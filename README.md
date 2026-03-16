@@ -52,9 +52,3 @@ This project is licensed under **GNU Affero General Public License v3.0 (AGPL‑
 
 Full license text:
 https://www.gnu.org/licenses/agpl-3.0.en.html
-
----
-
-## Author
-
-Dex
