@@ -18,3 +18,11 @@ Thumbs.db
 # Temp
 *.cache
 *.tmp
+
+# Project Game
+*.exe
+*_Data/
+Library/
+Temp/
+Logs/
+Build/
