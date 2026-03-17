@@ -99,7 +99,8 @@ public class Main : MonoBehaviour
 			else
 				Screen.SetResolution(1024, 600, false);
 		}
-	}
+        SocketServer.Start();
+    }
 
 	private void SetInit()
 	{
@@ -255,7 +256,8 @@ public class Main : MonoBehaviour
 
 	private void Update()
 	{
-	}
+        MainThreadDispatcher.Execute();
+    }
 
 	private void checkInput()
 	{

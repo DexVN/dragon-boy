@@ -7,13 +7,29 @@
   <PropertyGroup>
     <LangVersion>11.0</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)Assembly-CSharp.dll&quot; &quot;$(SolutionDir)\DragonBoy_Data\Managed\&quot; /E /Y&#xD;&#xA;start &quot;&quot; &quot;$(SolutionDir)DragonBoy.exe&quot; &amp;" />
+  </Target>
   <ItemGroup>
+    <Reference Include="Mono.Security">
+      <HintPath>..\DragonBoy_Data\Managed\Mono.Security.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\Game\Game_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\DragonBoy_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>..\DragonBoy_Data\Managed\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\DragonBoy_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetDir)\Assembly-CSharp.dll&quot; &quot;$(SolutionDir)\Game\Game_Data\Managed\&quot;" />
-  </Target>
+  <ItemGroup>
+    <Folder Include="GameController\Features\AutoFarm\" />
+    <Folder Include="GameController\Features\AutoLogin\" />
+    <Folder Include="GameController\Features\Combat\" />
+    <Folder Include="GameController\Features\Player\" />
+  </ItemGroup>
 </Project>
