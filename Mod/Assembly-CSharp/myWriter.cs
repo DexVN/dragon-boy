@@ -1,60 +1,66 @@
 ﻿using System;
 using System.Text;
 
-// Token: 0x0200002F RID: 47
+// Token: 0x0200007D RID: 125
 public class myWriter
 {
-	// Token: 0x06000204 RID: 516 RVA: 0x0000DBC7 File Offset: 0x0000BFC7
+	// Token: 0x06000625 RID: 1573 RVA: 0x0006B3F6 File Offset: 0x000695F6
 	public myWriter()
 	{
 	}
 
-	// Token: 0x06000205 RID: 517 RVA: 0x0000DBEA File Offset: 0x0000BFEA
+	// Token: 0x06000626 RID: 1574 RVA: 0x0006B41B File Offset: 0x0006961B
 	public myWriter(int len)
 	{
 		this.buffer = new sbyte[len];
 		this.lenght = len;
 	}
 
-	// Token: 0x06000206 RID: 518 RVA: 0x0000DC20 File Offset: 0x0000C020
+	// Token: 0x06000627 RID: 1575 RVA: 0x0006B454 File Offset: 0x00069654
 	public void writeSByte(sbyte value)
 	{
 		this.checkLenght(0);
-		this.buffer[this.posWrite++] = value;
+		sbyte[] array = this.buffer;
+		int num = this.posWrite;
+		this.posWrite = num + 1;
+		array[num] = value;
 	}
 
-	// Token: 0x06000207 RID: 519 RVA: 0x0000DC50 File Offset: 0x0000C050
+	// Token: 0x06000628 RID: 1576 RVA: 0x0006B484 File Offset: 0x00069684
 	public void writeSByteUncheck(sbyte value)
 	{
-		this.buffer[this.posWrite++] = value;
+		sbyte[] array = this.buffer;
+		int num = this.posWrite;
+		this.posWrite = num + 1;
+		array[num] = value;
 	}
 
-	// Token: 0x06000208 RID: 520 RVA: 0x0000DC76 File Offset: 0x0000C076
+	// Token: 0x06000629 RID: 1577 RVA: 0x0006B4AB File Offset: 0x000696AB
 	public void writeByte(sbyte value)
 	{
 		this.writeSByte(value);
 	}
 
-	// Token: 0x06000209 RID: 521 RVA: 0x0000DC7F File Offset: 0x0000C07F
+	// Token: 0x0600062A RID: 1578 RVA: 0x0006B4B6 File Offset: 0x000696B6
 	public void writeByte(int value)
 	{
 		this.writeSByte((sbyte)value);
 	}
 
-	// Token: 0x0600020A RID: 522 RVA: 0x0000DC89 File Offset: 0x0000C089
+	// Token: 0x0600062B RID: 1579 RVA: 0x0006B4C2 File Offset: 0x000696C2
 	public void writeChar(char value)
 	{
 		this.writeSByte(0);
 		this.writeSByte((sbyte)value);
 	}
 
-	// Token: 0x0600020B RID: 523 RVA: 0x0000DC9A File Offset: 0x0000C09A
+	// Token: 0x0600062C RID: 1580 RVA: 0x0006B4B6 File Offset: 0x000696B6
 	public void writeUnsignedByte(byte value)
 	{
 		this.writeSByte((sbyte)value);
 	}
 
-	// Token: 0x0600020C RID: 524 RVA: 0x0000DCA4 File Offset: 0x0000C0A4
+	// Token: 0x0600062D RID: 1581 RVA: 0x0006B4D8 File Offset: 0x000696D8
 	public void writeUnsignedByte(byte[] value)
 	{
 		this.checkLenght(value.Length);
@@ -64,7 +70,7 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x0600020D RID: 525 RVA: 0x0000DCD8 File Offset: 0x0000C0D8
+	// Token: 0x0600062E RID: 1582 RVA: 0x0006B510 File Offset: 0x00069710
 	public void writeSByte(sbyte[] value)
 	{
 		this.checkLenght(value.Length);
@@ -74,7 +80,7 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x0600020E RID: 526 RVA: 0x0000DD0C File Offset: 0x0000C10C
+	// Token: 0x0600062F RID: 1583 RVA: 0x0006B548 File Offset: 0x00069748
 	public void writeShort(short value)
 	{
 		this.checkLenght(2);
@@ -84,7 +90,7 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x0600020F RID: 527 RVA: 0x0000DD44 File Offset: 0x0000C144
+	// Token: 0x06000630 RID: 1584 RVA: 0x0006B584 File Offset: 0x00069784
 	public void writeShort(int value)
 	{
 		this.checkLenght(2);
@@ -95,7 +101,7 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x06000210 RID: 528 RVA: 0x0000DD7C File Offset: 0x0000C17C
+	// Token: 0x06000631 RID: 1585 RVA: 0x0006B5C4 File Offset: 0x000697C4
 	public void writeUnsignedShort(ushort value)
 	{
 		this.checkLenght(2);
@@ -105,7 +111,7 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x06000211 RID: 529 RVA: 0x0000DDB4 File Offset: 0x0000C1B4
+	// Token: 0x06000632 RID: 1586 RVA: 0x0006B600 File Offset: 0x00069800
 	public void writeInt(int value)
 	{
 		this.checkLenght(4);
@@ -115,7 +121,7 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x06000212 RID: 530 RVA: 0x0000DDEC File Offset: 0x0000C1EC
+	// Token: 0x06000633 RID: 1587 RVA: 0x0006B63C File Offset: 0x0006983C
 	public void writeLong(long value)
 	{
 		this.checkLenght(8);
@@ -125,19 +131,19 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x06000213 RID: 531 RVA: 0x0000DE21 File Offset: 0x0000C221
+	// Token: 0x06000634 RID: 1588 RVA: 0x0006B677 File Offset: 0x00069877
 	public void writeBoolean(bool value)
-	{
-        this.writeSByte((sbyte)((!value) ? 0 : 1));
-    }
-
-	// Token: 0x06000214 RID: 532 RVA: 0x0000DE36 File Offset: 0x0000C236
-	public void writeBool(bool value)
 	{
 		this.writeSByte((sbyte)((!value) ? 0 : 1));
 	}
 
-	// Token: 0x06000215 RID: 533 RVA: 0x0000DE4C File Offset: 0x0000C24C
+	// Token: 0x06000635 RID: 1589 RVA: 0x0006B677 File Offset: 0x00069877
+	public void writeBool(bool value)
+	{
+        this.writeSByte((sbyte)((!value) ? 0 : 1));
+    }
+
+	// Token: 0x06000636 RID: 1590 RVA: 0x0006B68C File Offset: 0x0006988C
 	public void writeString(string value)
 	{
 		char[] array = value.ToCharArray();
@@ -149,7 +155,7 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x06000216 RID: 534 RVA: 0x0000DE94 File Offset: 0x0000C294
+	// Token: 0x06000637 RID: 1591 RVA: 0x0006B6D8 File Offset: 0x000698D8
 	public void writeUTF(string value)
 	{
 		Encoding unicode = Encoding.Unicode;
@@ -164,48 +170,56 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x06000217 RID: 535 RVA: 0x0000DF00 File Offset: 0x0000C300
+	// Token: 0x06000638 RID: 1592 RVA: 0x0006B748 File Offset: 0x00069948
 	public void write(ref sbyte[] data, int arg1, int arg2)
 	{
-		if (data == null)
+		bool flag = data == null;
+		if (!flag)
 		{
-			return;
-		}
-		for (int i = 0; i < arg2; i++)
-		{
-			this.writeSByte(data[i + arg1]);
-			if (this.posWrite > this.buffer.Length)
+			for (int i = 0; i < arg2; i++)
 			{
-				return;
+				this.writeSByte(data[i + arg1]);
+				bool flag2 = this.posWrite > this.buffer.Length;
+				if (flag2)
+				{
+					break;
+				}
 			}
 		}
 	}
 
-	// Token: 0x06000218 RID: 536 RVA: 0x0000DF47 File Offset: 0x0000C347
+	// Token: 0x06000639 RID: 1593 RVA: 0x0006B798 File Offset: 0x00069998
 	public void write(sbyte[] value)
 	{
 		this.writeSByte(value);
 	}
 
-	// Token: 0x06000219 RID: 537 RVA: 0x0000DF50 File Offset: 0x0000C350
+	// Token: 0x0600063A RID: 1594 RVA: 0x0006B7A4 File Offset: 0x000699A4
 	public sbyte[] getData()
 	{
-		if (this.posWrite <= 0)
+		bool flag = this.posWrite <= 0;
+		sbyte[] result;
+		if (flag)
 		{
-			return null;
+			result = null;
 		}
-		sbyte[] array = new sbyte[this.posWrite];
-		for (int i = 0; i < this.posWrite; i++)
+		else
 		{
-			array[i] = this.buffer[i];
+			sbyte[] array = new sbyte[this.posWrite];
+			for (int i = 0; i < this.posWrite; i++)
+			{
+				array[i] = this.buffer[i];
+			}
+			result = array;
 		}
-		return array;
+		return result;
 	}
 
-	// Token: 0x0600021A RID: 538 RVA: 0x0000DF9C File Offset: 0x0000C39C
+	// Token: 0x0600063B RID: 1595 RVA: 0x0006B7FC File Offset: 0x000699FC
 	public void checkLenght(int ltemp)
 	{
-		if (this.posWrite + ltemp > this.lenght)
+		bool flag = this.posWrite + ltemp > this.lenght;
+		if (flag)
 		{
 			sbyte[] array = new sbyte[this.lenght + 1024 + ltemp];
 			for (int i = 0; i < this.lenght; i++)
@@ -218,24 +232,24 @@ public class myWriter
 		}
 	}
 
-	// Token: 0x0600021B RID: 539 RVA: 0x0000E014 File Offset: 0x0000C414
+	// Token: 0x0600063C RID: 1596 RVA: 0x0006B878 File Offset: 0x00069A78
 	public void Close()
 	{
 		this.buffer = null;
 	}
 
-	// Token: 0x0600021C RID: 540 RVA: 0x0000E01D File Offset: 0x0000C41D
+	// Token: 0x0600063D RID: 1597 RVA: 0x0006B878 File Offset: 0x00069A78
 	public void close()
 	{
 		this.buffer = null;
 	}
 
-	// Token: 0x040001E6 RID: 486
+	// Token: 0x04000E03 RID: 3587
 	public sbyte[] buffer = new sbyte[2048];
 
-	// Token: 0x040001E7 RID: 487
+	// Token: 0x04000E04 RID: 3588
 	private int posWrite;
 
-	// Token: 0x040001E8 RID: 488
+	// Token: 0x04000E05 RID: 3589
 	private int lenght = 2048;
 }

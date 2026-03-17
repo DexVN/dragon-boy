@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000091 RID: 145
+// Token: 0x020000B1 RID: 177
 public class TaskOrder
 {
-	// Token: 0x060004AF RID: 1199 RVA: 0x0003BF3D File Offset: 0x0003A33D
+	// Token: 0x060009BE RID: 2494 RVA: 0x000A29F2 File Offset: 0x000A0BF2
 	public TaskOrder(sbyte taskId, short count, short maxCount, string name, string description, sbyte killId, sbyte mapId)
 	{
 		this.count = (int)count;
@@ -15,30 +15,30 @@ public class TaskOrder
 		this.mapId = (int)mapId;
 	}
 
-	// Token: 0x04000801 RID: 2049
+	// Token: 0x04001243 RID: 4675
 	public const sbyte TASK_DAY = 0;
 
-	// Token: 0x04000802 RID: 2050
+	// Token: 0x04001244 RID: 4676
 	public const sbyte TASK_BOSS = 1;
 
-	// Token: 0x04000803 RID: 2051
+	// Token: 0x04001245 RID: 4677
 	public int taskId;
 
-	// Token: 0x04000804 RID: 2052
+	// Token: 0x04001246 RID: 4678
 	public int count;
 
-	// Token: 0x04000805 RID: 2053
+	// Token: 0x04001247 RID: 4679
 	public short maxCount;
 
-	// Token: 0x04000806 RID: 2054
+	// Token: 0x04001248 RID: 4680
 	public string name;
 
-	// Token: 0x04000807 RID: 2055
+	// Token: 0x04001249 RID: 4681
 	public string description;
 
-	// Token: 0x04000808 RID: 2056
+	// Token: 0x0400124A RID: 4682
 	public int killId;
 
-	// Token: 0x04000809 RID: 2057
+	// Token: 0x0400124B RID: 4683
 	public int mapId;
 }

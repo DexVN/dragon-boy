@@ -6,71 +6,73 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-// Token: 0x02000025 RID: 37
+// Token: 0x0200009B RID: 155
 public class Session_ME : ISession
 {
-	// Token: 0x06000156 RID: 342 RVA: 0x000086C4 File Offset: 0x00006AC4
+	// Token: 0x060008F4 RID: 2292 RVA: 0x00099CB0 File Offset: 0x00097EB0
 	public Session_ME()
 	{
 		Debug.Log("init Session_ME");
 	}
 
-	// Token: 0x06000157 RID: 343 RVA: 0x000086D6 File Offset: 0x00006AD6
+	// Token: 0x060008F5 RID: 2293 RVA: 0x00099CC5 File Offset: 0x00097EC5
 	public void clearSendingMessage()
 	{
 		Session_ME.sender.sendingMessage.Clear();
 	}
 
-	// Token: 0x06000158 RID: 344 RVA: 0x000086E7 File Offset: 0x00006AE7
+	// Token: 0x060008F6 RID: 2294 RVA: 0x00099CD8 File Offset: 0x00097ED8
 	public static Session_ME gI()
 	{
-		if (Session_ME.instance == null)
+		bool flag = Session_ME.instance == null;
+		if (flag)
 		{
 			Session_ME.instance = new Session_ME();
 		}
 		return Session_ME.instance;
 	}
 
-	// Token: 0x06000159 RID: 345 RVA: 0x00008702 File Offset: 0x00006B02
+	// Token: 0x060008F7 RID: 2295 RVA: 0x00099D08 File Offset: 0x00097F08
 	public bool isConnected()
 	{
 		return Session_ME.connected && Session_ME.sc != null && Session_ME.dis != null;
 	}
 
-	// Token: 0x0600015A RID: 346 RVA: 0x00008726 File Offset: 0x00006B26
+	// Token: 0x060008F8 RID: 2296 RVA: 0x00099D33 File Offset: 0x00097F33
 	public void setHandler(IMessageHandler msgHandler)
 	{
 		Session_ME.messageHandler = msgHandler;
 	}
 
-	// Token: 0x0600015B RID: 347 RVA: 0x00008730 File Offset: 0x00006B30
+	// Token: 0x060008F9 RID: 2297 RVA: 0x00099D3C File Offset: 0x00097F3C
 	public void connect(string host, int port)
 	{
-		if (Session_ME.connected || Session_ME.connecting)
+		bool flag = Session_ME.connected || Session_ME.connecting;
+		if (!flag)
 		{
-			return;
+			bool flag2 = mSystem.currentTimeMillis() < this.timeWaitConnect;
+			if (!flag2)
+			{
+				this.timeWaitConnect = mSystem.currentTimeMillis() + 50L;
+				bool flag3 = Session_ME.isMainSession;
+				if (flag3)
+				{
+					ServerListScreen.testConnect = -1;
+				}
+				this.host = host;
+				this.port = port;
+				Session_ME.getKeyComplete = false;
+				this.close();
+				Debug.Log("connecting...!");
+				Debug.Log("host: " + host);
+				Debug.Log("port: " + port.ToString());
+				Session_ME.initThread = new Thread(new ThreadStart(this.NetworkInit));
+				Session_ME.initThread.Start();
+			}
 		}
-		if (mSystem.currentTimeMillis() < this.timeWaitConnect)
-		{
-			return;
-		}
-		this.timeWaitConnect = mSystem.currentTimeMillis() + 50L;
-		if (Session_ME.isMainSession)
-		{
-			ServerListScreen.testConnect = -1;
-		}
-		this.host = host;
-		this.port = port;
-		Session_ME.getKeyComplete = false;
-		this.close();
-		Debug.Log("connecting...!");
-		Debug.Log("host: " + host);
-		Debug.Log("port: " + port);
-		Session_ME.initThread = new Thread(new ThreadStart(this.NetworkInit));
-		Session_ME.initThread.Start();
 	}
 
-	// Token: 0x0600015C RID: 348 RVA: 0x000087EC File Offset: 0x00006BEC
+	// Token: 0x060008FA RID: 2298 RVA: 0x00099E0C File Offset: 0x0009800C
 	private void NetworkInit()
 	{
 		Session_ME.isCancel = false;
@@ -84,7 +86,8 @@ public class Session_ME : ISession
 		}
 		catch (Exception)
 		{
-			if (Session_ME.messageHandler != null)
+			bool flag = Session_ME.messageHandler != null;
+			if (flag)
 			{
 				this.close();
 				Session_ME.messageHandler.onConnectionFail(Session_ME.isMainSession);
@@ -92,7 +95,7 @@ public class Session_ME : ISession
 		}
 	}
 
-	// Token: 0x0600015D RID: 349 RVA: 0x00008874 File Offset: 0x00006C74
+	// Token: 0x060008FB RID: 2299 RVA: 0x00099E9C File Offset: 0x0009809C
 	public void doConnect(string host, int port)
 	{
 		Session_ME.sc = new TcpClient();
@@ -112,21 +115,22 @@ public class Session_ME : ISession
 		Session_ME.key = null;
 	}
 
-	// Token: 0x0600015E RID: 350 RVA: 0x00008944 File Offset: 0x00006D44
+	// Token: 0x060008FC RID: 2300 RVA: 0x00099F72 File Offset: 0x00098172
 	public void sendMessage(Message message)
 	{
 		Session_ME.count++;
-		Res.outz("SEND MSG: " + message.command);
+		Res.outz("SEND MSG: " + message.command.ToString());
 		Session_ME.sender.AddMessage(message);
 	}
 
-	// Token: 0x0600015F RID: 351 RVA: 0x00008978 File Offset: 0x00006D78
+	// Token: 0x060008FD RID: 2301 RVA: 0x00099FA8 File Offset: 0x000981A8
 	private static void doSendMessage(Message m)
 	{
 		sbyte[] data = m.getData();
 		try
 		{
-			if (Session_ME.getKeyComplete)
+			bool flag = Session_ME.getKeyComplete;
+			if (flag)
 			{
 				sbyte value = Session_ME.writeKey(m.command);
 				Session_ME.dos.Write(value);
@@ -135,10 +139,12 @@ public class Session_ME : ISession
 			{
 				Session_ME.dos.Write(m.command);
 			}
-			if (data != null)
+			bool flag2 = data != null;
+			if (flag2)
 			{
 				int num = data.Length;
-				if (Session_ME.getKeyComplete)
+				bool flag3 = Session_ME.getKeyComplete;
+				if (flag3)
 				{
 					int num2 = (int)Session_ME.writeKey((sbyte)(num >> 8));
 					Session_ME.dos.Write((sbyte)num2);
@@ -149,7 +155,8 @@ public class Session_ME : ISession
 				{
 					Session_ME.dos.Write((ushort)num);
 				}
-				if (Session_ME.getKeyComplete)
+				bool flag4 = Session_ME.getKeyComplete;
+				if (flag4)
 				{
 					for (int i = 0; i < data.Length; i++)
 					{
@@ -161,7 +168,8 @@ public class Session_ME : ISession
 			}
 			else
 			{
-				if (Session_ME.getKeyComplete)
+				bool flag5 = Session_ME.getKeyComplete;
+				if (flag5)
 				{
 					int num4 = 0;
 					int num5 = (int)Session_ME.writeKey((sbyte)(num4 >> 8));
@@ -184,38 +192,41 @@ public class Session_ME : ISession
 		}
 	}
 
-	// Token: 0x06000160 RID: 352 RVA: 0x00008B14 File Offset: 0x00006F14
+	// Token: 0x060008FE RID: 2302 RVA: 0x0009A160 File Offset: 0x00098360
 	public static sbyte readKey(sbyte b)
 	{
 		sbyte[] array = Session_ME.key;
 		sbyte b2 = Session_ME.curR;
-		Session_ME.curR = (sbyte)((int)b2 + 1);
-		sbyte result = (sbyte)((array[(int)b2] & 255) ^ ((int)b & 255));
-		if ((int)Session_ME.curR >= Session_ME.key.Length)
+		Session_ME.curR = (sbyte)(b2 + 1);
+		sbyte result = (sbyte)(((int)array[(int)b2] & 255) ^ ((int)b & 255));
+		bool flag = (int)Session_ME.curR >= Session_ME.key.Length;
+		if (flag)
 		{
-			Session_ME.curR = (sbyte)((int)Session_ME.curR % (int)((sbyte)Session_ME.key.Length));
+			Session_ME.curR %= (sbyte)Session_ME.key.Length;
 		}
 		return result;
 	}
 
-	// Token: 0x06000161 RID: 353 RVA: 0x00008B74 File Offset: 0x00006F74
+	// Token: 0x060008FF RID: 2303 RVA: 0x0009A1C8 File Offset: 0x000983C8
 	public static sbyte writeKey(sbyte b)
 	{
 		sbyte[] array = Session_ME.key;
 		sbyte b2 = Session_ME.curW;
-		Session_ME.curW = (sbyte)((int)b2 + 1);
-		sbyte result = (sbyte)((array[(int)b2] & 255) ^ ((int)b & 255));
-		if ((int)Session_ME.curW >= Session_ME.key.Length)
+		Session_ME.curW = (sbyte)(b2 + 1);
+		sbyte result = (sbyte)(((int)array[(int)b2] & 255) ^ ((int)b & 255));
+		bool flag = (int)Session_ME.curW >= Session_ME.key.Length;
+		if (flag)
 		{
-			Session_ME.curW = (sbyte)((int)Session_ME.curW % (int)((sbyte)Session_ME.key.Length));
+			Session_ME.curW %= (sbyte)Session_ME.key.Length;
 		}
 		return result;
 	}
 
-	// Token: 0x06000162 RID: 354 RVA: 0x00008BD2 File Offset: 0x00006FD2
+	// Token: 0x06000900 RID: 2304 RVA: 0x0009A230 File Offset: 0x00098430
 	public static void onRecieveMsg(Message msg)
 	{
-		if (Thread.CurrentThread.Name == Main.mainThreadName)
+		bool flag = Thread.CurrentThread.Name == Main.mainThreadName;
+		if (flag)
 		{
 			Session_ME.messageHandler.onMessage(msg);
 		}
@@ -225,33 +236,35 @@ public class Session_ME : ISession
 		}
 	}
 
-	// Token: 0x06000163 RID: 355 RVA: 0x00008C08 File Offset: 0x00007008
+	// Token: 0x06000901 RID: 2305 RVA: 0x0009A274 File Offset: 0x00098474
 	public static void update()
 	{
 		while (Session_ME.recieveMsg.size() > 0)
 		{
 			Message message = (Message)Session_ME.recieveMsg.elementAt(0);
-			if (Controller.isStopReadMessage)
+			bool isStopReadMessage = Controller.isStopReadMessage;
+			if (isStopReadMessage)
 			{
-				return;
+				break;
 			}
-			if (message == null)
+			bool flag = message == null;
+			if (flag)
 			{
 				Session_ME.recieveMsg.removeElementAt(0);
-				return;
+				break;
 			}
 			Session_ME.messageHandler.onMessage(message);
 			Session_ME.recieveMsg.removeElementAt(0);
 		}
 	}
 
-	// Token: 0x06000164 RID: 356 RVA: 0x00008C6E File Offset: 0x0000706E
+	// Token: 0x06000902 RID: 2306 RVA: 0x0009A2E3 File Offset: 0x000984E3
 	public void close()
 	{
 		Session_ME.cleanNetwork();
 	}
 
-	// Token: 0x06000165 RID: 357 RVA: 0x00008C78 File Offset: 0x00007078
+	// Token: 0x06000903 RID: 2307 RVA: 0x0009A2EC File Offset: 0x000984EC
 	private static void cleanNetwork()
 	{
 		Session_ME.key = null;
@@ -261,39 +274,47 @@ public class Session_ME : ISession
 		{
 			Session_ME.connected = false;
 			Session_ME.connecting = false;
-			if (Session_ME.sc != null)
+			bool flag = Session_ME.sc != null;
+			if (flag)
 			{
 				Session_ME.sc.Close();
 				Session_ME.sc = null;
 			}
-			if (Session_ME.dataStream != null)
+			bool flag2 = Session_ME.dataStream != null;
+			if (flag2)
 			{
 				Session_ME.dataStream.Close();
 				Session_ME.dataStream = null;
 			}
-			if (Session_ME.dos != null)
+			bool flag3 = Session_ME.dos != null;
+			if (flag3)
 			{
 				Session_ME.dos.Close();
 				Session_ME.dos = null;
 			}
-			if (Session_ME.dis != null)
+			bool flag4 = Session_ME.dis != null;
+			if (flag4)
 			{
 				Session_ME.dis.Close();
 				Session_ME.dis = null;
 			}
-			if (Thread.CurrentThread.Name == Main.mainThreadName)
+			bool flag5 = Thread.CurrentThread.Name == Main.mainThreadName;
+			if (flag5)
 			{
-				if (Session_ME.sendThread != null)
+				bool flag6 = Session_ME.sendThread != null;
+				if (flag6)
 				{
 					Session_ME.sendThread.Abort();
 				}
 				Session_ME.sendThread = null;
-				if (Session_ME.initThread != null)
+				bool flag7 = Session_ME.initThread != null;
+				if (flag7)
 				{
 					Session_ME.initThread.Abort();
 				}
 				Session_ME.initThread = null;
-				if (Session_ME.collectorThread != null)
+				bool flag8 = Session_ME.collectorThread != null;
+				if (flag8)
 				{
 					Session_ME.collectorThread.Abort();
 				}
@@ -305,7 +326,8 @@ public class Session_ME : ISession
 				Session_ME.initThread = null;
 				Session_ME.collectorThread = null;
 			}
-			if (Session_ME.isMainSession)
+			bool flag9 = Session_ME.isMainSession;
+			if (flag9)
 			{
 				ServerListScreen.testConnect = 0;
 			}
@@ -315,29 +337,36 @@ public class Session_ME : ISession
 		}
 	}
 
-	// Token: 0x06000166 RID: 358 RVA: 0x00008DC0 File Offset: 0x000071C0
+	// Token: 0x06000904 RID: 2308 RVA: 0x0009A464 File Offset: 0x00098664
 	public static int currentTimeMillis()
 	{
 		return Environment.TickCount;
 	}
 
-	// Token: 0x06000167 RID: 359 RVA: 0x00008DC7 File Offset: 0x000071C7
+	// Token: 0x06000905 RID: 2309 RVA: 0x0009A47C File Offset: 0x0009867C
 	public static byte convertSbyteToByte(sbyte var)
 	{
-		if ((int)var > 0)
+		bool flag = var > 0;
+		byte result;
+		if (flag)
 		{
-			return (byte)var;
+			result = (byte)var;
 		}
-		return (byte)((int)var + 256);
+		else
+		{
+			result = (byte)((int)var + 256);
+		}
+		return result;
 	}
 
-	// Token: 0x06000168 RID: 360 RVA: 0x00008DE0 File Offset: 0x000071E0
+	// Token: 0x06000906 RID: 2310 RVA: 0x0009A4A4 File Offset: 0x000986A4
 	public static byte[] convertSbyteToByte(sbyte[] var)
 	{
 		byte[] array = new byte[var.Length];
 		for (int i = 0; i < var.Length; i++)
 		{
-			if ((int)var[i] > 0)
+			bool flag = var[i] > 0;
+			if (flag)
 			{
 				array[i] = (byte)var[i];
 			}
@@ -349,124 +378,125 @@ public class Session_ME : ISession
 		return array;
 	}
 
-	// Token: 0x06000169 RID: 361 RVA: 0x00008E2F File Offset: 0x0000722F
+	// Token: 0x06000907 RID: 2311 RVA: 0x0009A4FC File Offset: 0x000986FC
 	public bool isCompareIPConnect()
 	{
 		return true;
 	}
 
-	// Token: 0x04000128 RID: 296
+	// Token: 0x040010FE RID: 4350
 	protected static Session_ME instance = new Session_ME();
 
-	// Token: 0x04000129 RID: 297
+	// Token: 0x040010FF RID: 4351
 	private static NetworkStream dataStream;
 
-	// Token: 0x0400012A RID: 298
+	// Token: 0x04001100 RID: 4352
 	private static BinaryReader dis;
 
-	// Token: 0x0400012B RID: 299
+	// Token: 0x04001101 RID: 4353
 	private static BinaryWriter dos;
 
-	// Token: 0x0400012C RID: 300
+	// Token: 0x04001102 RID: 4354
 	public static IMessageHandler messageHandler;
 
-	// Token: 0x0400012D RID: 301
+	// Token: 0x04001103 RID: 4355
 	public static bool isMainSession = true;
 
-	// Token: 0x0400012E RID: 302
+	// Token: 0x04001104 RID: 4356
 	private static TcpClient sc;
 
-	// Token: 0x0400012F RID: 303
+	// Token: 0x04001105 RID: 4357
 	public static bool connected;
 
-	// Token: 0x04000130 RID: 304
+	// Token: 0x04001106 RID: 4358
 	public static bool connecting;
 
-	// Token: 0x04000131 RID: 305
+	// Token: 0x04001107 RID: 4359
 	private static Session_ME.Sender sender = new Session_ME.Sender();
 
-	// Token: 0x04000132 RID: 306
+	// Token: 0x04001108 RID: 4360
 	public static Thread initThread;
 
-	// Token: 0x04000133 RID: 307
+	// Token: 0x04001109 RID: 4361
 	public static Thread collectorThread;
 
-	// Token: 0x04000134 RID: 308
+	// Token: 0x0400110A RID: 4362
 	public static Thread sendThread;
 
-	// Token: 0x04000135 RID: 309
+	// Token: 0x0400110B RID: 4363
 	public static int sendByteCount;
 
-	// Token: 0x04000136 RID: 310
+	// Token: 0x0400110C RID: 4364
 	public static int recvByteCount;
 
-	// Token: 0x04000137 RID: 311
+	// Token: 0x0400110D RID: 4365
 	private static bool getKeyComplete;
 
-	// Token: 0x04000138 RID: 312
+	// Token: 0x0400110E RID: 4366
 	public static sbyte[] key = null;
 
-	// Token: 0x04000139 RID: 313
+	// Token: 0x0400110F RID: 4367
 	private static sbyte curR;
 
-	// Token: 0x0400013A RID: 314
+	// Token: 0x04001110 RID: 4368
 	private static sbyte curW;
 
-	// Token: 0x0400013B RID: 315
+	// Token: 0x04001111 RID: 4369
 	private static int timeConnected;
 
-	// Token: 0x0400013C RID: 316
+	// Token: 0x04001112 RID: 4370
 	private long lastTimeConn;
 
-	// Token: 0x0400013D RID: 317
+	// Token: 0x04001113 RID: 4371
 	public static string strRecvByteCount = string.Empty;
 
-	// Token: 0x0400013E RID: 318
+	// Token: 0x04001114 RID: 4372
 	public static bool isCancel;
 
-	// Token: 0x0400013F RID: 319
+	// Token: 0x04001115 RID: 4373
 	private string host;
 
-	// Token: 0x04000140 RID: 320
+	// Token: 0x04001116 RID: 4374
 	private int port;
 
-	// Token: 0x04000141 RID: 321
+	// Token: 0x04001117 RID: 4375
 	private long timeWaitConnect;
 
-	// Token: 0x04000142 RID: 322
+	// Token: 0x04001118 RID: 4376
 	public static int count;
 
-	// Token: 0x04000143 RID: 323
+	// Token: 0x04001119 RID: 4377
 	public static MyVector recieveMsg = new MyVector();
 
-	// Token: 0x02000026 RID: 38
+	// Token: 0x020000CC RID: 204
 	public class Sender
 	{
-		// Token: 0x0600016B RID: 363 RVA: 0x00008E68 File Offset: 0x00007268
+		// Token: 0x06000A9B RID: 2715 RVA: 0x000AFC48 File Offset: 0x000ADE48
 		public Sender()
 		{
 			this.sendingMessage = new List<Message>();
 		}
 
-		// Token: 0x0600016C RID: 364 RVA: 0x00008E7B File Offset: 0x0000727B
+		// Token: 0x06000A9C RID: 2716 RVA: 0x000AFC5D File Offset: 0x000ADE5D
 		public void AddMessage(Message message)
 		{
 			this.sendingMessage.Add(message);
 		}
 
-		// Token: 0x0600016D RID: 365 RVA: 0x00008E8C File Offset: 0x0000728C
+		// Token: 0x06000A9D RID: 2717 RVA: 0x000AFC70 File Offset: 0x000ADE70
 		public void run()
 		{
 			while (Session_ME.connected)
 			{
 				try
 				{
-					if (Session_ME.getKeyComplete)
+					bool getKeyComplete = Session_ME.getKeyComplete;
+					if (getKeyComplete)
 					{
 						while (this.sendingMessage.Count > 0)
 						{
-							Message m = this.sendingMessage[0];
-							Session_ME.doSendMessage(m);
+							Message i = this.sendingMessage[0];
+							Session_ME.doSendMessage(i);
 							this.sendingMessage.RemoveAt(0);
 						}
 					}
@@ -486,14 +516,14 @@ public class Session_ME : ISession
 			}
 		}
 
-		// Token: 0x04000144 RID: 324
+		// Token: 0x040014ED RID: 5357
 		public List<Message> sendingMessage;
 	}
 
-	// Token: 0x02000027 RID: 39
+	// Token: 0x020000CD RID: 205
 	private class MessageCollector
 	{
-		// Token: 0x0600016F RID: 367 RVA: 0x00008F3C File Offset: 0x0000733C
+		// Token: 0x06000A9E RID: 2718 RVA: 0x000AFD1C File Offset: 0x000ADF1C
 		public void run()
 		{
 			try
@@ -501,13 +531,15 @@ public class Session_ME : ISession
 				while (Session_ME.connected)
 				{
 					Message message = this.readMessage();
-					if (message == null)
+					bool flag = message == null;
+					if (flag)
 					{
 						break;
 					}
 					try
 					{
-						if ((int)message.command == -27)
+						bool flag2 = message.command == -27;
+						if (flag2)
 						{
 							this.getKey(message);
 						}
@@ -535,11 +567,14 @@ public class Session_ME : ISession
 				Debug.Log("error read message!");
 				Debug.Log(ex.Message.ToString());
 			}
-			if (Session_ME.connected)
+			bool connected = Session_ME.connected;
+			if (connected)
 			{
-				if (Session_ME.messageHandler != null)
+				bool flag3 = Session_ME.messageHandler != null;
+				if (flag3)
 				{
-					if (Session_ME.currentTimeMillis() - Session_ME.timeConnected > 500)
+					bool flag4 = Session_ME.currentTimeMillis() - Session_ME.timeConnected > 500;
+					if (flag4)
 					{
 						Session_ME.messageHandler.onDisconnected(Session_ME.isMainSession);
 					}
@@ -548,14 +583,15 @@ public class Session_ME : ISession
 						Session_ME.messageHandler.onConnectionFail(Session_ME.isMainSession);
 					}
 				}
-				if (Session_ME.sc != null)
+				bool flag5 = Session_ME.sc != null;
+				if (flag5)
 				{
 					Session_ME.cleanNetwork();
 				}
 			}
 		}
 
-		// Token: 0x06000170 RID: 368 RVA: 0x00009068 File Offset: 0x00007468
+		// Token: 0x06000A9F RID: 2719 RVA: 0x000AFE60 File Offset: 0x000AE060
 		private void getKey(Message message)
 		{
 			try
@@ -570,13 +606,14 @@ public class Session_ME : ISession
 				{
 					sbyte[] key = Session_ME.key;
 					int num = j + 1;
-					key[num] = (sbyte)((int)key[num] ^ (int)Session_ME.key[j]);
+					key[num] ^= Session_ME.key[j];
 				}
 				Session_ME.getKeyComplete = true;
 				GameMidlet.IP2 = message.reader().readUTF();
 				GameMidlet.PORT2 = message.reader().readInt();
-				GameMidlet.isConnect2 = ((int)message.reader().readByte() != 0);
-				if (Session_ME.isMainSession && GameMidlet.isConnect2)
+				GameMidlet.isConnect2 = (message.reader().readByte() != 0);
+				bool flag = Session_ME.isMainSession && GameMidlet.isConnect2;
+				if (flag)
 				{
 					GameCanvas.connect2();
 				}
@@ -586,7 +623,7 @@ public class Session_ME : ISession
 			}
 		}
 
-		// Token: 0x06000171 RID: 369 RVA: 0x00009160 File Offset: 0x00007560
+		// Token: 0x06000AA0 RID: 2720 RVA: 0x000AFF54 File Offset: 0x000AE154
 		private Message readMessage2(sbyte cmd)
 		{
 			int num = (int)Session_ME.readKey(Session_ME.dis.ReadSByte()) + 128;
@@ -605,7 +642,8 @@ public class Session_ME : ISession
 				num5 % 1024 / 102,
 				"Kb"
 			});
-			if (Session_ME.getKeyComplete)
+			bool getKeyComplete = Session_ME.getKeyComplete;
+			if (getKeyComplete)
 			{
 				for (int i = 0; i < array.Length; i++)
 				{
@@ -615,22 +653,25 @@ public class Session_ME : ISession
 			return new Message(cmd, array);
 		}
 
-		// Token: 0x06000172 RID: 370 RVA: 0x00009284 File Offset: 0x00007684
+		// Token: 0x06000AA1 RID: 2721 RVA: 0x000B007C File Offset: 0x000AE27C
 		private Message readMessage()
 		{
 			try
 			{
 				sbyte b = Session_ME.dis.ReadSByte();
-				if (Session_ME.getKeyComplete)
+				bool getKeyComplete = Session_ME.getKeyComplete;
+				if (getKeyComplete)
 				{
 					b = Session_ME.readKey(b);
 				}
-				if ((int)b == -32 || (int)b == -66 || (int)b == 11 || (int)b == -67 || (int)b == -74 || (int)b == -87 || (int)b == 66)
+				bool flag = b == -32 || b == -66 || b == 11 || b == -67 || b == -74 || b == -87 || b == 66;
+				if (flag)
 				{
 					return this.readMessage2(b);
 				}
+				bool getKeyComplete2 = Session_ME.getKeyComplete;
 				int num;
-				if (Session_ME.getKeyComplete)
+				if (getKeyComplete2)
 				{
 					sbyte b2 = Session_ME.dis.ReadSByte();
 					sbyte b3 = Session_ME.dis.ReadSByte();
@@ -654,7 +695,8 @@ public class Session_ME : ISession
 					num2 % 1024 / 102,
 					"Kb"
 				});
-				if (Session_ME.getKeyComplete)
+				bool getKeyComplete3 = Session_ME.getKeyComplete;
+				if (getKeyComplete3)
 				{
 					for (int i = 0; i < array.Length; i++)
 					{

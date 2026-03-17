@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-// Token: 0x020000C0 RID: 192
+// Token: 0x02000091 RID: 145
 public class RadarScr : mScreen
 {
-	// Token: 0x06000981 RID: 2433 RVA: 0x00091B6C File Offset: 0x0008FF6C
+	// Token: 0x060007D5 RID: 2005 RVA: 0x0008DF18 File Offset: 0x0008C118
 	public RadarScr()
 	{
 		RadarScr.TYPE_UI = true;
@@ -24,7 +24,7 @@ public class RadarScr : mScreen
 		RadarScr.imgRank = new Image[7];
 		for (int i = 0; i < 7; i++)
 		{
-			RadarScr.imgRank[i] = mSystem.loadImage("/radar/" + (i + 7) + ".png");
+			RadarScr.imgRank[i] = mSystem.loadImage("/radar/" + (i + 7).ToString() + ".png");
 		}
 		RadarScr.imgUse = mSystem.loadImage("/radar/14.png");
 		RadarScr.imgBack = mSystem.loadImage("/radar/15.png");
@@ -108,17 +108,18 @@ public class RadarScr : mScreen
 		this.maxpage = 2;
 	}
 
-	// Token: 0x06000982 RID: 2434 RVA: 0x00091FA2 File Offset: 0x000903A2
+	// Token: 0x060007D6 RID: 2006 RVA: 0x0008E358 File Offset: 0x0008C558
 	public static RadarScr gI()
 	{
-		if (RadarScr.instance == null)
+		bool flag = RadarScr.instance == null;
+		if (flag)
 		{
 			RadarScr.instance = new RadarScr();
 		}
 		return RadarScr.instance;
 	}
 
-	// Token: 0x06000983 RID: 2435 RVA: 0x00091FC0 File Offset: 0x000903C0
+	// Token: 0x060007D7 RID: 2007 RVA: 0x0008E388 File Offset: 0x0008C588
 	public void SetRadarScr(MyVector list, int num, int numMax)
 	{
 		RadarScr.list = list;
@@ -128,7 +129,8 @@ public class RadarScr : mScreen
 		this.listIndex();
 		RadarScr.TYPE_UI = true;
 		RadarScr.SetListUse();
-		if (RadarScr.TYPE_UI)
+		bool type_UI = RadarScr.TYPE_UI;
+		if (type_UI)
 		{
 			this.maxpage = list.size() / 5 + ((list.size() % 5 <= 0) ? 0 : 1);
 		}
@@ -138,32 +140,34 @@ public class RadarScr : mScreen
 		}
 	}
 
-	// Token: 0x06000984 RID: 2436 RVA: 0x00092058 File Offset: 0x00090458
+	// Token: 0x060007D8 RID: 2008 RVA: 0x0008E418 File Offset: 0x0008C618
 	public static void SetNum(int num, int numMax)
 	{
 		RadarScr.num = num;
 		RadarScr.numMax = numMax;
 	}
 
-	// Token: 0x06000985 RID: 2437 RVA: 0x00092068 File Offset: 0x00090468
+	// Token: 0x060007D9 RID: 2009 RVA: 0x0008E428 File Offset: 0x0008C628
 	public static void SetListUse()
 	{
 		RadarScr.listUse = new MyVector(string.Empty);
 		for (int i = 0; i < RadarScr.list.size(); i++)
 		{
 			Info_RadaScr info_RadaScr = (Info_RadaScr)RadarScr.list.elementAt(i);
-			if (info_RadaScr != null && (int)info_RadaScr.isUse == 1)
+			bool flag = info_RadaScr != null && info_RadaScr.isUse == 1;
+			if (flag)
 			{
 				RadarScr.listUse.addElement(info_RadaScr);
 			}
 		}
 	}
 
-	// Token: 0x06000986 RID: 2438 RVA: 0x000920D0 File Offset: 0x000904D0
+	// Token: 0x060007DA RID: 2010 RVA: 0x0008E494 File Offset: 0x0008C694
 	public void listIndex()
 	{
 		MyVector myVector = RadarScr.listUse;
-		if (RadarScr.TYPE_UI)
+		bool type_UI = RadarScr.TYPE_UI;
+		if (type_UI)
 		{
 			myVector = RadarScr.list;
 		}
@@ -171,14 +175,16 @@ public class RadarScr : mScreen
 		int num2 = num + 5;
 		for (int i = num; i < num2; i++)
 		{
-			if (i >= myVector.size())
+			bool flag = i >= myVector.size();
+			if (flag)
 			{
 				RadarScr.index[i - num] = -1;
 			}
 			else
 			{
 				Info_RadaScr info_RadaScr = (Info_RadaScr)myVector.elementAt(i);
-				if (info_RadaScr != null)
+				bool flag2 = info_RadaScr != null;
+				if (flag2)
 				{
 					RadarScr.index[i - num] = info_RadaScr.id;
 				}
@@ -189,28 +195,33 @@ public class RadarScr : mScreen
 		SoundMn.gI().radarItem();
 	}
 
-	// Token: 0x06000987 RID: 2439 RVA: 0x0009216C File Offset: 0x0009056C
+	// Token: 0x060007DB RID: 2011 RVA: 0x0008E548 File Offset: 0x0008C748
 	public override void update()
 	{
 		try
 		{
-			if (RadarScr.hText < 80)
+			bool flag = RadarScr.hText < 80;
+			if (flag)
 			{
 				RadarScr.hText += 4;
-				if (RadarScr.hText > 80)
+				bool flag2 = RadarScr.hText > 80;
+				if (flag2)
 				{
 					RadarScr.hText = 80;
 				}
 			}
 			this.focus_card = Info_RadaScr.GetInfo(RadarScr.listUse, RadarScr.index[this.indexFocus]);
-			if (RadarScr.TYPE_UI)
+			bool type_UI = RadarScr.TYPE_UI;
+			if (type_UI)
 			{
 				this.focus_card = Info_RadaScr.GetInfo(RadarScr.list, RadarScr.index[this.indexFocus]);
 			}
 			GameScr.gI().update();
-			if (GameCanvas.gameTick % 10 < 6)
+			bool flag3 = GameCanvas.gameTick % 10 < 6;
+			if (flag3)
 			{
-				if (GameCanvas.gameTick % 2 == 0)
+				bool flag4 = GameCanvas.gameTick % 2 == 0;
+				if (flag4)
 				{
 					this.dyArrow--;
 				}
@@ -219,9 +230,10 @@ public class RadarScr : mScreen
 			{
 				this.dyArrow = 0;
 			}
-			if (this.focus_card != null)
+			bool flag5 = this.focus_card != null;
+			if (flag5)
 			{
-				int num = (int)this.focus_card.amount * 100 / (int)this.focus_card.max_amount;
+				int num = (int)(this.focus_card.amount * 100 / this.focus_card.max_amount);
 				this.hClip = num * RadarScr.imgBar_1.getHeight() / 100;
 				int num2 = RadarScr.num * 100 / RadarScr.list.size();
 				this.wClip = num2 * RadarScr.imgPro_1.getWidth() / 100;
@@ -233,61 +245,70 @@ public class RadarScr : mScreen
 		}
 	}
 
-	// Token: 0x06000988 RID: 2440 RVA: 0x000922C8 File Offset: 0x000906C8
+	// Token: 0x060007DC RID: 2012 RVA: 0x0008E6BC File Offset: 0x0008C8BC
 	public override void updateKey()
 	{
-		if (InfoDlg.isLock)
+		bool isLock = InfoDlg.isLock;
+		if (!isLock)
 		{
-			return;
+			bool flag = GameCanvas.isTouch && !ChatTextField.gI().isShow && !GameCanvas.menu.showMenu;
+			if (flag)
+			{
+				this.updateKeyTouchControl();
+			}
+			bool flag2 = GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22];
+			if (flag2)
+			{
+				GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] = false;
+				this.doKeyText(1);
+			}
+			bool flag3 = GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21];
+			if (flag3)
+			{
+				GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21] = false;
+				this.doKeyText(-1);
+			}
+			bool flag4 = GameCanvas.keyPressed[(!Main.isPC) ? 4 : 23];
+			if (flag4)
+			{
+				GameCanvas.keyPressed[(!Main.isPC) ? 4 : 23] = false;
+				this.doKeyItem(1);
+			}
+			bool flag5 = GameCanvas.keyPressed[(!Main.isPC) ? 6 : 24];
+			if (flag5)
+			{
+				GameCanvas.keyPressed[(!Main.isPC) ? 6 : 24] = false;
+				this.doKeyItem(0);
+			}
+			bool flag6 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25];
+			if (flag6)
+			{
+				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+				this.doClickUse(1);
+			}
+			bool flag7 = GameCanvas.keyPressed[13];
+			if (flag7)
+			{
+				this.doClickUse(2);
+			}
+			bool flag8 = GameCanvas.keyPressed[12];
+			if (flag8)
+			{
+				GameCanvas.keyPressed[12] = false;
+				this.doClickUse(0);
+			}
+			GameCanvas.clearKeyPressed();
 		}
-		if (GameCanvas.isTouch && !ChatTextField.gI().isShow && !GameCanvas.menu.showMenu)
-		{
-			this.updateKeyTouchControl();
-		}
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22])
-		{
-			GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] = false;
-			this.doKeyText(1);
-		}
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21])
-		{
-			GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21] = false;
-			this.doKeyText(-1);
-		}
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 4 : 23])
-		{
-			GameCanvas.keyPressed[(!Main.isPC) ? 4 : 23] = false;
-			this.doKeyItem(1);
-		}
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 6 : 24])
-		{
-			GameCanvas.keyPressed[(!Main.isPC) ? 6 : 24] = false;
-			this.doKeyItem(0);
-		}
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25])
-		{
-			GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-			this.doClickUse(1);
-		}
-		if (GameCanvas.keyPressed[13])
-		{
-			this.doClickUse(2);
-		}
-		if (GameCanvas.keyPressed[12])
-		{
-			GameCanvas.keyPressed[12] = false;
-			this.doClickUse(0);
-		}
-		GameCanvas.clearKeyPressed();
 	}
 
-	// Token: 0x06000989 RID: 2441 RVA: 0x00092478 File Offset: 0x00090878
+	// Token: 0x060007DD RID: 2013 RVA: 0x0008E850 File Offset: 0x0008CA50
 	private void doChangeUI()
 	{
 		RadarScr.TYPE_UI = !RadarScr.TYPE_UI;
 		this.page = 1;
 		this.indexFocus = 0;
-		if (RadarScr.TYPE_UI)
+		bool type_UI = RadarScr.TYPE_UI;
+		if (type_UI)
 		{
 			this.maxpage = RadarScr.list.size() / 5 + ((RadarScr.list.size() % 5 <= 0) ? 0 : 1);
 		}
@@ -298,37 +319,45 @@ public class RadarScr : mScreen
 		this.listIndex();
 	}
 
-	// Token: 0x0600098A RID: 2442 RVA: 0x00092510 File Offset: 0x00090910
+	// Token: 0x060007DE RID: 2014 RVA: 0x0008E8DC File Offset: 0x0008CADC
 	private void updateKeyTouchControl()
 	{
-		if (GameCanvas.isPointerClick)
+		bool isPointerClick = GameCanvas.isPointerClick;
+		if (isPointerClick)
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				if (GameCanvas.isPointerHoldIn(RadarScr.xyItem[i][0], RadarScr.xyItem[i][1], 30, 30) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease && i != this.indexFocus)
+				bool flag = GameCanvas.isPointerHoldIn(RadarScr.xyItem[i][0], RadarScr.xyItem[i][1], 30, 30) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease && i != this.indexFocus;
+				if (flag)
 				{
 					this.doClickItem(i);
 				}
 			}
-			if (GameCanvas.isPointerHoldIn(RadarScr.xyArrow[0][0] - 5, RadarScr.xyArrow[0][1] - 5, 20, 20))
+			bool flag2 = GameCanvas.isPointerHoldIn(RadarScr.xyArrow[0][0] - 5, RadarScr.xyArrow[0][1] - 5, 20, 20);
+			if (flag2)
 			{
-				if (GameCanvas.isPointerDown)
+				bool isPointerDown = GameCanvas.isPointerDown;
+				if (isPointerDown)
 				{
 					this.dxArrow[0] = 1;
 				}
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+				bool flag3 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+				if (flag3)
 				{
 					this.doClickArrow(0);
 					this.dxArrow[0] = 0;
 				}
 			}
-			if (GameCanvas.isPointerHoldIn(RadarScr.xyArrow[2][0] - 5, RadarScr.xyArrow[2][1] - 5, 20, 20))
+			bool flag4 = GameCanvas.isPointerHoldIn(RadarScr.xyArrow[2][0] - 5, RadarScr.xyArrow[2][1] - 5, 20, 20);
+			if (flag4)
 			{
-				if (GameCanvas.isPointerDown)
+				bool isPointerDown2 = GameCanvas.isPointerDown;
+				if (isPointerDown2)
 				{
 					this.dxArrow[1] = 1;
 				}
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+				bool flag5 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+				if (flag5)
 				{
 					this.doClickArrow(1);
 					this.dxArrow[1] = 0;
@@ -336,13 +365,16 @@ public class RadarScr : mScreen
 			}
 			for (int j = 0; j < RadarScr.xCmd.Length; j++)
 			{
-				if (GameCanvas.isPointerHoldIn(RadarScr.xCmd[j] - 5, RadarScr.yCmd - 5, 20, 20))
+				bool flag6 = GameCanvas.isPointerHoldIn(RadarScr.xCmd[j] - 5, RadarScr.yCmd - 5, 20, 20);
+				if (flag6)
 				{
-					if (GameCanvas.isPointerDown)
+					bool isPointerDown3 = GameCanvas.isPointerDown;
+					if (isPointerDown3)
 					{
 						RadarScr.dxCmd[j] = 1;
 					}
-					if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+					bool flag7 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+					if (flag7)
 					{
 						this.doClickUse(j);
 						RadarScr.dxCmd[j] = 0;
@@ -358,25 +390,31 @@ public class RadarScr : mScreen
 			this.dxArrow[0] = 0;
 			this.dxArrow[1] = 0;
 		}
-		if (GameCanvas.isPointerHoldIn(RadarScr.xText, 0, RadarScr.wText, RadarScr.yText + RadarScr.hText))
+		bool flag8 = GameCanvas.isPointerHoldIn(RadarScr.xText, 0, RadarScr.wText, RadarScr.yText + RadarScr.hText);
+		if (flag8)
 		{
-			if (GameCanvas.isPointerMove)
+			bool isPointerMove = GameCanvas.isPointerMove;
+			if (isPointerMove)
 			{
-				if (this.pyy == 0)
+				bool flag9 = this.pyy == 0;
+				if (flag9)
 				{
 					this.pyy = GameCanvas.py;
 				}
 				this.pxx = this.pyy - GameCanvas.py;
-				if (this.pxx != 0)
+				bool flag10 = this.pxx != 0;
+				if (flag10)
 				{
 					RadarScr.cmyText += this.pxx;
 					this.pyy = GameCanvas.py;
 				}
-				if (RadarScr.cmyText < 0)
+				bool flag11 = RadarScr.cmyText < 0;
+				if (flag11)
 				{
 					RadarScr.cmyText = 0;
 				}
-				if (RadarScr.cmyText > this.focus_card.cp.lim)
+				bool flag12 = RadarScr.cmyText > this.focus_card.cp.lim;
+				if (flag12)
 				{
 					RadarScr.cmyText = this.focus_card.cp.lim;
 				}
@@ -389,31 +427,42 @@ public class RadarScr : mScreen
 		}
 	}
 
-	// Token: 0x0600098B RID: 2443 RVA: 0x0009279C File Offset: 0x00090B9C
+	// Token: 0x060007DF RID: 2015 RVA: 0x0008EBB8 File Offset: 0x0008CDB8
 	private void doClickUse(int i)
 	{
-		if (i == 0)
+		bool flag = i == 0;
+		if (flag)
 		{
 			this.doChangeUI();
 		}
-		else if (i == 1)
+		else
 		{
-			if (this.focus_card != null)
+			bool flag2 = i == 1;
+			if (flag2)
 			{
-				Service.gI().SendRada(1, this.focus_card.id);
+				bool flag3 = this.focus_card != null;
+				if (flag3)
+				{
+					Service.gI().SendRada(1, this.focus_card.id);
+				}
 			}
-		}
-		else if (i == 2)
-		{
-			GameScr.gI().switchToMe();
+			else
+			{
+				bool flag4 = i == 2;
+				if (flag4)
+				{
+					GameScr.gI().switchToMe();
+				}
+			}
 		}
 		SoundMn.gI().radarClick();
 	}
 
-	// Token: 0x0600098C RID: 2444 RVA: 0x00092804 File Offset: 0x00090C04
+	// Token: 0x060007E0 RID: 2016 RVA: 0x0008EC2C File Offset: 0x0008CE2C
 	private void doClickArrow(int dir)
 	{
-		if (RadarScr.TYPE_UI)
+		bool type_UI = RadarScr.TYPE_UI;
+		if (type_UI)
 		{
 			this.maxpage = RadarScr.list.size() / 5 + ((RadarScr.list.size() % 5 <= 0) ? 0 : 1);
 		}
@@ -422,64 +471,73 @@ public class RadarScr : mScreen
 			this.maxpage = RadarScr.listUse.size() / 5 + ((RadarScr.listUse.size() % 5 <= 0) ? 0 : 1);
 		}
 		int num = this.page;
-		if (dir == 0)
+		bool flag = dir == 0;
+		if (flag)
 		{
-			if (this.page == 1)
+			bool flag2 = this.page == 1;
+			if (flag2)
 			{
 				return;
 			}
 			num--;
-			if (num < 1)
+			bool flag3 = num < 1;
+			if (flag3)
 			{
 				num = 1;
 			}
 		}
 		else
 		{
-			if (this.page == this.maxpage)
+			bool flag4 = this.page == this.maxpage;
+			if (flag4)
 			{
 				return;
 			}
 			num++;
-			if (num > this.maxpage)
+			bool flag5 = num > this.maxpage;
+			if (flag5)
 			{
 				num = this.maxpage;
 			}
 		}
-		if (num != this.page)
+		bool flag6 = num != this.page;
+		if (flag6)
 		{
 			this.page = num;
 			this.listIndex();
 		}
 	}
 
-	// Token: 0x0600098D RID: 2445 RVA: 0x000928E6 File Offset: 0x00090CE6
+	// Token: 0x060007E1 RID: 2017 RVA: 0x0008ED21 File Offset: 0x0008CF21
 	private void doClickItem(int focus)
 	{
 		this.indexFocus = focus;
 		this.listIndex();
 	}
 
-	// Token: 0x0600098E RID: 2446 RVA: 0x000928F8 File Offset: 0x00090CF8
+	// Token: 0x060007E2 RID: 2018 RVA: 0x0008ED34 File Offset: 0x0008CF34
 	private void doKeyText(int type)
 	{
 		RadarScr.cmyText += 12 * type;
-		if (RadarScr.cmyText < 0)
+		bool flag = RadarScr.cmyText < 0;
+		if (flag)
 		{
 			RadarScr.cmyText = 0;
 		}
-		if (RadarScr.cmyText > this.focus_card.cp.lim)
+		bool flag2 = RadarScr.cmyText > this.focus_card.cp.lim;
+		if (flag2)
 		{
 			RadarScr.cmyText = this.focus_card.cp.lim;
 		}
 	}
 
-	// Token: 0x0600098F RID: 2447 RVA: 0x00092954 File Offset: 0x00090D54
+	// Token: 0x060007E3 RID: 2019 RVA: 0x0008ED98 File Offset: 0x0008CF98
 	private void doKeyItem(int type)
 	{
 		int num = this.indexFocus;
 		int num2 = this.page;
-		if (type == 0)
+		bool flag = type == 0;
+		if (flag)
 		{
 			num++;
 		}
@@ -487,9 +545,11 @@ public class RadarScr : mScreen
 		{
 			num--;
 		}
-		if (num >= RadarScr.index.Length)
+		bool flag2 = num >= RadarScr.index.Length;
+		if (flag2)
 		{
-			if (this.page < this.maxpage)
+			bool flag3 = this.page < this.maxpage;
+			if (flag3)
 			{
 				num = 0;
 				num2++;
@@ -499,9 +559,11 @@ public class RadarScr : mScreen
 				num = RadarScr.index.Length - 1;
 			}
 		}
-		if (num < 0)
+		bool flag4 = num < 0;
+		if (flag4)
 		{
-			if (this.page > 1)
+			bool flag5 = this.page > 1;
+			if (flag5)
 			{
 				num = RadarScr.index.Length - 1;
 				num2--;
@@ -511,20 +573,22 @@ public class RadarScr : mScreen
 				num = 0;
 			}
 		}
-		if (num != this.indexFocus)
+		bool flag6 = num != this.indexFocus;
+		if (flag6)
 		{
 			this.indexFocus = num;
 			RadarScr.cmyText = 0;
 			RadarScr.hText = 0;
 		}
-		if (num2 != this.page)
+		bool flag7 = num2 != this.page;
+		if (flag7)
 		{
 			this.page = num2;
 			this.listIndex();
 		}
 	}
 
-	// Token: 0x06000990 RID: 2448 RVA: 0x00092A18 File Offset: 0x00090E18
+	// Token: 0x060007E4 RID: 2020 RVA: 0x0008EE84 File Offset: 0x0008D084
 	public override void paint(mGraphics g)
 	{
 		try
@@ -541,7 +605,8 @@ public class RadarScr : mScreen
 			g.drawImage(RadarScr.imgChange, RadarScr.xCmd[0], RadarScr.yCmd + RadarScr.dxCmd[0], 0);
 			g.drawImage(RadarScr.imgUse_0, RadarScr.xCmd[1], RadarScr.yCmd + RadarScr.dxCmd[1], 0);
 			g.drawImage(RadarScr.imgBack, RadarScr.xCmd[2], RadarScr.yCmd + RadarScr.dxCmd[2], 0);
-			if (RadarScr.TYPE_UI)
+			bool type_UI = RadarScr.TYPE_UI;
+			if (type_UI)
 			{
 				g.drawRegion(RadarScr.imgUse, 0, 0, 17, 17, 0, RadarScr.xCmd[1], RadarScr.yCmd + RadarScr.dxCmd[1], 0);
 			}
@@ -549,13 +614,14 @@ public class RadarScr : mScreen
 			{
 				g.drawRegion(RadarScr.imgUse, 0, 0, 17, 17, 1, RadarScr.xCmd[1], RadarScr.yCmd + RadarScr.dxCmd[1], 0);
 			}
-			if (this.focus_card != null)
+			bool flag = this.focus_card != null;
+			if (flag)
 			{
 				g.setClip(RadarScr.xUi + 30, RadarScr.yUi + 13, RadarScr.wUi - 60, RadarScr.hUi / 2);
 				this.focus_card.paintInfo(g, RadarScr.xMon, RadarScr.yMon);
 				GameScr.resetTranslate(g);
-				mFont.tahoma_7b_yellow.drawString(g, (((int)this.focus_card.level <= 0) ? " " : ("Lv." + this.focus_card.level + " ")) + this.focus_card.name, RadarScr.xUi + RadarScr.wUi / 2, RadarScr.yUi + 15, 2);
-				mFont.tahoma_7_white.drawString(g, "no." + this.focus_card.no, RadarScr.xUi + 30, RadarScr.yText - 2, 0);
+				mFont.tahoma_7b_yellow.drawString(g, ((this.focus_card.level <= 0) ? " " : ("Lv." + this.focus_card.level.ToString() + " ")) + this.focus_card.name, RadarScr.xUi + RadarScr.wUi / 2, RadarScr.yUi + 15, 2);
+				mFont.tahoma_7_white.drawString(g, "no." + this.focus_card.no.ToString(), RadarScr.xUi + 30, RadarScr.yText - 2, 0);
 				g.drawImage(RadarScr.imgBar_0, RadarScr.xUi + 36, RadarScr.yText + 10, 0);
 				g.setClip(RadarScr.xUi + 36, this.yClip - this.hClip, 7, this.hClip);
 				g.drawImage(RadarScr.imgBar_1, RadarScr.xUi + 36, RadarScr.yText + 10, 0);
@@ -563,28 +629,34 @@ public class RadarScr : mScreen
 				g.drawImage(RadarScr.imgRank[(int)this.focus_card.rank], RadarScr.xUi + 39 - 5 + 14, RadarScr.yText + 12, 0);
 			}
 			g.setClip(RadarScr.xText, RadarScr.yText, RadarScr.wText + 5, RadarScr.hText + 8);
-			if (this.focus_card != null)
+			bool flag2 = this.focus_card != null;
+			if (flag2)
 			{
 				g.drawImage(RadarScr.imgUIText, RadarScr.xText, RadarScr.yText, 0);
 			}
 			GameScr.resetTranslate(g);
 			g.setClip(RadarScr.xText, RadarScr.yText + 1, RadarScr.wText, RadarScr.hText + 5);
-			if (this.focus_card != null && this.focus_card.cp != null)
+			bool flag3 = this.focus_card != null && this.focus_card.cp != null;
+			if (flag3)
 			{
-				if (this.focus_card.cp.says == null)
+				bool flag4 = this.focus_card.cp.says == null;
+				if (flag4)
 				{
 					return;
 				}
 				this.focus_card.cp.paintRada(g, RadarScr.cmyText);
 			}
 			GameScr.resetTranslate(g);
-			if ((!RadarScr.TYPE_UI && RadarScr.listUse.size() > 5) || RadarScr.TYPE_UI)
+			bool flag5 = (!RadarScr.TYPE_UI && RadarScr.listUse.size() > 5) || RadarScr.TYPE_UI;
+			if (flag5)
 			{
-				if (this.page > 1)
+				bool flag6 = this.page > 1;
+				if (flag6)
 				{
 					g.drawImage(RadarScr.imgArrow_Left, RadarScr.xyArrow[0][0], RadarScr.xyArrow[0][1] + this.dxArrow[0], 0);
 				}
-				if (this.page < this.maxpage)
+				bool flag7 = this.page < this.maxpage;
+				if (flag7)
 				{
 					g.drawImage(RadarScr.imgArrow_Right, RadarScr.xyArrow[2][0], RadarScr.xyArrow[2][1] + this.dxArrow[1], 0);
 				}
@@ -594,7 +666,8 @@ public class RadarScr : mScreen
 				int num = 0;
 				int num2 = 0;
 				int idx = 0;
-				if (i == this.indexFocus)
+				bool flag8 = i == this.indexFocus;
+				if (flag8)
 				{
 					num = this.dyArrow;
 					num2 = -10;
@@ -602,24 +675,29 @@ public class RadarScr : mScreen
 					g.drawImage(RadarScr.imgArrow_Down, RadarScr.xyItem[i][0] + 10, RadarScr.xyItem[i][1] + this.dyArrow + 29 + num2, 0);
 				}
 				Info_RadaScr info = Info_RadaScr.GetInfo(RadarScr.listUse, RadarScr.index[i]);
-				if (RadarScr.TYPE_UI)
+				bool type_UI2 = RadarScr.TYPE_UI;
+				if (type_UI2)
 				{
 					info = Info_RadaScr.GetInfo(RadarScr.list, RadarScr.index[i]);
 				}
-				if (info != null)
+				bool flag9 = info != null;
+				if (flag9)
 				{
 					RadarScr.fraImgFocus.drawFrame((int)info.rank, RadarScr.xyItem[i][0], RadarScr.xyItem[i][1] + num + num2, 0, 0, g);
 					SmallImage.drawSmallImage(g, info.idIcon, RadarScr.xyItem[i][0] + 14, RadarScr.xyItem[i][1] + 14 + num + num2, 0, StaticObj.VCENTER_HCENTER);
 					info.paintEff(g, RadarScr.xyItem[i][0], RadarScr.xyItem[i][1] + num + num2);
-					if ((int)info.level == 0)
+					bool flag10 = info.level == 0;
+					if (flag10)
 					{
 						g.drawImage(RadarScr.imgLock, RadarScr.xyItem[i][0], RadarScr.xyItem[i][1] + num + num2, 0);
 					}
-					if (i == this.indexFocus)
+					bool flag11 = i == this.indexFocus;
+					if (flag11)
 					{
 						RadarScr.fraImgFocus.drawFrame(7, RadarScr.xyItem[i][0], RadarScr.xyItem[i][1] + num + num2, 0, 0, g);
 					}
-					if ((int)info.isUse == 1)
+					bool flag12 = info.isUse == 1;
+					if (flag12)
 					{
 						RadarScr.fraImgFocus.drawFrame(8, RadarScr.xyItem[i][0], RadarScr.xyItem[i][1] + num + num2, 0, 0, g);
 					}
@@ -636,137 +714,137 @@ public class RadarScr : mScreen
 		}
 	}
 
-	// Token: 0x06000991 RID: 2449 RVA: 0x000930B8 File Offset: 0x000914B8
+	// Token: 0x060007E5 RID: 2021 RVA: 0x0008F5B4 File Offset: 0x0008D7B4
 	public override void switchToMe()
 	{
 		GameScr.isPaintOther = true;
 		base.switchToMe();
 	}
 
-	// Token: 0x04001195 RID: 4501
+	// Token: 0x04001047 RID: 4167
 	public const sbyte SUBCMD_ALL = 0;
 
-	// Token: 0x04001196 RID: 4502
+	// Token: 0x04001048 RID: 4168
 	public const sbyte SUBCMD_USE = 1;
 
-	// Token: 0x04001197 RID: 4503
+	// Token: 0x04001049 RID: 4169
 	public const sbyte SUBCMD_LEVEL = 2;
 
-	// Token: 0x04001198 RID: 4504
+	// Token: 0x0400104A RID: 4170
 	public const sbyte SUBCMD_AMOUNT = 3;
 
-	// Token: 0x04001199 RID: 4505
+	// Token: 0x0400104B RID: 4171
 	public const sbyte SUBCMD_AURA = 4;
 
-	// Token: 0x0400119A RID: 4506
+	// Token: 0x0400104C RID: 4172
 	public static RadarScr instance;
 
-	// Token: 0x0400119B RID: 4507
+	// Token: 0x0400104D RID: 4173
 	public static bool TYPE_UI;
 
-	// Token: 0x0400119C RID: 4508
+	// Token: 0x0400104E RID: 4174
 	public static FrameImage fraImgFocus;
 
-	// Token: 0x0400119D RID: 4509
+	// Token: 0x0400104F RID: 4175
 	public static FrameImage fraImgFocusNone;
 
-	// Token: 0x0400119E RID: 4510
+	// Token: 0x04001050 RID: 4176
 	public static FrameImage fraEff;
 
-	// Token: 0x0400119F RID: 4511
+	// Token: 0x04001051 RID: 4177
 	private static Image imgUI;
 
-	// Token: 0x040011A0 RID: 4512
+	// Token: 0x04001052 RID: 4178
 	private static Image imgUIText;
 
-	// Token: 0x040011A1 RID: 4513
+	// Token: 0x04001053 RID: 4179
 	private static Image imgArrow_Left;
 
-	// Token: 0x040011A2 RID: 4514
+	// Token: 0x04001054 RID: 4180
 	private static Image imgArrow_Right;
 
-	// Token: 0x040011A3 RID: 4515
+	// Token: 0x04001055 RID: 4181
 	private static Image imgArrow_Down;
 
-	// Token: 0x040011A4 RID: 4516
+	// Token: 0x04001056 RID: 4182
 	private static Image imgLock;
 
-	// Token: 0x040011A5 RID: 4517
+	// Token: 0x04001057 RID: 4183
 	private static Image imgUse_0;
 
-	// Token: 0x040011A6 RID: 4518
+	// Token: 0x04001058 RID: 4184
 	private static Image imgUse;
 
-	// Token: 0x040011A7 RID: 4519
+	// Token: 0x04001059 RID: 4185
 	private static Image imgBack;
 
-	// Token: 0x040011A8 RID: 4520
+	// Token: 0x0400105A RID: 4186
 	private static Image imgChange;
 
-	// Token: 0x040011A9 RID: 4521
+	// Token: 0x0400105B RID: 4187
 	private static Image imgBar_0;
 
-	// Token: 0x040011AA RID: 4522
+	// Token: 0x0400105C RID: 4188
 	private static Image imgBar_1;
 
-	// Token: 0x040011AB RID: 4523
+	// Token: 0x0400105D RID: 4189
 	private static Image imgPro_0;
 
-	// Token: 0x040011AC RID: 4524
+	// Token: 0x0400105E RID: 4190
 	private static Image imgPro_1;
 
-	// Token: 0x040011AD RID: 4525
+	// Token: 0x0400105F RID: 4191
 	private static Image[] imgRank;
 
-	// Token: 0x040011AE RID: 4526
+	// Token: 0x04001060 RID: 4192
 	public static int xUi;
 
-	// Token: 0x040011AF RID: 4527
+	// Token: 0x04001061 RID: 4193
 	public static int yUi;
 
-	// Token: 0x040011B0 RID: 4528
+	// Token: 0x04001062 RID: 4194
 	public static int wUi;
 
-	// Token: 0x040011B1 RID: 4529
+	// Token: 0x04001063 RID: 4195
 	public static int hUi;
 
-	// Token: 0x040011B2 RID: 4530
+	// Token: 0x04001064 RID: 4196
 	public static int xMon;
 
-	// Token: 0x040011B3 RID: 4531
+	// Token: 0x04001065 RID: 4197
 	public static int yMon;
 
-	// Token: 0x040011B4 RID: 4532
+	// Token: 0x04001066 RID: 4198
 	public static int xText;
 
-	// Token: 0x040011B5 RID: 4533
+	// Token: 0x04001067 RID: 4199
 	public static int yText;
 
-	// Token: 0x040011B6 RID: 4534
+	// Token: 0x04001068 RID: 4200
 	public static int wText;
 
-	// Token: 0x040011B7 RID: 4535
+	// Token: 0x04001069 RID: 4201
 	public static int cmyText;
 
-	// Token: 0x040011B8 RID: 4536
+	// Token: 0x0400106A RID: 4202
 	public static int hText;
 
-	// Token: 0x040011B9 RID: 4537
+	// Token: 0x0400106B RID: 4203
 	public static int yCmd;
 
-	// Token: 0x040011BA RID: 4538
+	// Token: 0x0400106C RID: 4204
 	public static int[] xCmd = new int[0];
 
-	// Token: 0x040011BB RID: 4539
+	// Token: 0x0400106D RID: 4205
 	public static int[] dxCmd = new int[0];
 
-	// Token: 0x040011BC RID: 4540
+	// Token: 0x0400106E RID: 4206
 	private static int[][] xyArrow;
 
-	// Token: 0x040011BD RID: 4541
+	// Token: 0x0400106F RID: 4207
 	private static int[][] xyItem;
 
-	// Token: 0x040011BE RID: 4542
+	// Token: 0x04001070 RID: 4208
 	private static int[] index = new int[]
 	{
 		-2,
@@ -776,51 +854,51 @@ public class RadarScr : mScreen
 		2
 	};
 
-	// Token: 0x040011BF RID: 4543
+	// Token: 0x04001071 RID: 4209
 	private int dyArrow;
 
-	// Token: 0x040011C0 RID: 4544
+	// Token: 0x04001072 RID: 4210
 	private int[] dxArrow;
 
-	// Token: 0x040011C1 RID: 4545
+	// Token: 0x04001073 RID: 4211
 	private int page;
 
-	// Token: 0x040011C2 RID: 4546
+	// Token: 0x04001074 RID: 4212
 	private int maxpage;
 
-	// Token: 0x040011C3 RID: 4547
+	// Token: 0x04001075 RID: 4213
 	private int indexFocus;
 
-	// Token: 0x040011C4 RID: 4548
+	// Token: 0x04001076 RID: 4214
 	public static MyVector list;
 
-	// Token: 0x040011C5 RID: 4549
+	// Token: 0x04001077 RID: 4215
 	public static MyVector listUse;
 
-	// Token: 0x040011C6 RID: 4550
+	// Token: 0x04001078 RID: 4216
 	private static int num;
 
-	// Token: 0x040011C7 RID: 4551
+	// Token: 0x04001079 RID: 4217
 	private static int numMax;
 
-	// Token: 0x040011C8 RID: 4552
+	// Token: 0x0400107A RID: 4218
 	private Info_RadaScr focus_card;
 
-	// Token: 0x040011C9 RID: 4553
+	// Token: 0x0400107B RID: 4219
 	private int pxx;
 
-	// Token: 0x040011CA RID: 4554
+	// Token: 0x0400107C RID: 4220
 	private int pyy;
 
-	// Token: 0x040011CB RID: 4555
+	// Token: 0x0400107D RID: 4221
 	private int xClip;
 
-	// Token: 0x040011CC RID: 4556
+	// Token: 0x0400107E RID: 4222
 	private int wClip;
 
-	// Token: 0x040011CD RID: 4557
+	// Token: 0x0400107F RID: 4223
 	private int yClip;
 
-	// Token: 0x040011CE RID: 4558
+	// Token: 0x04001080 RID: 4224
 	private int hClip;
 }

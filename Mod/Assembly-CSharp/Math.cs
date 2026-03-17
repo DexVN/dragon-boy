@@ -1,27 +1,27 @@
 ﻿using System;
 
-// Token: 0x0200000B RID: 11
+// Token: 0x02000064 RID: 100
 public class Math
 {
-	// Token: 0x06000057 RID: 87 RVA: 0x000033D1 File Offset: 0x000017D1
+	// Token: 0x060004DB RID: 1243 RVA: 0x0005D9E4 File Offset: 0x0005BBE4
 	public static int abs(int i)
 	{
 		return (i <= 0) ? (-i) : i;
 	}
 
-	// Token: 0x06000058 RID: 88 RVA: 0x000033E2 File Offset: 0x000017E2
+	// Token: 0x060004DC RID: 1244 RVA: 0x0005DA00 File Offset: 0x0005BC00
 	public static int min(int x, int y)
 	{
 		return (x >= y) ? y : x;
 	}
 
-	// Token: 0x06000059 RID: 89 RVA: 0x000033F2 File Offset: 0x000017F2
+	// Token: 0x060004DD RID: 1245 RVA: 0x0005DA1C File Offset: 0x0005BC1C
 	public static int max(int x, int y)
 	{
 		return (x <= y) ? y : x;
 	}
 
-	// Token: 0x0600005A RID: 90 RVA: 0x00003404 File Offset: 0x00001804
+	// Token: 0x060004DE RID: 1246 RVA: 0x0005DA38 File Offset: 0x0005BC38
 	public static int pow(int data, int x)
 	{
 		int num = 1;
@@ -32,6 +32,6 @@ public class Math
 		return num;
 	}
 
-	// Token: 0x04000020 RID: 32
+	// Token: 0x04000A9C RID: 2716
 	public const double PI = 3.141592653589793;
 }

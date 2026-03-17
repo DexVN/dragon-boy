@@ -1,13 +1,14 @@
 ﻿using System;
 using Assets.src.g;
 
-// Token: 0x020000A9 RID: 169
+// Token: 0x0200003A RID: 58
 public class GameScr : mScreen, IChatable
 {
-	// Token: 0x06000704 RID: 1796 RVA: 0x00060DCC File Offset: 0x0005F1CC
+	// Token: 0x060002F1 RID: 753 RVA: 0x00043378 File Offset: 0x00041578
 	public GameScr()
 	{
-		if (GameCanvas.w == 128 || GameCanvas.h <= 208)
+		bool flag = GameCanvas.w == 128 || GameCanvas.h <= 208;
+		if (flag)
 		{
 			GameScr.indexSize = 20;
 		}
@@ -18,7 +19,8 @@ public class GameScr : mScreen, IChatable
 		this.cmdMenu.w = mGraphics.getImageWidth(this.cmdMenu.img) + 20;
 		this.cmdMenu.isPlaySoundButton = false;
 		this.cmdFocus.img = GameScr.imgFocus;
-		if (GameCanvas.isTouch)
+		bool isTouch = GameCanvas.isTouch;
+		if (isTouch)
 		{
 			this.cmdMenu.x = 0;
 			this.cmdMenu.y = 50;
@@ -33,13 +35,14 @@ public class GameScr : mScreen, IChatable
 		}
 		this.right = this.cmdFocus;
 		GameScr.isPaintRada = 1;
-		if (GameCanvas.isTouch)
+		bool isTouch2 = GameCanvas.isTouch;
+		if (isTouch2)
 		{
 			GameScr.isHaveSelectSkill = true;
 		}
 	}
 
-	// Token: 0x06000705 RID: 1797 RVA: 0x00060FA4 File Offset: 0x0005F3A4
+	// Token: 0x060002F2 RID: 754 RVA: 0x00043558 File Offset: 0x00041758
 	public static void loadBg()
 	{
 		GameScr.fra_PVE_Bar_0 = new FrameImage(mSystem.loadImage("/mainImage/i_pve_bar_0.png"), 6, 15);
@@ -69,7 +72,8 @@ public class GameScr : mScreen, IChatable
 		GameScr.imgHP_tm_xanh = GameCanvas.loadImage("/mainImage/tm-xanh.png");
 		GameScr.imgChatPC = GameCanvas.loadImage("/pc/chat.png");
 		GameScr.imgChatsPC2 = GameCanvas.loadImage("/pc/chat2.png");
-		if (GameCanvas.isTouch)
+		bool isTouch = GameCanvas.isTouch;
+		if (isTouch)
 		{
 			GameScr.imgArrow = GameCanvas.loadImage("/mainImage/myTexture2darrow.png");
 			GameScr.imgArrow2 = GameCanvas.loadImage("/mainImage/myTexture2darrow2.png");
@@ -102,19 +106,23 @@ public class GameScr : mScreen, IChatable
 		sbyte[] array2 = Rms.loadRMS("NRmapVersion");
 		sbyte[] array3 = Rms.loadRMS("NRskillVersion");
 		sbyte[] array4 = Rms.loadRMS("NRitemVersion");
-		if (array != null)
+		bool flag = array != null;
+		if (flag)
 		{
 			GameScr.vcData = array[0];
 		}
-		if (array2 != null)
+		bool flag2 = array2 != null;
+		if (flag2)
 		{
 			GameScr.vcMap = array2[0];
 		}
-		if (array3 != null)
+		bool flag3 = array3 != null;
+		if (flag3)
 		{
 			GameScr.vcSkill = array3[0];
 		}
-		if (array4 != null)
+		bool flag4 = array4 != null;
+		if (flag4)
 		{
 			GameScr.vcItem = array4[0];
 		}
@@ -134,14 +142,14 @@ public class GameScr : mScreen, IChatable
 		GameScr.frBarPow22 = GameCanvas.loadImage("/mainImage/myTexture2dlineColor02.png");
 	}
 
-	// Token: 0x06000706 RID: 1798 RVA: 0x000613D8 File Offset: 0x0005F7D8
+	// Token: 0x060002F3 RID: 755 RVA: 0x000439AA File Offset: 0x00041BAA
 	public void initSelectChar()
 	{
 		this.readPart();
 		SmallImage.init();
 	}
 
-	// Token: 0x06000707 RID: 1799 RVA: 0x000613E8 File Offset: 0x0005F7E8
+	// Token: 0x060002F4 RID: 756 RVA: 0x000439BC File Offset: 0x00041BBC
 	public static void paintOngMauPercent(Image img0, Image img1, Image img2, float x, float y, int size, float pixelPercent, mGraphics g)
 	{
 		int clipX = g.getClipX();
@@ -160,44 +168,48 @@ public class GameScr : mScreen, IChatable
 		g.setClip(clipX, clipY, clipWidth, clipHeight);
 	}
 
-	// Token: 0x06000708 RID: 1800 RVA: 0x0006149E File Offset: 0x0005F89E
+	// Token: 0x060002F5 RID: 757 RVA: 0x00043A7C File Offset: 0x00041C7C
 	public void initTraining()
 	{
-		if (CreateCharScr.isCreateChar)
+		bool isCreateChar = CreateCharScr.isCreateChar;
+		if (isCreateChar)
 		{
 			CreateCharScr.isCreateChar = false;
 			this.right = null;
 		}
 	}
 
-	// Token: 0x06000709 RID: 1801 RVA: 0x000614B7 File Offset: 0x0005F8B7
+	// Token: 0x060002F6 RID: 758 RVA: 0x00043AA4 File Offset: 0x00041CA4
 	public bool isMapDocNhan()
 	{
 		return TileMap.mapID >= 53 && TileMap.mapID <= 62;
 	}
 
-	// Token: 0x0600070A RID: 1802 RVA: 0x000614D4 File Offset: 0x0005F8D4
+	// Token: 0x060002F7 RID: 759 RVA: 0x00043AD0 File Offset: 0x00041CD0
 	public bool isMapFize()
 	{
 		return TileMap.mapID >= 63;
 	}
 
-	// Token: 0x0600070B RID: 1803 RVA: 0x000614E8 File Offset: 0x0005F8E8
+	// Token: 0x060002F8 RID: 760 RVA: 0x00043AF0 File Offset: 0x00041CF0
 	public override void switchToMe()
 	{
 		GameScr.vChatVip.removeAllElements();
 		ServerListScreen.isWait = false;
-		if (BackgroudEffect.isHaveRain())
+		bool flag = BackgroudEffect.isHaveRain();
+		if (flag)
 		{
 			SoundMn.gI().rain();
 		}
 		LoginScr.isContinueToLogin = false;
 		global::Char.isLoadingMap = false;
-		if (!GameScr.isPaintOther)
+		bool flag2 = !GameScr.isPaintOther;
+		if (flag2)
 		{
 			Service.gI().finishLoadMap();
 		}
-		if (TileMap.isTrainingMap())
+		bool flag3 = TileMap.isTrainingMap();
+		if (flag3)
 		{
 			this.initTraining();
 		}
@@ -209,7 +221,7 @@ public class GameScr : mScreen, IChatable
 		base.switchToMe();
 	}
 
-	// Token: 0x0600070C RID: 1804 RVA: 0x00061578 File Offset: 0x0005F978
+	// Token: 0x060002F9 RID: 761 RVA: 0x00043B8C File Offset: 0x00041D8C
 	public static int getMaxExp(int level)
 	{
 		int num = 0;
@@ -220,7 +232,7 @@ public class GameScr : mScreen, IChatable
 		return num;
 	}
 
-	// Token: 0x0600070D RID: 1805 RVA: 0x000615A8 File Offset: 0x0005F9A8
+	// Token: 0x060002FA RID: 762 RVA: 0x00043BC4 File Offset: 0x00041DC4
 	public static void resetAllvector()
 	{
 		GameScr.vCharInMap.removeAllElements();
@@ -237,17 +249,18 @@ public class GameScr : mScreen, IChatable
 		global::Char.myCharz().vMovePoints.removeAllElements();
 	}
 
-	// Token: 0x0600070E RID: 1806 RVA: 0x00061632 File Offset: 0x0005FA32
+	// Token: 0x060002FB RID: 763 RVA: 0x00003136 File Offset: 0x00001336
 	public void loadSkillShortcut()
 	{
 	}
 
-	// Token: 0x0600070F RID: 1807 RVA: 0x00061634 File Offset: 0x0005FA34
+	// Token: 0x060002FC RID: 764 RVA: 0x00043C5C File Offset: 0x00041E5C
 	public void onOSkill(sbyte[] oSkillID)
 	{
 		Cout.println("GET onScreenSkill!");
 		GameScr.onScreenSkill = new Skill[10];
-		if (oSkillID == null)
+		bool flag = oSkillID == null;
+		if (flag)
 		{
 			this.loadDefaultonScreenSkill();
 		}
@@ -258,7 +271,8 @@ public class GameScr : mScreen, IChatable
 				for (int j = 0; j < global::Char.myCharz().vSkillFight.size(); j++)
 				{
 					Skill skill = (Skill)global::Char.myCharz().vSkillFight.elementAt(j);
-					if ((int)skill.template.id == (int)oSkillID[i])
+					bool flag2 = skill.template.id == oSkillID[i];
+					if (flag2)
 					{
 						GameScr.onScreenSkill[i] = skill;
 						break;
@@ -268,12 +282,13 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000710 RID: 1808 RVA: 0x000616D4 File Offset: 0x0005FAD4
+	// Token: 0x060002FD RID: 765 RVA: 0x00043D08 File Offset: 0x00041F08
 	public void onKSkill(sbyte[] kSkillID)
 	{
 		Cout.println("GET KEYSKILL!");
 		GameScr.keySkill = new Skill[10];
-		if (kSkillID == null)
+		bool flag = kSkillID == null;
+		if (flag)
 		{
 			this.loadDefaultKeySkill();
 		}
@@ -284,7 +299,8 @@ public class GameScr : mScreen, IChatable
 				for (int j = 0; j < global::Char.myCharz().vSkillFight.size(); j++)
 				{
 					Skill skill = (Skill)global::Char.myCharz().vSkillFight.elementAt(j);
-					if ((int)skill.template.id == (int)kSkillID[i])
+					bool flag2 = skill.template.id == kSkillID[i];
+					if (flag2)
 					{
 						GameScr.keySkill[i] = skill;
 						break;
@@ -294,13 +310,15 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000711 RID: 1809 RVA: 0x00061774 File Offset: 0x0005FB74
+	// Token: 0x060002FE RID: 766 RVA: 0x00043DB4 File Offset: 0x00041FB4
 	public void onCSkill(sbyte[] cSkillID)
 	{
 		Cout.println("GET CURRENTSKILL!");
-		if (cSkillID == null || cSkillID.Length == 0)
+		bool flag = cSkillID == null || cSkillID.Length == 0;
+		if (flag)
 		{
-			if (global::Char.myCharz().vSkillFight.size() > 0)
+			bool flag2 = global::Char.myCharz().vSkillFight.size() > 0;
+			if (flag2)
 			{
 				global::Char.myCharz().myskill = (Skill)global::Char.myCharz().vSkillFight.elementAt(0);
 			}
@@ -310,27 +328,30 @@ public class GameScr : mScreen, IChatable
 			for (int i = 0; i < global::Char.myCharz().vSkillFight.size(); i++)
 			{
 				Skill skill = (Skill)global::Char.myCharz().vSkillFight.elementAt(i);
-				if ((int)skill.template.id == (int)cSkillID[0])
+				bool flag3 = skill.template.id == cSkillID[0];
+				if (flag3)
 				{
 					global::Char.myCharz().myskill = skill;
 					break;
 				}
 			}
 		}
-		if (global::Char.myCharz().myskill != null)
+		bool flag4 = global::Char.myCharz().myskill != null;
+		if (flag4)
 		{
 			Service.gI().selectSkill((int)global::Char.myCharz().myskill.template.id);
 			this.saveRMSCurrentSkill(global::Char.myCharz().myskill.template.id);
 		}
 	}
 
-	// Token: 0x06000712 RID: 1810 RVA: 0x00061878 File Offset: 0x0005FC78
+	// Token: 0x060002FF RID: 767 RVA: 0x00043EC4 File Offset: 0x000420C4
 	private void loadDefaultonScreenSkill()
 	{
 		Cout.println("LOAD DEFAULT ONmScreen SKILL");
 		for (int i = 0; i < GameScr.onScreenSkill.Length; i++)
 		{
-			if (i >= global::Char.myCharz().vSkillFight.size())
+			bool flag = i >= global::Char.myCharz().vSkillFight.size();
+			if (flag)
 			{
 				break;
 			}
@@ -340,13 +361,14 @@ public class GameScr : mScreen, IChatable
 		this.saveonScreenSkillToRMS();
 	}
 
-	// Token: 0x06000713 RID: 1811 RVA: 0x000618E8 File Offset: 0x0005FCE8
+	// Token: 0x06000300 RID: 768 RVA: 0x00043F38 File Offset: 0x00042138
 	private void loadDefaultKeySkill()
 	{
 		Cout.println("LOAD DEFAULT KEY SKILL");
 		for (int i = 0; i < GameScr.keySkill.Length; i++)
 		{
-			if (i >= global::Char.myCharz().vSkillFight.size())
+			bool flag = i >= global::Char.myCharz().vSkillFight.size();
+			if (flag)
 			{
 				break;
 			}
@@ -356,7 +378,7 @@ public class GameScr : mScreen, IChatable
 		this.saveKeySkillToRMS();
 	}
 
-	// Token: 0x06000714 RID: 1812 RVA: 0x00061958 File Offset: 0x0005FD58
+	// Token: 0x06000301 RID: 769 RVA: 0x00043FAC File Offset: 0x000421AC
 	public void doSetOnScreenSkill(SkillTemplate skillTemplate)
 	{
 		Skill skill = global::Char.myCharz().getSkill(skillTemplate);
@@ -366,11 +388,12 @@ public class GameScr : mScreen, IChatable
 			object[] p = new object[]
 			{
 				skill,
-				i + string.Empty
+				i.ToString() + string.Empty
 			};
-			Command command = new Command(mResources.into_place + (i + 1), 11120, p);
+			Command command = new Command(mResources.into_place + (i + 1).ToString(), 11120, p);
 			Skill skill2 = GameScr.onScreenSkill[i];
-			if (skill2 != null)
+			bool flag = skill2 != null;
+			if (flag)
 			{
 				command.isDisplay = true;
 			}
@@ -379,7 +402,7 @@ public class GameScr : mScreen, IChatable
 		GameCanvas.menu.startAt(myVector, 0);
 	}
 
-	// Token: 0x06000715 RID: 1813 RVA: 0x000619F4 File Offset: 0x0005FDF4
+	// Token: 0x06000302 RID: 770 RVA: 0x00044058 File Offset: 0x00042258
 	public void doSetKeySkill(SkillTemplate skillTemplate)
 	{
 		Cout.println("DO SET KEY SKILL");
@@ -391,20 +414,21 @@ public class GameScr : mScreen, IChatable
 			object[] p = new object[]
 			{
 				skill,
-				i + string.Empty
+				i.ToString() + string.Empty
 			};
 			myVector.addElement(new Command(array[i], 11121, p));
 		}
 		GameCanvas.menu.startAt(myVector, 0);
 	}
 
-	// Token: 0x06000716 RID: 1814 RVA: 0x00061A8C File Offset: 0x0005FE8C
+	// Token: 0x06000303 RID: 771 RVA: 0x000440F0 File Offset: 0x000422F0
 	public void saveonScreenSkillToRMS()
 	{
 		sbyte[] array = new sbyte[GameScr.onScreenSkill.Length];
 		for (int i = 0; i < GameScr.onScreenSkill.Length; i++)
 		{
-			if (GameScr.onScreenSkill[i] == null)
+			bool flag = GameScr.onScreenSkill[i] == null;
+			if (flag)
 			{
 				array[i] = -1;
 			}
@@ -416,13 +440,14 @@ public class GameScr : mScreen, IChatable
 		Service.gI().changeOnKeyScr(array);
 	}
 
-	// Token: 0x06000717 RID: 1815 RVA: 0x00061AF4 File Offset: 0x0005FEF4
+	// Token: 0x06000304 RID: 772 RVA: 0x0004415C File Offset: 0x0004235C
 	public void saveKeySkillToRMS()
 	{
 		sbyte[] array = new sbyte[GameScr.keySkill.Length];
 		for (int i = 0; i < GameScr.keySkill.Length; i++)
 		{
-			if (GameScr.keySkill[i] == null)
+			bool flag = GameScr.keySkill[i] == null;
+			if (flag)
 			{
 				array[i] = -1;
 			}
@@ -434,18 +459,19 @@ public class GameScr : mScreen, IChatable
 		Service.gI().changeOnKeyScr(array);
 	}
 
-	// Token: 0x06000718 RID: 1816 RVA: 0x00061B5A File Offset: 0x0005FF5A
+	// Token: 0x06000305 RID: 773 RVA: 0x00003136 File Offset: 0x00001336
 	public void saveRMSCurrentSkill(sbyte id)
 	{
 	}
 
-	// Token: 0x06000719 RID: 1817 RVA: 0x00061B5C File Offset: 0x0005FF5C
+	// Token: 0x06000306 RID: 774 RVA: 0x000441C8 File Offset: 0x000423C8
 	public void addSkillShortcut(Skill skill)
 	{
-		Cout.println("ADD SKILL SHORTCUT TO SKILL " + skill.template.id);
+		Cout.println("ADD SKILL SHORTCUT TO SKILL " + skill.template.id.ToString());
 		for (int i = 0; i < GameScr.onScreenSkill.Length; i++)
 		{
-			if (GameScr.onScreenSkill[i] == null)
+			bool flag = GameScr.onScreenSkill[i] == null;
+			if (flag)
 			{
 				GameScr.onScreenSkill[i] = skill;
 				break;
@@ -453,13 +479,15 @@ public class GameScr : mScreen, IChatable
 		}
 		for (int j = 0; j < GameScr.keySkill.Length; j++)
 		{
-			if (GameScr.keySkill[j] == null)
+			bool flag2 = GameScr.keySkill[j] == null;
+			if (flag2)
 			{
 				GameScr.keySkill[j] = skill;
 				break;
 			}
 		}
-		if (global::Char.myCharz().myskill == null)
+		bool flag3 = global::Char.myCharz().myskill == null;
+		if (flag3)
 		{
 			global::Char.myCharz().myskill = skill;
 		}
@@ -467,12 +495,13 @@ public class GameScr : mScreen, IChatable
 		this.saveonScreenSkillToRMS();
 	}
 
-	// Token: 0x0600071A RID: 1818 RVA: 0x00061C10 File Offset: 0x00060010
+	// Token: 0x06000307 RID: 775 RVA: 0x0004428C File Offset: 0x0004248C
 	public bool isBagFull()
 	{
 		for (int i = global::Char.myCharz().arrItemBag.Length - 1; i >= 0; i--)
 		{
-			if (global::Char.myCharz().arrItemBag[i] == null)
+			bool flag = global::Char.myCharz().arrItemBag[i] == null;
+			if (flag)
 			{
 				return false;
 			}
@@ -480,7 +509,7 @@ public class GameScr : mScreen, IChatable
 		return true;
 	}
 
-	// Token: 0x0600071B RID: 1819 RVA: 0x00061C50 File Offset: 0x00060050
+	// Token: 0x06000308 RID: 776 RVA: 0x000442D9 File Offset: 0x000424D9
 	public void createConfirm(string[] menu, Npc npc)
 	{
 		this.resetButton();
@@ -489,7 +518,7 @@ public class GameScr : mScreen, IChatable
 		this.right = new Command(menu[1], 130012, npc);
 	}
 
-	// Token: 0x0600071C RID: 1820 RVA: 0x00061C88 File Offset: 0x00060088
+	// Token: 0x06000309 RID: 777 RVA: 0x00044314 File Offset: 0x00042514
 	public void createMenu(string[] menu, Npc npc)
 	{
 		MyVector myVector = new MyVector();
@@ -500,7 +529,7 @@ public class GameScr : mScreen, IChatable
 		GameCanvas.menu.startAt(myVector, 2);
 	}
 
-	// Token: 0x0600071D RID: 1821 RVA: 0x00061CD0 File Offset: 0x000600D0
+	// Token: 0x0600030A RID: 778 RVA: 0x00044360 File Offset: 0x00042560
 	public void readPart()
 	{
 		DataInputStream dataInputStream = null;
@@ -539,7 +568,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x0600071E RID: 1822 RVA: 0x00061E20 File Offset: 0x00060220
+	// Token: 0x0600030B RID: 779 RVA: 0x000444C0 File Offset: 0x000426C0
 	public void readEfect()
 	{
 		DataInputStream dataInputStream = null;
@@ -578,7 +607,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x0600071F RID: 1823 RVA: 0x00061F78 File Offset: 0x00060378
+	// Token: 0x0600030C RID: 780 RVA: 0x00044620 File Offset: 0x00042820
 	public void readArrow()
 	{
 		DataInputStream dataInputStream = null;
@@ -612,7 +641,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000720 RID: 1824 RVA: 0x00062074 File Offset: 0x00060474
+	// Token: 0x0600030D RID: 781 RVA: 0x00044720 File Offset: 0x00042920
 	public void readDart()
 	{
 		DataInputStream dataInputStream = null;
@@ -693,7 +722,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000721 RID: 1825 RVA: 0x000623B0 File Offset: 0x000607B0
+	// Token: 0x0600030E RID: 782 RVA: 0x00044A78 File Offset: 0x00042C78
 	public void readSkill()
 	{
 		DataInputStream dataInputStream = null;
@@ -706,14 +735,16 @@ public class GameScr : mScreen, IChatable
 			for (int i = 0; i < num; i++)
 			{
 				short num3 = dataInputStream.readShort();
-				if (num3 == 1111)
+				bool flag = num3 == 1111;
+				if (flag)
 				{
 					num3 = (short)(num - 1);
 				}
 				GameScr.sks[(int)num3] = new SkillPaint();
 				GameScr.sks[(int)num3].id = (int)num3;
 				GameScr.sks[(int)num3].effectHappenOnMob = (int)dataInputStream.readShort();
-				if (GameScr.sks[(int)num3].effectHappenOnMob <= 0)
+				bool flag2 = GameScr.sks[(int)num3].effectHappenOnMob <= 0;
+				if (flag2)
 				{
 					GameScr.sks[(int)num3].effectHappenOnMob = 80;
 				}
@@ -773,23 +804,24 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000722 RID: 1826 RVA: 0x00062878 File Offset: 0x00060C78
+	// Token: 0x0600030F RID: 783 RVA: 0x00044F64 File Offset: 0x00043164
 	public static GameScr gI()
 	{
-		if (GameScr.instance == null)
+		bool flag = GameScr.instance == null;
+		if (flag)
 		{
 			GameScr.instance = new GameScr();
 		}
 		return GameScr.instance;
 	}
 
-	// Token: 0x06000723 RID: 1827 RVA: 0x00062893 File Offset: 0x00060C93
+	// Token: 0x06000310 RID: 784 RVA: 0x00044F93 File Offset: 0x00043193
 	public static void clearGameScr()
 	{
 		GameScr.instance = null;
 	}
 
-	// Token: 0x06000724 RID: 1828 RVA: 0x0006289B File Offset: 0x00060C9B
+	// Token: 0x06000311 RID: 785 RVA: 0x00044F9C File Offset: 0x0004319C
 	public void loadGameScr()
 	{
 		GameScr.loadSplash();
@@ -797,7 +829,7 @@ public class GameScr : mScreen, IChatable
 		this.loadInforBar();
 	}
 
-	// Token: 0x06000725 RID: 1829 RVA: 0x000628B0 File Offset: 0x00060CB0
+	// Token: 0x06000312 RID: 786 RVA: 0x00044FB4 File Offset: 0x000431B4
 	public void doMenuInforMe()
 	{
 		GameScr.scrMain.clear();
@@ -817,7 +849,7 @@ public class GameScr : mScreen, IChatable
 		GameCanvas.menu.startAt(myVector, 3);
 	}
 
-	// Token: 0x06000726 RID: 1830 RVA: 0x00062998 File Offset: 0x00060D98
+	// Token: 0x06000313 RID: 787 RVA: 0x000450A8 File Offset: 0x000432A8
 	public void doMenusynthesis()
 	{
 		MyVector myVector = new MyVector();
@@ -827,7 +859,7 @@ public class GameScr : mScreen, IChatable
 		GameCanvas.menu.startAt(myVector, 3);
 	}
 
-	// Token: 0x06000727 RID: 1831 RVA: 0x000629FC File Offset: 0x00060DFC
+	// Token: 0x06000314 RID: 788 RVA: 0x00045114 File Offset: 0x00043314
 	public static void loadCamera(bool fullmScreen, int cx, int cy)
 	{
 		GameScr.gW = GameCanvas.w;
@@ -838,7 +870,8 @@ public class GameScr : mScreen, IChatable
 		GameScr.cmdBarY = GameCanvas.h - Paint.hTab - GameScr.cmdBarH;
 		GameScr.girlHPBarY = 0;
 		GameScr.csPadMaxH = GameCanvas.h / 6;
-		if (GameScr.csPadMaxH < 48)
+		bool flag = GameScr.csPadMaxH < 48;
+		if (flag)
 		{
 			GameScr.csPadMaxH = 48;
 		}
@@ -854,13 +887,15 @@ public class GameScr : mScreen, IChatable
 		GameScr.gH6 = GameScr.gH / 6;
 		GameScr.gssw = GameScr.gW / (int)TileMap.size + 2;
 		GameScr.gssh = GameScr.gH / (int)TileMap.size + 2;
-		if (GameScr.gW % 24 != 0)
+		bool flag2 = GameScr.gW % 24 != 0;
+		if (flag2)
 		{
 			GameScr.gssw++;
 		}
 		GameScr.cmxLim = (TileMap.tmw - 1) * (int)TileMap.size - GameScr.gW;
 		GameScr.cmyLim = (TileMap.tmh - 1) * (int)TileMap.size - GameScr.gH;
-		if (cx == -1 && cy == -1)
+		bool flag3 = cx == -1 && cy == -1;
+		if (flag3)
 		{
 			GameScr.cmx = (GameScr.cmtoX = global::Char.myCharz().cx - GameScr.gW2 + GameScr.gW6 * global::Char.myCharz().cdir);
 			GameScr.cmy = (GameScr.cmtoY = global::Char.myCharz().cy - GameScr.gH23);
@@ -871,77 +906,92 @@ public class GameScr : mScreen, IChatable
 			GameScr.cmy = (GameScr.cmtoY = cy - GameScr.gH23);
 		}
 		GameScr.firstY = GameScr.cmy;
-		if (GameScr.cmx < 24)
+		bool flag4 = GameScr.cmx < 24;
+		if (flag4)
 		{
 			GameScr.cmx = (GameScr.cmtoX = 24);
 		}
-		if (GameScr.cmx > GameScr.cmxLim)
+		bool flag5 = GameScr.cmx > GameScr.cmxLim;
+		if (flag5)
 		{
 			GameScr.cmx = (GameScr.cmtoX = GameScr.cmxLim);
 		}
-		if (GameScr.cmy < 0)
+		bool flag6 = GameScr.cmy < 0;
+		if (flag6)
 		{
 			GameScr.cmy = (GameScr.cmtoY = 0);
 		}
-		if (GameScr.cmy > GameScr.cmyLim)
+		bool flag7 = GameScr.cmy > GameScr.cmyLim;
+		if (flag7)
 		{
 			GameScr.cmy = (GameScr.cmtoY = GameScr.cmyLim);
 		}
 		GameScr.gssx = GameScr.cmx / (int)TileMap.size - 1;
-		if (GameScr.gssx < 0)
+		bool flag8 = GameScr.gssx < 0;
+		if (flag8)
 		{
 			GameScr.gssx = 0;
 		}
 		GameScr.gssy = GameScr.cmy / (int)TileMap.size;
 		GameScr.gssxe = GameScr.gssx + GameScr.gssw;
 		GameScr.gssye = GameScr.gssy + GameScr.gssh;
-		if (GameScr.gssy < 0)
+		bool flag9 = GameScr.gssy < 0;
+		if (flag9)
 		{
 			GameScr.gssy = 0;
 		}
-		if (GameScr.gssye > TileMap.tmh - 1)
+		bool flag10 = GameScr.gssye > TileMap.tmh - 1;
+		if (flag10)
 		{
 			GameScr.gssye = TileMap.tmh - 1;
 		}
 		TileMap.countx = (GameScr.gssxe - GameScr.gssx) * 4;
-		if (TileMap.countx > TileMap.tmw)
+		bool flag11 = TileMap.countx > TileMap.tmw;
+		if (flag11)
 		{
 			TileMap.countx = TileMap.tmw;
 		}
 		TileMap.county = (GameScr.gssye - GameScr.gssy) * 4;
-		if (TileMap.county > TileMap.tmh)
+		bool flag12 = TileMap.county > TileMap.tmh;
+		if (flag12)
 		{
 			TileMap.county = TileMap.tmh;
 		}
 		TileMap.gssx = (global::Char.myCharz().cx - 2 * GameScr.gW) / (int)TileMap.size;
-		if (TileMap.gssx < 0)
+		bool flag13 = TileMap.gssx < 0;
+		if (flag13)
 		{
 			TileMap.gssx = 0;
 		}
 		TileMap.gssxe = TileMap.gssx + TileMap.countx;
-		if (TileMap.gssxe > TileMap.tmw)
+		bool flag14 = TileMap.gssxe > TileMap.tmw;
+		if (flag14)
 		{
 			TileMap.gssxe = TileMap.tmw;
 		}
 		TileMap.gssy = (global::Char.myCharz().cy - 2 * GameScr.gH) / (int)TileMap.size;
-		if (TileMap.gssy < 0)
+		bool flag15 = TileMap.gssy < 0;
+		if (flag15)
 		{
 			TileMap.gssy = 0;
 		}
 		TileMap.gssye = TileMap.gssy + TileMap.county;
-		if (TileMap.gssye > TileMap.tmh)
+		bool flag16 = TileMap.gssye > TileMap.tmh;
+		if (flag16)
 		{
 			TileMap.gssye = TileMap.tmh;
 		}
 		ChatTextField.gI().parentScreen = GameScr.instance;
 		ChatTextField.gI().tfChat.y = GameCanvas.h - 35 - ChatTextField.gI().tfChat.height;
 		ChatTextField.gI().initChatTextField();
-		if (GameCanvas.isTouch)
+		bool isTouch = GameCanvas.isTouch;
+		if (isTouch)
 		{
 			GameScr.yTouchBar = GameScr.gH - 88;
 			GameScr.xC = GameScr.gW - 40;
 			GameScr.yC = 2;
-			if (GameCanvas.w <= 240)
+			bool flag17 = GameCanvas.w <= 240;
+			if (flag17)
 			{
 				GameScr.xC = GameScr.gW - 35;
 				GameScr.yC = 5;
@@ -950,7 +1000,8 @@ public class GameScr : mScreen, IChatable
 			GameScr.yF = GameScr.yTouchBar + 35;
 			GameScr.xTG = GameScr.gW - 37;
 			GameScr.yTG = GameScr.yTouchBar - 1;
-			if (GameCanvas.w >= 450)
+			bool flag18 = GameCanvas.w >= 450;
+			if (flag18)
 			{
 				GameScr.yTG -= 12;
 				GameScr.yHP -= 7;
@@ -961,7 +1012,8 @@ public class GameScr : mScreen, IChatable
 		}
 		GameScr.setSkillBarPosition();
 		GameScr.disXC = ((GameCanvas.w <= 200) ? 30 : 40);
-		if (Rms.loadRMSInt("viewchat") == -1)
+		bool flag19 = Rms.loadRMSInt("viewchat") == -1;
+		if (flag19)
 		{
 			GameCanvas.panel.isViewChatServer = true;
 		}
@@ -971,13 +1023,14 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000728 RID: 1832 RVA: 0x00062F60 File Offset: 0x00061360
+	// Token: 0x06000315 RID: 789 RVA: 0x000456C4 File Offset: 0x000438C4
 	public static void setSkillBarPosition()
 	{
 		Skill[] array = (!GameCanvas.isTouch) ? GameScr.keySkill : GameScr.onScreenSkill;
 		GameScr.xS = new int[array.Length];
 		GameScr.yS = new int[array.Length];
-		if (GameCanvas.isTouchControlSmallScreen && GameScr.isUseTouch)
+		bool flag = GameCanvas.isTouchControlSmallScreen && GameScr.isUseTouch;
+		if (flag)
 		{
 			GameScr.xSkill = 23;
 			GameScr.ySkill = 52;
@@ -986,7 +1039,8 @@ public class GameScr : mScreen, IChatable
 			{
 				GameScr.xS[i] = i * (25 + GameScr.padSkill);
 				GameScr.yS[i] = GameScr.ySkill;
-				if (GameScr.xS.Length > 5 && i >= GameScr.xS.Length / 2)
+				bool flag2 = GameScr.xS.Length > 5 && i >= GameScr.xS.Length / 2;
+				if (flag2)
 				{
 					GameScr.xS[i] = (i - GameScr.xS.Length / 2) * (25 + GameScr.padSkill);
 					GameScr.yS[i] = GameScr.ySkill - 32;
@@ -998,7 +1052,8 @@ public class GameScr : mScreen, IChatable
 		else
 		{
 			GameScr.wSkill = 30;
-			if (GameCanvas.w <= 320)
+			bool flag3 = GameCanvas.w <= 320;
+			if (flag3)
 			{
 				GameScr.ySkill = GameScr.gH - GameScr.wSkill - 6;
 				GameScr.xSkill = GameScr.gW2 - array.Length * GameScr.wSkill / 2 - 25;
@@ -1013,7 +1068,8 @@ public class GameScr : mScreen, IChatable
 			{
 				GameScr.xS[j] = j * GameScr.wSkill;
 				GameScr.yS[j] = GameScr.ySkill;
-				if (GameScr.xS.Length > 5 && j >= GameScr.xS.Length / 2)
+				bool flag4 = GameScr.xS.Length > 5 && j >= GameScr.xS.Length / 2;
+				if (flag4)
 				{
 					GameScr.xS[j] = (j - GameScr.xS.Length / 2) * GameScr.wSkill;
 					GameScr.yS[j] = GameScr.ySkill - 32;
@@ -1022,11 +1078,13 @@ public class GameScr : mScreen, IChatable
 			GameScr.xHP = array.Length * GameScr.wSkill;
 			GameScr.yHP = GameScr.ySkill;
 		}
-		if (GameCanvas.isTouch)
+		bool isTouch = GameCanvas.isTouch;
+		if (isTouch)
 		{
 			GameScr.xSkill = 17;
 			GameScr.ySkill = GameCanvas.h - 40;
-			if (GameScr.gamePad.isSmallGamePad && GameScr.isAnalog == 1)
+			bool flag5 = GameScr.gamePad.isSmallGamePad && GameScr.isAnalog == 1;
+			if (flag5)
 			{
 				GameScr.xHP = array.Length * GameScr.wSkill;
 				GameScr.yHP = GameScr.ySkill;
@@ -1041,7 +1099,8 @@ public class GameScr : mScreen, IChatable
 			{
 				GameScr.xS[k] = k * GameScr.wSkill;
 				GameScr.yS[k] = GameScr.ySkill;
-				if (GameScr.xS.Length > 5 && k >= GameScr.xS.Length / 2)
+				bool flag6 = GameScr.xS.Length > 5 && k >= GameScr.xS.Length / 2;
+				if (flag6)
 				{
 					GameScr.xS[k] = (k - GameScr.xS.Length / 2) * GameScr.wSkill;
 					GameScr.yS[k] = GameScr.ySkill - 32;
@@ -1050,98 +1109,109 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000729 RID: 1833 RVA: 0x00063240 File Offset: 0x00061640
+	// Token: 0x06000316 RID: 790 RVA: 0x000459F0 File Offset: 0x00043BF0
 	private static void updateCamera()
 	{
-		if (GameScr.isPaintOther)
+		bool flag = GameScr.isPaintOther;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameScr.cmx != GameScr.cmtoX || GameScr.cmy != GameScr.cmtoY)
-		{
-			GameScr.cmvx = GameScr.cmtoX - GameScr.cmx << 2;
-			GameScr.cmvy = GameScr.cmtoY - GameScr.cmy << 2;
-			GameScr.cmdx += GameScr.cmvx;
-			GameScr.cmx += GameScr.cmdx >> 4;
-			GameScr.cmdx &= 15;
-			GameScr.cmdy += GameScr.cmvy;
-			GameScr.cmy += GameScr.cmdy >> 4;
-			GameScr.cmdy &= 15;
-			if (GameScr.cmx < 24)
+			bool flag2 = GameScr.cmx != GameScr.cmtoX || GameScr.cmy != GameScr.cmtoY;
+			if (flag2)
 			{
-				GameScr.cmx = 24;
+				GameScr.cmvx = GameScr.cmtoX - GameScr.cmx << 2;
+				GameScr.cmvy = GameScr.cmtoY - GameScr.cmy << 2;
+				GameScr.cmdx += GameScr.cmvx;
+				GameScr.cmx += GameScr.cmdx >> 4;
+				GameScr.cmdx &= 15;
+				GameScr.cmdy += GameScr.cmvy;
+				GameScr.cmy += GameScr.cmdy >> 4;
+				GameScr.cmdy &= 15;
+				bool flag3 = GameScr.cmx < 24;
+				if (flag3)
+				{
+					GameScr.cmx = 24;
+				}
+				bool flag4 = GameScr.cmx > GameScr.cmxLim;
+				if (flag4)
+				{
+					GameScr.cmx = GameScr.cmxLim;
+				}
+				bool flag5 = GameScr.cmy < 0;
+				if (flag5)
+				{
+					GameScr.cmy = 0;
+				}
+				bool flag6 = GameScr.cmy > GameScr.cmyLim;
+				if (flag6)
+				{
+					GameScr.cmy = GameScr.cmyLim;
+				}
 			}
-			if (GameScr.cmx > GameScr.cmxLim)
+			GameScr.gssx = GameScr.cmx / (int)TileMap.size - 1;
+			bool flag7 = GameScr.gssx < 0;
+			if (flag7)
 			{
-				GameScr.cmx = GameScr.cmxLim;
+				GameScr.gssx = 0;
 			}
-			if (GameScr.cmy < 0)
+			GameScr.gssy = GameScr.cmy / (int)TileMap.size;
+			GameScr.gssxe = GameScr.gssx + GameScr.gssw;
+			GameScr.gssye = GameScr.gssy + GameScr.gssh;
+			bool flag8 = GameScr.gssy < 0;
+			if (flag8)
 			{
-				GameScr.cmy = 0;
+				GameScr.gssy = 0;
 			}
-			if (GameScr.cmy > GameScr.cmyLim)
+			bool flag9 = GameScr.gssye > TileMap.tmh - 1;
+			if (flag9)
 			{
-				GameScr.cmy = GameScr.cmyLim;
+				GameScr.gssye = TileMap.tmh - 1;
 			}
+			TileMap.gssx = (global::Char.myCharz().cx - 2 * GameScr.gW) / (int)TileMap.size;
+			bool flag10 = TileMap.gssx < 0;
+			if (flag10)
+			{
+				TileMap.gssx = 0;
+			}
+			TileMap.gssxe = TileMap.gssx + TileMap.countx;
+			bool flag11 = TileMap.gssxe > TileMap.tmw;
+			if (flag11)
+			{
+				TileMap.gssxe = TileMap.tmw;
+				TileMap.gssx = TileMap.gssxe - TileMap.countx;
+			}
+			TileMap.gssy = (global::Char.myCharz().cy - 2 * GameScr.gH) / (int)TileMap.size;
+			bool flag12 = TileMap.gssy < 0;
+			if (flag12)
+			{
+				TileMap.gssy = 0;
+			}
+			TileMap.gssye = TileMap.gssy + TileMap.county;
+			bool flag13 = TileMap.gssye > TileMap.tmh;
+			if (flag13)
+			{
+				TileMap.gssye = TileMap.tmh;
+				TileMap.gssy = TileMap.gssye - TileMap.county;
+			}
+			GameScr.scrMain.updatecm();
+			GameScr.scrInfo.updatecm();
 		}
-		GameScr.gssx = GameScr.cmx / (int)TileMap.size - 1;
-		if (GameScr.gssx < 0)
-		{
-			GameScr.gssx = 0;
-		}
-		GameScr.gssy = GameScr.cmy / (int)TileMap.size;
-		GameScr.gssxe = GameScr.gssx + GameScr.gssw;
-		GameScr.gssye = GameScr.gssy + GameScr.gssh;
-		if (GameScr.gssy < 0)
-		{
-			GameScr.gssy = 0;
-		}
-		if (GameScr.gssye > TileMap.tmh - 1)
-		{
-			GameScr.gssye = TileMap.tmh - 1;
-		}
-		TileMap.gssx = (global::Char.myCharz().cx - 2 * GameScr.gW) / (int)TileMap.size;
-		if (TileMap.gssx < 0)
-		{
-			TileMap.gssx = 0;
-		}
-		TileMap.gssxe = TileMap.gssx + TileMap.countx;
-		if (TileMap.gssxe > TileMap.tmw)
-		{
-			TileMap.gssxe = TileMap.tmw;
-			TileMap.gssx = TileMap.gssxe - TileMap.countx;
-		}
-		TileMap.gssy = (global::Char.myCharz().cy - 2 * GameScr.gH) / (int)TileMap.size;
-		if (TileMap.gssy < 0)
-		{
-			TileMap.gssy = 0;
-		}
-		TileMap.gssye = TileMap.gssy + TileMap.county;
-		if (TileMap.gssye > TileMap.tmh)
-		{
-			TileMap.gssye = TileMap.tmh;
-			TileMap.gssy = TileMap.gssye - TileMap.county;
-		}
-		GameScr.scrMain.updatecm();
-		GameScr.scrInfo.updatecm();
 	}
 
-	// Token: 0x0600072A RID: 1834 RVA: 0x000634B8 File Offset: 0x000618B8
+	// Token: 0x06000317 RID: 791 RVA: 0x00045CA4 File Offset: 0x00043EA4
 	public bool testAct()
 	{
-		sbyte b = 2;
-		while ((int)b < 9)
+		for (sbyte b = 2; b < 9; b += 2)
 		{
-			if (GameCanvas.keyHold[(int)b])
+			bool flag = GameCanvas.keyHold[(int)b];
+			if (flag)
 			{
 				return false;
 			}
-			b = (sbyte)((int)b + 2);
 		}
 		return true;
 	}
 
-	// Token: 0x0600072B RID: 1835 RVA: 0x000634EC File Offset: 0x000618EC
+	// Token: 0x06000318 RID: 792 RVA: 0x00045CDC File Offset: 0x00043EDC
 	public void clanInvite(string strInvite, int clanID, int code)
 	{
 		ClanObject clanObject = new ClanObject();
@@ -1150,460 +1220,646 @@ public class GameScr : mScreen, IChatable
 		this.startYesNoPopUp(strInvite, new Command(mResources.YES, 12002, clanObject), new Command(mResources.NO, 12003, clanObject));
 	}
 
-	// Token: 0x0600072C RID: 1836 RVA: 0x00063534 File Offset: 0x00061934
+	// Token: 0x06000319 RID: 793 RVA: 0x00045D28 File Offset: 0x00043F28
 	public void playerMenu(global::Char c)
 	{
 		this.auto = 0;
 		GameCanvas.clearKeyHold();
-		if (global::Char.myCharz().charFocus.charID < 0)
+		bool flag = global::Char.myCharz().charFocus.charID < 0;
+		if (!flag)
 		{
-			return;
-		}
-		if (global::Char.myCharz().charID < 0)
-		{
-			return;
-		}
-		MyVector vPlayerMenu = GameCanvas.panel.vPlayerMenu;
-		if (vPlayerMenu.size() > 0)
-		{
-			return;
-		}
-		if (global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId > 1)
-		{
-			vPlayerMenu.addElement(new Command(mResources.make_friend, 11112, global::Char.myCharz().charFocus));
-			vPlayerMenu.addElement(new Command(mResources.trade, 11113, global::Char.myCharz().charFocus));
-		}
-		if (global::Char.myCharz().clan != null && (int)global::Char.myCharz().role < 2 && global::Char.myCharz().charFocus.clanID == -1)
-		{
-			vPlayerMenu.addElement(new Command(mResources.CHAR_ORDER[4], 110391));
-		}
-		if (global::Char.myCharz().charFocus.statusMe != 14 && global::Char.myCharz().charFocus.statusMe != 5)
-		{
-			if (global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId >= 14)
+			bool flag2 = global::Char.myCharz().charID < 0;
+			if (!flag2)
 			{
-				vPlayerMenu.addElement(new Command(mResources.CHAR_ORDER[0], 2003));
-			}
-		}
-		else if (global::Char.myCharz().myskill.template.type == 4)
-		{
-		}
-		if (global::Char.myCharz().clan != null && global::Char.myCharz().clan.ID == global::Char.myCharz().charFocus.clanID && global::Char.myCharz().charFocus.statusMe != 14 && global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId >= 14)
-		{
-			vPlayerMenu.addElement(new Command(mResources.CHAR_ORDER[1], 2004));
-		}
-		int num = global::Char.myCharz().nClass.skillTemplates.Length;
-		for (int i = 0; i < num; i++)
-		{
-			SkillTemplate skillTemplate = global::Char.myCharz().nClass.skillTemplates[i];
-			Skill skill = global::Char.myCharz().getSkill(skillTemplate);
-			if (skill != null && skillTemplate.isBuffToPlayer() && skill.point >= 1)
-			{
-				vPlayerMenu.addElement(new Command(skillTemplate.name, 12004, skill));
-			}
-		}
-	}
-
-	// Token: 0x0600072D RID: 1837 RVA: 0x000637C0 File Offset: 0x00061BC0
-	public bool isAttack()
-	{
-		if (this.checkClickToBotton(global::Char.myCharz().charFocus))
-		{
-			return false;
-		}
-		if (this.checkClickToBotton(global::Char.myCharz().mobFocus))
-		{
-			return false;
-		}
-		if (this.checkClickToBotton(global::Char.myCharz().npcFocus))
-		{
-			return false;
-		}
-		if (ChatTextField.gI().isShow)
-		{
-			return false;
-		}
-		if (InfoDlg.isLock || global::Char.myCharz().isLockAttack || global::Char.isLockKey)
-		{
-			return false;
-		}
-		if (global::Char.myCharz().myskill != null && (int)global::Char.myCharz().myskill.template.id == 6 && global::Char.myCharz().itemFocus != null)
-		{
-			this.pickItem();
-			return false;
-		}
-		if (global::Char.myCharz().myskill != null && global::Char.myCharz().myskill.template.type == 2 && global::Char.myCharz().npcFocus == null && (int)global::Char.myCharz().myskill.template.id != 6)
-		{
-			return this.checkSkillValid();
-		}
-		if (global::Char.myCharz().skillPaint != null || (global::Char.myCharz().mobFocus == null && global::Char.myCharz().npcFocus == null && global::Char.myCharz().charFocus == null && global::Char.myCharz().itemFocus == null))
-		{
-			return false;
-		}
-		if (global::Char.myCharz().mobFocus != null)
-		{
-			if (global::Char.myCharz().mobFocus.isBigBoss() && global::Char.myCharz().mobFocus.status == 4)
-			{
-				global::Char.myCharz().mobFocus = null;
-				global::Char.myCharz().currentMovePoint = null;
-			}
-			GameScr.isAutoPlay = true;
-			if (!this.isMeCanAttackMob(global::Char.myCharz().mobFocus))
-			{
-				Res.outz("can not attack");
-				return false;
-			}
-			if (this.mobCapcha != null)
-			{
-				return false;
-			}
-			if (global::Char.myCharz().myskill == null)
-			{
-				return false;
-			}
-			if (global::Char.myCharz().isSelectingSkillUseAlone())
-			{
-				return false;
-			}
-			int num = -1;
-			int num2 = Res.abs(global::Char.myCharz().cx - GameScr.cmx) * mGraphics.zoomLevel;
-			if (global::Char.myCharz().charFocus != null)
-			{
-				num = Res.abs(global::Char.myCharz().cx - global::Char.myCharz().charFocus.cx) * mGraphics.zoomLevel;
-			}
-			else if (global::Char.myCharz().mobFocus != null)
-			{
-				num = Res.abs(global::Char.myCharz().cx - global::Char.myCharz().mobFocus.x) * mGraphics.zoomLevel;
-			}
-			if (global::Char.myCharz().mobFocus.status == 1 || global::Char.myCharz().mobFocus.status == 0 || global::Char.myCharz().myskill.template.type == 4 || num == -1 || num > num2)
-			{
-				if (global::Char.myCharz().myskill.template.type == 4)
+				MyVector vPlayerMenu = GameCanvas.panel.vPlayerMenu;
+				bool flag3 = vPlayerMenu.size() > 0;
+				if (!flag3)
 				{
-					if (global::Char.myCharz().mobFocus.x < global::Char.myCharz().cx)
+					bool flag4 = global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId > 1;
+					if (flag4)
 					{
-						global::Char.myCharz().cdir = -1;
+						vPlayerMenu.addElement(new Command(mResources.make_friend, 11112, global::Char.myCharz().charFocus));
+						vPlayerMenu.addElement(new Command(mResources.trade, 11113, global::Char.myCharz().charFocus));
+					}
+					bool flag5 = global::Char.myCharz().clan != null && global::Char.myCharz().role < 2 && global::Char.myCharz().charFocus.clanID == -1;
+					if (flag5)
+					{
+						vPlayerMenu.addElement(new Command(mResources.CHAR_ORDER[4], 110391));
+					}
+					bool flag6 = global::Char.myCharz().charFocus.statusMe != 14 && global::Char.myCharz().charFocus.statusMe != 5;
+					if (flag6)
+					{
+						bool flag7 = global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId >= 14;
+						if (flag7)
+						{
+							vPlayerMenu.addElement(new Command(mResources.CHAR_ORDER[0], 2003));
+						}
 					}
 					else
 					{
-						global::Char.myCharz().cdir = 1;
-					}
-					this.doSelectSkill(global::Char.myCharz().myskill, true);
-				}
-				return false;
-			}
-			if (!this.checkSkillValid())
-			{
-				return false;
-			}
-			if (global::Char.myCharz().cx < global::Char.myCharz().mobFocus.getX())
-			{
-				global::Char.myCharz().cdir = 1;
-			}
-			else
-			{
-				global::Char.myCharz().cdir = -1;
-			}
-			int num3 = global::Math.abs(global::Char.myCharz().cx - global::Char.myCharz().mobFocus.getX());
-			int num4 = global::Math.abs(global::Char.myCharz().cy - global::Char.myCharz().mobFocus.getY());
-			global::Char.myCharz().cvx = 0;
-			if (num3 > global::Char.myCharz().myskill.dx || num4 > global::Char.myCharz().myskill.dy)
-			{
-				bool flag = false;
-				if (global::Char.myCharz().mobFocus is BigBoss || global::Char.myCharz().mobFocus is BigBoss2)
-				{
-					flag = true;
-				}
-				int num5 = (global::Char.myCharz().myskill.dx - ((!flag) ? 20 : 50)) * ((global::Char.myCharz().cx <= global::Char.myCharz().mobFocus.getX()) ? -1 : 1);
-				if (num3 <= global::Char.myCharz().myskill.dx)
-				{
-					num5 = 0;
-				}
-				global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().mobFocus.getX() + num5, global::Char.myCharz().mobFocus.getY());
-				global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
-				GameCanvas.clearKeyHold();
-				GameCanvas.clearKeyPressed();
-				return false;
-			}
-			if ((int)global::Char.myCharz().myskill.template.id == 20)
-			{
-				return true;
-			}
-			if (num4 > num3 && Res.abs(global::Char.myCharz().cy - global::Char.myCharz().mobFocus.getY()) > 30 && (int)global::Char.myCharz().mobFocus.getTemplate().type == 4)
-			{
-				global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().cx + global::Char.myCharz().cdir, global::Char.myCharz().mobFocus.getY());
-				global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
-				GameCanvas.clearKeyHold();
-				GameCanvas.clearKeyPressed();
-				return false;
-			}
-			int num6 = 20;
-			bool flag2 = false;
-			if (global::Char.myCharz().mobFocus is BigBoss || global::Char.myCharz().mobFocus is BigBoss2)
-			{
-				flag2 = true;
-			}
-			if (global::Char.myCharz().myskill.dx > 100)
-			{
-				num6 = 60;
-				if (num3 < 20)
-				{
-					global::Char.myCharz().createShadow(global::Char.myCharz().cx, global::Char.myCharz().cy, 10);
-				}
-			}
-			bool flag3 = false;
-			if ((TileMap.tileTypeAtPixel(global::Char.myCharz().cx, global::Char.myCharz().cy + 3) & 2) == 2)
-			{
-				int num7 = (global::Char.myCharz().cx <= global::Char.myCharz().mobFocus.getX()) ? -1 : 1;
-				if ((TileMap.tileTypeAtPixel(global::Char.myCharz().mobFocus.getX() + num6 * num7, global::Char.myCharz().cy + 3) & 2) != 2)
-				{
-					flag3 = true;
-				}
-			}
-			if (num3 <= num6 && !flag3)
-			{
-				if (global::Char.myCharz().cx > global::Char.myCharz().mobFocus.getX())
-				{
-					global::Char.myCharz().cx = global::Char.myCharz().mobFocus.getX() + num6 + ((!flag2) ? 0 : 30);
-					global::Char.myCharz().cdir = -1;
-				}
-				else
-				{
-					global::Char.myCharz().cx = global::Char.myCharz().mobFocus.getX() - num6 - ((!flag2) ? 0 : 30);
-					global::Char.myCharz().cdir = 1;
-				}
-				Service.gI().charMove();
-			}
-			GameCanvas.clearKeyHold();
-			GameCanvas.clearKeyPressed();
-			return true;
-		}
-		else if (global::Char.myCharz().npcFocus != null)
-		{
-			if (global::Char.myCharz().npcFocus.isHide)
-			{
-				return false;
-			}
-			if (global::Char.myCharz().cx < global::Char.myCharz().npcFocus.cx)
-			{
-				global::Char.myCharz().cdir = 1;
-			}
-			else
-			{
-				global::Char.myCharz().cdir = -1;
-			}
-			if (global::Char.myCharz().cx < global::Char.myCharz().npcFocus.cx)
-			{
-				global::Char.myCharz().npcFocus.cdir = -1;
-			}
-			else
-			{
-				global::Char.myCharz().npcFocus.cdir = 1;
-			}
-			int num8 = global::Math.abs(global::Char.myCharz().cx - global::Char.myCharz().npcFocus.cx);
-			int num9 = global::Math.abs(global::Char.myCharz().cy - global::Char.myCharz().npcFocus.cy);
-			if (num9 > 40)
-			{
-				global::Char.myCharz().cy = global::Char.myCharz().npcFocus.cy - 40;
-			}
-			if (num8 < 60)
-			{
-				GameCanvas.clearKeyHold();
-				GameCanvas.clearKeyPressed();
-				if (this.tMenuDelay == 0)
-				{
-					if (global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId == 0)
-					{
-						if (global::Char.myCharz().taskMaint.index < 4 && global::Char.myCharz().npcFocus.template.npcTemplateId == 4)
+						bool flag8 = global::Char.myCharz().myskill.template.type == 4;
+						if (flag8)
 						{
-							return false;
-						}
-						if (global::Char.myCharz().taskMaint.index < 3 && global::Char.myCharz().npcFocus.template.npcTemplateId == 3)
-						{
-							return false;
 						}
 					}
-					this.tMenuDelay = 50;
-					InfoDlg.showWait();
-					Service.gI().charMove();
-					Service.gI().openMenu(global::Char.myCharz().npcFocus.template.npcTemplateId);
-				}
-			}
-			else
-			{
-				int num10 = (20 + Res.r.nextInt(20)) * ((global::Char.myCharz().cx <= global::Char.myCharz().npcFocus.cx) ? -1 : 1);
-				global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().npcFocus.cx + num10, global::Char.myCharz().cy);
-				global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
-				GameCanvas.clearKeyHold();
-				GameCanvas.clearKeyPressed();
-			}
-			return false;
-		}
-		else if (global::Char.myCharz().charFocus != null)
-		{
-			if (this.mobCapcha != null)
-			{
-				return false;
-			}
-			if (global::Char.myCharz().cx < global::Char.myCharz().charFocus.cx)
-			{
-				global::Char.myCharz().cdir = 1;
-			}
-			else
-			{
-				global::Char.myCharz().cdir = -1;
-			}
-			int num11 = global::Math.abs(global::Char.myCharz().cx - global::Char.myCharz().charFocus.cx);
-			int num12 = global::Math.abs(global::Char.myCharz().cy - global::Char.myCharz().charFocus.cy);
-			if (!global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus) && !global::Char.myCharz().isSelectingSkillBuffToPlayer())
-			{
-				if (num11 < 60 && num12 < 40)
-				{
-					this.playerMenu(global::Char.myCharz().charFocus);
-					if (!GameCanvas.isTouch && global::Char.myCharz().charFocus.charID >= 0 && TileMap.mapID != 51 && TileMap.mapID != 52 && this.popUpYesNo == null)
+					bool flag9 = global::Char.myCharz().clan != null && global::Char.myCharz().clan.ID == global::Char.myCharz().charFocus.clanID && global::Char.myCharz().charFocus.statusMe != 14 && global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId >= 14;
+					if (flag9)
 					{
-						GameCanvas.panel.setTypePlayerMenu(global::Char.myCharz().charFocus);
-						GameCanvas.panel.show();
-						Service.gI().getPlayerMenu(global::Char.myCharz().charFocus.charID);
-						Service.gI().messagePlayerMenu(global::Char.myCharz().charFocus.charID);
+						vPlayerMenu.addElement(new Command(mResources.CHAR_ORDER[1], 2004));
+					}
+					int num = global::Char.myCharz().nClass.skillTemplates.Length;
+					for (int i = 0; i < num; i++)
+					{
+						SkillTemplate skillTemplate = global::Char.myCharz().nClass.skillTemplates[i];
+						Skill skill = global::Char.myCharz().getSkill(skillTemplate);
+						bool flag10 = skill != null && skillTemplate.isBuffToPlayer() && skill.point >= 1;
+						if (flag10)
+						{
+							vPlayerMenu.addElement(new Command(skillTemplate.name, 12004, skill));
+						}
 					}
 				}
-				else
-				{
-					int num13 = (20 + Res.r.nextInt(20)) * ((global::Char.myCharz().cx <= global::Char.myCharz().charFocus.cx) ? -1 : 1);
-					global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().charFocus.cx + num13, global::Char.myCharz().charFocus.cy);
-					global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
-					GameCanvas.clearKeyHold();
-					GameCanvas.clearKeyPressed();
-				}
-				return false;
 			}
-			if (global::Char.myCharz().myskill == null)
-			{
-				return false;
-			}
-			if (!this.checkSkillValid())
-			{
-				return false;
-			}
-			if (global::Char.myCharz().cx < global::Char.myCharz().charFocus.cx)
-			{
-				global::Char.myCharz().cdir = 1;
-			}
-			else
-			{
-				global::Char.myCharz().cdir = -1;
-			}
-			global::Char.myCharz().cvx = 0;
-			if (num11 > global::Char.myCharz().myskill.dx || num12 > global::Char.myCharz().myskill.dy)
-			{
-				int num14 = (global::Char.myCharz().myskill.dx - 20) * ((global::Char.myCharz().cx <= global::Char.myCharz().charFocus.cx) ? -1 : 1);
-				if (num11 <= global::Char.myCharz().myskill.dx)
-				{
-					num14 = 0;
-				}
-				global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().charFocus.cx + num14, global::Char.myCharz().charFocus.cy);
-				global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
-				GameCanvas.clearKeyHold();
-				GameCanvas.clearKeyPressed();
-				return false;
-			}
-			if ((int)global::Char.myCharz().myskill.template.id == 20)
-			{
-				return true;
-			}
-			int num15 = 20;
-			if (global::Char.myCharz().myskill.dx > 60)
-			{
-				num15 = 60;
-				if (num11 < 20)
-				{
-					global::Char.myCharz().createShadow(global::Char.myCharz().cx, global::Char.myCharz().cy, 10);
-				}
-			}
-			bool flag4 = false;
-			if ((TileMap.tileTypeAtPixel(global::Char.myCharz().cx, global::Char.myCharz().cy + 3) & 2) == 2)
-			{
-				int num16 = (global::Char.myCharz().cx <= global::Char.myCharz().charFocus.cx) ? -1 : 1;
-				if ((TileMap.tileTypeAtPixel(global::Char.myCharz().charFocus.cx + num15 * num16, global::Char.myCharz().cy + 3) & 2) != 2)
-				{
-					flag4 = true;
-				}
-			}
-			if (num11 <= num15 && !flag4)
-			{
-				if (global::Char.myCharz().cx > global::Char.myCharz().charFocus.cx)
-				{
-					global::Char.myCharz().cx = global::Char.myCharz().charFocus.cx + num15;
-					global::Char.myCharz().cdir = -1;
-				}
-				else
-				{
-					global::Char.myCharz().cx = global::Char.myCharz().charFocus.cx - num15;
-					global::Char.myCharz().cdir = 1;
-				}
-				Service.gI().charMove();
-			}
-			GameCanvas.clearKeyHold();
-			GameCanvas.clearKeyPressed();
-			return true;
+		}
+	}
+
+	// Token: 0x0600031A RID: 794 RVA: 0x00045FF8 File Offset: 0x000441F8
+	public bool isAttack()
+	{
+		bool flag5 = this.checkClickToBotton(global::Char.myCharz().charFocus);
+		bool result;
+		if (flag5)
+		{
+			result = false;
 		}
 		else
 		{
-			if (global::Char.myCharz().itemFocus != null)
+			bool flag6 = this.checkClickToBotton(global::Char.myCharz().mobFocus);
+			if (flag6)
 			{
-				this.pickItem();
-				return false;
+				result = false;
 			}
-			return true;
+			else
+			{
+				bool flag7 = this.checkClickToBotton(global::Char.myCharz().npcFocus);
+				if (flag7)
+				{
+					result = false;
+				}
+				else
+				{
+					bool isShow = ChatTextField.gI().isShow;
+					if (isShow)
+					{
+						result = false;
+					}
+					else
+					{
+						bool flag8 = InfoDlg.isLock || global::Char.myCharz().isLockAttack || global::Char.isLockKey;
+						if (flag8)
+						{
+							result = false;
+						}
+						else
+						{
+							bool flag9 = global::Char.myCharz().myskill != null && global::Char.myCharz().myskill.template.id == 6 && global::Char.myCharz().itemFocus != null;
+							if (flag9)
+							{
+								this.pickItem();
+								result = false;
+							}
+							else
+							{
+								bool flag10 = global::Char.myCharz().myskill != null && global::Char.myCharz().myskill.template.type == 2 && global::Char.myCharz().npcFocus == null && global::Char.myCharz().myskill.template.id != 6;
+								if (flag10)
+								{
+									result = this.checkSkillValid();
+								}
+								else
+								{
+									bool flag11 = global::Char.myCharz().skillPaint != null || (global::Char.myCharz().mobFocus == null && global::Char.myCharz().npcFocus == null && global::Char.myCharz().charFocus == null && global::Char.myCharz().itemFocus == null);
+									if (flag11)
+									{
+										result = false;
+									}
+									else
+									{
+										bool flag12 = global::Char.myCharz().mobFocus != null;
+										if (flag12)
+										{
+											bool flag13 = global::Char.myCharz().mobFocus.isBigBoss() && global::Char.myCharz().mobFocus.status == 4;
+											if (flag13)
+											{
+												global::Char.myCharz().mobFocus = null;
+												global::Char.myCharz().currentMovePoint = null;
+											}
+											GameScr.isAutoPlay = true;
+											bool flag14 = !this.isMeCanAttackMob(global::Char.myCharz().mobFocus);
+											if (flag14)
+											{
+												Res.outz("can not attack");
+												result = false;
+											}
+											else
+											{
+												bool flag15 = this.mobCapcha != null;
+												if (flag15)
+												{
+													result = false;
+												}
+												else
+												{
+													bool flag16 = global::Char.myCharz().myskill == null;
+													if (flag16)
+													{
+														result = false;
+													}
+													else
+													{
+														bool flag17 = global::Char.myCharz().isSelectingSkillUseAlone();
+														if (flag17)
+														{
+															result = false;
+														}
+														else
+														{
+															int num = -1;
+															int num2 = Res.abs(global::Char.myCharz().cx - GameScr.cmx) * mGraphics.zoomLevel;
+															bool flag18 = global::Char.myCharz().charFocus != null;
+															if (flag18)
+															{
+																num = Res.abs(global::Char.myCharz().cx - global::Char.myCharz().charFocus.cx) * mGraphics.zoomLevel;
+															}
+															else
+															{
+																bool flag19 = global::Char.myCharz().mobFocus != null;
+																if (flag19)
+																{
+																	num = Res.abs(global::Char.myCharz().cx - global::Char.myCharz().mobFocus.x) * mGraphics.zoomLevel;
+																}
+															}
+															bool flag20 = global::Char.myCharz().mobFocus.status == 1 || global::Char.myCharz().mobFocus.status == 0 || global::Char.myCharz().myskill.template.type == 4 || num == -1 || num > num2;
+															if (flag20)
+															{
+																bool flag21 = global::Char.myCharz().myskill.template.type == 4;
+																if (flag21)
+																{
+																	bool flag22 = global::Char.myCharz().mobFocus.x < global::Char.myCharz().cx;
+																	if (flag22)
+																	{
+																		global::Char.myCharz().cdir = -1;
+																	}
+																	else
+																	{
+																		global::Char.myCharz().cdir = 1;
+																	}
+																	this.doSelectSkill(global::Char.myCharz().myskill, true);
+																}
+																result = false;
+															}
+															else
+															{
+																bool flag23 = !this.checkSkillValid();
+																if (flag23)
+																{
+																	result = false;
+																}
+																else
+																{
+																	bool flag24 = global::Char.myCharz().cx < global::Char.myCharz().mobFocus.getX();
+																	if (flag24)
+																	{
+																		global::Char.myCharz().cdir = 1;
+																	}
+																	else
+																	{
+																		global::Char.myCharz().cdir = -1;
+																	}
+																	int num3 = global::Math.abs(global::Char.myCharz().cx - global::Char.myCharz().mobFocus.getX());
+																	int num4 = global::Math.abs(global::Char.myCharz().cy - global::Char.myCharz().mobFocus.getY());
+																	global::Char.myCharz().cvx = 0;
+																	bool flag25 = num3 > global::Char.myCharz().myskill.dx || num4 > global::Char.myCharz().myskill.dy;
+																	if (flag25)
+																	{
+																		bool flag = false;
+																		bool flag26 = global::Char.myCharz().mobFocus is BigBoss || global::Char.myCharz().mobFocus is BigBoss2;
+																		if (flag26)
+																		{
+																			flag = true;
+																		}
+																		int num5 = (global::Char.myCharz().myskill.dx - ((!flag) ? 20 : 50)) * ((global::Char.myCharz().cx <= global::Char.myCharz().mobFocus.getX()) ? -1 : 1);
+																		bool flag27 = num3 <= global::Char.myCharz().myskill.dx;
+																		if (flag27)
+																		{
+																			num5 = 0;
+																		}
+																		global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().mobFocus.getX() + num5, global::Char.myCharz().mobFocus.getY());
+																		global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
+																		GameCanvas.clearKeyHold();
+																		GameCanvas.clearKeyPressed();
+																		result = false;
+																	}
+																	else
+																	{
+																		bool flag28 = global::Char.myCharz().myskill.template.id == 20;
+																		if (flag28)
+																		{
+																			result = true;
+																		}
+																		else
+																		{
+																			bool flag29 = num4 > num3 && Res.abs(global::Char.myCharz().cy - global::Char.myCharz().mobFocus.getY()) > 30 && global::Char.myCharz().mobFocus.getTemplate().type == 4;
+																			if (flag29)
+																			{
+																				global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().cx + global::Char.myCharz().cdir, global::Char.myCharz().mobFocus.getY());
+																				global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
+																				GameCanvas.clearKeyHold();
+																				GameCanvas.clearKeyPressed();
+																				result = false;
+																			}
+																			else
+																			{
+																				int num6 = 20;
+																				bool flag2 = false;
+																				bool flag30 = global::Char.myCharz().mobFocus is BigBoss || global::Char.myCharz().mobFocus is BigBoss2;
+																				if (flag30)
+																				{
+																					flag2 = true;
+																				}
+																				bool flag31 = global::Char.myCharz().myskill.dx > 100;
+																				if (flag31)
+																				{
+																					num6 = 60;
+																					bool flag32 = num3 < 20;
+																					if (flag32)
+																					{
+																						global::Char.myCharz().createShadow(global::Char.myCharz().cx, global::Char.myCharz().cy, 10);
+																					}
+																				}
+																				bool flag3 = false;
+																				bool flag33 = (TileMap.tileTypeAtPixel(global::Char.myCharz().cx, global::Char.myCharz().cy + 3) & 2) == 2;
+																				if (flag33)
+																				{
+																					int num7 = (global::Char.myCharz().cx <= global::Char.myCharz().mobFocus.getX()) ? -1 : 1;
+																					bool flag34 = (TileMap.tileTypeAtPixel(global::Char.myCharz().mobFocus.getX() + num6 * num7, global::Char.myCharz().cy + 3) & 2) != 2;
+																					if (flag34)
+																					{
+																						flag3 = true;
+																					}
+																				}
+																				bool flag35 = num3 <= num6 && !flag3;
+																				if (flag35)
+																				{
+																					bool flag36 = global::Char.myCharz().cx > global::Char.myCharz().mobFocus.getX();
+																					if (flag36)
+																					{
+																						global::Char.myCharz().cx = global::Char.myCharz().mobFocus.getX() + num6 + ((!flag2) ? 0 : 30);
+																						global::Char.myCharz().cdir = -1;
+																					}
+																					else
+																					{
+																						global::Char.myCharz().cx = global::Char.myCharz().mobFocus.getX() - num6 - ((!flag2) ? 0 : 30);
+																						global::Char.myCharz().cdir = 1;
+																					}
+																					Service.gI().charMove();
+																				}
+																				GameCanvas.clearKeyHold();
+																				GameCanvas.clearKeyPressed();
+																				result = true;
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+										else
+										{
+											bool flag37 = global::Char.myCharz().npcFocus != null;
+											if (flag37)
+											{
+												bool isHide = global::Char.myCharz().npcFocus.isHide;
+												if (isHide)
+												{
+													result = false;
+												}
+												else
+												{
+													bool flag38 = global::Char.myCharz().cx < global::Char.myCharz().npcFocus.cx;
+													if (flag38)
+													{
+														global::Char.myCharz().cdir = 1;
+													}
+													else
+													{
+														global::Char.myCharz().cdir = -1;
+													}
+													bool flag39 = global::Char.myCharz().cx < global::Char.myCharz().npcFocus.cx;
+													if (flag39)
+													{
+														global::Char.myCharz().npcFocus.cdir = -1;
+													}
+													else
+													{
+														global::Char.myCharz().npcFocus.cdir = 1;
+													}
+													int num8 = global::Math.abs(global::Char.myCharz().cx - global::Char.myCharz().npcFocus.cx);
+													int num9 = global::Math.abs(global::Char.myCharz().cy - global::Char.myCharz().npcFocus.cy);
+													bool flag40 = num9 > 40;
+													if (flag40)
+													{
+														global::Char.myCharz().cy = global::Char.myCharz().npcFocus.cy - 40;
+													}
+													bool flag41 = num8 < 60;
+													if (flag41)
+													{
+														GameCanvas.clearKeyHold();
+														GameCanvas.clearKeyPressed();
+														bool flag42 = this.tMenuDelay == 0;
+														if (flag42)
+														{
+															bool flag43 = global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId == 0;
+															if (flag43)
+															{
+																bool flag44 = global::Char.myCharz().taskMaint.index < 4 && global::Char.myCharz().npcFocus.template.npcTemplateId == 4;
+																if (flag44)
+																{
+																	return false;
+																}
+																bool flag45 = global::Char.myCharz().taskMaint.index < 3 && global::Char.myCharz().npcFocus.template.npcTemplateId == 3;
+																if (flag45)
+																{
+																	return false;
+																}
+															}
+															this.tMenuDelay = 50;
+															InfoDlg.showWait();
+															Service.gI().charMove();
+															Service.gI().openMenu(global::Char.myCharz().npcFocus.template.npcTemplateId);
+														}
+													}
+													else
+													{
+														int num10 = (20 + Res.r.nextInt(20)) * ((global::Char.myCharz().cx <= global::Char.myCharz().npcFocus.cx) ? -1 : 1);
+														global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().npcFocus.cx + num10, global::Char.myCharz().cy);
+														global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
+														GameCanvas.clearKeyHold();
+														GameCanvas.clearKeyPressed();
+													}
+													result = false;
+												}
+											}
+											else
+											{
+												bool flag46 = global::Char.myCharz().charFocus != null;
+												if (flag46)
+												{
+													bool flag47 = this.mobCapcha != null;
+													if (flag47)
+													{
+														result = false;
+													}
+													else
+													{
+														bool flag48 = global::Char.myCharz().cx < global::Char.myCharz().charFocus.cx;
+														if (flag48)
+														{
+															global::Char.myCharz().cdir = 1;
+														}
+														else
+														{
+															global::Char.myCharz().cdir = -1;
+														}
+														int num11 = global::Math.abs(global::Char.myCharz().cx - global::Char.myCharz().charFocus.cx);
+														int num12 = global::Math.abs(global::Char.myCharz().cy - global::Char.myCharz().charFocus.cy);
+														bool flag49 = !global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus) && !global::Char.myCharz().isSelectingSkillBuffToPlayer();
+														if (flag49)
+														{
+															bool flag50 = num11 < 60 && num12 < 40;
+															if (flag50)
+															{
+																this.playerMenu(global::Char.myCharz().charFocus);
+																bool flag51 = !GameCanvas.isTouch && global::Char.myCharz().charFocus.charID >= 0 && TileMap.mapID != 51 && TileMap.mapID != 52 && this.popUpYesNo == null;
+																if (flag51)
+																{
+																	GameCanvas.panel.setTypePlayerMenu(global::Char.myCharz().charFocus);
+																	GameCanvas.panel.show();
+																	Service.gI().getPlayerMenu(global::Char.myCharz().charFocus.charID);
+																	Service.gI().messagePlayerMenu(global::Char.myCharz().charFocus.charID);
+																}
+															}
+															else
+															{
+																int num13 = (20 + Res.r.nextInt(20)) * ((global::Char.myCharz().cx <= global::Char.myCharz().charFocus.cx) ? -1 : 1);
+																global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().charFocus.cx + num13, global::Char.myCharz().charFocus.cy);
+																global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
+																GameCanvas.clearKeyHold();
+																GameCanvas.clearKeyPressed();
+															}
+															result = false;
+														}
+														else
+														{
+															bool flag52 = global::Char.myCharz().myskill == null;
+															if (flag52)
+															{
+																result = false;
+															}
+															else
+															{
+																bool flag53 = !this.checkSkillValid();
+																if (flag53)
+																{
+																	result = false;
+																}
+																else
+																{
+																	bool flag54 = global::Char.myCharz().cx < global::Char.myCharz().charFocus.cx;
+																	if (flag54)
+																	{
+																		global::Char.myCharz().cdir = 1;
+																	}
+																	else
+																	{
+																		global::Char.myCharz().cdir = -1;
+																	}
+																	global::Char.myCharz().cvx = 0;
+																	bool flag55 = num11 > global::Char.myCharz().myskill.dx || num12 > global::Char.myCharz().myskill.dy;
+																	if (flag55)
+																	{
+																		int num14 = (global::Char.myCharz().myskill.dx - 20) * ((global::Char.myCharz().cx <= global::Char.myCharz().charFocus.cx) ? -1 : 1);
+																		bool flag56 = num11 <= global::Char.myCharz().myskill.dx;
+																		if (flag56)
+																		{
+																			num14 = 0;
+																		}
+																		global::Char.myCharz().currentMovePoint = new MovePoint(global::Char.myCharz().charFocus.cx + num14, global::Char.myCharz().charFocus.cy);
+																		global::Char.myCharz().endMovePointCommand = new Command(null, null, 8002, null);
+																		GameCanvas.clearKeyHold();
+																		GameCanvas.clearKeyPressed();
+																		result = false;
+																	}
+																	else
+																	{
+																		bool flag57 = global::Char.myCharz().myskill.template.id == 20;
+																		if (flag57)
+																		{
+																			result = true;
+																		}
+																		else
+																		{
+																			int num15 = 20;
+																			bool flag58 = global::Char.myCharz().myskill.dx > 60;
+																			if (flag58)
+																			{
+																				num15 = 60;
+																				bool flag59 = num11 < 20;
+																				if (flag59)
+																				{
+																					global::Char.myCharz().createShadow(global::Char.myCharz().cx, global::Char.myCharz().cy, 10);
+																				}
+																			}
+																			bool flag4 = false;
+																			bool flag60 = (TileMap.tileTypeAtPixel(global::Char.myCharz().cx, global::Char.myCharz().cy + 3) & 2) == 2;
+																			if (flag60)
+																			{
+																				int num16 = (global::Char.myCharz().cx <= global::Char.myCharz().charFocus.cx) ? -1 : 1;
+																				bool flag61 = (TileMap.tileTypeAtPixel(global::Char.myCharz().charFocus.cx + num15 * num16, global::Char.myCharz().cy + 3) & 2) != 2;
+																				if (flag61)
+																				{
+																					flag4 = true;
+																				}
+																			}
+																			bool flag62 = num11 <= num15 && !flag4;
+																			if (flag62)
+																			{
+																				bool flag63 = global::Char.myCharz().cx > global::Char.myCharz().charFocus.cx;
+																				if (flag63)
+																				{
+																					global::Char.myCharz().cx = global::Char.myCharz().charFocus.cx + num15;
+																					global::Char.myCharz().cdir = -1;
+																				}
+																				else
+																				{
+																					global::Char.myCharz().cx = global::Char.myCharz().charFocus.cx - num15;
+																					global::Char.myCharz().cdir = 1;
+																				}
+																				Service.gI().charMove();
+																			}
+																			GameCanvas.clearKeyHold();
+																			GameCanvas.clearKeyPressed();
+																			result = true;
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+												else
+												{
+													bool flag64 = global::Char.myCharz().itemFocus != null;
+													if (flag64)
+													{
+														this.pickItem();
+														result = false;
+													}
+													else
+													{
+														result = true;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
+		return result;
 	}
 
-	// Token: 0x0600072E RID: 1838 RVA: 0x00064654 File Offset: 0x00062A54
+	// Token: 0x0600031B RID: 795 RVA: 0x0004702C File Offset: 0x0004522C
 	public bool isMeCanAttackMob(Mob m)
 	{
-		if (m == null)
+		bool flag = m == null;
+		bool result;
+		if (flag)
 		{
-			return false;
+			result = false;
 		}
-		if ((int)global::Char.myCharz().cTypePk == 5)
+		else
 		{
-			return true;
+			bool flag2 = global::Char.myCharz().cTypePk == 5;
+			if (flag2)
+			{
+				result = true;
+			}
+			else
+			{
+				bool flag3 = global::Char.myCharz().isAttacPlayerStatus() && !m.isMobMe;
+				if (flag3)
+				{
+					result = false;
+				}
+				else
+				{
+					bool flag4 = global::Char.myCharz().mobMe != null && m.Equals(global::Char.myCharz().mobMe);
+					if (flag4)
+					{
+						result = false;
+					}
+					else
+					{
+						global::Char @char = GameScr.findCharInMap(m.mobId);
+						result = (@char == null || @char.cTypePk == 5 || global::Char.myCharz().isMeCanAttackOtherPlayer(@char));
+					}
+				}
+			}
 		}
-		if (global::Char.myCharz().isAttacPlayerStatus() && !m.isMobMe)
-		{
-			return false;
-		}
-		if (global::Char.myCharz().mobMe != null && m.Equals(global::Char.myCharz().mobMe))
-		{
-			return false;
-		}
-		global::Char @char = GameScr.findCharInMap(m.mobId);
-		return @char == null || (int)@char.cTypePk == 5 || global::Char.myCharz().isMeCanAttackOtherPlayer(@char);
+		return result;
 	}
 
-	// Token: 0x0600072F RID: 1839 RVA: 0x000646F4 File Offset: 0x00062AF4
+	// Token: 0x0600031C RID: 796 RVA: 0x000470D8 File Offset: 0x000452D8
 	private bool checkSkillValid()
 	{
-		if (global::Char.myCharz().myskill != null && ((global::Char.myCharz().myskill.template.manaUseType != 1 && global::Char.myCharz().cMP < global::Char.myCharz().myskill.manaUse) || (global::Char.myCharz().myskill.template.manaUseType == 1 && global::Char.myCharz().cMP < global::Char.myCharz().cMPFull * global::Char.myCharz().myskill.manaUse / 100)))
+		bool flag = global::Char.myCharz().myskill != null && ((global::Char.myCharz().myskill.template.manaUseType != 1 && global::Char.myCharz().cMP < global::Char.myCharz().myskill.manaUse) || (global::Char.myCharz().myskill.template.manaUseType == 1 && global::Char.myCharz().cMP < global::Char.myCharz().cMPFull * global::Char.myCharz().myskill.manaUse / 100));
+		bool result;
+		if (flag)
 		{
 			GameScr.info1.addInfo(mResources.NOT_ENOUGH_MP, 0);
 			this.auto = 0;
-			return false;
+			result = false;
 		}
-		if (global::Char.myCharz().myskill == null || (global::Char.myCharz().myskill.template.maxPoint > 0 && global::Char.myCharz().myskill.point == 0))
+		else
 		{
-			GameCanvas.startOKDlg(mResources.SKILL_FAIL);
-			return false;
+			bool flag2 = global::Char.myCharz().myskill == null || (global::Char.myCharz().myskill.template.maxPoint > 0 && global::Char.myCharz().myskill.point == 0);
+			if (flag2)
+			{
+				GameCanvas.startOKDlg(mResources.SKILL_FAIL);
+				result = false;
+			}
+			else
+			{
+				result = true;
+			}
 		}
-		return true;
+		return result;
 	}
 
-	// Token: 0x06000730 RID: 1840 RVA: 0x000647F4 File Offset: 0x00062BF4
+	// Token: 0x0600031D RID: 797 RVA: 0x000471E4 File Offset: 0x000453E4
 	private bool checkSkillValid2()
 	{
 		return (global::Char.myCharz().myskill == null || ((global::Char.myCharz().myskill.template.manaUseType == 1 || global::Char.myCharz().cMP >= global::Char.myCharz().myskill.manaUse) && (global::Char.myCharz().myskill.template.manaUseType != 1 || global::Char.myCharz().cMP >= global::Char.myCharz().cMPFull * global::Char.myCharz().myskill.manaUse / 100))) && global::Char.myCharz().myskill != null && (global::Char.myCharz().myskill.template.maxPoint <= 0 || global::Char.myCharz().myskill.point != 0);
 	}
 
-	// Token: 0x06000731 RID: 1841 RVA: 0x000648D0 File Offset: 0x00062CD0
+	// Token: 0x0600031E RID: 798 RVA: 0x000472B0 File Offset: 0x000454B0
 	public void resetButton()
 	{
 		GameCanvas.menu.showMenu = false;
@@ -1619,9 +1875,11 @@ public class GameScr : mScreen, IChatable
 		GameScr.indexTitle = 0;
 		this.typeTrade = (this.typeTradeOrder = 0);
 		mSystem.endKey();
-		if (global::Char.myCharz().cHP <= 0 || global::Char.myCharz().statusMe == 14 || global::Char.myCharz().statusMe == 5)
+		bool flag = global::Char.myCharz().cHP <= 0 || global::Char.myCharz().statusMe == 14 || global::Char.myCharz().statusMe == 5;
+		if (flag)
 		{
-			if (global::Char.myCharz().meDead)
+			bool meDead = global::Char.myCharz().meDead;
+			if (meDead)
 			{
 				this.cmdDead = new Command(mResources.DIES[0], 11038);
 				this.center = this.cmdDead;
@@ -1636,812 +1894,1089 @@ public class GameScr : mScreen, IChatable
 		GameScr.scrMain.clear();
 	}
 
-	// Token: 0x06000732 RID: 1842 RVA: 0x000649CE File Offset: 0x00062DCE
+	// Token: 0x0600031F RID: 799 RVA: 0x000473B2 File Offset: 0x000455B2
 	public override void keyPress(int keyCode)
 	{
 		base.keyPress(keyCode);
 	}
 
-	// Token: 0x06000733 RID: 1843 RVA: 0x000649D8 File Offset: 0x00062DD8
+	// Token: 0x06000320 RID: 800 RVA: 0x000473C0 File Offset: 0x000455C0
 	public override void updateKey()
 	{
-		if (Controller.isStopReadMessage || global::Char.myCharz().isTeleport || global::Char.myCharz().isPaintNewSkill)
+		bool flag = Controller.isStopReadMessage || global::Char.myCharz().isTeleport || global::Char.myCharz().isPaintNewSkill;
+		if (!flag)
 		{
-			return;
-		}
-		if (InfoDlg.isLock)
-		{
-			return;
-		}
-		if (GameCanvas.isTouch && !ChatTextField.gI().isShow && !GameCanvas.menu.showMenu)
-		{
-			this.updateKeyTouchControl();
-		}
-		this.checkAuto();
-		GameCanvas.debug("F2", 0);
-		if (ChatPopup.currChatPopup != null)
-		{
-			Command cmdNextLine = ChatPopup.currChatPopup.cmdNextLine;
-			if ((GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(cmdNextLine)) && cmdNextLine != null)
+			bool isLock = InfoDlg.isLock;
+			if (!isLock)
 			{
-				GameCanvas.isPointerJustRelease = false;
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-				mScreen.keyTouch = -1;
-				if (cmdNextLine != null)
+				bool flag2 = GameCanvas.isTouch && !ChatTextField.gI().isShow && !GameCanvas.menu.showMenu;
+				if (flag2)
 				{
-					cmdNextLine.performAction();
+					this.updateKeyTouchControl();
 				}
-			}
-		}
-		else if (!ChatTextField.gI().isShow)
-		{
-			if ((GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.left)) && this.left != null)
-			{
-				GameCanvas.isPointerJustRelease = false;
-				GameCanvas.isPointerClick = false;
-				GameCanvas.keyPressed[12] = false;
-				mScreen.keyTouch = -1;
-				if (this.left != null)
+				this.checkAuto();
+				GameCanvas.debug("F2", 0);
+				bool flag3 = ChatPopup.currChatPopup != null;
+				if (flag3)
 				{
-					this.left.performAction();
-				}
-			}
-			if ((GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.right)) && this.right != null)
-			{
-				GameCanvas.isPointerJustRelease = false;
-				GameCanvas.isPointerClick = false;
-				GameCanvas.keyPressed[13] = false;
-				mScreen.keyTouch = -1;
-				if (this.right != null)
-				{
-					this.right.performAction();
-				}
-			}
-			if ((GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.center)) && this.center != null)
-			{
-				GameCanvas.isPointerJustRelease = false;
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-				mScreen.keyTouch = -1;
-				if (this.center != null)
-				{
-					this.center.performAction();
-				}
-			}
-		}
-		else
-		{
-			if (ChatTextField.gI().left != null && (GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(ChatTextField.gI().left)) && ChatTextField.gI().left != null)
-			{
-				ChatTextField.gI().left.performAction();
-			}
-			if (ChatTextField.gI().right != null && (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(ChatTextField.gI().right)) && ChatTextField.gI().right != null)
-			{
-				ChatTextField.gI().right.performAction();
-			}
-			if (ChatTextField.gI().center != null && (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(ChatTextField.gI().center)) && ChatTextField.gI().center != null)
-			{
-				ChatTextField.gI().center.performAction();
-			}
-		}
-		GameCanvas.debug("F6", 0);
-		this.updateKeyAlert();
-		GameCanvas.debug("F7", 0);
-		if (global::Char.myCharz().currentMovePoint != null)
-		{
-			for (int i = 0; i < GameCanvas.keyPressed.Length; i++)
-			{
-				if (GameCanvas.keyPressed[i])
-				{
-					global::Char.myCharz().currentMovePoint = null;
-					break;
-				}
-			}
-		}
-		GameCanvas.debug("F8", 0);
-		if (ChatTextField.gI().isShow && GameCanvas.keyAsciiPress != 0)
-		{
-			ChatTextField.gI().keyPressed(GameCanvas.keyAsciiPress);
-			GameCanvas.keyAsciiPress = 0;
-			return;
-		}
-		if (this.isLockKey)
-		{
-			GameCanvas.clearKeyHold();
-			GameCanvas.clearKeyPressed();
-			return;
-		}
-		if (GameCanvas.menu.showMenu || this.isOpenUI() || global::Char.isLockKey)
-		{
-			return;
-		}
-		if (GameCanvas.keyPressed[10])
-		{
-			GameCanvas.keyPressed[10] = false;
-			this.doUseHP();
-			GameCanvas.clearKeyPressed();
-		}
-		if (GameCanvas.keyPressed[11] && this.mobCapcha == null)
-		{
-			if (this.popUpYesNo != null)
-			{
-				this.popUpYesNo.cmdYes.performAction();
-			}
-			else if (GameScr.info2.info.info != null && GameScr.info2.info.info.charInfo != null)
-			{
-				GameCanvas.panel.setTypeMessage();
-				GameCanvas.panel.show();
-			}
-			GameCanvas.keyPressed[11] = false;
-			GameCanvas.clearKeyPressed();
-		}
-		if (GameCanvas.keyAsciiPress != 0 && TField.isQwerty && GameCanvas.keyAsciiPress == 32)
-		{
-			this.doUseHP();
-			GameCanvas.keyAsciiPress = 0;
-			GameCanvas.clearKeyPressed();
-		}
-		if (GameCanvas.keyAsciiPress != 0 && this.mobCapcha == null && TField.isQwerty && GameCanvas.keyAsciiPress == 121)
-		{
-			if (this.popUpYesNo != null)
-			{
-				this.popUpYesNo.cmdYes.performAction();
-				GameCanvas.keyAsciiPress = 0;
-				GameCanvas.clearKeyPressed();
-			}
-			else if (GameScr.info2.info.info != null && GameScr.info2.info.info.charInfo != null)
-			{
-				GameCanvas.panel.setTypeMessage();
-				GameCanvas.panel.show();
-				GameCanvas.keyAsciiPress = 0;
-				GameCanvas.clearKeyPressed();
-			}
-		}
-		if (GameCanvas.keyPressed[10] && this.mobCapcha == null)
-		{
-			GameCanvas.keyPressed[10] = false;
-			GameScr.info2.doClick(10);
-			GameCanvas.clearKeyPressed();
-		}
-		this.checkDrag();
-		if (!global::Char.myCharz().isFlyAndCharge)
-		{
-			this.checkClick();
-		}
-		if (global::Char.myCharz().cmdMenu != null && global::Char.myCharz().cmdMenu.isPointerPressInside())
-		{
-			global::Char.myCharz().cmdMenu.performAction();
-		}
-		if (global::Char.myCharz().skillPaint != null)
-		{
-			return;
-		}
-		if (GameCanvas.keyAsciiPress != 0)
-		{
-			if (this.mobCapcha == null)
-			{
-				if (TField.isQwerty)
-				{
-					if (GameCanvas.keyPressed[1])
+					Command cmdNextLine = ChatPopup.currChatPopup.cmdNextLine;
+					bool flag4 = (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(cmdNextLine)) && cmdNextLine != null;
+					if (flag4)
 					{
-						if (GameScr.keySkill[0] != null)
+						GameCanvas.isPointerJustRelease = false;
+						GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+						mScreen.keyTouch = -1;
+						bool flag5 = cmdNextLine != null;
+						if (flag5)
 						{
-							this.doSelectSkill(GameScr.keySkill[0], true);
+							cmdNextLine.performAction();
 						}
 					}
-					else if (GameCanvas.keyPressed[2])
-					{
-						if (GameScr.keySkill[1] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[1], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[3])
-					{
-						if (GameScr.keySkill[2] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[2], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[4])
-					{
-						if (GameScr.keySkill[3] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[3], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[5])
-					{
-						if (GameScr.keySkill[4] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[4], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[6])
-					{
-						if (GameScr.keySkill[5] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[5], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[7])
-					{
-						if (GameScr.keySkill[6] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[6], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[8])
-					{
-						if (GameScr.keySkill[7] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[7], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[9])
-					{
-						if (GameScr.keySkill[8] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[8], true);
-						}
-					}
-					else if (GameCanvas.keyPressed[0])
-					{
-						if (GameScr.keySkill[9] != null)
-						{
-							this.doSelectSkill(GameScr.keySkill[9], true);
-						}
-					}
-					else if (GameCanvas.keyAsciiPress == 114)
-					{
-						ChatTextField.gI().startChat(this, string.Empty);
-					}
-				}
-				else if (!GameCanvas.isMoveNumberPad)
-				{
-					ChatTextField.gI().startChat(GameCanvas.keyAsciiPress, this, string.Empty);
-				}
-				else if (GameCanvas.keyAsciiPress == 55)
-				{
-					if (GameScr.keySkill[0] != null)
-					{
-						this.doSelectSkill(GameScr.keySkill[0], true);
-					}
-				}
-				else if (GameCanvas.keyAsciiPress == 56)
-				{
-					if (GameScr.keySkill[1] != null)
-					{
-						this.doSelectSkill(GameScr.keySkill[1], true);
-					}
-				}
-				else if (GameCanvas.keyAsciiPress == 57)
-				{
-					if (GameScr.keySkill[(!Main.isPC) ? 2 : 21] != null)
-					{
-						this.doSelectSkill(GameScr.keySkill[2], true);
-					}
-				}
-				else if (GameCanvas.keyAsciiPress == 48)
-				{
-					ChatTextField.gI().startChat(this, string.Empty);
-				}
-			}
-			else
-			{
-				char[] array = this.keyInput.ToCharArray();
-				MyVector myVector = new MyVector();
-				for (int j = 0; j < array.Length; j++)
-				{
-					myVector.addElement(array[j] + string.Empty);
-				}
-				myVector.removeElementAt(0);
-				string text = (char)GameCanvas.keyAsciiPress + string.Empty;
-				if (text.Equals(string.Empty) || text == null || text.Equals("\n"))
-				{
-					text = "-";
-				}
-				myVector.insertElementAt(text, myVector.size());
-				this.keyInput = string.Empty;
-				for (int k = 0; k < myVector.size(); k++)
-				{
-					this.keyInput += ((string)myVector.elementAt(k)).ToUpper();
-				}
-				Service.gI().mobCapcha((char)GameCanvas.keyAsciiPress);
-			}
-			GameCanvas.keyAsciiPress = 0;
-		}
-		if (global::Char.myCharz().statusMe == 1)
-		{
-			GameCanvas.debug("F10", 0);
-			if (!this.doSeleckSkillFlag)
-			{
-				if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25])
-				{
-					GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-					this.doFire(false, false);
-				}
-				else if (GameCanvas.keyHold[(!Main.isPC) ? 2 : 21])
-				{
-					if (!global::Char.myCharz().isLockMove)
-					{
-						this.setCharJump(0);
-					}
-				}
-				else if (GameCanvas.keyHold[1] && this.mobCapcha == null)
-				{
-					if (!Main.isPC)
-					{
-						global::Char.myCharz().cdir = -1;
-						if (!global::Char.myCharz().isLockMove)
-						{
-							this.setCharJump(-4);
-						}
-					}
-				}
-				else if (GameCanvas.keyHold[(!Main.isPC) ? 5 : 25] && this.mobCapcha == null)
-				{
-					if (!Main.isPC)
-					{
-						global::Char.myCharz().cdir = 1;
-						if (!global::Char.myCharz().isLockMove)
-						{
-							this.setCharJump(4);
-						}
-					}
-				}
-				else if (GameCanvas.keyHold[(!Main.isPC) ? 4 : 23])
-				{
-					GameScr.isAutoPlay = false;
-					global::Char.myCharz().isAttack = false;
-					if (global::Char.myCharz().cdir == 1)
-					{
-						global::Char.myCharz().cdir = -1;
-					}
-					else if (!global::Char.myCharz().isLockMove)
-					{
-						if (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0)
-						{
-							Service.gI().charMove();
-						}
-						global::Char.myCharz().statusMe = 2;
-						global::Char.myCharz().cvx = -global::Char.myCharz().cspeed;
-					}
-					global::Char.myCharz().holder = false;
-				}
-				else if (GameCanvas.keyHold[(!Main.isPC) ? 6 : 24])
-				{
-					GameScr.isAutoPlay = false;
-					global::Char.myCharz().isAttack = false;
-					if (global::Char.myCharz().cdir == -1)
-					{
-						global::Char.myCharz().cdir = 1;
-					}
-					else if (!global::Char.myCharz().isLockMove)
-					{
-						if (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0)
-						{
-							Service.gI().charMove();
-						}
-						global::Char.myCharz().statusMe = 2;
-						global::Char.myCharz().cvx = global::Char.myCharz().cspeed;
-					}
-					global::Char.myCharz().holder = false;
-				}
-			}
-		}
-		else if (global::Char.myCharz().statusMe == 2)
-		{
-			GameCanvas.debug("F11", 0);
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25])
-			{
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-				this.doFire(false, true);
-			}
-			else if (GameCanvas.keyHold[(!Main.isPC) ? 2 : 21])
-			{
-				if (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0)
-				{
-					Service.gI().charMove();
-				}
-				global::Char.myCharz().cvy = -10;
-				global::Char.myCharz().statusMe = 3;
-				global::Char.myCharz().cp1 = 0;
-			}
-			else if (GameCanvas.keyHold[1] && this.mobCapcha == null)
-			{
-				if (Main.isPC)
-				{
-					if (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0)
-					{
-						Service.gI().charMove();
-					}
-					global::Char.myCharz().cdir = -1;
-					global::Char.myCharz().cvy = -10;
-					global::Char.myCharz().cvx = -4;
-					global::Char.myCharz().statusMe = 3;
-					global::Char.myCharz().cp1 = 0;
-				}
-			}
-			else if (GameCanvas.keyHold[3] && this.mobCapcha == null)
-			{
-				if (!Main.isPC)
-				{
-					if (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0)
-					{
-						Service.gI().charMove();
-					}
-					global::Char.myCharz().cdir = 1;
-					global::Char.myCharz().cvy = -10;
-					global::Char.myCharz().cvx = 4;
-					global::Char.myCharz().statusMe = 3;
-					global::Char.myCharz().cp1 = 0;
-				}
-			}
-			else if (GameCanvas.keyHold[(!Main.isPC) ? 4 : 23])
-			{
-				GameScr.isAutoPlay = false;
-				if (global::Char.myCharz().cdir == 1)
-				{
-					global::Char.myCharz().cdir = -1;
 				}
 				else
 				{
-					global::Char.myCharz().cvx = -global::Char.myCharz().cspeed + global::Char.myCharz().cBonusSpeed;
-				}
-			}
-			else if (GameCanvas.keyHold[(!Main.isPC) ? 6 : 24])
-			{
-				GameScr.isAutoPlay = false;
-				if (global::Char.myCharz().cdir == -1)
-				{
-					global::Char.myCharz().cdir = 1;
-				}
-				else
-				{
-					global::Char.myCharz().cvx = global::Char.myCharz().cspeed + global::Char.myCharz().cBonusSpeed;
-				}
-			}
-		}
-		else if (global::Char.myCharz().statusMe == 3)
-		{
-			GameScr.isAutoPlay = false;
-			GameCanvas.debug("F12", 0);
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25])
-			{
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-				this.doFire(false, true);
-			}
-			if (GameCanvas.keyHold[(!Main.isPC) ? 4 : 23] || (GameCanvas.keyHold[1] && this.mobCapcha == null))
-			{
-				if (global::Char.myCharz().cdir == 1)
-				{
-					global::Char.myCharz().cdir = -1;
-				}
-				else
-				{
-					global::Char.myCharz().cvx = -global::Char.myCharz().cspeed;
-				}
-			}
-			else if (GameCanvas.keyHold[(!Main.isPC) ? 6 : 24] || (GameCanvas.keyHold[3] && this.mobCapcha == null))
-			{
-				if (global::Char.myCharz().cdir == -1)
-				{
-					global::Char.myCharz().cdir = 1;
-				}
-				else
-				{
-					global::Char.myCharz().cvx = global::Char.myCharz().cspeed;
-				}
-			}
-			if ((GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] || ((GameCanvas.keyHold[1] || GameCanvas.keyHold[3]) && this.mobCapcha == null)) && global::Char.myCharz().canFly && global::Char.myCharz().cMP > 0 && global::Char.myCharz().cp1 < 8 && global::Char.myCharz().cvy > -4)
-			{
-				global::Char.myCharz().cp1++;
-				global::Char.myCharz().cvy = -7;
-			}
-		}
-		else if (global::Char.myCharz().statusMe == 4)
-		{
-			GameCanvas.debug("F13", 0);
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25])
-			{
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-				this.doFire(false, true);
-			}
-			if (GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] && global::Char.myCharz().cMP > 0 && global::Char.myCharz().canFly)
-			{
-				GameScr.isAutoPlay = false;
-				if ((global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0) && (Res.abs(global::Char.myCharz().cx - global::Char.myCharz().cxSend) > 96 || Res.abs(global::Char.myCharz().cy - global::Char.myCharz().cySend) > 24))
-				{
-					Service.gI().charMove();
-				}
-				global::Char.myCharz().cvy = -10;
-				global::Char.myCharz().statusMe = 3;
-				global::Char.myCharz().cp1 = 0;
-			}
-			if (GameCanvas.keyHold[(!Main.isPC) ? 4 : 23])
-			{
-				GameScr.isAutoPlay = false;
-				if (global::Char.myCharz().cdir == 1)
-				{
-					global::Char.myCharz().cdir = -1;
-				}
-				else
-				{
-					global::Char.myCharz().cp1++;
-					global::Char.myCharz().cvx = -global::Char.myCharz().cspeed;
-					if (global::Char.myCharz().cp1 > 5 && global::Char.myCharz().cvy > 6)
+					bool flag6 = !ChatTextField.gI().isShow;
+					if (flag6)
 					{
-						global::Char.myCharz().statusMe = 10;
-						global::Char.myCharz().cp1 = 0;
-						global::Char.myCharz().cvy = 0;
-					}
-				}
-			}
-			else if (GameCanvas.keyHold[(!Main.isPC) ? 6 : 24])
-			{
-				GameScr.isAutoPlay = false;
-				if (global::Char.myCharz().cdir == -1)
-				{
-					global::Char.myCharz().cdir = 1;
-				}
-				else
-				{
-					global::Char.myCharz().cp1++;
-					global::Char.myCharz().cvx = global::Char.myCharz().cspeed;
-					if (global::Char.myCharz().cp1 > 5 && global::Char.myCharz().cvy > 6)
-					{
-						global::Char.myCharz().statusMe = 10;
-						global::Char.myCharz().cp1 = 0;
-						global::Char.myCharz().cvy = 0;
-					}
-				}
-			}
-		}
-		else if (global::Char.myCharz().statusMe == 10)
-		{
-			GameCanvas.debug("F14", 0);
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25])
-			{
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-				this.doFire(false, true);
-			}
-			if (global::Char.myCharz().canFly && global::Char.myCharz().cMP > 0)
-			{
-				if (GameCanvas.keyHold[(!Main.isPC) ? 2 : 21])
-				{
-					GameScr.isAutoPlay = false;
-					if ((global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0) && (Res.abs(global::Char.myCharz().cx - global::Char.myCharz().cxSend) > 96 || Res.abs(global::Char.myCharz().cy - global::Char.myCharz().cySend) > 24))
-					{
-						Service.gI().charMove();
-					}
-					global::Char.myCharz().cvy = -10;
-					global::Char.myCharz().statusMe = 3;
-					global::Char.myCharz().cp1 = 0;
-				}
-				else if (GameCanvas.keyHold[(!Main.isPC) ? 4 : 23])
-				{
-					GameScr.isAutoPlay = false;
-					if (global::Char.myCharz().cdir == 1)
-					{
-						global::Char.myCharz().cdir = -1;
+						bool flag7 = (GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.left)) && this.left != null;
+						if (flag7)
+						{
+							GameCanvas.isPointerJustRelease = false;
+							GameCanvas.isPointerClick = false;
+							GameCanvas.keyPressed[12] = false;
+							mScreen.keyTouch = -1;
+							bool flag8 = this.left != null;
+							if (flag8)
+							{
+								this.left.performAction();
+							}
+						}
+						bool flag9 = (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.right)) && this.right != null;
+						if (flag9)
+						{
+							GameCanvas.isPointerJustRelease = false;
+							GameCanvas.isPointerClick = false;
+							GameCanvas.keyPressed[13] = false;
+							mScreen.keyTouch = -1;
+							bool flag10 = this.right != null;
+							if (flag10)
+							{
+								this.right.performAction();
+							}
+						}
+						bool flag11 = (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.center)) && this.center != null;
+						if (flag11)
+						{
+							GameCanvas.isPointerJustRelease = false;
+							GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+							mScreen.keyTouch = -1;
+							bool flag12 = this.center != null;
+							if (flag12)
+							{
+								this.center.performAction();
+							}
+						}
 					}
 					else
 					{
-						global::Char.myCharz().cvx = -(global::Char.myCharz().cspeed + 1);
+						bool flag13 = ChatTextField.gI().left != null && (GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(ChatTextField.gI().left)) && ChatTextField.gI().left != null;
+						if (flag13)
+						{
+							ChatTextField.gI().left.performAction();
+						}
+						bool flag14 = ChatTextField.gI().right != null && (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(ChatTextField.gI().right)) && ChatTextField.gI().right != null;
+						if (flag14)
+						{
+							ChatTextField.gI().right.performAction();
+						}
+						bool flag15 = ChatTextField.gI().center != null && (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(ChatTextField.gI().center)) && ChatTextField.gI().center != null;
+						if (flag15)
+						{
+							ChatTextField.gI().center.performAction();
+						}
 					}
 				}
-				else if (GameCanvas.keyHold[(!Main.isPC) ? 6 : 24])
+				GameCanvas.debug("F6", 0);
+				this.updateKeyAlert();
+				GameCanvas.debug("F7", 0);
+				bool flag16 = global::Char.myCharz().currentMovePoint != null;
+				if (flag16)
 				{
-					if (global::Char.myCharz().cdir == -1)
+					for (int i = 0; i < GameCanvas.keyPressed.Length; i++)
 					{
-						global::Char.myCharz().cdir = 1;
+						bool flag17 = GameCanvas.keyPressed[i];
+						if (flag17)
+						{
+							global::Char.myCharz().currentMovePoint = null;
+							break;
+						}
+					}
+				}
+				GameCanvas.debug("F8", 0);
+				bool flag18 = ChatTextField.gI().isShow && GameCanvas.keyAsciiPress != 0;
+				if (flag18)
+				{
+					ChatTextField.gI().keyPressed(GameCanvas.keyAsciiPress);
+					GameCanvas.keyAsciiPress = 0;
+				}
+				else
+				{
+					bool flag19 = this.isLockKey;
+					if (flag19)
+					{
+						GameCanvas.clearKeyHold();
+						GameCanvas.clearKeyPressed();
 					}
 					else
 					{
-						global::Char.myCharz().cvx = global::Char.myCharz().cspeed + 1;
+						bool flag20 = GameCanvas.menu.showMenu || this.isOpenUI() || global::Char.isLockKey;
+						if (!flag20)
+						{
+							bool flag21 = GameCanvas.keyPressed[10];
+							if (flag21)
+							{
+								GameCanvas.keyPressed[10] = false;
+								this.doUseHP();
+								GameCanvas.clearKeyPressed();
+							}
+							bool flag22 = GameCanvas.keyPressed[11] && this.mobCapcha == null;
+							if (flag22)
+							{
+								bool flag23 = this.popUpYesNo != null;
+								if (flag23)
+								{
+									this.popUpYesNo.cmdYes.performAction();
+								}
+								else
+								{
+									bool flag24 = GameScr.info2.info.info != null && GameScr.info2.info.info.charInfo != null;
+									if (flag24)
+									{
+										GameCanvas.panel.setTypeMessage();
+										GameCanvas.panel.show();
+									}
+								}
+								GameCanvas.keyPressed[11] = false;
+								GameCanvas.clearKeyPressed();
+							}
+							bool flag25 = GameCanvas.keyAsciiPress != 0 && TField.isQwerty && GameCanvas.keyAsciiPress == 32;
+							if (flag25)
+							{
+								this.doUseHP();
+								GameCanvas.keyAsciiPress = 0;
+								GameCanvas.clearKeyPressed();
+							}
+							bool flag26 = GameCanvas.keyAsciiPress != 0 && this.mobCapcha == null && TField.isQwerty && GameCanvas.keyAsciiPress == 121;
+							if (flag26)
+							{
+								bool flag27 = this.popUpYesNo != null;
+								if (flag27)
+								{
+									this.popUpYesNo.cmdYes.performAction();
+									GameCanvas.keyAsciiPress = 0;
+									GameCanvas.clearKeyPressed();
+								}
+								else
+								{
+									bool flag28 = GameScr.info2.info.info != null && GameScr.info2.info.info.charInfo != null;
+									if (flag28)
+									{
+										GameCanvas.panel.setTypeMessage();
+										GameCanvas.panel.show();
+										GameCanvas.keyAsciiPress = 0;
+										GameCanvas.clearKeyPressed();
+									}
+								}
+							}
+							bool flag29 = GameCanvas.keyPressed[10] && this.mobCapcha == null;
+							if (flag29)
+							{
+								GameCanvas.keyPressed[10] = false;
+								GameScr.info2.doClick(10);
+								GameCanvas.clearKeyPressed();
+							}
+							this.checkDrag();
+							bool flag30 = !global::Char.myCharz().isFlyAndCharge;
+							if (flag30)
+							{
+								this.checkClick();
+							}
+							bool flag31 = global::Char.myCharz().cmdMenu != null && global::Char.myCharz().cmdMenu.isPointerPressInside();
+							if (flag31)
+							{
+								global::Char.myCharz().cmdMenu.performAction();
+							}
+							bool flag32 = global::Char.myCharz().skillPaint != null;
+							if (!flag32)
+							{
+								bool flag33 = GameCanvas.keyAsciiPress != 0;
+								if (flag33)
+								{
+									bool flag34 = this.mobCapcha == null;
+									if (flag34)
+									{
+										bool isQwerty = TField.isQwerty;
+										if (isQwerty)
+										{
+											bool flag35 = GameCanvas.keyPressed[1];
+											if (flag35)
+											{
+												bool flag36 = GameScr.keySkill[0] != null;
+												if (flag36)
+												{
+													this.doSelectSkill(GameScr.keySkill[0], true);
+												}
+											}
+											else
+											{
+												bool flag37 = GameCanvas.keyPressed[2];
+												if (flag37)
+												{
+													bool flag38 = GameScr.keySkill[1] != null;
+													if (flag38)
+													{
+														this.doSelectSkill(GameScr.keySkill[1], true);
+													}
+												}
+												else
+												{
+													bool flag39 = GameCanvas.keyPressed[3];
+													if (flag39)
+													{
+														bool flag40 = GameScr.keySkill[2] != null;
+														if (flag40)
+														{
+															this.doSelectSkill(GameScr.keySkill[2], true);
+														}
+													}
+													else
+													{
+														bool flag41 = GameCanvas.keyPressed[4];
+														if (flag41)
+														{
+															bool flag42 = GameScr.keySkill[3] != null;
+															if (flag42)
+															{
+																this.doSelectSkill(GameScr.keySkill[3], true);
+															}
+														}
+														else
+														{
+															bool flag43 = GameCanvas.keyPressed[5];
+															if (flag43)
+															{
+																bool flag44 = GameScr.keySkill[4] != null;
+																if (flag44)
+																{
+																	this.doSelectSkill(GameScr.keySkill[4], true);
+																}
+															}
+															else
+															{
+																bool flag45 = GameCanvas.keyPressed[6];
+																if (flag45)
+																{
+																	bool flag46 = GameScr.keySkill[5] != null;
+																	if (flag46)
+																	{
+																		this.doSelectSkill(GameScr.keySkill[5], true);
+																	}
+																}
+																else
+																{
+																	bool flag47 = GameCanvas.keyPressed[7];
+																	if (flag47)
+																	{
+																		bool flag48 = GameScr.keySkill[6] != null;
+																		if (flag48)
+																		{
+																			this.doSelectSkill(GameScr.keySkill[6], true);
+																		}
+																	}
+																	else
+																	{
+																		bool flag49 = GameCanvas.keyPressed[8];
+																		if (flag49)
+																		{
+																			bool flag50 = GameScr.keySkill[7] != null;
+																			if (flag50)
+																			{
+																				this.doSelectSkill(GameScr.keySkill[7], true);
+																			}
+																		}
+																		else
+																		{
+																			bool flag51 = GameCanvas.keyPressed[9];
+																			if (flag51)
+																			{
+																				bool flag52 = GameScr.keySkill[8] != null;
+																				if (flag52)
+																				{
+																					this.doSelectSkill(GameScr.keySkill[8], true);
+																				}
+																			}
+																			else
+																			{
+																				bool flag53 = GameCanvas.keyPressed[0];
+																				if (flag53)
+																				{
+																					bool flag54 = GameScr.keySkill[9] != null;
+																					if (flag54)
+																					{
+																						this.doSelectSkill(GameScr.keySkill[9], true);
+																					}
+																				}
+																				else
+																				{
+																					bool flag55 = GameCanvas.keyAsciiPress == 114;
+																					if (flag55)
+																					{
+																						ChatTextField.gI().startChat(this, string.Empty);
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+										else
+										{
+											bool flag56 = !GameCanvas.isMoveNumberPad;
+											if (flag56)
+											{
+												ChatTextField.gI().startChat(GameCanvas.keyAsciiPress, this, string.Empty);
+											}
+											else
+											{
+												bool flag57 = GameCanvas.keyAsciiPress == 55;
+												if (flag57)
+												{
+													bool flag58 = GameScr.keySkill[0] != null;
+													if (flag58)
+													{
+														this.doSelectSkill(GameScr.keySkill[0], true);
+													}
+												}
+												else
+												{
+													bool flag59 = GameCanvas.keyAsciiPress == 56;
+													if (flag59)
+													{
+														bool flag60 = GameScr.keySkill[1] != null;
+														if (flag60)
+														{
+															this.doSelectSkill(GameScr.keySkill[1], true);
+														}
+													}
+													else
+													{
+														bool flag61 = GameCanvas.keyAsciiPress == 57;
+														if (flag61)
+														{
+															bool flag62 = GameScr.keySkill[(!Main.isPC) ? 2 : 21] != null;
+															if (flag62)
+															{
+																this.doSelectSkill(GameScr.keySkill[2], true);
+															}
+														}
+														else
+														{
+															bool flag63 = GameCanvas.keyAsciiPress == 48;
+															if (flag63)
+															{
+																ChatTextField.gI().startChat(this, string.Empty);
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+									else
+									{
+										char[] array = this.keyInput.ToCharArray();
+										MyVector myVector = new MyVector();
+										for (int j = 0; j < array.Length; j++)
+										{
+											myVector.addElement(array[j].ToString() + string.Empty);
+										}
+										myVector.removeElementAt(0);
+										string text = ((char)GameCanvas.keyAsciiPress).ToString() + string.Empty;
+										bool flag64 = text.Equals(string.Empty) || text == null || text.Equals("\n");
+										if (flag64)
+										{
+											text = "-";
+										}
+										myVector.insertElementAt(text, myVector.size());
+										this.keyInput = string.Empty;
+										for (int k = 0; k < myVector.size(); k++)
+										{
+											this.keyInput += ((string)myVector.elementAt(k)).ToUpper();
+										}
+										Service.gI().mobCapcha((char)GameCanvas.keyAsciiPress);
+									}
+									GameCanvas.keyAsciiPress = 0;
+								}
+								bool flag65 = global::Char.myCharz().statusMe == 1;
+								if (flag65)
+								{
+									GameCanvas.debug("F10", 0);
+									bool flag66 = !this.doSeleckSkillFlag;
+									if (flag66)
+									{
+										bool flag67 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25];
+										if (flag67)
+										{
+											GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+											this.doFire(false, false);
+										}
+										else
+										{
+											bool flag68 = GameCanvas.keyHold[(!Main.isPC) ? 2 : 21];
+											if (flag68)
+											{
+												bool flag69 = !global::Char.myCharz().isLockMove;
+												if (flag69)
+												{
+													this.setCharJump(0);
+												}
+											}
+											else
+											{
+												bool flag70 = GameCanvas.keyHold[1] && this.mobCapcha == null;
+												if (flag70)
+												{
+													bool flag71 = !Main.isPC;
+													if (flag71)
+													{
+														global::Char.myCharz().cdir = -1;
+														bool flag72 = !global::Char.myCharz().isLockMove;
+														if (flag72)
+														{
+															this.setCharJump(-4);
+														}
+													}
+												}
+												else
+												{
+													bool flag73 = GameCanvas.keyHold[(!Main.isPC) ? 5 : 25] && this.mobCapcha == null;
+													if (flag73)
+													{
+														bool flag74 = !Main.isPC;
+														if (flag74)
+														{
+															global::Char.myCharz().cdir = 1;
+															bool flag75 = !global::Char.myCharz().isLockMove;
+															if (flag75)
+															{
+																this.setCharJump(4);
+															}
+														}
+													}
+													else
+													{
+														bool flag76 = GameCanvas.keyHold[(!Main.isPC) ? 4 : 23];
+														if (flag76)
+														{
+															GameScr.isAutoPlay = false;
+															global::Char.myCharz().isAttack = false;
+															bool flag77 = global::Char.myCharz().cdir == 1;
+															if (flag77)
+															{
+																global::Char.myCharz().cdir = -1;
+															}
+															else
+															{
+																bool flag78 = !global::Char.myCharz().isLockMove;
+																if (flag78)
+																{
+																	bool flag79 = global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0;
+																	if (flag79)
+																	{
+																		Service.gI().charMove();
+																	}
+																	global::Char.myCharz().statusMe = 2;
+																	global::Char.myCharz().cvx = -global::Char.myCharz().cspeed;
+																}
+															}
+															global::Char.myCharz().holder = false;
+														}
+														else
+														{
+															bool flag80 = GameCanvas.keyHold[(!Main.isPC) ? 6 : 24];
+															if (flag80)
+															{
+																GameScr.isAutoPlay = false;
+																global::Char.myCharz().isAttack = false;
+																bool flag81 = global::Char.myCharz().cdir == -1;
+																if (flag81)
+																{
+																	global::Char.myCharz().cdir = 1;
+																}
+																else
+																{
+																	bool flag82 = !global::Char.myCharz().isLockMove;
+																	if (flag82)
+																	{
+																		bool flag83 = global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0;
+																		if (flag83)
+																		{
+																			Service.gI().charMove();
+																		}
+																		global::Char.myCharz().statusMe = 2;
+																		global::Char.myCharz().cvx = global::Char.myCharz().cspeed;
+																	}
+																}
+																global::Char.myCharz().holder = false;
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								else
+								{
+									bool flag84 = global::Char.myCharz().statusMe == 2;
+									if (flag84)
+									{
+										GameCanvas.debug("F11", 0);
+										bool flag85 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25];
+										if (flag85)
+										{
+											GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+											this.doFire(false, true);
+										}
+										else
+										{
+											bool flag86 = GameCanvas.keyHold[(!Main.isPC) ? 2 : 21];
+											if (flag86)
+											{
+												bool flag87 = global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0;
+												if (flag87)
+												{
+													Service.gI().charMove();
+												}
+												global::Char.myCharz().cvy = -10;
+												global::Char.myCharz().statusMe = 3;
+												global::Char.myCharz().cp1 = 0;
+											}
+											else
+											{
+												bool flag88 = GameCanvas.keyHold[1] && this.mobCapcha == null;
+												if (flag88)
+												{
+													bool isPC = Main.isPC;
+													if (isPC)
+													{
+														bool flag89 = global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0;
+														if (flag89)
+														{
+															Service.gI().charMove();
+														}
+														global::Char.myCharz().cdir = -1;
+														global::Char.myCharz().cvy = -10;
+														global::Char.myCharz().cvx = -4;
+														global::Char.myCharz().statusMe = 3;
+														global::Char.myCharz().cp1 = 0;
+													}
+												}
+												else
+												{
+													bool flag90 = GameCanvas.keyHold[3] && this.mobCapcha == null;
+													if (flag90)
+													{
+														bool flag91 = !Main.isPC;
+														if (flag91)
+														{
+															bool flag92 = global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0;
+															if (flag92)
+															{
+																Service.gI().charMove();
+															}
+															global::Char.myCharz().cdir = 1;
+															global::Char.myCharz().cvy = -10;
+															global::Char.myCharz().cvx = 4;
+															global::Char.myCharz().statusMe = 3;
+															global::Char.myCharz().cp1 = 0;
+														}
+													}
+													else
+													{
+														bool flag93 = GameCanvas.keyHold[(!Main.isPC) ? 4 : 23];
+														if (flag93)
+														{
+															GameScr.isAutoPlay = false;
+															bool flag94 = global::Char.myCharz().cdir == 1;
+															if (flag94)
+															{
+																global::Char.myCharz().cdir = -1;
+															}
+															else
+															{
+																global::Char.myCharz().cvx = -global::Char.myCharz().cspeed + global::Char.myCharz().cBonusSpeed;
+															}
+														}
+														else
+														{
+															bool flag95 = GameCanvas.keyHold[(!Main.isPC) ? 6 : 24];
+															if (flag95)
+															{
+																GameScr.isAutoPlay = false;
+																bool flag96 = global::Char.myCharz().cdir == -1;
+																if (flag96)
+																{
+																	global::Char.myCharz().cdir = 1;
+																}
+																else
+																{
+																	global::Char.myCharz().cvx = global::Char.myCharz().cspeed + global::Char.myCharz().cBonusSpeed;
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+									else
+									{
+										bool flag97 = global::Char.myCharz().statusMe == 3;
+										if (flag97)
+										{
+											GameScr.isAutoPlay = false;
+											GameCanvas.debug("F12", 0);
+											bool flag98 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25];
+											if (flag98)
+											{
+												GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+												this.doFire(false, true);
+											}
+											bool flag99 = GameCanvas.keyHold[(!Main.isPC) ? 4 : 23] || (GameCanvas.keyHold[1] && this.mobCapcha == null);
+											if (flag99)
+											{
+												bool flag100 = global::Char.myCharz().cdir == 1;
+												if (flag100)
+												{
+													global::Char.myCharz().cdir = -1;
+												}
+												else
+												{
+													global::Char.myCharz().cvx = -global::Char.myCharz().cspeed;
+												}
+											}
+											else
+											{
+												bool flag101 = GameCanvas.keyHold[(!Main.isPC) ? 6 : 24] || (GameCanvas.keyHold[3] && this.mobCapcha == null);
+												if (flag101)
+												{
+													bool flag102 = global::Char.myCharz().cdir == -1;
+													if (flag102)
+													{
+														global::Char.myCharz().cdir = 1;
+													}
+													else
+													{
+														global::Char.myCharz().cvx = global::Char.myCharz().cspeed;
+													}
+												}
+											}
+											bool flag103 = (GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] || ((GameCanvas.keyHold[1] || GameCanvas.keyHold[3]) && this.mobCapcha == null)) && global::Char.myCharz().canFly && global::Char.myCharz().cMP > 0 && global::Char.myCharz().cp1 < 8 && global::Char.myCharz().cvy > -4;
+											if (flag103)
+											{
+												global::Char.myCharz().cp1++;
+												global::Char.myCharz().cvy = -7;
+											}
+										}
+										else
+										{
+											bool flag104 = global::Char.myCharz().statusMe == 4;
+											if (flag104)
+											{
+												GameCanvas.debug("F13", 0);
+												bool flag105 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25];
+												if (flag105)
+												{
+													GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+													this.doFire(false, true);
+												}
+												bool flag106 = GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] && global::Char.myCharz().cMP > 0 && global::Char.myCharz().canFly;
+												if (flag106)
+												{
+													GameScr.isAutoPlay = false;
+													bool flag107 = (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0) && (Res.abs(global::Char.myCharz().cx - global::Char.myCharz().cxSend) > 96 || Res.abs(global::Char.myCharz().cy - global::Char.myCharz().cySend) > 24);
+													if (flag107)
+													{
+														Service.gI().charMove();
+													}
+													global::Char.myCharz().cvy = -10;
+													global::Char.myCharz().statusMe = 3;
+													global::Char.myCharz().cp1 = 0;
+												}
+												bool flag108 = GameCanvas.keyHold[(!Main.isPC) ? 4 : 23];
+												if (flag108)
+												{
+													GameScr.isAutoPlay = false;
+													bool flag109 = global::Char.myCharz().cdir == 1;
+													if (flag109)
+													{
+														global::Char.myCharz().cdir = -1;
+													}
+													else
+													{
+														global::Char.myCharz().cp1++;
+														global::Char.myCharz().cvx = -global::Char.myCharz().cspeed;
+														bool flag110 = global::Char.myCharz().cp1 > 5 && global::Char.myCharz().cvy > 6;
+														if (flag110)
+														{
+															global::Char.myCharz().statusMe = 10;
+															global::Char.myCharz().cp1 = 0;
+															global::Char.myCharz().cvy = 0;
+														}
+													}
+												}
+												else
+												{
+													bool flag111 = GameCanvas.keyHold[(!Main.isPC) ? 6 : 24];
+													if (flag111)
+													{
+														GameScr.isAutoPlay = false;
+														bool flag112 = global::Char.myCharz().cdir == -1;
+														if (flag112)
+														{
+															global::Char.myCharz().cdir = 1;
+														}
+														else
+														{
+															global::Char.myCharz().cp1++;
+															global::Char.myCharz().cvx = global::Char.myCharz().cspeed;
+															bool flag113 = global::Char.myCharz().cp1 > 5 && global::Char.myCharz().cvy > 6;
+															if (flag113)
+															{
+																global::Char.myCharz().statusMe = 10;
+																global::Char.myCharz().cp1 = 0;
+																global::Char.myCharz().cvy = 0;
+															}
+														}
+													}
+												}
+											}
+											else
+											{
+												bool flag114 = global::Char.myCharz().statusMe == 10;
+												if (flag114)
+												{
+													GameCanvas.debug("F14", 0);
+													bool flag115 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25];
+													if (flag115)
+													{
+														GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+														this.doFire(false, true);
+													}
+													bool flag116 = global::Char.myCharz().canFly && global::Char.myCharz().cMP > 0;
+													if (flag116)
+													{
+														bool flag117 = GameCanvas.keyHold[(!Main.isPC) ? 2 : 21];
+														if (flag117)
+														{
+															GameScr.isAutoPlay = false;
+															bool flag118 = (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0) && (Res.abs(global::Char.myCharz().cx - global::Char.myCharz().cxSend) > 96 || Res.abs(global::Char.myCharz().cy - global::Char.myCharz().cySend) > 24);
+															if (flag118)
+															{
+																Service.gI().charMove();
+															}
+															global::Char.myCharz().cvy = -10;
+															global::Char.myCharz().statusMe = 3;
+															global::Char.myCharz().cp1 = 0;
+														}
+														else
+														{
+															bool flag119 = GameCanvas.keyHold[(!Main.isPC) ? 4 : 23];
+															if (flag119)
+															{
+																GameScr.isAutoPlay = false;
+																bool flag120 = global::Char.myCharz().cdir == 1;
+																if (flag120)
+																{
+																	global::Char.myCharz().cdir = -1;
+																}
+																else
+																{
+																	global::Char.myCharz().cvx = -(global::Char.myCharz().cspeed + 1);
+																}
+															}
+															else
+															{
+																bool flag121 = GameCanvas.keyHold[(!Main.isPC) ? 6 : 24];
+																if (flag121)
+																{
+																	bool flag122 = global::Char.myCharz().cdir == -1;
+																	if (flag122)
+																	{
+																		global::Char.myCharz().cdir = 1;
+																	}
+																	else
+																	{
+																		global::Char.myCharz().cvx = global::Char.myCharz().cspeed + 1;
+																	}
+																}
+															}
+														}
+													}
+												}
+												else
+												{
+													bool flag123 = global::Char.myCharz().statusMe == 7;
+													if (flag123)
+													{
+														GameCanvas.debug("F15", 0);
+														bool flag124 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25];
+														if (flag124)
+														{
+															GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+														}
+														bool flag125 = GameCanvas.keyHold[(!Main.isPC) ? 4 : 23];
+														if (flag125)
+														{
+															GameScr.isAutoPlay = false;
+															bool flag126 = global::Char.myCharz().cdir == 1;
+															if (flag126)
+															{
+																global::Char.myCharz().cdir = -1;
+															}
+															else
+															{
+																global::Char.myCharz().cvx = -global::Char.myCharz().cspeed + 2;
+															}
+														}
+														else
+														{
+															bool flag127 = GameCanvas.keyHold[(!Main.isPC) ? 6 : 24];
+															if (flag127)
+															{
+																GameScr.isAutoPlay = false;
+																bool flag128 = global::Char.myCharz().cdir == -1;
+																if (flag128)
+																{
+																	global::Char.myCharz().cdir = 1;
+																}
+																else
+																{
+																	global::Char.myCharz().cvx = global::Char.myCharz().cspeed - 2;
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								GameCanvas.debug("F17", 0);
+								bool flag129 = GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] && GameCanvas.keyAsciiPress != 56;
+								if (flag129)
+								{
+									GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] = false;
+									global::Char.myCharz().delayFall = 0;
+								}
+								bool flag130 = GameCanvas.keyPressed[10];
+								if (flag130)
+								{
+									GameCanvas.keyPressed[10] = false;
+									this.doUseHP();
+								}
+								GameCanvas.debug("F20", 0);
+								GameCanvas.clearKeyPressed();
+								GameCanvas.debug("F23", 0);
+								this.doSeleckSkillFlag = false;
+							}
+						}
 					}
 				}
 			}
 		}
-		else if (global::Char.myCharz().statusMe == 7)
-		{
-			GameCanvas.debug("F15", 0);
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25])
-			{
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-			}
-			if (GameCanvas.keyHold[(!Main.isPC) ? 4 : 23])
-			{
-				GameScr.isAutoPlay = false;
-				if (global::Char.myCharz().cdir == 1)
-				{
-					global::Char.myCharz().cdir = -1;
-				}
-				else
-				{
-					global::Char.myCharz().cvx = -global::Char.myCharz().cspeed + 2;
-				}
-			}
-			else if (GameCanvas.keyHold[(!Main.isPC) ? 6 : 24])
-			{
-				GameScr.isAutoPlay = false;
-				if (global::Char.myCharz().cdir == -1)
-				{
-					global::Char.myCharz().cdir = 1;
-				}
-				else
-				{
-					global::Char.myCharz().cvx = global::Char.myCharz().cspeed - 2;
-				}
-			}
-		}
-		GameCanvas.debug("F17", 0);
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] && GameCanvas.keyAsciiPress != 56)
-		{
-			GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] = false;
-			global::Char.myCharz().delayFall = 0;
-		}
-		if (GameCanvas.keyPressed[10])
-		{
-			GameCanvas.keyPressed[10] = false;
-			this.doUseHP();
-		}
-		GameCanvas.debug("F20", 0);
-		GameCanvas.clearKeyPressed();
-		GameCanvas.debug("F23", 0);
-		this.doSeleckSkillFlag = false;
 	}
 
-	// Token: 0x06000734 RID: 1844 RVA: 0x00066152 File Offset: 0x00064552
+	// Token: 0x06000321 RID: 801 RVA: 0x00048D1C File Offset: 0x00046F1C
 	public bool isVsMap()
 	{
 		return true;
 	}
 
-	// Token: 0x06000735 RID: 1845 RVA: 0x00066158 File Offset: 0x00064558
+	// Token: 0x06000322 RID: 802 RVA: 0x00048D30 File Offset: 0x00046F30
 	private void checkDrag()
 	{
-		if (GameScr.isAnalog == 1)
+		bool flag = GameScr.isAnalog == 1;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameScr.gamePad.disableCheckDrag())
-		{
-			return;
-		}
-		global::Char.myCharz().cmtoChar = true;
-		if (GameScr.isUseTouch)
-		{
-			return;
-		}
-		if (GameCanvas.isPointerJustDown)
-		{
-			GameCanvas.isPointerJustDown = false;
-			this.isPointerDowning = true;
-			this.ptDownTime = 0;
-			this.ptLastDownX = (this.ptFirstDownX = GameCanvas.px);
-			this.ptLastDownY = (this.ptFirstDownY = GameCanvas.py);
-		}
-		if (this.isPointerDowning)
-		{
-			int num = GameCanvas.px - this.ptLastDownX;
-			int num2 = GameCanvas.py - this.ptLastDownY;
-			if (!this.isChangingCameraMode && (Res.abs(GameCanvas.px - this.ptFirstDownX) > 15 || Res.abs(GameCanvas.py - this.ptFirstDownY) > 15))
+			bool flag2 = GameScr.gamePad.disableCheckDrag();
+			if (!flag2)
 			{
-				this.isChangingCameraMode = true;
-			}
-			this.ptLastDownX = GameCanvas.px;
-			this.ptLastDownY = GameCanvas.py;
-			this.ptDownTime++;
-			if (this.isChangingCameraMode)
-			{
-				global::Char.myCharz().cmtoChar = false;
-				GameScr.cmx -= num;
-				GameScr.cmy -= num2;
-				if (GameScr.cmx < 24)
+				global::Char.myCharz().cmtoChar = true;
+				bool flag3 = GameScr.isUseTouch;
+				if (!flag3)
 				{
-					int num3 = (24 - GameScr.cmx) / 3;
-					if (num3 != 0)
+					bool isPointerJustDown = GameCanvas.isPointerJustDown;
+					if (isPointerJustDown)
 					{
-						GameScr.cmx += num - num / num3;
+						GameCanvas.isPointerJustDown = false;
+						this.isPointerDowning = true;
+						this.ptDownTime = 0;
+						this.ptLastDownX = (this.ptFirstDownX = GameCanvas.px);
+						this.ptLastDownY = (this.ptFirstDownY = GameCanvas.py);
+					}
+					bool flag4 = this.isPointerDowning;
+					if (flag4)
+					{
+						int num = GameCanvas.px - this.ptLastDownX;
+						int num2 = GameCanvas.py - this.ptLastDownY;
+						bool flag5 = !this.isChangingCameraMode && (Res.abs(GameCanvas.px - this.ptFirstDownX) > 15 || Res.abs(GameCanvas.py - this.ptFirstDownY) > 15);
+						if (flag5)
+						{
+							this.isChangingCameraMode = true;
+						}
+						this.ptLastDownX = GameCanvas.px;
+						this.ptLastDownY = GameCanvas.py;
+						this.ptDownTime++;
+						bool flag6 = this.isChangingCameraMode;
+						if (flag6)
+						{
+							global::Char.myCharz().cmtoChar = false;
+							GameScr.cmx -= num;
+							GameScr.cmy -= num2;
+							bool flag7 = GameScr.cmx < 24;
+							if (flag7)
+							{
+								int num3 = (24 - GameScr.cmx) / 3;
+								bool flag8 = num3 != 0;
+								if (flag8)
+								{
+									GameScr.cmx += num - num / num3;
+								}
+							}
+							bool flag9 = GameScr.cmx < ((!this.isVsMap()) ? 0 : 24);
+							if (flag9)
+							{
+								GameScr.cmx = ((!this.isVsMap()) ? 0 : 24);
+							}
+							bool flag10 = GameScr.cmx > GameScr.cmxLim;
+							if (flag10)
+							{
+								int num4 = (GameScr.cmx - GameScr.cmxLim) / 3;
+								bool flag11 = num4 != 0;
+								if (flag11)
+								{
+									GameScr.cmx += num - num / num4;
+								}
+							}
+							bool flag12 = GameScr.cmx > GameScr.cmxLim + ((!this.isVsMap()) ? 24 : 0);
+							if (flag12)
+							{
+								GameScr.cmx = GameScr.cmxLim + ((!this.isVsMap()) ? 24 : 0);
+							}
+							bool flag13 = GameScr.cmy < 0;
+							if (flag13)
+							{
+								int num5 = -GameScr.cmy / 3;
+								bool flag14 = num5 != 0;
+								if (flag14)
+								{
+									GameScr.cmy += num2 - num2 / num5;
+								}
+							}
+							bool flag15 = GameScr.cmy < -((!this.isVsMap()) ? 24 : 0);
+							if (flag15)
+							{
+								GameScr.cmy = -((!this.isVsMap()) ? 24 : 0);
+							}
+							bool flag16 = GameScr.cmy > GameScr.cmyLim;
+							if (flag16)
+							{
+								GameScr.cmy = GameScr.cmyLim;
+							}
+							GameScr.cmtoX = GameScr.cmx;
+							GameScr.cmtoY = GameScr.cmy;
+						}
+					}
+					bool flag17 = this.isPointerDowning && GameCanvas.isPointerJustRelease;
+					if (flag17)
+					{
+						this.isPointerDowning = false;
+						this.isChangingCameraMode = false;
+						bool flag18 = Res.abs(GameCanvas.px - this.ptFirstDownX) > 15 || Res.abs(GameCanvas.py - this.ptFirstDownY) > 15;
+						if (flag18)
+						{
+							GameCanvas.isPointerJustRelease = false;
+						}
 					}
 				}
-				if (GameScr.cmx < ((!this.isVsMap()) ? 0 : 24))
-				{
-					GameScr.cmx = ((!this.isVsMap()) ? 0 : 24);
-				}
-				if (GameScr.cmx > GameScr.cmxLim)
-				{
-					int num4 = (GameScr.cmx - GameScr.cmxLim) / 3;
-					if (num4 != 0)
-					{
-						GameScr.cmx += num - num / num4;
-					}
-				}
-				if (GameScr.cmx > GameScr.cmxLim + ((!this.isVsMap()) ? 24 : 0))
-				{
-					GameScr.cmx = GameScr.cmxLim + ((!this.isVsMap()) ? 24 : 0);
-				}
-				if (GameScr.cmy < 0)
-				{
-					int num5 = -GameScr.cmy / 3;
-					if (num5 != 0)
-					{
-						GameScr.cmy += num2 - num2 / num5;
-					}
-				}
-				if (GameScr.cmy < -((!this.isVsMap()) ? 24 : 0))
-				{
-					GameScr.cmy = -((!this.isVsMap()) ? 24 : 0);
-				}
-				if (GameScr.cmy > GameScr.cmyLim)
-				{
-					GameScr.cmy = GameScr.cmyLim;
-				}
-				GameScr.cmtoX = GameScr.cmx;
-				GameScr.cmtoY = GameScr.cmy;
-			}
-		}
-		if (this.isPointerDowning && GameCanvas.isPointerJustRelease)
-		{
-			this.isPointerDowning = false;
-			this.isChangingCameraMode = false;
-			if (Res.abs(GameCanvas.px - this.ptFirstDownX) > 15 || Res.abs(GameCanvas.py - this.ptFirstDownY) > 15)
-			{
-				GameCanvas.isPointerJustRelease = false;
 			}
 		}
 	}
 
-	// Token: 0x06000736 RID: 1846 RVA: 0x0006645C File Offset: 0x0006485C
+	// Token: 0x06000323 RID: 803 RVA: 0x0004907C File Offset: 0x0004727C
 	private void checkClick()
 	{
-		if (this.isCharging())
+		bool flag = this.isCharging();
+		if (!flag)
 		{
-			return;
-		}
-		if (this.popUpYesNo != null && this.popUpYesNo.cmdYes != null && this.popUpYesNo.cmdYes.isPointerPressInside())
-		{
-			this.popUpYesNo.cmdYes.performAction();
-			return;
-		}
-		if (this.checkClickToCapcha())
-		{
-			return;
-		}
-		long num = mSystem.currentTimeMillis();
-		if (this.lastSingleClick != 0L)
-		{
-			this.lastSingleClick = 0L;
-			GameCanvas.isPointerJustDown = false;
-			if (!this.disableSingleClick)
+			bool flag2 = this.popUpYesNo != null && this.popUpYesNo.cmdYes != null && this.popUpYesNo.cmdYes.isPointerPressInside();
+			if (flag2)
 			{
-				this.checkSingleClick();
-				GameCanvas.isPointerJustRelease = false;
-				this.isWaitingDoubleClick = true;
-				this.timeStartDblClick = mSystem.currentTimeMillis();
+				this.popUpYesNo.cmdYes.performAction();
 			}
-		}
-		if (this.isWaitingDoubleClick)
-		{
-			this.timeEndDblClick = mSystem.currentTimeMillis();
-			if (this.timeEndDblClick - this.timeStartDblClick < 300L && GameCanvas.isPointerJustRelease)
+			else
 			{
-				this.isWaitingDoubleClick = false;
-				this.checkDoubleClick();
+				bool flag3 = this.checkClickToCapcha();
+				if (!flag3)
+				{
+					long num = mSystem.currentTimeMillis();
+					bool flag4 = this.lastSingleClick != 0L;
+					if (flag4)
+					{
+						this.lastSingleClick = 0L;
+						GameCanvas.isPointerJustDown = false;
+						bool flag5 = !this.disableSingleClick;
+						if (flag5)
+						{
+							this.checkSingleClick();
+							GameCanvas.isPointerJustRelease = false;
+							this.isWaitingDoubleClick = true;
+							this.timeStartDblClick = mSystem.currentTimeMillis();
+						}
+					}
+					bool flag6 = this.isWaitingDoubleClick;
+					if (flag6)
+					{
+						this.timeEndDblClick = mSystem.currentTimeMillis();
+						bool flag7 = this.timeEndDblClick - this.timeStartDblClick < 300L && GameCanvas.isPointerJustRelease;
+						if (flag7)
+						{
+							this.isWaitingDoubleClick = false;
+							this.checkDoubleClick();
+						}
+					}
+					bool isPointerJustRelease = GameCanvas.isPointerJustRelease;
+					if (isPointerJustRelease)
+					{
+						this.disableSingleClick = this.checkSingleClickEarly();
+						this.lastSingleClick = num;
+						this.lastClickCMX = GameScr.cmx;
+						this.lastClickCMY = GameScr.cmy;
+						GameCanvas.isPointerJustRelease = false;
+					}
+				}
 			}
-		}
-		if (GameCanvas.isPointerJustRelease)
-		{
-			this.disableSingleClick = this.checkSingleClickEarly();
-			this.lastSingleClick = num;
-			this.lastClickCMX = GameScr.cmx;
-			this.lastClickCMY = GameScr.cmy;
-			GameCanvas.isPointerJustRelease = false;
 		}
 	}
 
-	// Token: 0x06000737 RID: 1847 RVA: 0x0006658C File Offset: 0x0006498C
+	// Token: 0x06000324 RID: 804 RVA: 0x000491CC File Offset: 0x000473CC
 	private IMapObject findClickToItem(int px, int py)
 	{
 		IMapObject mapObject = null;
@@ -2459,27 +2994,33 @@ public class GameScr : mScreen, IChatable
 			for (int j = 0; j < array[i].size(); j++)
 			{
 				IMapObject mapObject2 = (IMapObject)array[i].elementAt(j);
-				if (!mapObject2.isInvisible())
+				bool flag = !mapObject2.isInvisible();
+				if (flag)
 				{
-					if (mapObject2 is Mob)
+					bool flag2 = mapObject2 is Mob;
+					if (flag2)
 					{
 						Mob mob = (Mob)mapObject2;
-						if (mob.isMobMe && mob.Equals(global::Char.myCharz().mobMe))
+						bool flag3 = mob.isMobMe && mob.Equals(global::Char.myCharz().mobMe);
+						if (flag3)
 						{
-							goto IL_139;
+							goto IL_15C;
 						}
 					}
 					int x = mapObject2.getX();
 					int y = mapObject2.getY();
 					int w = mapObject2.getW();
 					int h = mapObject2.getH();
-					if (this.inRectangle(px, py, x - w / 2 - num2, y - h - num2, w + num2 * 2, h + num2 * 2))
+					bool flag4 = this.inRectangle(px, py, x - w / 2 - num2, y - h - num2, w + num2 * 2, h + num2 * 2);
+					if (flag4)
 					{
-						if (mapObject == null)
+						bool flag5 = mapObject == null;
+						if (flag5)
 						{
 							mapObject = mapObject2;
 							num = Res.abs(px - x) + Res.abs(py - y);
-							if (i == 1)
+							bool flag6 = i == 1;
+							if (flag6)
 							{
 								return mapObject;
 							}
@@ -2487,7 +3028,8 @@ public class GameScr : mScreen, IChatable
 						else
 						{
 							int num3 = Res.abs(px - x) + Res.abs(py - y);
-							if (num3 < num)
+							bool flag7 = num3 < num;
+							if (flag7)
 							{
 								mapObject = mapObject2;
 								num = num3;
@@ -2495,13 +3037,13 @@ public class GameScr : mScreen, IChatable
 						}
 					}
 				}
-				IL_139:;
+				IL_15C:;
 			}
 		}
 		return mapObject;
 	}
 
-	// Token: 0x06000738 RID: 1848 RVA: 0x000666FC File Offset: 0x00064AFC
+	// Token: 0x06000325 RID: 805 RVA: 0x00049374 File Offset: 0x00047574
 	private Mob findClickToMOB(int px, int py)
 	{
 		int num = 30;
@@ -2510,23 +3052,28 @@ public class GameScr : mScreen, IChatable
 		for (int i = 0; i < GameScr.vMob.size(); i++)
 		{
 			Mob mob2 = (Mob)GameScr.vMob.elementAt(i);
-			if (!mob2.isInvisible())
+			bool flag = !mob2.isInvisible();
+			if (flag)
 			{
-				if (mob2 != null)
+				bool flag2 = mob2 != null;
+				if (flag2)
 				{
 					Mob mob3 = mob2;
-					if (mob3.isMobMe && mob3.Equals(global::Char.myCharz().mobMe))
+					bool flag3 = mob3.isMobMe && mob3.Equals(global::Char.myCharz().mobMe);
+					if (flag3)
 					{
-						goto IL_F5;
+						goto IL_110;
 					}
 				}
 				int x = mob2.getX();
 				int y = mob2.getY();
 				int w = mob2.getW();
 				int h = mob2.getH();
-				if (this.inRectangle(px, py, x - w / 2 - num, y - h - num, w + num * 2, h + num * 2))
+				bool flag4 = this.inRectangle(px, py, x - w / 2 - num, y - h - num, w + num * 2, h + num * 2);
+				if (flag4)
 				{
-					if (mob == null)
+					bool flag5 = mob == null;
+					if (flag5)
 					{
 						mob = mob2;
 						num2 = Res.abs(px - x) + Res.abs(py - y);
@@ -2534,7 +3081,8 @@ public class GameScr : mScreen, IChatable
 					else
 					{
 						int num3 = Res.abs(px - x) + Res.abs(py - y);
-						if (num3 < num2)
+						bool flag6 = num3 < num2;
+						if (flag6)
 						{
 							mob = mob2;
 							num2 = num3;
@@ -2542,338 +3090,416 @@ public class GameScr : mScreen, IChatable
 					}
 				}
 			}
-			IL_F5:;
+			IL_110:;
 		}
 		return mob;
 	}
 
-	// Token: 0x06000739 RID: 1849 RVA: 0x00066813 File Offset: 0x00064C13
+	// Token: 0x06000326 RID: 806 RVA: 0x000494B8 File Offset: 0x000476B8
 	private bool inRectangle(int xClick, int yClick, int x, int y, int w, int h)
 	{
 		return xClick >= x && xClick <= x + w && yClick >= y && yClick <= y + h;
 	}
 
-	// Token: 0x0600073A RID: 1850 RVA: 0x0006683C File Offset: 0x00064C3C
+	// Token: 0x06000327 RID: 807 RVA: 0x000494E8 File Offset: 0x000476E8
 	private bool checkSingleClickEarly()
 	{
 		int num = GameCanvas.px + GameScr.cmx;
 		int num2 = GameCanvas.py + GameScr.cmy;
 		global::Char.myCharz().cancelAttack();
 		IMapObject mapObject = this.findClickToItem(num, num2);
-		if (mapObject == null)
+		bool flag = mapObject == null;
+		bool result;
+		if (flag)
 		{
-			return false;
+			result = false;
 		}
-		if (global::Char.myCharz().isAttacPlayerStatus() && global::Char.myCharz().charFocus != null && !mapObject.Equals(global::Char.myCharz().charFocus))
+		else
 		{
-			if (!mapObject.Equals(global::Char.myCharz().charFocus.mobMe))
+			bool flag2 = global::Char.myCharz().isAttacPlayerStatus() && global::Char.myCharz().charFocus != null && !mapObject.Equals(global::Char.myCharz().charFocus);
+			if (flag2)
 			{
-				if (mapObject is global::Char)
+				bool flag3 = !mapObject.Equals(global::Char.myCharz().charFocus.mobMe);
+				if (flag3)
 				{
-					global::Char @char = (global::Char)mapObject;
-					if ((int)@char.cTypePk != 5 && !@char.isAttacPlayerStatus())
+					bool flag4 = mapObject is global::Char;
+					if (flag4)
 					{
-						this.checkClickMoveTo(num, num2, 2);
-						return false;
+						global::Char @char = (global::Char)mapObject;
+						bool flag5 = @char.cTypePk != 5 && !@char.isAttacPlayerStatus();
+						if (flag5)
+						{
+							this.checkClickMoveTo(num, num2, 2);
+							return false;
+						}
+					}
+				}
+			}
+			bool flag6 = global::Char.myCharz().mobFocus == mapObject || global::Char.myCharz().itemFocus == mapObject;
+			if (flag6)
+			{
+				this.doDoubleClickToObj(mapObject);
+				result = true;
+			}
+			else
+			{
+				bool flag7 = TileMap.mapID == 51 && mapObject.Equals(global::Char.myCharz().npcFocus);
+				if (flag7)
+				{
+					this.checkClickMoveTo(num, num2, 3);
+					result = false;
+				}
+				else
+				{
+					bool flag8 = global::Char.myCharz().skillPaint != null || global::Char.myCharz().arr != null || global::Char.myCharz().dart != null || global::Char.myCharz().skillInfoPaint() != null;
+					if (flag8)
+					{
+						result = false;
+					}
+					else
+					{
+						global::Char.myCharz().focusManualTo(mapObject);
+						mapObject.stopMoving();
+						result = false;
 					}
 				}
 			}
 		}
-		if (global::Char.myCharz().mobFocus == mapObject || global::Char.myCharz().itemFocus == mapObject)
-		{
-			this.doDoubleClickToObj(mapObject);
-			return true;
-		}
-		if (TileMap.mapID == 51 && mapObject.Equals(global::Char.myCharz().npcFocus))
-		{
-			this.checkClickMoveTo(num, num2, 3);
-			return false;
-		}
-		if (global::Char.myCharz().skillPaint != null || global::Char.myCharz().arr != null || global::Char.myCharz().dart != null || global::Char.myCharz().skillInfoPaint() != null)
-		{
-			return false;
-		}
-		global::Char.myCharz().focusManualTo(mapObject);
-		mapObject.stopMoving();
-		return false;
+		return result;
 	}
 
-	// Token: 0x0600073B RID: 1851 RVA: 0x000669B0 File Offset: 0x00064DB0
+	// Token: 0x06000328 RID: 808 RVA: 0x00049694 File Offset: 0x00047894
 	private void checkDoubleClick()
 	{
 		int num = GameCanvas.px + this.lastClickCMX;
 		int num2 = GameCanvas.py + this.lastClickCMY;
 		int cy = global::Char.myCharz().cy;
-		if (this.isLockKey)
+		bool flag = this.isLockKey;
+		if (!flag)
 		{
-			return;
-		}
-		IMapObject mapObject = this.findClickToItem(num, num2);
-		if (mapObject != null)
-		{
-			if (mapObject is Mob && !this.isMeCanAttackMob((Mob)mapObject))
+			IMapObject mapObject = this.findClickToItem(num, num2);
+			bool flag2 = mapObject != null;
+			if (flag2)
 			{
-				this.checkClickMoveTo(num, num2, 4);
-				return;
-			}
-			if (this.checkClickToBotton(mapObject))
-			{
-				return;
-			}
-			if (!mapObject.Equals(global::Char.myCharz().npcFocus) && this.mobCapcha != null)
-			{
-				return;
-			}
-			if (global::Char.myCharz().isAttacPlayerStatus() && global::Char.myCharz().charFocus != null && !mapObject.Equals(global::Char.myCharz().charFocus))
-			{
-				if (!mapObject.Equals(global::Char.myCharz().charFocus.mobMe))
+				bool flag3 = mapObject is Mob && !this.isMeCanAttackMob((Mob)mapObject);
+				if (flag3)
 				{
-					if (mapObject is global::Char)
+					this.checkClickMoveTo(num, num2, 4);
+				}
+				else
+				{
+					bool flag4 = this.checkClickToBotton(mapObject);
+					if (!flag4)
 					{
-						global::Char @char = (global::Char)mapObject;
-						if ((int)@char.cTypePk != 5 && !@char.isAttacPlayerStatus())
+						bool flag5 = !mapObject.Equals(global::Char.myCharz().npcFocus) && this.mobCapcha != null;
+						if (!flag5)
 						{
-							this.checkClickMoveTo(num, num2, 5);
-							return;
+							bool flag6 = global::Char.myCharz().isAttacPlayerStatus() && global::Char.myCharz().charFocus != null && !mapObject.Equals(global::Char.myCharz().charFocus);
+							if (flag6)
+							{
+								bool flag7 = !mapObject.Equals(global::Char.myCharz().charFocus.mobMe);
+								if (flag7)
+								{
+									bool flag8 = mapObject is global::Char;
+									if (flag8)
+									{
+										global::Char @char = (global::Char)mapObject;
+										bool flag9 = @char.cTypePk != 5 && !@char.isAttacPlayerStatus();
+										if (flag9)
+										{
+											this.checkClickMoveTo(num, num2, 5);
+											return;
+										}
+									}
+								}
+							}
+							bool flag10 = TileMap.mapID == 51 && mapObject.Equals(global::Char.myCharz().npcFocus);
+							if (flag10)
+							{
+								this.checkClickMoveTo(num, num2, 6);
+							}
+							else
+							{
+								this.doDoubleClickToObj(mapObject);
+							}
 						}
 					}
 				}
 			}
-			if (TileMap.mapID == 51 && mapObject.Equals(global::Char.myCharz().npcFocus))
+			else
 			{
-				this.checkClickMoveTo(num, num2, 6);
-				return;
-			}
-			this.doDoubleClickToObj(mapObject);
-			return;
-		}
-		else
-		{
-			if (this.checkClickToPopup(num, num2))
-			{
-				return;
-			}
-			if (this.checkClipTopChatPopUp(num, num2))
-			{
-				return;
-			}
-			if (Main.isPC)
-			{
-				return;
-			}
-			this.checkClickMoveTo(num, num2, 7);
-			return;
-		}
-	}
-
-	// Token: 0x0600073C RID: 1852 RVA: 0x00066B44 File Offset: 0x00064F44
-	private bool checkClickToBotton(IMapObject Object)
-	{
-		if (Object == null)
-		{
-			return false;
-		}
-		int i = Object.getY();
-		int num = global::Char.myCharz().cy;
-		if (i < num)
-		{
-			while (i < num)
-			{
-				num -= 5;
-				if (TileMap.tileTypeAt(global::Char.myCharz().cx, num, 8192))
+				bool flag11 = this.checkClickToPopup(num, num2);
+				if (!flag11)
 				{
-					this.auto = 0;
-					global::Char.myCharz().cancelAttack();
-					global::Char.myCharz().currentMovePoint = null;
-					return true;
+					bool flag12 = this.checkClipTopChatPopUp(num, num2);
+					if (!flag12)
+					{
+						bool isPC = Main.isPC;
+						if (!isPC)
+						{
+							this.checkClickMoveTo(num, num2, 7);
+						}
+					}
 				}
 			}
 		}
-		return false;
 	}
 
-	// Token: 0x0600073D RID: 1853 RVA: 0x00066BBC File Offset: 0x00064FBC
+	// Token: 0x06000329 RID: 809 RVA: 0x0004986C File Offset: 0x00047A6C
+	private bool checkClickToBotton(IMapObject Object)
+	{
+		bool flag = Object == null;
+		bool result;
+		if (flag)
+		{
+			result = false;
+		}
+		else
+		{
+			int i = Object.getY();
+			int num = global::Char.myCharz().cy;
+			bool flag2 = i < num;
+			if (flag2)
+			{
+				while (i < num)
+				{
+					num -= 5;
+					bool flag3 = TileMap.tileTypeAt(global::Char.myCharz().cx, num, 8192);
+					if (flag3)
+					{
+						this.auto = 0;
+						global::Char.myCharz().cancelAttack();
+						global::Char.myCharz().currentMovePoint = null;
+						return true;
+					}
+				}
+			}
+			result = false;
+		}
+		return result;
+	}
+
+	// Token: 0x0600032A RID: 810 RVA: 0x000498FC File Offset: 0x00047AFC
 	private void doDoubleClickToObj(IMapObject obj)
 	{
-		if (!obj.Equals(global::Char.myCharz().npcFocus) && this.mobCapcha != null)
+		bool flag = !obj.Equals(global::Char.myCharz().npcFocus) && this.mobCapcha != null;
+		if (!flag)
 		{
-			return;
+			bool flag2 = this.checkClickToBotton(obj);
+			if (!flag2)
+			{
+				this.checkEffToObj(obj, false);
+				global::Char.myCharz().cancelAttack();
+				global::Char.myCharz().currentMovePoint = null;
+				global::Char.myCharz().cvx = (global::Char.myCharz().cvy = 0);
+				obj.stopMoving();
+				this.auto = 10;
+				this.doFire(false, true);
+				this.clickToX = obj.getX();
+				this.clickToY = obj.getY();
+				this.clickOnTileTop = false;
+				this.clickMoving = true;
+				this.clickMovingRed = true;
+				this.clickMovingTimeOut = 20;
+				this.clickMovingP1 = 30;
+			}
 		}
-		if (this.checkClickToBotton(obj))
-		{
-			return;
-		}
-		this.checkEffToObj(obj, false);
-		global::Char.myCharz().cancelAttack();
-		global::Char.myCharz().currentMovePoint = null;
-		global::Char.myCharz().cvx = (global::Char.myCharz().cvy = 0);
-		obj.stopMoving();
-		this.auto = 10;
-		this.doFire(false, true);
-		this.clickToX = obj.getX();
-		this.clickToY = obj.getY();
-		this.clickOnTileTop = false;
-		this.clickMoving = true;
-		this.clickMovingRed = true;
-		this.clickMovingTimeOut = 20;
-		this.clickMovingP1 = 30;
 	}
 
-	// Token: 0x0600073E RID: 1854 RVA: 0x00066C80 File Offset: 0x00065080
+	// Token: 0x0600032B RID: 811 RVA: 0x000499D0 File Offset: 0x00047BD0
 	private void checkSingleClick()
 	{
 		int xClick = GameCanvas.px + this.lastClickCMX;
 		int yClick = GameCanvas.py + this.lastClickCMY;
-		if (this.isLockKey)
+		bool flag = this.isLockKey;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.checkClickToPopup(xClick, yClick))
-		{
-			return;
-		}
-		if (this.checkClipTopChatPopUp(xClick, yClick))
-		{
-			return;
-		}
-		this.checkClickMoveTo(xClick, yClick, 0);
-	}
-
-	// Token: 0x0600073F RID: 1855 RVA: 0x00066CD8 File Offset: 0x000650D8
-	private bool checkClipTopChatPopUp(int xClick, int yClick)
-	{
-		if (this.Equals(GameScr.info2) && GameScr.gI().popUpYesNo != null)
-		{
-			return false;
-		}
-		if (GameScr.info2.info.info != null && GameScr.info2.info.info.charInfo != null)
-		{
-			int x = Res.abs(GameScr.info2.cmx) + GameScr.info2.info.X - 40;
-			int y = Res.abs(GameScr.info2.cmy) + GameScr.info2.info.Y;
-			if (this.inRectangle(xClick - GameScr.cmx, yClick - GameScr.cmy, x, y, 200, GameScr.info2.info.H))
+			bool flag2 = this.checkClickToPopup(xClick, yClick);
+			if (!flag2)
 			{
-				GameScr.info2.doClick(10);
-				return true;
+				bool flag3 = this.checkClipTopChatPopUp(xClick, yClick);
+				if (!flag3)
+				{
+					this.checkClickMoveTo(xClick, yClick, 0);
+				}
 			}
 		}
-		return false;
 	}
 
-	// Token: 0x06000740 RID: 1856 RVA: 0x00066DB8 File Offset: 0x000651B8
+	// Token: 0x0600032C RID: 812 RVA: 0x00049A30 File Offset: 0x00047C30
+	private bool checkClipTopChatPopUp(int xClick, int yClick)
+	{
+		bool flag = this.Equals(GameScr.info2) && GameScr.gI().popUpYesNo != null;
+		bool result;
+		if (flag)
+		{
+			result = false;
+		}
+		else
+		{
+			bool flag2 = GameScr.info2.info.info != null && GameScr.info2.info.info.charInfo != null;
+			if (flag2)
+			{
+				int x = Res.abs(GameScr.info2.cmx) + GameScr.info2.info.X - 40;
+				int y = Res.abs(GameScr.info2.cmy) + GameScr.info2.info.Y;
+				bool flag3 = this.inRectangle(xClick - GameScr.cmx, yClick - GameScr.cmy, x, y, 200, GameScr.info2.info.H);
+				if (flag3)
+				{
+					GameScr.info2.doClick(10);
+					return true;
+				}
+			}
+			result = false;
+		}
+		return result;
+	}
+
+	// Token: 0x0600032D RID: 813 RVA: 0x00049B28 File Offset: 0x00047D28
 	private bool checkClickToPopup(int xClick, int yClick)
 	{
 		for (int i = 0; i < PopUp.vPopups.size(); i++)
 		{
 			PopUp popUp = (PopUp)PopUp.vPopups.elementAt(i);
-			if (this.inRectangle(xClick, yClick, popUp.cx, popUp.cy, popUp.cw, popUp.ch))
+			bool flag = this.inRectangle(xClick, yClick, popUp.cx, popUp.cy, popUp.cw, popUp.ch);
+			if (flag)
 			{
-				if (popUp.cy <= 24 && TileMap.isInAirMap() && (int)global::Char.myCharz().cTypePk != 0)
+				bool flag2 = popUp.cy <= 24 && TileMap.isInAirMap() && global::Char.myCharz().cTypePk != 0;
+				bool result;
+				if (flag2)
 				{
-					return false;
+					result = false;
 				}
-				if (popUp.isPaint)
+				else
 				{
+					bool flag3 = popUp.isPaint;
+					if (!flag3)
+					{
+						goto IL_86;
+					}
 					popUp.doClick(10);
-					return true;
+					result = true;
 				}
+				return result;
 			}
+			IL_86:;
 		}
 		return false;
 	}
 
-	// Token: 0x06000741 RID: 1857 RVA: 0x00066E58 File Offset: 0x00065258
+	// Token: 0x0600032E RID: 814 RVA: 0x00049BE0 File Offset: 0x00047DE0
 	private void checkClickMoveTo(int xClick, int yClick, int index)
 	{
-		if (GameScr.gamePad.disableClickMove())
+		bool flag = GameScr.gamePad.disableClickMove();
+		if (!flag)
 		{
-			return;
-		}
-		global::Char.myCharz().cancelAttack();
-		if (xClick < TileMap.pxw && xClick > TileMap.pxw - 32)
-		{
-			global::Char.myCharz().currentMovePoint = new MovePoint(TileMap.pxw, yClick);
-			return;
-		}
-		if (xClick < 32 && xClick > 0)
-		{
-			global::Char.myCharz().currentMovePoint = new MovePoint(0, yClick);
-			return;
-		}
-		if (xClick < TileMap.pxw && xClick > TileMap.pxw - 48)
-		{
-			global::Char.myCharz().currentMovePoint = new MovePoint(TileMap.pxw, yClick);
-			return;
-		}
-		if (xClick < 48 && xClick > 0)
-		{
-			global::Char.myCharz().currentMovePoint = new MovePoint(0, yClick);
-			return;
-		}
-		this.clickToX = xClick;
-		this.clickToY = yClick;
-		this.clickOnTileTop = false;
-		global::Char.myCharz().delayFall = 0;
-		int num = (!global::Char.myCharz().canFly || global::Char.myCharz().cMP <= 0) ? 1000 : 0;
-		if (this.clickToY > global::Char.myCharz().cy && Res.abs(this.clickToX - global::Char.myCharz().cx) < 12)
-		{
-			return;
-		}
-		for (int i = 0; i < 60 + num; i += 24)
-		{
-			if (this.clickToY + i >= TileMap.pxh - 24)
+			global::Char.myCharz().cancelAttack();
+			bool flag2 = xClick < TileMap.pxw && xClick > TileMap.pxw - 32;
+			if (flag2)
 			{
-				break;
+				global::Char.myCharz().currentMovePoint = new MovePoint(TileMap.pxw, yClick);
 			}
-			if (TileMap.tileTypeAt(this.clickToX, this.clickToY + i, 2))
+			else
 			{
-				this.clickToY = TileMap.tileYofPixel(this.clickToY + i);
-				this.clickOnTileTop = true;
-				break;
+				bool flag3 = xClick < 32 && xClick > 0;
+				if (flag3)
+				{
+					global::Char.myCharz().currentMovePoint = new MovePoint(0, yClick);
+				}
+				else
+				{
+					bool flag4 = xClick < TileMap.pxw && xClick > TileMap.pxw - 48;
+					if (flag4)
+					{
+						global::Char.myCharz().currentMovePoint = new MovePoint(TileMap.pxw, yClick);
+					}
+					else
+					{
+						bool flag5 = xClick < 48 && xClick > 0;
+						if (flag5)
+						{
+							global::Char.myCharz().currentMovePoint = new MovePoint(0, yClick);
+						}
+						else
+						{
+							this.clickToX = xClick;
+							this.clickToY = yClick;
+							this.clickOnTileTop = false;
+							global::Char.myCharz().delayFall = 0;
+							int num = (!global::Char.myCharz().canFly || global::Char.myCharz().cMP <= 0) ? 1000 : 0;
+							bool flag6 = this.clickToY > global::Char.myCharz().cy && Res.abs(this.clickToX - global::Char.myCharz().cx) < 12;
+							if (!flag6)
+							{
+								for (int i = 0; i < 60 + num; i += 24)
+								{
+									bool flag7 = this.clickToY + i >= TileMap.pxh - 24;
+									if (flag7)
+									{
+										break;
+									}
+									bool flag8 = TileMap.tileTypeAt(this.clickToX, this.clickToY + i, 2);
+									if (flag8)
+									{
+										this.clickToY = TileMap.tileYofPixel(this.clickToY + i);
+										this.clickOnTileTop = true;
+										break;
+									}
+								}
+								for (int j = 0; j < 40 + num; j += 24)
+								{
+									bool flag9 = TileMap.tileTypeAt(this.clickToX, this.clickToY - j, 2);
+									if (flag9)
+									{
+										this.clickToY = TileMap.tileYofPixel(this.clickToY - j);
+										this.clickOnTileTop = true;
+										break;
+									}
+								}
+								this.clickMoving = true;
+								this.clickMovingRed = false;
+								this.clickMovingP1 = ((!this.clickOnTileTop) ? 30 : ((yClick >= this.clickToY) ? this.clickToY : yClick));
+								global::Char.myCharz().delayFall = 0;
+								bool flag10 = !this.clickOnTileTop && this.clickToY < global::Char.myCharz().cy - 50;
+								if (flag10)
+								{
+									global::Char.myCharz().delayFall = 20;
+								}
+								this.clickMovingTimeOut = 30;
+								this.auto = 0;
+								bool holder = global::Char.myCharz().holder;
+								if (holder)
+								{
+									global::Char.myCharz().removeHoleEff();
+								}
+								global::Char.myCharz().currentMovePoint = new MovePoint(this.clickToX, this.clickToY);
+								global::Char.myCharz().cdir = ((global::Char.myCharz().cx - global::Char.myCharz().currentMovePoint.xEnd <= 0) ? 1 : -1);
+								global::Char.myCharz().endMovePointCommand = null;
+								GameScr.isAutoPlay = false;
+							}
+						}
+					}
+				}
 			}
 		}
-		for (int j = 0; j < 40 + num; j += 24)
-		{
-			if (TileMap.tileTypeAt(this.clickToX, this.clickToY - j, 2))
-			{
-				this.clickToY = TileMap.tileYofPixel(this.clickToY - j);
-				this.clickOnTileTop = true;
-				break;
-			}
-		}
-		this.clickMoving = true;
-		this.clickMovingRed = false;
-		this.clickMovingP1 = ((!this.clickOnTileTop) ? 30 : ((yClick >= this.clickToY) ? this.clickToY : yClick));
-		global::Char.myCharz().delayFall = 0;
-		if (!this.clickOnTileTop && this.clickToY < global::Char.myCharz().cy - 50)
-		{
-			global::Char.myCharz().delayFall = 20;
-		}
-		this.clickMovingTimeOut = 30;
-		this.auto = 0;
-		if (global::Char.myCharz().holder)
-		{
-			global::Char.myCharz().removeHoleEff();
-		}
-		global::Char.myCharz().currentMovePoint = new MovePoint(this.clickToX, this.clickToY);
-		global::Char.myCharz().cdir = ((global::Char.myCharz().cx - global::Char.myCharz().currentMovePoint.xEnd <= 0) ? 1 : -1);
-		global::Char.myCharz().endMovePointCommand = null;
-		GameScr.isAutoPlay = false;
 	}
 
-	// Token: 0x06000742 RID: 1858 RVA: 0x00067150 File Offset: 0x00065550
+	// Token: 0x0600032F RID: 815 RVA: 0x00049F04 File Offset: 0x00048104
 	private void checkAuto()
 	{
 		long num = mSystem.currentTimeMillis();
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21] || GameCanvas.keyPressed[(!Main.isPC) ? 4 : 23] || GameCanvas.keyPressed[(!Main.isPC) ? 6 : 24] || GameCanvas.keyPressed[1] || GameCanvas.keyPressed[3])
+		bool flag = GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21] || GameCanvas.keyPressed[(!Main.isPC) ? 4 : 23] || GameCanvas.keyPressed[(!Main.isPC) ? 6 : 24] || GameCanvas.keyPressed[1] || GameCanvas.keyPressed[3];
+		if (flag)
 		{
 			this.auto = 0;
 			GameScr.isAutoPlay = false;
 		}
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] && !this.isPaintPopup())
+		bool flag2 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] && !this.isPaintPopup();
+		if (flag2)
 		{
-			if (this.auto == 0)
+			bool flag3 = this.auto == 0;
+			if (flag3)
 			{
-				if (num - this.lastFire < 800L && this.checkSkillValid2() && (global::Char.myCharz().mobFocus != null || (global::Char.myCharz().charFocus != null && global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus))))
+				bool flag4 = num - this.lastFire < 800L && this.checkSkillValid2() && (global::Char.myCharz().mobFocus != null || (global::Char.myCharz().charFocus != null && global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus)));
+				if (flag4)
 				{
 					Res.outz("toi day");
 					this.auto = 10;
@@ -2887,64 +3513,71 @@ public class GameScr : mScreen, IChatable
 			}
 			this.lastFire = num;
 		}
-		if (GameCanvas.gameTick % 5 == 0 && this.auto > 0 && global::Char.myCharz().currentMovePoint == null)
+		bool flag5 = GameCanvas.gameTick % 5 == 0 && this.auto > 0 && global::Char.myCharz().currentMovePoint == null;
+		if (flag5)
 		{
-			if (global::Char.myCharz().myskill != null && (global::Char.myCharz().myskill.template.isUseAlone() || global::Char.myCharz().myskill.paintCanNotUseSkill))
+			bool flag6 = global::Char.myCharz().myskill != null && (global::Char.myCharz().myskill.template.isUseAlone() || global::Char.myCharz().myskill.paintCanNotUseSkill);
+			if (flag6)
 			{
 				return;
 			}
-			if ((global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.status != 1 && global::Char.myCharz().mobFocus.status != 0 && global::Char.myCharz().charFocus == null) || (global::Char.myCharz().charFocus != null && global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus)))
+			bool flag7 = (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.status != 1 && global::Char.myCharz().mobFocus.status != 0 && global::Char.myCharz().charFocus == null) || (global::Char.myCharz().charFocus != null && global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus));
+			if (flag7)
 			{
-				if (global::Char.myCharz().myskill.paintCanNotUseSkill)
+				bool paintCanNotUseSkill = global::Char.myCharz().myskill.paintCanNotUseSkill;
+				if (paintCanNotUseSkill)
 				{
 					return;
 				}
 				this.doFire(false, true);
 			}
 		}
-		if (this.auto > 1)
+		bool flag8 = this.auto > 1;
+		if (flag8)
 		{
 			this.auto--;
 		}
 	}
 
-	// Token: 0x06000743 RID: 1859 RVA: 0x000673E4 File Offset: 0x000657E4
+	// Token: 0x06000330 RID: 816 RVA: 0x0004A184 File Offset: 0x00048384
 	public void doUseHP()
 	{
-		if (global::Char.myCharz().stone)
+		bool stone = global::Char.myCharz().stone;
+		if (!stone)
 		{
-			return;
-		}
-		if (global::Char.myCharz().blindEff)
-		{
-			return;
-		}
-		if (global::Char.myCharz().holdEffID > 0)
-		{
-			return;
-		}
-		long num = mSystem.currentTimeMillis();
-		if (num - this.lastUsePotion < 10000L)
-		{
-			return;
-		}
-		if (!global::Char.myCharz().doUsePotion())
-		{
-			GameScr.info1.addInfo(mResources.HP_EMPTY, 0);
-		}
-		else
-		{
-			ServerEffect.addServerEffect(11, global::Char.myCharz(), 5);
-			ServerEffect.addServerEffect(104, global::Char.myCharz(), 4);
-			this.lastUsePotion = num;
-			SoundMn.gI().eatPeans();
+			bool blindEff = global::Char.myCharz().blindEff;
+			if (!blindEff)
+			{
+				bool flag = global::Char.myCharz().holdEffID > 0;
+				if (!flag)
+				{
+					long num = mSystem.currentTimeMillis();
+					bool flag2 = num - this.lastUsePotion < 10000L;
+					if (!flag2)
+					{
+						bool flag3 = !global::Char.myCharz().doUsePotion();
+						if (flag3)
+						{
+							GameScr.info1.addInfo(mResources.HP_EMPTY, 0);
+						}
+						else
+						{
+							ServerEffect.addServerEffect(11, global::Char.myCharz(), 5);
+							ServerEffect.addServerEffect(104, global::Char.myCharz(), 4);
+							this.lastUsePotion = num;
+							SoundMn.gI().eatPeans();
+						}
+					}
+				}
+			}
 		}
 	}
 
-	// Token: 0x06000744 RID: 1860 RVA: 0x0006748C File Offset: 0x0006588C
+	// Token: 0x06000331 RID: 817 RVA: 0x0004A248 File Offset: 0x00048448
 	public void activeSuperPower(int x, int y)
 	{
-		if (!this.isSuperPower)
+		bool flag = !this.isSuperPower;
+		if (flag)
 		{
 			SoundMn.gI().bigeExlode();
 			this.isSuperPower = true;
@@ -2955,7 +3588,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000745 RID: 1861 RVA: 0x000674E0 File Offset: 0x000658E0
+	// Token: 0x06000332 RID: 818 RVA: 0x0004A2A0 File Offset: 0x000484A0
 	public void activeRongThanEff(bool isMe)
 	{
 		this.activeRongThan = true;
@@ -2968,7 +3601,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000746 RID: 1862 RVA: 0x00067530 File Offset: 0x00065930
+	// Token: 0x06000333 RID: 819 RVA: 0x0004A2F3 File Offset: 0x000484F3
 	public void hideRongThanEff()
 	{
 		this.activeRongThan = false;
@@ -2976,14 +3609,14 @@ public class GameScr : mScreen, IChatable
 		this.isMeCallRongThan = false;
 	}
 
-	// Token: 0x06000747 RID: 1863 RVA: 0x00067547 File Offset: 0x00065947
+	// Token: 0x06000334 RID: 820 RVA: 0x0004A30B File Offset: 0x0004850B
 	public void doiMauTroi()
 	{
 		this.isRongThanXuatHien = true;
 		this.mautroi = mGraphics.blendColor(0.4f, 0, GameCanvas.colorTop[GameCanvas.colorTop.Length - 1]);
 	}
 
-	// Token: 0x06000748 RID: 1864 RVA: 0x00067570 File Offset: 0x00065970
+	// Token: 0x06000335 RID: 821 RVA: 0x0004A338 File Offset: 0x00048538
 	public void callRongThan(int x, int y)
 	{
 		Res.outz(string.Concat(new object[]
@@ -2998,287 +3631,358 @@ public class GameScr : mScreen, IChatable
 		EffecMn.addEff(me);
 	}
 
-	// Token: 0x06000749 RID: 1865 RVA: 0x000675DD File Offset: 0x000659DD
+	// Token: 0x06000336 RID: 822 RVA: 0x0004A3A4 File Offset: 0x000485A4
 	public void hideRongThan()
 	{
 		this.isRongThanXuatHien = false;
 		EffecMn.removeEff(17);
-		if (this.isRongNamek)
+		bool flag = this.isRongNamek;
+		if (flag)
 		{
 			this.isRongNamek = false;
 			EffecMn.removeEff(25);
 		}
 	}
 
-	// Token: 0x0600074A RID: 1866 RVA: 0x00067608 File Offset: 0x00065A08
+	// Token: 0x06000337 RID: 823 RVA: 0x0004A3DC File Offset: 0x000485DC
 	private void autoPlay()
 	{
-		if (this.timeSkill > 0)
+		bool flag3 = this.timeSkill > 0;
+		if (flag3)
 		{
 			this.timeSkill--;
 		}
-		if (!GameScr.canAutoPlay)
+		bool flag4 = !GameScr.canAutoPlay;
+		if (!flag4)
 		{
-			return;
-		}
-		if (GameScr.isChangeZone)
-		{
-			return;
-		}
-		if (global::Char.myCharz().statusMe == 14 || global::Char.myCharz().statusMe == 5)
-		{
-			return;
-		}
-		if (global::Char.myCharz().isCharge || global::Char.myCharz().isFlyAndCharge || global::Char.myCharz().isUseChargeSkill())
-		{
-			return;
-		}
-		bool flag = false;
-		for (int i = 0; i < GameScr.vMob.size(); i++)
-		{
-			Mob mob = (Mob)GameScr.vMob.elementAt(i);
-			if (mob.status != 0 && mob.status != 1)
+			bool flag5 = GameScr.isChangeZone;
+			if (!flag5)
 			{
-				flag = true;
-			}
-		}
-		if (!flag)
-		{
-			return;
-		}
-		bool flag2 = false;
-		for (int j = 0; j < global::Char.myCharz().arrItemBag.Length; j++)
-		{
-			Item item = global::Char.myCharz().arrItemBag[j];
-			if (item != null && (int)item.template.type == 6)
-			{
-				flag2 = true;
-				break;
-			}
-		}
-		if (!flag2 && GameCanvas.gameTick % 150 == 0)
-		{
-			Service.gI().requestPean();
-		}
-		if (global::Char.myCharz().cHP <= global::Char.myCharz().cHPFull * 20 / 100 || global::Char.myCharz().cMP <= global::Char.myCharz().cMPFull * 20 / 100)
-		{
-			this.doUseHP();
-		}
-		if (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.isMobMe))
-		{
-			for (int k = 0; k < GameScr.vMob.size(); k++)
-			{
-				Mob mob2 = (Mob)GameScr.vMob.elementAt(k);
-				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe)
+				bool flag6 = global::Char.myCharz().statusMe == 14 || global::Char.myCharz().statusMe == 5;
+				if (!flag6)
 				{
-					global::Char.myCharz().cx = mob2.x;
-					global::Char.myCharz().cy = mob2.y;
-					global::Char.myCharz().mobFocus = mob2;
-					Service.gI().charMove();
-					break;
-				}
-			}
-		}
-		else if (global::Char.myCharz().mobFocus.hp <= 0 || global::Char.myCharz().mobFocus.status == 1 || global::Char.myCharz().mobFocus.status == 0)
-		{
-			global::Char.myCharz().mobFocus = null;
-		}
-		if (global::Char.myCharz().mobFocus != null && this.timeSkill == 0)
-		{
-			if (global::Char.myCharz().skillInfoPaint() != null && global::Char.myCharz().indexSkill < global::Char.myCharz().skillInfoPaint().Length && global::Char.myCharz().dart != null && global::Char.myCharz().arr != null)
-			{
-				return;
-			}
-			Skill skill = null;
-			if (GameCanvas.isTouch)
-			{
-				for (int l = 0; l < GameScr.onScreenSkill.Length; l++)
-				{
-					if (GameScr.onScreenSkill[l] != null)
+					bool flag7 = global::Char.myCharz().isCharge || global::Char.myCharz().isFlyAndCharge || global::Char.myCharz().isUseChargeSkill();
+					if (!flag7)
 					{
-						if (!GameScr.onScreenSkill[l].paintCanNotUseSkill)
+						bool flag = false;
+						for (int i = 0; i < GameScr.vMob.size(); i++)
 						{
-							if ((int)GameScr.onScreenSkill[l].template.id != 10)
+							Mob mob = (Mob)GameScr.vMob.elementAt(i);
+							bool flag8 = mob.status != 0 && mob.status != 1;
+							if (flag8)
 							{
-								if ((int)GameScr.onScreenSkill[l].template.id != 11)
+								flag = true;
+							}
+						}
+						bool flag9 = !flag;
+						if (!flag9)
+						{
+							bool flag2 = false;
+							for (int j = 0; j < global::Char.myCharz().arrItemBag.Length; j++)
+							{
+								Item item = global::Char.myCharz().arrItemBag[j];
+								bool flag10 = item != null && item.template.type == 6;
+								if (flag10)
 								{
-									if ((int)GameScr.onScreenSkill[l].template.id != 14)
+									flag2 = true;
+									break;
+								}
+							}
+							bool flag11 = !flag2 && GameCanvas.gameTick % 150 == 0;
+							if (flag11)
+							{
+								Service.gI().requestPean();
+							}
+							bool flag12 = global::Char.myCharz().cHP <= global::Char.myCharz().cHPFull * 20 / 100 || global::Char.myCharz().cMP <= global::Char.myCharz().cMPFull * 20 / 100;
+							if (flag12)
+							{
+								this.doUseHP();
+							}
+							bool flag13 = global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.isMobMe);
+							if (flag13)
+							{
+								for (int k = 0; k < GameScr.vMob.size(); k++)
+								{
+									Mob mob2 = (Mob)GameScr.vMob.elementAt(k);
+									bool flag14 = mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe;
+									if (flag14)
 									{
-										if ((int)GameScr.onScreenSkill[l].template.id != 23)
+										global::Char.myCharz().cx = mob2.x;
+										global::Char.myCharz().cy = mob2.y;
+										global::Char.myCharz().mobFocus = mob2;
+										Service.gI().charMove();
+										break;
+									}
+								}
+							}
+							else
+							{
+								bool flag15 = global::Char.myCharz().mobFocus.hp <= 0 || global::Char.myCharz().mobFocus.status == 1 || global::Char.myCharz().mobFocus.status == 0;
+								if (flag15)
+								{
+									global::Char.myCharz().mobFocus = null;
+								}
+							}
+							bool flag16 = global::Char.myCharz().mobFocus != null && this.timeSkill == 0;
+							if (flag16)
+							{
+								bool flag17 = global::Char.myCharz().skillInfoPaint() != null && global::Char.myCharz().indexSkill < global::Char.myCharz().skillInfoPaint().Length && global::Char.myCharz().dart != null && global::Char.myCharz().arr != null;
+								if (!flag17)
+								{
+									Skill skill = null;
+									bool isTouch = GameCanvas.isTouch;
+									if (isTouch)
+									{
+										for (int l = 0; l < GameScr.onScreenSkill.Length; l++)
 										{
-											if ((int)GameScr.onScreenSkill[l].template.id != 7)
+											bool flag18 = GameScr.onScreenSkill[l] != null;
+											if (flag18)
 											{
-												if (global::Char.myCharz().skillInfoPaint() == null)
+												bool flag19 = !GameScr.onScreenSkill[l].paintCanNotUseSkill;
+												if (flag19)
 												{
-													if (!GameScr.onScreenSkill[l].template.isSkillSpec())
+													bool flag20 = GameScr.onScreenSkill[l].template.id != 10;
+													if (flag20)
 													{
-														int num;
-														if (GameScr.onScreenSkill[l].template.manaUseType == 2)
+														bool flag21 = GameScr.onScreenSkill[l].template.id != 11;
+														if (flag21)
 														{
-															num = 1;
-														}
-														else if (GameScr.onScreenSkill[l].template.manaUseType != 1)
-														{
-															num = GameScr.onScreenSkill[l].manaUse;
-														}
-														else
-														{
-															num = GameScr.onScreenSkill[l].manaUse * global::Char.myCharz().cMPFull / 100;
-														}
-														if (global::Char.myCharz().cMP >= num)
-														{
-															if (skill == null)
+															bool flag22 = GameScr.onScreenSkill[l].template.id != 14;
+															if (flag22)
 															{
-																skill = GameScr.onScreenSkill[l];
-															}
-															else if (skill.coolDown < GameScr.onScreenSkill[l].coolDown)
-															{
-																skill = GameScr.onScreenSkill[l];
+																bool flag23 = GameScr.onScreenSkill[l].template.id != 23;
+																if (flag23)
+																{
+																	bool flag24 = GameScr.onScreenSkill[l].template.id != 7;
+																	if (flag24)
+																	{
+																		bool flag25 = global::Char.myCharz().skillInfoPaint() == null;
+																		if (flag25)
+																		{
+																			bool flag26 = !GameScr.onScreenSkill[l].template.isSkillSpec();
+																			if (flag26)
+																			{
+																				bool flag27 = GameScr.onScreenSkill[l].template.manaUseType == 2;
+																				int num;
+																				if (flag27)
+																				{
+																					num = 1;
+																				}
+																				else
+																				{
+																					bool flag28 = GameScr.onScreenSkill[l].template.manaUseType != 1;
+																					if (flag28)
+																					{
+																						num = GameScr.onScreenSkill[l].manaUse;
+																					}
+																					else
+																					{
+																						num = GameScr.onScreenSkill[l].manaUse * global::Char.myCharz().cMPFull / 100;
+																					}
+																				}
+																				bool flag29 = global::Char.myCharz().cMP >= num;
+																				if (flag29)
+																				{
+																					bool flag30 = skill == null;
+																					if (flag30)
+																					{
+																						skill = GameScr.onScreenSkill[l];
+																					}
+																					else
+																					{
+																						bool flag31 = skill.coolDown < GameScr.onScreenSkill[l].coolDown;
+																						if (flag31)
+																						{
+																							skill = GameScr.onScreenSkill[l];
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
 															}
 														}
 													}
 												}
 											}
 										}
-									}
-								}
-							}
-						}
-					}
-				}
-				if (skill != null)
-				{
-					this.doSelectSkill(skill, true);
-					this.doDoubleClickToObj(global::Char.myCharz().mobFocus);
-				}
-			}
-			else
-			{
-				for (int m = 0; m < GameScr.keySkill.Length; m++)
-				{
-					if (GameScr.keySkill[m] != null)
-					{
-						if (!GameScr.keySkill[m].paintCanNotUseSkill)
-						{
-							if ((int)GameScr.keySkill[m].template.id != 10)
-							{
-								if ((int)GameScr.keySkill[m].template.id != 11)
-								{
-									if ((int)GameScr.keySkill[m].template.id != 14)
-									{
-										if ((int)GameScr.keySkill[m].template.id != 23)
+										bool flag32 = skill != null;
+										if (flag32)
 										{
-											if ((int)GameScr.keySkill[m].template.id != 7)
+											this.doSelectSkill(skill, true);
+											this.doDoubleClickToObj(global::Char.myCharz().mobFocus);
+										}
+									}
+									else
+									{
+										for (int m = 0; m < GameScr.keySkill.Length; m++)
+										{
+											bool flag33 = GameScr.keySkill[m] != null;
+											if (flag33)
 											{
-												if (global::Char.myCharz().skillInfoPaint() == null)
+												bool flag34 = !GameScr.keySkill[m].paintCanNotUseSkill;
+												if (flag34)
 												{
-													int num2;
-													if (GameScr.keySkill[m].template.manaUseType == 2)
+													bool flag35 = GameScr.keySkill[m].template.id != 10;
+													if (flag35)
 													{
-														num2 = 1;
-													}
-													else if (GameScr.keySkill[m].template.manaUseType != 1)
-													{
-														num2 = GameScr.keySkill[m].manaUse;
-													}
-													else
-													{
-														num2 = GameScr.keySkill[m].manaUse * global::Char.myCharz().cMPFull / 100;
-													}
-													if (global::Char.myCharz().cMP >= num2)
-													{
-														if (skill == null)
+														bool flag36 = GameScr.keySkill[m].template.id != 11;
+														if (flag36)
 														{
-															skill = GameScr.keySkill[m];
-														}
-														else if (skill.coolDown < GameScr.keySkill[m].coolDown)
-														{
-															skill = GameScr.keySkill[m];
+															bool flag37 = GameScr.keySkill[m].template.id != 14;
+															if (flag37)
+															{
+																bool flag38 = GameScr.keySkill[m].template.id != 23;
+																if (flag38)
+																{
+																	bool flag39 = GameScr.keySkill[m].template.id != 7;
+																	if (flag39)
+																	{
+																		bool flag40 = global::Char.myCharz().skillInfoPaint() == null;
+																		if (flag40)
+																		{
+																			bool flag41 = GameScr.keySkill[m].template.manaUseType == 2;
+																			int num2;
+																			if (flag41)
+																			{
+																				num2 = 1;
+																			}
+																			else
+																			{
+																				bool flag42 = GameScr.keySkill[m].template.manaUseType != 1;
+																				if (flag42)
+																				{
+																					num2 = GameScr.keySkill[m].manaUse;
+																				}
+																				else
+																				{
+																					num2 = GameScr.keySkill[m].manaUse * global::Char.myCharz().cMPFull / 100;
+																				}
+																			}
+																			bool flag43 = global::Char.myCharz().cMP >= num2;
+																			if (flag43)
+																			{
+																				bool flag44 = skill == null;
+																				if (flag44)
+																				{
+																					skill = GameScr.keySkill[m];
+																				}
+																				else
+																				{
+																					bool flag45 = skill.coolDown < GameScr.keySkill[m].coolDown;
+																					if (flag45)
+																					{
+																						skill = GameScr.keySkill[m];
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
 														}
 													}
 												}
 											}
+										}
+										bool flag46 = skill != null;
+										if (flag46)
+										{
+											this.doSelectSkill(skill, true);
+											this.doDoubleClickToObj(global::Char.myCharz().mobFocus);
 										}
 									}
 								}
 							}
 						}
 					}
-				}
-				if (skill != null)
-				{
-					this.doSelectSkill(skill, true);
-					this.doDoubleClickToObj(global::Char.myCharz().mobFocus);
 				}
 			}
 		}
 	}
 
-	// Token: 0x0600074B RID: 1867 RVA: 0x00067CE8 File Offset: 0x000660E8
+	// Token: 0x06000338 RID: 824 RVA: 0x0004ABB4 File Offset: 0x00048DB4
 	private void doFire(bool isFireByShortCut, bool skipWaypoint)
 	{
 		GameScr.tam++;
 		Waypoint waypoint = global::Char.myCharz().isInEnterOfflinePoint();
 		Waypoint waypoint2 = global::Char.myCharz().isInEnterOnlinePoint();
-		if (!skipWaypoint && waypoint != null && (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.templateId == 0)))
+		bool flag2 = !skipWaypoint && waypoint != null && (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.templateId == 0));
+		if (flag2)
 		{
 			waypoint.popup.command.performAction();
 		}
-		else if (!skipWaypoint && waypoint2 != null && (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.templateId == 0)))
-		{
-			waypoint2.popup.command.performAction();
-		}
 		else
 		{
-			if (TileMap.mapID == 51 && global::Char.myCharz().npcFocus != null)
+			bool flag3 = !skipWaypoint && waypoint2 != null && (global::Char.myCharz().mobFocus == null || (global::Char.myCharz().mobFocus != null && global::Char.myCharz().mobFocus.templateId == 0));
+			if (flag3)
 			{
-				return;
+				waypoint2.popup.command.performAction();
 			}
-			if (global::Char.myCharz().statusMe != 14)
+			else
 			{
-				global::Char.myCharz().cvx = (global::Char.myCharz().cvy = 0);
-				if (global::Char.myCharz().isSelectingSkillUseAlone() && global::Char.myCharz().focusToAttack())
+				bool flag4 = TileMap.mapID == 51 && global::Char.myCharz().npcFocus != null;
+				if (!flag4)
 				{
-					if (this.checkSkillValid())
+					bool flag5 = global::Char.myCharz().statusMe != 14;
+					if (flag5)
 					{
-						global::Char.myCharz().currentFireByShortcut = isFireByShortCut;
-						global::Char.myCharz().useSkillNotFocus();
-					}
-				}
-				else if (this.isAttack())
-				{
-					if (global::Char.myCharz().isUseChargeSkill() && global::Char.myCharz().focusToAttack())
-					{
-						if (this.checkSkillValid())
+						global::Char.myCharz().cvx = (global::Char.myCharz().cvy = 0);
+						bool flag6 = global::Char.myCharz().isSelectingSkillUseAlone() && global::Char.myCharz().focusToAttack();
+						if (flag6)
 						{
-							global::Char.myCharz().currentFireByShortcut = isFireByShortCut;
-							global::Char.myCharz().sendUseChargeSkill();
+							bool flag7 = this.checkSkillValid();
+							if (flag7)
+							{
+								global::Char.myCharz().currentFireByShortcut = isFireByShortCut;
+								global::Char.myCharz().useSkillNotFocus();
+							}
 						}
 						else
 						{
-							global::Char.myCharz().stopUseChargeSkill();
+							bool flag8 = this.isAttack();
+							if (flag8)
+							{
+								bool flag9 = global::Char.myCharz().isUseChargeSkill() && global::Char.myCharz().focusToAttack();
+								if (flag9)
+								{
+									bool flag10 = this.checkSkillValid();
+									if (flag10)
+									{
+										global::Char.myCharz().currentFireByShortcut = isFireByShortCut;
+										global::Char.myCharz().sendUseChargeSkill();
+									}
+									else
+									{
+										global::Char.myCharz().stopUseChargeSkill();
+									}
+								}
+								else
+								{
+									bool flag = TileMap.tileTypeAt(global::Char.myCharz().cx, global::Char.myCharz().cy, 2);
+									global::Char.myCharz().setSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], (!flag) ? 1 : 0);
+									bool flag11 = flag;
+									if (flag11)
+									{
+										global::Char.myCharz().delayFall = 20;
+									}
+									global::Char.myCharz().currentFireByShortcut = isFireByShortCut;
+								}
+							}
 						}
-					}
-					else
-					{
-						bool flag = TileMap.tileTypeAt(global::Char.myCharz().cx, global::Char.myCharz().cy, 2);
-						global::Char.myCharz().setSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], (!flag) ? 1 : 0);
-						if (flag)
+						bool flag12 = global::Char.myCharz().isSelectingSkillBuffToPlayer();
+						if (flag12)
 						{
-							global::Char.myCharz().delayFall = 20;
+							this.auto = 0;
 						}
-						global::Char.myCharz().currentFireByShortcut = isFireByShortCut;
 					}
-				}
-				if (global::Char.myCharz().isSelectingSkillBuffToPlayer())
-				{
-					this.auto = 0;
 				}
 			}
 		}
 	}
 
-	// Token: 0x0600074C RID: 1868 RVA: 0x00067F20 File Offset: 0x00066320
+	// Token: 0x06000339 RID: 825 RVA: 0x0004AE1C File Offset: 0x0004901C
 	private void askToPick()
 	{
 		Npc npc = new Npc(5, 0, -100, 100, 5, GameScr.info1.charId[global::Char.myCharz().cgender][2]);
@@ -3293,12 +3997,14 @@ public class GameScr : mScreen, IChatable
 		ChatPopup.addChatPopupWithIcon(nhatvatpham, 100000, npc, 5820);
 	}
 
-	// Token: 0x0600074D RID: 1869 RVA: 0x00067F98 File Offset: 0x00066398
+	// Token: 0x0600033A RID: 826 RVA: 0x0004AE98 File Offset: 0x00049098
 	private void pickItem()
 	{
-		if (global::Char.myCharz().itemFocus != null)
+		bool flag = global::Char.myCharz().itemFocus != null;
+		if (flag)
 		{
-			if (global::Char.myCharz().cx < global::Char.myCharz().itemFocus.x)
+			bool flag2 = global::Char.myCharz().cx < global::Char.myCharz().itemFocus.x;
+			if (flag2)
 			{
 				global::Char.myCharz().cdir = 1;
 			}
@@ -3308,11 +4014,13 @@ public class GameScr : mScreen, IChatable
 			}
 			int num = global::Math.abs(global::Char.myCharz().cx - global::Char.myCharz().itemFocus.x);
 			int num2 = global::Math.abs(global::Char.myCharz().cy - global::Char.myCharz().itemFocus.y);
-			if (num <= 40 && num2 < 40)
+			bool flag3 = num <= 40 && num2 < 40;
+			if (flag3)
 			{
 				GameCanvas.clearKeyHold();
 				GameCanvas.clearKeyPressed();
-				if (global::Char.myCharz().itemFocus.template.id != 673)
+				bool flag4 = global::Char.myCharz().itemFocus.template.id != 673;
+				if (flag4)
 				{
 					Service.gI().pickItem(global::Char.myCharz().itemFocus.itemMapID);
 				}
@@ -3331,127 +4039,145 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x0600074E RID: 1870 RVA: 0x000680DC File Offset: 0x000664DC
+	// Token: 0x0600033B RID: 827 RVA: 0x0004AFF8 File Offset: 0x000491F8
 	public bool isCharging()
 	{
 		return global::Char.myCharz().isFlyAndCharge || global::Char.myCharz().isUseSkillAfterCharge || global::Char.myCharz().isStandAndCharge || global::Char.myCharz().isWaitMonkey || this.isSuperPower || global::Char.myCharz().isFreez;
 	}
 
-	// Token: 0x0600074F RID: 1871 RVA: 0x00068144 File Offset: 0x00066544
+	// Token: 0x0600033C RID: 828 RVA: 0x0004B050 File Offset: 0x00049250
 	public void doSelectSkill(Skill skill, bool isShortcut)
 	{
-		if (global::Char.myCharz().isCreateDark)
+		bool isCreateDark = global::Char.myCharz().isCreateDark;
+		if (!isCreateDark)
 		{
-			return;
-		}
-		if (this.isCharging())
-		{
-			return;
-		}
-		if (global::Char.myCharz().taskMaint.taskId <= 1)
-		{
-			return;
-		}
-		global::Char.myCharz().myskill = skill;
-		if (this.lastSkill != skill && this.lastSkill != null)
-		{
-			Service.gI().selectSkill((int)skill.template.id);
-			this.saveRMSCurrentSkill(skill.template.id);
-			this.resetButton();
-			this.lastSkill = skill;
-			this.selectedIndexSkill = -1;
-			GameScr.gI().auto = 0;
-			return;
-		}
-		if (global::Char.myCharz().isUseSkillSpec())
-		{
-			Res.outz(">>>use skill spec: " + skill.template.id);
-			global::Char.myCharz().sendNewAttack((short)skill.template.id);
-			this.saveRMSCurrentSkill(skill.template.id);
-			this.resetButton();
-			this.lastSkill = skill;
-			this.selectedIndexSkill = -1;
-			GameScr.gI().auto = 0;
-			return;
-		}
-		if (global::Char.myCharz().isSelectingSkillUseAlone())
-		{
-			Res.outz("use skill not focus");
-			this.doUseSkillNotFocus(skill);
-			this.lastSkill = skill;
-			return;
-		}
-		this.selectedIndexSkill = -1;
-		if (skill != null)
-		{
-			Res.outz("only select skill");
-			if (this.lastSkill != skill)
+			bool flag = this.isCharging();
+			if (!flag)
 			{
-				Service.gI().selectSkill((int)skill.template.id);
-				this.saveRMSCurrentSkill(skill.template.id);
-				this.resetButton();
+				bool flag2 = global::Char.myCharz().taskMaint.taskId <= 1;
+				if (!flag2)
+				{
+					global::Char.myCharz().myskill = skill;
+					bool flag3 = this.lastSkill != skill && this.lastSkill != null;
+					if (flag3)
+					{
+						Service.gI().selectSkill((int)skill.template.id);
+						this.saveRMSCurrentSkill(skill.template.id);
+						this.resetButton();
+						this.lastSkill = skill;
+						this.selectedIndexSkill = -1;
+						GameScr.gI().auto = 0;
+					}
+					else
+					{
+						bool flag4 = global::Char.myCharz().isUseSkillSpec();
+						if (flag4)
+						{
+							Res.outz(">>>use skill spec: " + skill.template.id.ToString());
+							global::Char.myCharz().sendNewAttack((short)skill.template.id);
+							this.saveRMSCurrentSkill(skill.template.id);
+							this.resetButton();
+							this.lastSkill = skill;
+							this.selectedIndexSkill = -1;
+							GameScr.gI().auto = 0;
+						}
+						else
+						{
+							bool flag5 = global::Char.myCharz().isSelectingSkillUseAlone();
+							if (flag5)
+							{
+								Res.outz("use skill not focus");
+								this.doUseSkillNotFocus(skill);
+								this.lastSkill = skill;
+							}
+							else
+							{
+								this.selectedIndexSkill = -1;
+								bool flag6 = skill != null;
+								if (flag6)
+								{
+									Res.outz("only select skill");
+									bool flag7 = this.lastSkill != skill;
+									if (flag7)
+									{
+										Service.gI().selectSkill((int)skill.template.id);
+										this.saveRMSCurrentSkill(skill.template.id);
+										this.resetButton();
+									}
+									bool flag8 = global::Char.myCharz().charFocus == null && global::Char.myCharz().isSelectingSkillBuffToPlayer();
+									if (!flag8)
+									{
+										bool flag9 = global::Char.myCharz().focusToAttack();
+										if (flag9)
+										{
+											this.doFire(isShortcut, true);
+											this.doSeleckSkillFlag = true;
+										}
+										this.lastSkill = skill;
+									}
+								}
+							}
+						}
+					}
+				}
 			}
-			if (global::Char.myCharz().charFocus == null && global::Char.myCharz().isSelectingSkillBuffToPlayer())
-			{
-				return;
-			}
-			if (global::Char.myCharz().focusToAttack())
-			{
-				this.doFire(isShortcut, true);
-				this.doSeleckSkillFlag = true;
-			}
-			this.lastSkill = skill;
 		}
 	}
 
-	// Token: 0x06000750 RID: 1872 RVA: 0x00068320 File Offset: 0x00066720
+	// Token: 0x0600033D RID: 829 RVA: 0x0004B270 File Offset: 0x00049470
 	public void doUseSkill(Skill skill, bool isShortcut)
 	{
-		if ((TileMap.mapID == 112 || TileMap.mapID == 113) && (int)global::Char.myCharz().cTypePk == 0)
+		bool flag = (TileMap.mapID == 112 || TileMap.mapID == 113) && global::Char.myCharz().cTypePk == 0;
+		if (!flag)
 		{
-			return;
-		}
-		if (global::Char.myCharz().isSelectingSkillUseAlone())
-		{
-			Res.outz("HERE");
-			this.doUseSkillNotFocus(skill);
-			return;
-		}
-		this.selectedIndexSkill = -1;
-		if (skill != null)
-		{
-			Service.gI().selectSkill((int)skill.template.id);
-			this.saveRMSCurrentSkill(skill.template.id);
-			this.resetButton();
-			global::Char.myCharz().myskill = skill;
-			this.doFire(isShortcut, true);
-		}
-	}
-
-	// Token: 0x06000751 RID: 1873 RVA: 0x000683C4 File Offset: 0x000667C4
-	public void doUseSkillNotFocus(Skill skill)
-	{
-		if ((TileMap.mapID == 112 || TileMap.mapID == 113) && (int)global::Char.myCharz().cTypePk == 0)
-		{
-			return;
-		}
-		if (this.checkSkillValid())
-		{
-			this.selectedIndexSkill = -1;
-			if (skill != null)
+			bool flag2 = global::Char.myCharz().isSelectingSkillUseAlone();
+			if (flag2)
 			{
-				Service.gI().selectSkill((int)skill.template.id);
-				this.saveRMSCurrentSkill(skill.template.id);
-				this.resetButton();
-				global::Char.myCharz().myskill = skill;
-				global::Char.myCharz().useSkillNotFocus();
-				global::Char.myCharz().currentFireByShortcut = true;
-				this.auto = 0;
+				Res.outz("HERE");
+				this.doUseSkillNotFocus(skill);
+			}
+			else
+			{
+				this.selectedIndexSkill = -1;
+				bool flag3 = skill != null;
+				if (flag3)
+				{
+					Service.gI().selectSkill((int)skill.template.id);
+					this.saveRMSCurrentSkill(skill.template.id);
+					this.resetButton();
+					global::Char.myCharz().myskill = skill;
+					this.doFire(isShortcut, true);
+				}
 			}
 		}
 	}
 
-	// Token: 0x06000752 RID: 1874 RVA: 0x00068468 File Offset: 0x00066868
+	// Token: 0x0600033E RID: 830 RVA: 0x0004B320 File Offset: 0x00049520
+	public void doUseSkillNotFocus(Skill skill)
+	{
+		bool flag = (TileMap.mapID == 112 || TileMap.mapID == 113) && global::Char.myCharz().cTypePk == 0;
+		if (!flag)
+		{
+			bool flag2 = this.checkSkillValid();
+			if (flag2)
+			{
+				this.selectedIndexSkill = -1;
+				bool flag3 = skill != null;
+				if (flag3)
+				{
+					Service.gI().selectSkill((int)skill.template.id);
+					this.saveRMSCurrentSkill(skill.template.id);
+					this.resetButton();
+					global::Char.myCharz().myskill = skill;
+					global::Char.myCharz().useSkillNotFocus();
+					global::Char.myCharz().currentFireByShortcut = true;
+					this.auto = 0;
+				}
+			}
+		}
+	}
+
+	// Token: 0x0600033F RID: 831 RVA: 0x0004B3CC File Offset: 0x000495CC
 	public void sortSkill()
 	{
 		for (int i = 0; i < global::Char.myCharz().vSkillFight.size() - 1; i++)
@@ -3460,7 +4186,8 @@ public class GameScr : mScreen, IChatable
 			for (int j = i + 1; j < global::Char.myCharz().vSkillFight.size(); j++)
 			{
 				Skill skill2 = (Skill)global::Char.myCharz().vSkillFight.elementAt(j);
-				if ((int)skill2.template.id < (int)skill.template.id)
+				bool flag = skill2.template.id < skill.template.id;
+				if (flag)
 				{
 					Skill skill3 = skill2;
 					skill2 = skill;
@@ -3472,240 +4199,297 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000753 RID: 1875 RVA: 0x0006852C File Offset: 0x0006692C
+	// Token: 0x06000340 RID: 832 RVA: 0x0004B4A0 File Offset: 0x000496A0
 	public void updateKeyTouchCapcha()
 	{
-		if (this.isNotPaintTouchControl())
+		bool flag = this.isNotPaintTouchControl();
+		if (!flag)
 		{
-			return;
-		}
-		for (int i = 0; i < this.strCapcha.Length; i++)
-		{
-			this.keyCapcha[i] = -1;
-			if (GameCanvas.isTouchControl)
+			for (int i = 0; i < this.strCapcha.Length; i++)
 			{
-				int num = (GameCanvas.w - this.strCapcha.Length * GameScr.disXC) / 2;
-				int w = this.strCapcha.Length * GameScr.disXC;
-				int y = GameCanvas.h - 40;
-				int h = GameScr.disXC;
-				if (GameCanvas.isPointerHoldIn(num, y, w, h))
+				this.keyCapcha[i] = -1;
+				bool isTouchControl = GameCanvas.isTouchControl;
+				if (isTouchControl)
 				{
-					int num2 = (GameCanvas.px - num) / GameScr.disXC;
-					if (i == num2)
+					int num = (GameCanvas.w - this.strCapcha.Length * GameScr.disXC) / 2;
+					int w = this.strCapcha.Length * GameScr.disXC;
+					int y = GameCanvas.h - 40;
+					int h = GameScr.disXC;
+					bool flag2 = GameCanvas.isPointerHoldIn(num, y, w, h);
+					if (flag2)
 					{
-						this.keyCapcha[i] = 1;
-					}
-					if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease && i == num2)
-					{
-						char[] array = this.keyInput.ToCharArray();
-						MyVector myVector = new MyVector();
-						for (int j = 0; j < array.Length; j++)
+						int num2 = (GameCanvas.px - num) / GameScr.disXC;
+						bool flag3 = i == num2;
+						if (flag3)
 						{
-							myVector.addElement(array[j] + string.Empty);
+							this.keyCapcha[i] = 1;
 						}
-						myVector.removeElementAt(0);
-						myVector.insertElementAt(this.strCapcha[i] + string.Empty, myVector.size());
-						this.keyInput = string.Empty;
-						for (int k = 0; k < myVector.size(); k++)
+						bool flag4 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease && i == num2;
+						if (flag4)
 						{
-							this.keyInput += ((string)myVector.elementAt(k)).ToUpper();
+							char[] array = this.keyInput.ToCharArray();
+							MyVector myVector = new MyVector();
+							for (int j = 0; j < array.Length; j++)
+							{
+								myVector.addElement(array[j].ToString() + string.Empty);
+							}
+							myVector.removeElementAt(0);
+							myVector.insertElementAt(this.strCapcha[i].ToString() + string.Empty, myVector.size());
+							this.keyInput = string.Empty;
+							for (int k = 0; k < myVector.size(); k++)
+							{
+								this.keyInput += ((string)myVector.elementAt(k)).ToUpper();
+							}
+							Service.gI().mobCapcha(this.strCapcha[i]);
 						}
-						Service.gI().mobCapcha(this.strCapcha[i]);
 					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000754 RID: 1876 RVA: 0x000686D8 File Offset: 0x00066AD8
+	// Token: 0x06000341 RID: 833 RVA: 0x0004B680 File Offset: 0x00049880
 	public bool checkClickToCapcha()
 	{
-		if (this.mobCapcha == null)
+		bool flag = this.mobCapcha == null;
+		bool result;
+		if (flag)
 		{
-			return false;
+			result = false;
 		}
-		int x = (GameCanvas.w - 5 * GameScr.disXC) / 2;
-		int w = 5 * GameScr.disXC;
-		int y = GameCanvas.h - 40;
-		int h = GameScr.disXC;
-		return GameCanvas.isPointerHoldIn(x, y, w, h);
+		else
+		{
+			int x = (GameCanvas.w - 5 * GameScr.disXC) / 2;
+			int w = 5 * GameScr.disXC;
+			int y = GameCanvas.h - 40;
+			int h = GameScr.disXC;
+			result = GameCanvas.isPointerHoldIn(x, y, w, h);
+		}
+		return result;
 	}
 
-	// Token: 0x06000755 RID: 1877 RVA: 0x0006872C File Offset: 0x00066B2C
+	// Token: 0x06000342 RID: 834 RVA: 0x0004B6DC File Offset: 0x000498DC
 	public void checkMouseChat()
 	{
-		if (GameCanvas.isMouseFocus(GameScr.xC, GameScr.yC, 34, 34))
+		bool flag = GameCanvas.isMouseFocus(GameScr.xC, GameScr.yC, 34, 34);
+		if (flag)
 		{
-			if (!TileMap.isOfflineMap())
+			bool flag2 = !TileMap.isOfflineMap();
+			if (flag2)
 			{
 				mScreen.keyMouse = 15;
 			}
 		}
-		else if (GameCanvas.isMouseFocus(GameScr.xHP, GameScr.yHP, 40, 40))
-		{
-			if (global::Char.myCharz().statusMe != 14)
-			{
-				mScreen.keyMouse = 10;
-			}
-		}
-		else if (GameCanvas.isMouseFocus(GameScr.xF, GameScr.yF, 40, 40))
-		{
-			if (global::Char.myCharz().statusMe != 14)
-			{
-				mScreen.keyMouse = 5;
-			}
-		}
-		else if (this.cmdMenu != null && GameCanvas.isMouseFocus(this.cmdMenu.x, this.cmdMenu.y, this.cmdMenu.w / 2, this.cmdMenu.h))
-		{
-			mScreen.keyMouse = 1;
-		}
 		else
 		{
-			mScreen.keyMouse = -1;
-		}
-	}
-
-	// Token: 0x06000756 RID: 1878 RVA: 0x00068824 File Offset: 0x00066C24
-	private void updateKeyTouchControl()
-	{
-		if (this.isNotPaintTouchControl())
-		{
-			return;
-		}
-		mScreen.keyTouch = -1;
-		if (GameCanvas.isTouchControl)
-		{
-			if (GameCanvas.isPointerHoldIn(0, 0, 60, 50) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+			bool flag3 = GameCanvas.isMouseFocus(GameScr.xHP, GameScr.yHP, 40, 40);
+			if (flag3)
 			{
-				if (global::Char.myCharz().cmdMenu != null)
+				bool flag4 = global::Char.myCharz().statusMe != 14;
+				if (flag4)
 				{
-					global::Char.myCharz().cmdMenu.performAction();
-				}
-				global::Char.myCharz().currentMovePoint = null;
-				GameCanvas.clearAllPointerEvent();
-				this.flareFindFocus = true;
-				this.flareTime = 5;
-				return;
-			}
-			if (Main.isPC)
-			{
-				this.checkMouseChat();
-			}
-			if (!TileMap.isOfflineMap() && GameCanvas.isPointerHoldIn(GameScr.xC, GameScr.yC, 34, 34))
-			{
-				mScreen.keyTouch = 15;
-				GameCanvas.isPointerJustDown = false;
-				this.isPointerDowning = false;
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					ChatTextField.gI().startChat(this, string.Empty);
-					SoundMn.gI().buttonClick();
-					global::Char.myCharz().currentMovePoint = null;
-					GameCanvas.clearAllPointerEvent();
-					return;
+					mScreen.keyMouse = 10;
 				}
 			}
-			if (global::Char.myCharz().cmdMenu != null && GameCanvas.isPointerHoldIn(global::Char.myCharz().cmdMenu.x - 17, global::Char.myCharz().cmdMenu.y - 17, 34, 34))
+			else
 			{
-				mScreen.keyTouch = 20;
-				GameCanvas.isPointerJustDown = false;
-				this.isPointerDowning = false;
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+				bool flag5 = GameCanvas.isMouseFocus(GameScr.xF, GameScr.yF, 40, 40);
+				if (flag5)
 				{
-					GameCanvas.clearAllPointerEvent();
-					global::Char.myCharz().cmdMenu.performAction();
-					return;
-				}
-			}
-			this.updateGamePad();
-			if (((GameScr.isAnalog != 0) ? GameCanvas.isPointerHoldIn(GameScr.xHP, GameScr.yHP, 34, 34) : GameCanvas.isPointerHoldIn(GameScr.xHP, GameScr.yHP, 40, 40)) && global::Char.myCharz().statusMe != 14 && this.mobCapcha == null)
-			{
-				mScreen.keyTouch = 10;
-				GameCanvas.isPointerJustDown = false;
-				this.isPointerDowning = false;
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					GameCanvas.keyPressed[10] = true;
-					GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
-				}
-			}
-		}
-		if (this.mobCapcha != null)
-		{
-			this.updateKeyTouchCapcha();
-		}
-		else if (GameScr.isHaveSelectSkill)
-		{
-			if (this.isCharging())
-			{
-				return;
-			}
-			this.keyTouchSkill = -1;
-			bool flag = false;
-			if (GameScr.onScreenSkill.Length > 5 && (GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12, GameScr.yS[0] - GameScr.wSkill / 2 + 12, 5 * GameScr.wSkill, GameScr.wSkill) || GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[5] - GameScr.wSkill / 2 + 12, GameScr.yS[5] - GameScr.wSkill / 2 + 12, 5 * GameScr.wSkill, GameScr.wSkill)))
-			{
-				flag = true;
-			}
-			if (flag || GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12, GameScr.yS[0] - GameScr.wSkill / 2 + 12, 5 * GameScr.wSkill, GameScr.wSkill) || (!GameCanvas.isTouchControl && GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12, GameScr.yS[0] - GameScr.wSkill / 2 + 12, GameScr.wSkill, GameScr.onScreenSkill.Length * GameScr.wSkill)))
-			{
-				GameCanvas.isPointerJustDown = false;
-				this.isPointerDowning = false;
-				int num = (GameCanvas.pxLast - (GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12)) / GameScr.wSkill;
-				if (flag && GameCanvas.pyLast < GameScr.yS[0])
-				{
-					num += 5;
-				}
-				this.keyTouchSkill = num;
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
-					this.selectedIndexSkill = num;
-					if (GameScr.indexSelect < 0)
+					bool flag6 = global::Char.myCharz().statusMe != 14;
+					if (flag6)
 					{
-						GameScr.indexSelect = 0;
+						mScreen.keyMouse = 5;
 					}
-					if (!Main.isPC)
+				}
+				else
+				{
+					bool flag7 = this.cmdMenu != null && GameCanvas.isMouseFocus(this.cmdMenu.x, this.cmdMenu.y, this.cmdMenu.w / 2, this.cmdMenu.h);
+					if (flag7)
 					{
-						if (this.selectedIndexSkill > GameScr.onScreenSkill.Length - 1)
-						{
-							this.selectedIndexSkill = GameScr.onScreenSkill.Length - 1;
-						}
-					}
-					else if (this.selectedIndexSkill > GameScr.keySkill.Length - 1)
-					{
-						this.selectedIndexSkill = GameScr.keySkill.Length - 1;
-					}
-					Skill skill;
-					if (!Main.isPC)
-					{
-						skill = GameScr.onScreenSkill[this.selectedIndexSkill];
+						mScreen.keyMouse = 1;
 					}
 					else
 					{
-						skill = GameScr.keySkill[this.selectedIndexSkill];
-					}
-					if (skill != null)
-					{
-						this.doSelectSkill(skill, true);
+						mScreen.keyMouse = -1;
 					}
 				}
 			}
 		}
-		if (GameCanvas.isPointerJustRelease)
+	}
+
+	// Token: 0x06000343 RID: 835 RVA: 0x0004B7EC File Offset: 0x000499EC
+	private void updateKeyTouchControl()
+	{
+		bool flag2 = this.isNotPaintTouchControl();
+		if (!flag2)
 		{
-			if (GameCanvas.keyHold[1] || (GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] || GameCanvas.keyHold[3]) || GameCanvas.keyHold[(!Main.isPC) ? 4 : 23] || GameCanvas.keyHold[(!Main.isPC) ? 6 : 24])
+			mScreen.keyTouch = -1;
+			bool isTouchControl = GameCanvas.isTouchControl;
+			if (isTouchControl)
 			{
-				GameCanvas.isPointerJustRelease = false;
+				bool flag3 = GameCanvas.isPointerHoldIn(0, 0, 60, 50) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+				if (flag3)
+				{
+					bool flag4 = global::Char.myCharz().cmdMenu != null;
+					if (flag4)
+					{
+						global::Char.myCharz().cmdMenu.performAction();
+					}
+					global::Char.myCharz().currentMovePoint = null;
+					GameCanvas.clearAllPointerEvent();
+					this.flareFindFocus = true;
+					this.flareTime = 5;
+					return;
+				}
+				bool isPC = Main.isPC;
+				if (isPC)
+				{
+					this.checkMouseChat();
+				}
+				bool flag5 = !TileMap.isOfflineMap() && GameCanvas.isPointerHoldIn(GameScr.xC, GameScr.yC, 34, 34);
+				if (flag5)
+				{
+					mScreen.keyTouch = 15;
+					GameCanvas.isPointerJustDown = false;
+					this.isPointerDowning = false;
+					bool flag6 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+					if (flag6)
+					{
+						ChatTextField.gI().startChat(this, string.Empty);
+						SoundMn.gI().buttonClick();
+						global::Char.myCharz().currentMovePoint = null;
+						GameCanvas.clearAllPointerEvent();
+						return;
+					}
+				}
+				bool flag7 = global::Char.myCharz().cmdMenu != null && GameCanvas.isPointerHoldIn(global::Char.myCharz().cmdMenu.x - 17, global::Char.myCharz().cmdMenu.y - 17, 34, 34);
+				if (flag7)
+				{
+					mScreen.keyTouch = 20;
+					GameCanvas.isPointerJustDown = false;
+					this.isPointerDowning = false;
+					bool flag8 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+					if (flag8)
+					{
+						GameCanvas.clearAllPointerEvent();
+						global::Char.myCharz().cmdMenu.performAction();
+						return;
+					}
+				}
+				this.updateGamePad();
+				bool flag9 = ((GameScr.isAnalog != 0) ? GameCanvas.isPointerHoldIn(GameScr.xHP, GameScr.yHP, 34, 34) : GameCanvas.isPointerHoldIn(GameScr.xHP, GameScr.yHP, 40, 40)) && global::Char.myCharz().statusMe != 14 && this.mobCapcha == null;
+				if (flag9)
+				{
+					mScreen.keyTouch = 10;
+					GameCanvas.isPointerJustDown = false;
+					this.isPointerDowning = false;
+					bool flag10 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+					if (flag10)
+					{
+						GameCanvas.keyPressed[10] = true;
+						GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
+					}
+				}
 			}
-			GameCanvas.keyHold[1] = false;
-			GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] = false;
-			GameCanvas.keyHold[3] = false;
-			GameCanvas.keyHold[(!Main.isPC) ? 4 : 23] = false;
-			GameCanvas.keyHold[(!Main.isPC) ? 6 : 24] = false;
+			bool flag11 = this.mobCapcha != null;
+			if (flag11)
+			{
+				this.updateKeyTouchCapcha();
+			}
+			else
+			{
+				bool flag12 = GameScr.isHaveSelectSkill;
+				if (flag12)
+				{
+					bool flag13 = this.isCharging();
+					if (flag13)
+					{
+						return;
+					}
+					this.keyTouchSkill = -1;
+					bool flag = false;
+					bool flag14 = GameScr.onScreenSkill.Length > 5 && (GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12, GameScr.yS[0] - GameScr.wSkill / 2 + 12, 5 * GameScr.wSkill, GameScr.wSkill) || GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[5] - GameScr.wSkill / 2 + 12, GameScr.yS[5] - GameScr.wSkill / 2 + 12, 5 * GameScr.wSkill, GameScr.wSkill));
+					if (flag14)
+					{
+						flag = true;
+					}
+					bool flag15 = flag || GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12, GameScr.yS[0] - GameScr.wSkill / 2 + 12, 5 * GameScr.wSkill, GameScr.wSkill) || (!GameCanvas.isTouchControl && GameCanvas.isPointerHoldIn(GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12, GameScr.yS[0] - GameScr.wSkill / 2 + 12, GameScr.wSkill, GameScr.onScreenSkill.Length * GameScr.wSkill));
+					if (flag15)
+					{
+						GameCanvas.isPointerJustDown = false;
+						this.isPointerDowning = false;
+						int num = (GameCanvas.pxLast - (GameScr.xSkill + GameScr.xS[0] - GameScr.wSkill / 2 + 12)) / GameScr.wSkill;
+						bool flag16 = flag && GameCanvas.pyLast < GameScr.yS[0];
+						if (flag16)
+						{
+							num += 5;
+						}
+						this.keyTouchSkill = num;
+						bool flag17 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+						if (flag17)
+						{
+							GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
+							this.selectedIndexSkill = num;
+							bool flag18 = GameScr.indexSelect < 0;
+							if (flag18)
+							{
+								GameScr.indexSelect = 0;
+							}
+							bool flag19 = !Main.isPC;
+							if (flag19)
+							{
+								bool flag20 = this.selectedIndexSkill > GameScr.onScreenSkill.Length - 1;
+								if (flag20)
+								{
+									this.selectedIndexSkill = GameScr.onScreenSkill.Length - 1;
+								}
+							}
+							else
+							{
+								bool flag21 = this.selectedIndexSkill > GameScr.keySkill.Length - 1;
+								if (flag21)
+								{
+									this.selectedIndexSkill = GameScr.keySkill.Length - 1;
+								}
+							}
+							bool flag22 = !Main.isPC;
+							Skill skill;
+							if (flag22)
+							{
+								skill = GameScr.onScreenSkill[this.selectedIndexSkill];
+							}
+							else
+							{
+								skill = GameScr.keySkill[this.selectedIndexSkill];
+							}
+							bool flag23 = skill != null;
+							if (flag23)
+							{
+								this.doSelectSkill(skill, true);
+							}
+						}
+					}
+				}
+			}
+			bool isPointerJustRelease = GameCanvas.isPointerJustRelease;
+			if (isPointerJustRelease)
+			{
+				bool flag24 = GameCanvas.keyHold[1] || GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] || GameCanvas.keyHold[3] || GameCanvas.keyHold[(!Main.isPC) ? 4 : 23] || GameCanvas.keyHold[(!Main.isPC) ? 6 : 24];
+				if (flag24)
+				{
+					GameCanvas.isPointerJustRelease = false;
+				}
+				GameCanvas.keyHold[1] = false;
+				GameCanvas.keyHold[(!Main.isPC) ? 2 : 21] = false;
+				GameCanvas.keyHold[3] = false;
+				GameCanvas.keyHold[(!Main.isPC) ? 4 : 23] = false;
+				GameCanvas.keyHold[(!Main.isPC) ? 6 : 24] = false;
+			}
 		}
 	}
 
-	// Token: 0x06000757 RID: 1879 RVA: 0x00068DA4 File Offset: 0x000671A4
+	// Token: 0x06000344 RID: 836 RVA: 0x0004BDC4 File Offset: 0x00049FC4
 	public void setCharJumpAtt()
 	{
 		global::Char.myCharz().cvy = -10;
@@ -3713,10 +4497,11 @@ public class GameScr : mScreen, IChatable
 		global::Char.myCharz().cp1 = 0;
 	}
 
-	// Token: 0x06000758 RID: 1880 RVA: 0x00068DC8 File Offset: 0x000671C8
+	// Token: 0x06000345 RID: 837 RVA: 0x0004BDEC File Offset: 0x00049FEC
 	public void setCharJump(int cvx)
 	{
-		if (global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0)
+		bool flag = global::Char.myCharz().cx - global::Char.myCharz().cxSend != 0 || global::Char.myCharz().cy - global::Char.myCharz().cySend != 0;
+		if (flag)
 		{
 			Service.gI().charMove();
 		}
@@ -3726,112 +4511,136 @@ public class GameScr : mScreen, IChatable
 		global::Char.myCharz().cp1 = 0;
 	}
 
-	// Token: 0x06000759 RID: 1881 RVA: 0x00068E40 File Offset: 0x00067240
+	// Token: 0x06000346 RID: 838 RVA: 0x0004BE6C File Offset: 0x0004A06C
 	public void updateOpen()
 	{
-		if (!this.isstarOpen)
+		bool flag = !this.isstarOpen;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.moveUp > -3)
-		{
-			this.moveUp -= 4;
-		}
-		else
-		{
-			this.moveUp = -2;
-		}
-		if (this.moveDow < GameCanvas.h + 3)
-		{
-			this.moveDow += 4;
-		}
-		else
-		{
-			this.moveDow = GameCanvas.h + 2;
-		}
-		if (this.moveUp <= -2 && this.moveDow >= GameCanvas.h + 2)
-		{
-			this.isstarOpen = false;
+			bool flag2 = this.moveUp > -3;
+			if (flag2)
+			{
+				this.moveUp -= 4;
+			}
+			else
+			{
+				this.moveUp = -2;
+			}
+			bool flag3 = this.moveDow < GameCanvas.h + 3;
+			if (flag3)
+			{
+				this.moveDow += 4;
+			}
+			else
+			{
+				this.moveDow = GameCanvas.h + 2;
+			}
+			bool flag4 = this.moveUp <= -2 && this.moveDow >= GameCanvas.h + 2;
+			if (flag4)
+			{
+				this.isstarOpen = false;
+			}
 		}
 	}
 
-	// Token: 0x0600075A RID: 1882 RVA: 0x00068ED9 File Offset: 0x000672D9
+	// Token: 0x06000347 RID: 839 RVA: 0x00003136 File Offset: 0x00001336
 	public void initCreateCommand()
 	{
 	}
 
-	// Token: 0x0600075B RID: 1883 RVA: 0x00068EDB File Offset: 0x000672DB
+	// Token: 0x06000348 RID: 840 RVA: 0x00003136 File Offset: 0x00001336
 	public void checkCharFocus()
 	{
 	}
 
-	// Token: 0x0600075C RID: 1884 RVA: 0x00068EE0 File Offset: 0x000672E0
+	// Token: 0x06000349 RID: 841 RVA: 0x0004BF18 File Offset: 0x0004A118
 	public void updateXoSo()
 	{
-		if (this.tShow != 0)
+		bool flag = this.tShow != 0;
+		if (flag)
 		{
 			GameScr.currXS = mSystem.currentTimeMillis();
-			if (GameScr.currXS - GameScr.lastXS > 1000L)
+			bool flag2 = GameScr.currXS - GameScr.lastXS > 1000L;
+			if (flag2)
 			{
 				GameScr.lastXS = mSystem.currentTimeMillis();
 				GameScr.secondXS++;
 			}
-			if (GameScr.secondXS > 20)
+			bool flag3 = GameScr.secondXS > 20;
+			if (flag3)
 			{
 				for (int i = 0; i < this.winnumber.Length; i++)
 				{
 					this.randomNumber[i] = this.winnumber[i];
 				}
 				this.tShow--;
-				if (this.tShow == 0)
+				bool flag4 = this.tShow == 0;
+				if (flag4)
 				{
 					this.yourNumber = string.Empty;
 					GameScr.info1.addInfo(this.strFinish, 0);
 					GameScr.secondXS = 0;
 				}
-				return;
 			}
-			if (this.moveIndex > this.winnumber.Length - 1)
+			else
 			{
-				this.tShow--;
-				if (this.tShow == 0)
+				bool flag5 = this.moveIndex > this.winnumber.Length - 1;
+				if (flag5)
 				{
-					this.yourNumber = string.Empty;
-					GameScr.info1.addInfo(this.strFinish, 0);
-				}
-				return;
-			}
-			if (this.moveIndex < this.randomNumber.Length)
-			{
-				if (this.tMove[this.moveIndex] == 15)
-				{
-					if (this.randomNumber[this.moveIndex] == this.winnumber[this.moveIndex] - 1)
+					this.tShow--;
+					bool flag6 = this.tShow == 0;
+					if (flag6)
 					{
-						this.delayMove[this.moveIndex] = 10;
-					}
-					if (this.randomNumber[this.moveIndex] == this.winnumber[this.moveIndex])
-					{
-						this.tMove[this.moveIndex] = -1;
-						this.moveIndex++;
+						this.yourNumber = string.Empty;
+						GameScr.info1.addInfo(this.strFinish, 0);
 					}
 				}
-				else if (GameCanvas.gameTick % 5 == 0)
+				else
 				{
-					this.tMove[this.moveIndex]++;
-				}
-			}
-			for (int j = 0; j < this.winnumber.Length; j++)
-			{
-				if (this.tMove[j] != -1)
-				{
-					this.moveCount[j]++;
-					if (this.moveCount[j] > this.tMove[j] + this.delayMove[j])
+					bool flag7 = this.moveIndex < this.randomNumber.Length;
+					if (flag7)
 					{
-						this.moveCount[j] = 0;
-						this.randomNumber[j]++;
-						if (this.randomNumber[j] >= 10)
+						bool flag8 = this.tMove[this.moveIndex] == 15;
+						if (flag8)
 						{
-							this.randomNumber[j] = 0;
+							bool flag9 = this.randomNumber[this.moveIndex] == this.winnumber[this.moveIndex] - 1;
+							if (flag9)
+							{
+								this.delayMove[this.moveIndex] = 10;
+							}
+							bool flag10 = this.randomNumber[this.moveIndex] == this.winnumber[this.moveIndex];
+							if (flag10)
+							{
+								this.tMove[this.moveIndex] = -1;
+								this.moveIndex++;
+							}
+						}
+						else
+						{
+							bool flag11 = GameCanvas.gameTick % 5 == 0;
+							if (flag11)
+							{
+								this.tMove[this.moveIndex]++;
+							}
+						}
+					}
+					for (int j = 0; j < this.winnumber.Length; j++)
+					{
+						bool flag12 = this.tMove[j] != -1;
+						if (flag12)
+						{
+							this.moveCount[j]++;
+							bool flag13 = this.moveCount[j] > this.tMove[j] + this.delayMove[j];
+							if (flag13)
+							{
+								this.moveCount[j] = 0;
+								this.randomNumber[j]++;
+								bool flag14 = this.randomNumber[j] >= 10;
+								if (flag14)
+								{
+									this.randomNumber[j] = 0;
+								}
+							}
 						}
 					}
 				}
@@ -3839,33 +4648,39 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x0600075D RID: 1885 RVA: 0x0006912C File Offset: 0x0006752C
+	// Token: 0x0600034A RID: 842 RVA: 0x0004C1D0 File Offset: 0x0004A3D0
 	public override void update()
 	{
-		if (GameCanvas.keyPressed[16])
+		bool flag = GameCanvas.keyPressed[16];
+		if (flag)
 		{
 			GameCanvas.keyPressed[16] = false;
 			global::Char.myCharz().findNextFocusByKey();
 		}
-		if (GameCanvas.keyPressed[13] && !GameCanvas.panel.isShow)
+		bool flag2 = GameCanvas.keyPressed[13] && !GameCanvas.panel.isShow;
+		if (flag2)
 		{
 			GameCanvas.keyPressed[13] = false;
 			global::Char.myCharz().findNextFocusByKey();
 		}
-		if (GameCanvas.keyPressed[17])
+		bool flag3 = GameCanvas.keyPressed[17];
+		if (flag3)
 		{
 			GameCanvas.keyPressed[17] = false;
 			global::Char.myCharz().searchItem();
-			if (global::Char.myCharz().itemFocus != null)
+			bool flag4 = global::Char.myCharz().itemFocus != null;
+			if (flag4)
 			{
 				this.pickItem();
 			}
 		}
-		if (GameCanvas.gameTick % 100 == 0 && TileMap.mapID == 137)
+		bool flag5 = GameCanvas.gameTick % 100 == 0 && TileMap.mapID == 137;
+		if (flag5)
 		{
 			GameScr.shock_scr = 30;
 		}
-		if (GameScr.isAutoPlay && GameCanvas.gameTick % 20 == 0)
+		bool flag6 = GameScr.isAutoPlay && GameCanvas.gameTick % 20 == 0;
+		if (flag6)
 		{
 			this.autoPlay();
 		}
@@ -3874,25 +4689,30 @@ public class GameScr : mScreen, IChatable
 		SmallImage.update();
 		try
 		{
-			if (LoginScr.isContinueToLogin)
+			bool isContinueToLogin = LoginScr.isContinueToLogin;
+			if (isContinueToLogin)
 			{
 				LoginScr.isContinueToLogin = false;
 			}
-			if (GameScr.tickMove == 1)
+			bool flag7 = GameScr.tickMove == 1;
+			if (flag7)
 			{
 				GameScr.lastTick = mSystem.currentTimeMillis();
 			}
-			if (GameScr.tickMove == 100)
+			bool flag8 = GameScr.tickMove == 100;
+			if (flag8)
 			{
 				GameScr.tickMove = 0;
 				GameScr.currTick = mSystem.currentTimeMillis();
 				int second = (int)(GameScr.currTick - GameScr.lastTick) / 1000;
 				Service.gI().checkMMove(second);
 			}
-			if (GameScr.lockTick > 0)
+			bool flag9 = GameScr.lockTick > 0;
+			if (flag9)
 			{
 				GameScr.lockTick--;
-				if (GameScr.lockTick == 0)
+				bool flag10 = GameScr.lockTick == 0;
+				if (flag10)
 				{
 					Controller.isStopReadMessage = false;
 				}
@@ -3907,47 +4727,55 @@ public class GameScr : mScreen, IChatable
 			{
 				((global::Char)GameScr.vCharInMap.elementAt(i)).update();
 			}
-			for (int i = 0; i < Teleport.vTeleport.size(); i++)
+			for (int j = 0; j < Teleport.vTeleport.size(); j++)
 			{
-				((Teleport)Teleport.vTeleport.elementAt(i)).update();
+				((Teleport)Teleport.vTeleport.elementAt(j)).update();
 			}
 			global::Char.myCharz().update();
-			if (global::Char.myCharz().statusMe == 1)
+			bool flag11 = global::Char.myCharz().statusMe == 1;
+			if (flag11)
 			{
 			}
-			if (this.popUpYesNo != null)
+			bool flag12 = this.popUpYesNo != null;
+			if (flag12)
 			{
 				this.popUpYesNo.update();
 			}
 			EffecMn.update();
 			GameCanvas.debug("E5x", 0);
-			for (int i = 0; i < GameScr.vMob.size(); i++)
+			for (int k = 0; k < GameScr.vMob.size(); k++)
 			{
-				((Mob)GameScr.vMob.elementAt(i)).update();
+				((Mob)GameScr.vMob.elementAt(k)).update();
 			}
 			GameCanvas.debug("E6", 0);
-			for (int i = 0; i < GameScr.vNpc.size(); i++)
+			for (int l = 0; l < GameScr.vNpc.size(); l++)
 			{
-				((Npc)GameScr.vNpc.elementAt(i)).update();
+				((Npc)GameScr.vNpc.elementAt(l)).update();
 			}
 			this.nSkill = GameScr.onScreenSkill.Length;
-			for (int i = GameScr.onScreenSkill.Length - 1; i >= 0; i--)
+			for (int m = GameScr.onScreenSkill.Length - 1; m >= 0; m--)
 			{
-				Skill skill = GameScr.onScreenSkill[i];
-				if (skill != null)
+				Skill skill = GameScr.onScreenSkill[m];
+				bool flag13 = skill != null;
+				if (flag13)
 				{
-					this.nSkill = i + 1;
+					this.nSkill = m + 1;
 					break;
 				}
 				this.nSkill--;
 			}
-			if (this.nSkill == 1 && GameCanvas.isTouch)
+			bool flag14 = this.nSkill == 1 && GameCanvas.isTouch;
+			if (flag14)
 			{
 				GameScr.xSkill = -200;
 			}
-			else if (GameScr.xSkill < 0)
+			else
 			{
-				GameScr.setSkillBarPosition();
+				bool flag15 = GameScr.xSkill < 0;
+				if (flag15)
+				{
+					GameScr.setSkillBarPosition();
+				}
 			}
 			GameCanvas.debug("E7", 0);
 			GameCanvas.gI().updateDust();
@@ -3960,104 +4788,122 @@ public class GameScr : mScreen, IChatable
 			GameCanvas.debug("E9", 0);
 			this.updateClickToArrow();
 			GameCanvas.debug("E10", 0);
-			for (int i = 0; i < GameScr.vItemMap.size(); i++)
+			for (int n = 0; n < GameScr.vItemMap.size(); n++)
 			{
-				((ItemMap)GameScr.vItemMap.elementAt(i)).update();
+				((ItemMap)GameScr.vItemMap.elementAt(n)).update();
 			}
 			GameCanvas.debug("E11", 0);
 			GameCanvas.debug("E13", 0);
-			for (int i = Effect2.vRemoveEffect2.size() - 1; i >= 0; i--)
+			for (int i2 = Effect2.vRemoveEffect2.size() - 1; i2 >= 0; i2--)
 			{
-				Effect2.vEffect2.removeElement(Effect2.vRemoveEffect2.elementAt(i));
-				Effect2.vRemoveEffect2.removeElementAt(i);
+				Effect2.vEffect2.removeElement(Effect2.vRemoveEffect2.elementAt(i2));
+				Effect2.vRemoveEffect2.removeElementAt(i2);
 			}
-			for (int i = 0; i < Effect2.vEffect2.size(); i++)
+			for (int i3 = 0; i3 < Effect2.vEffect2.size(); i3++)
 			{
-				Effect2 effect = (Effect2)Effect2.vEffect2.elementAt(i);
+				Effect2 effect = (Effect2)Effect2.vEffect2.elementAt(i3);
 				effect.update();
 			}
-			for (int i = 0; i < Effect2.vEffect2Outside.size(); i++)
+			for (int i4 = 0; i4 < Effect2.vEffect2Outside.size(); i4++)
 			{
-				Effect2 effect2 = (Effect2)Effect2.vEffect2Outside.elementAt(i);
+				Effect2 effect2 = (Effect2)Effect2.vEffect2Outside.elementAt(i4);
 				effect2.update();
 			}
-			for (int i = 0; i < Effect2.vAnimateEffect.size(); i++)
+			for (int i5 = 0; i5 < Effect2.vAnimateEffect.size(); i5++)
 			{
-				Effect2 effect3 = (Effect2)Effect2.vAnimateEffect.elementAt(i);
+				Effect2 effect3 = (Effect2)Effect2.vAnimateEffect.elementAt(i5);
 				effect3.update();
 			}
-			for (int i = 0; i < Effect2.vEffectFeet.size(); i++)
+			for (int i6 = 0; i6 < Effect2.vEffectFeet.size(); i6++)
 			{
-				Effect2 effect4 = (Effect2)Effect2.vEffectFeet.elementAt(i);
+				Effect2 effect4 = (Effect2)Effect2.vEffectFeet.elementAt(i6);
 				effect4.update();
 			}
-			for (int i = 0; i < Effect2.vEffect3.size(); i++)
+			for (int i7 = 0; i7 < Effect2.vEffect3.size(); i7++)
 			{
-				Effect2 effect5 = (Effect2)Effect2.vEffect3.elementAt(i);
+				Effect2 effect5 = (Effect2)Effect2.vEffect3.elementAt(i7);
 				effect5.update();
 			}
 			BackgroudEffect.updateEff();
 			GameScr.info1.update();
 			GameScr.info2.update();
 			GameCanvas.debug("E15", 0);
-			if (GameScr.currentCharViewInfo != null && !GameScr.currentCharViewInfo.Equals(global::Char.myCharz()))
+			bool flag16 = GameScr.currentCharViewInfo != null && !GameScr.currentCharViewInfo.Equals(global::Char.myCharz());
+			if (flag16)
 			{
 				GameScr.currentCharViewInfo.update();
 			}
 			this.runArrow++;
-			if (this.runArrow > 3)
+			bool flag17 = this.runArrow > 3;
+			if (flag17)
 			{
 				this.runArrow = 0;
 			}
-			if (this.isInjureHp)
+			bool flag18 = this.isInjureHp;
+			if (flag18)
 			{
 				this.twHp++;
-				if (this.twHp == 20)
+				bool flag19 = this.twHp == 20;
+				if (flag19)
 				{
 					this.twHp = 0;
 					this.isInjureHp = false;
 				}
 			}
-			else if (this.dHP > global::Char.myCharz().cHP)
-			{
-				int num = this.dHP - global::Char.myCharz().cHP >> 1;
-				if (num < 1)
-				{
-					num = 1;
-				}
-				this.dHP -= num;
-			}
 			else
 			{
-				this.dHP = global::Char.myCharz().cHP;
+				bool flag20 = this.dHP > global::Char.myCharz().cHP;
+				if (flag20)
+				{
+					int num = this.dHP - global::Char.myCharz().cHP >> 1;
+					bool flag21 = num < 1;
+					if (flag21)
+					{
+						num = 1;
+					}
+					this.dHP -= num;
+				}
+				else
+				{
+					this.dHP = global::Char.myCharz().cHP;
+				}
 			}
-			if (this.isInjureMp)
+			bool flag22 = this.isInjureMp;
+			if (flag22)
 			{
 				this.twMp++;
-				if (this.twMp == 20)
+				bool flag23 = this.twMp == 20;
+				if (flag23)
 				{
 					this.twMp = 0;
 					this.isInjureMp = false;
 				}
 			}
-			else if (this.dMP > global::Char.myCharz().cMP)
-			{
-				int num2 = this.dMP - global::Char.myCharz().cMP >> 1;
-				if (num2 < 1)
-				{
-					num2 = 1;
-				}
-				this.dMP -= num2;
-			}
 			else
 			{
-				this.dMP = global::Char.myCharz().cMP;
+				bool flag24 = this.dMP > global::Char.myCharz().cMP;
+				if (flag24)
+				{
+					int num2 = this.dMP - global::Char.myCharz().cMP >> 1;
+					bool flag25 = num2 < 1;
+					if (flag25)
+					{
+						num2 = 1;
+					}
+					this.dMP -= num2;
+				}
+				else
+				{
+					this.dMP = global::Char.myCharz().cMP;
+				}
 			}
-			if (this.tMenuDelay > 0)
+			bool flag26 = this.tMenuDelay > 0;
+			if (flag26)
 			{
 				this.tMenuDelay--;
 			}
-			if (this.isRongThanMenu())
+			bool flag27 = this.isRongThanMenu();
+			if (flag27)
 			{
 				int num3 = 100;
 				while (this.yR - num3 < GameScr.cmy)
@@ -4065,13 +4911,13 @@ public class GameScr : mScreen, IChatable
 					GameScr.cmy--;
 				}
 			}
-			for (int i = 0; i < global::Char.vItemTime.size(); i++)
+			for (int i8 = 0; i8 < global::Char.vItemTime.size(); i8++)
 			{
-				((ItemTime)global::Char.vItemTime.elementAt(i)).update();
+				((ItemTime)global::Char.vItemTime.elementAt(i8)).update();
 			}
-			for (int i = 0; i < GameScr.textTime.size(); i++)
+			for (int i9 = 0; i9 < GameScr.textTime.size(); i9++)
 			{
-				((ItemTime)GameScr.textTime.elementAt(i)).update();
+				((ItemTime)GameScr.textTime.elementAt(i9)).update();
 			}
 			this.updateChatVip();
 		}
@@ -4079,62 +4925,67 @@ public class GameScr : mScreen, IChatable
 		{
 		}
 		int num4 = GameCanvas.gameTick % 4000;
-		if (num4 == 1000)
+		bool flag28 = num4 == 1000;
+		if (flag28)
 		{
 			GameScr.checkRemoveImage();
 		}
 		EffectManager.update();
 	}
 
-	// Token: 0x0600075E RID: 1886 RVA: 0x000698C4 File Offset: 0x00067CC4
+	// Token: 0x0600034B RID: 843 RVA: 0x00003136 File Offset: 0x00001336
 	public void updateKeyChatPopUp()
 	{
 	}
 
-	// Token: 0x0600075F RID: 1887 RVA: 0x000698C6 File Offset: 0x00067CC6
+	// Token: 0x0600034C RID: 844 RVA: 0x0004CA84 File Offset: 0x0004AC84
 	public bool isRongThanMenu()
 	{
 		return this.isMeCallRongThan;
 	}
 
-	// Token: 0x06000760 RID: 1888 RVA: 0x000698D8 File Offset: 0x00067CD8
+	// Token: 0x0600034D RID: 845 RVA: 0x0004CA9C File Offset: 0x0004AC9C
 	public void paintEffect(mGraphics g)
 	{
 		for (int i = 0; i < Effect2.vEffect2.size(); i++)
 		{
 			Effect2 effect = (Effect2)Effect2.vEffect2.elementAt(i);
-			if (effect != null && !(effect is ChatPopup))
+			bool flag = effect != null && !(effect is ChatPopup);
+			if (flag)
 			{
 				effect.paint(g);
 			}
 		}
-		if (!GameCanvas.lowGraphic)
+		bool flag2 = !GameCanvas.lowGraphic;
+		if (flag2)
 		{
-			for (int i = 0; i < Effect2.vAnimateEffect.size(); i++)
+			for (int j = 0; j < Effect2.vAnimateEffect.size(); j++)
 			{
-				Effect2 effect2 = (Effect2)Effect2.vAnimateEffect.elementAt(i);
+				Effect2 effect2 = (Effect2)Effect2.vAnimateEffect.elementAt(j);
 				effect2.paint(g);
 			}
 		}
-		for (int i = 0; i < Effect2.vEffect2Outside.size(); i++)
+		for (int k = 0; k < Effect2.vEffect2Outside.size(); k++)
 		{
-			Effect2 effect3 = (Effect2)Effect2.vEffect2Outside.elementAt(i);
+			Effect2 effect3 = (Effect2)Effect2.vEffect2Outside.elementAt(k);
 			effect3.paint(g);
 		}
 	}
 
-	// Token: 0x06000761 RID: 1889 RVA: 0x0006999C File Offset: 0x00067D9C
+	// Token: 0x0600034E RID: 846 RVA: 0x0004CB80 File Offset: 0x0004AD80
 	public void paintBgItem(mGraphics g, int layer)
 	{
 		for (int i = 0; i < TileMap.vCurrItem.size(); i++)
 		{
 			BgItem bgItem = (BgItem)TileMap.vCurrItem.elementAt(i);
-			if (bgItem.idImage != -1 && (int)bgItem.layer == layer)
+			bool flag = bgItem.idImage != -1 && (int)bgItem.layer == layer;
+			if (flag)
 			{
 				bgItem.paint(g);
 			}
 		}
-		if (TileMap.mapID == 48 && layer == 3 && GameCanvas.bgW != null && GameCanvas.bgW[0] != 0)
+		bool flag2 = TileMap.mapID == 48 && layer == 3 && GameCanvas.bgW != null && GameCanvas.bgW[0] != 0;
+		if (flag2)
 		{
 			for (int j = 0; j < TileMap.pxw / GameCanvas.bgW[0] + 1; j++)
 			{
@@ -4143,611 +4994,693 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000762 RID: 1890 RVA: 0x00069A65 File Offset: 0x00067E65
+	// Token: 0x0600034F RID: 847 RVA: 0x0004CC58 File Offset: 0x0004AE58
 	public void paintBlackSky(mGraphics g)
 	{
-		if (GameCanvas.lowGraphic)
+		bool lowGraphic = GameCanvas.lowGraphic;
+		if (!lowGraphic)
 		{
-			return;
+			g.fillTrans(GameScr.imgTrans, 0, 0, GameCanvas.w, GameCanvas.h);
 		}
-		g.fillTrans(GameScr.imgTrans, 0, 0, GameCanvas.w, GameCanvas.h);
 	}
 
-	// Token: 0x06000763 RID: 1891 RVA: 0x00069A8C File Offset: 0x00067E8C
+	// Token: 0x06000350 RID: 848 RVA: 0x0004CC8C File Offset: 0x0004AE8C
 	public void paintCapcha(mGraphics g)
 	{
 		MobCapcha.paint(g, global::Char.myCharz().cx, global::Char.myCharz().cy);
 		g.translate(-g.getTranslateX(), -g.getTranslateY());
-		if (GameCanvas.menu.showMenu)
+		bool showMenu = GameCanvas.menu.showMenu;
+		if (!showMenu)
 		{
-			return;
-		}
-		if (GameCanvas.panel.isShow)
-		{
-			return;
-		}
-		if (ChatPopup.currChatPopup != null)
-		{
-			return;
-		}
-		if (GameCanvas.isTouch)
-		{
-			for (int i = 0; i < this.strCapcha.Length; i++)
+			bool isShow = GameCanvas.panel.isShow;
+			if (!isShow)
 			{
-				int x = (GameCanvas.w - this.strCapcha.Length * GameScr.disXC) / 2 + i * GameScr.disXC + GameScr.disXC / 2;
-				if (this.keyCapcha[i] == -1)
+				bool flag = ChatPopup.currChatPopup != null;
+				if (!flag)
 				{
-					g.drawImage(GameScr.imgNut, x, GameCanvas.h - 25, 3);
-					mFont.tahoma_7b_dark.drawString(g, this.strCapcha[i] + string.Empty, x, GameCanvas.h - 30, 2);
-				}
-				else
-				{
-					g.drawImage(GameScr.imgNutF, x, GameCanvas.h - 25, 3);
-					mFont.tahoma_7b_green2.drawString(g, this.strCapcha[i] + string.Empty, x, GameCanvas.h - 30, 2);
+					bool isTouch = GameCanvas.isTouch;
+					if (isTouch)
+					{
+						for (int i = 0; i < this.strCapcha.Length; i++)
+						{
+							int x = (GameCanvas.w - this.strCapcha.Length * GameScr.disXC) / 2 + i * GameScr.disXC + GameScr.disXC / 2;
+							bool flag2 = this.keyCapcha[i] == -1;
+							if (flag2)
+							{
+								g.drawImage(GameScr.imgNut, x, GameCanvas.h - 25, 3);
+								mFont.tahoma_7b_dark.drawString(g, this.strCapcha[i].ToString() + string.Empty, x, GameCanvas.h - 30, 2);
+							}
+							else
+							{
+								g.drawImage(GameScr.imgNutF, x, GameCanvas.h - 25, 3);
+								mFont.tahoma_7b_green2.drawString(g, this.strCapcha[i].ToString() + string.Empty, x, GameCanvas.h - 30, 2);
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000764 RID: 1892 RVA: 0x00069BE0 File Offset: 0x00067FE0
+	// Token: 0x06000351 RID: 849 RVA: 0x0004CE1C File Offset: 0x0004B01C
 	public override void paint(mGraphics g)
 	{
 		GameScr.countEff = 0;
-		if (!GameScr.isPaint)
+		bool flag2 = !GameScr.isPaint;
+		if (!flag2)
 		{
-			return;
-		}
-		GameCanvas.debug("PA1", 1);
-		if (this.isFreez || (this.isUseFreez && ChatPopup.currChatPopup == null))
-		{
-			this.dem++;
-			if ((this.dem < 30 && this.dem >= 0 && GameCanvas.gameTick % 4 == 0) || (this.dem >= 30 && this.dem <= 50 && GameCanvas.gameTick % 3 == 0) || this.dem > 50)
+			GameCanvas.debug("PA1", 1);
+			bool flag3 = this.isFreez || (this.isUseFreez && ChatPopup.currChatPopup == null);
+			if (flag3)
 			{
-				g.setColor(16777215);
-				g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-				if (this.dem > 50)
-				{
-					if (this.isUseFreez)
-					{
-						this.isUseFreez = false;
-						this.dem = 0;
-						if (this.activeRongThan)
-						{
-							this.callRongThan(this.xR, this.yR);
-						}
-						else
-						{
-							this.hideRongThan();
-						}
-					}
-					this.paintInfoBar(g);
-					g.translate(-GameScr.cmx, -GameScr.cmy);
-					g.translate(0, GameCanvas.transY);
-					global::Char.myCharz().paint(g);
-					mSystem.paintFlyText(g);
-					GameScr.resetTranslate(g);
-					this.paintSelectedSkill(g);
-					return;
-				}
-				return;
-			}
-		}
-		GameCanvas.debug("PA2", 1);
-		GameCanvas.paintBGGameScr(g);
-		this.paint_ios_bg(g);
-		if ((this.isRongThanXuatHien || this.isFireWorks) && TileMap.bgID != 3)
-		{
-			this.paintBlackSky(g);
-		}
-		GameCanvas.debug("PA3", 1);
-		if (GameScr.shock_scr > 0)
-		{
-			g.translate(-GameScr.cmx + GameScr.shock_x[GameScr.shock_scr % GameScr.shock_x.Length], -GameScr.cmy + GameScr.shock_y[GameScr.shock_scr % GameScr.shock_y.Length]);
-			GameScr.shock_scr--;
-		}
-		else
-		{
-			g.translate(-GameScr.cmx, -GameScr.cmy);
-		}
-		if (this.isSuperPower)
-		{
-			int tx = (GameCanvas.gameTick % 3 != 0) ? -3 : 3;
-			g.translate(tx, 0);
-		}
-		BackgroudEffect.paintBehindTileAll(g);
-		EffecMn.paintLayer1(g);
-		TileMap.paintTilemap(g);
-		TileMap.paintOutTilemap(g);
-		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-		{
-			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
-			if (@char.isMabuHold && TileMap.mapID == 128)
-			{
-				@char.paintHeadWithXY(g, @char.cx, @char.cy, 0);
-			}
-		}
-		if (global::Char.myCharz().isMabuHold && TileMap.mapID == 128)
-		{
-			global::Char.myCharz().paintHeadWithXY(g, global::Char.myCharz().cx, global::Char.myCharz().cy, 0);
-		}
-		this.paintBgItem(g, 2);
-		if (global::Char.myCharz().cmdMenu != null && GameCanvas.isTouch)
-		{
-			if (mScreen.keyTouch == 20)
-			{
-				g.drawImage(GameScr.imgChat2, global::Char.myCharz().cmdMenu.x + GameScr.cmx, global::Char.myCharz().cmdMenu.y + GameScr.cmy, mGraphics.HCENTER | mGraphics.VCENTER);
-			}
-			else
-			{
-				g.drawImage(GameScr.imgChat, global::Char.myCharz().cmdMenu.x + GameScr.cmx, global::Char.myCharz().cmdMenu.y + GameScr.cmy, mGraphics.HCENTER | mGraphics.VCENTER);
-			}
-		}
-		GameCanvas.debug("PA4", 1);
-		GameCanvas.debug("PA5", 1);
-		BackgroudEffect.paintBackAll(g);
-		EffectManager.lowEffects.paintAll(g);
-		for (int i = 0; i < Effect2.vEffectFeet.size(); i++)
-		{
-			Effect2 effect = (Effect2)Effect2.vEffectFeet.elementAt(i);
-			effect.paint(g);
-		}
-		for (int i = 0; i < Teleport.vTeleport.size(); i++)
-		{
-			((Teleport)Teleport.vTeleport.elementAt(i)).paintHole(g);
-		}
-		for (int i = 0; i < GameScr.vNpc.size(); i++)
-		{
-			Npc npc = (Npc)GameScr.vNpc.elementAt(i);
-			if (npc.cHP > 0)
-			{
-				npc.paintShadow(g);
-			}
-		}
-		for (int i = 0; i < GameScr.vNpc.size(); i++)
-		{
-			((Npc)GameScr.vNpc.elementAt(i)).paint(g);
-		}
-		g.translate(0, GameCanvas.transY);
-		GameCanvas.debug("PA7", 1);
-		GameCanvas.debug("PA8", 1);
-		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-		{
-			global::Char char2 = null;
-			try
-			{
-				char2 = (global::Char)GameScr.vCharInMap.elementAt(i);
-			}
-			catch (Exception ex)
-			{
-				Cout.LogError("Loi ham paint char gamesc: " + ex.ToString());
-			}
-			if (char2 != null)
-			{
-				if (!GameCanvas.panel.isShow || !GameCanvas.panel.isTypeShop())
-				{
-					if (char2.isShadown)
-					{
-						char2.paintShadow(g);
-					}
-				}
-			}
-		}
-		global::Char.myCharz().paintShadow(g);
-		EffecMn.paintLayer2(g);
-		for (int i = 0; i < GameScr.vMob.size(); i++)
-		{
-			((Mob)GameScr.vMob.elementAt(i)).paint(g);
-		}
-		for (int i = 0; i < Teleport.vTeleport.size(); i++)
-		{
-			((Teleport)Teleport.vTeleport.elementAt(i)).paint(g);
-		}
-		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-		{
-			global::Char char3 = null;
-			try
-			{
-				char3 = (global::Char)GameScr.vCharInMap.elementAt(i);
-			}
-			catch (Exception ex2)
-			{
-			}
-			if (char3 != null)
-			{
-				if (!GameCanvas.panel.isShow || !GameCanvas.panel.isTypeShop())
-				{
-					char3.paint(g);
-				}
-			}
-		}
-		global::Char.myCharz().paint(g);
-		if (global::Char.myCharz().skillPaint != null && global::Char.myCharz().skillInfoPaint() != null && global::Char.myCharz().indexSkill < global::Char.myCharz().skillInfoPaint().Length)
-		{
-			global::Char.myCharz().paintCharWithSkill(g);
-			global::Char.myCharz().paintMount2(g);
-		}
-		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-		{
-			global::Char char4 = null;
-			try
-			{
-				char4 = (global::Char)GameScr.vCharInMap.elementAt(i);
-			}
-			catch (Exception ex3)
-			{
-				Cout.LogError("Loi ham paint char gamescr: " + ex3.ToString());
-			}
-			if (char4 != null)
-			{
-				if (!GameCanvas.panel.isShow || !GameCanvas.panel.isTypeShop())
-				{
-					if (char4.skillPaint != null && char4.skillInfoPaint() != null && char4.indexSkill < char4.skillInfoPaint().Length)
-					{
-						char4.paintCharWithSkill(g);
-						char4.paintMount2(g);
-					}
-				}
-			}
-		}
-		for (int i = 0; i < GameScr.vItemMap.size(); i++)
-		{
-			((ItemMap)GameScr.vItemMap.elementAt(i)).paint(g);
-		}
-		g.translate(0, -GameCanvas.transY);
-		GameCanvas.debug("PA9", 1);
-		GameScr.paintSplash(g);
-		GameCanvas.debug("PA10", 1);
-		GameCanvas.debug("PA11", 1);
-		GameCanvas.debug("PA13", 1);
-		this.paintEffect(g);
-		this.paintBgItem(g, 3);
-		for (int i = 0; i < GameScr.vNpc.size(); i++)
-		{
-			Npc npc2 = (Npc)GameScr.vNpc.elementAt(i);
-			npc2.paintName(g);
-		}
-		EffecMn.paintLayer3(g);
-		for (int i = 0; i < GameScr.vNpc.size(); i++)
-		{
-			Npc npc3 = (Npc)GameScr.vNpc.elementAt(i);
-			if (npc3.chatInfo != null)
-			{
-				if (npc3 != null)
-				{
-					npc3.chatInfo.paint(g, npc3.cx, npc3.cy - npc3.ch - GameCanvas.transY, npc3.cdir);
-				}
-			}
-		}
-		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-		{
-			global::Char char5 = null;
-			try
-			{
-				char5 = (global::Char)GameScr.vCharInMap.elementAt(i);
-			}
-			catch (Exception ex4)
-			{
-			}
-			if (char5 != null)
-			{
-				if (char5.chatInfo != null)
-				{
-					char5.chatInfo.paint(g, char5.cx, char5.cy - char5.ch, char5.cdir);
-				}
-			}
-		}
-		if (global::Char.myCharz().chatInfo != null)
-		{
-			global::Char.myCharz().chatInfo.paint(g, global::Char.myCharz().cx, global::Char.myCharz().cy - global::Char.myCharz().ch, global::Char.myCharz().cdir);
-		}
-		EffectManager.mid_2Effects.paintAll(g);
-		EffectManager.midEffects.paintAll(g);
-		BackgroudEffect.paintFrontAll(g);
-		for (int j = 0; j < TileMap.vCurrItem.size(); j++)
-		{
-			BgItem bgItem = (BgItem)TileMap.vCurrItem.elementAt(j);
-			if (bgItem.idImage != -1 && (int)bgItem.layer > 3)
-			{
-				bgItem.paint(g);
-			}
-		}
-		PopUp.paintAll(g);
-		if (TileMap.mapID == 120)
-		{
-			if ((int)this.percentMabu != 100)
-			{
-				int w = (int)this.percentMabu * mGraphics.getImageWidth(GameScr.imgHPLost) / 100;
-				int num = (int)this.percentMabu;
-				g.drawImage(GameScr.imgHPLost, TileMap.pxw / 2 - mGraphics.getImageWidth(GameScr.imgHPLost) / 2, 220, 0);
-				g.setClip(TileMap.pxw / 2 - mGraphics.getImageWidth(GameScr.imgHPLost) / 2, 220, w, 10);
-				g.drawImage(GameScr.imgHP, TileMap.pxw / 2 - mGraphics.getImageWidth(GameScr.imgHPLost) / 2, 220, 0);
-				g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
-			}
-			if (this.mabuEff)
-			{
-				this.tMabuEff++;
-				if (GameCanvas.gameTick % 3 == 0)
-				{
-					Effect me = new Effect(19, Res.random(TileMap.pxw / 2 - 50, TileMap.pxw / 2 + 50), 340, 2, 1, -1);
-					EffecMn.addEff(me);
-				}
-				if (GameCanvas.gameTick % 15 == 0)
-				{
-					Effect me2 = new Effect(18, Res.random(TileMap.pxw / 2 - 5, TileMap.pxw / 2 + 5), Res.random(300, 320), 2, 1, -1);
-					EffecMn.addEff(me2);
-				}
-				if (this.tMabuEff == 100)
-				{
-					this.activeSuperPower(TileMap.pxw / 2, 300);
-				}
-				if (this.tMabuEff == 110)
-				{
-					this.tMabuEff = 0;
-					this.mabuEff = false;
-				}
-			}
-		}
-		BackgroudEffect.paintFog(g);
-		bool flag = true;
-		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
-		{
-			BackgroudEffect backgroudEffect = (BackgroudEffect)BackgroudEffect.vBgEffect.elementAt(i);
-			if (backgroudEffect.typeEff == 0)
-			{
-				flag = false;
-				break;
-			}
-		}
-		if (mGraphics.zoomLevel <= 1 || Main.isIpod || Main.isIphone4)
-		{
-			flag = false;
-		}
-		if (flag && !this.isRongThanXuatHien)
-		{
-			int num2 = TileMap.pxw / (mGraphics.getImageWidth(TileMap.imgLight) + 50);
-			if (num2 <= 0)
-			{
-				num2 = 1;
-			}
-			if (TileMap.tileID != 28)
-			{
-				for (int i = 0; i < num2; i++)
-				{
-					int num3 = 100 + i * (mGraphics.getImageWidth(TileMap.imgLight) + 50) - GameScr.cmx / 2;
-					int num4 = -20;
-					int imageWidth = mGraphics.getImageWidth(TileMap.imgLight);
-					if (num3 + imageWidth >= GameScr.cmx && num3 <= GameScr.cmx + GameCanvas.w && num4 + mGraphics.getImageHeight(TileMap.imgLight) >= GameScr.cmy && num4 <= GameScr.cmy + GameCanvas.h)
-					{
-						g.drawImage(TileMap.imgLight, 100 + i * (mGraphics.getImageWidth(TileMap.imgLight) + 50) - GameScr.cmx / 2, num4, 0);
-					}
-				}
-			}
-		}
-		mSystem.paintFlyText(g);
-		GameCanvas.debug("PA14", 1);
-		GameCanvas.debug("PA15", 1);
-		GameCanvas.debug("PA16", 1);
-		this.paintArrowPointToNPC(g);
-		GameCanvas.debug("PA17", 1);
-		if (!GameScr.isPaintOther && GameScr.isPaintRada == 1 && !GameCanvas.panel.isShow)
-		{
-			this.paintInfoBar(g);
-		}
-		GameScr.resetTranslate(g);
-		this.paint_xp_bar(g);
-		if (!GameScr.isPaintOther)
-		{
-			if (GameCanvas.open3Hour)
-			{
-				if (GameCanvas.w > 250)
-				{
-					g.drawImage(GameCanvas.img12, 160, 6, 0);
-					mFont.tahoma_7_white.drawString(g, "Dành cho người chơi trên 12 tuổi.", 180, 2, 0);
-					mFont.tahoma_7_white.drawString(g, "Chơi quá 180 phút mỗi ngày ", 180, 12, 0);
-					mFont.tahoma_7_white.drawString(g, "sẽ hại sức khỏe.", 180, 22, 0);
-				}
-				else
-				{
-					g.drawImage(GameCanvas.img12, 5, GameCanvas.h - 67, 0);
-					mFont.tahoma_7_white.drawString(g, "Dành cho người chơi trên 12 tuổi.", 25, GameCanvas.h - 70, 0);
-					mFont.tahoma_7_white.drawString(g, "Chơi quá 180 phút mỗi ngày sẽ hại sức khỏe.", 25, GameCanvas.h - 60, 0);
-				}
-			}
-			GameCanvas.debug("PA21", 1);
-			GameCanvas.debug("PA18", 1);
-			g.translate(-g.getTranslateX(), -g.getTranslateY());
-			if ((TileMap.mapID == 128 || TileMap.mapID == 127) && (int)GameScr.mabuPercent != 0)
-			{
-				int num5 = 30;
-				int num6 = 200;
-				g.setColor(0);
-				g.fillRect(num5 - 27, num6 - 112, 54, 8);
-				g.setColor(16711680);
-				g.setClip(num5 - 25, num6 - 110, (int)GameScr.mabuPercent, 4);
-				g.fillRect(num5 - 25, num6 - 110, 50, 4);
-				g.setClip(0, 0, 3000, 3000);
-				mFont.tahoma_7b_white.drawString(g, "Mabu", num5, num6 - 112 + 10, 2, mFont.tahoma_7b_dark);
-			}
-			if (global::Char.myCharz().isFusion)
-			{
-				global::Char.myCharz().tFusion++;
-				if (GameCanvas.gameTick % 3 == 0)
+				this.dem++;
+				bool flag4 = (this.dem < 30 && this.dem >= 0 && GameCanvas.gameTick % 4 == 0) || (this.dem >= 30 && this.dem <= 50 && GameCanvas.gameTick % 3 == 0) || this.dem > 50;
+				if (flag4)
 				{
 					g.setColor(16777215);
 					g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-				}
-				if (global::Char.myCharz().tFusion >= 100)
-				{
-					global::Char.myCharz().fusionComplete();
+					bool flag5 = this.dem > 50;
+					if (flag5)
+					{
+						bool flag6 = this.isUseFreez;
+						if (flag6)
+						{
+							this.isUseFreez = false;
+							this.dem = 0;
+							bool flag7 = this.activeRongThan;
+							if (flag7)
+							{
+								this.callRongThan(this.xR, this.yR);
+							}
+							else
+							{
+								this.hideRongThan();
+							}
+						}
+						this.paintInfoBar(g);
+						g.translate(-GameScr.cmx, -GameScr.cmy);
+						g.translate(0, GameCanvas.transY);
+						global::Char.myCharz().paint(g);
+						mSystem.paintFlyText(g);
+						GameScr.resetTranslate(g);
+						this.paintSelectedSkill(g);
+						return;
+					}
+					return;
 				}
 			}
+			GameCanvas.debug("PA2", 1);
+			GameCanvas.paintBGGameScr(g);
+			this.paint_ios_bg(g);
+			bool flag8 = (this.isRongThanXuatHien || this.isFireWorks) && TileMap.bgID != 3;
+			if (flag8)
+			{
+				this.paintBlackSky(g);
+			}
+			GameCanvas.debug("PA3", 1);
+			bool flag9 = GameScr.shock_scr > 0;
+			if (flag9)
+			{
+				g.translate(-GameScr.cmx + GameScr.shock_x[GameScr.shock_scr % GameScr.shock_x.Length], -GameScr.cmy + GameScr.shock_y[GameScr.shock_scr % GameScr.shock_y.Length]);
+				GameScr.shock_scr--;
+			}
+			else
+			{
+				g.translate(-GameScr.cmx, -GameScr.cmy);
+			}
+			bool flag10 = this.isSuperPower;
+			if (flag10)
+			{
+				int tx = (GameCanvas.gameTick % 3 != 0) ? -3 : 3;
+				g.translate(tx, 0);
+			}
+			BackgroudEffect.paintBehindTileAll(g);
+			EffecMn.paintLayer1(g);
+			TileMap.paintTilemap(g);
+			TileMap.paintOutTilemap(g);
 			for (int i = 0; i < GameScr.vCharInMap.size(); i++)
 			{
-				global::Char char6 = null;
-				try
+				global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
+				bool flag11 = @char.isMabuHold && TileMap.mapID == 128;
+				if (flag11)
 				{
-					char6 = (global::Char)GameScr.vCharInMap.elementAt(i);
-				}
-				catch (Exception ex5)
-				{
-				}
-				if (char6 != null)
-				{
-					if (char6.isFusion && global::Char.isCharInScreen(char6))
-					{
-						char6.tFusion++;
-						if (GameCanvas.gameTick % 3 == 0)
-						{
-							g.setColor(16777215);
-							g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-						}
-						if (char6.tFusion >= 100)
-						{
-							char6.fusionComplete();
-						}
-					}
+					@char.paintHeadWithXY(g, @char.cx, @char.cy, 0);
 				}
 			}
-			GameCanvas.paintz.paintTabSoft(g);
-			GameCanvas.debug("PA19", 1);
-			GameCanvas.debug("PA20", 1);
-			GameScr.resetTranslate(g);
-			this.paintSelectedSkill(g);
-			GameCanvas.debug("PA22", 1);
-			GameScr.resetTranslate(g);
-			if (GameCanvas.isTouch && GameCanvas.isTouchControl)
+			bool flag12 = global::Char.myCharz().isMabuHold && TileMap.mapID == 128;
+			if (flag12)
 			{
-				this.paintTouchControl(g);
+				global::Char.myCharz().paintHeadWithXY(g, global::Char.myCharz().cx, global::Char.myCharz().cy, 0);
 			}
-			GameScr.resetTranslate(g);
-			this.paintChatVip(g);
-			if (!GameCanvas.panel.isShow && GameCanvas.currentDialog == null && ChatPopup.currChatPopup == null && ChatPopup.serverChatPopUp == null && GameCanvas.currentScreen.Equals(GameScr.instance))
+			this.paintBgItem(g, 2);
+			bool flag13 = global::Char.myCharz().cmdMenu != null && GameCanvas.isTouch;
+			if (flag13)
 			{
-				base.paint(g);
-				if (mScreen.keyMouse == 1 && this.cmdMenu != null)
+				bool flag14 = mScreen.keyTouch == 20;
+				if (flag14)
 				{
-					g.drawImage(ItemMap.imageFlare, this.cmdMenu.x + 7, this.cmdMenu.y + 15, 3);
-				}
-			}
-			GameScr.resetTranslate(g);
-			int num7 = 100 + ((global::Char.vItemTime.size() == 0) ? 0 : (GameScr.textTime.size() * 12));
-			if (global::Char.myCharz().clan != null)
-			{
-				int num8 = 0;
-				int num9 = 0;
-				int num10 = (GameCanvas.h - 100 - 60) / 12;
-				for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-				{
-					global::Char char7 = (global::Char)GameScr.vCharInMap.elementAt(i);
-					if (char7.clanID != -1 && char7.clanID == global::Char.myCharz().clan.ID)
-					{
-						if (char7.isOutX() && char7.cx < global::Char.myCharz().cx)
-						{
-							int num11 = num10;
-							if (global::Char.vItemTime.size() != 0)
-							{
-								num11 -= GameScr.textTime.size();
-							}
-							if (num8 <= num11)
-							{
-								mFont.tahoma_7_green.drawString(g, char7.cName, 20, num7 - 12 + num8 * 12, mFont.LEFT, mFont.tahoma_7_grey);
-								char7.paintHp(g, 10, num7 + num8 * 12 - 5);
-								num8++;
-							}
-						}
-						else if (char7.isOutX() && char7.cx > global::Char.myCharz().cx)
-						{
-							if (num9 <= num10)
-							{
-								mFont.tahoma_7_green.drawString(g, char7.cName, GameCanvas.w - 25, num7 - 12 + num9 * 12, mFont.RIGHT, mFont.tahoma_7_grey);
-								char7.paintHp(g, GameCanvas.w - 15, num7 + num9 * 12 - 5);
-								num9++;
-							}
-						}
-					}
-				}
-			}
-			ChatTextField.gI().paint(g);
-			if (GameScr.isNewClanMessage && !GameCanvas.panel.isShow && GameCanvas.gameTick % 4 == 0)
-			{
-				g.drawImage(ItemMap.imageFlare, this.cmdMenu.x + 15, this.cmdMenu.y + 30, mGraphics.BOTTOM | mGraphics.HCENTER);
-			}
-			if (this.isSuperPower)
-			{
-				this.dxPower += 5;
-				if (this.tPower >= 0)
-				{
-					this.tPower += this.dxPower;
-				}
-				Res.outz("x power= " + this.xPower);
-				if (this.tPower < 0)
-				{
-					this.tPower--;
-					if (this.tPower == -20)
-					{
-						this.isSuperPower = false;
-						this.tPower = 0;
-						this.dxPower = 0;
-					}
-				}
-				else if ((this.xPower - this.tPower > 0 || this.tPower < TileMap.pxw) && this.tPower > 0)
-				{
-					g.setColor(16777215);
-					if (!GameCanvas.lowGraphic)
-					{
-						g.fillArg(0, 0, GameCanvas.w, GameCanvas.h, 0, 0);
-					}
-					else
-					{
-						g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-					}
+					g.drawImage(GameScr.imgChat2, global::Char.myCharz().cmdMenu.x + GameScr.cmx, global::Char.myCharz().cmdMenu.y + GameScr.cmy, mGraphics.HCENTER | mGraphics.VCENTER);
 				}
 				else
 				{
-					this.tPower = -1;
+					g.drawImage(GameScr.imgChat, global::Char.myCharz().cmdMenu.x + GameScr.cmx, global::Char.myCharz().cmdMenu.y + GameScr.cmy, mGraphics.HCENTER | mGraphics.VCENTER);
 				}
 			}
-			for (int i = 0; i < global::Char.vItemTime.size(); i++)
+			GameCanvas.debug("PA4", 1);
+			GameCanvas.debug("PA5", 1);
+			BackgroudEffect.paintBackAll(g);
+			EffectManager.lowEffects.paintAll(g);
+			for (int j = 0; j < Effect2.vEffectFeet.size(); j++)
 			{
-				((ItemTime)global::Char.vItemTime.elementAt(i)).paint(g, this.cmdMenu.x + 32 + i * 24, 55);
+				Effect2 effect = (Effect2)Effect2.vEffectFeet.elementAt(j);
+				effect.paint(g);
 			}
-			for (int i = 0; i < GameScr.textTime.size(); i++)
+			for (int k = 0; k < Teleport.vTeleport.size(); k++)
 			{
-				((ItemTime)GameScr.textTime.elementAt(i)).paintText(g, this.cmdMenu.x + ((global::Char.vItemTime.size() == 0) ? 25 : 5), ((global::Char.vItemTime.size() == 0) ? 45 : 90) + i * 12);
+				((Teleport)Teleport.vTeleport.elementAt(k)).paintHole(g);
 			}
-			this.paintXoSo(g);
-			if ((int)mResources.language == 1)
+			for (int l = 0; l < GameScr.vNpc.size(); l++)
 			{
-				long second = mSystem.currentTimeMillis() - GameScr.deltaTime;
-				mFont.tahoma_7b_white.drawString(g, NinjaUtil.getDate2(second), 10, GameCanvas.h - 65, 0, mFont.tahoma_7b_dark);
-			}
-			if (!this.yourNumber.Equals(string.Empty))
-			{
-				for (int i = 0; i < this.strPaint.Length; i++)
+				Npc npc = (Npc)GameScr.vNpc.elementAt(l);
+				bool flag15 = npc.cHP > 0;
+				if (flag15)
 				{
-					mFont.tahoma_7b_white.drawString(g, this.strPaint[i], 5, 85 + i * 18, 0, mFont.tahoma_7b_dark);
+					npc.paintShadow(g);
 				}
 			}
+			for (int m = 0; m < GameScr.vNpc.size(); m++)
+			{
+				((Npc)GameScr.vNpc.elementAt(m)).paint(g);
+			}
+			g.translate(0, GameCanvas.transY);
+			GameCanvas.debug("PA7", 1);
+			GameCanvas.debug("PA8", 1);
+			for (int n = 0; n < GameScr.vCharInMap.size(); n++)
+			{
+				global::Char char2 = null;
+				try
+				{
+					char2 = (global::Char)GameScr.vCharInMap.elementAt(n);
+				}
+				catch (Exception ex)
+				{
+					Cout.LogError("Loi ham paint char gamesc: " + ex.ToString());
+				}
+				bool flag16 = char2 != null;
+				if (flag16)
+				{
+					bool flag17 = !GameCanvas.panel.isShow || !GameCanvas.panel.isTypeShop();
+					if (flag17)
+					{
+						bool isShadown = char2.isShadown;
+						if (isShadown)
+						{
+							char2.paintShadow(g);
+						}
+					}
+				}
+			}
+			global::Char.myCharz().paintShadow(g);
+			EffecMn.paintLayer2(g);
+			for (int i2 = 0; i2 < GameScr.vMob.size(); i2++)
+			{
+				((Mob)GameScr.vMob.elementAt(i2)).paint(g);
+			}
+			for (int i3 = 0; i3 < Teleport.vTeleport.size(); i3++)
+			{
+				((Teleport)Teleport.vTeleport.elementAt(i3)).paint(g);
+			}
+			for (int i4 = 0; i4 < GameScr.vCharInMap.size(); i4++)
+			{
+				global::Char char3 = null;
+				try
+				{
+					char3 = (global::Char)GameScr.vCharInMap.elementAt(i4);
+				}
+				catch (Exception ex2)
+				{
+				}
+				bool flag18 = char3 != null;
+				if (flag18)
+				{
+					bool flag19 = !GameCanvas.panel.isShow || !GameCanvas.panel.isTypeShop();
+					if (flag19)
+					{
+						char3.paint(g);
+					}
+				}
+			}
+			global::Char.myCharz().paint(g);
+			bool flag20 = global::Char.myCharz().skillPaint != null && global::Char.myCharz().skillInfoPaint() != null && global::Char.myCharz().indexSkill < global::Char.myCharz().skillInfoPaint().Length;
+			if (flag20)
+			{
+				global::Char.myCharz().paintCharWithSkill(g);
+				global::Char.myCharz().paintMount2(g);
+			}
+			for (int i5 = 0; i5 < GameScr.vCharInMap.size(); i5++)
+			{
+				global::Char char4 = null;
+				try
+				{
+					char4 = (global::Char)GameScr.vCharInMap.elementAt(i5);
+				}
+				catch (Exception ex3)
+				{
+					Cout.LogError("Loi ham paint char gamescr: " + ex3.ToString());
+				}
+				bool flag21 = char4 != null;
+				if (flag21)
+				{
+					bool flag22 = !GameCanvas.panel.isShow || !GameCanvas.panel.isTypeShop();
+					if (flag22)
+					{
+						bool flag23 = char4.skillPaint != null && char4.skillInfoPaint() != null && char4.indexSkill < char4.skillInfoPaint().Length;
+						if (flag23)
+						{
+							char4.paintCharWithSkill(g);
+							char4.paintMount2(g);
+						}
+					}
+				}
+			}
+			for (int i6 = 0; i6 < GameScr.vItemMap.size(); i6++)
+			{
+				((ItemMap)GameScr.vItemMap.elementAt(i6)).paint(g);
+			}
+			g.translate(0, -GameCanvas.transY);
+			GameCanvas.debug("PA9", 1);
+			GameScr.paintSplash(g);
+			GameCanvas.debug("PA10", 1);
+			GameCanvas.debug("PA11", 1);
+			GameCanvas.debug("PA13", 1);
+			this.paintEffect(g);
+			this.paintBgItem(g, 3);
+			for (int i7 = 0; i7 < GameScr.vNpc.size(); i7++)
+			{
+				Npc npc2 = (Npc)GameScr.vNpc.elementAt(i7);
+				npc2.paintName(g);
+			}
+			EffecMn.paintLayer3(g);
+			for (int i8 = 0; i8 < GameScr.vNpc.size(); i8++)
+			{
+				Npc npc3 = (Npc)GameScr.vNpc.elementAt(i8);
+				bool flag24 = npc3.chatInfo != null;
+				if (flag24)
+				{
+					bool flag25 = npc3 != null;
+					if (flag25)
+					{
+						npc3.chatInfo.paint(g, npc3.cx, npc3.cy - npc3.ch - GameCanvas.transY, npc3.cdir);
+					}
+				}
+			}
+			for (int i9 = 0; i9 < GameScr.vCharInMap.size(); i9++)
+			{
+				global::Char char5 = null;
+				try
+				{
+					char5 = (global::Char)GameScr.vCharInMap.elementAt(i9);
+				}
+				catch (Exception ex4)
+				{
+				}
+				bool flag26 = char5 != null;
+				if (flag26)
+				{
+					bool flag27 = char5.chatInfo != null;
+					if (flag27)
+					{
+						char5.chatInfo.paint(g, char5.cx, char5.cy - char5.ch, char5.cdir);
+					}
+				}
+			}
+			bool flag28 = global::Char.myCharz().chatInfo != null;
+			if (flag28)
+			{
+				global::Char.myCharz().chatInfo.paint(g, global::Char.myCharz().cx, global::Char.myCharz().cy - global::Char.myCharz().ch, global::Char.myCharz().cdir);
+			}
+			EffectManager.mid_2Effects.paintAll(g);
+			EffectManager.midEffects.paintAll(g);
+			BackgroudEffect.paintFrontAll(g);
+			for (int j2 = 0; j2 < TileMap.vCurrItem.size(); j2++)
+			{
+				BgItem bgItem = (BgItem)TileMap.vCurrItem.elementAt(j2);
+				bool flag29 = bgItem.idImage != -1 && bgItem.layer > 3;
+				if (flag29)
+				{
+					bgItem.paint(g);
+				}
+			}
+			PopUp.paintAll(g);
+			bool flag30 = TileMap.mapID == 120;
+			if (flag30)
+			{
+				bool flag31 = this.percentMabu != 100;
+				if (flag31)
+				{
+					int w = (int)this.percentMabu * mGraphics.getImageWidth(GameScr.imgHPLost) / 100;
+					int num = (int)this.percentMabu;
+					g.drawImage(GameScr.imgHPLost, TileMap.pxw / 2 - mGraphics.getImageWidth(GameScr.imgHPLost) / 2, 220, 0);
+					g.setClip(TileMap.pxw / 2 - mGraphics.getImageWidth(GameScr.imgHPLost) / 2, 220, w, 10);
+					g.drawImage(GameScr.imgHP, TileMap.pxw / 2 - mGraphics.getImageWidth(GameScr.imgHPLost) / 2, 220, 0);
+					g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+				}
+				bool flag32 = this.mabuEff;
+				if (flag32)
+				{
+					this.tMabuEff++;
+					bool flag33 = GameCanvas.gameTick % 3 == 0;
+					if (flag33)
+					{
+						Effect me = new Effect(19, Res.random(TileMap.pxw / 2 - 50, TileMap.pxw / 2 + 50), 340, 2, 1, -1);
+						EffecMn.addEff(me);
+					}
+					bool flag34 = GameCanvas.gameTick % 15 == 0;
+					if (flag34)
+					{
+						Effect me2 = new Effect(18, Res.random(TileMap.pxw / 2 - 5, TileMap.pxw / 2 + 5), Res.random(300, 320), 2, 1, -1);
+						EffecMn.addEff(me2);
+					}
+					bool flag35 = this.tMabuEff == 100;
+					if (flag35)
+					{
+						this.activeSuperPower(TileMap.pxw / 2, 300);
+					}
+					bool flag36 = this.tMabuEff == 110;
+					if (flag36)
+					{
+						this.tMabuEff = 0;
+						this.mabuEff = false;
+					}
+				}
+			}
+			BackgroudEffect.paintFog(g);
+			bool flag = true;
+			for (int i10 = 0; i10 < BackgroudEffect.vBgEffect.size(); i10++)
+			{
+				BackgroudEffect backgroudEffect = (BackgroudEffect)BackgroudEffect.vBgEffect.elementAt(i10);
+				bool flag37 = backgroudEffect.typeEff == 0;
+				if (flag37)
+				{
+					flag = false;
+					break;
+				}
+			}
+			bool flag38 = mGraphics.zoomLevel <= 1 || Main.isIpod || Main.isIphone4;
+			if (flag38)
+			{
+				flag = false;
+			}
+			bool flag39 = flag && !this.isRongThanXuatHien;
+			if (flag39)
+			{
+				int num2 = TileMap.pxw / (mGraphics.getImageWidth(TileMap.imgLight) + 50);
+				bool flag40 = num2 <= 0;
+				if (flag40)
+				{
+					num2 = 1;
+				}
+				bool flag41 = TileMap.tileID != 28;
+				if (flag41)
+				{
+					for (int i11 = 0; i11 < num2; i11++)
+					{
+						int num3 = 100 + i11 * (mGraphics.getImageWidth(TileMap.imgLight) + 50) - GameScr.cmx / 2;
+						int num4 = -20;
+						int imageWidth = mGraphics.getImageWidth(TileMap.imgLight);
+						bool flag42 = num3 + imageWidth >= GameScr.cmx && num3 <= GameScr.cmx + GameCanvas.w && num4 + mGraphics.getImageHeight(TileMap.imgLight) >= GameScr.cmy && num4 <= GameScr.cmy + GameCanvas.h;
+						if (flag42)
+						{
+							g.drawImage(TileMap.imgLight, 100 + i11 * (mGraphics.getImageWidth(TileMap.imgLight) + 50) - GameScr.cmx / 2, num4, 0);
+						}
+					}
+				}
+			}
+			mSystem.paintFlyText(g);
+			GameCanvas.debug("PA14", 1);
+			GameCanvas.debug("PA15", 1);
+			GameCanvas.debug("PA16", 1);
+			this.paintArrowPointToNPC(g);
+			GameCanvas.debug("PA17", 1);
+			bool flag43 = !GameScr.isPaintOther && GameScr.isPaintRada == 1 && !GameCanvas.panel.isShow;
+			if (flag43)
+			{
+				this.paintInfoBar(g);
+			}
+			GameScr.resetTranslate(g);
+			this.paint_xp_bar(g);
+			bool flag44 = !GameScr.isPaintOther;
+			if (flag44)
+			{
+				bool open3Hour = GameCanvas.open3Hour;
+				if (open3Hour)
+				{
+					bool flag45 = GameCanvas.w > 250;
+					if (flag45)
+					{
+						g.drawImage(GameCanvas.img12, 160, 6, 0);
+						mFont.tahoma_7_white.drawString(g, "Dành cho người chơi trên 12 tuổi.", 180, 2, 0);
+						mFont.tahoma_7_white.drawString(g, "Chơi quá 180 phút mỗi ngày ", 180, 12, 0);
+						mFont.tahoma_7_white.drawString(g, "sẽ hại sức khỏe.", 180, 22, 0);
+					}
+					else
+					{
+						g.drawImage(GameCanvas.img12, 5, GameCanvas.h - 67, 0);
+						mFont.tahoma_7_white.drawString(g, "Dành cho người chơi trên 12 tuổi.", 25, GameCanvas.h - 70, 0);
+						mFont.tahoma_7_white.drawString(g, "Chơi quá 180 phút mỗi ngày sẽ hại sức khỏe.", 25, GameCanvas.h - 60, 0);
+					}
+				}
+				GameCanvas.debug("PA21", 1);
+				GameCanvas.debug("PA18", 1);
+				g.translate(-g.getTranslateX(), -g.getTranslateY());
+				bool flag46 = (TileMap.mapID == 128 || TileMap.mapID == 127) && GameScr.mabuPercent != 0;
+				if (flag46)
+				{
+					int num5 = 30;
+					int num6 = 200;
+					g.setColor(0);
+					g.fillRect(num5 - 27, num6 - 112, 54, 8);
+					g.setColor(16711680);
+					g.setClip(num5 - 25, num6 - 110, (int)GameScr.mabuPercent, 4);
+					g.fillRect(num5 - 25, num6 - 110, 50, 4);
+					g.setClip(0, 0, 3000, 3000);
+					mFont.tahoma_7b_white.drawString(g, "Mabu", num5, num6 - 112 + 10, 2, mFont.tahoma_7b_dark);
+				}
+				bool isFusion = global::Char.myCharz().isFusion;
+				if (isFusion)
+				{
+					global::Char.myCharz().tFusion++;
+					bool flag47 = GameCanvas.gameTick % 3 == 0;
+					if (flag47)
+					{
+						g.setColor(16777215);
+						g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
+					}
+					bool flag48 = global::Char.myCharz().tFusion >= 100;
+					if (flag48)
+					{
+						global::Char.myCharz().fusionComplete();
+					}
+				}
+				for (int i12 = 0; i12 < GameScr.vCharInMap.size(); i12++)
+				{
+					global::Char char6 = null;
+					try
+					{
+						char6 = (global::Char)GameScr.vCharInMap.elementAt(i12);
+					}
+					catch (Exception ex5)
+					{
+					}
+					bool flag49 = char6 != null;
+					if (flag49)
+					{
+						bool flag50 = char6.isFusion && global::Char.isCharInScreen(char6);
+						if (flag50)
+						{
+							char6.tFusion++;
+							bool flag51 = GameCanvas.gameTick % 3 == 0;
+							if (flag51)
+							{
+								g.setColor(16777215);
+								g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
+							}
+							bool flag52 = char6.tFusion >= 100;
+							if (flag52)
+							{
+								char6.fusionComplete();
+							}
+						}
+					}
+				}
+				GameCanvas.paintz.paintTabSoft(g);
+				GameCanvas.debug("PA19", 1);
+				GameCanvas.debug("PA20", 1);
+				GameScr.resetTranslate(g);
+				this.paintSelectedSkill(g);
+				GameCanvas.debug("PA22", 1);
+				GameScr.resetTranslate(g);
+				bool flag53 = GameCanvas.isTouch && GameCanvas.isTouchControl;
+				if (flag53)
+				{
+					this.paintTouchControl(g);
+				}
+				GameScr.resetTranslate(g);
+				this.paintChatVip(g);
+				bool flag54 = !GameCanvas.panel.isShow && GameCanvas.currentDialog == null && ChatPopup.currChatPopup == null && ChatPopup.serverChatPopUp == null && GameCanvas.currentScreen.Equals(GameScr.instance);
+				if (flag54)
+				{
+					base.paint(g);
+					bool flag55 = mScreen.keyMouse == 1 && this.cmdMenu != null;
+					if (flag55)
+					{
+						g.drawImage(ItemMap.imageFlare, this.cmdMenu.x + 7, this.cmdMenu.y + 15, 3);
+					}
+				}
+				GameScr.resetTranslate(g);
+				int num7 = 100 + ((global::Char.vItemTime.size() == 0) ? 0 : (GameScr.textTime.size() * 12));
+				bool flag56 = global::Char.myCharz().clan != null;
+				if (flag56)
+				{
+					int num8 = 0;
+					int num9 = 0;
+					int num10 = (GameCanvas.h - 100 - 60) / 12;
+					for (int i13 = 0; i13 < GameScr.vCharInMap.size(); i13++)
+					{
+						global::Char char7 = (global::Char)GameScr.vCharInMap.elementAt(i13);
+						bool flag57 = char7.clanID != -1 && char7.clanID == global::Char.myCharz().clan.ID;
+						if (flag57)
+						{
+							bool flag58 = char7.isOutX() && char7.cx < global::Char.myCharz().cx;
+							if (flag58)
+							{
+								int num11 = num10;
+								bool flag59 = global::Char.vItemTime.size() != 0;
+								if (flag59)
+								{
+									num11 -= GameScr.textTime.size();
+								}
+								bool flag60 = num8 <= num11;
+								if (flag60)
+								{
+									mFont.tahoma_7_green.drawString(g, char7.cName, 20, num7 - 12 + num8 * 12, mFont.LEFT, mFont.tahoma_7_grey);
+									char7.paintHp(g, 10, num7 + num8 * 12 - 5);
+									num8++;
+								}
+							}
+							else
+							{
+								bool flag61 = char7.isOutX() && char7.cx > global::Char.myCharz().cx;
+								if (flag61)
+								{
+									bool flag62 = num9 <= num10;
+									if (flag62)
+									{
+										mFont.tahoma_7_green.drawString(g, char7.cName, GameCanvas.w - 25, num7 - 12 + num9 * 12, mFont.RIGHT, mFont.tahoma_7_grey);
+										char7.paintHp(g, GameCanvas.w - 15, num7 + num9 * 12 - 5);
+										num9++;
+									}
+								}
+							}
+						}
+					}
+				}
+				ChatTextField.gI().paint(g);
+				bool flag63 = GameScr.isNewClanMessage && !GameCanvas.panel.isShow && GameCanvas.gameTick % 4 == 0;
+				if (flag63)
+				{
+					g.drawImage(ItemMap.imageFlare, this.cmdMenu.x + 15, this.cmdMenu.y + 30, mGraphics.BOTTOM | mGraphics.HCENTER);
+				}
+				bool flag64 = this.isSuperPower;
+				if (flag64)
+				{
+					this.dxPower += 5;
+					bool flag65 = this.tPower >= 0;
+					if (flag65)
+					{
+						this.tPower += this.dxPower;
+					}
+					Res.outz("x power= " + this.xPower.ToString());
+					bool flag66 = this.tPower < 0;
+					if (flag66)
+					{
+						this.tPower--;
+						bool flag67 = this.tPower == -20;
+						if (flag67)
+						{
+							this.isSuperPower = false;
+							this.tPower = 0;
+							this.dxPower = 0;
+						}
+					}
+					else
+					{
+						bool flag68 = (this.xPower - this.tPower > 0 || this.tPower < TileMap.pxw) && this.tPower > 0;
+						if (flag68)
+						{
+							g.setColor(16777215);
+							bool flag69 = !GameCanvas.lowGraphic;
+							if (flag69)
+							{
+								g.fillArg(0, 0, GameCanvas.w, GameCanvas.h, 0, 0);
+							}
+							else
+							{
+								g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
+							}
+						}
+						else
+						{
+							this.tPower = -1;
+						}
+					}
+				}
+				for (int i14 = 0; i14 < global::Char.vItemTime.size(); i14++)
+				{
+					((ItemTime)global::Char.vItemTime.elementAt(i14)).paint(g, this.cmdMenu.x + 32 + i14 * 24, 55);
+				}
+				for (int i15 = 0; i15 < GameScr.textTime.size(); i15++)
+				{
+					((ItemTime)GameScr.textTime.elementAt(i15)).paintText(g, this.cmdMenu.x + ((global::Char.vItemTime.size() == 0) ? 25 : 5), ((global::Char.vItemTime.size() == 0) ? 45 : 90) + i15 * 12);
+				}
+				this.paintXoSo(g);
+				bool flag70 = mResources.language == 1;
+				if (flag70)
+				{
+					long second = mSystem.currentTimeMillis() - GameScr.deltaTime;
+					mFont.tahoma_7b_white.drawString(g, NinjaUtil.getDate2(second), 10, GameCanvas.h - 65, 0, mFont.tahoma_7b_dark);
+				}
+				bool flag71 = !this.yourNumber.Equals(string.Empty);
+				if (flag71)
+				{
+					for (int i16 = 0; i16 < this.strPaint.Length; i16++)
+					{
+						mFont.tahoma_7b_white.drawString(g, this.strPaint[i16], 5, 85 + i16 * 18, 0, mFont.tahoma_7b_dark);
+					}
+				}
+			}
+			int num12 = 0;
+			int num13 = GameCanvas.hw;
+			bool flag72 = num13 > 200;
+			if (flag72)
+			{
+				num13 = 200;
+			}
+			this.paintPhuBanBar(g, num12 + GameCanvas.w / 2, 0, num13);
+			EffectManager.hiEffects.paintAll(g);
 		}
-		int num12 = 0;
-		int num13 = GameCanvas.hw;
-		if (num13 > 200)
-		{
-			num13 = 200;
-		}
-		this.paintPhuBanBar(g, num12 + GameCanvas.w / 2, 0, num13);
-		EffectManager.hiEffects.paintAll(g);
 	}
 
-	// Token: 0x06000765 RID: 1893 RVA: 0x0006B190 File Offset: 0x00069590
+	// Token: 0x06000352 RID: 850 RVA: 0x0004E640 File Offset: 0x0004C840
 	private void paintXoSo(mGraphics g)
 	{
-		if (this.tShow != 0)
+		bool flag = this.tShow != 0;
+		if (flag)
 		{
 			string text = string.Empty;
 			for (int i = 0; i < this.winnumber.Length; i++)
 			{
-				text = text + this.randomNumber[i] + " ";
+				text = text + this.randomNumber[i].ToString() + " ";
 			}
 			PopUp.paintPopUp(g, 20, 45, 95, 35, 16777215, false);
 			mFont.tahoma_7b_dark.drawString(g, mResources.kquaVongQuay, 68, 50, 2);
@@ -4755,137 +5688,173 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000766 RID: 1894 RVA: 0x0006B224 File Offset: 0x00069624
+	// Token: 0x06000353 RID: 851 RVA: 0x0004E6E4 File Offset: 0x0004C8E4
 	private void checkEffToObj(IMapObject obj, bool isnew)
 	{
-		if (obj == null)
+		bool flag = obj == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.tDoubleDelay > 0)
-		{
-			return;
-		}
-		this.tDoubleDelay = 10;
-		int x = obj.getX();
-		int num = Res.abs(global::Char.myCharz().cx - x);
-		int loopCount;
-		if (num <= 80)
-		{
-			loopCount = 1;
-		}
-		else if (num > 80 && num <= 200)
-		{
-			loopCount = 2;
-		}
-		else if (num > 200 && num <= 400)
-		{
-			loopCount = 3;
-		}
-		else
-		{
-			loopCount = 4;
-		}
-		if (!isnew)
-		{
-			if (obj.Equals(global::Char.myCharz().mobFocus) || (obj.Equals(global::Char.myCharz().charFocus) && global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus)))
+			bool flag2 = this.tDoubleDelay > 0;
+			if (!flag2)
 			{
-				ServerEffect.addServerEffect(135, obj.getX(), obj.getY(), loopCount);
+				this.tDoubleDelay = 10;
+				int x = obj.getX();
+				int num = Res.abs(global::Char.myCharz().cx - x);
+				bool flag3 = num <= 80;
+				int loopCount;
+				if (flag3)
+				{
+					loopCount = 1;
+				}
+				else
+				{
+					bool flag4 = num > 80 && num <= 200;
+					if (flag4)
+					{
+						loopCount = 2;
+					}
+					else
+					{
+						bool flag5 = num > 200 && num <= 400;
+						if (flag5)
+						{
+							loopCount = 3;
+						}
+						else
+						{
+							loopCount = 4;
+						}
+					}
+				}
+				bool flag6 = !isnew;
+				if (flag6)
+				{
+					bool flag7 = obj.Equals(global::Char.myCharz().mobFocus) || (obj.Equals(global::Char.myCharz().charFocus) && global::Char.myCharz().isMeCanAttackOtherPlayer(global::Char.myCharz().charFocus));
+					if (flag7)
+					{
+						ServerEffect.addServerEffect(135, obj.getX(), obj.getY(), loopCount);
+					}
+					else
+					{
+						bool flag8 = obj.Equals(global::Char.myCharz().npcFocus) || obj.Equals(global::Char.myCharz().itemFocus) || obj.Equals(global::Char.myCharz().charFocus);
+						if (flag8)
+						{
+							ServerEffect.addServerEffect(136, obj.getX(), obj.getY(), loopCount);
+						}
+					}
+				}
+				else
+				{
+					ServerEffect.addServerEffect(136, obj.getX(), obj.getY(), loopCount);
+				}
 			}
-			else if (obj.Equals(global::Char.myCharz().npcFocus) || obj.Equals(global::Char.myCharz().itemFocus) || obj.Equals(global::Char.myCharz().charFocus))
-			{
-				ServerEffect.addServerEffect(136, obj.getX(), obj.getY(), loopCount);
-			}
-		}
-		else
-		{
-			ServerEffect.addServerEffect(136, obj.getX(), obj.getY(), loopCount);
 		}
 	}
 
-	// Token: 0x06000767 RID: 1895 RVA: 0x0006B388 File Offset: 0x00069788
+	// Token: 0x06000354 RID: 852 RVA: 0x0004E874 File Offset: 0x0004CA74
 	private void updateClickToArrow()
 	{
-		if (this.tDoubleDelay > 0)
+		bool flag = this.tDoubleDelay > 0;
+		if (flag)
 		{
 			this.tDoubleDelay--;
 		}
-		if (this.clickMoving)
+		bool flag2 = this.clickMoving;
+		if (flag2)
 		{
 			this.clickMoving = false;
 			IMapObject mapObject = this.findClickToItem(this.clickToX, this.clickToY);
-			if (mapObject == null || (mapObject != null && mapObject.Equals(global::Char.myCharz().npcFocus) && TileMap.mapID == 51))
+			bool flag3 = mapObject == null || (mapObject != null && mapObject.Equals(global::Char.myCharz().npcFocus) && TileMap.mapID == 51);
+			if (flag3)
 			{
 				ServerEffect.addServerEffect(134, this.clickToX, this.clickToY + GameCanvas.transY / 2, 3);
 			}
 		}
 	}
 
-	// Token: 0x06000768 RID: 1896 RVA: 0x0006B420 File Offset: 0x00069820
+	// Token: 0x06000355 RID: 853 RVA: 0x0004E914 File Offset: 0x0004CB14
 	private void paintWaypointArrow(mGraphics g)
 	{
 		int num = 10;
 		Task taskMaint = global::Char.myCharz().taskMaint;
-		if (taskMaint != null && taskMaint.taskId == 0 && ((taskMaint.index != 1 && taskMaint.index < 6) || taskMaint.index == 0))
+		bool flag = taskMaint != null && taskMaint.taskId == 0 && ((taskMaint.index != 1 && taskMaint.index < 6) || taskMaint.index == 0);
+		if (!flag)
 		{
-			return;
-		}
-		for (int i = 0; i < TileMap.vGo.size(); i++)
-		{
-			Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt(i);
-			if (waypoint.minY == 0 || (int)waypoint.maxY >= TileMap.pxh - 24)
+			for (int i = 0; i < TileMap.vGo.size(); i++)
 			{
-				if ((int)waypoint.maxY <= TileMap.pxh / 2)
+				Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt(i);
+				bool flag2 = waypoint.minY == 0 || (int)waypoint.maxY >= TileMap.pxh - 24;
+				if (flag2)
 				{
-					int x = (int)(waypoint.minX + (waypoint.maxX - waypoint.minX) / 2);
-					int y = (int)(waypoint.minY + (waypoint.maxY - waypoint.minY) / 2) + this.runArrow;
-					if (GameCanvas.isTouch)
+					bool flag3 = (int)waypoint.maxY <= TileMap.pxh / 2;
+					if (flag3)
 					{
-						y = (int)(waypoint.maxY + (waypoint.maxY - waypoint.minY)) + this.runArrow + num;
+						int x = (int)(waypoint.minX + (waypoint.maxX - waypoint.minX) / 2);
+						int y = (int)(waypoint.minY + (waypoint.maxY - waypoint.minY) / 2) + this.runArrow;
+						bool isTouch = GameCanvas.isTouch;
+						if (isTouch)
+						{
+							y = (int)(waypoint.maxY + (waypoint.maxY - waypoint.minY)) + this.runArrow + num;
+						}
+						g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 6, x, y, StaticObj.VCENTER_HCENTER);
 					}
-					g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 6, x, y, StaticObj.VCENTER_HCENTER);
-				}
-				else if ((int)waypoint.minY >= TileMap.pxh / 2)
-				{
-					g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 4, (int)(waypoint.minX + (waypoint.maxX - waypoint.minX) / 2), (int)(waypoint.minY - 12) - this.runArrow, StaticObj.VCENTER_HCENTER);
-				}
-			}
-			else if (waypoint.minX >= 0 && waypoint.minX < 24)
-			{
-				if (!GameCanvas.isTouch)
-				{
-					g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 2, (int)(waypoint.maxX + 12) + this.runArrow, (int)(waypoint.maxY - 12), StaticObj.VCENTER_HCENTER);
+					else
+					{
+						bool flag4 = (int)waypoint.minY >= TileMap.pxh / 2;
+						if (flag4)
+						{
+							g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 4, (int)(waypoint.minX + (waypoint.maxX - waypoint.minX) / 2), (int)(waypoint.minY - 12) - this.runArrow, StaticObj.VCENTER_HCENTER);
+						}
+					}
 				}
 				else
 				{
-					g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 2, (int)(waypoint.maxX + 12) + this.runArrow, (int)(waypoint.maxY - 32), StaticObj.VCENTER_HCENTER);
+					bool flag5 = waypoint.minX >= 0 && waypoint.minX < 24;
+					if (flag5)
+					{
+						bool flag6 = !GameCanvas.isTouch;
+						if (flag6)
+						{
+							g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 2, (int)(waypoint.maxX + 12) + this.runArrow, (int)(waypoint.maxY - 12), StaticObj.VCENTER_HCENTER);
+						}
+						else
+						{
+							g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 2, (int)(waypoint.maxX + 12) + this.runArrow, (int)(waypoint.maxY - 32), StaticObj.VCENTER_HCENTER);
+						}
+					}
+					else
+					{
+						bool flag7 = (int)waypoint.minX <= TileMap.tmw * 24 && (int)waypoint.minX >= TileMap.tmw * 24 - 48;
+						if (flag7)
+						{
+							bool flag8 = !GameCanvas.isTouch;
+							if (flag8)
+							{
+								g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 0, (int)(waypoint.minX - 12) - this.runArrow, (int)(waypoint.maxY - 12), StaticObj.VCENTER_HCENTER);
+							}
+							else
+							{
+								g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 0, (int)(waypoint.minX - 12) - this.runArrow, (int)(waypoint.maxY - 32), StaticObj.VCENTER_HCENTER);
+							}
+						}
+						else
+						{
+							g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 4, (int)(waypoint.minX + (waypoint.maxX - waypoint.minX) / 2), (int)(waypoint.maxY - 48) - this.runArrow, StaticObj.VCENTER_HCENTER);
+						}
+					}
 				}
-			}
-			else if ((int)waypoint.minX <= TileMap.tmw * 24 && (int)waypoint.minX >= TileMap.tmw * 24 - 48)
-			{
-				if (!GameCanvas.isTouch)
-				{
-					g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 0, (int)(waypoint.minX - 12) - this.runArrow, (int)(waypoint.maxY - 12), StaticObj.VCENTER_HCENTER);
-				}
-				else
-				{
-					g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 0, (int)(waypoint.minX - 12) - this.runArrow, (int)(waypoint.maxY - 32), StaticObj.VCENTER_HCENTER);
-				}
-			}
-			else
-			{
-				g.drawRegion(GameScr.arrow, 0, 0, 13, 16, 4, (int)(waypoint.minX + (waypoint.maxX - waypoint.minX) / 2), (int)(waypoint.maxY - 48) - this.runArrow, StaticObj.VCENTER_HCENTER);
 			}
 		}
 	}
 
-	// Token: 0x06000769 RID: 1897 RVA: 0x0006B72C File Offset: 0x00069B2C
+	// Token: 0x06000356 RID: 854 RVA: 0x0004EC68 File Offset: 0x0004CE68
 	public static Npc findNPCInMap(short id)
 	{
 		for (int i = 0; i < GameScr.vNpc.size(); i++)
 		{
 			Npc npc = (Npc)GameScr.vNpc.elementAt(i);
-			if (npc.template.npcTemplateId == (int)id)
+			bool flag = npc.template.npcTemplateId == (int)id;
+			if (flag)
 			{
 				return npc;
 			}
@@ -4893,13 +5862,14 @@ public class GameScr : mScreen, IChatable
 		return null;
 	}
 
-	// Token: 0x0600076A RID: 1898 RVA: 0x0006B77C File Offset: 0x00069B7C
+	// Token: 0x06000357 RID: 855 RVA: 0x0004ECC0 File Offset: 0x0004CEC0
 	public static global::Char findCharInMap(int charId)
 	{
 		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
 		{
 			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
-			if (@char.charID == charId)
+			bool flag = @char.charID == charId;
+			if (flag)
 			{
 				return @char;
 			}
@@ -4907,19 +5877,20 @@ public class GameScr : mScreen, IChatable
 		return null;
 	}
 
-	// Token: 0x0600076B RID: 1899 RVA: 0x0006B7C4 File Offset: 0x00069BC4
+	// Token: 0x06000358 RID: 856 RVA: 0x0004ED14 File Offset: 0x0004CF14
 	public static Mob findMobInMap(sbyte mobIndex)
 	{
 		return (Mob)GameScr.vMob.elementAt((int)mobIndex);
 	}
 
-	// Token: 0x0600076C RID: 1900 RVA: 0x0006B7D8 File Offset: 0x00069BD8
+	// Token: 0x06000359 RID: 857 RVA: 0x0004ED38 File Offset: 0x0004CF38
 	public static Mob findMobInMap(int mobId)
 	{
 		for (int i = 0; i < GameScr.vMob.size(); i++)
 		{
 			Mob mob = (Mob)GameScr.vMob.elementAt(i);
-			if (mob.mobId == mobId)
+			bool flag = mob.mobId == mobId;
+			if (flag)
 			{
 				return mob;
 			}
@@ -4927,13 +5898,14 @@ public class GameScr : mScreen, IChatable
 		return null;
 	}
 
-	// Token: 0x0600076D RID: 1901 RVA: 0x0006B820 File Offset: 0x00069C20
+	// Token: 0x0600035A RID: 858 RVA: 0x0004ED8C File Offset: 0x0004CF8C
 	public static Npc getNpcTask()
 	{
 		for (int i = 0; i < GameScr.vNpc.size(); i++)
 		{
 			Npc npc = (Npc)GameScr.vNpc.elementAt(i);
-			if (npc.template.npcTemplateId == (int)GameScr.getTaskNpcId())
+			bool flag = npc.template.npcTemplateId == (int)GameScr.getTaskNpcId();
+			if (flag)
 			{
 				return npc;
 			}
@@ -4941,50 +5913,64 @@ public class GameScr : mScreen, IChatable
 		return null;
 	}
 
-	// Token: 0x0600076E RID: 1902 RVA: 0x0006B874 File Offset: 0x00069C74
+	// Token: 0x0600035B RID: 859 RVA: 0x0004EDE8 File Offset: 0x0004CFE8
 	private void paintArrowPointToNPC(mGraphics g)
 	{
 		try
 		{
-			if (ChatPopup.currChatPopup == null)
+			bool flag = ChatPopup.currChatPopup == null;
+			if (flag)
 			{
 				int num = (int)GameScr.getTaskNpcId();
-				if (num != -1)
+				bool flag2 = num != -1;
+				if (flag2)
 				{
 					Npc npc = null;
 					for (int i = 0; i < GameScr.vNpc.size(); i++)
 					{
 						Npc npc2 = (Npc)GameScr.vNpc.elementAt(i);
-						if (npc2.template.npcTemplateId == num)
+						bool flag3 = npc2.template.npcTemplateId == num;
+						if (flag3)
 						{
-							if (npc == null)
+							bool flag4 = npc == null;
+							if (flag4)
 							{
 								npc = npc2;
 							}
-							else if (Res.abs(npc2.cx - global::Char.myCharz().cx) < Res.abs(npc.cx - global::Char.myCharz().cx))
+							else
 							{
-								npc = npc2;
+								bool flag5 = Res.abs(npc2.cx - global::Char.myCharz().cx) < Res.abs(npc.cx - global::Char.myCharz().cx);
+								if (flag5)
+								{
+									npc = npc2;
+								}
 							}
 						}
 					}
-					if (npc != null && npc.statusMe != 15)
+					bool flag6 = npc != null && npc.statusMe != 15;
+					if (flag6)
 					{
-						if (npc.cx <= GameScr.cmx || npc.cx >= GameScr.cmx + GameScr.gW || npc.cy <= GameScr.cmy || npc.cy >= GameScr.cmy + GameScr.gH)
+						bool flag7 = npc.cx <= GameScr.cmx || npc.cx >= GameScr.cmx + GameScr.gW || npc.cy <= GameScr.cmy || npc.cy >= GameScr.cmy + GameScr.gH;
+						if (flag7)
 						{
-							if (GameCanvas.gameTick % 10 >= 5)
+							bool flag8 = GameCanvas.gameTick % 10 >= 5;
+							if (flag8)
 							{
 								int num2 = npc.cx - global::Char.myCharz().cx;
 								int num3 = npc.cy - global::Char.myCharz().cy;
 								int x = 0;
 								int y = 0;
 								int arg = 0;
-								if (num2 > 0 && num3 >= 0)
+								bool flag9 = num2 > 0 && num3 >= 0;
+								if (flag9)
 								{
-									if (Res.abs(num2) >= Res.abs(num3))
+									bool flag10 = Res.abs(num2) >= Res.abs(num3);
+									if (flag10)
 									{
 										x = GameScr.gW - 10;
 										y = GameScr.gH / 2 + 30;
-										if (GameCanvas.isTouch)
+										bool isTouch = GameCanvas.isTouch;
+										if (isTouch)
 										{
 											y = GameScr.gH / 2 + 10;
 										}
@@ -4997,32 +5983,41 @@ public class GameScr : mScreen, IChatable
 										arg = 5;
 									}
 								}
-								else if (num2 >= 0 && num3 < 0)
+								else
 								{
-									if (Res.abs(num2) >= Res.abs(num3))
+									bool flag11 = num2 >= 0 && num3 < 0;
+									if (flag11)
 									{
-										x = GameScr.gW - 10;
-										y = GameScr.gH / 2 + 30;
-										if (GameCanvas.isTouch)
+										bool flag12 = Res.abs(num2) >= Res.abs(num3);
+										if (flag12)
 										{
-											y = GameScr.gH / 2 + 10;
+											x = GameScr.gW - 10;
+											y = GameScr.gH / 2 + 30;
+											bool isTouch2 = GameCanvas.isTouch;
+											if (isTouch2)
+											{
+												y = GameScr.gH / 2 + 10;
+											}
+											arg = 0;
 										}
-										arg = 0;
-									}
-									else
-									{
-										x = GameScr.gW / 2;
-										y = 10;
-										arg = 6;
+										else
+										{
+											x = GameScr.gW / 2;
+											y = 10;
+											arg = 6;
+										}
 									}
 								}
-								if (num2 < 0 && num3 >= 0)
+								bool flag13 = num2 < 0 && num3 >= 0;
+								if (flag13)
 								{
-									if (Res.abs(num2) >= Res.abs(num3))
+									bool flag14 = Res.abs(num2) >= Res.abs(num3);
+									if (flag14)
 									{
 										x = 10;
 										y = GameScr.gH / 2 + 30;
-										if (GameCanvas.isTouch)
+										bool isTouch3 = GameCanvas.isTouch;
+										if (isTouch3)
 										{
 											y = GameScr.gH / 2 + 10;
 										}
@@ -5035,23 +6030,29 @@ public class GameScr : mScreen, IChatable
 										arg = 5;
 									}
 								}
-								else if (num2 <= 0 && num3 < 0)
+								else
 								{
-									if (Res.abs(num2) >= Res.abs(num3))
+									bool flag15 = num2 <= 0 && num3 < 0;
+									if (flag15)
 									{
-										x = 10;
-										y = GameScr.gH / 2 + 30;
-										if (GameCanvas.isTouch)
+										bool flag16 = Res.abs(num2) >= Res.abs(num3);
+										if (flag16)
 										{
-											y = GameScr.gH / 2 + 10;
+											x = 10;
+											y = GameScr.gH / 2 + 30;
+											bool isTouch4 = GameCanvas.isTouch;
+											if (isTouch4)
+											{
+												y = GameScr.gH / 2 + 10;
+											}
+											arg = 3;
 										}
-										arg = 3;
-									}
-									else
-									{
-										x = GameScr.gW / 2;
-										y = 10;
-										arg = 6;
+										else
+										{
+											x = GameScr.gW / 2;
+											y = 10;
+											arg = 6;
+										}
 									}
 								}
 								GameScr.resetTranslate(g);
@@ -5068,39 +6069,41 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x0600076F RID: 1903 RVA: 0x0006BBD4 File Offset: 0x00069FD4
+	// Token: 0x0600035C RID: 860 RVA: 0x0004F1B4 File Offset: 0x0004D3B4
 	public static void resetTranslate(mGraphics g)
 	{
 		g.translate(-g.getTranslateX(), -g.getTranslateY());
 		g.setClip(0, -200, GameCanvas.w, 200 + GameCanvas.h);
 	}
 
-	// Token: 0x06000770 RID: 1904 RVA: 0x0006BC08 File Offset: 0x0006A008
+	// Token: 0x0600035D RID: 861 RVA: 0x0004F1EC File Offset: 0x0004D3EC
 	private void paintTouchControl(mGraphics g)
 	{
-		if (this.isNotPaintTouchControl())
+		bool flag = this.isNotPaintTouchControl();
+		if (!flag)
 		{
-			return;
-		}
-		GameScr.resetTranslate(g);
-		if (!TileMap.isOfflineMap() && !this.isVS())
-		{
-			if (mScreen.keyTouch == 15 || mScreen.keyMouse == 15)
+			GameScr.resetTranslate(g);
+			bool flag2 = !TileMap.isOfflineMap() && !this.isVS();
+			if (flag2)
 			{
-				g.drawImage((!Main.isPC) ? GameScr.imgChat2 : GameScr.imgChatsPC2, GameScr.xC + 17, GameScr.yC + 17 + mGraphics.addYWhenOpenKeyBoard, mGraphics.HCENTER | mGraphics.VCENTER);
+				bool flag3 = mScreen.keyTouch == 15 || mScreen.keyMouse == 15;
+				if (flag3)
+				{
+					g.drawImage((!Main.isPC) ? GameScr.imgChat2 : GameScr.imgChatsPC2, GameScr.xC + 17, GameScr.yC + 17 + mGraphics.addYWhenOpenKeyBoard, mGraphics.HCENTER | mGraphics.VCENTER);
+				}
+				else
+				{
+					g.drawImage((!Main.isPC) ? GameScr.imgChat : GameScr.imgChatPC, GameScr.xC + 17, GameScr.yC + 17 + mGraphics.addYWhenOpenKeyBoard, mGraphics.HCENTER | mGraphics.VCENTER);
+				}
 			}
-			else
+			bool flag4 = !GameScr.isUseTouch;
+			if (flag4)
 			{
-				g.drawImage((!Main.isPC) ? GameScr.imgChat : GameScr.imgChatPC, GameScr.xC + 17, GameScr.yC + 17 + mGraphics.addYWhenOpenKeyBoard, mGraphics.HCENTER | mGraphics.VCENTER);
 			}
-		}
-		if (!GameScr.isUseTouch)
-		{
-			return;
 		}
 	}
 
-	// Token: 0x06000771 RID: 1905 RVA: 0x0006BCE4 File Offset: 0x0006A0E4
+	// Token: 0x0600035E RID: 862 RVA: 0x0004F2D4 File Offset: 0x0004D4D4
 	public void paintImageBarRight(mGraphics g, global::Char c)
 	{
 		int num = (int)((long)c.cHP * GameScr.hpBarW / (long)c.cHPFull);
@@ -5123,119 +6126,124 @@ public class GameScr : mScreen, IChatable
 		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
 	}
 
-	// Token: 0x06000772 RID: 1906 RVA: 0x0006BF0C File Offset: 0x0006A30C
+	// Token: 0x0600035F RID: 863 RVA: 0x0004F50C File Offset: 0x0004D70C
 	private void paintImageBar(mGraphics g, bool isLeft, global::Char c)
 	{
-		if (c == null)
+		bool flag = c == null;
+		if (!flag)
 		{
-			return;
-		}
-		int num;
-		int num2;
-		int num3;
-		int num4;
-		if (c.charID == global::Char.myCharz().charID)
-		{
-			num = (int)((long)this.dHP * GameScr.hpBarW / (long)c.cHPFull);
-			num2 = this.dMP * GameScr.mpBarW / c.cMPFull;
-			num3 = (int)((long)c.cHP * GameScr.hpBarW / (long)c.cHPFull);
-			num4 = c.cMP * GameScr.mpBarW / c.cMPFull;
-		}
-		else
-		{
-			num = (int)((long)c.dHP * GameScr.hpBarW / (long)c.cHPFull);
-			num2 = c.perCentMp * GameScr.mpBarW / 100;
-			num3 = (int)((long)c.cHP * GameScr.hpBarW / (long)c.cHPFull);
-			num4 = c.perCentMp * GameScr.mpBarW / 100;
-		}
-		if (global::Char.myCharz().secondPower > 0)
-		{
-			int w = (int)global::Char.myCharz().powerPoint * GameScr.spBarW / (int)global::Char.myCharz().maxPowerPoint;
-			g.drawImage(GameScr.imgPanel2, 58, 29, 0);
-			g.setClip(83, 31, w, 10);
-			g.drawImage(GameScr.imgSP, 83, 31, 0);
-			g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
-			mFont.tahoma_7_white.drawString(g, string.Concat(new object[]
+			bool flag2 = c.charID == global::Char.myCharz().charID;
+			int num;
+			int num2;
+			int num3;
+			int num4;
+			if (flag2)
 			{
-				global::Char.myCharz().strInfo,
-				":",
-				global::Char.myCharz().powerPoint,
-				"/",
-				global::Char.myCharz().maxPowerPoint
-			}), 115, 29, 2);
-		}
-		if (c.charID != global::Char.myCharz().charID)
-		{
-			g.setClip(mGraphics.getImageWidth(GameScr.imgPanel) - 95, 0, 95, 100);
-		}
-		g.drawImage(GameScr.imgPanel, 0, 0, 0);
-		if (isLeft)
-		{
-			g.setClip(83, 5, num, 10);
-		}
-		else
-		{
-			g.setClip((int)(83L + GameScr.hpBarW - (long)num), 5, num, 10);
-		}
-		g.drawImage(GameScr.imgHPLost, 83, 5, 0);
-		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
-		if (isLeft)
-		{
-			g.setClip(83, 5, num3, 10);
-		}
-		else
-		{
-			g.setClip((int)(83L + GameScr.hpBarW - (long)num3), 5, num3, 10);
-		}
-		g.drawImage(GameScr.imgHP, 83, 5, 0);
-		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
-		if (isLeft)
-		{
-			g.setClip(83, 20, num2, 6);
-		}
-		else
-		{
-			g.setClip(83 + GameScr.mpBarW - num2, 20, num2, 6);
-		}
-		g.drawImage(GameScr.imgMPLost, 83, 20, 0);
-		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
-		if (isLeft)
-		{
-			g.setClip(83, 20, num2, 6);
-		}
-		else
-		{
-			g.setClip(83 + GameScr.mpBarW - num4, 20, num4, 6);
-		}
-		g.drawImage(GameScr.imgMP, 83, 20, 0);
-		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
-		if (global::Char.myCharz().cMP == 0 && GameCanvas.gameTick % 10 > 5)
-		{
-			g.setClip(83, 20, 2, 6);
+				num = (int)((long)this.dHP * GameScr.hpBarW / (long)c.cHPFull);
+				num2 = this.dMP * GameScr.mpBarW / c.cMPFull;
+				num3 = (int)((long)c.cHP * GameScr.hpBarW / (long)c.cHPFull);
+				num4 = c.cMP * GameScr.mpBarW / c.cMPFull;
+			}
+			else
+			{
+				num = (int)((long)c.dHP * GameScr.hpBarW / (long)c.cHPFull);
+				num2 = c.perCentMp * GameScr.mpBarW / 100;
+				num3 = (int)((long)c.cHP * GameScr.hpBarW / (long)c.cHPFull);
+				num4 = c.perCentMp * GameScr.mpBarW / 100;
+			}
+			bool flag3 = global::Char.myCharz().secondPower > 0;
+			if (flag3)
+			{
+				int w = (int)global::Char.myCharz().powerPoint * GameScr.spBarW / (int)global::Char.myCharz().maxPowerPoint;
+				g.drawImage(GameScr.imgPanel2, 58, 29, 0);
+				g.setClip(83, 31, w, 10);
+				g.drawImage(GameScr.imgSP, 83, 31, 0);
+				g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+				mFont.tahoma_7_white.drawString(g, string.Concat(new object[]
+				{
+					global::Char.myCharz().strInfo,
+					":",
+					global::Char.myCharz().powerPoint,
+					"/",
+					global::Char.myCharz().maxPowerPoint
+				}), 115, 29, 2);
+			}
+			bool flag4 = c.charID != global::Char.myCharz().charID;
+			if (flag4)
+			{
+				g.setClip(mGraphics.getImageWidth(GameScr.imgPanel) - 95, 0, 95, 100);
+			}
+			g.drawImage(GameScr.imgPanel, 0, 0, 0);
+			if (isLeft)
+			{
+				g.setClip(83, 5, num, 10);
+			}
+			else
+			{
+				g.setClip((int)(83L + GameScr.hpBarW - (long)num), 5, num, 10);
+			}
+			g.drawImage(GameScr.imgHPLost, 83, 5, 0);
+			g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+			if (isLeft)
+			{
+				g.setClip(83, 5, num3, 10);
+			}
+			else
+			{
+				g.setClip((int)(83L + GameScr.hpBarW - (long)num3), 5, num3, 10);
+			}
+			g.drawImage(GameScr.imgHP, 83, 5, 0);
+			g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+			if (isLeft)
+			{
+				g.setClip(83, 20, num2, 6);
+			}
+			else
+			{
+				g.setClip(83 + GameScr.mpBarW - num2, 20, num2, 6);
+			}
 			g.drawImage(GameScr.imgMPLost, 83, 20, 0);
 			g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+			if (isLeft)
+			{
+				g.setClip(83, 20, num2, 6);
+			}
+			else
+			{
+				g.setClip(83 + GameScr.mpBarW - num4, 20, num4, 6);
+			}
+			g.drawImage(GameScr.imgMP, 83, 20, 0);
+			g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+			bool flag5 = global::Char.myCharz().cMP == 0 && GameCanvas.gameTick % 10 > 5;
+			if (flag5)
+			{
+				g.setClip(83, 20, 2, 6);
+				g.drawImage(GameScr.imgMPLost, 83, 20, 0);
+				g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+			}
 		}
 	}
 
-	// Token: 0x06000773 RID: 1907 RVA: 0x0006C26D File Offset: 0x0006A66D
+	// Token: 0x06000360 RID: 864 RVA: 0x00003136 File Offset: 0x00001336
 	public void getInjure()
 	{
 	}
 
-	// Token: 0x06000774 RID: 1908 RVA: 0x0006C270 File Offset: 0x0006A670
+	// Token: 0x06000361 RID: 865 RVA: 0x0004F8AC File Offset: 0x0004DAAC
 	public void starVS()
 	{
 		this.curr = (this.last = mSystem.currentTimeMillis());
 		this.secondVS = 180;
 	}
 
-	// Token: 0x06000775 RID: 1909 RVA: 0x0006C29C File Offset: 0x0006A69C
+	// Token: 0x06000362 RID: 866 RVA: 0x0004F8DC File Offset: 0x0004DADC
 	private global::Char findCharVS1()
 	{
 		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
 		{
 			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
-			if ((int)@char.cTypePk != 0)
+			bool flag = @char.cTypePk != 0;
+			if (flag)
 			{
 				return @char;
 			}
@@ -5243,13 +6251,14 @@ public class GameScr : mScreen, IChatable
 		return null;
 	}
 
-	// Token: 0x06000776 RID: 1910 RVA: 0x0006C2E4 File Offset: 0x0006A6E4
+	// Token: 0x06000363 RID: 867 RVA: 0x0004F930 File Offset: 0x0004DB30
 	private global::Char findCharVS2()
 	{
 		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
 		{
 			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
-			if ((int)@char.cTypePk != 0 && @char != this.findCharVS1())
+			bool flag = @char.cTypePk != 0 && @char != this.findCharVS1();
+			if (flag)
 			{
 				return @char;
 			}
@@ -5257,11 +6266,12 @@ public class GameScr : mScreen, IChatable
 		return null;
 	}
 
-	// Token: 0x06000777 RID: 1911 RVA: 0x0006C338 File Offset: 0x0006A738
+	// Token: 0x06000364 RID: 868 RVA: 0x0004F994 File Offset: 0x0004DB94
 	private void paintInfoBar(mGraphics g)
 	{
 		GameScr.resetTranslate(g);
-		if (TileMap.mapID == 130 && this.findCharVS1() != null && this.findCharVS2() != null)
+		bool flag = TileMap.mapID == 130 && this.findCharVS1() != null && this.findCharVS2() != null;
+		if (flag)
 		{
 			g.translate(GameCanvas.w / 2 - 62, 0);
 			this.paintImageBar(g, true, this.findCharVS1());
@@ -5270,72 +6280,100 @@ public class GameScr : mScreen, IChatable
 			this.findCharVS1().paintHeadWithXY(g, 137, 25, 0);
 			this.findCharVS2().paintHeadWithXY(g, GameCanvas.w - 15 - 122, 25, 2);
 		}
-		else if (this.isVS() && global::Char.myCharz().charFocus != null)
-		{
-			g.translate(GameCanvas.w / 2 - 62, 0);
-			this.paintImageBar(g, true, global::Char.myCharz().charFocus);
-			g.translate(-(GameCanvas.w / 2 - 65), 0);
-			this.paintImageBarRight(g, global::Char.myCharz());
-			global::Char.myCharz().paintHeadWithXY(g, 137, 25, 0);
-			global::Char.myCharz().charFocus.paintHeadWithXY(g, GameCanvas.w - 15 - 122, 25, 2);
-		}
-		else if (GameScr.ispaintPhubangBar() && GameScr.isSmallScr())
-		{
-			GameScr.paintHPBar_NEW(g, 1, 1, global::Char.myCharz());
-		}
 		else
 		{
-			this.paintImageBar(g, true, global::Char.myCharz());
-			if (global::Char.myCharz().isInEnterOfflinePoint() != null || global::Char.myCharz().isInEnterOnlinePoint() != null)
+			bool flag2 = this.isVS() && global::Char.myCharz().charFocus != null;
+			if (flag2)
 			{
-				mFont.tahoma_7_green2.drawString(g, mResources.enter, this.imgScrW / 2, 8 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-			}
-			else if (global::Char.myCharz().mobFocus != null)
-			{
-				if (global::Char.myCharz().mobFocus.getTemplate() != null)
-				{
-					mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().mobFocus.getTemplate().name, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				}
-				if (global::Char.myCharz().mobFocus.templateId != 0)
-				{
-					mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys((long)global::Char.myCharz().mobFocus.hp) + string.Empty, this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				}
-			}
-			else if (global::Char.myCharz().npcFocus != null)
-			{
-				mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().npcFocus.template.name, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				if (global::Char.myCharz().npcFocus.template.npcTemplateId == 4)
-				{
-					mFont.tahoma_7b_green2.drawString(g, GameScr.gI().magicTree.currPeas + "/" + GameScr.gI().magicTree.maxPeas, this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				}
-			}
-			else if (global::Char.myCharz().charFocus != null)
-			{
-				mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().charFocus.cName, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys((long)global::Char.myCharz().charFocus.cHP) + string.Empty, this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+				g.translate(GameCanvas.w / 2 - 62, 0);
+				this.paintImageBar(g, true, global::Char.myCharz().charFocus);
+				g.translate(-(GameCanvas.w / 2 - 65), 0);
+				this.paintImageBarRight(g, global::Char.myCharz());
+				global::Char.myCharz().paintHeadWithXY(g, 137, 25, 0);
+				global::Char.myCharz().charFocus.paintHeadWithXY(g, GameCanvas.w - 15 - 122, 25, 2);
 			}
 			else
 			{
-				mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().cName, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys(global::Char.myCharz().cPower) + string.Empty, this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+				bool flag3 = GameScr.ispaintPhubangBar() && GameScr.isSmallScr();
+				if (flag3)
+				{
+					GameScr.paintHPBar_NEW(g, 1, 1, global::Char.myCharz());
+				}
+				else
+				{
+					this.paintImageBar(g, true, global::Char.myCharz());
+					bool flag4 = global::Char.myCharz().isInEnterOfflinePoint() != null || global::Char.myCharz().isInEnterOnlinePoint() != null;
+					if (flag4)
+					{
+						mFont.tahoma_7_green2.drawString(g, mResources.enter, this.imgScrW / 2, 8 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+					}
+					else
+					{
+						bool flag5 = global::Char.myCharz().mobFocus != null;
+						if (flag5)
+						{
+							bool flag6 = global::Char.myCharz().mobFocus.getTemplate() != null;
+							if (flag6)
+							{
+								mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().mobFocus.getTemplate().name, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+							}
+							bool flag7 = global::Char.myCharz().mobFocus.templateId != 0;
+							if (flag7)
+							{
+								mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys((long)global::Char.myCharz().mobFocus.hp) + string.Empty, this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+							}
+						}
+						else
+						{
+							bool flag8 = global::Char.myCharz().npcFocus != null;
+							if (flag8)
+							{
+								mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().npcFocus.template.name, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+								bool flag9 = global::Char.myCharz().npcFocus.template.npcTemplateId == 4;
+								if (flag9)
+								{
+									mFont.tahoma_7b_green2.drawString(g, GameScr.gI().magicTree.currPeas.ToString() + "/" + GameScr.gI().magicTree.maxPeas.ToString(), this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+								}
+							}
+							else
+							{
+								bool flag10 = global::Char.myCharz().charFocus != null;
+								if (flag10)
+								{
+									mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().charFocus.cName, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+									mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys((long)global::Char.myCharz().charFocus.cHP) + string.Empty, this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+								}
+								else
+								{
+									mFont.tahoma_7b_green2.drawString(g, global::Char.myCharz().cName, this.imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+									mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys(global::Char.myCharz().cPower) + string.Empty, this.imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 		g.translate(-g.getTranslateX(), -g.getTranslateY());
-		if (this.isVS() && this.secondVS > 0)
+		bool flag11 = this.isVS() && this.secondVS > 0;
+		if (flag11)
 		{
 			this.curr = mSystem.currentTimeMillis();
-			if (this.curr - this.last >= 1000L)
+			bool flag12 = this.curr - this.last >= 1000L;
+			if (flag12)
 			{
 				this.last = mSystem.currentTimeMillis();
 				this.secondVS--;
 			}
-			mFont.tahoma_7b_white.drawString(g, this.secondVS + string.Empty, GameCanvas.w / 2, 13, 2, mFont.tahoma_7b_dark);
+			mFont.tahoma_7b_white.drawString(g, this.secondVS.ToString() + string.Empty, GameCanvas.w / 2, 13, 2, mFont.tahoma_7b_dark);
 		}
-		if (this.flareFindFocus)
+		bool flag13 = this.flareFindFocus;
+		if (flag13)
 		{
 			g.drawImage(ItemMap.imageFlare, 40, 35, mGraphics.BOTTOM | mGraphics.HCENTER);
 			this.flareTime--;
-			if (this.flareTime < 0)
+			bool flag14 = this.flareTime < 0;
+			if (flag14)
 			{
 				this.flareTime = 0;
 				this.flareFindFocus = false;
@@ -5343,198 +6381,236 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000778 RID: 1912 RVA: 0x0006C818 File Offset: 0x0006AC18
+	// Token: 0x06000365 RID: 869 RVA: 0x0004FED8 File Offset: 0x0004E0D8
 	public bool isVS()
 	{
-		return TileMap.isVoDaiMap() && ((int)global::Char.myCharz().cTypePk != 0 || (TileMap.mapID == 130 && this.findCharVS1() != null && this.findCharVS2() != null));
+		return TileMap.isVoDaiMap() && (global::Char.myCharz().cTypePk != 0 || (TileMap.mapID == 130 && this.findCharVS1() != null && this.findCharVS2() != null));
 	}
 
-	// Token: 0x06000779 RID: 1913 RVA: 0x0006C868 File Offset: 0x0006AC68
+	// Token: 0x06000366 RID: 870 RVA: 0x0004FF24 File Offset: 0x0004E124
 	private void paintSelectedSkill(mGraphics g)
 	{
-		if (this.mobCapcha != null)
+		bool flag = this.mobCapcha != null;
+		if (flag)
 		{
 			this.paintCapcha(g);
-			return;
 		}
-		if (GameCanvas.currentDialog != null || ChatPopup.currChatPopup != null || GameCanvas.menu.showMenu || this.isPaintPopup() || GameCanvas.panel.isShow || global::Char.myCharz().taskMaint.taskId == 0 || ChatTextField.gI().isShow || GameCanvas.currentScreen == MoneyCharge.instance)
+		else
 		{
-			return;
-		}
-		long num = mSystem.currentTimeMillis();
-		long num2 = num - this.lastUsePotion;
-		int num3 = 0;
-		if (num2 < 10000L)
-		{
-			num3 = (int)(num2 * 20L / 10000L);
-		}
-		if (!GameCanvas.isTouch)
-		{
-			g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgSkill : GameScr.imgSkill2, GameScr.xSkill + GameScr.xHP - 1, GameScr.yHP - 1, 0);
-			SmallImage.drawSmallImage(g, 542, GameScr.xSkill + GameScr.xHP + 3, GameScr.yHP + 3, 0, 0);
-			mFont.number_gray.drawString(g, string.Empty + GameScr.hpPotion, GameScr.xSkill + GameScr.xHP + 22, GameScr.yHP + 15, 1);
-			if (num2 < 10000L)
+			bool flag2 = GameCanvas.currentDialog != null || ChatPopup.currChatPopup != null || GameCanvas.menu.showMenu || this.isPaintPopup() || GameCanvas.panel.isShow || global::Char.myCharz().taskMaint.taskId == 0 || ChatTextField.gI().isShow || GameCanvas.currentScreen == MoneyCharge.instance;
+			if (!flag2)
 			{
-				g.setColor(2721889);
-				num3 = (int)(num2 * 20L / 10000L);
-				g.fillRect(GameScr.xSkill + GameScr.xHP + 3, GameScr.yHP + 3 + num3, 20, 20 - num3);
-			}
-		}
-		else if (global::Char.myCharz().statusMe != 14)
-		{
-			if (GameScr.gamePad.isSmallGamePad)
-			{
-				if (GameScr.isAnalog != 1)
+				long num = mSystem.currentTimeMillis();
+				long num2 = num - this.lastUsePotion;
+				int num3 = 0;
+				bool flag3 = num2 < 10000L;
+				if (flag3)
 				{
-					g.setColor(9670800);
-					g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10, 22, 20);
-					g.setColor(16777215);
-					g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10 + ((num3 == 0) ? 0 : (20 - num3)), 22, (num3 == 0) ? 20 : num3);
-					g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgHP1 : GameScr.imgHP2, GameScr.xHP, GameScr.yHP, 0);
-					mFont.tahoma_7_red.drawString(g, string.Empty + GameScr.hpPotion, GameScr.xHP + 20, GameScr.yHP + 15, 2);
+					num3 = (int)(num2 * 20L / 10000L);
 				}
-				else if (GameScr.isAnalog == 1)
+				bool flag4 = !GameCanvas.isTouch;
+				if (flag4)
 				{
 					g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgSkill : GameScr.imgSkill2, GameScr.xSkill + GameScr.xHP - 1, GameScr.yHP - 1, 0);
 					SmallImage.drawSmallImage(g, 542, GameScr.xSkill + GameScr.xHP + 3, GameScr.yHP + 3, 0, 0);
-					mFont.number_gray.drawString(g, string.Empty + GameScr.hpPotion, GameScr.xSkill + GameScr.xHP + 22, GameScr.yHP + 13, 1);
-					if (num2 < 10000L)
+					mFont.number_gray.drawString(g, string.Empty + GameScr.hpPotion.ToString(), GameScr.xSkill + GameScr.xHP + 22, GameScr.yHP + 15, 1);
+					bool flag5 = num2 < 10000L;
+					if (flag5)
 					{
 						g.setColor(2721889);
 						num3 = (int)(num2 * 20L / 10000L);
 						g.fillRect(GameScr.xSkill + GameScr.xHP + 3, GameScr.yHP + 3 + num3, 20, 20 - num3);
 					}
 				}
-			}
-			else if (GameScr.isAnalog != 1)
-			{
-				g.setColor(9670800);
-				g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10 - 6, 22, 20);
-				g.setColor(16777215);
-				g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10 + ((num3 == 0) ? 0 : (20 - num3)) - 6, 22, (num3 == 0) ? 20 : num3);
-				g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgHP1 : GameScr.imgHP2, GameScr.xHP, GameScr.yHP - 6, 0);
-				mFont.tahoma_7_red.drawString(g, string.Empty + GameScr.hpPotion, GameScr.xHP + 20, GameScr.yHP + 15 - 6, 2);
-			}
-			else
-			{
-				g.setColor(9670800);
-				g.fillRect(GameScr.xHP + 10, GameScr.yHP + 10 - 6, 20, 18);
-				g.setColor(16777215);
-				g.fillRect(GameScr.xHP + 10, GameScr.yHP + 10 + ((num3 == 0) ? 0 : (20 - num3)) - 6, 20, (num3 == 0) ? 18 : num3);
-				g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgHP3 : GameScr.imgHP4, GameScr.xHP + 20, GameScr.yHP + 20 - 6, mGraphics.HCENTER | mGraphics.VCENTER);
-				mFont.tahoma_7_red.drawString(g, string.Empty + GameScr.hpPotion, GameScr.xHP + 20, GameScr.yHP + 15 - 6, 2);
-			}
-		}
-		if (GameScr.isHaveSelectSkill)
-		{
-			Skill[] array = Main.isPC ? GameScr.keySkill : ((!GameCanvas.isTouch) ? GameScr.keySkill : GameScr.onScreenSkill);
-			if (mScreen.keyTouch == 10)
-			{
-			}
-			if (!GameCanvas.isTouch)
-			{
-				g.setColor(11152401);
-				g.fillRect(GameScr.xSkill + GameScr.xHP + 2, GameScr.yHP - 10 + 6, 20, 10);
-				mFont.tahoma_7_white.drawString(g, "*", GameScr.xSkill + GameScr.xHP + 12, GameScr.yHP - 8 + 6, mFont.CENTER);
-			}
-			int num4 = (!Main.isPC) ? ((!GameCanvas.isTouch) ? array.Length : this.nSkill) : array.Length;
-			for (int i = 0; i < num4; i++)
-			{
-				if (Main.isPC)
+				else
 				{
-					string[] array3;
-					if (TField.isQwerty)
+					bool flag6 = global::Char.myCharz().statusMe != 14;
+					if (flag6)
 					{
-						string[] array2 = new string[10];
-						array2[0] = "1";
-						array2[1] = "2";
-						array2[2] = "3";
-						array2[3] = "4";
-						array2[4] = "5";
-						array2[5] = "6";
-						array2[6] = "7";
-						array2[7] = "8";
-						array2[8] = "9";
-						array3 = array2;
-						array2[9] = "0";
-					}
-					else
-					{
-						string[] array4 = new string[5];
-						array4[0] = "7";
-						array4[1] = "8";
-						array4[2] = "9";
-						array4[3] = "10";
-						array3 = array4;
-						array4[4] = "11";
-					}
-					string[] array5 = array3;
-					int num5 = -13;
-					if (num4 > 5 && i < 5)
-					{
-						num5 = 27;
-					}
-					mFont.tahoma_7b_dark.drawString(g, array5[i], GameScr.xSkill + GameScr.xS[i] + 14, GameScr.yS[i] + num5, mFont.CENTER);
-					mFont.tahoma_7b_white.drawString(g, array5[i], GameScr.xSkill + GameScr.xS[i] + 14, GameScr.yS[i] + num5 + 1, mFont.CENTER);
-				}
-				else if (!GameCanvas.isTouch)
-				{
-					string[] array7;
-					if (TField.isQwerty)
-					{
-						string[] array6 = new string[5];
-						array6[0] = "Q";
-						array6[1] = "W";
-						array6[2] = "E";
-						array6[3] = "R";
-						array7 = array6;
-						array6[4] = "T";
-					}
-					else
-					{
-						string[] array8 = new string[5];
-						array8[0] = "7";
-						array8[1] = "8";
-						array8[2] = "9";
-						array8[3] = "1";
-						array7 = array8;
-						array8[4] = "3";
-					}
-					string[] array9 = array7;
-					g.setColor(11152401);
-					g.fillRect(GameScr.xSkill + GameScr.xS[i] + 2, GameScr.yS[i] - 10 + 8, 20, 10);
-					mFont.tahoma_7_white.drawString(g, array9[i], GameScr.xSkill + GameScr.xS[i] + 12, GameScr.yS[i] - 10 + 6, mFont.CENTER);
-				}
-				Skill skill = array[i];
-				if (skill != global::Char.myCharz().myskill)
-				{
-					g.drawImage(GameScr.imgSkill, GameScr.xSkill + GameScr.xS[i] - 1, GameScr.yS[i] - 1, 0);
-				}
-				if (skill != null)
-				{
-					if (skill == global::Char.myCharz().myskill)
-					{
-						g.drawImage(GameScr.imgSkill2, GameScr.xSkill + GameScr.xS[i] - 1, GameScr.yS[i] - 1, 0);
-						if (GameCanvas.isTouch && !Main.isPC)
+						bool isSmallGamePad = GameScr.gamePad.isSmallGamePad;
+						if (isSmallGamePad)
 						{
-							g.drawRegion(Mob.imgHP, 0, 12, 9, 6, 0, GameScr.xSkill + GameScr.xS[i] + 8, GameScr.yS[i] - 7, 0);
+							bool flag7 = GameScr.isAnalog != 1;
+							if (flag7)
+							{
+								g.setColor(9670800);
+								g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10, 22, 20);
+								g.setColor(16777215);
+								g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10 + ((num3 == 0) ? 0 : (20 - num3)), 22, (num3 == 0) ? 20 : num3);
+								g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgHP1 : GameScr.imgHP2, GameScr.xHP, GameScr.yHP, 0);
+								mFont.tahoma_7_red.drawString(g, string.Empty + GameScr.hpPotion.ToString(), GameScr.xHP + 20, GameScr.yHP + 15, 2);
+							}
+							else
+							{
+								bool flag8 = GameScr.isAnalog == 1;
+								if (flag8)
+								{
+									g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgSkill : GameScr.imgSkill2, GameScr.xSkill + GameScr.xHP - 1, GameScr.yHP - 1, 0);
+									SmallImage.drawSmallImage(g, 542, GameScr.xSkill + GameScr.xHP + 3, GameScr.yHP + 3, 0, 0);
+									mFont.number_gray.drawString(g, string.Empty + GameScr.hpPotion.ToString(), GameScr.xSkill + GameScr.xHP + 22, GameScr.yHP + 13, 1);
+									bool flag9 = num2 < 10000L;
+									if (flag9)
+									{
+										g.setColor(2721889);
+										num3 = (int)(num2 * 20L / 10000L);
+										g.fillRect(GameScr.xSkill + GameScr.xHP + 3, GameScr.yHP + 3 + num3, 20, 20 - num3);
+									}
+								}
+							}
+						}
+						else
+						{
+							bool flag10 = GameScr.isAnalog != 1;
+							if (flag10)
+							{
+								g.setColor(9670800);
+								g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10 - 6, 22, 20);
+								g.setColor(16777215);
+								g.fillRect(GameScr.xHP + 9, GameScr.yHP + 10 + ((num3 == 0) ? 0 : (20 - num3)) - 6, 22, (num3 == 0) ? 20 : num3);
+								g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgHP1 : GameScr.imgHP2, GameScr.xHP, GameScr.yHP - 6, 0);
+								mFont.tahoma_7_red.drawString(g, string.Empty + GameScr.hpPotion.ToString(), GameScr.xHP + 20, GameScr.yHP + 15 - 6, 2);
+							}
+							else
+							{
+								g.setColor(9670800);
+								g.fillRect(GameScr.xHP + 10, GameScr.yHP + 10 - 6, 20, 18);
+								g.setColor(16777215);
+								g.fillRect(GameScr.xHP + 10, GameScr.yHP + 10 + ((num3 == 0) ? 0 : (20 - num3)) - 6, 20, (num3 == 0) ? 18 : num3);
+								g.drawImage((mScreen.keyTouch != 10) ? GameScr.imgHP3 : GameScr.imgHP4, GameScr.xHP + 20, GameScr.yHP + 20 - 6, mGraphics.HCENTER | mGraphics.VCENTER);
+								mFont.tahoma_7_red.drawString(g, string.Empty + GameScr.hpPotion.ToString(), GameScr.xHP + 20, GameScr.yHP + 15 - 6, 2);
+							}
 						}
 					}
-					skill.paint(GameScr.xSkill + GameScr.xS[i] + 13, GameScr.yS[i] + 13, g);
-					if ((i == this.selectedIndexSkill && !this.isPaintUI() && GameCanvas.gameTick % 10 > 5) || i == this.keyTouchSkill)
+				}
+				bool flag11 = GameScr.isHaveSelectSkill;
+				if (flag11)
+				{
+					Skill[] array = Main.isPC ? GameScr.keySkill : ((!GameCanvas.isTouch) ? GameScr.keySkill : GameScr.onScreenSkill);
+					bool flag12 = mScreen.keyTouch == 10;
+					if (flag12)
 					{
-						g.drawImage(ItemMap.imageFlare, GameScr.xSkill + GameScr.xS[i] + 13, GameScr.yS[i] + 14, 3);
+					}
+					bool flag13 = !GameCanvas.isTouch;
+					if (flag13)
+					{
+						g.setColor(11152401);
+						g.fillRect(GameScr.xSkill + GameScr.xHP + 2, GameScr.yHP - 10 + 6, 20, 10);
+						mFont.tahoma_7_white.drawString(g, "*", GameScr.xSkill + GameScr.xHP + 12, GameScr.yHP - 8 + 6, mFont.CENTER);
+					}
+					int num4 = (!Main.isPC) ? ((!GameCanvas.isTouch) ? array.Length : this.nSkill) : array.Length;
+					for (int i = 0; i < num4; i++)
+					{
+						bool isPC = Main.isPC;
+						if (isPC)
+						{
+							bool isQwerty = TField.isQwerty;
+							string[] array3;
+							if (isQwerty)
+							{
+								string[] array2 = new string[10];
+								array2[0] = "1";
+								array2[1] = "2";
+								array2[2] = "3";
+								array2[3] = "4";
+								array2[4] = "5";
+								array2[5] = "6";
+								array2[6] = "7";
+								array2[7] = "8";
+								array2[8] = "9";
+								array3 = array2;
+								array2[9] = "0";
+							}
+							else
+							{
+								string[] array4 = new string[5];
+								array4[0] = "7";
+								array4[1] = "8";
+								array4[2] = "9";
+								array4[3] = "10";
+								array3 = array4;
+								array4[4] = "11";
+							}
+							string[] array5 = array3;
+							int num5 = -13;
+							bool flag14 = num4 > 5 && i < 5;
+							if (flag14)
+							{
+								num5 = 27;
+							}
+							mFont.tahoma_7b_dark.drawString(g, array5[i], GameScr.xSkill + GameScr.xS[i] + 14, GameScr.yS[i] + num5, mFont.CENTER);
+							mFont.tahoma_7b_white.drawString(g, array5[i], GameScr.xSkill + GameScr.xS[i] + 14, GameScr.yS[i] + num5 + 1, mFont.CENTER);
+						}
+						else
+						{
+							bool flag15 = !GameCanvas.isTouch;
+							if (flag15)
+							{
+								bool isQwerty2 = TField.isQwerty;
+								string[] array7;
+								if (isQwerty2)
+								{
+									string[] array6 = new string[5];
+									array6[0] = "Q";
+									array6[1] = "W";
+									array6[2] = "E";
+									array6[3] = "R";
+									array7 = array6;
+									array6[4] = "T";
+								}
+								else
+								{
+									string[] array8 = new string[5];
+									array8[0] = "7";
+									array8[1] = "8";
+									array8[2] = "9";
+									array8[3] = "1";
+									array7 = array8;
+									array8[4] = "3";
+								}
+								string[] array9 = array7;
+								g.setColor(11152401);
+								g.fillRect(GameScr.xSkill + GameScr.xS[i] + 2, GameScr.yS[i] - 10 + 8, 20, 10);
+								mFont.tahoma_7_white.drawString(g, array9[i], GameScr.xSkill + GameScr.xS[i] + 12, GameScr.yS[i] - 10 + 6, mFont.CENTER);
+							}
+						}
+						Skill skill = array[i];
+						bool flag16 = skill != global::Char.myCharz().myskill;
+						if (flag16)
+						{
+							g.drawImage(GameScr.imgSkill, GameScr.xSkill + GameScr.xS[i] - 1, GameScr.yS[i] - 1, 0);
+						}
+						bool flag17 = skill != null;
+						if (flag17)
+						{
+							bool flag18 = skill == global::Char.myCharz().myskill;
+							if (flag18)
+							{
+								g.drawImage(GameScr.imgSkill2, GameScr.xSkill + GameScr.xS[i] - 1, GameScr.yS[i] - 1, 0);
+								bool flag19 = GameCanvas.isTouch && !Main.isPC;
+								if (flag19)
+								{
+									g.drawRegion(Mob.imgHP, 0, 12, 9, 6, 0, GameScr.xSkill + GameScr.xS[i] + 8, GameScr.yS[i] - 7, 0);
+								}
+							}
+							skill.paint(GameScr.xSkill + GameScr.xS[i] + 13, GameScr.yS[i] + 13, g);
+							bool flag20 = (i == this.selectedIndexSkill && !this.isPaintUI() && GameCanvas.gameTick % 10 > 5) || i == this.keyTouchSkill;
+							if (flag20)
+							{
+								g.drawImage(ItemMap.imageFlare, GameScr.xSkill + GameScr.xS[i] + 13, GameScr.yS[i] + 14, 3);
+							}
+						}
 					}
 				}
+				this.paintGamePad(g);
 			}
 		}
-		this.paintGamePad(g);
 	}
 
-	// Token: 0x0600077A RID: 1914 RVA: 0x0006D1C4 File Offset: 0x0006B5C4
+	// Token: 0x06000367 RID: 871 RVA: 0x00050918 File Offset: 0x0004EB18
 	public void paintOpen(mGraphics g)
 	{
-		if (this.isstarOpen)
+		bool flag = this.isstarOpen;
+		if (flag)
 		{
 			g.translate(-g.getTranslateX(), -g.getTranslateY());
 			g.fillRect(0, 0, GameCanvas.w, this.moveUp);
@@ -5544,51 +6620,56 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x0600077B RID: 1915 RVA: 0x0006D238 File Offset: 0x0006B638
+	// Token: 0x06000368 RID: 872 RVA: 0x00050994 File Offset: 0x0004EB94
 	public static void startFlyText(string flyString, int x, int y, int dx, int dy, int color)
 	{
 		int num = -1;
 		for (int i = 0; i < 5; i++)
 		{
-			if (GameScr.flyTextState[i] == -1)
+			bool flag = GameScr.flyTextState[i] == -1;
+			if (flag)
 			{
 				num = i;
 				break;
 			}
 		}
-		if (num == -1)
+		bool flag2 = num == -1;
+		if (!flag2)
 		{
-			return;
-		}
-		GameScr.flyTextColor[num] = color;
-		GameScr.flyTextString[num] = flyString;
-		GameScr.flyTextX[num] = x;
-		GameScr.flyTextY[num] = y;
-		GameScr.flyTextDx[num] = dx;
-		GameScr.flyTextDy[num] = ((dy >= 0) ? 5 : -5);
-		GameScr.flyTextState[num] = 0;
-		GameScr.flyTime[num] = 0;
-		GameScr.flyTextYTo[num] = 10;
-		for (int j = 0; j < 5; j++)
-		{
-			if (GameScr.flyTextState[j] != -1 && num != j && GameScr.flyTextDy[num] < 0 && Res.abs(GameScr.flyTextX[num] - GameScr.flyTextX[j]) <= 20 && GameScr.flyTextYTo[num] == GameScr.flyTextYTo[j])
+			GameScr.flyTextColor[num] = color;
+			GameScr.flyTextString[num] = flyString;
+			GameScr.flyTextX[num] = x;
+			GameScr.flyTextY[num] = y;
+			GameScr.flyTextDx[num] = dx;
+			GameScr.flyTextDy[num] = ((dy >= 0) ? 5 : -5);
+			GameScr.flyTextState[num] = 0;
+			GameScr.flyTime[num] = 0;
+			GameScr.flyTextYTo[num] = 10;
+			for (int j = 0; j < 5; j++)
 			{
-				GameScr.flyTextYTo[num] += 10;
+				bool flag3 = GameScr.flyTextState[j] != -1 && num != j && GameScr.flyTextDy[num] < 0 && Res.abs(GameScr.flyTextX[num] - GameScr.flyTextX[j]) <= 20 && GameScr.flyTextYTo[num] == GameScr.flyTextYTo[j];
+				if (flag3)
+				{
+					GameScr.flyTextYTo[num] += 10;
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600077C RID: 1916 RVA: 0x0006D340 File Offset: 0x0006B740
+	// Token: 0x06000369 RID: 873 RVA: 0x00050AA4 File Offset: 0x0004ECA4
 	public static void updateFlyText()
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			if (GameScr.flyTextState[i] != -1)
+			bool flag = GameScr.flyTextState[i] != -1;
+			if (flag)
 			{
-				if (GameScr.flyTextState[i] > GameScr.flyTextYTo[i])
+				bool flag2 = GameScr.flyTextState[i] > GameScr.flyTextYTo[i];
+				if (flag2)
 				{
 					GameScr.flyTime[i]++;
-					if (GameScr.flyTime[i] == 25)
+					bool flag3 = GameScr.flyTime[i] == 25;
+					if (flag3)
 					{
 						GameScr.flyTime[i] = 0;
 						GameScr.flyTextState[i] = -1;
@@ -5607,15 +6688,16 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x0600077D RID: 1917 RVA: 0x0006D414 File Offset: 0x0006B814
+	// Token: 0x0600036A RID: 874 RVA: 0x00050B8C File Offset: 0x0004ED8C
 	public static void loadSplash()
 	{
-		if (GameScr.imgSplash == null)
+		bool flag = GameScr.imgSplash == null;
+		if (flag)
 		{
 			GameScr.imgSplash = new Image[3];
 			for (int i = 0; i < 3; i++)
 			{
-				GameScr.imgSplash[i] = GameCanvas.loadImage("/e/sp" + i + ".png");
+				GameScr.imgSplash[i] = GameCanvas.loadImage("/e/sp" + i.ToString() + ".png");
 			}
 		}
 		GameScr.splashX = new int[2];
@@ -5626,32 +6708,40 @@ public class GameScr : mScreen, IChatable
 		GameScr.splashState[0] = (GameScr.splashState[1] = -1);
 	}
 
-	// Token: 0x0600077E RID: 1918 RVA: 0x0006D4B4 File Offset: 0x0006B8B4
+	// Token: 0x0600036B RID: 875 RVA: 0x00050C30 File Offset: 0x0004EE30
 	public static bool startSplash(int x, int y, int dir)
 	{
 		int num = (GameScr.splashState[0] != -1) ? 1 : 0;
-		if (GameScr.splashState[num] != -1)
+		bool flag = GameScr.splashState[num] != -1;
+		bool result;
+		if (flag)
 		{
-			return false;
+			result = false;
 		}
-		GameScr.splashState[num] = 0;
-		GameScr.splashDir[num] = dir;
-		GameScr.splashX[num] = x;
-		GameScr.splashY[num] = y;
-		return true;
+		else
+		{
+			GameScr.splashState[num] = 0;
+			GameScr.splashDir[num] = dir;
+			GameScr.splashX[num] = x;
+			GameScr.splashY[num] = y;
+			result = true;
+		}
+		return result;
 	}
 
-	// Token: 0x0600077F RID: 1919 RVA: 0x0006D508 File Offset: 0x0006B908
+	// Token: 0x0600036C RID: 876 RVA: 0x00050C88 File Offset: 0x0004EE88
 	public static void updateSplash()
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			if (GameScr.splashState[i] != -1)
+			bool flag = GameScr.splashState[i] != -1;
+			if (flag)
 			{
 				GameScr.splashState[i]++;
 				GameScr.splashX[i] += GameScr.splashDir[i] << 2;
 				GameScr.splashY[i]--;
-				if (GameScr.splashState[i] >= 6)
+				bool flag2 = GameScr.splashState[i] >= 6;
+				if (flag2)
 				{
 					GameScr.splashState[i] = -1;
 				}
@@ -5663,14 +6753,16 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000780 RID: 1920 RVA: 0x0006D598 File Offset: 0x0006B998
+	// Token: 0x0600036D RID: 877 RVA: 0x00050D2C File Offset: 0x0004EF2C
 	public static void paintSplash(mGraphics g)
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			if (GameScr.splashState[i] != -1)
+			bool flag = GameScr.splashState[i] != -1;
+			if (flag)
 			{
-				if (GameScr.splashDir[i] == 1)
+				bool flag2 = GameScr.splashDir[i] == 1;
+				if (flag2)
 				{
 					g.drawImage(GameScr.imgSplash[GameScr.splashF[i]], GameScr.splashX[i], GameScr.splashY[i], 3);
 				}
@@ -5682,7 +6774,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x06000781 RID: 1921 RVA: 0x0006D641 File Offset: 0x0006BA41
+	// Token: 0x0600036E RID: 878 RVA: 0x00050DE9 File Offset: 0x0004EFE9
 	private void loadInforBar()
 	{
 		this.imgScrW = 84;
@@ -5694,150 +6786,174 @@ public class GameScr : mScreen, IChatable
 		GameScr.expBarW = GameScr.gW - 61;
 	}
 
-	// Token: 0x06000782 RID: 1922 RVA: 0x0006D67C File Offset: 0x0006BA7C
+	// Token: 0x0600036F RID: 879 RVA: 0x00050E28 File Offset: 0x0004F028
 	public void updateSS()
 	{
-		if (GameScr.indexMenu == -1)
+		bool flag = GameScr.indexMenu == -1;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameScr.cmySK != GameScr.cmtoYSK)
-		{
-			GameScr.cmvySK = GameScr.cmtoYSK - GameScr.cmySK << 2;
-			GameScr.cmdySK += GameScr.cmvySK;
-			GameScr.cmySK += GameScr.cmdySK >> 4;
-			GameScr.cmdySK &= 15;
-		}
-		if (global::Math.abs(GameScr.cmtoYSK - GameScr.cmySK) < 15 && GameScr.cmySK < 0)
-		{
-			GameScr.cmtoYSK = 0;
-		}
-		if (global::Math.abs(GameScr.cmtoYSK - GameScr.cmySK) < 15 && GameScr.cmySK > GameScr.cmyLimSK)
-		{
-			GameScr.cmtoYSK = GameScr.cmyLimSK;
+			bool flag2 = GameScr.cmySK != GameScr.cmtoYSK;
+			if (flag2)
+			{
+				GameScr.cmvySK = GameScr.cmtoYSK - GameScr.cmySK << 2;
+				GameScr.cmdySK += GameScr.cmvySK;
+				GameScr.cmySK += GameScr.cmdySK >> 4;
+				GameScr.cmdySK &= 15;
+			}
+			bool flag3 = global::Math.abs(GameScr.cmtoYSK - GameScr.cmySK) < 15 && GameScr.cmySK < 0;
+			if (flag3)
+			{
+				GameScr.cmtoYSK = 0;
+			}
+			bool flag4 = global::Math.abs(GameScr.cmtoYSK - GameScr.cmySK) < 15 && GameScr.cmySK > GameScr.cmyLimSK;
+			if (flag4)
+			{
+				GameScr.cmtoYSK = GameScr.cmyLimSK;
+			}
 		}
 	}
 
-	// Token: 0x06000783 RID: 1923 RVA: 0x0006D740 File Offset: 0x0006BB40
+	// Token: 0x06000370 RID: 880 RVA: 0x00050EFC File Offset: 0x0004F0FC
 	public void updateKeyAlert()
 	{
-		if (!GameScr.isPaintAlert || GameCanvas.currentDialog != null)
+		bool flag2 = !GameScr.isPaintAlert || GameCanvas.currentDialog != null;
+		if (!flag2)
 		{
-			return;
-		}
-		bool flag = false;
-		if (GameCanvas.keyPressed[Key.NUM8])
-		{
-			GameScr.indexRow++;
-			if (GameScr.indexRow >= this.texts.size())
+			bool flag = false;
+			bool flag3 = GameCanvas.keyPressed[Key.NUM8];
+			if (flag3)
 			{
-				GameScr.indexRow = 0;
-			}
-			flag = true;
-		}
-		else if (GameCanvas.keyPressed[Key.NUM2])
-		{
-			GameScr.indexRow--;
-			if (GameScr.indexRow < 0)
-			{
-				GameScr.indexRow = this.texts.size() - 1;
-			}
-			flag = true;
-		}
-		if (flag)
-		{
-			GameScr.scrMain.moveTo(GameScr.indexRow * GameScr.scrMain.ITEM_SIZE);
-			GameCanvas.clearKeyHold();
-			GameCanvas.clearKeyPressed();
-		}
-		if (GameCanvas.isTouch)
-		{
-			ScrollResult scrollResult = GameScr.scrMain.updateKey();
-			if (scrollResult.isDowning || scrollResult.isFinish)
-			{
-				GameScr.indexRow = scrollResult.selected;
+				GameScr.indexRow++;
+				bool flag4 = GameScr.indexRow >= this.texts.size();
+				if (flag4)
+				{
+					GameScr.indexRow = 0;
+				}
 				flag = true;
 			}
-		}
-		if (flag && GameScr.indexRow >= 0 && GameScr.indexRow < this.texts.size())
-		{
-			string text = (string)this.texts.elementAt(GameScr.indexRow);
-			this.fnick = null;
-			this.alertURL = null;
-			this.center = null;
-			ChatTextField.gI().center = null;
-			int num;
-			if ((num = text.IndexOf("http://")) >= 0)
+			else
 			{
-				Cout.println("currentLine: " + text);
-				this.alertURL = text.Substring(num);
-				this.center = new Command(mResources.open_link, 12000);
-				if (!GameCanvas.isTouch)
+				bool flag5 = GameCanvas.keyPressed[Key.NUM2];
+				if (flag5)
 				{
-					ChatTextField.gI().center = new Command(mResources.open_link, null, 12000, null);
+					GameScr.indexRow--;
+					bool flag6 = GameScr.indexRow < 0;
+					if (flag6)
+					{
+						GameScr.indexRow = this.texts.size() - 1;
+					}
+					flag = true;
 				}
 			}
-			else if (text.IndexOf("@") >= 0)
+			bool flag7 = flag;
+			if (flag7)
 			{
-				string text2 = text.Substring(2);
-				text2 = text2.Trim();
-				num = text2.IndexOf("@");
-				string text3 = text2.Substring(num);
-				int num2 = text3.IndexOf(" ");
-				if (num2 <= 0)
+				GameScr.scrMain.moveTo(GameScr.indexRow * GameScr.scrMain.ITEM_SIZE);
+				GameCanvas.clearKeyHold();
+				GameCanvas.clearKeyPressed();
+			}
+			bool isTouch = GameCanvas.isTouch;
+			if (isTouch)
+			{
+				ScrollResult scrollResult = GameScr.scrMain.updateKey();
+				bool flag8 = scrollResult.isDowning || scrollResult.isFinish;
+				if (flag8)
 				{
-					num2 = num + text3.Length;
+					GameScr.indexRow = scrollResult.selected;
+					flag = true;
 				}
-				else
+			}
+			bool flag9 = flag && GameScr.indexRow >= 0 && GameScr.indexRow < this.texts.size();
+			if (flag9)
+			{
+				string text = (string)this.texts.elementAt(GameScr.indexRow);
+				this.fnick = null;
+				this.alertURL = null;
+				this.center = null;
+				ChatTextField.gI().center = null;
+				int num;
+				bool flag10 = (num = text.IndexOf("http://")) >= 0;
+				if (flag10)
 				{
-					num2 += num;
-				}
-				this.fnick = text2.Substring(num + 1, num2);
-				if (!this.fnick.Equals(string.Empty) && !this.fnick.Equals(global::Char.myCharz().cName))
-				{
-					this.center = new Command(mResources.SELECT, 12009, this.fnick);
-					if (!GameCanvas.isTouch)
+					Cout.println("currentLine: " + text);
+					this.alertURL = text.Substring(num);
+					this.center = new Command(mResources.open_link, 12000);
+					bool flag11 = !GameCanvas.isTouch;
+					if (flag11)
 					{
-						ChatTextField.gI().center = new Command(mResources.SELECT, null, 12009, this.fnick);
+						ChatTextField.gI().center = new Command(mResources.open_link, null, 12000, null);
 					}
 				}
 				else
 				{
-					this.fnick = null;
-					this.center = null;
+					bool flag12 = text.IndexOf("@") >= 0;
+					if (flag12)
+					{
+						string text2 = text.Substring(2);
+						text2 = text2.Trim();
+						num = text2.IndexOf("@");
+						string text3 = text2.Substring(num);
+						int num2 = text3.IndexOf(" ");
+						bool flag13 = num2 <= 0;
+						if (flag13)
+						{
+							num2 = num + text3.Length;
+						}
+						else
+						{
+							num2 += num;
+						}
+						this.fnick = text2.Substring(num + 1, num2);
+						bool flag14 = !this.fnick.Equals(string.Empty) && !this.fnick.Equals(global::Char.myCharz().cName);
+						if (flag14)
+						{
+							this.center = new Command(mResources.SELECT, 12009, this.fnick);
+							bool flag15 = !GameCanvas.isTouch;
+							if (flag15)
+							{
+								ChatTextField.gI().center = new Command(mResources.SELECT, null, 12009, this.fnick);
+							}
+						}
+						else
+						{
+							this.fnick = null;
+							this.center = null;
+						}
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000784 RID: 1924 RVA: 0x0006DA10 File Offset: 0x0006BE10
+	// Token: 0x06000371 RID: 881 RVA: 0x00051228 File Offset: 0x0004F428
 	public bool isPaintPopup()
 	{
 		return GameScr.isPaintItemInfo || GameScr.isPaintInfoMe || GameScr.isPaintStore || GameScr.isPaintWeapon || GameScr.isPaintNonNam || GameScr.isPaintNonNu || GameScr.isPaintAoNam || GameScr.isPaintAoNu || GameScr.isPaintGangTayNam || GameScr.isPaintGangTayNu || GameScr.isPaintQuanNam || GameScr.isPaintQuanNu || GameScr.isPaintGiayNam || GameScr.isPaintGiayNu || GameScr.isPaintLien || GameScr.isPaintNhan || GameScr.isPaintNgocBoi || GameScr.isPaintPhu || GameScr.isPaintStack || GameScr.isPaintStackLock || GameScr.isPaintGrocery || GameScr.isPaintGroceryLock || GameScr.isPaintUpGrade || GameScr.isPaintConvert || GameScr.isPaintSplit || GameScr.isPaintUpPearl || GameScr.isPaintBox || GameScr.isPaintTrade || GameScr.isPaintAlert || GameScr.isPaintZone || GameScr.isPaintTeam || GameScr.isPaintClan || GameScr.isPaintFindTeam || GameScr.isPaintTask || GameScr.isPaintFriend || GameScr.isPaintEnemies || GameScr.isPaintCharInMap || GameScr.isPaintMessage;
 	}
 
-	// Token: 0x06000785 RID: 1925 RVA: 0x0006DB9C File Offset: 0x0006BF9C
+	// Token: 0x06000372 RID: 882 RVA: 0x00051380 File Offset: 0x0004F580
 	public bool isNotPaintTouchControl()
 	{
-		return (!GameCanvas.isTouchControl && GameCanvas.currentScreen == GameScr.gI()) || !GameCanvas.isTouch || ChatTextField.gI().isShow || InfoDlg.isShow || (GameCanvas.currentDialog != null || ChatPopup.currChatPopup != null || GameCanvas.menu.showMenu || GameCanvas.panel.isShow || this.isPaintPopup());
+		return (!GameCanvas.isTouchControl && GameCanvas.currentScreen == GameScr.gI()) || !GameCanvas.isTouch || ChatTextField.gI().isShow || InfoDlg.isShow || GameCanvas.currentDialog != null || ChatPopup.currChatPopup != null || GameCanvas.menu.showMenu || GameCanvas.panel.isShow || this.isPaintPopup();
 	}
 
-	// Token: 0x06000786 RID: 1926 RVA: 0x0006DC30 File Offset: 0x0006C030
+	// Token: 0x06000373 RID: 883 RVA: 0x000513F4 File Offset: 0x0004F5F4
 	public bool isPaintUI()
 	{
 		return GameScr.isPaintStore || GameScr.isPaintWeapon || GameScr.isPaintNonNam || GameScr.isPaintNonNu || GameScr.isPaintAoNam || GameScr.isPaintAoNu || GameScr.isPaintGangTayNam || GameScr.isPaintGangTayNu || GameScr.isPaintQuanNam || GameScr.isPaintQuanNu || GameScr.isPaintGiayNam || GameScr.isPaintGiayNu || GameScr.isPaintLien || GameScr.isPaintNhan || GameScr.isPaintNgocBoi || GameScr.isPaintPhu || GameScr.isPaintStack || GameScr.isPaintStackLock || GameScr.isPaintGrocery || GameScr.isPaintGroceryLock || GameScr.isPaintUpGrade || GameScr.isPaintConvert || GameScr.isPaintSplit || GameScr.isPaintUpPearl || GameScr.isPaintBox || GameScr.isPaintTrade;
 	}
 
-	// Token: 0x06000787 RID: 1927 RVA: 0x0006DD44 File Offset: 0x0006C144
+	// Token: 0x06000374 RID: 884 RVA: 0x000514D4 File Offset: 0x0004F6D4
 	public bool isOpenUI()
 	{
 		return GameScr.isPaintItemInfo || GameScr.isPaintInfoMe || GameScr.isPaintStore || GameScr.isPaintNonNam || GameScr.isPaintNonNu || GameScr.isPaintAoNam || GameScr.isPaintAoNu || GameScr.isPaintGangTayNam || GameScr.isPaintGangTayNu || GameScr.isPaintQuanNam || GameScr.isPaintQuanNu || GameScr.isPaintGiayNam || GameScr.isPaintGiayNu || GameScr.isPaintLien || GameScr.isPaintNhan || GameScr.isPaintNgocBoi || GameScr.isPaintPhu || GameScr.isPaintWeapon || GameScr.isPaintStack || GameScr.isPaintStackLock || GameScr.isPaintGrocery || GameScr.isPaintGroceryLock || GameScr.isPaintUpGrade || GameScr.isPaintConvert || GameScr.isPaintUpPearl || GameScr.isPaintBox || GameScr.isPaintSplit || GameScr.isPaintTrade;
 	}
 
-	// Token: 0x06000788 RID: 1928 RVA: 0x0006DE6C File Offset: 0x0006C26C
+	// Token: 0x06000375 RID: 885 RVA: 0x000515C8 File Offset: 0x0004F7C8
 	public static void setPopupSize(int w, int h)
 	{
-		if (GameCanvas.w == 128 || GameCanvas.h <= 208)
+		bool flag = GameCanvas.w == 128 || GameCanvas.h <= 208;
+		if (flag)
 		{
 			w = 126;
 			h = 160;
@@ -5847,55 +6963,64 @@ public class GameScr : mScreen, IChatable
 		GameScr.popupH = h;
 		GameScr.popupX = GameScr.gW2 - w / 2;
 		GameScr.popupY = GameScr.gH2 - h / 2;
-		if (GameCanvas.isTouch && !GameScr.isPaintZone && !GameScr.isPaintTeam && !GameScr.isPaintClan && !GameScr.isPaintCharInMap && !GameScr.isPaintFindTeam && !GameScr.isPaintFriend && !GameScr.isPaintEnemies && !GameScr.isPaintTask && !GameScr.isPaintMessage)
+		bool flag2 = GameCanvas.isTouch && !GameScr.isPaintZone && !GameScr.isPaintTeam && !GameScr.isPaintClan && !GameScr.isPaintCharInMap && !GameScr.isPaintFindTeam && !GameScr.isPaintFriend && !GameScr.isPaintEnemies && !GameScr.isPaintTask && !GameScr.isPaintMessage;
+		if (flag2)
 		{
-			if (GameCanvas.h <= 240)
+			bool flag3 = GameCanvas.h <= 240;
+			if (flag3)
 			{
 				GameScr.popupY -= 10;
 			}
-			if (GameCanvas.isTouch && !GameCanvas.isTouchControlSmallScreen && GameCanvas.currentScreen is GameScr)
+			bool flag4 = GameCanvas.isTouch && !GameCanvas.isTouchControlSmallScreen && GameCanvas.currentScreen is GameScr;
+			if (flag4)
 			{
 				GameScr.popupW = 310;
 				GameScr.popupX = GameScr.gW / 2 - GameScr.popupW / 2;
-				if (GameScr.isPaintInfoMe && GameScr.indexMenu > 0)
+				bool flag5 = GameScr.isPaintInfoMe && GameScr.indexMenu > 0;
+				if (flag5)
 				{
 					GameScr.popupW = w;
 					GameScr.popupX = GameScr.gW2 - w / 2;
 				}
 			}
 		}
-		if (GameScr.popupY < -10)
+		bool flag6 = GameScr.popupY < -10;
+		if (flag6)
 		{
 			GameScr.popupY = -10;
 		}
-		if (GameCanvas.h > 208 && GameScr.popupY < 0)
+		bool flag7 = GameCanvas.h > 208 && GameScr.popupY < 0;
+		if (flag7)
 		{
 			GameScr.popupY = 0;
 		}
-		if (GameCanvas.h == 208 && GameScr.popupY < 10)
+		bool flag8 = GameCanvas.h == 208 && GameScr.popupY < 10;
+		if (flag8)
 		{
 			GameScr.popupY = 10;
 		}
 	}
 
-	// Token: 0x06000789 RID: 1929 RVA: 0x0006E00F File Offset: 0x0006C40F
+	// Token: 0x06000376 RID: 886 RVA: 0x0005177C File Offset: 0x0004F97C
 	public static void loadImg()
 	{
 		TileMap.loadTileImage();
 	}
 
-	// Token: 0x0600078A RID: 1930 RVA: 0x0006E018 File Offset: 0x0006C418
+	// Token: 0x06000377 RID: 887 RVA: 0x00051788 File Offset: 0x0004F988
 	public void paintTitle(mGraphics g, string title, bool arrow)
 	{
 		int num = GameScr.gW / 2;
 		g.setColor(Paint.COLORDARK);
 		g.fillRoundRect(num - mFont.tahoma_8b.getWidth(title) / 2 - 12, GameScr.popupY + 4, mFont.tahoma_8b.getWidth(title) + 22, 24, 6, 6);
-		if ((GameScr.indexTitle == 0 || GameCanvas.isTouch) && arrow)
+		bool flag = (GameScr.indexTitle == 0 || GameCanvas.isTouch) && arrow;
+		if (flag)
 		{
 			SmallImage.drawSmallImage(g, 989, num - mFont.tahoma_8b.getWidth(title) / 2 - 15 - 7 - ((GameCanvas.gameTick % 8 > 3) ? 0 : 2), GameScr.popupY + 16, 2, StaticObj.VCENTER_HCENTER);
 			SmallImage.drawSmallImage(g, 989, num + mFont.tahoma_8b.getWidth(title) / 2 + 15 + 5 + ((GameCanvas.gameTick % 8 > 3) ? 0 : 2), GameScr.popupY + 16, 0, StaticObj.VCENTER_HCENTER);
 		}
-		if (GameScr.indexTitle == 0)
+		bool flag2 = GameScr.indexTitle == 0;
+		if (flag2)
 		{
 			g.setColor(Paint.COLORFOCUS);
 		}
@@ -5907,11 +7032,12 @@ public class GameScr : mScreen, IChatable
 		mFont.tahoma_8b.drawString(g, title, num, GameScr.popupY + 9, 2);
 	}
 
-	// Token: 0x0600078B RID: 1931 RVA: 0x0006E178 File Offset: 0x0006C578
+	// Token: 0x06000378 RID: 888 RVA: 0x000518E0 File Offset: 0x0004FAE0
 	public static int getTaskMapId()
 	{
+		bool flag = global::Char.myCharz().taskMaint == null;
 		int result;
-		if (global::Char.myCharz().taskMaint == null)
+		if (flag)
 		{
 			result = -1;
 		}
@@ -5922,65 +7048,71 @@ public class GameScr : mScreen, IChatable
 		return result;
 	}
 
-	// Token: 0x0600078C RID: 1932 RVA: 0x0006E1B4 File Offset: 0x0006C5B4
+	// Token: 0x06000379 RID: 889 RVA: 0x00051924 File Offset: 0x0004FB24
 	public static sbyte getTaskNpcId()
 	{
 		sbyte result = 0;
-		if (global::Char.myCharz().taskMaint == null)
+		bool flag = global::Char.myCharz().taskMaint == null;
+		if (flag)
 		{
 			result = -1;
 		}
-		else if (global::Char.myCharz().taskMaint.index <= GameScr.tasks.Length - 1)
+		else
 		{
-			result = (sbyte)GameScr.tasks[global::Char.myCharz().taskMaint.index];
+			bool flag2 = global::Char.myCharz().taskMaint.index <= GameScr.tasks.Length - 1;
+			if (flag2)
+			{
+				result = (sbyte)GameScr.tasks[global::Char.myCharz().taskMaint.index];
+			}
 		}
 		return result;
 	}
 
-	// Token: 0x0600078D RID: 1933 RVA: 0x0006E20E File Offset: 0x0006C60E
+	// Token: 0x0600037A RID: 890 RVA: 0x00003136 File Offset: 0x00001336
 	public void refreshTeam()
 	{
 	}
 
-	// Token: 0x0600078E RID: 1934 RVA: 0x0006E210 File Offset: 0x0006C610
+	// Token: 0x0600037B RID: 891 RVA: 0x0005198C File Offset: 0x0004FB8C
 	public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");
-		if (!GameScr.isPaintMessage || GameCanvas.isTouch)
+		bool flag = !GameScr.isPaintMessage || GameCanvas.isTouch;
+		if (flag)
 		{
 			ChatTextField.gI().isShow = false;
 		}
-		if (to.Equals(mResources.chat_player))
+		bool flag2 = to.Equals(mResources.chat_player);
+		if (flag2)
 		{
-			if (GameScr.info2.playerID == global::Char.myCharz().charID)
+			bool flag3 = GameScr.info2.playerID == global::Char.myCharz().charID;
+			if (!flag3)
 			{
-				return;
+				Service.gI().chatPlayer(text, GameScr.info2.playerID);
 			}
-			Service.gI().chatPlayer(text, GameScr.info2.playerID);
-			return;
 		}
 		else
 		{
-			if (text.Equals(string.Empty))
+			bool flag4 = text.Equals(string.Empty);
+			if (!flag4)
 			{
-				return;
+				Service.gI().chat(text);
 			}
-			Service.gI().chat(text);
-			return;
 		}
 	}
 
-	// Token: 0x0600078F RID: 1935 RVA: 0x0006E2A2 File Offset: 0x0006C6A2
+	// Token: 0x0600037C RID: 892 RVA: 0x00051A2C File Offset: 0x0004FC2C
 	public void onCancelChat()
 	{
-		if (GameScr.isPaintMessage)
+		bool flag = GameScr.isPaintMessage;
+		if (flag)
 		{
 			GameScr.isPaintMessage = false;
 			ChatTextField.gI().center = null;
 		}
 	}
 
-	// Token: 0x06000790 RID: 1936 RVA: 0x0006E2C0 File Offset: 0x0006C6C0
+	// Token: 0x0600037D RID: 893 RVA: 0x00051A58 File Offset: 0x0004FC58
 	public void openWeb(string strLeft, string strRight, string url, string title, string str)
 	{
 		GameScr.isPaintAlert = true;
@@ -5994,7 +7126,7 @@ public class GameScr : mScreen, IChatable
 		this.right = new Command(strRight, 11069);
 	}
 
-	// Token: 0x06000791 RID: 1937 RVA: 0x0006E33C File Offset: 0x0006C73C
+	// Token: 0x0600037E RID: 894 RVA: 0x00051AD8 File Offset: 0x0004FCD8
 	public void sendSms(string strLeft, string strRight, short port, string syntax, string title, string str)
 	{
 		GameScr.isPaintAlert = true;
@@ -6005,20 +7137,20 @@ public class GameScr : mScreen, IChatable
 		this.texts = mFont.tahoma_7.splitFontVector(str, GameScr.popupW - 30);
 		this.center = null;
 		MyVector myVector = new MyVector();
-		myVector.addElement(string.Empty + port);
+		myVector.addElement(string.Empty + port.ToString());
 		myVector.addElement(syntax);
 		this.left = new Command(strLeft, 11074);
 		this.right = new Command(strRight, 11075);
 	}
 
-	// Token: 0x06000792 RID: 1938 RVA: 0x0006E3DA File Offset: 0x0006C7DA
+	// Token: 0x0600037F RID: 895 RVA: 0x00051B7B File Offset: 0x0004FD7B
 	public void actMenu()
 	{
 		GameCanvas.panel.setTypeMain();
 		GameCanvas.panel.show();
 	}
 
-	// Token: 0x06000793 RID: 1939 RVA: 0x0006E3F0 File Offset: 0x0006C7F0
+	// Token: 0x06000380 RID: 896 RVA: 0x00051B94 File Offset: 0x0004FD94
 	public void openUIZone(Message message)
 	{
 		InfoDlg.hide();
@@ -6039,7 +7171,8 @@ public class GameScr : mScreen, IChatable
 				this.numPlayer[i] = (int)message.reader().readByte();
 				this.maxPlayer[i] = (int)message.reader().readByte();
 				sbyte b = message.reader().readByte();
-				if ((int)b == 1)
+				bool flag = b == 1;
+				if (flag)
 				{
 					this.rankName1[i] = message.reader().readUTF();
 					this.rank1[i] = message.reader().readInt();
@@ -6056,7 +7189,7 @@ public class GameScr : mScreen, IChatable
 		GameCanvas.panel.show();
 	}
 
-	// Token: 0x06000794 RID: 1940 RVA: 0x0006E5B8 File Offset: 0x0006C9B8
+	// Token: 0x06000381 RID: 897 RVA: 0x00051D64 File Offset: 0x0004FF64
 	public void showViewInfo()
 	{
 		GameScr.indexMenu = 3;
@@ -6064,7 +7197,7 @@ public class GameScr : mScreen, IChatable
 		GameScr.setPopupSize(175, 200);
 	}
 
-	// Token: 0x06000795 RID: 1941 RVA: 0x0006E5D8 File Offset: 0x0006C9D8
+	// Token: 0x06000382 RID: 898 RVA: 0x00051D84 File Offset: 0x0004FF84
 	private void actDead()
 	{
 		MyVector myVector = new MyVector();
@@ -6074,268 +7207,369 @@ public class GameScr : mScreen, IChatable
 		GameCanvas.menu.startAt(myVector, 3);
 	}
 
-	// Token: 0x06000796 RID: 1942 RVA: 0x0006E63C File Offset: 0x0006CA3C
+	// Token: 0x06000383 RID: 899 RVA: 0x00051DED File Offset: 0x0004FFED
 	public void startYesNoPopUp(string info, Command cmdYes, Command cmdNo)
 	{
 		this.popUpYesNo = new PopUpYesNo();
 		this.popUpYesNo.setPopUp(info, cmdYes, cmdNo);
 	}
 
-	// Token: 0x06000797 RID: 1943 RVA: 0x0006E658 File Offset: 0x0006CA58
+	// Token: 0x06000384 RID: 900 RVA: 0x00051E0C File Offset: 0x0005000C
 	public void player_vs_player(int playerId, int xu, string info, sbyte typePK)
 	{
 		global::Char @char = GameScr.findCharInMap(playerId);
-		if (@char != null)
+		bool flag = @char != null;
+		if (flag)
 		{
-			if ((int)typePK == 3)
+			bool flag2 = typePK == 3;
+			if (flag2)
 			{
 				this.startYesNoPopUp(info, new Command(mResources.OK, 2000, @char), new Command(mResources.CLOSE, 2009, @char));
 			}
-			if ((int)typePK == 4)
+			bool flag3 = typePK == 4;
+			if (flag3)
 			{
 				this.startYesNoPopUp(info, new Command(mResources.OK, 2005, @char), new Command(mResources.CLOSE, 2009, @char));
 			}
 		}
 	}
 
-	// Token: 0x06000798 RID: 1944 RVA: 0x0006E6D4 File Offset: 0x0006CAD4
+	// Token: 0x06000385 RID: 901 RVA: 0x00051E94 File Offset: 0x00050094
 	public void giaodich(int playerID)
 	{
 		global::Char @char = GameScr.findCharInMap(playerID);
-		if (@char != null)
+		bool flag = @char != null;
+		if (flag)
 		{
 			this.startYesNoPopUp(@char.cName + mResources.want_to_trade, new Command(mResources.YES, 11114, @char), new Command(mResources.NO, 2009, @char));
 		}
 	}
 
-	// Token: 0x06000799 RID: 1945 RVA: 0x0006E724 File Offset: 0x0006CB24
+	// Token: 0x06000386 RID: 902 RVA: 0x00051EEC File Offset: 0x000500EC
 	public void getFlagImage(int charID, sbyte cflag)
 	{
-		if (GameScr.vFlag.size() == 0)
+		bool flag = GameScr.vFlag.size() == 0;
+		if (flag)
 		{
 			Service.gI().getFlag(2, cflag);
 			Res.outz("getFlag1");
 		}
-		else if (charID == global::Char.myCharz().charID)
-		{
-			Res.outz("my cflag: isme");
-			if (global::Char.myCharz().isGetFlagImage(cflag))
-			{
-				Res.outz("my cflag: true");
-				for (int i = 0; i < GameScr.vFlag.size(); i++)
-				{
-					PKFlag pkflag = (PKFlag)GameScr.vFlag.elementAt(i);
-					if (pkflag != null && (int)pkflag.cflag == (int)cflag)
-					{
-						Res.outz("my cflag: cflag==");
-						global::Char.myCharz().flagImage = pkflag.IDimageFlag;
-					}
-				}
-			}
-			else if (!global::Char.myCharz().isGetFlagImage(cflag))
-			{
-				Res.outz("my cflag: false");
-				Service.gI().getFlag(2, cflag);
-			}
-		}
 		else
 		{
-			Res.outz("my cflag: not me");
-			if (GameScr.findCharInMap(charID) != null)
+			bool flag2 = charID == global::Char.myCharz().charID;
+			if (flag2)
 			{
-				if (GameScr.findCharInMap(charID).isGetFlagImage(cflag))
+				Res.outz("my cflag: isme");
+				bool flag3 = global::Char.myCharz().isGetFlagImage(cflag);
+				if (flag3)
 				{
 					Res.outz("my cflag: true");
-					for (int j = 0; j < GameScr.vFlag.size(); j++)
+					for (int i = 0; i < GameScr.vFlag.size(); i++)
 					{
-						PKFlag pkflag2 = (PKFlag)GameScr.vFlag.elementAt(j);
-						if (pkflag2 != null && (int)pkflag2.cflag == (int)cflag)
+						PKFlag pkflag = (PKFlag)GameScr.vFlag.elementAt(i);
+						bool flag4 = pkflag != null && pkflag.cflag == cflag;
+						if (flag4)
 						{
 							Res.outz("my cflag: cflag==");
-							GameScr.findCharInMap(charID).flagImage = pkflag2.IDimageFlag;
+							global::Char.myCharz().flagImage = pkflag.IDimageFlag;
 						}
 					}
 				}
-				else if (!GameScr.findCharInMap(charID).isGetFlagImage(cflag))
+				else
 				{
-					Res.outz("my cflag: false");
-					Service.gI().getFlag(2, cflag);
+					bool flag5 = !global::Char.myCharz().isGetFlagImage(cflag);
+					if (flag5)
+					{
+						Res.outz("my cflag: false");
+						Service.gI().getFlag(2, cflag);
+					}
+				}
+			}
+			else
+			{
+				Res.outz("my cflag: not me");
+				bool flag6 = GameScr.findCharInMap(charID) != null;
+				if (flag6)
+				{
+					bool flag7 = GameScr.findCharInMap(charID).isGetFlagImage(cflag);
+					if (flag7)
+					{
+						Res.outz("my cflag: true");
+						for (int j = 0; j < GameScr.vFlag.size(); j++)
+						{
+							PKFlag pkflag2 = (PKFlag)GameScr.vFlag.elementAt(j);
+							bool flag8 = pkflag2 != null && pkflag2.cflag == cflag;
+							if (flag8)
+							{
+								Res.outz("my cflag: cflag==");
+								GameScr.findCharInMap(charID).flagImage = pkflag2.IDimageFlag;
+							}
+						}
+					}
+					else
+					{
+						bool flag9 = !GameScr.findCharInMap(charID).isGetFlagImage(cflag);
+						if (flag9)
+						{
+							Res.outz("my cflag: false");
+							Service.gI().getFlag(2, cflag);
+						}
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x0600079A RID: 1946 RVA: 0x0006E8D0 File Offset: 0x0006CCD0
+	// Token: 0x06000387 RID: 903 RVA: 0x000520DC File Offset: 0x000502DC
 	public void actionPerform(int idAction, object p)
 	{
-		Cout.println("PERFORM WITH ID = " + idAction);
+		Cout.println("PERFORM WITH ID = " + idAction.ToString());
 		switch (idAction)
 		{
 		case 2000:
+		{
 			this.popUpYesNo = null;
 			GameCanvas.endDlg();
-			if ((global::Char)p == null)
+			bool flag = (global::Char)p == null;
+			if (flag)
 			{
 				Service.gI().player_vs_player(1, 3, -1);
 				return;
 			}
 			Service.gI().player_vs_player(1, 3, ((global::Char)p).charID);
 			Service.gI().charMove();
-			break;
+			return;
+		}
 		case 2001:
 			GameCanvas.endDlg();
+			return;
+		case 2003:
+			GameCanvas.endDlg();
+			InfoDlg.showWait();
+			Service.gI().player_vs_player(0, 3, global::Char.myCharz().charFocus.charID);
+			return;
+		case 2004:
+			GameCanvas.endDlg();
+			Service.gI().player_vs_player(0, 4, global::Char.myCharz().charFocus.charID);
+			return;
+		case 2005:
+		{
+			GameCanvas.endDlg();
+			this.popUpYesNo = null;
+			bool flag2 = (global::Char)p == null;
+			if (flag2)
+			{
+				Service.gI().player_vs_player(1, 4, -1);
+				return;
+			}
+			Service.gI().player_vs_player(1, 4, ((global::Char)p).charID);
+			return;
+		}
+		case 2006:
+			GameCanvas.endDlg();
+			Service.gI().player_vs_player(2, 4, global::Char.myCharz().charFocus.charID);
+			return;
+		case 2007:
+			GameCanvas.endDlg();
+			GameMidlet.instance.exit();
+			return;
+		case 2009:
+			this.popUpYesNo = null;
+			return;
+		}
+		switch (idAction)
+		{
+		case 11111:
+		{
+			bool flag3 = global::Char.myCharz().charFocus == null;
+			if (flag3)
+			{
+				return;
+			}
+			InfoDlg.showWait();
+			bool flag4 = GameCanvas.panel.vPlayerMenu.size() <= 0;
+			if (flag4)
+			{
+				this.playerMenu(global::Char.myCharz().charFocus);
+			}
+			GameCanvas.panel.setTypePlayerMenu(global::Char.myCharz().charFocus);
+			GameCanvas.panel.show();
+			Service.gI().getPlayerMenu(global::Char.myCharz().charFocus.charID);
+			Service.gI().messagePlayerMenu(global::Char.myCharz().charFocus.charID);
+			return;
+		}
+		case 11112:
+		{
+			global::Char @char = (global::Char)p;
+			Service.gI().friend(1, @char.charID);
+			return;
+		}
+		case 11113:
+		{
+			global::Char char2 = (global::Char)p;
+			bool flag5 = char2 != null;
+			if (flag5)
+			{
+				Service.gI().giaodich(0, char2.charID, -1, -1);
+			}
+			return;
+		}
+		case 11114:
+		{
+			this.popUpYesNo = null;
+			GameCanvas.endDlg();
+			global::Char char3 = (global::Char)p;
+			bool flag6 = char3 == null;
+			if (flag6)
+			{
+				return;
+			}
+			Service.gI().giaodich(1, char3.charID, -1, -1);
+			return;
+		}
+		case 11115:
+		{
+			bool flag7 = global::Char.myCharz().charFocus == null;
+			if (flag7)
+			{
+				return;
+			}
+			InfoDlg.showWait();
+			Service.gI().playerMenuAction(global::Char.myCharz().charFocus.charID, (short)global::Char.myCharz().charFocus.menuSelect);
+			return;
+		}
+		case 11120:
+		{
+			object[] array = (object[])p;
+			Skill skill3 = (Skill)array[0];
+			int num = int.Parse((string)array[1]);
+			for (int i = 0; i < GameScr.onScreenSkill.Length; i++)
+			{
+				bool flag8 = GameScr.onScreenSkill[i] == skill3;
+				if (flag8)
+				{
+					GameScr.onScreenSkill[i] = null;
+				}
+			}
+			GameScr.onScreenSkill[num] = skill3;
+			this.saveonScreenSkillToRMS();
+			return;
+		}
+		case 11121:
+		{
+			object[] array2 = (object[])p;
+			Skill skill4 = (Skill)array2[0];
+			int num2 = int.Parse((string)array2[1]);
+			for (int j = 0; j < GameScr.keySkill.Length; j++)
+			{
+				bool flag9 = GameScr.keySkill[j] == skill4;
+				if (flag9)
+				{
+					GameScr.keySkill[j] = null;
+				}
+			}
+			GameScr.keySkill[num2] = skill4;
+			this.saveKeySkillToRMS();
+			return;
+		}
+		}
+		switch (idAction)
+		{
+		case 12000:
+			Service.gI().getClan(1, -1, null);
+			break;
+		case 12001:
+			GameCanvas.endDlg();
+			break;
+		case 12002:
+		{
+			GameCanvas.endDlg();
+			ClanObject clanObject = (ClanObject)p;
+			Service.gI().clanInvite(1, -1, clanObject.clanID, clanObject.code);
+			this.popUpYesNo = null;
+			break;
+		}
+		case 12003:
+		{
+			ClanObject clanObject2 = (ClanObject)p;
+			GameCanvas.endDlg();
+			Service.gI().clanInvite(2, -1, clanObject2.clanID, clanObject2.code);
+			this.popUpYesNo = null;
+			break;
+		}
+		case 12004:
+		{
+			Skill skill5 = (Skill)p;
+			this.doUseSkill(skill5, true);
+			global::Char.myCharz().saveLoadPreviousSkill();
+			break;
+		}
+		case 12005:
+		{
+			bool flag10 = GameCanvas.serverScr == null;
+			if (flag10)
+			{
+				GameCanvas.serverScr = new ServerScr();
+			}
+			GameCanvas.serverScr.switchToMe();
+			GameCanvas.endDlg();
+			break;
+		}
+		case 12006:
+			GameMidlet.instance.exit();
 			break;
 		default:
 			switch (idAction)
 			{
-			case 11111:
-				if (global::Char.myCharz().charFocus == null)
-				{
-					return;
-				}
-				InfoDlg.showWait();
-				if (GameCanvas.panel.vPlayerMenu.size() <= 0)
-				{
-					this.playerMenu(global::Char.myCharz().charFocus);
-				}
-				GameCanvas.panel.setTypePlayerMenu(global::Char.myCharz().charFocus);
-				GameCanvas.panel.show();
-				Service.gI().getPlayerMenu(global::Char.myCharz().charFocus.charID);
-				Service.gI().messagePlayerMenu(global::Char.myCharz().charFocus.charID);
+			case 11000:
+				this.actMenu();
 				break;
-			case 11112:
-			{
-				global::Char @char = (global::Char)p;
-				Service.gI().friend(1, @char.charID);
+			case 11001:
+				global::Char.myCharz().findNextFocusByKey();
 				break;
-			}
-			case 11113:
-			{
-				global::Char char2 = (global::Char)p;
-				if (char2 != null)
-				{
-					Service.gI().giaodich(0, char2.charID, -1, -1);
-				}
-				break;
-			}
-			case 11114:
-			{
-				this.popUpYesNo = null;
-				GameCanvas.endDlg();
-				global::Char char3 = (global::Char)p;
-				if (char3 == null)
-				{
-					return;
-				}
-				Service.gI().giaodich(1, char3.charID, -1, -1);
-				break;
-			}
-			case 11115:
-				if (global::Char.myCharz().charFocus == null)
-				{
-					return;
-				}
-				InfoDlg.showWait();
-				Service.gI().playerMenuAction(global::Char.myCharz().charFocus.charID, (short)global::Char.myCharz().charFocus.menuSelect);
+			case 11002:
+				GameCanvas.panel.hide();
 				break;
 			default:
-				switch (idAction)
+			{
+				bool flag11 = idAction != 1;
+				if (flag11)
 				{
-				case 12000:
-					Service.gI().getClan(1, -1, null);
-					break;
-				case 12001:
-					GameCanvas.endDlg();
-					break;
-				case 12002:
-				{
-					GameCanvas.endDlg();
-					ClanObject clanObject = (ClanObject)p;
-					Service.gI().clanInvite(1, -1, clanObject.clanID, clanObject.code);
-					this.popUpYesNo = null;
-					break;
-				}
-				case 12003:
-				{
-					ClanObject clanObject = (ClanObject)p;
-					GameCanvas.endDlg();
-					Service.gI().clanInvite(2, -1, clanObject.clanID, clanObject.code);
-					this.popUpYesNo = null;
-					break;
-				}
-				case 12004:
-				{
-					Skill skill = (Skill)p;
-					this.doUseSkill(skill, true);
-					global::Char.myCharz().saveLoadPreviousSkill();
-					break;
-				}
-				case 12005:
-					if (GameCanvas.serverScr == null)
+					bool flag12 = idAction != 2;
+					if (flag12)
 					{
-						GameCanvas.serverScr = new ServerScr();
-					}
-					GameCanvas.serverScr.switchToMe();
-					GameCanvas.endDlg();
-					break;
-				case 12006:
-					GameMidlet.instance.exit();
-					break;
-				default:
-					switch (idAction)
-					{
-					case 11000:
-						this.actMenu();
-						break;
-					case 11001:
-						global::Char.myCharz().findNextFocusByKey();
-						break;
-					case 11002:
-						GameCanvas.panel.hide();
-						break;
-					default:
-						if (idAction != 1)
+						int num3 = idAction;
+						int num4 = num3;
+						if (num4 != 11057)
 						{
-							if (idAction != 2)
+							if (num4 != 11059)
 							{
-								switch (idAction)
+								int num5 = idAction;
+								int num6 = num5;
+								if (num6 != 110001)
 								{
-								case 11057:
-								{
-									Effect2.vEffect2Outside.removeAllElements();
-									Effect2.vEffect2.removeAllElements();
-									Npc npc = (Npc)p;
-									if (npc.idItem == 0)
+									if (num6 != 110004)
 									{
-										Service.gI().confirmMenu((short)npc.template.npcTemplateId, (sbyte)GameCanvas.menu.menuSelectedItem);
-									}
-									else if (GameCanvas.menu.menuSelectedItem == 0)
-									{
-										Service.gI().pickItem(npc.idItem);
-									}
-									break;
-								}
-								default:
-									switch (idAction)
-									{
-									case 110001:
-										GameCanvas.panel.setTypeMain();
-										GameCanvas.panel.show();
-										break;
-									default:
-										if (idAction != 110382)
+										bool flag13 = idAction != 110382;
+										if (flag13)
 										{
-											if (idAction != 110383)
+											bool flag14 = idAction != 110383;
+											if (flag14)
 											{
-												if (idAction != 8002)
+												bool flag15 = idAction != 8002;
+												if (flag15)
 												{
-													if (idAction != 11038)
+													bool flag16 = idAction != 11038;
+													if (flag16)
 													{
-														if (idAction != 11067)
+														bool flag17 = idAction != 11067;
+														if (flag17)
 														{
-															if (idAction != 110391)
+															bool flag18 = idAction != 110391;
+															if (flag18)
 															{
-																if (idAction == 888351)
+																bool flag19 = idAction == 888351;
+																if (flag19)
 																{
 																	Service.gI().petStatus(5);
 																	GameCanvas.endDlg();
@@ -6346,14 +7580,18 @@ public class GameScr : mScreen, IChatable
 																Service.gI().clanInvite(0, global::Char.myCharz().charFocus.charID, -1, -1);
 															}
 														}
-														else if (TileMap.zoneID != GameScr.indexSelect)
-														{
-															Service.gI().requestChangeZone(GameScr.indexSelect, this.indexItemUse);
-															InfoDlg.showWait();
-														}
 														else
 														{
-															GameScr.info1.addInfo(mResources.ZONE_HERE, 0);
+															bool flag20 = TileMap.zoneID != GameScr.indexSelect;
+															if (flag20)
+															{
+																Service.gI().requestChangeZone(GameScr.indexSelect, this.indexItemUse);
+																InfoDlg.showWait();
+															}
+															else
+															{
+																GameScr.info1.addInfo(mResources.ZONE_HERE, 0);
+															}
 														}
 													}
 													else
@@ -6377,175 +7615,143 @@ public class GameScr : mScreen, IChatable
 										{
 											Service.gI().returnTownFromDead();
 										}
-										break;
-									case 110004:
-										GameCanvas.menu.showMenu = false;
-										break;
 									}
-									break;
-								case 11059:
-								{
-									Skill skill2 = GameScr.onScreenSkill[this.selectedIndexSkill];
-									this.doUseSkill(skill2, false);
-									this.center = null;
-									break;
+									else
+									{
+										GameCanvas.menu.showMenu = false;
+									}
 								}
+								else
+								{
+									GameCanvas.panel.setTypeMain();
+									GameCanvas.panel.show();
 								}
 							}
 							else
 							{
-								GameCanvas.menu.showMenu = false;
+								Skill skill6 = GameScr.onScreenSkill[this.selectedIndexSkill];
+								this.doUseSkill(skill6, false);
+								this.center = null;
 							}
 						}
 						else
 						{
-							GameCanvas.endDlg();
+							Effect2.vEffect2Outside.removeAllElements();
+							Effect2.vEffect2.removeAllElements();
+							Npc npc = (Npc)p;
+							bool flag21 = npc.idItem == 0;
+							if (flag21)
+							{
+								Service.gI().confirmMenu((short)npc.template.npcTemplateId, (sbyte)GameCanvas.menu.menuSelectedItem);
+							}
+							else
+							{
+								bool flag22 = GameCanvas.menu.menuSelectedItem == 0;
+								if (flag22)
+								{
+									Service.gI().pickItem(npc.idItem);
+								}
+							}
 						}
-						break;
 					}
-					break;
-				}
-				break;
-			case 11120:
-			{
-				object[] array = (object[])p;
-				Skill skill3 = (Skill)array[0];
-				int num = int.Parse((string)array[1]);
-				for (int i = 0; i < GameScr.onScreenSkill.Length; i++)
-				{
-					if (GameScr.onScreenSkill[i] == skill3)
+					else
 					{
-						GameScr.onScreenSkill[i] = null;
+						GameCanvas.menu.showMenu = false;
 					}
 				}
-				GameScr.onScreenSkill[num] = skill3;
-				this.saveonScreenSkillToRMS();
-				break;
-			}
-			case 11121:
-			{
-				object[] array2 = (object[])p;
-				Skill skill4 = (Skill)array2[0];
-				int num2 = int.Parse((string)array2[1]);
-				for (int j = 0; j < GameScr.keySkill.Length; j++)
+				else
 				{
-					if (GameScr.keySkill[j] == skill4)
-					{
-						GameScr.keySkill[j] = null;
-					}
+					GameCanvas.endDlg();
 				}
-				GameScr.keySkill[num2] = skill4;
-				this.saveKeySkillToRMS();
 				break;
 			}
 			}
-			break;
-		case 2003:
-			GameCanvas.endDlg();
-			InfoDlg.showWait();
-			Service.gI().player_vs_player(0, 3, global::Char.myCharz().charFocus.charID);
-			break;
-		case 2004:
-			GameCanvas.endDlg();
-			Service.gI().player_vs_player(0, 4, global::Char.myCharz().charFocus.charID);
-			break;
-		case 2005:
-			GameCanvas.endDlg();
-			this.popUpYesNo = null;
-			if ((global::Char)p == null)
-			{
-				Service.gI().player_vs_player(1, 4, -1);
-				return;
-			}
-			Service.gI().player_vs_player(1, 4, ((global::Char)p).charID);
-			break;
-		case 2006:
-			GameCanvas.endDlg();
-			Service.gI().player_vs_player(2, 4, global::Char.myCharz().charFocus.charID);
-			break;
-		case 2007:
-			GameCanvas.endDlg();
-			GameMidlet.instance.exit();
-			break;
-		case 2009:
-			this.popUpYesNo = null;
 			break;
 		}
 	}
 
-	// Token: 0x0600079B RID: 1947 RVA: 0x0006F010 File Offset: 0x0006D410
+	// Token: 0x06000388 RID: 904 RVA: 0x00052940 File Offset: 0x00050B40
 	private static void setTouchBtn()
 	{
-		if (GameScr.isAnalog == 0)
+		bool flag = GameScr.isAnalog == 0;
+		if (!flag)
 		{
-			return;
+			GameScr.xTG = (GameScr.xF = GameCanvas.w - 45);
+			bool isLargeGamePad = GameScr.gamePad.isLargeGamePad;
+			if (isLargeGamePad)
+			{
+				GameScr.xSkill = GameScr.gamePad.wZone + 20;
+				GameScr.wSkill = 35;
+				GameScr.xHP = GameScr.xF - 45;
+			}
+			else
+			{
+				bool isMediumGamePad = GameScr.gamePad.isMediumGamePad;
+				if (isMediumGamePad)
+				{
+					GameScr.xHP = GameScr.xF - 45;
+				}
+			}
+			GameScr.yF = GameCanvas.h - 45;
+			GameScr.yTG = GameScr.yF - 45;
 		}
-		GameScr.xTG = (GameScr.xF = GameCanvas.w - 45);
-		if (GameScr.gamePad.isLargeGamePad)
-		{
-			GameScr.xSkill = GameScr.gamePad.wZone + 20;
-			GameScr.wSkill = 35;
-			GameScr.xHP = GameScr.xF - 45;
-		}
-		else if (GameScr.gamePad.isMediumGamePad)
-		{
-			GameScr.xHP = GameScr.xF - 45;
-		}
-		GameScr.yF = GameCanvas.h - 45;
-		GameScr.yTG = GameScr.yF - 45;
 	}
 
-	// Token: 0x0600079C RID: 1948 RVA: 0x0006F0AC File Offset: 0x0006D4AC
+	// Token: 0x06000389 RID: 905 RVA: 0x000529E4 File Offset: 0x00050BE4
 	private void updateGamePad()
 	{
-		if (GameScr.isAnalog == 0)
+		bool flag = GameScr.isAnalog == 0;
+		if (!flag)
 		{
-			return;
-		}
-		if (global::Char.myCharz().statusMe == 14)
-		{
-			return;
-		}
-		if (GameCanvas.isPointerHoldIn(GameScr.xF, GameScr.yF, 40, 40))
-		{
-			mScreen.keyTouch = 5;
-			if (GameCanvas.isPointerJustRelease)
+			bool flag2 = global::Char.myCharz().statusMe == 14;
+			if (!flag2)
 			{
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = true;
-				GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
-			}
-		}
-		GameScr.gamePad.update();
-		if (GameCanvas.isPointerHoldIn(GameScr.xTG, GameScr.yTG, 34, 34))
-		{
-			mScreen.keyTouch = 13;
-			GameCanvas.isPointerJustDown = false;
-			this.isPointerDowning = false;
-			if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-			{
-				global::Char.myCharz().findNextFocusByKey();
-				GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
+				bool flag3 = GameCanvas.isPointerHoldIn(GameScr.xF, GameScr.yF, 40, 40);
+				if (flag3)
+				{
+					mScreen.keyTouch = 5;
+					bool isPointerJustRelease = GameCanvas.isPointerJustRelease;
+					if (isPointerJustRelease)
+					{
+						GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = true;
+						GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
+					}
+				}
+				GameScr.gamePad.update();
+				bool flag4 = GameCanvas.isPointerHoldIn(GameScr.xTG, GameScr.yTG, 34, 34);
+				if (flag4)
+				{
+					mScreen.keyTouch = 13;
+					GameCanvas.isPointerJustDown = false;
+					this.isPointerDowning = false;
+					bool flag5 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+					if (flag5)
+					{
+						global::Char.myCharz().findNextFocusByKey();
+						GameCanvas.isPointerClick = (GameCanvas.isPointerJustDown = (GameCanvas.isPointerJustRelease = false));
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600079D RID: 1949 RVA: 0x0006F190 File Offset: 0x0006D590
+	// Token: 0x0600038A RID: 906 RVA: 0x00052ADC File Offset: 0x00050CDC
 	private void paintGamePad(mGraphics g)
 	{
-		if (GameScr.isAnalog == 0)
+		bool flag = GameScr.isAnalog == 0;
+		if (!flag)
 		{
-			return;
+			bool flag2 = global::Char.myCharz().statusMe == 14;
+			if (!flag2)
+			{
+				g.drawImage((mScreen.keyTouch != 5 && mScreen.keyMouse != 5) ? GameScr.imgFire0 : GameScr.imgFire1, GameScr.xF + 20, GameScr.yF + 20, mGraphics.HCENTER | mGraphics.VCENTER);
+				GameScr.gamePad.paint(g);
+				g.drawImage((mScreen.keyTouch != 13) ? GameScr.imgFocus : GameScr.imgFocus2, GameScr.xTG + 20, GameScr.yTG + 20, mGraphics.HCENTER | mGraphics.VCENTER);
+			}
 		}
-		if (global::Char.myCharz().statusMe == 14)
-		{
-			return;
-		}
-		g.drawImage((mScreen.keyTouch != 5 && mScreen.keyMouse != 5) ? GameScr.imgFire0 : GameScr.imgFire1, GameScr.xF + 20, GameScr.yF + 20, mGraphics.HCENTER | mGraphics.VCENTER);
-		GameScr.gamePad.paint(g);
-		g.drawImage((mScreen.keyTouch != 13) ? GameScr.imgFocus : GameScr.imgFocus2, GameScr.xTG + 20, GameScr.yTG + 20, mGraphics.HCENTER | mGraphics.VCENTER);
 	}
 
-	// Token: 0x0600079E RID: 1950 RVA: 0x0006F248 File Offset: 0x0006D648
+	// Token: 0x0600038B RID: 907 RVA: 0x00052B98 File Offset: 0x00050D98
 	public void showWinNumber(string num, string finish)
 	{
 		this.winnumber = new int[num.Length];
@@ -6572,16 +7778,18 @@ public class GameScr : mScreen, IChatable
 		GameScr.lastXS = (GameScr.currXS = mSystem.currentTimeMillis());
 	}
 
-	// Token: 0x0600079F RID: 1951 RVA: 0x0006F348 File Offset: 0x0006D748
+	// Token: 0x0600038C RID: 908 RVA: 0x00052C90 File Offset: 0x00050E90
 	public void chatVip(string chatVip)
 	{
-		if (!this.startChat)
+		bool flag = !this.startChat;
+		if (flag)
 		{
 			this.currChatWidth = mFont.tahoma_7b_yellowSmall.getWidth(chatVip);
 			this.xChatVip = GameCanvas.w;
 			this.startChat = true;
 		}
-		if (chatVip.StartsWith("!"))
+		bool flag2 = chatVip.StartsWith("!");
+		if (flag2)
 		{
 			chatVip = chatVip.Substring(1, chatVip.Length);
 			this.isFireWorks = true;
@@ -6589,7 +7797,7 @@ public class GameScr : mScreen, IChatable
 		GameScr.vChatVip.addElement(chatVip);
 	}
 
-	// Token: 0x060007A0 RID: 1952 RVA: 0x0006F3B4 File Offset: 0x0006D7B4
+	// Token: 0x0600038D RID: 909 RVA: 0x00052D03 File Offset: 0x00050F03
 	public void clearChatVip()
 	{
 		GameScr.vChatVip.removeAllElements();
@@ -6597,58 +7805,63 @@ public class GameScr : mScreen, IChatable
 		this.startChat = false;
 	}
 
-	// Token: 0x060007A1 RID: 1953 RVA: 0x0006F3D4 File Offset: 0x0006D7D4
+	// Token: 0x0600038E RID: 910 RVA: 0x00052D24 File Offset: 0x00050F24
 	public void paintChatVip(mGraphics g)
 	{
-		if (GameScr.vChatVip.size() == 0)
+		bool flag = GameScr.vChatVip.size() == 0;
+		if (!flag)
 		{
-			return;
-		}
-		if (!GameScr.isPaintChatVip)
-		{
-			return;
-		}
-		g.setClip(0, GameCanvas.h - 13, GameCanvas.w, 15);
-		g.fillRect(0, GameCanvas.h - 13, GameCanvas.w, 15, 0, 90);
-		string st = (string)GameScr.vChatVip.elementAt(0);
-		mFont.tahoma_7b_yellow.drawString(g, st, this.xChatVip, GameCanvas.h - 13, 0, mFont.tahoma_7b_dark);
-	}
-
-	// Token: 0x060007A2 RID: 1954 RVA: 0x0006F45C File Offset: 0x0006D85C
-	public void updateChatVip()
-	{
-		if (this.startChat)
-		{
-			this.xChatVip -= 2;
-			if (this.xChatVip < -this.currChatWidth)
+			bool flag2 = !GameScr.isPaintChatVip;
+			if (!flag2)
 			{
-				this.xChatVip = GameCanvas.w;
-				GameScr.vChatVip.removeElementAt(0);
-				if (GameScr.vChatVip.size() == 0)
-				{
-					this.isFireWorks = false;
-					this.startChat = false;
-					return;
-				}
-				this.currChatWidth = mFont.tahoma_7b_white.getWidth((string)GameScr.vChatVip.elementAt(0));
+				g.setClip(0, GameCanvas.h - 13, GameCanvas.w, 15);
+				g.fillRect(0, GameCanvas.h - 13, GameCanvas.w, 15, 0, 90);
+				string st = (string)GameScr.vChatVip.elementAt(0);
+				mFont.tahoma_7b_yellow.drawString(g, st, this.xChatVip, GameCanvas.h - 13, 0, mFont.tahoma_7b_dark);
 			}
 		}
 	}
 
-	// Token: 0x060007A3 RID: 1955 RVA: 0x0006F4E8 File Offset: 0x0006D8E8
+	// Token: 0x0600038F RID: 911 RVA: 0x00052DB8 File Offset: 0x00050FB8
+	public void updateChatVip()
+	{
+		bool flag = this.startChat;
+		if (flag)
+		{
+			this.xChatVip -= 2;
+			bool flag2 = this.xChatVip < -this.currChatWidth;
+			if (flag2)
+			{
+				this.xChatVip = GameCanvas.w;
+				GameScr.vChatVip.removeElementAt(0);
+				bool flag3 = GameScr.vChatVip.size() == 0;
+				if (flag3)
+				{
+					this.isFireWorks = false;
+					this.startChat = false;
+				}
+				else
+				{
+					this.currChatWidth = mFont.tahoma_7b_white.getWidth((string)GameScr.vChatVip.elementAt(0));
+				}
+			}
+		}
+	}
+
+	// Token: 0x06000390 RID: 912 RVA: 0x00052E4E File Offset: 0x0005104E
 	public void showYourNumber(string strNum)
 	{
 		this.yourNumber = strNum;
 		this.strPaint = mFont.tahoma_7.splitFontArray(this.yourNumber, 500);
 	}
 
-	// Token: 0x060007A4 RID: 1956 RVA: 0x0006F50C File Offset: 0x0006D90C
+	// Token: 0x06000391 RID: 913 RVA: 0x00052E73 File Offset: 0x00051073
 	public static void checkRemoveImage()
 	{
 		ImgByName.checkDelHash(ImgByName.hashImagePath, 10, false);
 	}
 
-	// Token: 0x060007A5 RID: 1957 RVA: 0x0006F51C File Offset: 0x0006D91C
+	// Token: 0x06000392 RID: 914 RVA: 0x00052E84 File Offset: 0x00051084
 	public static void StartServerPopUp(string strMsg)
 	{
 		GameCanvas.endDlg();
@@ -6662,162 +7875,183 @@ public class GameScr : mScreen, IChatable
 		ChatPopup.serverChatPopUp.cmdMsg1.y = GameCanvas.h - 35;
 	}
 
-	// Token: 0x060007A6 RID: 1958 RVA: 0x0006F5A2 File Offset: 0x0006D9A2
+	// Token: 0x06000393 RID: 915 RVA: 0x00052F0C File Offset: 0x0005110C
 	public static bool ispaintPhubangBar()
 	{
 		return TileMap.mapPhuBang() && GameScr.phuban_Info.type_PB == 0;
 	}
 
-	// Token: 0x060007A7 RID: 1959 RVA: 0x0006F5C0 File Offset: 0x0006D9C0
+	// Token: 0x06000394 RID: 916 RVA: 0x00052F38 File Offset: 0x00051138
 	public void paintPhuBanBar(mGraphics g, int x, int y, int w)
 	{
-		if (GameScr.phuban_Info == null)
+		bool flag = GameScr.phuban_Info == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (!GameScr.isPaintOther && GameScr.isPaintRada == 1 && !GameCanvas.panel.isShow && GameScr.ispaintPhubangBar())
-		{
-			if (w < GameScr.fra_PVE_Bar_1.frameWidth + GameScr.fra_PVE_Bar_0.frameWidth * 4)
+			bool flag2 = !GameScr.isPaintOther && GameScr.isPaintRada == 1 && !GameCanvas.panel.isShow && GameScr.ispaintPhubangBar();
+			if (flag2)
 			{
-				w = GameScr.fra_PVE_Bar_1.frameWidth + GameScr.fra_PVE_Bar_0.frameWidth * 4;
-			}
-			if (x > GameCanvas.w - w / 2)
-			{
-				x = GameCanvas.w - w / 2;
-			}
-			if (x < mGraphics.getImageWidth(GameScr.imgKhung) + w / 2 + 10)
-			{
-				x = mGraphics.getImageWidth(GameScr.imgKhung) + w / 2 + 10;
-			}
-			int frameHeight = GameScr.fra_PVE_Bar_0.frameHeight;
-			int num = y + frameHeight + mGraphics.getImageHeight(GameScr.imgBall) / 2 + 2;
-			int frameWidth = GameScr.fra_PVE_Bar_1.frameWidth;
-			int num2 = w / 2 - frameWidth / 2;
-			int num3 = x - w / 2;
-			int num4 = x + frameWidth / 2;
-			int y2 = y + 3;
-			int num5 = num2 - GameScr.fra_PVE_Bar_0.frameWidth;
-			int num6 = num5 / GameScr.fra_PVE_Bar_0.frameWidth;
-			if (num5 % GameScr.fra_PVE_Bar_0.frameWidth > 0)
-			{
-				num6++;
-			}
-			for (int i = 0; i < num6; i++)
-			{
-				if (i < num6 - 1)
+				bool flag3 = w < GameScr.fra_PVE_Bar_1.frameWidth + GameScr.fra_PVE_Bar_0.frameWidth * 4;
+				if (flag3)
 				{
-					GameScr.fra_PVE_Bar_0.drawFrame(1, num3 + GameScr.fra_PVE_Bar_0.frameWidth + i * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+					w = GameScr.fra_PVE_Bar_1.frameWidth + GameScr.fra_PVE_Bar_0.frameWidth * 4;
 				}
-				else
+				bool flag4 = x > GameCanvas.w - w / 2;
+				if (flag4)
 				{
-					GameScr.fra_PVE_Bar_0.drawFrame(1, num3 + num5, y2, 0, 0, g);
+					x = GameCanvas.w - w / 2;
 				}
-				if (i < num6 - 1)
+				bool flag5 = x < mGraphics.getImageWidth(GameScr.imgKhung) + w / 2 + 10;
+				if (flag5)
 				{
-					GameScr.fra_PVE_Bar_0.drawFrame(1, num4 + i * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+					x = mGraphics.getImageWidth(GameScr.imgKhung) + w / 2 + 10;
 				}
-				else
+				int frameHeight = GameScr.fra_PVE_Bar_0.frameHeight;
+				int num = y + frameHeight + mGraphics.getImageHeight(GameScr.imgBall) / 2 + 2;
+				int frameWidth = GameScr.fra_PVE_Bar_1.frameWidth;
+				int num2 = w / 2 - frameWidth / 2;
+				int num3 = x - w / 2;
+				int num4 = x + frameWidth / 2;
+				int y2 = y + 3;
+				int num5 = num2 - GameScr.fra_PVE_Bar_0.frameWidth;
+				int num6 = num5 / GameScr.fra_PVE_Bar_0.frameWidth;
+				bool flag6 = num5 % GameScr.fra_PVE_Bar_0.frameWidth > 0;
+				if (flag6)
 				{
-					GameScr.fra_PVE_Bar_0.drawFrame(1, num4 + num5 - GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+					num6++;
 				}
-			}
-			GameScr.fra_PVE_Bar_0.drawFrame(0, num3, y2, 2, 0, g);
-			GameScr.fra_PVE_Bar_0.drawFrame(0, num4 + num5, y2, 0, 0, g);
-			if (GameScr.phuban_Info.pointTeam1 > 0)
-			{
-				int idx = 2;
-				int idx2 = 3;
-				if (GameScr.phuban_Info.color_1 == 4)
+				for (int i = 0; i < num6; i++)
 				{
-					idx = 4;
-					idx2 = 5;
-				}
-				int num7 = GameScr.phuban_Info.pointTeam1 * num2 / GameScr.phuban_Info.maxPoint;
-				if (num7 < 0)
-				{
-					num7 = 0;
-				}
-				if (num7 > num2)
-				{
-					num7 = num2;
-				}
-				g.setClip(num3 + num2 - num7, y2, num7, frameHeight);
-				for (int j = 0; j < num6; j++)
-				{
-					if (j < num6 - 1)
+					bool flag7 = i < num6 - 1;
+					if (flag7)
 					{
-						GameScr.fra_PVE_Bar_0.drawFrame(idx2, num3 + GameScr.fra_PVE_Bar_0.frameWidth + j * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+						GameScr.fra_PVE_Bar_0.drawFrame(1, num3 + GameScr.fra_PVE_Bar_0.frameWidth + i * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
 					}
 					else
 					{
-						GameScr.fra_PVE_Bar_0.drawFrame(idx2, num3 + num5, y2, 0, 0, g);
+						GameScr.fra_PVE_Bar_0.drawFrame(1, num3 + num5, y2, 0, 0, g);
 					}
-				}
-				GameScr.fra_PVE_Bar_0.drawFrame(idx, num3, y2, 2, 0, g);
-				GameCanvas.resetTrans(g);
-			}
-			if (GameScr.phuban_Info.pointTeam2 > 0)
-			{
-				int idx3 = 2;
-				int idx4 = 3;
-				if (GameScr.phuban_Info.color_2 == 4)
-				{
-					idx3 = 4;
-					idx4 = 5;
-				}
-				int num8 = GameScr.phuban_Info.pointTeam2 * num2 / GameScr.phuban_Info.maxPoint;
-				if (num8 < 0)
-				{
-					num8 = 0;
-				}
-				if (num8 > num2)
-				{
-					num8 = num2;
-				}
-				g.setClip(num4, y2, num8, frameHeight);
-				for (int k = 0; k < num6; k++)
-				{
-					if (k < num6 - 1)
+					bool flag8 = i < num6 - 1;
+					if (flag8)
 					{
-						GameScr.fra_PVE_Bar_0.drawFrame(idx4, num4 + k * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+						GameScr.fra_PVE_Bar_0.drawFrame(1, num4 + i * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
 					}
 					else
 					{
-						GameScr.fra_PVE_Bar_0.drawFrame(idx4, num4 + num5 - GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+						GameScr.fra_PVE_Bar_0.drawFrame(1, num4 + num5 - GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
 					}
 				}
-				GameScr.fra_PVE_Bar_0.drawFrame(idx3, num4 + num5, y2, 0, 0, g);
-				GameCanvas.resetTrans(g);
-			}
-			GameScr.fra_PVE_Bar_1.drawFrame(0, x - frameWidth / 2, y, 0, 0, g);
-			string timeCountDown = mSystem.getTimeCountDown(GameScr.phuban_Info.timeStart, (int)GameScr.phuban_Info.timeSecond, true, false);
-			mFont.tahoma_7b_yellow.drawString(g, timeCountDown, x + 1, y + GameScr.fra_PVE_Bar_1.frameHeight / 2 - mFont.tahoma_7b_green2.getHeight() / 2, 2);
-			Panel.setTextColor(GameScr.phuban_Info.color_1, 1).drawString(g, GameScr.phuban_Info.nameTeam1, x - 5, num + 5, 1);
-			Panel.setTextColor(GameScr.phuban_Info.color_2, 1).drawString(g, GameScr.phuban_Info.nameTeam2, x + 5, num + 5, 0);
-			if (GameScr.phuban_Info.type_PB != 0)
-			{
-				int y3 = y + frameHeight / 2 - 2;
-				mFont.bigNumber_While.drawString(g, string.Empty + GameScr.phuban_Info.pointTeam1, num3 + num2 / 2, y3, 2);
-				mFont.bigNumber_While.drawString(g, string.Empty + GameScr.phuban_Info.pointTeam2, num4 + num2 / 2, y3, 2);
-			}
-			g.drawImage(GameScr.imgVS, x, y + GameScr.fra_PVE_Bar_1.frameHeight + 2, 3);
-			if (GameScr.phuban_Info.type_PB == 0)
-			{
-				GameScr.paintChienTruong_Life(g, GameScr.phuban_Info.maxLife, GameScr.phuban_Info.color_1, GameScr.phuban_Info.lifeTeam1, x - 13, GameScr.phuban_Info.color_2, GameScr.phuban_Info.lifeTeam2, x + 13, num);
+				GameScr.fra_PVE_Bar_0.drawFrame(0, num3, y2, 2, 0, g);
+				GameScr.fra_PVE_Bar_0.drawFrame(0, num4 + num5, y2, 0, 0, g);
+				bool flag9 = GameScr.phuban_Info.pointTeam1 > 0;
+				if (flag9)
+				{
+					int idx = 2;
+					int idx2 = 3;
+					bool flag10 = GameScr.phuban_Info.color_1 == 4;
+					if (flag10)
+					{
+						idx = 4;
+						idx2 = 5;
+					}
+					int num7 = GameScr.phuban_Info.pointTeam1 * num2 / GameScr.phuban_Info.maxPoint;
+					bool flag11 = num7 < 0;
+					if (flag11)
+					{
+						num7 = 0;
+					}
+					bool flag12 = num7 > num2;
+					if (flag12)
+					{
+						num7 = num2;
+					}
+					g.setClip(num3 + num2 - num7, y2, num7, frameHeight);
+					for (int j = 0; j < num6; j++)
+					{
+						bool flag13 = j < num6 - 1;
+						if (flag13)
+						{
+							GameScr.fra_PVE_Bar_0.drawFrame(idx2, num3 + GameScr.fra_PVE_Bar_0.frameWidth + j * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+						}
+						else
+						{
+							GameScr.fra_PVE_Bar_0.drawFrame(idx2, num3 + num5, y2, 0, 0, g);
+						}
+					}
+					GameScr.fra_PVE_Bar_0.drawFrame(idx, num3, y2, 2, 0, g);
+					GameCanvas.resetTrans(g);
+				}
+				bool flag14 = GameScr.phuban_Info.pointTeam2 > 0;
+				if (flag14)
+				{
+					int idx3 = 2;
+					int idx4 = 3;
+					bool flag15 = GameScr.phuban_Info.color_2 == 4;
+					if (flag15)
+					{
+						idx3 = 4;
+						idx4 = 5;
+					}
+					int num8 = GameScr.phuban_Info.pointTeam2 * num2 / GameScr.phuban_Info.maxPoint;
+					bool flag16 = num8 < 0;
+					if (flag16)
+					{
+						num8 = 0;
+					}
+					bool flag17 = num8 > num2;
+					if (flag17)
+					{
+						num8 = num2;
+					}
+					g.setClip(num4, y2, num8, frameHeight);
+					for (int k = 0; k < num6; k++)
+					{
+						bool flag18 = k < num6 - 1;
+						if (flag18)
+						{
+							GameScr.fra_PVE_Bar_0.drawFrame(idx4, num4 + k * GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+						}
+						else
+						{
+							GameScr.fra_PVE_Bar_0.drawFrame(idx4, num4 + num5 - GameScr.fra_PVE_Bar_0.frameWidth, y2, 0, 0, g);
+						}
+					}
+					GameScr.fra_PVE_Bar_0.drawFrame(idx3, num4 + num5, y2, 0, 0, g);
+					GameCanvas.resetTrans(g);
+				}
+				GameScr.fra_PVE_Bar_1.drawFrame(0, x - frameWidth / 2, y, 0, 0, g);
+				string timeCountDown = mSystem.getTimeCountDown(GameScr.phuban_Info.timeStart, (int)GameScr.phuban_Info.timeSecond, true, false);
+				mFont.tahoma_7b_yellow.drawString(g, timeCountDown, x + 1, y + GameScr.fra_PVE_Bar_1.frameHeight / 2 - mFont.tahoma_7b_green2.getHeight() / 2, 2);
+				Panel.setTextColor(GameScr.phuban_Info.color_1, 1).drawString(g, GameScr.phuban_Info.nameTeam1, x - 5, num + 5, 1);
+				Panel.setTextColor(GameScr.phuban_Info.color_2, 1).drawString(g, GameScr.phuban_Info.nameTeam2, x + 5, num + 5, 0);
+				bool flag19 = GameScr.phuban_Info.type_PB != 0;
+				if (flag19)
+				{
+					int y3 = y + frameHeight / 2 - 2;
+					mFont.bigNumber_While.drawString(g, string.Empty + GameScr.phuban_Info.pointTeam1.ToString(), num3 + num2 / 2, y3, 2);
+					mFont.bigNumber_While.drawString(g, string.Empty + GameScr.phuban_Info.pointTeam2.ToString(), num4 + num2 / 2, y3, 2);
+				}
+				g.drawImage(GameScr.imgVS, x, y + GameScr.fra_PVE_Bar_1.frameHeight + 2, 3);
+				bool flag20 = GameScr.phuban_Info.type_PB == 0;
+				if (flag20)
+				{
+					GameScr.paintChienTruong_Life(g, GameScr.phuban_Info.maxLife, GameScr.phuban_Info.color_1, GameScr.phuban_Info.lifeTeam1, x - 13, GameScr.phuban_Info.color_2, GameScr.phuban_Info.lifeTeam2, x + 13, num);
+				}
 			}
 		}
 	}
 
-	// Token: 0x060007A8 RID: 1960 RVA: 0x0006FB44 File Offset: 0x0006DF44
+	// Token: 0x06000395 RID: 917 RVA: 0x00053554 File Offset: 0x00051754
 	public static void paintChienTruong_Life(mGraphics g, int maxLife, int cl1, int lifeTeam1, int x1, int cl2, int lifeTeam2, int x2, int y)
 	{
-		if (GameScr.imgBall != null)
+		bool flag = GameScr.imgBall != null;
+		if (flag)
 		{
 			int num = mGraphics.getImageHeight(GameScr.imgBall) / 2;
 			for (int i = 0; i < maxLife; i++)
 			{
 				int num2 = 0;
-				if (i < lifeTeam1)
+				bool flag2 = i < lifeTeam1;
+				if (flag2)
 				{
 					num2 = 1;
 				}
@@ -6826,7 +8060,8 @@ public class GameScr : mScreen, IChatable
 			for (int j = 0; j < maxLife; j++)
 			{
 				int num3 = 0;
-				if (j < lifeTeam2)
+				bool flag3 = j < lifeTeam2;
+				if (flag3)
 				{
 					num3 = 1;
 				}
@@ -6835,7 +8070,7 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x060007A9 RID: 1961 RVA: 0x0006FC08 File Offset: 0x0006E008
+	// Token: 0x06000396 RID: 918 RVA: 0x00053634 File Offset: 0x00051834
 	public static void paintHPBar_NEW(mGraphics g, int x, int y, global::Char c)
 	{
 		g.drawImage(GameScr.imgKhung, x, y, 0);
@@ -6844,93 +8079,122 @@ public class GameScr : mScreen, IChatable
 		int width = GameScr.imgHP_NEW.getWidth();
 		int num2 = GameScr.imgHP_NEW.getHeight() / 2;
 		int num3 = c.cHP * width / c.cHPFull;
-		if (num3 <= 0)
+		bool flag = num3 <= 0;
+		if (flag)
 		{
 			num3 = 1;
 		}
-		else if (num3 > width)
+		else
 		{
-			num3 = width;
+			bool flag2 = num3 > width;
+			if (flag2)
+			{
+				num3 = width;
+			}
 		}
 		g.drawRegion(GameScr.imgHP_NEW, 0, num2, num3, num2, 0, x2, num, 0);
 		int num4 = c.cMP * width / c.cMPFull;
-		if (num4 <= 0)
+		bool flag3 = num4 <= 0;
+		if (flag3)
 		{
 			num4 = 1;
 		}
-		else if (num4 > width)
+		else
 		{
-			num4 = width;
+			bool flag4 = num4 > width;
+			if (flag4)
+			{
+				num4 = width;
+			}
 		}
 		g.drawRegion(GameScr.imgHP_NEW, 0, 0, num4, num2, 0, x2, num + 6, 0);
 		int x3 = x + GameScr.imgKhung.getWidth() / 2 + 1;
 		int y2 = num + 13;
 		mFont.tahoma_7_green2.drawString(g, c.cName, x3, y + 4, 2);
-		if (c.mobFocus != null)
+		bool flag5 = c.mobFocus != null;
+		if (flag5)
 		{
-			if (c.mobFocus.getTemplate() != null)
+			bool flag6 = c.mobFocus.getTemplate() != null;
+			if (flag6)
 			{
 				mFont.tahoma_7_green2.drawString(g, c.mobFocus.getTemplate().name, x3, y2, 2);
 			}
 		}
-		else if (c.npcFocus != null)
+		else
 		{
-			mFont.tahoma_7_green2.drawString(g, c.npcFocus.template.name, x3, y2, 2);
-		}
-		else if (c.charFocus != null)
-		{
-			mFont.tahoma_7_green2.drawString(g, c.charFocus.cName, x3, y2, 2);
+			bool flag7 = c.npcFocus != null;
+			if (flag7)
+			{
+				mFont.tahoma_7_green2.drawString(g, c.npcFocus.template.name, x3, y2, 2);
+			}
+			else
+			{
+				bool flag8 = c.charFocus != null;
+				if (flag8)
+				{
+					mFont.tahoma_7_green2.drawString(g, c.charFocus.cName, x3, y2, 2);
+				}
+			}
 		}
 	}
 
-	// Token: 0x060007AA RID: 1962 RVA: 0x0006FD90 File Offset: 0x0006E190
+	// Token: 0x06000397 RID: 919 RVA: 0x000537E8 File Offset: 0x000519E8
 	public static void addEffectEnd(int type, int subtype, int typePaint, int x, int y, int levelPaint, int dir, short timeRemove, Point[] listObj)
 	{
 		Effect_End eff = new Effect_End(type, subtype, typePaint, x, y, levelPaint, dir, timeRemove, listObj);
 		GameScr.addEffect2Vector(eff);
 	}
 
-	// Token: 0x060007AB RID: 1963 RVA: 0x0006FDB8 File Offset: 0x0006E1B8
+	// Token: 0x06000398 RID: 920 RVA: 0x00053814 File Offset: 0x00051A14
 	public static void addEffectEnd_Target(int type, int subtype, int typePaint, global::Char charUse, Point target, int levelPaint, short timeRemove, short range)
 	{
 		Effect_End eff = new Effect_End(type, subtype, typePaint, charUse.clone(), target, levelPaint, timeRemove, range);
 		GameScr.addEffect2Vector(eff);
 	}
 
-	// Token: 0x060007AC RID: 1964 RVA: 0x0006FDE4 File Offset: 0x0006E1E4
+	// Token: 0x06000399 RID: 921 RVA: 0x00053840 File Offset: 0x00051A40
 	public static void addEffect2Vector(Effect_End eff)
 	{
-		if (eff.levelPaint == 0)
+		bool flag = eff.levelPaint == 0;
+		if (flag)
 		{
 			EffectManager.addHiEffect(eff);
 		}
-		else if (eff.levelPaint == 1)
-		{
-			EffectManager.addMidEffects(eff);
-		}
-		else if (eff.levelPaint == 2)
-		{
-			EffectManager.addMid_2Effects(eff);
-		}
 		else
 		{
-			EffectManager.addLowEffect(eff);
+			bool flag2 = eff.levelPaint == 1;
+			if (flag2)
+			{
+				EffectManager.addMidEffects(eff);
+			}
+			else
+			{
+				bool flag3 = eff.levelPaint == 2;
+				if (flag3)
+				{
+					EffectManager.addMid_2Effects(eff);
+				}
+				else
+				{
+					EffectManager.addLowEffect(eff);
+				}
+			}
 		}
 	}
 
-	// Token: 0x060007AD RID: 1965 RVA: 0x0006FE3C File Offset: 0x0006E23C
+	// Token: 0x0600039A RID: 922 RVA: 0x000538A0 File Offset: 0x00051AA0
 	public static bool setIsInScreen(int x, int y, int wOne, int hOne)
 	{
 		return x >= GameScr.cmx - wOne && x <= GameScr.cmx + GameCanvas.w + wOne && y >= GameScr.cmy - hOne && y <= GameScr.cmy + GameCanvas.h + hOne * 3 / 2;
 	}
 
-	// Token: 0x060007AE RID: 1966 RVA: 0x0006FE90 File Offset: 0x0006E290
+	// Token: 0x0600039B RID: 923 RVA: 0x000538F0 File Offset: 0x00051AF0
 	public static bool isSmallScr()
 	{
 		return GameCanvas.w <= 320;
 	}
 
-	// Token: 0x060007AF RID: 1967 RVA: 0x0006FEA4 File Offset: 0x0006E2A4
+	// Token: 0x0600039C RID: 924 RVA: 0x00053914 File Offset: 0x00051B14
 	private void paint_xp_bar(mGraphics g)
 	{
 		g.setColor(8421504);
@@ -6946,966 +8210,966 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	// Token: 0x060007B0 RID: 1968 RVA: 0x0006FF3C File Offset: 0x0006E33C
+	// Token: 0x0600039D RID: 925 RVA: 0x000539B4 File Offset: 0x00051BB4
 	private void paint_ios_bg(mGraphics g)
 	{
-		if (mSystem.clientType != 5)
+		bool flag = mSystem.clientType != 5;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameScr.imgBgIOS != null)
-		{
-			g.setColor(16777215);
-			g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-			g.drawImage(GameScr.imgBgIOS, GameCanvas.w / 2, GameCanvas.h / 2, mGraphics.VCENTER | mGraphics.HCENTER);
-		}
-		else
-		{
-			int num = (TileMap.bgID % 2 != 0) ? 1 : 2;
-			GameScr.imgBgIOS = GameCanvas.loadImage("/bg/bg_ios_" + num + ".png");
+			bool flag2 = GameScr.imgBgIOS != null;
+			if (flag2)
+			{
+				g.setColor(16777215);
+				g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
+				g.drawImage(GameScr.imgBgIOS, GameCanvas.w / 2, GameCanvas.h / 2, mGraphics.VCENTER | mGraphics.HCENTER);
+			}
+			else
+			{
+				GameScr.imgBgIOS = GameCanvas.loadImage("/bg/bg_ios_" + ((TileMap.bgID % 2 != 0) ? 1 : 2).ToString() + ".png");
+			}
 		}
 	}
 
-	// Token: 0x04000CDE RID: 3294
+	// Token: 0x040006A5 RID: 1701
 	public bool isWaitingDoubleClick;
 
-	// Token: 0x04000CDF RID: 3295
+	// Token: 0x040006A6 RID: 1702
 	public long timeStartDblClick;
 
-	// Token: 0x04000CE0 RID: 3296
+	// Token: 0x040006A7 RID: 1703
 	public long timeEndDblClick;
 
-	// Token: 0x04000CE1 RID: 3297
+	// Token: 0x040006A8 RID: 1704
 	public static bool isPaintOther = false;
 
-	// Token: 0x04000CE2 RID: 3298
+	// Token: 0x040006A9 RID: 1705
 	public static MyVector textTime = new MyVector(string.Empty);
 
-	// Token: 0x04000CE3 RID: 3299
+	// Token: 0x040006AA RID: 1706
 	public static bool isLoadAllData = false;
 
-	// Token: 0x04000CE4 RID: 3300
+	// Token: 0x040006AB RID: 1707
 	public static GameScr instance;
 
-	// Token: 0x04000CE5 RID: 3301
+	// Token: 0x040006AC RID: 1708
 	public static int gW;
 
-	// Token: 0x04000CE6 RID: 3302
+	// Token: 0x040006AD RID: 1709
 	public static int gH;
 
-	// Token: 0x04000CE7 RID: 3303
+	// Token: 0x040006AE RID: 1710
 	public static int gW2;
 
-	// Token: 0x04000CE8 RID: 3304
+	// Token: 0x040006AF RID: 1711
 	public static int gssw;
 
-	// Token: 0x04000CE9 RID: 3305
+	// Token: 0x040006B0 RID: 1712
 	public static int gssh;
 
-	// Token: 0x04000CEA RID: 3306
+	// Token: 0x040006B1 RID: 1713
 	public static int gH34;
 
-	// Token: 0x04000CEB RID: 3307
+	// Token: 0x040006B2 RID: 1714
 	public static int gW3;
 
-	// Token: 0x04000CEC RID: 3308
+	// Token: 0x040006B3 RID: 1715
 	public static int gH3;
 
-	// Token: 0x04000CED RID: 3309
+	// Token: 0x040006B4 RID: 1716
 	public static int gH23;
 
-	// Token: 0x04000CEE RID: 3310
+	// Token: 0x040006B5 RID: 1717
 	public static int gW23;
 
-	// Token: 0x04000CEF RID: 3311
+	// Token: 0x040006B6 RID: 1718
 	public static int gH2;
 
-	// Token: 0x04000CF0 RID: 3312
+	// Token: 0x040006B7 RID: 1719
 	public static int csPadMaxH;
 
-	// Token: 0x04000CF1 RID: 3313
+	// Token: 0x040006B8 RID: 1720
 	public static int cmdBarH;
 
-	// Token: 0x04000CF2 RID: 3314
+	// Token: 0x040006B9 RID: 1721
 	public static int gW34;
 
-	// Token: 0x04000CF3 RID: 3315
+	// Token: 0x040006BA RID: 1722
 	public static int gW6;
 
-	// Token: 0x04000CF4 RID: 3316
+	// Token: 0x040006BB RID: 1723
 	public static int gH6;
 
-	// Token: 0x04000CF5 RID: 3317
+	// Token: 0x040006BC RID: 1724
 	public static int cmx;
 
-	// Token: 0x04000CF6 RID: 3318
+	// Token: 0x040006BD RID: 1725
 	public static int cmy;
 
-	// Token: 0x04000CF7 RID: 3319
+	// Token: 0x040006BE RID: 1726
 	public static int cmdx;
 
-	// Token: 0x04000CF8 RID: 3320
+	// Token: 0x040006BF RID: 1727
 	public static int cmdy;
 
-	// Token: 0x04000CF9 RID: 3321
+	// Token: 0x040006C0 RID: 1728
 	public static int cmvx;
 
-	// Token: 0x04000CFA RID: 3322
+	// Token: 0x040006C1 RID: 1729
 	public static int cmvy;
 
-	// Token: 0x04000CFB RID: 3323
+	// Token: 0x040006C2 RID: 1730
 	public static int cmtoX;
 
-	// Token: 0x04000CFC RID: 3324
+	// Token: 0x040006C3 RID: 1731
 	public static int cmtoY;
 
-	// Token: 0x04000CFD RID: 3325
+	// Token: 0x040006C4 RID: 1732
 	public static int cmxLim;
 
-	// Token: 0x04000CFE RID: 3326
+	// Token: 0x040006C5 RID: 1733
 	public static int cmyLim;
 
-	// Token: 0x04000CFF RID: 3327
+	// Token: 0x040006C6 RID: 1734
 	public static int gssx;
 
-	// Token: 0x04000D00 RID: 3328
+	// Token: 0x040006C7 RID: 1735
 	public static int gssy;
 
-	// Token: 0x04000D01 RID: 3329
+	// Token: 0x040006C8 RID: 1736
 	public static int gssxe;
 
-	// Token: 0x04000D02 RID: 3330
+	// Token: 0x040006C9 RID: 1737
 	public static int gssye;
 
-	// Token: 0x04000D03 RID: 3331
+	// Token: 0x040006CA RID: 1738
 	public Command cmdback;
 
-	// Token: 0x04000D04 RID: 3332
+	// Token: 0x040006CB RID: 1739
 	public Command cmdBag;
 
-	// Token: 0x04000D05 RID: 3333
+	// Token: 0x040006CC RID: 1740
 	public Command cmdSkill;
 
-	// Token: 0x04000D06 RID: 3334
+	// Token: 0x040006CD RID: 1741
 	public Command cmdTiemnang;
 
-	// Token: 0x04000D07 RID: 3335
+	// Token: 0x040006CE RID: 1742
 	public Command cmdtrangbi;
 
-	// Token: 0x04000D08 RID: 3336
+	// Token: 0x040006CF RID: 1743
 	public Command cmdInfo;
 
-	// Token: 0x04000D09 RID: 3337
+	// Token: 0x040006D0 RID: 1744
 	public Command cmdFocus;
 
-	// Token: 0x04000D0A RID: 3338
+	// Token: 0x040006D1 RID: 1745
 	public Command cmdFire;
 
-	// Token: 0x04000D0B RID: 3339
+	// Token: 0x040006D2 RID: 1746
 	public static int d;
 
-	// Token: 0x04000D0C RID: 3340
+	// Token: 0x040006D3 RID: 1747
 	public static int hpPotion;
 
-	// Token: 0x04000D0D RID: 3341
+	// Token: 0x040006D4 RID: 1748
 	public static SkillPaint[] sks;
 
-	// Token: 0x04000D0E RID: 3342
+	// Token: 0x040006D5 RID: 1749
 	public static Arrowpaint[] arrs;
 
-	// Token: 0x04000D0F RID: 3343
+	// Token: 0x040006D6 RID: 1750
 	public static DartInfo[] darts;
 
-	// Token: 0x04000D10 RID: 3344
+	// Token: 0x040006D7 RID: 1751
 	public static Part[] parts;
 
-	// Token: 0x04000D11 RID: 3345
+	// Token: 0x040006D8 RID: 1752
 	public static EffectCharPaint[] efs;
 
-	// Token: 0x04000D12 RID: 3346
+	// Token: 0x040006D9 RID: 1753
 	public static int lockTick;
 
-	// Token: 0x04000D13 RID: 3347
+	// Token: 0x040006DA RID: 1754
 	private int moveUp;
 
-	// Token: 0x04000D14 RID: 3348
+	// Token: 0x040006DB RID: 1755
 	private int moveDow;
 
-	// Token: 0x04000D15 RID: 3349
+	// Token: 0x040006DC RID: 1756
 	private int idTypeTask;
 
-	// Token: 0x04000D16 RID: 3350
+	// Token: 0x040006DD RID: 1757
 	private bool isstarOpen;
 
-	// Token: 0x04000D17 RID: 3351
+	// Token: 0x040006DE RID: 1758
 	private bool isChangeSkill;
 
-	// Token: 0x04000D18 RID: 3352
+	// Token: 0x040006DF RID: 1759
 	public static MyVector vClan = new MyVector();
 
-	// Token: 0x04000D19 RID: 3353
+	// Token: 0x040006E0 RID: 1760
 	public static MyVector vPtMap = new MyVector();
 
-	// Token: 0x04000D1A RID: 3354
+	// Token: 0x040006E1 RID: 1761
 	public static MyVector vFriend = new MyVector();
 
-	// Token: 0x04000D1B RID: 3355
+	// Token: 0x040006E2 RID: 1762
 	public static MyVector vEnemies = new MyVector();
 
-	// Token: 0x04000D1C RID: 3356
+	// Token: 0x040006E3 RID: 1763
 	public static MyVector vCharInMap = new MyVector();
 
-	// Token: 0x04000D1D RID: 3357
+	// Token: 0x040006E4 RID: 1764
 	public static MyVector vItemMap = new MyVector();
 
-	// Token: 0x04000D1E RID: 3358
+	// Token: 0x040006E5 RID: 1765
 	public static MyVector vMobAttack = new MyVector();
 
-	// Token: 0x04000D1F RID: 3359
+	// Token: 0x040006E6 RID: 1766
 	public static MyVector vSet = new MyVector();
 
-	// Token: 0x04000D20 RID: 3360
+	// Token: 0x040006E7 RID: 1767
 	public static MyVector vMob = new MyVector();
 
-	// Token: 0x04000D21 RID: 3361
+	// Token: 0x040006E8 RID: 1768
 	public static MyVector vNpc = new MyVector();
 
-	// Token: 0x04000D22 RID: 3362
+	// Token: 0x040006E9 RID: 1769
 	public static MyVector vFlag = new MyVector();
 
-	// Token: 0x04000D23 RID: 3363
+	// Token: 0x040006EA RID: 1770
 	public static NClass[] nClasss;
 
-	// Token: 0x04000D24 RID: 3364
+	// Token: 0x040006EB RID: 1771
 	public static int indexSize = 28;
 
-	// Token: 0x04000D25 RID: 3365
+	// Token: 0x040006EC RID: 1772
 	public static int indexTitle = 0;
 
-	// Token: 0x04000D26 RID: 3366
+	// Token: 0x040006ED RID: 1773
 	public static int indexSelect = 0;
 
-	// Token: 0x04000D27 RID: 3367
+	// Token: 0x040006EE RID: 1774
 	public static int indexRow = -1;
 
-	// Token: 0x04000D28 RID: 3368
+	// Token: 0x040006EF RID: 1775
 	public static int indexRowMax;
 
-	// Token: 0x04000D29 RID: 3369
+	// Token: 0x040006F0 RID: 1776
 	public static int indexMenu = 0;
 
-	// Token: 0x04000D2A RID: 3370
+	// Token: 0x040006F1 RID: 1777
 	public Item itemFocus;
 
-	// Token: 0x04000D2B RID: 3371
+	// Token: 0x040006F2 RID: 1778
 	public ItemOptionTemplate[] iOptionTemplates;
 
-	// Token: 0x04000D2C RID: 3372
+	// Token: 0x040006F3 RID: 1779
 	public SkillOptionTemplate[] sOptionTemplates;
 
-	// Token: 0x04000D2D RID: 3373
+	// Token: 0x040006F4 RID: 1780
 	private static Scroll scrInfo = new Scroll();
 
-	// Token: 0x04000D2E RID: 3374
+	// Token: 0x040006F5 RID: 1781
 	public static Scroll scrMain = new Scroll();
 
-	// Token: 0x04000D2F RID: 3375
+	// Token: 0x040006F6 RID: 1782
 	public static MyVector vItemUpGrade = new MyVector();
 
-	// Token: 0x04000D30 RID: 3376
+	// Token: 0x040006F7 RID: 1783
 	public static bool isTypeXu;
 
-	// Token: 0x04000D31 RID: 3377
+	// Token: 0x040006F8 RID: 1784
 	public static bool isViewNext;
 
-	// Token: 0x04000D32 RID: 3378
+	// Token: 0x040006F9 RID: 1785
 	public static bool isViewClanMemOnline = false;
 
-	// Token: 0x04000D33 RID: 3379
+	// Token: 0x040006FA RID: 1786
 	public static bool isViewClanInvite = true;
 
-	// Token: 0x04000D34 RID: 3380
+	// Token: 0x040006FB RID: 1787
 	public static bool isChop;
 
-	// Token: 0x04000D35 RID: 3381
+	// Token: 0x040006FC RID: 1788
 	public static string titleInputText = string.Empty;
 
-	// Token: 0x04000D36 RID: 3382
+	// Token: 0x040006FD RID: 1789
 	public static int tickMove;
 
-	// Token: 0x04000D37 RID: 3383
+	// Token: 0x040006FE RID: 1790
 	public static bool isPaintAlert = false;
 
-	// Token: 0x04000D38 RID: 3384
+	// Token: 0x040006FF RID: 1791
 	public static bool isPaintTask = false;
 
-	// Token: 0x04000D39 RID: 3385
+	// Token: 0x04000700 RID: 1792
 	public static bool isPaintTeam = false;
 
-	// Token: 0x04000D3A RID: 3386
+	// Token: 0x04000701 RID: 1793
 	public static bool isPaintFindTeam = false;
 
-	// Token: 0x04000D3B RID: 3387
+	// Token: 0x04000702 RID: 1794
 	public static bool isPaintFriend = false;
 
-	// Token: 0x04000D3C RID: 3388
+	// Token: 0x04000703 RID: 1795
 	public static bool isPaintEnemies = false;
 
-	// Token: 0x04000D3D RID: 3389
+	// Token: 0x04000704 RID: 1796
 	public static bool isPaintItemInfo = false;
 
-	// Token: 0x04000D3E RID: 3390
+	// Token: 0x04000705 RID: 1797
 	public static bool isHaveSelectSkill = false;
 
-	// Token: 0x04000D3F RID: 3391
+	// Token: 0x04000706 RID: 1798
 	public static bool isPaintSkill = false;
 
-	// Token: 0x04000D40 RID: 3392
+	// Token: 0x04000707 RID: 1799
 	public static bool isPaintInfoMe = false;
 
-	// Token: 0x04000D41 RID: 3393
+	// Token: 0x04000708 RID: 1800
 	public static bool isPaintStore = false;
 
-	// Token: 0x04000D42 RID: 3394
+	// Token: 0x04000709 RID: 1801
 	public static bool isPaintNonNam = false;
 
-	// Token: 0x04000D43 RID: 3395
+	// Token: 0x0400070A RID: 1802
 	public static bool isPaintNonNu = false;
 
-	// Token: 0x04000D44 RID: 3396
+	// Token: 0x0400070B RID: 1803
 	public static bool isPaintAoNam = false;
 
-	// Token: 0x04000D45 RID: 3397
+	// Token: 0x0400070C RID: 1804
 	public static bool isPaintAoNu = false;
 
-	// Token: 0x04000D46 RID: 3398
+	// Token: 0x0400070D RID: 1805
 	public static bool isPaintGangTayNam = false;
 
-	// Token: 0x04000D47 RID: 3399
+	// Token: 0x0400070E RID: 1806
 	public static bool isPaintGangTayNu = false;
 
-	// Token: 0x04000D48 RID: 3400
+	// Token: 0x0400070F RID: 1807
 	public static bool isPaintQuanNam = false;
 
-	// Token: 0x04000D49 RID: 3401
+	// Token: 0x04000710 RID: 1808
 	public static bool isPaintQuanNu = false;
 
-	// Token: 0x04000D4A RID: 3402
+	// Token: 0x04000711 RID: 1809
 	public static bool isPaintGiayNam = false;
 
-	// Token: 0x04000D4B RID: 3403
+	// Token: 0x04000712 RID: 1810
 	public static bool isPaintGiayNu = false;
 
-	// Token: 0x04000D4C RID: 3404
+	// Token: 0x04000713 RID: 1811
 	public static bool isPaintLien = false;
 
-	// Token: 0x04000D4D RID: 3405
+	// Token: 0x04000714 RID: 1812
 	public static bool isPaintNhan = false;
 
-	// Token: 0x04000D4E RID: 3406
+	// Token: 0x04000715 RID: 1813
 	public static bool isPaintNgocBoi = false;
 
-	// Token: 0x04000D4F RID: 3407
+	// Token: 0x04000716 RID: 1814
 	public static bool isPaintPhu = false;
 
-	// Token: 0x04000D50 RID: 3408
+	// Token: 0x04000717 RID: 1815
 	public static bool isPaintWeapon = false;
 
-	// Token: 0x04000D51 RID: 3409
+	// Token: 0x04000718 RID: 1816
 	public static bool isPaintStack = false;
 
-	// Token: 0x04000D52 RID: 3410
+	// Token: 0x04000719 RID: 1817
 	public static bool isPaintStackLock = false;
 
-	// Token: 0x04000D53 RID: 3411
+	// Token: 0x0400071A RID: 1818
 	public static bool isPaintGrocery = false;
 
-	// Token: 0x04000D54 RID: 3412
+	// Token: 0x0400071B RID: 1819
 	public static bool isPaintGroceryLock = false;
 
-	// Token: 0x04000D55 RID: 3413
+	// Token: 0x0400071C RID: 1820
 	public static bool isPaintUpGrade = false;
 
-	// Token: 0x04000D56 RID: 3414
+	// Token: 0x0400071D RID: 1821
 	public static bool isPaintConvert = false;
 
-	// Token: 0x04000D57 RID: 3415
+	// Token: 0x0400071E RID: 1822
 	public static bool isPaintUpGradeGold = false;
 
-	// Token: 0x04000D58 RID: 3416
+	// Token: 0x0400071F RID: 1823
 	public static bool isPaintUpPearl = false;
 
-	// Token: 0x04000D59 RID: 3417
+	// Token: 0x04000720 RID: 1824
 	public static bool isPaintBox = false;
 
-	// Token: 0x04000D5A RID: 3418
+	// Token: 0x04000721 RID: 1825
 	public static bool isPaintSplit = false;
 
-	// Token: 0x04000D5B RID: 3419
+	// Token: 0x04000722 RID: 1826
 	public static bool isPaintCharInMap = false;
 
-	// Token: 0x04000D5C RID: 3420
+	// Token: 0x04000723 RID: 1827
 	public static bool isPaintTrade = false;
 
-	// Token: 0x04000D5D RID: 3421
+	// Token: 0x04000724 RID: 1828
 	public static bool isPaintZone = false;
 
-	// Token: 0x04000D5E RID: 3422
+	// Token: 0x04000725 RID: 1829
 	public static bool isPaintMessage = false;
 
-	// Token: 0x04000D5F RID: 3423
+	// Token: 0x04000726 RID: 1830
 	public static bool isPaintClan = false;
 
-	// Token: 0x04000D60 RID: 3424
+	// Token: 0x04000727 RID: 1831
 	public static bool isRequestMember = false;
 
-	// Token: 0x04000D61 RID: 3425
+	// Token: 0x04000728 RID: 1832
 	public static global::Char currentCharViewInfo;
 
-	// Token: 0x04000D62 RID: 3426
+	// Token: 0x04000729 RID: 1833
 	public static long[] exps;
 
-	// Token: 0x04000D63 RID: 3427
+	// Token: 0x0400072A RID: 1834
 	public static int[] crystals;
 
-	// Token: 0x04000D64 RID: 3428
+	// Token: 0x0400072B RID: 1835
 	public static int[] upClothe;
 
-	// Token: 0x04000D65 RID: 3429
+	// Token: 0x0400072C RID: 1836
 	public static int[] upAdorn;
 
-	// Token: 0x04000D66 RID: 3430
+	// Token: 0x0400072D RID: 1837
 	public static int[] upWeapon;
 
-	// Token: 0x04000D67 RID: 3431
+	// Token: 0x0400072E RID: 1838
 	public static int[] coinUpCrystals;
 
-	// Token: 0x04000D68 RID: 3432
+	// Token: 0x0400072F RID: 1839
 	public static int[] coinUpClothes;
 
-	// Token: 0x04000D69 RID: 3433
+	// Token: 0x04000730 RID: 1840
 	public static int[] coinUpAdorns;
 
-	// Token: 0x04000D6A RID: 3434
+	// Token: 0x04000731 RID: 1841
 	public static int[] coinUpWeapons;
 
-	// Token: 0x04000D6B RID: 3435
+	// Token: 0x04000732 RID: 1842
 	public static int[] maxPercents;
 
-	// Token: 0x04000D6C RID: 3436
+	// Token: 0x04000733 RID: 1843
 	public static int[] goldUps;
 
-	// Token: 0x04000D6D RID: 3437
+	// Token: 0x04000734 RID: 1844
 	public int tMenuDelay;
 
-	// Token: 0x04000D6E RID: 3438
+	// Token: 0x04000735 RID: 1845
 	public int zoneCol = 6;
 
-	// Token: 0x04000D6F RID: 3439
+	// Token: 0x04000736 RID: 1846
 	public int[] zones;
 
-	// Token: 0x04000D70 RID: 3440
+	// Token: 0x04000737 RID: 1847
 	public int[] pts;
 
-	// Token: 0x04000D71 RID: 3441
+	// Token: 0x04000738 RID: 1848
 	public int[] numPlayer;
 
-	// Token: 0x04000D72 RID: 3442
+	// Token: 0x04000739 RID: 1849
 	public int[] maxPlayer;
 
-	// Token: 0x04000D73 RID: 3443
+	// Token: 0x0400073A RID: 1850
 	public int[] rank1;
 
-	// Token: 0x04000D74 RID: 3444
+	// Token: 0x0400073B RID: 1851
 	public int[] rank2;
 
-	// Token: 0x04000D75 RID: 3445
+	// Token: 0x0400073C RID: 1852
 	public string[] rankName1;
 
-	// Token: 0x04000D76 RID: 3446
+	// Token: 0x0400073D RID: 1853
 	public string[] rankName2;
 
-	// Token: 0x04000D77 RID: 3447
+	// Token: 0x0400073E RID: 1854
 	public int typeTrade;
 
-	// Token: 0x04000D78 RID: 3448
+	// Token: 0x0400073F RID: 1855
 	public int typeTradeOrder;
 
-	// Token: 0x04000D79 RID: 3449
+	// Token: 0x04000740 RID: 1856
 	public int coinTrade;
 
-	// Token: 0x04000D7A RID: 3450
+	// Token: 0x04000741 RID: 1857
 	public int coinTradeOrder;
 
-	// Token: 0x04000D7B RID: 3451
+	// Token: 0x04000742 RID: 1858
 	public int timeTrade;
 
-	// Token: 0x04000D7C RID: 3452
+	// Token: 0x04000743 RID: 1859
 	public int indexItemUse = -1;
 
-	// Token: 0x04000D7D RID: 3453
+	// Token: 0x04000744 RID: 1860
 	public int cLastFocusID = -1;
 
-	// Token: 0x04000D7E RID: 3454
+	// Token: 0x04000745 RID: 1861
 	public int cPreFocusID = -1;
 
-	// Token: 0x04000D7F RID: 3455
+	// Token: 0x04000746 RID: 1862
 	public bool isLockKey;
 
-	// Token: 0x04000D80 RID: 3456
+	// Token: 0x04000747 RID: 1863
 	public static int[] tasks;
 
-	// Token: 0x04000D81 RID: 3457
+	// Token: 0x04000748 RID: 1864
 	public static int[] mapTasks;
 
-	// Token: 0x04000D82 RID: 3458
+	// Token: 0x04000749 RID: 1865
 	public static Image imgRoomStat;
 
-	// Token: 0x04000D83 RID: 3459
+	// Token: 0x0400074A RID: 1866
 	public static Image frBarPow0;
 
-	// Token: 0x04000D84 RID: 3460
+	// Token: 0x0400074B RID: 1867
 	public static Image frBarPow1;
 
-	// Token: 0x04000D85 RID: 3461
+	// Token: 0x0400074C RID: 1868
 	public static Image frBarPow2;
 
-	// Token: 0x04000D86 RID: 3462
+	// Token: 0x0400074D RID: 1869
 	public static Image frBarPow20;
 
-	// Token: 0x04000D87 RID: 3463
+	// Token: 0x0400074E RID: 1870
 	public static Image frBarPow21;
 
-	// Token: 0x04000D88 RID: 3464
+	// Token: 0x0400074F RID: 1871
 	public static Image frBarPow22;
 
-	// Token: 0x04000D89 RID: 3465
+	// Token: 0x04000750 RID: 1872
 	public MyVector texts;
 
-	// Token: 0x04000D8A RID: 3466
+	// Token: 0x04000751 RID: 1873
 	public string textsTitle;
 
-	// Token: 0x04000D8B RID: 3467
+	// Token: 0x04000752 RID: 1874
 	public static sbyte vcData;
 
-	// Token: 0x04000D8C RID: 3468
+	// Token: 0x04000753 RID: 1875
 	public static sbyte vcMap;
 
-	// Token: 0x04000D8D RID: 3469
+	// Token: 0x04000754 RID: 1876
 	public static sbyte vcSkill;
 
-	// Token: 0x04000D8E RID: 3470
+	// Token: 0x04000755 RID: 1877
 	public static sbyte vcItem;
 
-	// Token: 0x04000D8F RID: 3471
+	// Token: 0x04000756 RID: 1878
 	public static sbyte vsData;
 
-	// Token: 0x04000D90 RID: 3472
+	// Token: 0x04000757 RID: 1879
 	public static sbyte vsMap;
 
-	// Token: 0x04000D91 RID: 3473
+	// Token: 0x04000758 RID: 1880
 	public static sbyte vsSkill;
 
-	// Token: 0x04000D92 RID: 3474
+	// Token: 0x04000759 RID: 1881
 	public static sbyte vsItem;
 
-	// Token: 0x04000D93 RID: 3475
+	// Token: 0x0400075A RID: 1882
 	public static sbyte vcTask;
 
-	// Token: 0x04000D94 RID: 3476
+	// Token: 0x0400075B RID: 1883
 	public static Image imgArrow;
 
-	// Token: 0x04000D95 RID: 3477
+	// Token: 0x0400075C RID: 1884
 	public static Image imgArrow2;
 
-	// Token: 0x04000D96 RID: 3478
+	// Token: 0x0400075D RID: 1885
 	public static Image imgChat;
 
-	// Token: 0x04000D97 RID: 3479
+	// Token: 0x0400075E RID: 1886
 	public static Image imgChat2;
 
-	// Token: 0x04000D98 RID: 3480
+	// Token: 0x0400075F RID: 1887
 	public static Image imgMenu;
 
-	// Token: 0x04000D99 RID: 3481
+	// Token: 0x04000760 RID: 1888
 	public static Image imgFocus;
 
-	// Token: 0x04000D9A RID: 3482
+	// Token: 0x04000761 RID: 1889
 	public static Image imgFocus2;
 
-	// Token: 0x04000D9B RID: 3483
+	// Token: 0x04000762 RID: 1890
 	public static Image imgSkill;
 
-	// Token: 0x04000D9C RID: 3484
+	// Token: 0x04000763 RID: 1891
 	public static Image imgSkill2;
 
-	// Token: 0x04000D9D RID: 3485
+	// Token: 0x04000764 RID: 1892
 	public static Image imgHP1;
 
-	// Token: 0x04000D9E RID: 3486
+	// Token: 0x04000765 RID: 1893
 	public static Image imgHP2;
 
-	// Token: 0x04000D9F RID: 3487
+	// Token: 0x04000766 RID: 1894
 	public static Image imgHP3;
 
-	// Token: 0x04000DA0 RID: 3488
+	// Token: 0x04000767 RID: 1895
 	public static Image imgHP4;
 
-	// Token: 0x04000DA1 RID: 3489
+	// Token: 0x04000768 RID: 1896
 	public static Image imgFire0;
 
-	// Token: 0x04000DA2 RID: 3490
+	// Token: 0x04000769 RID: 1897
 	public static Image imgFire1;
 
-	// Token: 0x04000DA3 RID: 3491
+	// Token: 0x0400076A RID: 1898
 	public static Image imgLbtn;
 
-	// Token: 0x04000DA4 RID: 3492
+	// Token: 0x0400076B RID: 1899
 	public static Image imgLbtnFocus;
 
-	// Token: 0x04000DA5 RID: 3493
+	// Token: 0x0400076C RID: 1900
 	public static Image imgLbtn2;
 
-	// Token: 0x04000DA6 RID: 3494
+	// Token: 0x0400076D RID: 1901
 	public static Image imgLbtnFocus2;
 
-	// Token: 0x04000DA7 RID: 3495
+	// Token: 0x0400076E RID: 1902
 	public static Image imgAnalog1;
 
-	// Token: 0x04000DA8 RID: 3496
+	// Token: 0x0400076F RID: 1903
 	public static Image imgAnalog2;
 
-	// Token: 0x04000DA9 RID: 3497
+	// Token: 0x04000770 RID: 1904
 	public string tradeName = string.Empty;
 
-	// Token: 0x04000DAA RID: 3498
+	// Token: 0x04000771 RID: 1905
 	public string tradeItemName = string.Empty;
 
-	// Token: 0x04000DAB RID: 3499
+	// Token: 0x04000772 RID: 1906
 	public int timeLengthMap;
 
-	// Token: 0x04000DAC RID: 3500
+	// Token: 0x04000773 RID: 1907
 	public int timeStartMap;
 
-	// Token: 0x04000DAD RID: 3501
+	// Token: 0x04000774 RID: 1908
 	public static sbyte typeViewInfo = 0;
 
-	// Token: 0x04000DAE RID: 3502
+	// Token: 0x04000775 RID: 1909
 	public static sbyte typeActive = 0;
 
-	// Token: 0x04000DAF RID: 3503
+	// Token: 0x04000776 RID: 1910
 	public static InfoMe info1 = new InfoMe();
 
-	// Token: 0x04000DB0 RID: 3504
+	// Token: 0x04000777 RID: 1911
 	public static InfoMe info2 = new InfoMe();
 
-	// Token: 0x04000DB1 RID: 3505
+	// Token: 0x04000778 RID: 1912
 	public static Image imgPanel;
 
-	// Token: 0x04000DB2 RID: 3506
+	// Token: 0x04000779 RID: 1913
 	public static Image imgPanel2;
 
-	// Token: 0x04000DB3 RID: 3507
+	// Token: 0x0400077A RID: 1914
 	public static Image imgHP;
 
-	// Token: 0x04000DB4 RID: 3508
+	// Token: 0x0400077B RID: 1915
 	public static Image imgMP;
 
-	// Token: 0x04000DB5 RID: 3509
+	// Token: 0x0400077C RID: 1916
 	public static Image imgSP;
 
-	// Token: 0x04000DB6 RID: 3510
+	// Token: 0x0400077D RID: 1917
 	public static Image imgHPLost;
 
-	// Token: 0x04000DB7 RID: 3511
+	// Token: 0x0400077E RID: 1918
 	public static Image imgMPLost;
 
-	// Token: 0x04000DB8 RID: 3512
+	// Token: 0x0400077F RID: 1919
 	public static Image imgHP_tm_do;
 
-	// Token: 0x04000DB9 RID: 3513
+	// Token: 0x04000780 RID: 1920
 	public static Image imgHP_tm_vang;
 
-	// Token: 0x04000DBA RID: 3514
+	// Token: 0x04000781 RID: 1921
 	public static Image imgHP_tm_xam;
 
-	// Token: 0x04000DBB RID: 3515
+	// Token: 0x04000782 RID: 1922
 	public static Image imgHP_tm_xanh;
 
-	// Token: 0x04000DBC RID: 3516
+	// Token: 0x04000783 RID: 1923
 	public Mob mobCapcha;
 
-	// Token: 0x04000DBD RID: 3517
+	// Token: 0x04000784 RID: 1924
 	public MagicTree magicTree;
 
-	// Token: 0x04000DBE RID: 3518
+	// Token: 0x04000785 RID: 1925
 	private short l;
 
-	// Token: 0x04000DBF RID: 3519
+	// Token: 0x04000786 RID: 1926
 	public static int countEff;
 
-	// Token: 0x04000DC0 RID: 3520
+	// Token: 0x04000787 RID: 1927
 	public static GamePad gamePad = new GamePad();
 
-	// Token: 0x04000DC1 RID: 3521
+	// Token: 0x04000788 RID: 1928
 	public static Image imgChatPC;
 
-	// Token: 0x04000DC2 RID: 3522
+	// Token: 0x04000789 RID: 1929
 	public static Image imgChatsPC2;
 
-	// Token: 0x04000DC3 RID: 3523
+	// Token: 0x0400078A RID: 1930
 	public static int isAnalog = 0;
 
-	// Token: 0x04000DC4 RID: 3524
+	// Token: 0x0400078B RID: 1931
 	public static bool isUseTouch;
 
-	// Token: 0x04000DC5 RID: 3525
+	// Token: 0x0400078C RID: 1932
 	public const int numSkill = 10;
 
-	// Token: 0x04000DC6 RID: 3526
+	// Token: 0x0400078D RID: 1933
 	public const int numSkill_2 = 5;
 
-	// Token: 0x04000DC7 RID: 3527
+	// Token: 0x0400078E RID: 1934
 	public static Skill[] keySkill = new Skill[10];
 
-	// Token: 0x04000DC8 RID: 3528
+	// Token: 0x0400078F RID: 1935
 	public static Skill[] onScreenSkill = new Skill[10];
 
-	// Token: 0x04000DC9 RID: 3529
+	// Token: 0x04000790 RID: 1936
 	public Command cmdMenu;
 
-	// Token: 0x04000DCA RID: 3530
+	// Token: 0x04000791 RID: 1937
 	public static int firstY;
 
-	// Token: 0x04000DCB RID: 3531
+	// Token: 0x04000792 RID: 1938
 	public static int wSkill;
 
-	// Token: 0x04000DCC RID: 3532
+	// Token: 0x04000793 RID: 1939
 	public static long deltaTime;
 
-	// Token: 0x04000DCD RID: 3533
+	// Token: 0x04000794 RID: 1940
 	public bool isPointerDowning;
 
-	// Token: 0x04000DCE RID: 3534
+	// Token: 0x04000795 RID: 1941
 	public bool isChangingCameraMode;
 
-	// Token: 0x04000DCF RID: 3535
+	// Token: 0x04000796 RID: 1942
 	private int ptLastDownX;
 
-	// Token: 0x04000DD0 RID: 3536
+	// Token: 0x04000797 RID: 1943
 	private int ptLastDownY;
 
-	// Token: 0x04000DD1 RID: 3537
+	// Token: 0x04000798 RID: 1944
 	private int ptFirstDownX;
 
-	// Token: 0x04000DD2 RID: 3538
+	// Token: 0x04000799 RID: 1945
 	private int ptFirstDownY;
 
-	// Token: 0x04000DD3 RID: 3539
+	// Token: 0x0400079A RID: 1946
 	private int ptDownTime;
 
-	// Token: 0x04000DD4 RID: 3540
+	// Token: 0x0400079B RID: 1947
 	private bool disableSingleClick;
 
-	// Token: 0x04000DD5 RID: 3541
+	// Token: 0x0400079C RID: 1948
 	public long lastSingleClick;
 
-	// Token: 0x04000DD6 RID: 3542
+	// Token: 0x0400079D RID: 1949
 	public bool clickMoving;
 
-	// Token: 0x04000DD7 RID: 3543
+	// Token: 0x0400079E RID: 1950
 	public bool clickOnTileTop;
 
-	// Token: 0x04000DD8 RID: 3544
+	// Token: 0x0400079F RID: 1951
 	public bool clickMovingRed;
 
-	// Token: 0x04000DD9 RID: 3545
+	// Token: 0x040007A0 RID: 1952
 	private int clickToX;
 
-	// Token: 0x04000DDA RID: 3546
+	// Token: 0x040007A1 RID: 1953
 	private int clickToY;
 
-	// Token: 0x04000DDB RID: 3547
+	// Token: 0x040007A2 RID: 1954
 	private int lastClickCMX;
 
-	// Token: 0x04000DDC RID: 3548
+	// Token: 0x040007A3 RID: 1955
 	private int lastClickCMY;
 
-	// Token: 0x04000DDD RID: 3549
+	// Token: 0x040007A4 RID: 1956
 	private int clickMovingP1;
 
-	// Token: 0x04000DDE RID: 3550
+	// Token: 0x040007A5 RID: 1957
 	private int clickMovingTimeOut;
 
-	// Token: 0x04000DDF RID: 3551
+	// Token: 0x040007A6 RID: 1958
 	private long lastMove;
 
-	// Token: 0x04000DE0 RID: 3552
+	// Token: 0x040007A7 RID: 1959
 	public static bool isNewClanMessage;
 
-	// Token: 0x04000DE1 RID: 3553
+	// Token: 0x040007A8 RID: 1960
 	private long lastFire;
 
-	// Token: 0x04000DE2 RID: 3554
+	// Token: 0x040007A9 RID: 1961
 	private long lastUsePotion;
 
-	// Token: 0x04000DE3 RID: 3555
+	// Token: 0x040007AA RID: 1962
 	public int auto;
 
-	// Token: 0x04000DE4 RID: 3556
+	// Token: 0x040007AB RID: 1963
 	public int dem;
 
-	// Token: 0x04000DE5 RID: 3557
+	// Token: 0x040007AC RID: 1964
 	private string strTam = string.Empty;
 
-	// Token: 0x04000DE6 RID: 3558
+	// Token: 0x040007AD RID: 1965
 	private int a;
 
-	// Token: 0x04000DE7 RID: 3559
+	// Token: 0x040007AE RID: 1966
 	public bool isFreez;
 
-	// Token: 0x04000DE8 RID: 3560
+	// Token: 0x040007AF RID: 1967
 	public bool isUseFreez;
 
-	// Token: 0x04000DE9 RID: 3561
+	// Token: 0x040007B0 RID: 1968
 	public static Image imgTrans;
 
-	// Token: 0x04000DEA RID: 3562
+	// Token: 0x040007B1 RID: 1969
 	public bool isRongThanXuatHien;
 
-	// Token: 0x04000DEB RID: 3563
+	// Token: 0x040007B2 RID: 1970
 	public bool isRongNamek;
 
-	// Token: 0x04000DEC RID: 3564
+	// Token: 0x040007B3 RID: 1971
 	public bool isSuperPower;
 
-	// Token: 0x04000DED RID: 3565
+	// Token: 0x040007B4 RID: 1972
 	public int tPower;
 
-	// Token: 0x04000DEE RID: 3566
+	// Token: 0x040007B5 RID: 1973
 	public int xPower;
 
-	// Token: 0x04000DEF RID: 3567
+	// Token: 0x040007B6 RID: 1974
 	public int yPower;
 
-	// Token: 0x04000DF0 RID: 3568
+	// Token: 0x040007B7 RID: 1975
 	public int dxPower;
 
-	// Token: 0x04000DF1 RID: 3569
+	// Token: 0x040007B8 RID: 1976
 	public bool activeRongThan;
 
-	// Token: 0x04000DF2 RID: 3570
+	// Token: 0x040007B9 RID: 1977
 	public bool isMeCallRongThan;
 
-	// Token: 0x04000DF3 RID: 3571
+	// Token: 0x040007BA RID: 1978
 	public int mautroi;
 
-	// Token: 0x04000DF4 RID: 3572
+	// Token: 0x040007BB RID: 1979
 	public int mapRID;
 
-	// Token: 0x04000DF5 RID: 3573
+	// Token: 0x040007BC RID: 1980
 	public int zoneRID;
 
-	// Token: 0x04000DF6 RID: 3574
+	// Token: 0x040007BD RID: 1981
 	public int bgRID = -1;
 
-	// Token: 0x04000DF7 RID: 3575
+	// Token: 0x040007BE RID: 1982
 	public static int tam = 0;
 
-	// Token: 0x04000DF8 RID: 3576
+	// Token: 0x040007BF RID: 1983
 	public static bool isAutoPlay;
 
-	// Token: 0x04000DF9 RID: 3577
+	// Token: 0x040007C0 RID: 1984
 	public static bool canAutoPlay;
 
-	// Token: 0x04000DFA RID: 3578
+	// Token: 0x040007C1 RID: 1985
 	public static bool isChangeZone;
 
-	// Token: 0x04000DFB RID: 3579
+	// Token: 0x040007C2 RID: 1986
 	private int timeSkill;
 
-	// Token: 0x04000DFC RID: 3580
+	// Token: 0x040007C3 RID: 1987
 	private int nSkill;
 
-	// Token: 0x04000DFD RID: 3581
+	// Token: 0x040007C4 RID: 1988
 	private int selectedIndexSkill = -1;
 
-	// Token: 0x04000DFE RID: 3582
+	// Token: 0x040007C5 RID: 1989
 	private Skill lastSkill;
 
-	// Token: 0x04000DFF RID: 3583
+	// Token: 0x040007C6 RID: 1990
 	private bool doSeleckSkillFlag;
 
-	// Token: 0x04000E00 RID: 3584
+	// Token: 0x040007C7 RID: 1991
 	public string strCapcha;
 
-	// Token: 0x04000E01 RID: 3585
+	// Token: 0x040007C8 RID: 1992
 	private long longPress;
 
-	// Token: 0x04000E02 RID: 3586
+	// Token: 0x040007C9 RID: 1993
 	private int move;
 
-	// Token: 0x04000E03 RID: 3587
+	// Token: 0x040007CA RID: 1994
 	public bool flareFindFocus;
 
-	// Token: 0x04000E04 RID: 3588
+	// Token: 0x040007CB RID: 1995
 	private int flareTime;
 
-	// Token: 0x04000E05 RID: 3589
+	// Token: 0x040007CC RID: 1996
 	public int keyTouchSkill = -1;
 
-	// Token: 0x04000E06 RID: 3590
+	// Token: 0x040007CD RID: 1997
 	private long lastSendUpdatePostion;
 
-	// Token: 0x04000E07 RID: 3591
+	// Token: 0x040007CE RID: 1998
 	public static long lastTick;
 
-	// Token: 0x04000E08 RID: 3592
+	// Token: 0x040007CF RID: 1999
 	public static long currTick;
 
-	// Token: 0x04000E09 RID: 3593
+	// Token: 0x040007D0 RID: 2000
 	private int timeAuto;
 
-	// Token: 0x04000E0A RID: 3594
+	// Token: 0x040007D1 RID: 2001
 	public static long lastXS;
 
-	// Token: 0x04000E0B RID: 3595
+	// Token: 0x040007D2 RID: 2002
 	public static long currXS;
 
-	// Token: 0x04000E0C RID: 3596
+	// Token: 0x040007D3 RID: 2003
 	public static int secondXS;
 
-	// Token: 0x04000E0D RID: 3597
+	// Token: 0x040007D4 RID: 2004
 	public int runArrow;
 
-	// Token: 0x04000E0E RID: 3598
+	// Token: 0x040007D5 RID: 2005
 	public static int isPaintRada;
 
-	// Token: 0x04000E0F RID: 3599
+	// Token: 0x040007D6 RID: 2006
 	public static Image imgNut;
 
-	// Token: 0x04000E10 RID: 3600
+	// Token: 0x040007D7 RID: 2007
 	public static Image imgNutF;
 
-	// Token: 0x04000E11 RID: 3601
+	// Token: 0x040007D8 RID: 2008
 	public int[] keyCapcha;
 
-	// Token: 0x04000E12 RID: 3602
+	// Token: 0x040007D9 RID: 2009
 	public static Image imgCapcha;
 
-	// Token: 0x04000E13 RID: 3603
+	// Token: 0x040007DA RID: 2010
 	public string keyInput;
 
-	// Token: 0x04000E14 RID: 3604
+	// Token: 0x040007DB RID: 2011
 	public static int disXC;
 
-	// Token: 0x04000E15 RID: 3605
+	// Token: 0x040007DC RID: 2012
 	public static bool isPaint = true;
 
-	// Token: 0x04000E16 RID: 3606
+	// Token: 0x040007DD RID: 2013
 	public static int shock_scr;
 
-	// Token: 0x04000E17 RID: 3607
+	// Token: 0x040007DE RID: 2014
 	private static int[] shock_x = new int[]
 	{
 		1,
@@ -7914,7 +9178,7 @@ public class GameScr : mScreen, IChatable
 		-1
 	};
 
-	// Token: 0x04000E18 RID: 3608
+	// Token: 0x040007DF RID: 2015
 	private static int[] shock_y = new int[]
 	{
 		1,
@@ -7923,454 +9187,454 @@ public class GameScr : mScreen, IChatable
 		1
 	};
 
-	// Token: 0x04000E19 RID: 3609
+	// Token: 0x040007E0 RID: 2016
 	private int tDoubleDelay;
 
-	// Token: 0x04000E1A RID: 3610
+	// Token: 0x040007E1 RID: 2017
 	public static Image arrow;
 
-	// Token: 0x04000E1B RID: 3611
+	// Token: 0x040007E2 RID: 2018
 	private static int yTouchBar;
 
-	// Token: 0x04000E1C RID: 3612
+	// Token: 0x040007E3 RID: 2019
 	private static int xC;
 
-	// Token: 0x04000E1D RID: 3613
+	// Token: 0x040007E4 RID: 2020
 	private static int yC;
 
-	// Token: 0x04000E1E RID: 3614
+	// Token: 0x040007E5 RID: 2021
 	private static int xL;
 
-	// Token: 0x04000E1F RID: 3615
+	// Token: 0x040007E6 RID: 2022
 	private static int yL;
 
-	// Token: 0x04000E20 RID: 3616
+	// Token: 0x040007E7 RID: 2023
 	public int xR;
 
-	// Token: 0x04000E21 RID: 3617
+	// Token: 0x040007E8 RID: 2024
 	public int yR;
 
-	// Token: 0x04000E22 RID: 3618
+	// Token: 0x040007E9 RID: 2025
 	private static int xU;
 
-	// Token: 0x04000E23 RID: 3619
+	// Token: 0x040007EA RID: 2026
 	private static int yU;
 
-	// Token: 0x04000E24 RID: 3620
+	// Token: 0x040007EB RID: 2027
 	private static int xF;
 
-	// Token: 0x04000E25 RID: 3621
+	// Token: 0x040007EC RID: 2028
 	private static int yF;
 
-	// Token: 0x04000E26 RID: 3622
+	// Token: 0x040007ED RID: 2029
 	public static int xHP;
 
-	// Token: 0x04000E27 RID: 3623
+	// Token: 0x040007EE RID: 2030
 	public static int yHP;
 
-	// Token: 0x04000E28 RID: 3624
+	// Token: 0x040007EF RID: 2031
 	private static int xTG;
 
-	// Token: 0x04000E29 RID: 3625
+	// Token: 0x040007F0 RID: 2032
 	private static int yTG;
 
-	// Token: 0x04000E2A RID: 3626
+	// Token: 0x040007F1 RID: 2033
 	public static int[] xS;
 
-	// Token: 0x04000E2B RID: 3627
+	// Token: 0x040007F2 RID: 2034
 	public static int[] yS;
 
-	// Token: 0x04000E2C RID: 3628
+	// Token: 0x040007F3 RID: 2035
 	public static int xSkill;
 
-	// Token: 0x04000E2D RID: 3629
+	// Token: 0x040007F4 RID: 2036
 	public static int ySkill;
 
-	// Token: 0x04000E2E RID: 3630
+	// Token: 0x040007F5 RID: 2037
 	public static int padSkill;
 
-	// Token: 0x04000E2F RID: 3631
+	// Token: 0x040007F6 RID: 2038
 	public int dMP;
 
-	// Token: 0x04000E30 RID: 3632
+	// Token: 0x040007F7 RID: 2039
 	public int twMp;
 
-	// Token: 0x04000E31 RID: 3633
+	// Token: 0x040007F8 RID: 2040
 	public bool isInjureMp;
 
-	// Token: 0x04000E32 RID: 3634
+	// Token: 0x040007F9 RID: 2041
 	public int dHP;
 
-	// Token: 0x04000E33 RID: 3635
+	// Token: 0x040007FA RID: 2042
 	public int twHp;
 
-	// Token: 0x04000E34 RID: 3636
+	// Token: 0x040007FB RID: 2043
 	public bool isInjureHp;
 
-	// Token: 0x04000E35 RID: 3637
+	// Token: 0x040007FC RID: 2044
 	private long curr;
 
-	// Token: 0x04000E36 RID: 3638
+	// Token: 0x040007FD RID: 2045
 	private long last;
 
-	// Token: 0x04000E37 RID: 3639
+	// Token: 0x040007FE RID: 2046
 	private int secondVS;
 
-	// Token: 0x04000E38 RID: 3640
+	// Token: 0x040007FF RID: 2047
 	private int[] idVS = new int[]
 	{
 		-1,
 		-1
 	};
 
-	// Token: 0x04000E39 RID: 3641
+	// Token: 0x04000800 RID: 2048
 	public static string[] flyTextString;
 
-	// Token: 0x04000E3A RID: 3642
+	// Token: 0x04000801 RID: 2049
 	public static int[] flyTextX;
 
-	// Token: 0x04000E3B RID: 3643
+	// Token: 0x04000802 RID: 2050
 	public static int[] flyTextY;
 
-	// Token: 0x04000E3C RID: 3644
+	// Token: 0x04000803 RID: 2051
 	public static int[] flyTextYTo;
 
-	// Token: 0x04000E3D RID: 3645
+	// Token: 0x04000804 RID: 2052
 	public static int[] flyTextDx;
 
-	// Token: 0x04000E3E RID: 3646
+	// Token: 0x04000805 RID: 2053
 	public static int[] flyTextDy;
 
-	// Token: 0x04000E3F RID: 3647
+	// Token: 0x04000806 RID: 2054
 	public static int[] flyTextState;
 
-	// Token: 0x04000E40 RID: 3648
+	// Token: 0x04000807 RID: 2055
 	public static int[] flyTextColor;
 
-	// Token: 0x04000E41 RID: 3649
+	// Token: 0x04000808 RID: 2056
 	public static int[] flyTime;
 
-	// Token: 0x04000E42 RID: 3650
+	// Token: 0x04000809 RID: 2057
 	public static int[] splashX;
 
-	// Token: 0x04000E43 RID: 3651
+	// Token: 0x0400080A RID: 2058
 	public static int[] splashY;
 
-	// Token: 0x04000E44 RID: 3652
+	// Token: 0x0400080B RID: 2059
 	public static int[] splashState;
 
-	// Token: 0x04000E45 RID: 3653
+	// Token: 0x0400080C RID: 2060
 	public static int[] splashF;
 
-	// Token: 0x04000E46 RID: 3654
+	// Token: 0x0400080D RID: 2061
 	public static int[] splashDir;
 
-	// Token: 0x04000E47 RID: 3655
+	// Token: 0x0400080E RID: 2062
 	public static Image[] imgSplash;
 
-	// Token: 0x04000E48 RID: 3656
+	// Token: 0x0400080F RID: 2063
 	public static int cmdBarX;
 
-	// Token: 0x04000E49 RID: 3657
+	// Token: 0x04000810 RID: 2064
 	public static int cmdBarY;
 
-	// Token: 0x04000E4A RID: 3658
+	// Token: 0x04000811 RID: 2065
 	public static int cmdBarW;
 
-	// Token: 0x04000E4B RID: 3659
+	// Token: 0x04000812 RID: 2066
 	public static int cmdBarLeftW;
 
-	// Token: 0x04000E4C RID: 3660
+	// Token: 0x04000813 RID: 2067
 	public static int cmdBarRightW;
 
-	// Token: 0x04000E4D RID: 3661
+	// Token: 0x04000814 RID: 2068
 	public static int cmdBarCenterW;
 
-	// Token: 0x04000E4E RID: 3662
+	// Token: 0x04000815 RID: 2069
 	public static int hpBarX;
 
-	// Token: 0x04000E4F RID: 3663
+	// Token: 0x04000816 RID: 2070
 	public static int hpBarY;
 
-	// Token: 0x04000E50 RID: 3664
+	// Token: 0x04000817 RID: 2071
 	public static int spBarW;
 
-	// Token: 0x04000E51 RID: 3665
+	// Token: 0x04000818 RID: 2072
 	public static int mpBarW;
 
-	// Token: 0x04000E52 RID: 3666
+	// Token: 0x04000819 RID: 2073
 	public static int expBarW;
 
-	// Token: 0x04000E53 RID: 3667
+	// Token: 0x0400081A RID: 2074
 	public static int lvPosX;
 
-	// Token: 0x04000E54 RID: 3668
+	// Token: 0x0400081B RID: 2075
 	public static int moneyPosX;
 
-	// Token: 0x04000E55 RID: 3669
+	// Token: 0x0400081C RID: 2076
 	public static int hpBarH;
 
-	// Token: 0x04000E56 RID: 3670
+	// Token: 0x0400081D RID: 2077
 	public static int girlHPBarY;
 
-	// Token: 0x04000E57 RID: 3671
+	// Token: 0x0400081E RID: 2078
 	public static long hpBarW;
 
-	// Token: 0x04000E58 RID: 3672
+	// Token: 0x0400081F RID: 2079
 	public static Image[] imgCmdBar;
 
-	// Token: 0x04000E59 RID: 3673
+	// Token: 0x04000820 RID: 2080
 	private int imgScrW;
 
-	// Token: 0x04000E5A RID: 3674
+	// Token: 0x04000821 RID: 2081
 	public static int popupY;
 
-	// Token: 0x04000E5B RID: 3675
+	// Token: 0x04000822 RID: 2082
 	public static int popupX;
 
-	// Token: 0x04000E5C RID: 3676
+	// Token: 0x04000823 RID: 2083
 	public static int isborderIndex;
 
-	// Token: 0x04000E5D RID: 3677
+	// Token: 0x04000824 RID: 2084
 	public static int isselectedRow;
 
-	// Token: 0x04000E5E RID: 3678
+	// Token: 0x04000825 RID: 2085
 	private static Image imgNolearn;
 
-	// Token: 0x04000E5F RID: 3679
+	// Token: 0x04000826 RID: 2086
 	public int cmxp;
 
-	// Token: 0x04000E60 RID: 3680
+	// Token: 0x04000827 RID: 2087
 	public int cmvxp;
 
-	// Token: 0x04000E61 RID: 3681
+	// Token: 0x04000828 RID: 2088
 	public int cmdxp;
 
-	// Token: 0x04000E62 RID: 3682
+	// Token: 0x04000829 RID: 2089
 	public int cmxLimp;
 
-	// Token: 0x04000E63 RID: 3683
+	// Token: 0x0400082A RID: 2090
 	public int cmyLimp;
 
-	// Token: 0x04000E64 RID: 3684
+	// Token: 0x0400082B RID: 2091
 	public int cmyp;
 
-	// Token: 0x04000E65 RID: 3685
+	// Token: 0x0400082C RID: 2092
 	public int cmvyp;
 
-	// Token: 0x04000E66 RID: 3686
+	// Token: 0x0400082D RID: 2093
 	public int cmdyp;
 
-	// Token: 0x04000E67 RID: 3687
+	// Token: 0x0400082E RID: 2094
 	private int indexTiemNang;
 
-	// Token: 0x04000E68 RID: 3688
+	// Token: 0x0400082F RID: 2095
 	private string alertURL;
 
-	// Token: 0x04000E69 RID: 3689
+	// Token: 0x04000830 RID: 2096
 	private string fnick;
 
-	// Token: 0x04000E6A RID: 3690
+	// Token: 0x04000831 RID: 2097
 	public static int xstart;
 
-	// Token: 0x04000E6B RID: 3691
+	// Token: 0x04000832 RID: 2098
 	public static int ystart;
 
-	// Token: 0x04000E6C RID: 3692
+	// Token: 0x04000833 RID: 2099
 	public static int popupW = 140;
 
-	// Token: 0x04000E6D RID: 3693
+	// Token: 0x04000834 RID: 2100
 	public static int popupH = 160;
 
-	// Token: 0x04000E6E RID: 3694
+	// Token: 0x04000835 RID: 2101
 	public static int cmySK;
 
-	// Token: 0x04000E6F RID: 3695
+	// Token: 0x04000836 RID: 2102
 	public static int cmtoYSK;
 
-	// Token: 0x04000E70 RID: 3696
+	// Token: 0x04000837 RID: 2103
 	public static int cmdySK;
 
-	// Token: 0x04000E71 RID: 3697
+	// Token: 0x04000838 RID: 2104
 	public static int cmvySK;
 
-	// Token: 0x04000E72 RID: 3698
+	// Token: 0x04000839 RID: 2105
 	public static int cmyLimSK;
 
-	// Token: 0x04000E73 RID: 3699
+	// Token: 0x0400083A RID: 2106
 	public static int columns = 6;
 
-	// Token: 0x04000E74 RID: 3700
+	// Token: 0x0400083B RID: 2107
 	public static int rows;
 
-	// Token: 0x04000E75 RID: 3701
+	// Token: 0x0400083C RID: 2108
 	private int totalRowInfo;
 
-	// Token: 0x04000E76 RID: 3702
+	// Token: 0x0400083D RID: 2109
 	private int ypaintKill;
 
-	// Token: 0x04000E77 RID: 3703
+	// Token: 0x0400083E RID: 2110
 	private int ylimUp;
 
-	// Token: 0x04000E78 RID: 3704
+	// Token: 0x0400083F RID: 2111
 	private int ylimDow;
 
-	// Token: 0x04000E79 RID: 3705
+	// Token: 0x04000840 RID: 2112
 	private int yPaint;
 
-	// Token: 0x04000E7A RID: 3706
+	// Token: 0x04000841 RID: 2113
 	public static int indexEff = 0;
 
-	// Token: 0x04000E7B RID: 3707
+	// Token: 0x04000842 RID: 2114
 	public static EffectCharPaint effUpok;
 
-	// Token: 0x04000E7C RID: 3708
+	// Token: 0x04000843 RID: 2115
 	public static int inforX;
 
-	// Token: 0x04000E7D RID: 3709
+	// Token: 0x04000844 RID: 2116
 	public static int inforY;
 
-	// Token: 0x04000E7E RID: 3710
+	// Token: 0x04000845 RID: 2117
 	public static int inforW;
 
-	// Token: 0x04000E7F RID: 3711
+	// Token: 0x04000846 RID: 2118
 	public static int inforH;
 
-	// Token: 0x04000E80 RID: 3712
+	// Token: 0x04000847 RID: 2119
 	public Command cmdDead;
 
-	// Token: 0x04000E81 RID: 3713
+	// Token: 0x04000848 RID: 2120
 	public static bool notPaint = false;
 
-	// Token: 0x04000E82 RID: 3714
+	// Token: 0x04000849 RID: 2121
 	public static bool isPing = false;
 
-	// Token: 0x04000E83 RID: 3715
+	// Token: 0x0400084A RID: 2122
 	public static int INFO = 0;
 
-	// Token: 0x04000E84 RID: 3716
+	// Token: 0x0400084B RID: 2123
 	public static int STORE = 1;
 
-	// Token: 0x04000E85 RID: 3717
+	// Token: 0x0400084C RID: 2124
 	public static int ZONE = 2;
 
-	// Token: 0x04000E86 RID: 3718
+	// Token: 0x0400084D RID: 2125
 	public static int UPGRADE = 3;
 
-	// Token: 0x04000E87 RID: 3719
+	// Token: 0x0400084E RID: 2126
 	private int Hitem = 30;
 
-	// Token: 0x04000E88 RID: 3720
+	// Token: 0x0400084F RID: 2127
 	private int maxSizeRow = 5;
 
-	// Token: 0x04000E89 RID: 3721
+	// Token: 0x04000850 RID: 2128
 	private int isTranKyNang;
 
-	// Token: 0x04000E8A RID: 3722
+	// Token: 0x04000851 RID: 2129
 	private bool isTran;
 
-	// Token: 0x04000E8B RID: 3723
+	// Token: 0x04000852 RID: 2130
 	private int cmY_Old;
 
-	// Token: 0x04000E8C RID: 3724
+	// Token: 0x04000853 RID: 2131
 	private int cmX_Old;
 
-	// Token: 0x04000E8D RID: 3725
+	// Token: 0x04000854 RID: 2132
 	public PopUpYesNo popUpYesNo;
 
-	// Token: 0x04000E8E RID: 3726
+	// Token: 0x04000855 RID: 2133
 	public static MyVector vChatVip = new MyVector();
 
-	// Token: 0x04000E8F RID: 3727
+	// Token: 0x04000856 RID: 2134
 	public static int vBig;
 
-	// Token: 0x04000E90 RID: 3728
+	// Token: 0x04000857 RID: 2135
 	public bool isFireWorks;
 
-	// Token: 0x04000E91 RID: 3729
+	// Token: 0x04000858 RID: 2136
 	public int[] winnumber;
 
-	// Token: 0x04000E92 RID: 3730
+	// Token: 0x04000859 RID: 2137
 	public int[] randomNumber;
 
-	// Token: 0x04000E93 RID: 3731
+	// Token: 0x0400085A RID: 2138
 	public int[] tMove;
 
-	// Token: 0x04000E94 RID: 3732
+	// Token: 0x0400085B RID: 2139
 	public int[] moveCount;
 
-	// Token: 0x04000E95 RID: 3733
+	// Token: 0x0400085C RID: 2140
 	public int[] delayMove;
 
-	// Token: 0x04000E96 RID: 3734
+	// Token: 0x0400085D RID: 2141
 	public int moveIndex;
 
-	// Token: 0x04000E97 RID: 3735
+	// Token: 0x0400085E RID: 2142
 	private bool isWin;
 
-	// Token: 0x04000E98 RID: 3736
+	// Token: 0x0400085F RID: 2143
 	private string strFinish;
 
-	// Token: 0x04000E99 RID: 3737
+	// Token: 0x04000860 RID: 2144
 	private int tShow;
 
-	// Token: 0x04000E9A RID: 3738
+	// Token: 0x04000861 RID: 2145
 	private int xChatVip;
 
-	// Token: 0x04000E9B RID: 3739
+	// Token: 0x04000862 RID: 2146
 	private int currChatWidth;
 
-	// Token: 0x04000E9C RID: 3740
+	// Token: 0x04000863 RID: 2147
 	private bool startChat;
 
-	// Token: 0x04000E9D RID: 3741
+	// Token: 0x04000864 RID: 2148
 	public sbyte percentMabu;
 
-	// Token: 0x04000E9E RID: 3742
+	// Token: 0x04000865 RID: 2149
 	public bool mabuEff;
 
-	// Token: 0x04000E9F RID: 3743
+	// Token: 0x04000866 RID: 2150
 	public int tMabuEff;
 
-	// Token: 0x04000EA0 RID: 3744
+	// Token: 0x04000867 RID: 2151
 	public static bool isPaintChatVip;
 
-	// Token: 0x04000EA1 RID: 3745
+	// Token: 0x04000868 RID: 2152
 	public static sbyte mabuPercent;
 
-	// Token: 0x04000EA2 RID: 3746
+	// Token: 0x04000869 RID: 2153
 	public static sbyte isNewMember;
 
-	// Token: 0x04000EA3 RID: 3747
+	// Token: 0x0400086A RID: 2154
 	private string yourNumber = string.Empty;
 
-	// Token: 0x04000EA4 RID: 3748
+	// Token: 0x0400086B RID: 2155
 	private string[] strPaint;
 
-	// Token: 0x04000EA5 RID: 3749
+	// Token: 0x0400086C RID: 2156
 	public static Image imgHP_NEW;
 
-	// Token: 0x04000EA6 RID: 3750
+	// Token: 0x0400086D RID: 2157
 	public static InfoPhuBan phuban_Info;
 
-	// Token: 0x04000EA7 RID: 3751
+	// Token: 0x0400086E RID: 2158
 	public static FrameImage fra_PVE_Bar_0;
 
-	// Token: 0x04000EA8 RID: 3752
+	// Token: 0x0400086F RID: 2159
 	public static FrameImage fra_PVE_Bar_1;
 
-	// Token: 0x04000EA9 RID: 3753
+	// Token: 0x04000870 RID: 2160
 	public static Image imgVS;
 
-	// Token: 0x04000EAA RID: 3754
+	// Token: 0x04000871 RID: 2161
 	public static Image imgBall;
 
-	// Token: 0x04000EAB RID: 3755
+	// Token: 0x04000872 RID: 2162
 	public static Image imgKhung;
 
-	// Token: 0x04000EAC RID: 3756
+	// Token: 0x04000873 RID: 2163
 	public int countFrameSkill;
 
-	// Token: 0x04000EAD RID: 3757
+	// Token: 0x04000874 RID: 2164
 	public static Image imgBgIOS;
 }

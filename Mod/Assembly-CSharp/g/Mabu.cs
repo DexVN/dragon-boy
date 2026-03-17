@@ -2,22 +2,23 @@
 
 namespace Assets.src.g
 {
-	// Token: 0x020000B5 RID: 181
+	// Token: 0x020000C1 RID: 193
 	internal class Mabu : global::Char
 	{
-		// Token: 0x06000808 RID: 2056 RVA: 0x00073D00 File Offset: 0x00072100
+		// Token: 0x06000A5E RID: 2654 RVA: 0x000A98F2 File Offset: 0x000A7AF2
 		public Mabu()
 		{
 			this.getData1();
 			this.getData2();
 		}
 
-		// Token: 0x06000809 RID: 2057 RVA: 0x00073D1C File Offset: 0x0007211C
+		// Token: 0x06000A5F RID: 2655 RVA: 0x000A9914 File Offset: 0x000A7B14
 		public void eat(int id)
 		{
 			this.effEat = new Effect(105, this.cx, this.cy + 20, 2, 1, -1);
 			EffecMn.addEff(this.effEat);
-			if (id == global::Char.myCharz().charID)
+			bool flag = id == global::Char.myCharz().charID;
+			if (flag)
 			{
 				this.focus = global::Char.myCharz();
 			}
@@ -27,38 +28,45 @@ namespace Assets.src.g
 			}
 		}
 
-		// Token: 0x0600080A RID: 2058 RVA: 0x00073D80 File Offset: 0x00072180
+		// Token: 0x06000A60 RID: 2656 RVA: 0x000A997C File Offset: 0x000A7B7C
 		public new void checkFrameTick(int[] array)
 		{
-			if ((int)this.skillID == 0)
+			bool flag = this.skillID == 0;
+			if (flag)
 			{
-				if (this.tick == 11)
+				bool flag2 = this.tick == 11;
+				if (flag2)
 				{
 					this.addFoot = true;
 					Effect me = new Effect(19, this.cx, this.cy + 20, 2, 1, -1);
 					EffecMn.addEff(me);
 				}
-				if (this.tick >= array.Length - 1)
+				bool flag3 = this.tick >= array.Length - 1;
+				if (flag3)
 				{
 					this.skillID = 2;
 					return;
 				}
 			}
-			if ((int)this.skillID == 1 && this.tick == array.Length - 1)
+			bool flag4 = this.skillID == 1 && this.tick == array.Length - 1;
+			if (flag4)
 			{
 				this.skillID = 3;
 				this.cy -= 15;
-				return;
 			}
-			this.tick++;
-			if (this.tick > array.Length - 1)
+			else
 			{
-				this.tick = 0;
+				this.tick++;
+				bool flag5 = this.tick > array.Length - 1;
+				if (flag5)
+				{
+					this.tick = 0;
+				}
+				this.frame = array[this.tick];
 			}
-			this.frame = array[this.tick];
 		}
 
-		// Token: 0x0600080B RID: 2059 RVA: 0x00073E4C File Offset: 0x0007224C
+		// Token: 0x06000A61 RID: 2657 RVA: 0x000A9A60 File Offset: 0x000A7C60
 		public void getData1()
 		{
 			Mabu.data1 = null;
@@ -74,14 +82,14 @@ namespace Assets.src.g
 			try
 			{
 				Mabu.data1.readData2(patch);
-				Mabu.data1.img = GameCanvas.loadImage("/effectdata/" + 102 + "/img.png");
+				Mabu.data1.img = GameCanvas.loadImage("/effectdata/" + 102.ToString() + "/img.png");
 			}
 			catch (Exception ex)
 			{
 			}
 		}
 
-		// Token: 0x0600080C RID: 2060 RVA: 0x00073EF0 File Offset: 0x000722F0
+		// Token: 0x06000A62 RID: 2658 RVA: 0x000A9B08 File Offset: 0x000A7D08
 		public void setSkill(sbyte id, short x, short y, global::Char[] charHit, int[] damageHit)
 		{
 			this.skillID = id;
@@ -93,7 +101,7 @@ namespace Assets.src.g
 			this.damageAttack = damageHit;
 		}
 
-		// Token: 0x0600080D RID: 2061 RVA: 0x00073F4C File Offset: 0x0007234C
+		// Token: 0x06000A63 RID: 2659 RVA: 0x000A9B60 File Offset: 0x000A7D60
 		public void getData2()
 		{
 			Mabu.data2 = null;
@@ -109,7 +117,7 @@ namespace Assets.src.g
 			try
 			{
 				Mabu.data2.readData2(patch);
-				Mabu.data2.img = GameCanvas.loadImage("/effectdata/" + 103 + "/img.png");
+				Mabu.data2.img = GameCanvas.loadImage("/effectdata/" + 103.ToString() + "/img.png");
 				Res.outz("read xong data");
 			}
 			catch (Exception ex)
@@ -117,12 +125,14 @@ namespace Assets.src.g
 			}
 		}
 
-		// Token: 0x0600080E RID: 2062 RVA: 0x00073FFC File Offset: 0x000723FC
+		// Token: 0x06000A64 RID: 2660 RVA: 0x000A9C14 File Offset: 0x000A7E14
 		public override void update()
 		{
-			if (this.focus != null)
+			bool flag = this.focus != null;
+			if (flag)
 			{
-				if (this.effEat.t >= 30)
+				bool flag2 = this.effEat.t >= 30;
+				if (flag2)
 				{
 					this.effEat.x += (this.cx - this.effEat.x) / 4;
 					this.effEat.y += (this.cy - this.effEat.y) / 4;
@@ -137,16 +147,19 @@ namespace Assets.src.g
 					this.effEat.y += (this.focus.cy - this.effEat.y) / 3;
 				}
 			}
-			if ((int)this.skillID != -1)
+			bool flag3 = this.skillID != -1;
+			if (flag3)
 			{
-				if ((int)this.skillID == 0 && this.addFoot && GameCanvas.gameTick % 2 == 0)
+				bool flag4 = this.skillID == 0 && this.addFoot && GameCanvas.gameTick % 2 == 0;
+				if (flag4)
 				{
 					this.dx += ((this.xTo <= this.cx) ? -30 : 30);
 					EffecMn.addEff(new Effect(103, this.cx + this.dx, this.cy + 20, 2, 1, -1)
 					{
 						trans = ((this.xTo <= this.cx) ? 1 : 0)
 					});
-					if ((this.cdir == 1 && this.cx + this.dx >= this.xTo) || (this.cdir == -1 && this.cx + this.dx <= this.xTo))
+					bool flag5 = (this.cdir == 1 && this.cx + this.dx >= this.xTo) || (this.cdir == -1 && this.cx + this.dx <= this.xTo);
+					if (flag5)
 					{
 						this.addFoot = false;
 						this.skillID = -1;
@@ -159,44 +172,52 @@ namespace Assets.src.g
 						}
 					}
 				}
-				if ((int)this.skillID == 3)
+				bool flag6 = this.skillID == 3;
+				if (flag6)
 				{
 					this.xTo = this.charAttack[this.pIndex].cx;
 					this.yTo = this.charAttack[this.pIndex].cy;
 					this.cx += (this.xTo - this.cx) / 3;
 					this.cy += (this.yTo - this.cy) / 3;
-					if (GameCanvas.gameTick % 5 == 0)
+					bool flag7 = GameCanvas.gameTick % 5 == 0;
+					if (flag7)
 					{
 						Effect me = new Effect(19, this.cx, this.cy, 2, 1, -1);
 						EffecMn.addEff(me);
 					}
-					if (Res.abs(this.cx - this.xTo) <= 20 && Res.abs(this.cy - this.yTo) <= 20)
+					bool flag8 = Res.abs(this.cx - this.xTo) <= 20 && Res.abs(this.cy - this.yTo) <= 20;
+					if (flag8)
 					{
 						this.cx = this.xTo;
 						this.cy = this.yTo;
 						this.charAttack[this.pIndex].doInjure(this.damageAttack[this.pIndex], 0, false, false);
 						this.pIndex++;
-						if (this.pIndex == this.charAttack.Length)
+						bool flag9 = this.pIndex == this.charAttack.Length;
+						if (flag9)
 						{
 							this.skillID = -1;
 							this.pIndex = 0;
 						}
 					}
 				}
-				return;
 			}
-			base.update();
+			else
+			{
+				base.update();
+			}
 		}
 
-		// Token: 0x0600080F RID: 2063 RVA: 0x000743B0 File Offset: 0x000727B0
+		// Token: 0x06000A65 RID: 2661 RVA: 0x000A9FFC File Offset: 0x000A81FC
 		public override void paint(mGraphics g)
 		{
-			if ((int)this.skillID != -1)
+			bool flag = this.skillID != -1;
+			if (flag)
 			{
 				base.paintShadow(g);
 				g.translate(0, GameCanvas.transY);
 				this.checkFrameTick(Mabu.skills[(int)this.skillID]);
-				if ((int)this.skillID == 0 || (int)this.skillID == 1)
+				bool flag2 = this.skillID == 0 || this.skillID == 1;
+				if (flag2)
 				{
 					Mabu.data1.paintFrame(g, this.frame, this.cx, this.cy + this.fy, (this.cdir != 1) ? 1 : 0, 2);
 				}
@@ -212,49 +233,49 @@ namespace Assets.src.g
 			}
 		}
 
-		// Token: 0x04000F45 RID: 3909
+		// Token: 0x0400138C RID: 5004
 		public static EffectData data1;
 
-		// Token: 0x04000F46 RID: 3910
+		// Token: 0x0400138D RID: 5005
 		public static EffectData data2;
 
-		// Token: 0x04000F47 RID: 3911
+		// Token: 0x0400138E RID: 5006
 		private new int tick;
 
-		// Token: 0x04000F48 RID: 3912
+		// Token: 0x0400138F RID: 5007
 		private int lastDir;
 
-		// Token: 0x04000F49 RID: 3913
+		// Token: 0x04001390 RID: 5008
 		private bool addFoot;
 
-		// Token: 0x04000F4A RID: 3914
+		// Token: 0x04001391 RID: 5009
 		private Effect effEat;
 
-		// Token: 0x04000F4B RID: 3915
+		// Token: 0x04001392 RID: 5010
 		private new global::Char focus;
 
-		// Token: 0x04000F4C RID: 3916
+		// Token: 0x04001393 RID: 5011
 		public int xTo;
 
-		// Token: 0x04000F4D RID: 3917
+		// Token: 0x04001394 RID: 5012
 		public int yTo;
 
-		// Token: 0x04000F4E RID: 3918
+		// Token: 0x04001395 RID: 5013
 		public bool haftBody;
 
-		// Token: 0x04000F4F RID: 3919
+		// Token: 0x04001396 RID: 5014
 		public bool change;
 
-		// Token: 0x04000F50 RID: 3920
+		// Token: 0x04001397 RID: 5015
 		private global::Char[] charAttack;
 
-		// Token: 0x04000F51 RID: 3921
+		// Token: 0x04001398 RID: 5016
 		private int[] damageAttack;
 
-		// Token: 0x04000F52 RID: 3922
+		// Token: 0x04001399 RID: 5017
 		private int dx;
 
-		// Token: 0x04000F53 RID: 3923
+		// Token: 0x0400139A RID: 5018
 		public static int[] skill1 = new int[]
 		{
 			0,
@@ -289,7 +310,7 @@ namespace Assets.src.g
 			5
 		};
 
-		// Token: 0x04000F54 RID: 3924
+		// Token: 0x0400139B RID: 5019
 		public static int[] skill2 = new int[]
 		{
 			0,
@@ -309,7 +330,7 @@ namespace Assets.src.g
 			10
 		};
 
-		// Token: 0x04000F55 RID: 3925
+		// Token: 0x0400139C RID: 5020
 		public static int[] skill3 = new int[]
 		{
 			0,
@@ -340,7 +361,7 @@ namespace Assets.src.g
 			12
 		};
 
-		// Token: 0x04000F56 RID: 3926
+		// Token: 0x0400139D RID: 5021
 		public static int[] skill4 = new int[]
 		{
 			13,
@@ -353,7 +374,7 @@ namespace Assets.src.g
 			16
 		};
 
-		// Token: 0x04000F57 RID: 3927
+		// Token: 0x0400139E RID: 5022
 		public static int[][] skills = new int[][]
 		{
 			Mabu.skill1,
@@ -362,13 +383,13 @@ namespace Assets.src.g
 			Mabu.skill4
 		};
 
-		// Token: 0x04000F58 RID: 3928
+		// Token: 0x0400139F RID: 5023
 		public sbyte skillID = -1;
 
-		// Token: 0x04000F59 RID: 3929
+		// Token: 0x040013A0 RID: 5024
 		private int frame;
 
-		// Token: 0x04000F5A RID: 3930
+		// Token: 0x040013A1 RID: 5025
 		private int pIndex;
 	}
 }

@@ -3,23 +3,25 @@ using System.Collections;
 using Assets.src.e;
 using UnityEngine;
 
-// Token: 0x0200002C RID: 44
+// Token: 0x02000069 RID: 105
 public class mGraphics
 {
-	// Token: 0x060001AD RID: 429 RVA: 0x0000B8EC File Offset: 0x00009CEC
+	// Token: 0x06000515 RID: 1301 RVA: 0x000607F8 File Offset: 0x0005E9F8
 	private void cache(string key, Texture value)
 	{
-		if (mGraphics.cachedTextures.Count > 400)
+		bool flag = mGraphics.cachedTextures.Count > 400;
+		if (flag)
 		{
 			mGraphics.cachedTextures.Clear();
 		}
-		if (value.width * value.height < GameCanvas.w * GameCanvas.h)
+		bool flag2 = value.width * value.height < GameCanvas.w * GameCanvas.h;
+		if (flag2)
 		{
 			mGraphics.cachedTextures.Add(key, value);
 		}
 	}
 
-	// Token: 0x060001AE RID: 430 RVA: 0x0000B940 File Offset: 0x00009D40
+	// Token: 0x06000516 RID: 1302 RVA: 0x00060858 File Offset: 0x0005EA58
 	public void translate(int tx, int ty)
 	{
 		tx *= mGraphics.zoomLevel;
@@ -27,37 +29,39 @@ public class mGraphics
 		this.translateX += tx;
 		this.translateY += ty;
 		this.isTranslate = true;
-		if (this.translateX == 0 && this.translateY == 0)
+		bool flag = this.translateX == 0 && this.translateY == 0;
+		if (flag)
 		{
 			this.isTranslate = false;
 		}
 	}
 
-	// Token: 0x060001AF RID: 431 RVA: 0x0000B9A0 File Offset: 0x00009DA0
+	// Token: 0x06000517 RID: 1303 RVA: 0x000608BC File Offset: 0x0005EABC
 	public void translate(float x, float y)
 	{
 		this.translateXf += x;
 		this.translateYf += y;
 		this.isTranslate = true;
-		if (this.translateXf == 0f && this.translateYf == 0f)
+		bool flag = this.translateXf == 0f && this.translateYf == 0f;
+		if (flag)
 		{
 			this.isTranslate = false;
 		}
 	}
 
-	// Token: 0x060001B0 RID: 432 RVA: 0x0000B9F7 File Offset: 0x00009DF7
+	// Token: 0x06000518 RID: 1304 RVA: 0x00060918 File Offset: 0x0005EB18
 	public int getTranslateX()
 	{
 		return this.translateX / mGraphics.zoomLevel;
 	}
 
-	// Token: 0x060001B1 RID: 433 RVA: 0x0000BA05 File Offset: 0x00009E05
+	// Token: 0x06000519 RID: 1305 RVA: 0x00060938 File Offset: 0x0005EB38
 	public int getTranslateY()
 	{
 		return this.translateY / mGraphics.zoomLevel + mGraphics.addYWhenOpenKeyBoard;
 	}
 
-	// Token: 0x060001B2 RID: 434 RVA: 0x0000BA1C File Offset: 0x00009E1C
+	// Token: 0x0600051A RID: 1306 RVA: 0x0006095C File Offset: 0x0005EB5C
 	public void setClip(int x, int y, int w, int h)
 	{
 		x *= mGraphics.zoomLevel;
@@ -73,31 +77,31 @@ public class mGraphics
 		this.isClip = true;
 	}
 
-	// Token: 0x060001B3 RID: 435 RVA: 0x0000BA8A File Offset: 0x00009E8A
+	// Token: 0x0600051B RID: 1307 RVA: 0x000609CC File Offset: 0x0005EBCC
 	public int getClipX()
 	{
 		return GameScr.cmx;
 	}
 
-	// Token: 0x060001B4 RID: 436 RVA: 0x0000BA91 File Offset: 0x00009E91
+	// Token: 0x0600051C RID: 1308 RVA: 0x000609E4 File Offset: 0x0005EBE4
 	public int getClipY()
 	{
 		return GameScr.cmy;
 	}
 
-	// Token: 0x060001B5 RID: 437 RVA: 0x0000BA98 File Offset: 0x00009E98
+	// Token: 0x0600051D RID: 1309 RVA: 0x000609FC File Offset: 0x0005EBFC
 	public int getClipWidth()
 	{
 		return GameScr.gW;
 	}
 
-	// Token: 0x060001B6 RID: 438 RVA: 0x0000BA9F File Offset: 0x00009E9F
+	// Token: 0x0600051E RID: 1310 RVA: 0x00060A14 File Offset: 0x0005EC14
 	public int getClipHeight()
 	{
 		return GameScr.gH;
 	}
 
-	// Token: 0x060001B7 RID: 439 RVA: 0x0000BAA8 File Offset: 0x00009EA8
+	// Token: 0x0600051F RID: 1311 RVA: 0x00060A2C File Offset: 0x0005EC2C
 	public void fillRect(int x, int y, int w, int h, int color, int alpha)
 	{
 		float alpha2 = 0.5f;
@@ -105,97 +109,112 @@ public class mGraphics
 		this.fillRect(x, y, w, h);
 	}
 
-	// Token: 0x060001B8 RID: 440 RVA: 0x0000BAD0 File Offset: 0x00009ED0
+	// Token: 0x06000520 RID: 1312 RVA: 0x00060A58 File Offset: 0x0005EC58
 	public void drawLine(int x1, int y1, int x2, int y2)
 	{
 		x1 *= mGraphics.zoomLevel;
 		y1 *= mGraphics.zoomLevel;
 		x2 *= mGraphics.zoomLevel;
 		y2 *= mGraphics.zoomLevel;
-		if (y1 == y2)
+		bool flag = y1 == y2;
+		if (flag)
 		{
-			if (x1 > x2)
+			bool flag2 = x1 > x2;
+			if (flag2)
 			{
 				int num = x2;
 				x2 = x1;
 				x1 = num;
 			}
 			this.fillRect(x1, y1, x2 - x1, 1);
-			return;
 		}
-		if (x1 == x2)
+		else
 		{
-			if (y1 > y2)
+			bool flag3 = x1 == x2;
+			if (flag3)
 			{
-				int num2 = y2;
-				y2 = y1;
-				y1 = num2;
+				bool flag4 = y1 > y2;
+				if (flag4)
+				{
+					int num2 = y2;
+					y2 = y1;
+					y1 = num2;
+				}
+				this.fillRect(x1, y1, 1, y2 - y1);
 			}
-			this.fillRect(x1, y1, 1, y2 - y1);
-			return;
-		}
-		if (this.isTranslate)
-		{
-			x1 += this.translateX;
-			y1 += this.translateY;
-			x2 += this.translateX;
-			y2 += this.translateY;
-		}
-		string key = string.Concat(new object[]
-		{
-			"dl",
-			this.r,
-			this.g,
-			this.b
-		});
-		Texture2D texture2D = (Texture2D)mGraphics.cachedTextures[key];
-		if (texture2D == null)
-		{
-			texture2D = new Texture2D(1, 1);
-			Color color = new Color(this.r, this.g, this.b);
-			texture2D.SetPixel(0, 0, color);
-			texture2D.Apply();
-			this.cache(key, texture2D);
-		}
-		Vector2 pivotPoint = new Vector2((float)x1, (float)y1);
-		Vector2 vector = new Vector2((float)x2, (float)y2);
-		Vector2 vector2 = vector - pivotPoint;
-		float num3 = 57.29578f * Mathf.Atan(vector2.y / vector2.x);
-		if (vector2.x < 0f)
-		{
-			num3 += 180f;
-		}
-		int num4 = (int)Mathf.Ceil(0f);
-		GUIUtility.RotateAroundPivot(num3, pivotPoint);
-		int num5 = 0;
-		int num6 = 0;
-		int num7 = 0;
-		int num8 = 0;
-		if (this.isClip)
-		{
-			num5 = this.clipX;
-			num6 = this.clipY;
-			num7 = this.clipW;
-			num8 = this.clipH;
-			if (this.isTranslate)
+			else
 			{
-				num5 += this.clipTX;
-				num6 += this.clipTY;
+				bool flag5 = this.isTranslate;
+				if (flag5)
+				{
+					x1 += this.translateX;
+					y1 += this.translateY;
+					x2 += this.translateX;
+					y2 += this.translateY;
+				}
+				string key = string.Concat(new object[]
+				{
+					"dl",
+					this.r,
+					this.g,
+					this.b
+				});
+				Texture2D texture2D = (Texture2D)mGraphics.cachedTextures[key];
+				bool flag6 = texture2D == null;
+				if (flag6)
+				{
+					texture2D = new Texture2D(1, 1);
+					Color color = new Color(this.r, this.g, this.b);
+					texture2D.SetPixel(0, 0, color);
+					texture2D.Apply();
+					this.cache(key, texture2D);
+				}
+				Vector2 pivotPoint = new Vector2((float)x1, (float)y1);
+				Vector2 vector = new Vector2((float)x2, (float)y2);
+				Vector2 vector2 = vector - pivotPoint;
+				float num3 = 57.29578f * Mathf.Atan(vector2.y / vector2.x);
+				bool flag7 = vector2.x < 0f;
+				if (flag7)
+				{
+					num3 += 180f;
+				}
+				int num4 = (int)Mathf.Ceil(0f);
+				GUIUtility.RotateAroundPivot(num3, pivotPoint);
+				int num5 = 0;
+				int num6 = 0;
+				int num7 = 0;
+				int num8 = 0;
+				bool flag8 = this.isClip;
+				if (flag8)
+				{
+					num5 = this.clipX;
+					num6 = this.clipY;
+					num7 = this.clipW;
+					num8 = this.clipH;
+					bool flag9 = this.isTranslate;
+					if (flag9)
+					{
+						num5 += this.clipTX;
+						num6 += this.clipTY;
+					}
+				}
+				bool flag10 = this.isClip;
+				if (flag10)
+				{
+					GUI.BeginGroup(new Rect((float)num5, (float)num6, (float)num7, (float)num8));
+				}
+				Graphics.DrawTexture(new Rect(pivotPoint.x - (float)num5, pivotPoint.y - (float)num4 - (float)num6, vector2.magnitude, 1f), texture2D);
+				bool flag11 = this.isClip;
+				if (flag11)
+				{
+					GUI.EndGroup();
+				}
+				GUIUtility.RotateAroundPivot(-num3, pivotPoint);
 			}
 		}
-		if (this.isClip)
-		{
-			GUI.BeginGroup(new Rect((float)num5, (float)num6, (float)num7, (float)num8));
-		}
-		Graphics.DrawTexture(new Rect(pivotPoint.x - (float)num5, pivotPoint.y - (float)num4 - (float)num6, vector2.magnitude, 1f), texture2D);
-		if (this.isClip)
-		{
-			GUI.EndGroup();
-		}
-		GUIUtility.RotateAroundPivot(-num3, pivotPoint);
 	}
 
-	// Token: 0x060001B9 RID: 441 RVA: 0x0000BD48 File Offset: 0x0000A148
+	// Token: 0x06000521 RID: 1313 RVA: 0x00060D0C File Offset: 0x0005EF0C
 	public Color setColorMiniMap(int rgb)
 	{
 		int num = rgb & 255;
@@ -208,7 +227,7 @@ public class mGraphics
 		return result;
 	}
 
-	// Token: 0x060001BA RID: 442 RVA: 0x0000BDA0 File Offset: 0x0000A1A0
+	// Token: 0x06000522 RID: 1314 RVA: 0x00060D68 File Offset: 0x0005EF68
 	public float[] getRGB(Color cl)
 	{
 		float num = 256f * cl.r;
@@ -222,7 +241,7 @@ public class mGraphics
 		};
 	}
 
-	// Token: 0x060001BB RID: 443 RVA: 0x0000BDEC File Offset: 0x0000A1EC
+	// Token: 0x06000523 RID: 1315 RVA: 0x00060DB4 File Offset: 0x0005EFB4
 	public void drawRect(int x, int y, int w, int h)
 	{
 		int num = 1;
@@ -232,71 +251,77 @@ public class mGraphics
 		this.fillRect(x, y + h, w + 1, num);
 	}
 
-	// Token: 0x060001BC RID: 444 RVA: 0x0000BE30 File Offset: 0x0000A230
+	// Token: 0x06000524 RID: 1316 RVA: 0x00060DFC File Offset: 0x0005EFFC
 	public void fillRect(int x, int y, int w, int h)
 	{
 		x *= mGraphics.zoomLevel;
 		y *= mGraphics.zoomLevel;
 		w *= mGraphics.zoomLevel;
 		h *= mGraphics.zoomLevel;
-		if (w < 0 || h < 0)
+		bool flag = w < 0 || h < 0;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.isTranslate)
-		{
-			x += this.translateX;
-			y += this.translateY;
-		}
-		int num = 1;
-		int num2 = 1;
-		string key = string.Concat(new object[]
-		{
-			"fr",
-			num,
-			num2,
-			this.r,
-			this.g,
-			this.b,
-			this.a
-		});
-		Texture2D texture2D = (Texture2D)mGraphics.cachedTextures[key];
-		if (texture2D == null)
-		{
-			texture2D = new Texture2D(num, num2);
-			Color color = new Color(this.r, this.g, this.b, this.a);
-			texture2D.SetPixel(0, 0, color);
-			texture2D.Apply();
-			this.cache(key, texture2D);
-		}
-		int num3 = 0;
-		int num4 = 0;
-		int num5 = 0;
-		int num6 = 0;
-		if (this.isClip)
-		{
-			num3 = this.clipX;
-			num4 = this.clipY;
-			num5 = this.clipW;
-			num6 = this.clipH;
-			if (this.isTranslate)
+			bool flag2 = this.isTranslate;
+			if (flag2)
 			{
-				num3 += this.clipTX;
-				num4 += this.clipTY;
+				x += this.translateX;
+				y += this.translateY;
 			}
-		}
-		if (this.isClip)
-		{
-			GUI.BeginGroup(new Rect((float)num3, (float)num4, (float)num5, (float)num6));
-		}
-		GUI.DrawTexture(new Rect((float)(x - num3), (float)(y - num4), (float)w, (float)h), texture2D);
-		if (this.isClip)
-		{
-			GUI.EndGroup();
+			int num = 1;
+			int num2 = 1;
+			string key = string.Concat(new object[]
+			{
+				"fr",
+				num,
+				num2,
+				this.r,
+				this.g,
+				this.b,
+				this.a
+			});
+			Texture2D texture2D = (Texture2D)mGraphics.cachedTextures[key];
+			bool flag3 = texture2D == null;
+			if (flag3)
+			{
+				texture2D = new Texture2D(num, num2);
+				Color color = new Color(this.r, this.g, this.b, this.a);
+				texture2D.SetPixel(0, 0, color);
+				texture2D.Apply();
+				this.cache(key, texture2D);
+			}
+			int num3 = 0;
+			int num4 = 0;
+			int num5 = 0;
+			int num6 = 0;
+			bool flag4 = this.isClip;
+			if (flag4)
+			{
+				num3 = this.clipX;
+				num4 = this.clipY;
+				num5 = this.clipW;
+				num6 = this.clipH;
+				bool flag5 = this.isTranslate;
+				if (flag5)
+				{
+					num3 += this.clipTX;
+					num4 += this.clipTY;
+				}
+			}
+			bool flag6 = this.isClip;
+			if (flag6)
+			{
+				GUI.BeginGroup(new Rect((float)num3, (float)num4, (float)num5, (float)num6));
+			}
+			GUI.DrawTexture(new Rect((float)(x - num3), (float)(y - num4), (float)w, (float)h), texture2D);
+			bool flag7 = this.isClip;
+			if (flag7)
+			{
+				GUI.EndGroup();
+			}
 		}
 	}
 
-	// Token: 0x060001BD RID: 445 RVA: 0x0000BFF4 File Offset: 0x0000A3F4
+	// Token: 0x06000525 RID: 1317 RVA: 0x00060FE0 File Offset: 0x0005F1E0
 	public void setColor(int rgb)
 	{
 		int num = rgb & 255;
@@ -308,7 +333,7 @@ public class mGraphics
 		this.a = 255f;
 	}
 
-	// Token: 0x060001BE RID: 446 RVA: 0x0000C053 File Offset: 0x0000A453
+	// Token: 0x06000526 RID: 1318 RVA: 0x00061040 File Offset: 0x0005F240
 	public void setColor(Color color)
 	{
 		this.b = color.b;
@@ -316,10 +341,11 @@ public class mGraphics
 		this.r = color.r;
 	}
 
-	// Token: 0x060001BF RID: 447 RVA: 0x0000C07C File Offset: 0x0000A47C
+	// Token: 0x06000527 RID: 1319 RVA: 0x00061068 File Offset: 0x0005F268
 	public void setBgColor(int rgb)
 	{
-		if (rgb != this.currentBGColor)
+		bool flag = rgb != this.currentBGColor;
+		if (flag)
 		{
 			this.currentBGColor = rgb;
 			int num = rgb & 255;
@@ -332,12 +358,13 @@ public class mGraphics
 		}
 	}
 
-	// Token: 0x060001C0 RID: 448 RVA: 0x0000C10C File Offset: 0x0000A50C
+	// Token: 0x06000528 RID: 1320 RVA: 0x00061100 File Offset: 0x0005F300
 	public void drawString(string s, int x, int y, GUIStyle style)
 	{
 		x *= mGraphics.zoomLevel;
 		y *= mGraphics.zoomLevel;
-		if (this.isTranslate)
+		bool flag = this.isTranslate;
+		if (flag)
 		{
 			x += this.translateX;
 			y += this.translateY;
@@ -346,30 +373,34 @@ public class mGraphics
 		int num2 = 0;
 		int num3 = 0;
 		int num4 = 0;
-		if (this.isClip)
+		bool flag2 = this.isClip;
+		if (flag2)
 		{
 			num = this.clipX;
 			num2 = this.clipY;
 			num3 = this.clipW;
 			num4 = this.clipH;
-			if (this.isTranslate)
+			bool flag3 = this.isTranslate;
+			if (flag3)
 			{
 				num += this.clipTX;
 				num2 += this.clipTY;
 			}
 		}
-		if (this.isClip)
+		bool flag4 = this.isClip;
+		if (flag4)
 		{
 			GUI.BeginGroup(new Rect((float)num, (float)num2, (float)num3, (float)num4));
 		}
 		GUI.Label(new Rect((float)(x - num), (float)(y - num2), ScaleGUI.WIDTH, 100f), s, style);
-		if (this.isClip)
+		bool flag5 = this.isClip;
+		if (flag5)
 		{
 			GUI.EndGroup();
 		}
 	}
 
-	// Token: 0x060001C1 RID: 449 RVA: 0x0000C1E4 File Offset: 0x0000A5E4
+	// Token: 0x06000529 RID: 1321 RVA: 0x000611EC File Offset: 0x0005F3EC
 	public void setColor(int rgb, float alpha)
 	{
 		int num = rgb & 255;
@@ -381,12 +412,13 @@ public class mGraphics
 		this.a = alpha;
 	}
 
-	// Token: 0x060001C2 RID: 450 RVA: 0x0000C240 File Offset: 0x0000A640
+	// Token: 0x0600052A RID: 1322 RVA: 0x00061248 File Offset: 0x0005F448
 	public void drawString(string s, int x, int y, GUIStyle style, int w)
 	{
 		x *= mGraphics.zoomLevel;
 		y *= mGraphics.zoomLevel;
-		if (this.isTranslate)
+		bool flag = this.isTranslate;
+		if (flag)
 		{
 			x += this.translateX;
 			y += this.translateY;
@@ -395,428 +427,542 @@ public class mGraphics
 		int num2 = 0;
 		int num3 = 0;
 		int num4 = 0;
-		if (this.isClip)
+		bool flag2 = this.isClip;
+		if (flag2)
 		{
 			num = this.clipX;
 			num2 = this.clipY;
 			num3 = this.clipW;
 			num4 = this.clipH;
-			if (this.isTranslate)
+			bool flag3 = this.isTranslate;
+			if (flag3)
 			{
 				num += this.clipTX;
 				num2 += this.clipTY;
 			}
 		}
-		if (this.isClip)
+		bool flag4 = this.isClip;
+		if (flag4)
 		{
 			GUI.BeginGroup(new Rect((float)num, (float)num2, (float)num3, (float)num4));
 		}
 		GUI.Label(new Rect((float)(x - num), (float)(y - num2 - 4), (float)w, 100f), s, style);
-		if (this.isClip)
+		bool flag5 = this.isClip;
+		if (flag5)
 		{
 			GUI.EndGroup();
 		}
 	}
 
-	// Token: 0x060001C3 RID: 451 RVA: 0x0000C318 File Offset: 0x0000A718
+	// Token: 0x0600052B RID: 1323 RVA: 0x00061334 File Offset: 0x0005F534
 	private void UpdatePos(int anchor)
 	{
 		Vector2 vector = new Vector2(0f, 0f);
-		switch (anchor)
+		if (anchor != 3)
 		{
-		case 3:
-			vector = new Vector2(this.size.x / 2f, this.size.y / 2f);
-			break;
-		default:
-			switch (anchor)
+			if (anchor != 6)
 			{
-			case 17:
-				vector = new Vector2((float)(Screen.width / 2), 0f);
-				break;
-			default:
-				switch (anchor)
+				if (anchor != 17)
 				{
-				case 33:
-					vector = new Vector2((float)(Screen.width / 2), (float)Screen.height);
-					break;
-				default:
-					if (anchor != 10)
+					if (anchor != 20)
 					{
-						if (anchor != 24)
+						if (anchor != 33)
 						{
-							if (anchor == 40)
+							if (anchor != 36)
 							{
-								vector = new Vector2((float)Screen.width, (float)Screen.height);
+								bool flag = anchor != 10;
+								if (flag)
+								{
+									bool flag2 = anchor != 24;
+									if (flag2)
+									{
+										bool flag3 = anchor == 40;
+										if (flag3)
+										{
+											vector = new Vector2((float)Screen.width, (float)Screen.height);
+										}
+									}
+									else
+									{
+										vector = new Vector2((float)Screen.width, 0f);
+									}
+								}
+								else
+								{
+									vector = new Vector2((float)Screen.width, (float)(Screen.height / 2));
+								}
+							}
+							else
+							{
+								vector = new Vector2(0f, (float)Screen.height);
 							}
 						}
 						else
 						{
-							vector = new Vector2((float)Screen.width, 0f);
+							vector = new Vector2((float)(Screen.width / 2), (float)Screen.height);
 						}
 					}
 					else
 					{
-						vector = new Vector2((float)Screen.width, (float)(Screen.height / 2));
+						vector = new Vector2(0f, 0f);
 					}
-					break;
-				case 36:
-					vector = new Vector2(0f, (float)Screen.height);
-					break;
 				}
-				break;
-			case 20:
-				vector = new Vector2(0f, 0f);
-				break;
+				else
+				{
+					vector = new Vector2((float)(Screen.width / 2), 0f);
+				}
 			}
-			break;
-		case 6:
-			vector = new Vector2(0f, (float)(Screen.height / 2));
-			break;
+			else
+			{
+				vector = new Vector2(0f, (float)(Screen.height / 2));
+			}
+		}
+		else
+		{
+			vector = new Vector2(this.size.x / 2f, this.size.y / 2f);
 		}
 		this.pos = vector + this.relativePosition;
 		this.rect = new Rect(this.pos.x - this.size.x * 0.5f, this.pos.y - this.size.y * 0.5f, this.size.x, this.size.y);
 		this.pivot = new Vector2(this.rect.xMin + this.rect.width * 0.5f, this.rect.yMin + this.rect.height * 0.5f);
 	}
 
-	// Token: 0x060001C4 RID: 452 RVA: 0x0000C544 File Offset: 0x0000A944
+	// Token: 0x0600052C RID: 1324 RVA: 0x0006155C File Offset: 0x0005F75C
 	public void drawRegion(Image arg0, int x0, int y0, int w0, int h0, int arg5, int x, int y, int arg8)
 	{
-		if (arg0 == null)
+		bool flag = arg0 == null;
+		if (!flag)
 		{
-			return;
+			x *= mGraphics.zoomLevel;
+			y *= mGraphics.zoomLevel;
+			x0 *= mGraphics.zoomLevel;
+			y0 *= mGraphics.zoomLevel;
+			w0 *= mGraphics.zoomLevel;
+			h0 *= mGraphics.zoomLevel;
+			this._drawRegion(arg0, (float)x0, (float)y0, w0, h0, arg5, x, y, arg8);
 		}
-		x *= mGraphics.zoomLevel;
-		y *= mGraphics.zoomLevel;
-		x0 *= mGraphics.zoomLevel;
-		y0 *= mGraphics.zoomLevel;
-		w0 *= mGraphics.zoomLevel;
-		h0 *= mGraphics.zoomLevel;
-		this._drawRegion(arg0, (float)x0, (float)y0, w0, h0, arg5, x, y, arg8);
 	}
 
-	// Token: 0x060001C5 RID: 453 RVA: 0x0000C5AC File Offset: 0x0000A9AC
+	// Token: 0x0600052D RID: 1325 RVA: 0x000615C8 File Offset: 0x0005F7C8
 	public void drawRegion(Image arg0, int x0, int y0, int w0, int h0, int arg5, float x, float y, int arg8)
 	{
-		if (arg0 == null)
+		bool flag = arg0 == null;
+		if (!flag)
 		{
-			return;
+			x *= (float)mGraphics.zoomLevel;
+			y *= (float)mGraphics.zoomLevel;
+			x0 *= mGraphics.zoomLevel;
+			y0 *= mGraphics.zoomLevel;
+			w0 *= mGraphics.zoomLevel;
+			h0 *= mGraphics.zoomLevel;
+			this.__drawRegion(arg0, x0, y0, w0, h0, arg5, x, y, arg8);
 		}
-		x *= (float)mGraphics.zoomLevel;
-		y *= (float)mGraphics.zoomLevel;
-		x0 *= mGraphics.zoomLevel;
-		y0 *= mGraphics.zoomLevel;
-		w0 *= mGraphics.zoomLevel;
-		h0 *= mGraphics.zoomLevel;
-		this.__drawRegion(arg0, x0, y0, w0, h0, arg5, x, y, arg8);
 	}
 
-	// Token: 0x060001C6 RID: 454 RVA: 0x0000C614 File Offset: 0x0000AA14
+	// Token: 0x0600052E RID: 1326 RVA: 0x00061634 File Offset: 0x0005F834
 	public void drawRegion(Image arg0, int x0, int y0, int w0, int h0, int arg5, int x, int y, int arg8, bool isClip)
 	{
 		this.drawRegion(arg0, x0, y0, w0, h0, arg5, x, y, arg8);
 	}
 
-	// Token: 0x060001C7 RID: 455 RVA: 0x0000C638 File Offset: 0x0000AA38
+	// Token: 0x0600052F RID: 1327 RVA: 0x00061658 File Offset: 0x0005F858
 	public void __drawRegion(Image image, int x0, int y0, int w, int h, int transform, float x, float y, int anchor)
 	{
-		if (image == null)
+		bool flag = image == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.isTranslate)
-		{
-			x += (float)this.translateX;
-			y += (float)this.translateY;
-		}
-		float num = (float)w;
-		float num2 = (float)h;
-		float num3 = 0f;
-		float num4 = 0f;
-		float num5 = 0f;
-		float num6 = 0f;
-		float num7 = 1f;
-		float num8 = 0f;
-		int num9 = 1;
-		if ((anchor & mGraphics.HCENTER) == mGraphics.HCENTER)
-		{
-			num5 -= num / 2f;
-		}
-		if ((anchor & mGraphics.VCENTER) == mGraphics.VCENTER)
-		{
-			num6 -= num2 / 2f;
-		}
-		if ((anchor & mGraphics.RIGHT) == mGraphics.RIGHT)
-		{
-			num5 -= num;
-		}
-		if ((anchor & mGraphics.BOTTOM) == mGraphics.BOTTOM)
-		{
-			num6 -= num2;
-		}
-		x += num5;
-		y += num6;
-		int num10 = 0;
-		int num11 = 0;
-		if (this.isClip)
-		{
-			num10 = this.clipX;
-			int num12 = this.clipY;
-			num11 = this.clipW;
-			int num13 = this.clipH;
-			if (this.isTranslate)
+			bool flag2 = this.isTranslate;
+			if (flag2)
 			{
-				num10 += this.clipTX;
-				num12 += this.clipTY;
+				x += (float)this.translateX;
+				y += (float)this.translateY;
 			}
-			Rect r = new Rect(x, y, (float)w, (float)h);
-			Rect r2 = new Rect((float)num10, (float)num12, (float)num11, (float)num13);
-			Rect rect = this.intersectRect(r, r2);
-			if (rect.width <= 0f || rect.height <= 0f)
+			float num = (float)w;
+			float num2 = (float)h;
+			float num3 = 0f;
+			float num4 = 0f;
+			float num5 = 0f;
+			float num6 = 0f;
+			float num7 = 1f;
+			float num8 = 0f;
+			int num9 = 1;
+			bool flag3 = (anchor & mGraphics.HCENTER) == mGraphics.HCENTER;
+			if (flag3)
 			{
-				return;
+				num5 -= num / 2f;
 			}
-			num = rect.width;
-			num2 = rect.height;
-			num3 = rect.x - r.x;
-			num4 = rect.y - r.y;
-		}
-		float num14 = 0f;
-		float num15 = 0f;
-		if (transform == 2)
-		{
-			num14 += num;
-			num7 = -1f;
-			if (this.isClip)
+			bool flag4 = (anchor & mGraphics.VCENTER) == mGraphics.VCENTER;
+			if (flag4)
 			{
-				if ((float)num10 > x)
+				num6 -= num2 / 2f;
+			}
+			bool flag5 = (anchor & mGraphics.RIGHT) == mGraphics.RIGHT;
+			if (flag5)
+			{
+				num5 -= num;
+			}
+			bool flag6 = (anchor & mGraphics.BOTTOM) == mGraphics.BOTTOM;
+			if (flag6)
+			{
+				num6 -= num2;
+			}
+			x += num5;
+			y += num6;
+			int num10 = 0;
+			int num11 = 0;
+			bool flag7 = this.isClip;
+			if (flag7)
+			{
+				num10 = this.clipX;
+				int num12 = this.clipY;
+				num11 = this.clipW;
+				int num13 = this.clipH;
+				bool flag8 = this.isTranslate;
+				if (flag8)
 				{
-					num8 = -num3;
+					num10 += this.clipTX;
+					num12 += this.clipTY;
 				}
-				else if ((float)(num10 + num11) < x + (float)w)
+				Rect r = new Rect(x, y, (float)w, (float)h);
+				Rect r2 = new Rect((float)num10, (float)num12, (float)num11, (float)num13);
+				Rect rect = this.intersectRect(r, r2);
+				bool flag9 = rect.width <= 0f || rect.height <= 0f;
+				if (flag9)
 				{
-					num8 = -((float)(num10 + num11) - x - (float)w);
+					return;
 				}
+				num = rect.width;
+				num2 = rect.height;
+				num3 = rect.x - r.x;
+				num4 = rect.y - r.y;
 			}
-		}
-		else if (transform == 1)
-		{
-			num9 = -1;
-			num15 += num2;
-		}
-		else if (transform == 3)
-		{
-			num9 = -1;
-			num15 += num2;
-			num7 = -1f;
-			num14 += num;
-		}
-		int num16 = 0;
-		int num17 = 0;
-		if (transform == 5 || transform == 6 || transform == 4 || transform == 7)
-		{
-			this.matrixBackup = GUI.matrix;
-			this.size = new Vector2((float)w, (float)h);
-			this.relativePosition = new Vector2(x, y);
-			this.UpdatePos(3);
-			if (transform == 6)
+			float num14 = 0f;
+			float num15 = 0f;
+			bool flag10 = transform == 2;
+			if (flag10)
 			{
-				this.UpdatePos(3);
-			}
-			else if (transform == 5)
-			{
-				this.size = new Vector2((float)w, (float)h);
-				this.UpdatePos(3);
-			}
-			if (transform == 5)
-			{
-				GUIUtility.RotateAroundPivot(90f, this.pivot);
-			}
-			else if (transform == 6)
-			{
-				GUIUtility.RotateAroundPivot(270f, this.pivot);
-			}
-			else if (transform == 4)
-			{
-				GUIUtility.RotateAroundPivot(270f, this.pivot);
 				num14 += num;
 				num7 = -1f;
-				if (this.isClip)
+				bool flag11 = this.isClip;
+				if (flag11)
 				{
-					if ((float)num10 > x)
+					bool flag12 = (float)num10 > x;
+					if (flag12)
 					{
 						num8 = -num3;
 					}
-					else if ((float)(num10 + num11) < x + (float)w)
+					else
 					{
-						num8 = -((float)(num10 + num11) - x - (float)w);
+						bool flag13 = (float)(num10 + num11) < x + (float)w;
+						if (flag13)
+						{
+							num8 = -((float)(num10 + num11) - x - (float)w);
+						}
 					}
 				}
 			}
-			else if (transform == 7)
+			else
 			{
-				GUIUtility.RotateAroundPivot(270f, this.pivot);
-				num9 = -1;
-				num15 += num2;
+				bool flag14 = transform == 1;
+				if (flag14)
+				{
+					num9 = -1;
+					num15 += num2;
+				}
+				else
+				{
+					bool flag15 = transform == 3;
+					if (flag15)
+					{
+						num9 = -1;
+						num15 += num2;
+						num7 = -1f;
+						num14 += num;
+					}
+				}
 			}
-		}
-		Graphics.DrawTexture(new Rect(x + num3 + num14 + (float)num16, y + num4 + (float)num17 + num15, num * num7, num2 * (float)num9), image.texture, new Rect(((float)x0 + num3 + num8) / (float)image.texture.width, ((float)image.texture.height - num2 - ((float)y0 + num4)) / (float)image.texture.height, num / (float)image.texture.width, num2 / (float)image.texture.height), 0, 0, 0, 0);
-		if (transform == 5 || transform == 6 || transform == 4 || transform == 7)
-		{
-			GUI.matrix = this.matrixBackup;
+			int num16 = 0;
+			int num17 = 0;
+			bool flag16 = transform == 5 || transform == 6 || transform == 4 || transform == 7;
+			if (flag16)
+			{
+				this.matrixBackup = GUI.matrix;
+				this.size = new Vector2((float)w, (float)h);
+				this.relativePosition = new Vector2(x, y);
+				this.UpdatePos(3);
+				bool flag17 = transform == 6;
+				if (flag17)
+				{
+					this.UpdatePos(3);
+				}
+				else
+				{
+					bool flag18 = transform == 5;
+					if (flag18)
+					{
+						this.size = new Vector2((float)w, (float)h);
+						this.UpdatePos(3);
+					}
+				}
+				bool flag19 = transform == 5;
+				if (flag19)
+				{
+					GUIUtility.RotateAroundPivot(90f, this.pivot);
+				}
+				else
+				{
+					bool flag20 = transform == 6;
+					if (flag20)
+					{
+						GUIUtility.RotateAroundPivot(270f, this.pivot);
+					}
+					else
+					{
+						bool flag21 = transform == 4;
+						if (flag21)
+						{
+							GUIUtility.RotateAroundPivot(270f, this.pivot);
+							num14 += num;
+							num7 = -1f;
+							bool flag22 = this.isClip;
+							if (flag22)
+							{
+								bool flag23 = (float)num10 > x;
+								if (flag23)
+								{
+									num8 = -num3;
+								}
+								else
+								{
+									bool flag24 = (float)(num10 + num11) < x + (float)w;
+									if (flag24)
+									{
+										num8 = -((float)(num10 + num11) - x - (float)w);
+									}
+								}
+							}
+						}
+						else
+						{
+							bool flag25 = transform == 7;
+							if (flag25)
+							{
+								GUIUtility.RotateAroundPivot(270f, this.pivot);
+								num9 = -1;
+								num15 += num2;
+							}
+						}
+					}
+				}
+			}
+			Graphics.DrawTexture(new Rect(x + num3 + num14 + (float)num16, y + num4 + (float)num17 + num15, num * num7, num2 * (float)num9), image.texture, new Rect(((float)x0 + num3 + num8) / (float)image.texture.width, ((float)image.texture.height - num2 - ((float)y0 + num4)) / (float)image.texture.height, num / (float)image.texture.width, num2 / (float)image.texture.height), 0, 0, 0, 0);
+			bool flag26 = transform == 5 || transform == 6 || transform == 4 || transform == 7;
+			if (flag26)
+			{
+				GUI.matrix = this.matrixBackup;
+			}
 		}
 	}
 
-	// Token: 0x060001C8 RID: 456 RVA: 0x0000CA98 File Offset: 0x0000AE98
+	// Token: 0x06000530 RID: 1328 RVA: 0x00061B24 File Offset: 0x0005FD24
 	public void _drawRegion(Image image, float x0, float y0, int w, int h, int transform, int x, int y, int anchor)
 	{
-		if (image == null)
+		bool flag = image == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.isTranslate)
-		{
-			x += this.translateX;
-			y += this.translateY;
-		}
-		float num = (float)w;
-		float num2 = (float)h;
-		float num3 = 0f;
-		float num4 = 0f;
-		float num5 = 0f;
-		float num6 = 0f;
-		float num7 = 1f;
-		float num8 = 0f;
-		int num9 = 1;
-		if ((anchor & mGraphics.HCENTER) == mGraphics.HCENTER)
-		{
-			num5 -= num / 2f;
-		}
-		if ((anchor & mGraphics.VCENTER) == mGraphics.VCENTER)
-		{
-			num6 -= num2 / 2f;
-		}
-		if ((anchor & mGraphics.RIGHT) == mGraphics.RIGHT)
-		{
-			num5 -= num;
-		}
-		if ((anchor & mGraphics.BOTTOM) == mGraphics.BOTTOM)
-		{
-			num6 -= num2;
-		}
-		x += (int)num5;
-		y += (int)num6;
-		int num10 = 0;
-		int num11 = 0;
-		if (this.isClip)
-		{
-			num10 = this.clipX;
-			int num12 = this.clipY;
-			num11 = this.clipW;
-			int num13 = this.clipH;
-			if (this.isTranslate)
+			bool flag2 = this.isTranslate;
+			if (flag2)
 			{
-				num10 += this.clipTX;
-				num12 += this.clipTY;
+				x += this.translateX;
+				y += this.translateY;
 			}
-			Rect r = new Rect((float)x, (float)y, (float)w, (float)h);
-			Rect r2 = new Rect((float)num10, (float)num12, (float)num11, (float)num13);
-			Rect rect = this.intersectRect(r, r2);
-			if (rect.width <= 0f || rect.height <= 0f)
+			float num = (float)w;
+			float num2 = (float)h;
+			float num3 = 0f;
+			float num4 = 0f;
+			float num5 = 0f;
+			float num6 = 0f;
+			float num7 = 1f;
+			float num8 = 0f;
+			int num9 = 1;
+			bool flag3 = (anchor & mGraphics.HCENTER) == mGraphics.HCENTER;
+			if (flag3)
 			{
-				return;
+				num5 -= num / 2f;
 			}
-			num = rect.width;
-			num2 = rect.height;
-			num3 = rect.x - r.x;
-			num4 = rect.y - r.y;
-		}
-		float num14 = 0f;
-		float num15 = 0f;
-		if (transform == 2)
-		{
-			num14 += num;
-			num7 = -1f;
-			if (this.isClip)
+			bool flag4 = (anchor & mGraphics.VCENTER) == mGraphics.VCENTER;
+			if (flag4)
 			{
-				if (num10 > x)
+				num6 -= num2 / 2f;
+			}
+			bool flag5 = (anchor & mGraphics.RIGHT) == mGraphics.RIGHT;
+			if (flag5)
+			{
+				num5 -= num;
+			}
+			bool flag6 = (anchor & mGraphics.BOTTOM) == mGraphics.BOTTOM;
+			if (flag6)
+			{
+				num6 -= num2;
+			}
+			x += (int)num5;
+			y += (int)num6;
+			int num10 = 0;
+			int num11 = 0;
+			bool flag7 = this.isClip;
+			if (flag7)
+			{
+				num10 = this.clipX;
+				int num12 = this.clipY;
+				num11 = this.clipW;
+				int num13 = this.clipH;
+				bool flag8 = this.isTranslate;
+				if (flag8)
 				{
-					num8 = -num3;
+					num10 += this.clipTX;
+					num12 += this.clipTY;
 				}
-				else if (num10 + num11 < x + w)
+				Rect r = new Rect((float)x, (float)y, (float)w, (float)h);
+				Rect r2 = new Rect((float)num10, (float)num12, (float)num11, (float)num13);
+				Rect rect = this.intersectRect(r, r2);
+				bool flag9 = rect.width <= 0f || rect.height <= 0f;
+				if (flag9)
 				{
-					num8 = (float)(-(float)(num10 + num11 - x - w));
+					return;
 				}
+				num = rect.width;
+				num2 = rect.height;
+				num3 = rect.x - r.x;
+				num4 = rect.y - r.y;
 			}
-		}
-		else if (transform == 1)
-		{
-			num9 = -1;
-			num15 += num2;
-		}
-		else if (transform == 3)
-		{
-			num9 = -1;
-			num15 += num2;
-			num7 = -1f;
-			num14 += num;
-		}
-		int num16 = 0;
-		int num17 = 0;
-		if (transform == 5 || transform == 6 || transform == 4 || transform == 7)
-		{
-			this.matrixBackup = GUI.matrix;
-			this.size = new Vector2((float)w, (float)h);
-			this.relativePosition = new Vector2((float)x, (float)y);
-			this.UpdatePos(3);
-			if (transform == 6)
+			float num14 = 0f;
+			float num15 = 0f;
+			bool flag10 = transform == 2;
+			if (flag10)
 			{
-				this.UpdatePos(3);
-			}
-			else if (transform == 5)
-			{
-				this.size = new Vector2((float)w, (float)h);
-				this.UpdatePos(3);
-			}
-			if (transform == 5)
-			{
-				GUIUtility.RotateAroundPivot(90f, this.pivot);
-			}
-			else if (transform == 6)
-			{
-				GUIUtility.RotateAroundPivot(270f, this.pivot);
-			}
-			else if (transform == 4)
-			{
-				GUIUtility.RotateAroundPivot(270f, this.pivot);
 				num14 += num;
 				num7 = -1f;
-				if (this.isClip)
+				bool flag11 = this.isClip;
+				if (flag11)
 				{
-					if (num10 > x)
+					bool flag12 = num10 > x;
+					if (flag12)
 					{
 						num8 = -num3;
 					}
-					else if (num10 + num11 < x + w)
+					else
 					{
-						num8 = (float)(-(float)(num10 + num11 - x - w));
+						bool flag13 = num10 + num11 < x + w;
+						if (flag13)
+						{
+							num8 = -(float)(num10 + num11 - x - w);
+						}
 					}
 				}
 			}
-			else if (transform == 7)
+			else
 			{
-				GUIUtility.RotateAroundPivot(270f, this.pivot);
-				num9 = -1;
-				num15 += num2;
+				bool flag14 = transform == 1;
+				if (flag14)
+				{
+					num9 = -1;
+					num15 += num2;
+				}
+				else
+				{
+					bool flag15 = transform == 3;
+					if (flag15)
+					{
+						num9 = -1;
+						num15 += num2;
+						num7 = -1f;
+						num14 += num;
+					}
+				}
 			}
-		}
-		Graphics.DrawTexture(new Rect((float)x + num3 + num14 + (float)num16, (float)y + num4 + (float)num17 + num15, num * num7, num2 * (float)num9), image.texture, new Rect((x0 + num3 + num8) / (float)image.texture.width, ((float)image.texture.height - num2 - (y0 + num4)) / (float)image.texture.height, num / (float)image.texture.width, num2 / (float)image.texture.height), 0, 0, 0, 0);
-		if (transform == 5 || transform == 6 || transform == 4 || transform == 7)
-		{
-			GUI.matrix = this.matrixBackup;
+			int num16 = 0;
+			int num17 = 0;
+			bool flag16 = transform == 5 || transform == 6 || transform == 4 || transform == 7;
+			if (flag16)
+			{
+				this.matrixBackup = GUI.matrix;
+				this.size = new Vector2((float)w, (float)h);
+				this.relativePosition = new Vector2((float)x, (float)y);
+				this.UpdatePos(3);
+				bool flag17 = transform == 6;
+				if (flag17)
+				{
+					this.UpdatePos(3);
+				}
+				else
+				{
+					bool flag18 = transform == 5;
+					if (flag18)
+					{
+						this.size = new Vector2((float)w, (float)h);
+						this.UpdatePos(3);
+					}
+				}
+				bool flag19 = transform == 5;
+				if (flag19)
+				{
+					GUIUtility.RotateAroundPivot(90f, this.pivot);
+				}
+				else
+				{
+					bool flag20 = transform == 6;
+					if (flag20)
+					{
+						GUIUtility.RotateAroundPivot(270f, this.pivot);
+					}
+					else
+					{
+						bool flag21 = transform == 4;
+						if (flag21)
+						{
+							GUIUtility.RotateAroundPivot(270f, this.pivot);
+							num14 += num;
+							num7 = -1f;
+							bool flag22 = this.isClip;
+							if (flag22)
+							{
+								bool flag23 = num10 > x;
+								if (flag23)
+								{
+									num8 = -num3;
+								}
+								else
+								{
+									bool flag24 = num10 + num11 < x + w;
+									if (flag24)
+									{
+										num8 = -(float)(num10 + num11 - x - w);
+									}
+								}
+							}
+						}
+						else
+						{
+							bool flag25 = transform == 7;
+							if (flag25)
+							{
+								GUIUtility.RotateAroundPivot(270f, this.pivot);
+								num9 = -1;
+								num15 += num2;
+							}
+						}
+					}
+				}
+			}
+			Graphics.DrawTexture(new Rect((float)x + num3 + num14 + (float)num16, (float)y + num4 + (float)num17 + num15, num * num7, num2 * (float)num9), image.texture, new Rect((x0 + num3 + num8) / (float)image.texture.width, ((float)image.texture.height - num2 - (y0 + num4)) / (float)image.texture.height, num / (float)image.texture.width, num2 / (float)image.texture.height), 0, 0, 0, 0);
+			bool flag26 = transform == 5 || transform == 6 || transform == 4 || transform == 7;
+			if (flag26)
+			{
+				GUI.matrix = this.matrixBackup;
+			}
 		}
 	}
 
-	// Token: 0x060001C9 RID: 457 RVA: 0x0000CEF8 File Offset: 0x0000B2F8
+	// Token: 0x06000531 RID: 1329 RVA: 0x00061FF0 File Offset: 0x000601F0
 	public void drawRegionGui(Image image, float x0, float y0, int w, int h, int transform, float x, float y, int anchor)
 	{
 		GUI.color = this.setColorMiniMap(807956);
@@ -828,11 +974,12 @@ public class mGraphics
 		h *= mGraphics.zoomLevel;
 	}
 
-	// Token: 0x060001CA RID: 458 RVA: 0x0000CF54 File Offset: 0x0000B354
+	// Token: 0x06000532 RID: 1330 RVA: 0x00062050 File Offset: 0x00060250
 	public void drawRegion2(Image image, float x0, float y0, int w, int h, int transform, int x, int y, int anchor)
 	{
 		GUI.color = image.colorBlend;
-		if (this.isTranslate)
+		bool flag = this.isTranslate;
+		if (flag)
 		{
 			x += this.translateX;
 			y += this.translateY;
@@ -848,7 +995,8 @@ public class mGraphics
 			image.GetHashCode()
 		});
 		Texture2D texture2D = (Texture2D)mGraphics.cachedTextures[key];
-		if (texture2D == null)
+		bool flag2 = texture2D == null;
+		if (flag2)
 		{
 			Image image2 = Image.createImage(image, (int)x0, (int)y0, w, h, transform);
 			texture2D = image2.texture;
@@ -862,49 +1010,57 @@ public class mGraphics
 		float num6 = (float)h;
 		float num7 = 0f;
 		float num8 = 0f;
-		if ((anchor & mGraphics.HCENTER) == mGraphics.HCENTER)
+		bool flag3 = (anchor & mGraphics.HCENTER) == mGraphics.HCENTER;
+		if (flag3)
 		{
 			num7 -= num5 / 2f;
 		}
-		if ((anchor & mGraphics.VCENTER) == mGraphics.VCENTER)
+		bool flag4 = (anchor & mGraphics.VCENTER) == mGraphics.VCENTER;
+		if (flag4)
 		{
 			num8 -= num6 / 2f;
 		}
-		if ((anchor & mGraphics.RIGHT) == mGraphics.RIGHT)
+		bool flag5 = (anchor & mGraphics.RIGHT) == mGraphics.RIGHT;
+		if (flag5)
 		{
 			num7 -= num5;
 		}
-		if ((anchor & mGraphics.BOTTOM) == mGraphics.BOTTOM)
+		bool flag6 = (anchor & mGraphics.BOTTOM) == mGraphics.BOTTOM;
+		if (flag6)
 		{
 			num8 -= num6;
 		}
 		x += (int)num7;
 		y += (int)num8;
-		if (this.isClip)
+		bool flag7 = this.isClip;
+		if (flag7)
 		{
 			num = this.clipX;
 			num2 = this.clipY;
 			num3 = this.clipW;
 			num4 = this.clipH;
-			if (this.isTranslate)
+			bool flag8 = this.isTranslate;
+			if (flag8)
 			{
 				num += this.clipTX;
 				num2 += this.clipTY;
 			}
 		}
-		if (this.isClip)
+		bool flag9 = this.isClip;
+		if (flag9)
 		{
 			GUI.BeginGroup(new Rect((float)num, (float)num2, (float)num3, (float)num4));
 		}
 		GUI.DrawTexture(new Rect((float)(x - num), (float)(y - num2), (float)w, (float)h), texture2D);
-		if (this.isClip)
+		bool flag10 = this.isClip;
+		if (flag10)
 		{
 			GUI.EndGroup();
 		}
 		GUI.color = new Color(1f, 1f, 1f, 1f);
 	}
 
-	// Token: 0x060001CB RID: 459 RVA: 0x0000D174 File Offset: 0x0000B574
+	// Token: 0x06000533 RID: 1331 RVA: 0x00062298 File Offset: 0x00060498
 	public void drawImagaByDrawTexture(Image image, float x, float y)
 	{
 		x *= (float)mGraphics.zoomLevel;
@@ -912,59 +1068,59 @@ public class mGraphics
 		GUI.DrawTexture(new Rect(x + (float)this.translateX, y + (float)this.translateY, (float)image.getRealImageWidth(), (float)image.getRealImageHeight()), image.texture);
 	}
 
-	// Token: 0x060001CC RID: 460 RVA: 0x0000D1C8 File Offset: 0x0000B5C8
+	// Token: 0x06000534 RID: 1332 RVA: 0x000622EC File Offset: 0x000604EC
 	public void drawImage(Image image, int x, int y, int anchor)
 	{
-		if (image == null)
+		bool flag = image == null;
+		if (!flag)
 		{
-			return;
+			this.drawRegion(image, 0, 0, mGraphics.getImageWidth(image), mGraphics.getImageHeight(image), 0, x, y, anchor);
 		}
-		this.drawRegion(image, 0, 0, mGraphics.getImageWidth(image), mGraphics.getImageHeight(image), 0, x, y, anchor);
 	}
 
-	// Token: 0x060001CD RID: 461 RVA: 0x0000D1F8 File Offset: 0x0000B5F8
+	// Token: 0x06000535 RID: 1333 RVA: 0x00062320 File Offset: 0x00060520
 	public void drawImageFog(Image image, int x, int y, int anchor)
 	{
-		if (image == null)
+		bool flag = image == null;
+		if (!flag)
 		{
-			return;
+			this.drawRegion(image, 0, 0, image.texture.width, image.texture.height, 0, x, y, anchor);
 		}
-		this.drawRegion(image, 0, 0, image.texture.width, image.texture.height, 0, x, y, anchor);
 	}
 
-	// Token: 0x060001CE RID: 462 RVA: 0x0000D230 File Offset: 0x0000B630
+	// Token: 0x06000536 RID: 1334 RVA: 0x00062360 File Offset: 0x00060560
 	public void drawImage(Image image, int x, int y)
 	{
-		if (image == null)
+		bool flag = image == null;
+		if (!flag)
 		{
-			return;
+			this.drawRegion(image, 0, 0, mGraphics.getImageWidth(image), mGraphics.getImageHeight(image), 0, x, y, mGraphics.TOP | mGraphics.LEFT);
 		}
-		this.drawRegion(image, 0, 0, mGraphics.getImageWidth(image), mGraphics.getImageHeight(image), 0, x, y, mGraphics.TOP | mGraphics.LEFT);
 	}
 
-	// Token: 0x060001CF RID: 463 RVA: 0x0000D268 File Offset: 0x0000B668
+	// Token: 0x06000537 RID: 1335 RVA: 0x000623A0 File Offset: 0x000605A0
 	public void drawImage(Image image, float x, float y, int anchor)
 	{
-		if (image == null)
+		bool flag = image == null;
+		if (!flag)
 		{
-			return;
+			this.drawRegion(image, 0, 0, mGraphics.getImageWidth(image), mGraphics.getImageHeight(image), 0, x, y, anchor);
 		}
-		this.drawRegion(image, 0, 0, mGraphics.getImageWidth(image), mGraphics.getImageHeight(image), 0, x, y, anchor);
 	}
 
-	// Token: 0x060001D0 RID: 464 RVA: 0x0000D296 File Offset: 0x0000B696
+	// Token: 0x06000538 RID: 1336 RVA: 0x000623D4 File Offset: 0x000605D4
 	public void drawRoundRect(int x, int y, int w, int h, int arcWidth, int arcHeight)
 	{
 		this.drawRect(x, y, w, h);
 	}
 
-	// Token: 0x060001D1 RID: 465 RVA: 0x0000D2A3 File Offset: 0x0000B6A3
+	// Token: 0x06000539 RID: 1337 RVA: 0x000623E3 File Offset: 0x000605E3
 	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight)
 	{
 		this.fillRect(x, y, width, height);
 	}
 
-	// Token: 0x060001D2 RID: 466 RVA: 0x0000D2B0 File Offset: 0x0000B6B0
+	// Token: 0x0600053A RID: 1338 RVA: 0x000623F2 File Offset: 0x000605F2
 	public void reset()
 	{
 		this.isClip = false;
@@ -973,7 +1129,7 @@ public class mGraphics
 		this.translateY = 0;
 	}
 
-	// Token: 0x060001D3 RID: 467 RVA: 0x0000D2D0 File Offset: 0x0000B6D0
+	// Token: 0x0600053B RID: 1339 RVA: 0x00062414 File Offset: 0x00060614
 	public Rect intersectRect(Rect r1, Rect r2)
 	{
 		float num = r1.x;
@@ -988,36 +1144,42 @@ public class mGraphics
 		num5 += r2.width;
 		float num6 = y;
 		num6 += r2.height;
-		if (num < x)
+		bool flag = num < x;
+		if (flag)
 		{
 			num = x;
 		}
-		if (num2 < y)
+		bool flag2 = num2 < y;
+		if (flag2)
 		{
 			num2 = y;
 		}
-		if (num3 > num5)
+		bool flag3 = num3 > num5;
+		if (flag3)
 		{
 			num3 = num5;
 		}
-		if (num4 > num6)
+		bool flag4 = num4 > num6;
+		if (flag4)
 		{
 			num4 = num6;
 		}
 		num3 -= num;
 		num4 -= num2;
-		if (num3 < -30000f)
+		bool flag5 = num3 < -30000f;
+		if (flag5)
 		{
 			num3 = -30000f;
 		}
-		if (num4 < -30000f)
+		bool flag6 = num4 < -30000f;
+		if (flag6)
 		{
 			num4 = -30000f;
 		}
 		return new Rect(num, num2, (float)((int)num3), (float)((int)num4));
 	}
 
-	// Token: 0x060001D4 RID: 468 RVA: 0x0000D3A8 File Offset: 0x0000B7A8
+	// Token: 0x0600053C RID: 1340 RVA: 0x00062510 File Offset: 0x00060710
 	public void drawImageScale(Image image, int x, int y, int w, int h, int tranform)
 	{
 		GUI.color = Color.red;
@@ -1025,42 +1187,44 @@ public class mGraphics
 		y *= mGraphics.zoomLevel;
 		w *= mGraphics.zoomLevel;
 		h *= mGraphics.zoomLevel;
-		if (image != null)
+		bool flag = image != null;
+		if (flag)
 		{
-			Graphics.DrawTexture(new Rect((float)(x + this.translateX), (float)(y + this.translateY), (float)((tranform != 0) ? (-(float)w) : w), (float)h), image.texture);
+			Graphics.DrawTexture(new Rect((float)(x + this.translateX), (float)(y + this.translateY), (tranform != 0) ? (-(float)w) : ((float)w), (float)h), image.texture);
 		}
 	}
 
-	// Token: 0x060001D5 RID: 469 RVA: 0x0000D422 File Offset: 0x0000B822
+	// Token: 0x0600053D RID: 1341 RVA: 0x00062590 File Offset: 0x00060790
 	public void drawImageSimple(Image image, int x, int y)
 	{
 		x *= mGraphics.zoomLevel;
 		y *= mGraphics.zoomLevel;
-		if (image != null)
+		bool flag = image != null;
+		if (flag)
 		{
 			Graphics.DrawTexture(new Rect((float)x, (float)y, (float)image.w, (float)image.h), image.texture);
 		}
 	}
 
-	// Token: 0x060001D6 RID: 470 RVA: 0x0000D45E File Offset: 0x0000B85E
+	// Token: 0x0600053E RID: 1342 RVA: 0x000625E0 File Offset: 0x000607E0
 	public static int getImageWidth(Image image)
 	{
 		return image.getWidth();
 	}
 
-	// Token: 0x060001D7 RID: 471 RVA: 0x0000D466 File Offset: 0x0000B866
+	// Token: 0x0600053F RID: 1343 RVA: 0x000625F8 File Offset: 0x000607F8
 	public static int getImageHeight(Image image)
 	{
 		return image.getHeight();
 	}
 
-	// Token: 0x060001D8 RID: 472 RVA: 0x0000D46E File Offset: 0x0000B86E
+	// Token: 0x06000540 RID: 1344 RVA: 0x00062610 File Offset: 0x00060810
 	public static bool isNotTranColor(Color color)
 	{
 		return !(color == Color.clear) && !(color == mGraphics.transParentColor);
 	}
 
-	// Token: 0x060001D9 RID: 473 RVA: 0x0000D494 File Offset: 0x0000B894
+	// Token: 0x06000541 RID: 1345 RVA: 0x00062640 File Offset: 0x00060840
 	public static Image blend(Image img0, float level, int rgb)
 	{
 		int num = rgb & 255;
@@ -1077,32 +1241,39 @@ public class mGraphics
 		for (int i = 0; i < pixels.Length; i++)
 		{
 			Color color2 = pixels[i];
-			if (mGraphics.isNotTranColor(color2))
+			bool flag = mGraphics.isNotTranColor(color2);
+			if (flag)
 			{
 				float num10 = (num7 - color2.r) * level + color2.r;
 				float num11 = (num8 - color2.g) * level + color2.g;
 				float num12 = (num9 - color2.b) * level + color2.b;
-				if (num10 > 255f)
+				bool flag2 = num10 > 255f;
+				if (flag2)
 				{
 					num10 = 255f;
 				}
-				if (num10 < 0f)
+				bool flag3 = num10 < 0f;
+				if (flag3)
 				{
 					num10 = 0f;
 				}
-				if (num11 > 255f)
+				bool flag4 = num11 > 255f;
+				if (flag4)
 				{
 					num11 = 255f;
 				}
-				if (num11 < 0f)
+				bool flag5 = num11 < 0f;
+				if (flag5)
 				{
 					num11 = 0f;
 				}
-				if (num12 < 0f)
+				bool flag6 = num12 < 0f;
+				if (flag6)
 				{
 					num12 = 0f;
 				}
-				if (num12 > 255f)
+				bool flag7 = num12 > 255f;
+				if (flag7)
 				{
 					num12 = 255f;
 				}
@@ -1119,7 +1290,7 @@ public class mGraphics
 		return image;
 	}
 
-	// Token: 0x060001DA RID: 474 RVA: 0x0000D670 File Offset: 0x0000BA70
+	// Token: 0x06000542 RID: 1346 RVA: 0x0006284C File Offset: 0x00060A4C
 	public static Color setColorObj(int rgb)
 	{
 		int num = rgb & 255;
@@ -1132,14 +1303,14 @@ public class mGraphics
 		return result;
 	}
 
-	// Token: 0x060001DB RID: 475 RVA: 0x0000D6C5 File Offset: 0x0000BAC5
+	// Token: 0x06000543 RID: 1347 RVA: 0x000628A8 File Offset: 0x00060AA8
 	public void fillTrans(Image imgTrans, int x, int y, int w, int h)
 	{
 		this.setColor(0, 0.5f);
 		this.fillRect(x * mGraphics.zoomLevel, y * mGraphics.zoomLevel, w * mGraphics.zoomLevel, h * mGraphics.zoomLevel);
 	}
 
-	// Token: 0x060001DC RID: 476 RVA: 0x0000D6F8 File Offset: 0x0000BAF8
+	// Token: 0x06000544 RID: 1348 RVA: 0x000628E0 File Offset: 0x00060AE0
 	public static int blendColor(float level, int color, int colorBlend)
 	{
 		Color color2 = mGraphics.setColorObj(colorBlend);
@@ -1150,34 +1321,40 @@ public class mGraphics
 		float num4 = (num + color3.r) * level + color3.r;
 		float num5 = (num2 + color3.g) * level + color3.g;
 		float num6 = (num3 + color3.b) * level + color3.b;
-		if (num4 > 255f)
+		bool flag = num4 > 255f;
+		if (flag)
 		{
 			num4 = 255f;
 		}
-		if (num4 < 0f)
+		bool flag2 = num4 < 0f;
+		if (flag2)
 		{
 			num4 = 0f;
 		}
-		if (num5 > 255f)
+		bool flag3 = num5 > 255f;
+		if (flag3)
 		{
 			num5 = 255f;
 		}
-		if (num5 < 0f)
+		bool flag4 = num5 < 0f;
+		if (flag4)
 		{
 			num5 = 0f;
 		}
-		if (num6 < 0f)
+		bool flag5 = num6 < 0f;
+		if (flag5)
 		{
 			num6 = 0f;
 		}
-		if (num6 > 255f)
+		bool flag6 = num6 > 255f;
+		if (flag6)
 		{
 			num6 = 255f;
 		}
 		return (int)num6 & 255 + ((int)num5 << 8) & 255 + ((int)num4 << 16) & 255;
 	}
 
-	// Token: 0x060001DD RID: 477 RVA: 0x0000D818 File Offset: 0x0000BC18
+	// Token: 0x06000545 RID: 1349 RVA: 0x00062A1C File Offset: 0x00060C1C
 	public static int getIntByColor(Color cl)
 	{
 		float num = cl.r * 255f;
@@ -1186,28 +1363,29 @@ public class mGraphics
 		return ((int)num & 255) << 16 | ((int)num3 & 255) << 8 | ((int)num2 & 255);
 	}
 
-	// Token: 0x060001DE RID: 478 RVA: 0x0000D871 File Offset: 0x0000BC71
+	// Token: 0x06000546 RID: 1350 RVA: 0x00062A74 File Offset: 0x00060C74
 	public static int getRealImageWidth(Image img)
 	{
 		return img.w;
 	}
 
-	// Token: 0x060001DF RID: 479 RVA: 0x0000D879 File Offset: 0x0000BC79
+	// Token: 0x06000547 RID: 1351 RVA: 0x00062A8C File Offset: 0x00060C8C
 	public static int getRealImageHeight(Image img)
 	{
 		return img.h;
 	}
 
-	// Token: 0x060001E0 RID: 480 RVA: 0x0000D881 File Offset: 0x0000BC81
+	// Token: 0x06000548 RID: 1352 RVA: 0x00062AA4 File Offset: 0x00060CA4
 	public void fillArg(int i, int j, int k, int l, int m, int n)
 	{
 		this.fillRect(i * mGraphics.zoomLevel, j * mGraphics.zoomLevel, k * mGraphics.zoomLevel, l * mGraphics.zoomLevel);
 	}
 
-	// Token: 0x060001E1 RID: 481 RVA: 0x0000D8A8 File Offset: 0x0000BCA8
+	// Token: 0x06000549 RID: 1353 RVA: 0x00062ACC File Offset: 0x00060CCC
 	public void CreateLineMaterial()
 	{
-		if (!this.lineMaterial)
+		bool flag = !this.lineMaterial;
+		if (flag)
 		{
 			this.lineMaterial = new Material("Shader \"Lines/Colored Blended\" {SubShader { Pass {  Blend SrcAlpha OneMinusSrcAlpha  ZWrite Off Cull Off Fog { Mode Off }  BindChannels { Bind \"vertex\", vertex Bind \"color\", color }} } }");
 			this.lineMaterial.hideFlags = HideFlags.HideAndDontSave;
@@ -1215,7 +1393,7 @@ public class mGraphics
 		}
 	}
 
-	// Token: 0x060001E2 RID: 482 RVA: 0x0000D8F4 File Offset: 0x0000BCF4
+	// Token: 0x0600054A RID: 1354 RVA: 0x00062B20 File Offset: 0x00060D20
 	public void drawlineGL(MyVector totalLine)
 	{
 		this.lineMaterial.SetPass(0);
@@ -1229,7 +1407,8 @@ public class mGraphics
 			int num2 = mLine.y1 * mGraphics.zoomLevel;
 			int num3 = mLine.x2 * mGraphics.zoomLevel;
 			int num4 = mLine.y2 * mGraphics.zoomLevel;
-			if (this.isTranslate)
+			bool flag = this.isTranslate;
+			if (flag)
 			{
 				num += this.translateX;
 				num2 += this.translateY;
@@ -1240,7 +1419,8 @@ public class mGraphics
 			{
 				GL.Vertex(new Vector2((float)(num + j), (float)(num2 + j)));
 				GL.Vertex(new Vector2((float)(num3 + j), (float)(num4 + j)));
-				if (j > 0)
+				bool flag2 = j > 0;
+				if (flag2)
 				{
 					GL.Vertex(new Vector2((float)(num + j), (float)num2));
 					GL.Vertex(new Vector2((float)(num3 + j), (float)num4));
@@ -1254,7 +1434,7 @@ public class mGraphics
 		totalLine.removeAllElements();
 	}
 
-	// Token: 0x060001E3 RID: 483 RVA: 0x0000DA8C File Offset: 0x0000BE8C
+	// Token: 0x0600054B RID: 1355 RVA: 0x00062CDC File Offset: 0x00060EDC
 	public void drawLine(mGraphics g, int x, int y, int xTo, int yTo, int nLine, int color)
 	{
 		MyVector myVector = new MyVector();
@@ -1265,147 +1445,147 @@ public class mGraphics
 		g.drawlineGL(myVector);
 	}
 
-	// Token: 0x060001E4 RID: 484 RVA: 0x0000DAD0 File Offset: 0x0000BED0
+	// Token: 0x0600054C RID: 1356 RVA: 0x00034931 File Offset: 0x00032B31
 	internal void drawRegion(Small img, int p1, int p2, int p3, int p4, int transform, int x, int y, int anchor)
 	{
 		throw new NotImplementedException();
 	}
 
-	// Token: 0x040001AB RID: 427
+	// Token: 0x04000B1E RID: 2846
 	public static int HCENTER = 1;
 
-	// Token: 0x040001AC RID: 428
+	// Token: 0x04000B1F RID: 2847
 	public static int VCENTER = 2;
 
-	// Token: 0x040001AD RID: 429
+	// Token: 0x04000B20 RID: 2848
 	public static int LEFT = 4;
 
-	// Token: 0x040001AE RID: 430
+	// Token: 0x04000B21 RID: 2849
 	public static int RIGHT = 8;
 
-	// Token: 0x040001AF RID: 431
+	// Token: 0x04000B22 RID: 2850
 	public static int TOP = 16;
 
-	// Token: 0x040001B0 RID: 432
+	// Token: 0x04000B23 RID: 2851
 	public static int BOTTOM = 32;
 
-	// Token: 0x040001B1 RID: 433
+	// Token: 0x04000B24 RID: 2852
 	private float r;
 
-	// Token: 0x040001B2 RID: 434
+	// Token: 0x04000B25 RID: 2853
 	private float g;
 
-	// Token: 0x040001B3 RID: 435
+	// Token: 0x04000B26 RID: 2854
 	private float b;
 
-	// Token: 0x040001B4 RID: 436
+	// Token: 0x04000B27 RID: 2855
 	private float a;
 
-	// Token: 0x040001B5 RID: 437
+	// Token: 0x04000B28 RID: 2856
 	public int clipX;
 
-	// Token: 0x040001B6 RID: 438
+	// Token: 0x04000B29 RID: 2857
 	public int clipY;
 
-	// Token: 0x040001B7 RID: 439
+	// Token: 0x04000B2A RID: 2858
 	public int clipW;
 
-	// Token: 0x040001B8 RID: 440
+	// Token: 0x04000B2B RID: 2859
 	public int clipH;
 
-	// Token: 0x040001B9 RID: 441
+	// Token: 0x04000B2C RID: 2860
 	private bool isClip;
 
-	// Token: 0x040001BA RID: 442
+	// Token: 0x04000B2D RID: 2861
 	private bool isTranslate = true;
 
-	// Token: 0x040001BB RID: 443
+	// Token: 0x04000B2E RID: 2862
 	private int translateX;
 
-	// Token: 0x040001BC RID: 444
+	// Token: 0x04000B2F RID: 2863
 	private int translateY;
 
-	// Token: 0x040001BD RID: 445
+	// Token: 0x04000B30 RID: 2864
 	private float translateXf;
 
-	// Token: 0x040001BE RID: 446
+	// Token: 0x04000B31 RID: 2865
 	private float translateYf;
 
-	// Token: 0x040001BF RID: 447
+	// Token: 0x04000B32 RID: 2866
 	public static int zoomLevel = 1;
 
-	// Token: 0x040001C0 RID: 448
+	// Token: 0x04000B33 RID: 2867
 	public const int BASELINE = 64;
 
-	// Token: 0x040001C1 RID: 449
+	// Token: 0x04000B34 RID: 2868
 	public const int SOLID = 0;
 
-	// Token: 0x040001C2 RID: 450
+	// Token: 0x04000B35 RID: 2869
 	public const int DOTTED = 1;
 
-	// Token: 0x040001C3 RID: 451
+	// Token: 0x04000B36 RID: 2870
 	public const int TRANS_MIRROR = 2;
 
-	// Token: 0x040001C4 RID: 452
+	// Token: 0x04000B37 RID: 2871
 	public const int TRANS_MIRROR_ROT180 = 1;
 
-	// Token: 0x040001C5 RID: 453
+	// Token: 0x04000B38 RID: 2872
 	public const int TRANS_MIRROR_ROT270 = 4;
 
-	// Token: 0x040001C6 RID: 454
+	// Token: 0x04000B39 RID: 2873
 	public const int TRANS_MIRROR_ROT90 = 7;
 
-	// Token: 0x040001C7 RID: 455
+	// Token: 0x04000B3A RID: 2874
 	public const int TRANS_NONE = 0;
 
-	// Token: 0x040001C8 RID: 456
+	// Token: 0x04000B3B RID: 2875
 	public const int TRANS_ROT180 = 3;
 
-	// Token: 0x040001C9 RID: 457
+	// Token: 0x04000B3C RID: 2876
 	public const int TRANS_ROT270 = 6;
 
-	// Token: 0x040001CA RID: 458
+	// Token: 0x04000B3D RID: 2877
 	public const int TRANS_ROT90 = 5;
 
-	// Token: 0x040001CB RID: 459
+	// Token: 0x04000B3E RID: 2878
 	public static Hashtable cachedTextures = new Hashtable();
 
-	// Token: 0x040001CC RID: 460
+	// Token: 0x04000B3F RID: 2879
 	public static int addYWhenOpenKeyBoard;
 
-	// Token: 0x040001CD RID: 461
+	// Token: 0x04000B40 RID: 2880
 	private int clipTX;
 
-	// Token: 0x040001CE RID: 462
+	// Token: 0x04000B41 RID: 2881
 	private int clipTY;
 
-	// Token: 0x040001CF RID: 463
+	// Token: 0x04000B42 RID: 2882
 	private int currentBGColor;
 
-	// Token: 0x040001D0 RID: 464
+	// Token: 0x04000B43 RID: 2883
 	private Vector2 pos = new Vector2(0f, 0f);
 
-	// Token: 0x040001D1 RID: 465
+	// Token: 0x04000B44 RID: 2884
 	private Rect rect;
 
-	// Token: 0x040001D2 RID: 466
+	// Token: 0x04000B45 RID: 2885
 	private Matrix4x4 matrixBackup;
 
-	// Token: 0x040001D3 RID: 467
+	// Token: 0x04000B46 RID: 2886
 	private Vector2 pivot;
 
-	// Token: 0x040001D4 RID: 468
+	// Token: 0x04000B47 RID: 2887
 	public Vector2 size = new Vector2(128f, 128f);
 
-	// Token: 0x040001D5 RID: 469
+	// Token: 0x04000B48 RID: 2888
 	public Vector2 relativePosition = new Vector2(0f, 0f);
 
-	// Token: 0x040001D6 RID: 470
+	// Token: 0x04000B49 RID: 2889
 	public Color clTrans;
 
-	// Token: 0x040001D7 RID: 471
+	// Token: 0x04000B4A RID: 2890
 	public static Color transParentColor = new Color(1f, 1f, 1f, 0f);
 
-	// Token: 0x040001D8 RID: 472
+	// Token: 0x04000B4B RID: 2891
 	private Material lineMaterial;
 }

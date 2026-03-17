@@ -1,5 +1,5 @@
 ﻿using System;
 
-// Token: 0x02000020 RID: 32
-// (Invoke) Token: 0x0600012F RID: 303
+// Token: 0x02000002 RID: 2
+// (Invoke) Token: 0x06000002 RID: 2
 public delegate void ActionChat(string str);

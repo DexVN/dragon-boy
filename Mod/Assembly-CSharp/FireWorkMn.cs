@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000040 RID: 64
+// Token: 0x02000033 RID: 51
 public class FireWorkMn
 {
-	// Token: 0x06000292 RID: 658 RVA: 0x000144B0 File Offset: 0x000128B0
+	// Token: 0x06000284 RID: 644 RVA: 0x0003BBC8 File Offset: 0x00039DC8
 	public FireWorkMn(int x, int y, int goc, int n)
 	{
 		this.x = x;
@@ -16,13 +16,14 @@ public class FireWorkMn
 		}
 	}
 
-	// Token: 0x06000293 RID: 659 RVA: 0x0001457C File Offset: 0x0001297C
+	// Token: 0x06000285 RID: 645 RVA: 0x0003BC98 File Offset: 0x00039E98
 	public void paint(mGraphics g)
 	{
 		for (int i = 0; i < this.fw.size(); i++)
 		{
 			Firework firework = (Firework)this.fw.elementAt(i);
-			if (firework.y < -200)
+			bool flag = firework.y < -200;
+			if (flag)
 			{
 				this.fw.removeElementAt(i);
 			}
@@ -30,25 +31,25 @@ public class FireWorkMn
 		}
 	}
 
-	// Token: 0x0400030B RID: 779
+	// Token: 0x040005B4 RID: 1460
 	private int x;
 
-	// Token: 0x0400030C RID: 780
+	// Token: 0x040005B5 RID: 1461
 	private int y;
 
-	// Token: 0x0400030D RID: 781
+	// Token: 0x040005B6 RID: 1462
 	private int goc = 1;
 
-	// Token: 0x0400030E RID: 782
+	// Token: 0x040005B7 RID: 1463
 	private int n = 360;
 
-	// Token: 0x0400030F RID: 783
+	// Token: 0x040005B8 RID: 1464
 	private MyRandom rd = new MyRandom();
 
-	// Token: 0x04000310 RID: 784
+	// Token: 0x040005B9 RID: 1465
 	private MyVector fw = new MyVector();
 
-	// Token: 0x04000311 RID: 785
+	// Token: 0x040005BA RID: 1466
 	private int[] color = new int[]
 	{
 		16711680,

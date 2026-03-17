@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x0200008D RID: 141
+// Token: 0x020000AC RID: 172
 public class T1 : mResources
 {
-	// Token: 0x060004A9 RID: 1193 RVA: 0x00037918 File Offset: 0x00035D18
+	// Token: 0x060009AC RID: 2476 RVA: 0x0009D97C File Offset: 0x0009BB7C
 	public static void load()
 	{
 		mResources.confirmChangeServer = "Bạn có muốn đổi máy chủ khác không?";
@@ -182,7 +182,8 @@ public class T1 : mResources
 			"Namếc",
 			"Xayda"
 		};
-		if (mSystem.clientType == 7)
+		bool flag = mSystem.clientType == 7;
+		if (flag)
 		{
 			mResources.MENUGENDER = new string[]
 			{
@@ -707,7 +708,8 @@ public class T1 : mResources
 				"Kakalot"
 			}
 		};
-		if (mSystem.clientType == 7)
+		bool flag2 = mSystem.clientType == 7;
+		if (flag2)
 		{
 			mResources.hairStyleName = new string[][]
 			{

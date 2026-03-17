@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x0200006A RID: 106
+// Token: 0x0200005E RID: 94
 public class Line
 {
-	// Token: 0x060003BD RID: 957 RVA: 0x0001ECFD File Offset: 0x0001D0FD
+	// Token: 0x060004A0 RID: 1184 RVA: 0x0005A5D1 File Offset: 0x000587D1
 	public void setLine(int x0, int y0, int x1, int y1, int vx, int vy, bool is2Line)
 	{
 		this.x0 = x0;
@@ -15,7 +15,7 @@ public class Line
 		this.is2Line = is2Line;
 	}
 
-	// Token: 0x060003BE RID: 958 RVA: 0x0001ED34 File Offset: 0x0001D134
+	// Token: 0x060004A1 RID: 1185 RVA: 0x0005A60C File Offset: 0x0005880C
 	public void update()
 	{
 		this.x0 += this.vx;
@@ -25,7 +25,7 @@ public class Line
 		this.f++;
 	}
 
-	// Token: 0x060003BF RID: 959 RVA: 0x0001ED9C File Offset: 0x0001D19C
+	// Token: 0x060004A2 RID: 1186 RVA: 0x0005A674 File Offset: 0x00058874
 	public void update_not_F()
 	{
 		this.x0 += this.vx;
@@ -34,42 +34,42 @@ public class Line
 		this.y1 += this.vy;
 	}
 
-	// Token: 0x0400064A RID: 1610
+	// Token: 0x04000A00 RID: 2560
 	public int x0;
 
-	// Token: 0x0400064B RID: 1611
+	// Token: 0x04000A01 RID: 2561
 	public int y0;
 
-	// Token: 0x0400064C RID: 1612
+	// Token: 0x04000A02 RID: 2562
 	public int x1;
 
-	// Token: 0x0400064D RID: 1613
+	// Token: 0x04000A03 RID: 2563
 	public int y1;
 
-	// Token: 0x0400064E RID: 1614
+	// Token: 0x04000A04 RID: 2564
 	public int vx;
 
-	// Token: 0x0400064F RID: 1615
+	// Token: 0x04000A05 RID: 2565
 	public int vy;
 
-	// Token: 0x04000650 RID: 1616
+	// Token: 0x04000A06 RID: 2566
 	public int f;
 
-	// Token: 0x04000651 RID: 1617
+	// Token: 0x04000A07 RID: 2567
 	public int fRe;
 
-	// Token: 0x04000652 RID: 1618
+	// Token: 0x04000A08 RID: 2568
 	public int idColor;
 
-	// Token: 0x04000653 RID: 1619
+	// Token: 0x04000A09 RID: 2569
 	public int type;
 
-	// Token: 0x04000654 RID: 1620
+	// Token: 0x04000A0A RID: 2570
 	public bool is2Line;
 
-	// Token: 0x04000655 RID: 1621
+	// Token: 0x04000A0B RID: 2571
 	public FrameImage fraImgEff;
 
-	// Token: 0x04000656 RID: 1622
+	// Token: 0x04000A0C RID: 2572
 	public int[] frame;
 }

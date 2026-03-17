@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000002 RID: 2
+// Token: 0x02000006 RID: 6
 public class ArrayCast
 {
-	// Token: 0x06000002 RID: 2 RVA: 0x00002058 File Offset: 0x00000458
+	// Token: 0x0600000E RID: 14 RVA: 0x0000205C File Offset: 0x0000025C
 	public static sbyte[] cast(byte[] data)
 	{
 		sbyte[] array = new sbyte[data.Length];
@@ -14,7 +14,7 @@ public class ArrayCast
 		return array;
 	}
 
-	// Token: 0x06000003 RID: 3 RVA: 0x0000208C File Offset: 0x0000048C
+	// Token: 0x0600000F RID: 15 RVA: 0x00002094 File Offset: 0x00000294
 	public static byte[] cast(sbyte[] data)
 	{
 		byte[] array = new byte[data.Length];
@@ -25,7 +25,7 @@ public class ArrayCast
 		return array;
 	}
 
-	// Token: 0x06000004 RID: 4 RVA: 0x000020C0 File Offset: 0x000004C0
+	// Token: 0x06000010 RID: 16 RVA: 0x000020CC File Offset: 0x000002CC
 	public static char[] ToCharArray(sbyte[] data)
 	{
 		char[] array = new char[data.Length];

@@ -2,132 +2,169 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-// Token: 0x0200001D RID: 29
+// Token: 0x0200004D RID: 77
 public class iOSPlugins
 {
-	// Token: 0x060000F6 RID: 246
+	// Token: 0x0600041B RID: 1051
 	[DllImport("__Internal")]
 	private static extern void _SMSsend(string tophone, string withtext, int n);
 
-	// Token: 0x060000F7 RID: 247
+	// Token: 0x0600041C RID: 1052
 	[DllImport("__Internal")]
 	private static extern int _unpause();
 
-	// Token: 0x060000F8 RID: 248
+	// Token: 0x0600041D RID: 1053
 	[DllImport("__Internal")]
 	private static extern int _checkRotation();
 
-	// Token: 0x060000F9 RID: 249
+	// Token: 0x0600041E RID: 1054
 	[DllImport("__Internal")]
 	private static extern int _back();
 
-	// Token: 0x060000FA RID: 250
+	// Token: 0x0600041F RID: 1055
 	[DllImport("__Internal")]
 	private static extern int _Send();
 
-	// Token: 0x060000FB RID: 251
+	// Token: 0x06000420 RID: 1056
 	[DllImport("__Internal")]
 	private static extern void _purchaseItem(string itemID, string userName, string gameID);
 
-	// Token: 0x060000FC RID: 252 RVA: 0x00006D14 File Offset: 0x00005114
+	// Token: 0x06000421 RID: 1057 RVA: 0x00058348 File Offset: 0x00056548
 	public static int Check()
 	{
-		if (Application.platform == RuntimePlatform.IPhonePlayer)
+		bool flag = Application.platform == RuntimePlatform.IPhonePlayer;
+		int result;
+		if (flag)
 		{
-			return iOSPlugins.checkCanSendSMS();
-		}
-		iOSPlugins.devide = iPhoneSettings.generation.ToString();
-		string a = string.Empty + iOSPlugins.devide[2];
-		if (a == "h" && iOSPlugins.devide.Length > 6)
-		{
-			iOSPlugins.Myname = SystemInfo.operatingSystem.ToString();
-			string a2 = string.Empty + iOSPlugins.Myname[10];
-			if (a2 != "2" && a2 != "3")
-			{
-				return 0;
-			}
-			return 1;
+			result = iOSPlugins.checkCanSendSMS();
 		}
 		else
 		{
-			Cout.println(iOSPlugins.devide + "  loai");
-			if (iOSPlugins.devide == "Unknown" && ScaleGUI.WIDTH * ScaleGUI.HEIGHT < 786432f)
+			iOSPlugins.devide = iPhoneSettings.generation.ToString();
+			string a = string.Empty + iOSPlugins.devide[2].ToString();
+			bool flag2 = a == "h" && iOSPlugins.devide.Length > 6;
+			if (flag2)
 			{
-				return 0;
+				iOSPlugins.Myname = SystemInfo.operatingSystem.ToString();
+				string a2 = string.Empty + iOSPlugins.Myname[10].ToString();
+				bool flag3 = a2 != "2" && a2 != "3";
+				if (flag3)
+				{
+					result = 0;
+				}
+				else
+				{
+					result = 1;
+				}
 			}
-			return -1;
+			else
+			{
+				Cout.println(iOSPlugins.devide + "  loai");
+				bool flag4 = iOSPlugins.devide == "Unknown" && ScaleGUI.WIDTH * ScaleGUI.HEIGHT < 786432f;
+				if (flag4)
+				{
+					result = 0;
+				}
+				else
+				{
+					result = -1;
+				}
+			}
 		}
+		return result;
 	}
 
-	// Token: 0x060000FD RID: 253 RVA: 0x00006E11 File Offset: 0x00005211
+	// Token: 0x06000422 RID: 1058 RVA: 0x0005846C File Offset: 0x0005666C
 	public static int checkCanSendSMS()
 	{
-		if (iPhoneSettings.generation == iPhoneGeneration.iPhone3GS || iPhoneSettings.generation == iPhoneGeneration.iPhone4 || iPhoneSettings.generation == iPhoneGeneration.iPhone4S || iPhoneSettings.generation == iPhoneGeneration.iPhone5)
+		bool flag = iPhoneSettings.generation == iPhoneGeneration.iPhone3GS || iPhoneSettings.generation == iPhoneGeneration.iPhone4 || iPhoneSettings.generation == iPhoneGeneration.iPhone4S || iPhoneSettings.generation == iPhoneGeneration.iPhone5;
+		int result;
+		if (flag)
 		{
-			return 0;
+			result = 0;
 		}
-		return -1;
+		else
+		{
+			result = -1;
+		}
+		return result;
 	}
 
-	// Token: 0x060000FE RID: 254 RVA: 0x00006E44 File Offset: 0x00005244
+	// Token: 0x06000423 RID: 1059 RVA: 0x000584B0 File Offset: 0x000566B0
 	public static void SMSsend(string phonenumber, string bodytext, int n)
 	{
-		if (Application.platform != RuntimePlatform.OSXEditor)
+		bool flag = Application.platform > RuntimePlatform.OSXEditor;
+		if (flag)
 		{
 			iOSPlugins._SMSsend(phonenumber, bodytext, n);
 		}
 	}
 
-	// Token: 0x060000FF RID: 255 RVA: 0x00006E58 File Offset: 0x00005258
+	// Token: 0x06000424 RID: 1060 RVA: 0x000584D8 File Offset: 0x000566D8
 	public static void back()
 	{
-		if (Application.platform != RuntimePlatform.OSXEditor)
+		bool flag = Application.platform > RuntimePlatform.OSXEditor;
+		if (flag)
 		{
 			iOSPlugins._back();
 		}
 	}
 
-	// Token: 0x06000100 RID: 256 RVA: 0x00006E6A File Offset: 0x0000526A
+	// Token: 0x06000425 RID: 1061 RVA: 0x000584FC File Offset: 0x000566FC
 	public static void Send()
 	{
-		if (Application.platform != RuntimePlatform.OSXEditor)
+		bool flag = Application.platform > RuntimePlatform.OSXEditor;
+		if (flag)
 		{
 			iOSPlugins._Send();
 		}
 	}
 
-	// Token: 0x06000101 RID: 257 RVA: 0x00006E7C File Offset: 0x0000527C
+	// Token: 0x06000426 RID: 1062 RVA: 0x00058520 File Offset: 0x00056720
 	public static int unpause()
 	{
-		if (Application.platform != RuntimePlatform.OSXEditor)
+		bool flag = Application.platform > RuntimePlatform.OSXEditor;
+		int result;
+		if (flag)
 		{
-			return iOSPlugins._unpause();
+			result = iOSPlugins._unpause();
 		}
-		return 0;
+		else
+		{
+			result = 0;
+		}
+		return result;
 	}
 
-	// Token: 0x06000102 RID: 258 RVA: 0x00006E8F File Offset: 0x0000528F
+	// Token: 0x06000427 RID: 1063 RVA: 0x00058548 File Offset: 0x00056748
 	public static int checkRotation()
 	{
-		if (Application.platform != RuntimePlatform.OSXEditor)
+		bool flag = Application.platform > RuntimePlatform.OSXEditor;
+		int result;
+		if (flag)
 		{
-			return iOSPlugins._checkRotation();
+			result = iOSPlugins._checkRotation();
 		}
-		return 0;
+		else
+		{
+			result = 0;
+		}
+		return result;
 	}
 
-	// Token: 0x06000103 RID: 259 RVA: 0x00006EA2 File Offset: 0x000052A2
+	// Token: 0x06000428 RID: 1064 RVA: 0x00058570 File Offset: 0x00056770
 	public static void purchaseItem(string itemID, string userName, string gameID)
 	{
-		if (Application.platform != RuntimePlatform.OSXEditor)
+		bool flag = Application.platform > RuntimePlatform.OSXEditor;
+		if (flag)
 		{
 			iOSPlugins._purchaseItem(itemID, userName, gameID);
 		}
 	}
 
-	// Token: 0x040000E5 RID: 229
+	// Token: 0x0400090B RID: 2315
 	public static string devide;
 
-	// Token: 0x040000E6 RID: 230
+	// Token: 0x0400090C RID: 2316
 	public static string Myname;
 }

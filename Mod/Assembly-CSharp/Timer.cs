@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x020000CA RID: 202
+// Token: 0x020000B7 RID: 183
 public class Timer
 {
-	// Token: 0x06000A33 RID: 2611 RVA: 0x0009A5AD File Offset: 0x000989AD
+	// Token: 0x06000A14 RID: 2580 RVA: 0x000A6F11 File Offset: 0x000A5111
 	public static void setTimer(IActionListener actionListener, int action, long timeEllapse)
 	{
 		Timer.timeListener = actionListener;
@@ -12,16 +12,18 @@ public class Timer
 		Timer.isON = true;
 	}
 
-	// Token: 0x06000A34 RID: 2612 RVA: 0x0009A5D0 File Offset: 0x000989D0
+	// Token: 0x06000A15 RID: 2581 RVA: 0x000A6F34 File Offset: 0x000A5134
 	public static void update()
 	{
 		long num = mSystem.currentTimeMillis();
-		if (Timer.isON && num > Timer.timeExecute)
+		bool flag = Timer.isON && num > Timer.timeExecute;
+		if (flag)
 		{
 			Timer.isON = false;
 			try
 			{
-				if (Timer.idAction > 0)
+				bool flag2 = Timer.idAction > 0;
+				if (flag2)
 				{
 					GameScr.gI().actionPerform(Timer.idAction, null);
 				}
@@ -32,15 +34,15 @@ public class Timer
 		}
 	}
 
-	// Token: 0x0400130D RID: 4877
+	// Token: 0x0400131C RID: 4892
 	public static IActionListener timeListener;
 
-	// Token: 0x0400130E RID: 4878
+	// Token: 0x0400131D RID: 4893
 	public static int idAction;
 
-	// Token: 0x0400130F RID: 4879
+	// Token: 0x0400131E RID: 4894
 	public static long timeExecute;
 
-	// Token: 0x04001310 RID: 4880
+	// Token: 0x0400131F RID: 4895
 	public static bool isON;
 }

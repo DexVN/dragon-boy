@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000041 RID: 65
+// Token: 0x02000031 RID: 49
 public class Firework
 {
-	// Token: 0x06000294 RID: 660 RVA: 0x000145DC File Offset: 0x000129DC
+	// Token: 0x06000277 RID: 631 RVA: 0x0003B584 File Offset: 0x00039784
 	public Firework(int x0, int y0, int v, int angle, int cl)
 	{
 		this.y0 = y0;
@@ -22,10 +22,11 @@ public class Firework
 		this.cl = cl;
 	}
 
-	// Token: 0x06000295 RID: 661 RVA: 0x0001469C File Offset: 0x00012A9C
+	// Token: 0x06000278 RID: 632 RVA: 0x0003B648 File Offset: 0x00039848
 	public void preDraw()
 	{
-		if (this.time() - this.last >= this.delay)
+		bool flag = this.time() - this.last >= this.delay;
+		if (flag)
 		{
 			this.t++;
 			this.last = this.time();
@@ -38,7 +39,7 @@ public class Firework
 		}
 	}
 
-	// Token: 0x06000296 RID: 662 RVA: 0x000147B0 File Offset: 0x00012BB0
+	// Token: 0x06000279 RID: 633 RVA: 0x0003B764 File Offset: 0x00039964
 	public void paint(mGraphics g)
 	{
 		this.Drawline(g, this.w - this.x, this.h - this.y, this.cl);
@@ -46,70 +47,71 @@ public class Firework
 		{
 			this.Drawline(g, this.w - this.arr_x[i], this.h - this.arr_y[i], this.cl);
 		}
-		if (this.act)
+		bool flag = this.act;
+		if (flag)
 		{
 			this.preDraw();
 		}
 	}
 
-	// Token: 0x06000297 RID: 663 RVA: 0x00014832 File Offset: 0x00012C32
+	// Token: 0x0600027A RID: 634 RVA: 0x0003B7EC File Offset: 0x000399EC
 	public long time()
 	{
 		return mSystem.currentTimeMillis();
 	}
 
-	// Token: 0x06000298 RID: 664 RVA: 0x00014839 File Offset: 0x00012C39
+	// Token: 0x0600027B RID: 635 RVA: 0x0003B803 File Offset: 0x00039A03
 	public void Drawline(mGraphics g, int x, int y, int color)
 	{
 		g.setColor(color);
 		g.fillRect(x, y, 1, 2);
 	}
 
-	// Token: 0x04000312 RID: 786
+	// Token: 0x04000591 RID: 1425
 	public int w;
 
-	// Token: 0x04000313 RID: 787
+	// Token: 0x04000592 RID: 1426
 	public int h;
 
-	// Token: 0x04000314 RID: 788
+	// Token: 0x04000593 RID: 1427
 	public int v;
 
-	// Token: 0x04000315 RID: 789
+	// Token: 0x04000594 RID: 1428
 	public int x0;
 
-	// Token: 0x04000316 RID: 790
+	// Token: 0x04000595 RID: 1429
 	public int x;
 
-	// Token: 0x04000317 RID: 791
+	// Token: 0x04000596 RID: 1430
 	public int y;
 
-	// Token: 0x04000318 RID: 792
+	// Token: 0x04000597 RID: 1431
 	public int y0;
 
-	// Token: 0x04000319 RID: 793
+	// Token: 0x04000598 RID: 1432
 	public int angle;
 
-	// Token: 0x0400031A RID: 794
+	// Token: 0x04000599 RID: 1433
 	public int t;
 
-	// Token: 0x0400031B RID: 795
+	// Token: 0x0400059A RID: 1434
 	public int cl = 16711680;
 
-	// Token: 0x0400031C RID: 796
+	// Token: 0x0400059B RID: 1435
 	private float a;
 
-	// Token: 0x0400031D RID: 797
+	// Token: 0x0400059C RID: 1436
 	private long last;
 
-	// Token: 0x0400031E RID: 798
+	// Token: 0x0400059D RID: 1437
 	private long delay = 150L;
 
-	// Token: 0x0400031F RID: 799
+	// Token: 0x0400059E RID: 1438
 	private bool act = true;
 
-	// Token: 0x04000320 RID: 800
+	// Token: 0x0400059F RID: 1439
 	private int[] arr_x = new int[2];
 
-	// Token: 0x04000321 RID: 801
+	// Token: 0x040005A0 RID: 1440
 	private int[] arr_y = new int[2];
 }

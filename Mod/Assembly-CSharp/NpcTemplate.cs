@@ -1,23 +1,23 @@
 ﻿using System;
 
-// Token: 0x02000072 RID: 114
+// Token: 0x02000084 RID: 132
 public class NpcTemplate
 {
-	// Token: 0x040006B5 RID: 1717
+	// Token: 0x04000E5E RID: 3678
 	public int npcTemplateId;
 
-	// Token: 0x040006B6 RID: 1718
+	// Token: 0x04000E5F RID: 3679
 	public string name;
 
-	// Token: 0x040006B7 RID: 1719
+	// Token: 0x04000E60 RID: 3680
 	public int headId;
 
-	// Token: 0x040006B8 RID: 1720
+	// Token: 0x04000E61 RID: 3681
 	public int bodyId;
 
-	// Token: 0x040006B9 RID: 1721
+	// Token: 0x04000E62 RID: 3682
 	public int legId;
 
-	// Token: 0x040006BA RID: 1722
+	// Token: 0x04000E63 RID: 3683
 	public string[][] menu;
 }

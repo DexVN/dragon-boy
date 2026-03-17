@@ -3,25 +3,29 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using UnityEngine;
 
-// Token: 0x02000023 RID: 35
+// Token: 0x02000061 RID: 97
 public class Main : MonoBehaviour
 {
-	// Token: 0x0600013B RID: 315 RVA: 0x00007D88 File Offset: 0x00006188
+	// Token: 0x060004C4 RID: 1220 RVA: 0x0005CF54 File Offset: 0x0005B154
 	private void Start()
 	{
-		if (!Main.started)
+		bool flag = !Main.started;
+		if (flag)
 		{
-			if (Thread.CurrentThread.Name != "Main")
+			bool flag2 = Thread.CurrentThread.Name != "Main";
+			if (flag2)
 			{
 				Thread.CurrentThread.Name = "Main";
 			}
 			Main.mainThreadName = Thread.CurrentThread.Name;
 			Main.isPC = true;
 			Main.started = true;
-			if (Main.isPC)
+			bool flag3 = Main.isPC;
+			if (flag3)
 			{
 				this.level = Rms.loadRMSInt("levelScreenKN");
-				if (this.level == 1)
+				bool flag4 = this.level == 1;
+				if (flag4)
 				{
 					Screen.SetResolution(720, 320, false);
 				}
@@ -33,16 +37,17 @@ public class Main : MonoBehaviour
 		}
 	}
 
-	// Token: 0x0600013C RID: 316 RVA: 0x00007E2D File Offset: 0x0000622D
+	// Token: 0x060004C5 RID: 1221 RVA: 0x0005D008 File Offset: 0x0005B208
 	private void SetInit()
 	{
 		base.enabled = true;
 	}
 
-	// Token: 0x0600013D RID: 317 RVA: 0x00007E36 File Offset: 0x00006236
+	// Token: 0x060004C6 RID: 1222 RVA: 0x0005D014 File Offset: 0x0005B214
 	private void OnHideUnity(bool isGameShown)
 	{
-		if (!isGameShown)
+		bool flag = !isGameShown;
+		if (flag)
 		{
 			Time.timeScale = 0f;
 		}
@@ -52,52 +57,61 @@ public class Main : MonoBehaviour
 		}
 	}
 
-	// Token: 0x0600013E RID: 318 RVA: 0x00007E58 File Offset: 0x00006258
+	// Token: 0x060004C7 RID: 1223 RVA: 0x0005D048 File Offset: 0x0005B248
 	private void OnGUI()
 	{
-		if (this.count < 10)
+		bool flag = this.count < 10;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.fps == 0)
-		{
-			this.timefps = mSystem.currentTimeMillis();
-		}
-		else if (mSystem.currentTimeMillis() - this.timefps > 1000L)
-		{
-			this.max = this.fps;
-			this.fps = 0;
-			this.timefps = mSystem.currentTimeMillis();
-		}
-		this.fps++;
-		this.checkInput();
-		Session_ME.update();
-		Session_ME2.update();
-		if (Event.current.type.Equals(EventType.Repaint) && this.paintCount <= this.updateCount)
-		{
-			GameMidlet.gameCanvas.paint(Main.g);
-			this.paintCount++;
-			Main.g.reset();
+			bool flag2 = this.fps == 0;
+			if (flag2)
+			{
+				this.timefps = mSystem.currentTimeMillis();
+			}
+			else
+			{
+				bool flag3 = mSystem.currentTimeMillis() - this.timefps > 1000L;
+				if (flag3)
+				{
+					this.max = this.fps;
+					this.fps = 0;
+					this.timefps = mSystem.currentTimeMillis();
+				}
+			}
+			this.fps++;
+			this.checkInput();
+			Session_ME.update();
+			Session_ME2.update();
+			bool flag4 = Event.current.type.Equals(EventType.Repaint) && this.paintCount <= this.updateCount;
+			if (flag4)
+			{
+				GameMidlet.gameCanvas.paint(Main.g);
+				this.paintCount++;
+				Main.g.reset();
+			}
 		}
 	}
 
-	// Token: 0x0600013F RID: 319 RVA: 0x00007F3C File Offset: 0x0000633C
+	// Token: 0x060004C8 RID: 1224 RVA: 0x0005D144 File Offset: 0x0005B344
 	public void setsizeChange()
 	{
-		if (!this.isRun)
+		bool flag = !this.isRun;
+		if (flag)
 		{
 			Screen.orientation = ScreenOrientation.LandscapeLeft;
 			Application.runInBackground = true;
 			Application.targetFrameRate = 35;
 			base.useGUILayout = false;
 			Main.isCompactDevice = Main.detectCompactDevice();
-			if (Main.main == null)
+			bool flag2 = Main.main == null;
+			if (flag2)
 			{
 				Main.main = this;
 			}
 			this.isRun = true;
 			ScaleGUI.initScaleGUI();
-			if (Main.isPC)
+			bool flag3 = Main.isPC;
+			if (flag3)
 			{
 				Main.IMEI = SystemInfo.deviceUniqueIdentifier;
 			}
@@ -106,27 +120,33 @@ public class Main : MonoBehaviour
 				Main.IMEI = this.GetMacAddress();
 			}
 			Main.isPC = true;
-			if (Main.isPC)
+			bool flag4 = Main.isPC;
+			if (flag4)
 			{
 				Screen.fullScreen = false;
 			}
-			if (Main.isWindowsPhone)
+			bool flag5 = Main.isWindowsPhone;
+			if (flag5)
 			{
 				Main.typeClient = 6;
 			}
-			if (Main.isPC)
+			bool flag6 = Main.isPC;
+			if (flag6)
 			{
 				Main.typeClient = 4;
 			}
-			if (Main.IphoneVersionApp)
+			bool iphoneVersionApp = Main.IphoneVersionApp;
+			if (iphoneVersionApp)
 			{
 				Main.typeClient = 5;
 			}
-			if (iPhoneSettings.generation == iPhoneGeneration.iPodTouch4Gen)
+			bool flag7 = iPhoneSettings.generation == iPhoneGeneration.iPodTouch4Gen;
+			if (flag7)
 			{
 				Main.isIpod = true;
 			}
-			if (iPhoneSettings.generation == iPhoneGeneration.iPhone4)
+			bool flag8 = iPhoneSettings.generation == iPhoneGeneration.iPhone4;
+			if (flag8)
 			{
 				Main.isIphone4 = true;
 			}
@@ -145,12 +165,12 @@ public class Main : MonoBehaviour
 		}
 	}
 
-	// Token: 0x06000140 RID: 320 RVA: 0x00008081 File Offset: 0x00006481
+	// Token: 0x060004C9 RID: 1225 RVA: 0x00003136 File Offset: 0x00001336
 	public static void setBackupIcloud(string path)
 	{
 	}
 
-	// Token: 0x06000141 RID: 321 RVA: 0x00008084 File Offset: 0x00006484
+	// Token: 0x060004CA RID: 1226 RVA: 0x0005D2B8 File Offset: 0x0005B4B8
 	public string GetMacAddress()
 	{
 		string empty = string.Empty;
@@ -158,7 +178,8 @@ public class Main : MonoBehaviour
 		for (int i = 0; i < allNetworkInterfaces.Length; i++)
 		{
 			PhysicalAddress physicalAddress = allNetworkInterfaces[i].GetPhysicalAddress();
-			if (physicalAddress.ToString() != string.Empty)
+			bool flag = physicalAddress.ToString() != string.Empty;
+			if (flag)
 			{
 				return physicalAddress.ToString();
 			}
@@ -166,109 +187,125 @@ public class Main : MonoBehaviour
 		return string.Empty;
 	}
 
-	// Token: 0x06000142 RID: 322 RVA: 0x000080E0 File Offset: 0x000064E0
+	// Token: 0x060004CB RID: 1227 RVA: 0x0005D320 File Offset: 0x0005B520
 	public void doClearRMS()
 	{
-		if (!Main.isPC)
+		bool flag = !Main.isPC;
+		if (!flag)
 		{
-			return;
-		}
-		int num = Rms.loadRMSInt("lastZoomlevel");
-		if (num != mGraphics.zoomLevel)
-		{
-			Rms.clearAll();
-			Rms.saveRMSInt("lastZoomlevel", mGraphics.zoomLevel);
-			Rms.saveRMSInt("levelScreenKN", this.level);
+			int num = Rms.loadRMSInt("lastZoomlevel");
+			bool flag2 = num != mGraphics.zoomLevel;
+			if (flag2)
+			{
+				Rms.clearAll();
+				Rms.saveRMSInt("lastZoomlevel", mGraphics.zoomLevel);
+				Rms.saveRMSInt("levelScreenKN", this.level);
+			}
 		}
 	}
 
-	// Token: 0x06000143 RID: 323 RVA: 0x00008132 File Offset: 0x00006532
+	// Token: 0x060004CC RID: 1228 RVA: 0x0005D380 File Offset: 0x0005B580
 	public static void closeKeyBoard()
 	{
-		if (global::TouchScreenKeyboard.visible)
+		bool visible = global::TouchScreenKeyboard.visible;
+		if (visible)
 		{
 			TField.kb.active = false;
 			TField.kb = null;
 		}
 	}
 
-	// Token: 0x06000144 RID: 324 RVA: 0x00008150 File Offset: 0x00006550
+	// Token: 0x060004CD RID: 1229 RVA: 0x0005D3AC File Offset: 0x0005B5AC
 	private void FixedUpdate()
 	{
 		Rms.update();
 		this.count++;
-		if (this.count < 10)
+		bool flag = this.count < 10;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.up == 0)
-		{
-			this.timeup = mSystem.currentTimeMillis();
-		}
-		else if (mSystem.currentTimeMillis() - this.timeup > 1000L)
-		{
-			this.upmax = this.up;
-			this.up = 0;
-			this.timeup = mSystem.currentTimeMillis();
-		}
-		this.up++;
-		this.setsizeChange();
-		this.updateCount++;
-		ipKeyboard.update();
-		GameMidlet.gameCanvas.update();
-		Image.update();
-		DataInputStream.update();
-		SMS.update();
-		Net.update();
-		Main.f++;
-		if (Main.f > 8)
-		{
-			Main.f = 0;
-		}
-		if (!Main.isPC)
-		{
-			int num = 1 / Main.a;
+			bool flag2 = this.up == 0;
+			if (flag2)
+			{
+				this.timeup = mSystem.currentTimeMillis();
+			}
+			else
+			{
+				bool flag3 = mSystem.currentTimeMillis() - this.timeup > 1000L;
+				if (flag3)
+				{
+					this.upmax = this.up;
+					this.up = 0;
+					this.timeup = mSystem.currentTimeMillis();
+				}
+			}
+			this.up++;
+			this.setsizeChange();
+			this.updateCount++;
+			ipKeyboard.update();
+			GameMidlet.gameCanvas.update();
+			Image.update();
+			DataInputStream.update();
+			SMS.update();
+			Net.update();
+			Main.f++;
+			bool flag4 = Main.f > 8;
+			if (flag4)
+			{
+				Main.f = 0;
+			}
+			bool flag5 = !Main.isPC;
+			if (flag5)
+			{
+				int num = 1 / Main.a;
+			}
 		}
 	}
 
-	// Token: 0x06000145 RID: 325 RVA: 0x00008242 File Offset: 0x00006642
+	// Token: 0x060004CE RID: 1230 RVA: 0x00003136 File Offset: 0x00001336
 	private void Update()
 	{
 	}
 
-	// Token: 0x06000146 RID: 326 RVA: 0x00008244 File Offset: 0x00006644
+	// Token: 0x060004CF RID: 1231 RVA: 0x0005D4BC File Offset: 0x0005B6BC
 	private void checkInput()
 	{
-		if (Input.GetMouseButtonDown(0))
+		bool mouseButtonDown = Input.GetMouseButtonDown(0);
+		if (mouseButtonDown)
 		{
 			Vector3 mousePosition = Input.mousePosition;
 			GameMidlet.gameCanvas.pointerPressed((int)(mousePosition.x / (float)mGraphics.zoomLevel), (int)(((float)Screen.height - mousePosition.y) / (float)mGraphics.zoomLevel) + mGraphics.addYWhenOpenKeyBoard);
 			this.lastMousePos.x = mousePosition.x / (float)mGraphics.zoomLevel;
 			this.lastMousePos.y = mousePosition.y / (float)mGraphics.zoomLevel + (float)mGraphics.addYWhenOpenKeyBoard;
 		}
-		if (Input.GetMouseButton(0))
+		bool mouseButton = Input.GetMouseButton(0);
+		if (mouseButton)
 		{
 			Vector3 mousePosition2 = Input.mousePosition;
 			GameMidlet.gameCanvas.pointerDragged((int)(mousePosition2.x / (float)mGraphics.zoomLevel), (int)(((float)Screen.height - mousePosition2.y) / (float)mGraphics.zoomLevel) + mGraphics.addYWhenOpenKeyBoard);
 			this.lastMousePos.x = mousePosition2.x / (float)mGraphics.zoomLevel;
 			this.lastMousePos.y = mousePosition2.y / (float)mGraphics.zoomLevel + (float)mGraphics.addYWhenOpenKeyBoard;
 		}
-		if (Input.GetMouseButtonUp(0))
+		bool mouseButtonUp = Input.GetMouseButtonUp(0);
+		if (mouseButtonUp)
 		{
 			Vector3 mousePosition3 = Input.mousePosition;
 			this.lastMousePos.x = mousePosition3.x / (float)mGraphics.zoomLevel;
 			this.lastMousePos.y = mousePosition3.y / (float)mGraphics.zoomLevel + (float)mGraphics.addYWhenOpenKeyBoard;
 			GameMidlet.gameCanvas.pointerReleased((int)(mousePosition3.x / (float)mGraphics.zoomLevel), (int)(((float)Screen.height - mousePosition3.y) / (float)mGraphics.zoomLevel) + mGraphics.addYWhenOpenKeyBoard);
 		}
-		if (Input.anyKeyDown && Event.current.type == EventType.KeyDown)
+		bool flag = Input.anyKeyDown && Event.current.type == EventType.KeyDown;
+		if (flag)
 		{
 			int num = MyKeyMap.map(Event.current.keyCode);
-			if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+			bool flag2 = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+			if (flag2)
 			{
 				KeyCode keyCode = Event.current.keyCode;
-				if (keyCode != KeyCode.Alpha2)
+				bool flag3 = keyCode != KeyCode.Alpha2;
+				if (flag3)
 				{
-					if (keyCode == KeyCode.Minus)
+					bool flag4 = keyCode == KeyCode.Minus;
+					if (flag4)
 					{
 						num = 95;
 					}
@@ -278,20 +315,24 @@ public class Main : MonoBehaviour
 					num = 64;
 				}
 			}
-			if (num != 0)
+			bool flag5 = num != 0;
+			if (flag5)
 			{
 				GameMidlet.gameCanvas.keyPressedz(num);
 			}
 		}
-		if (Event.current.type == EventType.KeyUp)
+		bool flag6 = Event.current.type == EventType.KeyUp;
+		if (flag6)
 		{
 			int num2 = MyKeyMap.map(Event.current.keyCode);
-			if (num2 != 0)
+			bool flag7 = num2 != 0;
+			if (flag7)
 			{
 				GameMidlet.gameCanvas.keyReleasedz(num2);
 			}
 		}
-		if (Main.isPC)
+		bool flag8 = Main.isPC;
+		if (flag8)
 		{
 			GameMidlet.gameCanvas.scrollMouse((int)(Input.GetAxis("Mouse ScrollWheel") * 10f));
 			float x = Input.mousePosition.x;
@@ -302,26 +343,28 @@ public class Main : MonoBehaviour
 		}
 	}
 
-	// Token: 0x06000147 RID: 327 RVA: 0x000084FD File Offset: 0x000068FD
+	// Token: 0x060004D0 RID: 1232 RVA: 0x0005D79C File Offset: 0x0005B99C
 	private void OnApplicationQuit()
 	{
 		Debug.LogWarning("APP QUIT");
 		GameCanvas.bRun = false;
 		Session_ME.gI().close();
 		Session_ME2.gI().close();
-		if (Main.isPC)
+		bool flag = Main.isPC;
+		if (flag)
 		{
 			Application.Quit();
 		}
 	}
 
-	// Token: 0x06000148 RID: 328 RVA: 0x00008534 File Offset: 0x00006934
+	// Token: 0x060004D1 RID: 1233 RVA: 0x0005D7E4 File Offset: 0x0005B9E4
 	private void OnApplicationPause(bool paused)
 	{
 		Main.isResume = false;
 		if (paused)
 		{
-			if (GameCanvas.isWaiting())
+			bool flag = GameCanvas.isWaiting();
+			if (flag)
 			{
 				Main.isQuitApp = true;
 			}
@@ -330,21 +373,24 @@ public class Main : MonoBehaviour
 		{
 			Main.isResume = true;
 		}
-		if (global::TouchScreenKeyboard.visible)
+		bool visible = global::TouchScreenKeyboard.visible;
+		if (visible)
 		{
 			TField.kb.active = false;
 			TField.kb = null;
 		}
-		if (Main.isQuitApp)
+		bool flag2 = Main.isQuitApp;
+		if (flag2)
 		{
 			Application.Quit();
 		}
 	}
 
-	// Token: 0x06000149 RID: 329 RVA: 0x00008592 File Offset: 0x00006992
+	// Token: 0x060004D2 RID: 1234 RVA: 0x0005D848 File Offset: 0x0005BA48
 	public static void exit()
 	{
-		if (Main.isPC)
+		bool flag = Main.isPC;
+		if (flag)
 		{
 			Main.main.OnApplicationQuit();
 		}
@@ -354,132 +400,132 @@ public class Main : MonoBehaviour
 		}
 	}
 
-	// Token: 0x0600014A RID: 330 RVA: 0x000085B3 File Offset: 0x000069B3
+	// Token: 0x060004D3 RID: 1235 RVA: 0x0005D878 File Offset: 0x0005BA78
 	public static bool detectCompactDevice()
 	{
 		return iPhoneSettings.generation != iPhoneGeneration.iPhone && iPhoneSettings.generation != iPhoneGeneration.iPhone3G && iPhoneSettings.generation != iPhoneGeneration.iPodTouch1Gen && iPhoneSettings.generation != iPhoneGeneration.iPodTouch2Gen;
 	}
 
-	// Token: 0x0600014B RID: 331 RVA: 0x000085E4 File Offset: 0x000069E4
+	// Token: 0x060004D4 RID: 1236 RVA: 0x0005D8B0 File Offset: 0x0005BAB0
 	public static bool checkCanSendSMS()
 	{
 		return iPhoneSettings.generation == iPhoneGeneration.iPhone3GS || iPhoneSettings.generation == iPhoneGeneration.iPhone4 || iPhoneSettings.generation > iPhoneGeneration.iPodTouch4Gen;
 	}
 
-	// Token: 0x040000FE RID: 254
+	// Token: 0x04000A66 RID: 2662
 	public static Main main;
 
-	// Token: 0x040000FF RID: 255
+	// Token: 0x04000A67 RID: 2663
 	public static mGraphics g;
 
-	// Token: 0x04000100 RID: 256
+	// Token: 0x04000A68 RID: 2664
 	public static GameMidlet midlet;
 
-	// Token: 0x04000101 RID: 257
+	// Token: 0x04000A69 RID: 2665
 	public static string res = "res";
 
-	// Token: 0x04000102 RID: 258
+	// Token: 0x04000A6A RID: 2666
 	public static string mainThreadName;
 
-	// Token: 0x04000103 RID: 259
+	// Token: 0x04000A6B RID: 2667
 	public static bool started;
 
-	// Token: 0x04000104 RID: 260
+	// Token: 0x04000A6C RID: 2668
 	public static bool isIpod;
 
-	// Token: 0x04000105 RID: 261
+	// Token: 0x04000A6D RID: 2669
 	public static bool isIphone4;
 
-	// Token: 0x04000106 RID: 262
+	// Token: 0x04000A6E RID: 2670
 	public static bool isPC;
 
-	// Token: 0x04000107 RID: 263
+	// Token: 0x04000A6F RID: 2671
 	public static bool isWindowsPhone;
 
-	// Token: 0x04000108 RID: 264
+	// Token: 0x04000A70 RID: 2672
 	public static bool isIPhone;
 
-	// Token: 0x04000109 RID: 265
+	// Token: 0x04000A71 RID: 2673
 	public static bool IphoneVersionApp;
 
-	// Token: 0x0400010A RID: 266
+	// Token: 0x04000A72 RID: 2674
 	public static string IMEI;
 
-	// Token: 0x0400010B RID: 267
+	// Token: 0x04000A73 RID: 2675
 	public static int versionIp;
 
-	// Token: 0x0400010C RID: 268
+	// Token: 0x04000A74 RID: 2676
 	public static int numberQuit = 1;
 
-	// Token: 0x0400010D RID: 269
+	// Token: 0x04000A75 RID: 2677
 	public static int typeClient = 4;
 
-	// Token: 0x0400010E RID: 270
+	// Token: 0x04000A76 RID: 2678
 	public const sbyte PC_VERSION = 4;
 
-	// Token: 0x0400010F RID: 271
+	// Token: 0x04000A77 RID: 2679
 	public const sbyte IP_APPSTORE = 5;
 
-	// Token: 0x04000110 RID: 272
+	// Token: 0x04000A78 RID: 2680
 	public const sbyte WINDOWSPHONE = 6;
 
-	// Token: 0x04000111 RID: 273
+	// Token: 0x04000A79 RID: 2681
 	private int level;
 
-	// Token: 0x04000112 RID: 274
+	// Token: 0x04000A7A RID: 2682
 	public const sbyte IP_JB = 3;
 
-	// Token: 0x04000113 RID: 275
+	// Token: 0x04000A7B RID: 2683
 	private int updateCount;
 
-	// Token: 0x04000114 RID: 276
+	// Token: 0x04000A7C RID: 2684
 	private int paintCount;
 
-	// Token: 0x04000115 RID: 277
+	// Token: 0x04000A7D RID: 2685
 	private int count;
 
-	// Token: 0x04000116 RID: 278
+	// Token: 0x04000A7E RID: 2686
 	private int fps;
 
-	// Token: 0x04000117 RID: 279
+	// Token: 0x04000A7F RID: 2687
 	private int max;
 
-	// Token: 0x04000118 RID: 280
+	// Token: 0x04000A80 RID: 2688
 	private int up;
 
-	// Token: 0x04000119 RID: 281
+	// Token: 0x04000A81 RID: 2689
 	private int upmax;
 
-	// Token: 0x0400011A RID: 282
+	// Token: 0x04000A82 RID: 2690
 	private long timefps;
 
-	// Token: 0x0400011B RID: 283
+	// Token: 0x04000A83 RID: 2691
 	private long timeup;
 
-	// Token: 0x0400011C RID: 284
+	// Token: 0x04000A84 RID: 2692
 	private bool isRun;
 
-	// Token: 0x0400011D RID: 285
+	// Token: 0x04000A85 RID: 2693
 	public static int waitTick;
 
-	// Token: 0x0400011E RID: 286
+	// Token: 0x04000A86 RID: 2694
 	public static int f;
 
-	// Token: 0x0400011F RID: 287
+	// Token: 0x04000A87 RID: 2695
 	public static bool isResume;
 
-	// Token: 0x04000120 RID: 288
+	// Token: 0x04000A88 RID: 2696
 	public static bool isMiniApp = true;
 
-	// Token: 0x04000121 RID: 289
+	// Token: 0x04000A89 RID: 2697
 	public static bool isQuitApp;
 
-	// Token: 0x04000122 RID: 290
+	// Token: 0x04000A8A RID: 2698
 	private Vector2 lastMousePos = default(Vector2);
 
-	// Token: 0x04000123 RID: 291
+	// Token: 0x04000A8B RID: 2699
 	public static int a = 1;
 
-	// Token: 0x04000124 RID: 292
+	// Token: 0x04000A8C RID: 2700
 	public static bool isCompactDevice = true;
 }

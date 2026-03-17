@@ -1,8 +1,8 @@
 ﻿using System;
 
-// Token: 0x02000032 RID: 50
+// Token: 0x02000016 RID: 22
 public class ClanManager
 {
-	// Token: 0x040001FC RID: 508
+	// Token: 0x04000301 RID: 769
 	public static Clan[] clans;
 }

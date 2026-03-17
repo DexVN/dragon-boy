@@ -1,29 +1,29 @@
 ﻿using System;
 
-// Token: 0x0200006E RID: 110
+// Token: 0x0200006D RID: 109
 public class MobTemplate
 {
-	// Token: 0x0400068B RID: 1675
+	// Token: 0x04000BD6 RID: 3030
 	public sbyte mobTemplateId;
 
-	// Token: 0x0400068C RID: 1676
+	// Token: 0x04000BD7 RID: 3031
 	public sbyte rangeMove;
 
-	// Token: 0x0400068D RID: 1677
+	// Token: 0x04000BD8 RID: 3032
 	public sbyte speed;
 
-	// Token: 0x0400068E RID: 1678
+	// Token: 0x04000BD9 RID: 3033
 	public sbyte type;
 
-	// Token: 0x0400068F RID: 1679
+	// Token: 0x04000BDA RID: 3034
 	public int hp;
 
-	// Token: 0x04000690 RID: 1680
+	// Token: 0x04000BDB RID: 3035
 	public string name;
 
-	// Token: 0x04000691 RID: 1681
+	// Token: 0x04000BDC RID: 3036
 	public EffectData data;
 
-	// Token: 0x04000692 RID: 1682
+	// Token: 0x04000BDD RID: 3037
 	public sbyte dartType;
 }

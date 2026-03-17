@@ -1,11 +1,11 @@
 ﻿using System;
 
-// Token: 0x020000AA RID: 170
+// Token: 0x0200003E RID: 62
 public interface IChatable
 {
-	// Token: 0x060007B2 RID: 1970
+	// Token: 0x060003AC RID: 940
 	void onChatFromMe(string text, string to);
 
-	// Token: 0x060007B3 RID: 1971
+	// Token: 0x060003AD RID: 941
 	void onCancelChat();
 }

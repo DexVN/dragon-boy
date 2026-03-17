@@ -1,33 +1,37 @@
 ﻿using System;
 
-// Token: 0x02000075 RID: 117
+// Token: 0x02000087 RID: 135
 public class Part
 {
-	// Token: 0x06000405 RID: 1029 RVA: 0x00031F84 File Offset: 0x00030384
+	// Token: 0x0600079F RID: 1951 RVA: 0x0008BDA8 File Offset: 0x00089FA8
 	public Part(int type)
 	{
 		this.type = type;
-		if (type == 0)
+		bool flag = type == 0;
+		if (flag)
 		{
 			this.pi = new PartImage[3];
 		}
-		if (type == 1)
+		bool flag2 = type == 1;
+		if (flag2)
 		{
 			this.pi = new PartImage[17];
 		}
-		if (type == 2)
+		bool flag3 = type == 2;
+		if (flag3)
 		{
 			this.pi = new PartImage[14];
 		}
-		if (type == 3)
+		bool flag4 = type == 3;
+		if (flag4)
 		{
 			this.pi = new PartImage[2];
 		}
 	}
 
-	// Token: 0x040006D4 RID: 1748
+	// Token: 0x04000FB5 RID: 4021
 	public int type;
 
-	// Token: 0x040006D5 RID: 1749
+	// Token: 0x04000FB6 RID: 4022
 	public PartImage[] pi;
 }

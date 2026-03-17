@@ -1,34 +1,35 @@
 ﻿using System;
 
-// Token: 0x0200009A RID: 154
+// Token: 0x02000082 RID: 130
 public class NinjaUtil
 {
-	// Token: 0x060004EC RID: 1260 RVA: 0x000502D0 File Offset: 0x0004E6D0
+	// Token: 0x0600066E RID: 1646 RVA: 0x00058318 File Offset: 0x00056518
 	public static void onLoadMapComplete()
 	{
 		GameCanvas.endDlg();
 	}
 
-	// Token: 0x060004ED RID: 1261 RVA: 0x000502D7 File Offset: 0x0004E6D7
+	// Token: 0x0600066F RID: 1647 RVA: 0x0006CCF2 File Offset: 0x0006AEF2
 	public void onLoading()
 	{
 		GameCanvas.startWaitDlg(mResources.downloading_data);
 	}
 
-	// Token: 0x060004EE RID: 1262 RVA: 0x000502E4 File Offset: 0x0004E6E4
+	// Token: 0x06000670 RID: 1648 RVA: 0x0006CD00 File Offset: 0x0006AF00
 	public static int randomNumber(int max)
 	{
 		MyRandom myRandom = new MyRandom();
 		return myRandom.nextInt(max);
 	}
 
-	// Token: 0x060004EF RID: 1263 RVA: 0x00050300 File Offset: 0x0004E700
+	// Token: 0x06000671 RID: 1649 RVA: 0x0006CD20 File Offset: 0x0006AF20
 	public static sbyte[] readByteArray(Message msg)
 	{
 		try
 		{
 			int num = msg.reader().readInt();
-			if (num > 1)
+			bool flag = num > 1;
+			if (flag)
 			{
 				sbyte[] result = new sbyte[num];
 				msg.reader().read(ref result);
@@ -41,7 +42,7 @@ public class NinjaUtil
 		return null;
 	}
 
-	// Token: 0x060004F0 RID: 1264 RVA: 0x0005035C File Offset: 0x0004E75C
+	// Token: 0x06000672 RID: 1650 RVA: 0x0006CD7C File Offset: 0x0006AF7C
 	public static sbyte[] readByteArray(myReader dos)
 	{
 		try
@@ -58,41 +59,49 @@ public class NinjaUtil
 		return null;
 	}
 
-	// Token: 0x060004F1 RID: 1265 RVA: 0x000503AC File Offset: 0x0004E7AC
+	// Token: 0x06000673 RID: 1651 RVA: 0x0006CDCC File Offset: 0x0006AFCC
 	public static string replace(string text, string regex, string replacement)
 	{
 		return text.Replace(regex, replacement);
 	}
 
-	// Token: 0x060004F2 RID: 1266 RVA: 0x000503B8 File Offset: 0x0004E7B8
+	// Token: 0x06000674 RID: 1652 RVA: 0x0006CDE8 File Offset: 0x0006AFE8
 	public static string numberTostring(string number)
 	{
 		string text = string.Empty;
 		string str = string.Empty;
-		if (number.Equals(string.Empty))
+		bool flag = number.Equals(string.Empty);
+		string result;
+		if (flag)
 		{
-			return text;
+			result = text;
 		}
-		if (number[0] == '-')
+		else
 		{
-			str = "-";
-			number = number.Substring(1);
-		}
-		for (int i = number.Length - 1; i >= 0; i--)
-		{
-			if ((number.Length - 1 - i) % 3 == 0 && number.Length - 1 - i > 0)
+			bool flag2 = number[0] == '-';
+			if (flag2)
 			{
-				text = number[i] + "." + text;
+				str = "-";
+				number = number.Substring(1);
 			}
-			else
+			for (int i = number.Length - 1; i >= 0; i--)
 			{
-				text = number[i] + text;
+				bool flag3 = (number.Length - 1 - i) % 3 == 0 && number.Length - 1 - i > 0;
+				if (flag3)
+				{
+					text = number[i].ToString() + "." + text;
+				}
+				else
+				{
+					text = number[i].ToString() + text;
+				}
 			}
+			result = str + text;
 		}
-		return str + text;
+		return result;
 	}
 
-	// Token: 0x060004F3 RID: 1267 RVA: 0x00050474 File Offset: 0x0004E874
+	// Token: 0x06000675 RID: 1653 RVA: 0x0006CECC File Offset: 0x0006B0CC
 	public static string getDate(int second)
 	{
 		long num = (long)second * 1000L;
@@ -116,7 +125,7 @@ public class NinjaUtil
 		});
 	}
 
-	// Token: 0x060004F4 RID: 1268 RVA: 0x0005053C File Offset: 0x0004E93C
+	// Token: 0x06000676 RID: 1654 RVA: 0x0006CF98 File Offset: 0x0006B198
 	public static string getDate2(long second)
 	{
 		long num = second + 25200000L;
@@ -133,64 +142,74 @@ public class NinjaUtil
 		});
 	}
 
-	// Token: 0x060004F5 RID: 1269 RVA: 0x000505C4 File Offset: 0x0004E9C4
+	// Token: 0x06000677 RID: 1655 RVA: 0x0006D024 File Offset: 0x0006B224
 	public static string getTime(int timeRemainS)
 	{
 		int num = 0;
-		if (timeRemainS > 60)
+		bool flag = timeRemainS > 60;
+		if (flag)
 		{
 			num = timeRemainS / 60;
 			timeRemainS %= 60;
 		}
 		int num2 = 0;
-		if (num > 60)
+		bool flag2 = num > 60;
+		if (flag2)
 		{
 			num2 = num / 60;
 			num %= 60;
 		}
 		int num3 = 0;
-		if (num2 > 24)
+		bool flag3 = num2 > 24;
+		if (flag3)
 		{
 			num3 = num2 / 24;
 			num2 %= 24;
 		}
 		string text = string.Empty;
-		if (num3 > 0)
+		bool flag4 = num3 > 0;
+		if (flag4)
 		{
-			text += num3;
+			text += num3.ToString();
 			text += "d";
-			text = text + num2 + "h";
-		}
-		else if (num2 > 0)
-		{
-			text += num2;
-			text += "h";
-			text = text + num + "'";
+			text = text + num2.ToString() + "h";
 		}
 		else
 		{
-			if (num > 9)
+			bool flag5 = num2 > 0;
+			if (flag5)
 			{
-				text += num;
+				text += num2.ToString();
+				text += "h";
+				text = text + num.ToString() + "'";
 			}
 			else
 			{
-				text = text + "0" + num;
-			}
-			text += ":";
-			if (timeRemainS > 9)
-			{
-				text += timeRemainS;
-			}
-			else
-			{
-				text = text + "0" + timeRemainS;
+				bool flag6 = num > 9;
+				if (flag6)
+				{
+					text += num.ToString();
+				}
+				else
+				{
+					text = text + "0" + num.ToString();
+				}
+				text += ":";
+				bool flag7 = timeRemainS > 9;
+				if (flag7)
+				{
+					text += timeRemainS.ToString();
+				}
+				else
+				{
+					text = text + "0" + timeRemainS.ToString();
+				}
 			}
 		}
 		return text;
 	}
 
-	// Token: 0x060004F6 RID: 1270 RVA: 0x000506E8 File Offset: 0x0004EAE8
+	// Token: 0x06000678 RID: 1656 RVA: 0x0006D178 File Offset: 0x0006B378
 	public static string getMoneys(long m)
 	{
 		string text = string.Empty;
@@ -198,27 +217,37 @@ public class NinjaUtil
 		int num2 = 0;
 		while ((long)num2 < num)
 		{
-			if (m < 1000L)
+			bool flag = m < 1000L;
+			if (flag)
 			{
-				text = m + text;
+				text = m.ToString() + text;
 				break;
 			}
 			long num3 = m % 1000L;
-			if (num3 == 0L)
+			bool flag2 = num3 == 0L;
+			if (flag2)
 			{
 				text = ".000" + text;
 			}
-			else if (num3 < 10L)
-			{
-				text = ".00" + num3 + text;
-			}
-			else if (num3 < 100L)
-			{
-				text = ".0" + num3 + text;
-			}
 			else
 			{
-				text = "." + num3 + text;
+				bool flag3 = num3 < 10L;
+				if (flag3)
+				{
+					text = ".00" + num3.ToString() + text;
+				}
+				else
+				{
+					bool flag4 = num3 < 100L;
+					if (flag4)
+					{
+						text = ".0" + num3.ToString() + text;
+					}
+					else
+					{
+						text = "." + num3.ToString() + text;
+					}
+				}
 			}
 			m /= 1000L;
 			num2++;
@@ -226,53 +255,62 @@ public class NinjaUtil
 		return text;
 	}
 
-	// Token: 0x060004F7 RID: 1271 RVA: 0x000507BC File Offset: 0x0004EBBC
+	// Token: 0x06000679 RID: 1657 RVA: 0x0006D268 File Offset: 0x0006B468
 	public static string getTimeAgo(int timeRemainS)
 	{
 		int num = 0;
-		if (timeRemainS > 60)
+		bool flag = timeRemainS > 60;
+		if (flag)
 		{
 			num = timeRemainS / 60;
 			timeRemainS %= 60;
 		}
 		int num2 = 0;
-		if (num > 60)
+		bool flag2 = num > 60;
+		if (flag2)
 		{
 			num2 = num / 60;
 			num %= 60;
 		}
 		int num3 = 0;
-		if (num2 > 24)
+		bool flag3 = num2 > 24;
+		if (flag3)
 		{
 			num3 = num2 / 24;
 			num2 %= 24;
 		}
 		string text = string.Empty;
-		if (num3 > 0)
+		bool flag4 = num3 > 0;
+		if (flag4)
 		{
-			text += num3;
+			text += num3.ToString();
 			text += "d";
-			text = text + num2 + "h";
-		}
-		else if (num2 > 0)
-		{
-			text += num2;
-			text += "h";
-			text = text + num + "'";
+			text = text + num2.ToString() + "h";
 		}
 		else
 		{
-			if (num == 0)
+			bool flag5 = num2 > 0;
+			if (flag5)
 			{
-				num = 1;
+				text += num2.ToString();
+				text += "h";
+				text = text + num.ToString() + "'";
 			}
-			text += num;
-			text += "ph";
+			else
+			{
+				bool flag6 = num == 0;
+				if (flag6)
+				{
+					num = 1;
+				}
+				text += num.ToString();
+				text += "ph";
+			}
 		}
 		return text;
 	}
 
-	// Token: 0x060004F8 RID: 1272 RVA: 0x0005089C File Offset: 0x0004EC9C
+	// Token: 0x0600067A RID: 1658 RVA: 0x0006D370 File Offset: 0x0006B570
 	public static string[] split(string original, string separator)
 	{
 		MyVector myVector = new MyVector();
@@ -283,7 +321,8 @@ public class NinjaUtil
 		}
 		myVector.addElement(original);
 		string[] array = new string[myVector.size()];
-		if (myVector.size() > 0)
+		bool flag = myVector.size() > 0;
+		if (flag)
 		{
 			for (int j = 0; j < myVector.size(); j++)
 			{
@@ -293,7 +332,7 @@ public class NinjaUtil
 		return array;
 	}
 
-	// Token: 0x060004F9 RID: 1273 RVA: 0x00050930 File Offset: 0x0004ED30
+	// Token: 0x0600067B RID: 1659 RVA: 0x0006D41C File Offset: 0x0006B61C
 	public static bool checkNumber(string numberStr)
 	{
 		bool result;

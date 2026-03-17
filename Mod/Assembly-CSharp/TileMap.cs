@@ -1,44 +1,45 @@
 ﻿using System;
 
-// Token: 0x020000C9 RID: 201
+// Token: 0x020000B6 RID: 182
 public class TileMap
 {
-	// Token: 0x06000A0F RID: 2575 RVA: 0x0009916D File Offset: 0x0009756D
+	// Token: 0x060009F0 RID: 2544 RVA: 0x000A5910 File Offset: 0x000A3B10
 	public static void loadBg()
 	{
 		TileMap.bong = GameCanvas.loadImage("/mainImage/myTexture2dbong.png");
-		if (mGraphics.zoomLevel == 1 || Main.isIpod || Main.isIphone4)
+		bool flag = mGraphics.zoomLevel == 1 || Main.isIpod || Main.isIphone4;
+		if (!flag)
 		{
-			return;
+			TileMap.imgLight = GameCanvas.loadImage("/bg/light.png");
 		}
-		TileMap.imgLight = GameCanvas.loadImage("/bg/light.png");
 	}
 
-	// Token: 0x06000A10 RID: 2576 RVA: 0x000991B0 File Offset: 0x000975B0
+	// Token: 0x060009F1 RID: 2545 RVA: 0x000A595C File Offset: 0x000A3B5C
 	public static bool isVoDaiMap()
 	{
 		return TileMap.mapID == 51 || TileMap.mapID == 103 || TileMap.mapID == 112 || TileMap.mapID == 113 || TileMap.mapID == 129 || TileMap.mapID == 130;
 	}
 
-	// Token: 0x06000A11 RID: 2577 RVA: 0x0009920E File Offset: 0x0009760E
+	// Token: 0x060009F2 RID: 2546 RVA: 0x000A59B0 File Offset: 0x000A3BB0
 	public static bool isTrainingMap()
 	{
 		return TileMap.mapID == 39 || TileMap.mapID == 40 || TileMap.mapID == 41;
 	}
 
-	// Token: 0x06000A12 RID: 2578 RVA: 0x00099237 File Offset: 0x00097637
+	// Token: 0x060009F3 RID: 2547 RVA: 0x000A59E0 File Offset: 0x000A3BE0
 	public static bool mapPhuBang()
 	{
 		return GameScr.phuban_Info != null && TileMap.mapID == (int)GameScr.phuban_Info.idmapPaint;
 	}
 
-	// Token: 0x06000A13 RID: 2579 RVA: 0x0009925C File Offset: 0x0009765C
+	// Token: 0x060009F4 RID: 2548 RVA: 0x000A5A10 File Offset: 0x000A3C10
 	public static BgItem getBIById(int id)
 	{
 		for (int i = 0; i < TileMap.vItemBg.size(); i++)
 		{
 			BgItem bgItem = (BgItem)TileMap.vItemBg.elementAt(i);
-			if (bgItem.id == id)
+			bool flag = bgItem.id == id;
+			if (flag)
 			{
 				return bgItem;
 			}
@@ -46,12 +47,13 @@ public class TileMap
 		return null;
 	}
 
-	// Token: 0x06000A14 RID: 2580 RVA: 0x000992A4 File Offset: 0x000976A4
+	// Token: 0x060009F5 RID: 2549 RVA: 0x000A5A64 File Offset: 0x000A3C64
 	public static bool isOfflineMap()
 	{
 		for (int i = 0; i < TileMap.offlineId.Length; i++)
 		{
-			if (TileMap.mapID == TileMap.offlineId[i])
+			bool flag = TileMap.mapID == TileMap.offlineId[i];
+			if (flag)
 			{
 				return true;
 			}
@@ -59,12 +61,13 @@ public class TileMap
 		return false;
 	}
 
-	// Token: 0x06000A15 RID: 2581 RVA: 0x000992E0 File Offset: 0x000976E0
+	// Token: 0x060009F6 RID: 2550 RVA: 0x000A5AA8 File Offset: 0x000A3CA8
 	public static bool isHighterMap()
 	{
 		for (int i = 0; i < TileMap.offlineId.Length; i++)
 		{
-			if (TileMap.mapID == TileMap.highterId[i])
+			bool flag = TileMap.mapID == TileMap.highterId[i];
+			if (flag)
 			{
 				return true;
 			}
@@ -72,12 +75,13 @@ public class TileMap
 		return false;
 	}
 
-	// Token: 0x06000A16 RID: 2582 RVA: 0x0009931C File Offset: 0x0009771C
+	// Token: 0x060009F7 RID: 2551 RVA: 0x000A5AEC File Offset: 0x000A3CEC
 	public static bool isToOfflineMap()
 	{
 		for (int i = 0; i < TileMap.toOfflineId.Length; i++)
 		{
-			if (TileMap.mapID == TileMap.toOfflineId[i])
+			bool flag = TileMap.mapID == TileMap.toOfflineId[i];
+			if (flag)
 			{
 				return true;
 			}
@@ -85,86 +89,103 @@ public class TileMap
 		return false;
 	}
 
-	// Token: 0x06000A17 RID: 2583 RVA: 0x00099355 File Offset: 0x00097755
+	// Token: 0x060009F8 RID: 2552 RVA: 0x000A5B2E File Offset: 0x000A3D2E
 	public static void freeTilemap()
 	{
 		TileMap.imgTile = null;
 		mSystem.gcc();
 	}
 
-	// Token: 0x06000A18 RID: 2584 RVA: 0x00099362 File Offset: 0x00097762
+	// Token: 0x060009F9 RID: 2553 RVA: 0x00003136 File Offset: 0x00001336
 	public static void loadTileCreatChar()
 	{
 	}
 
-	// Token: 0x06000A19 RID: 2585 RVA: 0x00099364 File Offset: 0x00097764
+	// Token: 0x060009FA RID: 2554 RVA: 0x000A5B40 File Offset: 0x000A3D40
 	public static bool isExistMoreOne(int id)
 	{
-		if (id == 156 || id == 330 || id == 345 || id == 334)
+		bool flag = id == 156 || id == 330 || id == 345 || id == 334;
+		bool result;
+		if (flag)
 		{
-			return false;
+			result = false;
 		}
-		if (TileMap.mapID == 54 || TileMap.mapID == 55 || TileMap.mapID == 56 || TileMap.mapID == 57 || TileMap.mapID == 58 || TileMap.mapID == 59 || TileMap.mapID == 103)
+		else
 		{
-			return false;
-		}
-		int num = 0;
-		for (int i = 0; i < TileMap.vCurrItem.size(); i++)
-		{
-			BgItem bgItem = (BgItem)TileMap.vCurrItem.elementAt(i);
-			if (bgItem.id == id)
+			bool flag2 = TileMap.mapID == 54 || TileMap.mapID == 55 || TileMap.mapID == 56 || TileMap.mapID == 57 || TileMap.mapID == 58 || TileMap.mapID == 59 || TileMap.mapID == 103;
+			if (flag2)
 			{
-				num++;
+				result = false;
+			}
+			else
+			{
+				int num = 0;
+				for (int i = 0; i < TileMap.vCurrItem.size(); i++)
+				{
+					BgItem bgItem = (BgItem)TileMap.vCurrItem.elementAt(i);
+					bool flag3 = bgItem.id == id;
+					if (flag3)
+					{
+						num++;
+					}
+				}
+				result = (num > 2);
 			}
 		}
-		return num > 2;
+		return result;
 	}
 
-	// Token: 0x06000A1A RID: 2586 RVA: 0x00099440 File Offset: 0x00097840
+	// Token: 0x060009FB RID: 2555 RVA: 0x000A5C1C File Offset: 0x000A3E1C
 	public static void loadTileImage()
 	{
-		if (TileMap.imgWaterfall == null)
+		bool flag = TileMap.imgWaterfall == null;
+		if (flag)
 		{
 			TileMap.imgWaterfall = GameCanvas.loadImageRMS("/tWater/wtf.png");
 		}
-		if (TileMap.imgTopWaterfall == null)
+		bool flag2 = TileMap.imgTopWaterfall == null;
+		if (flag2)
 		{
 			TileMap.imgTopWaterfall = GameCanvas.loadImageRMS("/tWater/twtf.png");
 		}
-		if (TileMap.imgWaterflow == null)
+		bool flag3 = TileMap.imgWaterflow == null;
+		if (flag3)
 		{
 			TileMap.imgWaterflow = GameCanvas.loadImageRMS("/tWater/wts.png");
 		}
-		if (TileMap.imgWaterlowN == null)
+		bool flag4 = TileMap.imgWaterlowN == null;
+		if (flag4)
 		{
 			TileMap.imgWaterlowN = GameCanvas.loadImageRMS("/tWater/wtsN.png");
 		}
-		if (TileMap.imgWaterlowN2 == null)
+		bool flag5 = TileMap.imgWaterlowN2 == null;
+		if (flag5)
 		{
 			TileMap.imgWaterlowN2 = GameCanvas.loadImageRMS("/tWater/wtsN2.png");
 		}
 		mSystem.gcc();
 	}
 
-	// Token: 0x06000A1B RID: 2587 RVA: 0x000994D0 File Offset: 0x000978D0
+	// Token: 0x060009FC RID: 2556 RVA: 0x000A5CC4 File Offset: 0x000A3EC4
 	public static void setTile(int index, int[] mapsArr, int type)
 	{
 		for (int i = 0; i < mapsArr.Length; i++)
 		{
-			if (TileMap.maps[index] == mapsArr[i])
+			bool flag = TileMap.maps[index] == mapsArr[i];
+			if (flag)
 			{
 				TileMap.types[index] |= type;
-				return;
+				break;
 			}
 		}
 	}
 
-	// Token: 0x06000A1C RID: 2588 RVA: 0x00099514 File Offset: 0x00097914
+	// Token: 0x060009FD RID: 2557 RVA: 0x000A5D0C File Offset: 0x000A3F0C
 	public static void loadMap(int tileId)
 	{
 		TileMap.pxh = TileMap.tmh * (int)TileMap.size;
 		TileMap.pxw = TileMap.tmw * (int)TileMap.size;
-		Res.outz("load tile ID= " + TileMap.tileID);
+		Res.outz("load tile ID= " + TileMap.tileID.ToString());
 		int num = tileId - 1;
 		try
 		{
@@ -183,27 +204,29 @@ public class TileMap
 		}
 	}
 
-	// Token: 0x06000A1D RID: 2589 RVA: 0x000995E0 File Offset: 0x000979E0
+	// Token: 0x060009FE RID: 2558 RVA: 0x000A5DDC File Offset: 0x000A3FDC
 	public static bool isInAirMap()
 	{
 		return TileMap.mapID == 45 || TileMap.mapID == 46 || TileMap.mapID == 48;
 	}
 
-	// Token: 0x06000A1E RID: 2590 RVA: 0x0009960C File Offset: 0x00097A0C
+	// Token: 0x060009FF RID: 2559 RVA: 0x000A5E0C File Offset: 0x000A400C
 	public static bool isDoubleMap()
 	{
 		return TileMap.isMapDouble || TileMap.mapID == 45 || TileMap.mapID == 46 || TileMap.mapID == 48 || TileMap.mapID == 51 || TileMap.mapID == 52 || TileMap.mapID == 103 || TileMap.mapID == 112 || TileMap.mapID == 113 || TileMap.mapID == 115 || TileMap.mapID == 117 || TileMap.mapID == 118 || TileMap.mapID == 119 || TileMap.mapID == 120 || TileMap.mapID == 121 || TileMap.mapID == 125 || TileMap.mapID == 129 || TileMap.mapID == 130;
 	}
 
-	// Token: 0x06000A1F RID: 2591 RVA: 0x000996F8 File Offset: 0x00097AF8
+	// Token: 0x06000A00 RID: 2560 RVA: 0x000A5ED4 File Offset: 0x000A40D4
 	public static void getTile()
 	{
-		if (Main.typeClient == 3 || Main.typeClient == 5)
+		bool flag = Main.typeClient == 3 || Main.typeClient == 5;
+		if (flag)
 		{
-			if (mGraphics.zoomLevel == 1)
+			bool flag2 = mGraphics.zoomLevel == 1;
+			if (flag2)
 			{
 				TileMap.imgTile = new Image[1];
-				TileMap.imgTile[0] = GameCanvas.loadImage("/t/" + TileMap.tileID + ".png");
+				TileMap.imgTile[0] = GameCanvas.loadImage("/t/" + TileMap.tileID.ToString() + ".png");
 			}
 			else
 			{
@@ -223,13 +246,16 @@ public class TileMap
 		}
 		else
 		{
-			if (mGraphics.zoomLevel == 1)
+			bool flag3 = mGraphics.zoomLevel == 1;
+			if (flag3)
 			{
-				if (TileMap.imgTile != null)
+				bool flag4 = TileMap.imgTile != null;
+				if (flag4)
 				{
 					for (int j = 0; j < TileMap.imgTile.Length; j++)
 					{
-						if (TileMap.imgTile[j] != null)
+						bool flag5 = TileMap.imgTile[j] != null;
+						if (flag5)
 						{
 							TileMap.imgTile[j].texture = null;
 							TileMap.imgTile[j] = null;
@@ -241,7 +267,8 @@ public class TileMap
 				string path = string.Empty;
 				for (int k = 0; k < TileMap.imgTile.Length; k++)
 				{
-					if (k < 9)
+					bool flag6 = k < 9;
+					if (flag6)
 					{
 						path = string.Concat(new object[]
 						{
@@ -263,79 +290,85 @@ public class TileMap
 					}
 					TileMap.imgTile[k] = GameCanvas.loadImage(path);
 				}
-				return;
-			}
-			Image image = GameCanvas.loadImageRMS("/t/" + TileMap.tileID + "$1.png");
-			if (image != null)
-			{
-				Rms.DeleteStorage(string.Concat(new object[]
-				{
-					"x",
-					mGraphics.zoomLevel,
-					"t",
-					TileMap.tileID
-				}));
-				TileMap.imgTile = new Image[100];
-				for (int l = 0; l < TileMap.imgTile.Length; l++)
-				{
-					TileMap.imgTile[l] = GameCanvas.loadImageRMS(string.Concat(new object[]
-					{
-						"/t/",
-						TileMap.tileID,
-						"$",
-						l + 1,
-						".png"
-					}));
-				}
 			}
 			else
 			{
-				image = GameCanvas.loadImageRMS("/t/" + TileMap.tileID + ".png");
-				if (image != null)
+				Image image = GameCanvas.loadImageRMS("/t/" + TileMap.tileID.ToString() + "$1.png");
+				bool flag7 = image != null;
+				if (flag7)
 				{
-					Rms.DeleteStorage("$");
-					TileMap.imgTile = new Image[1];
-					TileMap.imgTile[0] = image;
+					Rms.DeleteStorage(string.Concat(new object[]
+					{
+						"x",
+						mGraphics.zoomLevel,
+						"t",
+						TileMap.tileID
+					}));
+					TileMap.imgTile = new Image[100];
+					for (int l = 0; l < TileMap.imgTile.Length; l++)
+					{
+						TileMap.imgTile[l] = GameCanvas.loadImageRMS(string.Concat(new object[]
+						{
+							"/t/",
+							TileMap.tileID,
+							"$",
+							l + 1,
+							".png"
+						}));
+					}
+				}
+				else
+				{
+					image = GameCanvas.loadImageRMS("/t/" + TileMap.tileID.ToString() + ".png");
+					bool flag8 = image != null;
+					if (flag8)
+					{
+						Rms.DeleteStorage("$");
+						TileMap.imgTile = new Image[1];
+						TileMap.imgTile[0] = image;
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000A20 RID: 2592 RVA: 0x000999E8 File Offset: 0x00097DE8
+	// Token: 0x06000A01 RID: 2561 RVA: 0x000A621C File Offset: 0x000A441C
 	public static void paintTile(mGraphics g, int frame, int indexX, int indexY)
 	{
-		if (TileMap.imgTile == null)
+		bool flag = TileMap.imgTile == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (TileMap.imgTile.Length == 1)
-		{
-			g.drawRegion(TileMap.imgTile[0], 0, frame * (int)TileMap.size, (int)TileMap.size, (int)TileMap.size, 0, indexX * (int)TileMap.size, indexY * (int)TileMap.size, 0);
-		}
-		else
-		{
-			g.drawImage(TileMap.imgTile[frame], indexX * (int)TileMap.size, indexY * (int)TileMap.size, 0);
+			bool flag2 = TileMap.imgTile.Length == 1;
+			if (flag2)
+			{
+				g.drawRegion(TileMap.imgTile[0], 0, frame * (int)TileMap.size, (int)TileMap.size, (int)TileMap.size, 0, indexX * (int)TileMap.size, indexY * (int)TileMap.size, 0);
+			}
+			else
+			{
+				g.drawImage(TileMap.imgTile[frame], indexX * (int)TileMap.size, indexY * (int)TileMap.size, 0);
+			}
 		}
 	}
 
-	// Token: 0x06000A21 RID: 2593 RVA: 0x00099A64 File Offset: 0x00097E64
+	// Token: 0x06000A02 RID: 2562 RVA: 0x000A629C File Offset: 0x000A449C
 	public static void paintTile(mGraphics g, int frame, int x, int y, int w, int h)
 	{
-		if (TileMap.imgTile == null)
+		bool flag = TileMap.imgTile == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (TileMap.imgTile.Length == 1)
-		{
-			g.drawRegion(TileMap.imgTile[0], 0, frame * w, w, w, 0, x, y, 0);
-		}
-		else
-		{
-			g.drawImage(TileMap.imgTile[frame], x, y, 0);
+			bool flag2 = TileMap.imgTile.Length == 1;
+			if (flag2)
+			{
+				g.drawRegion(TileMap.imgTile[0], 0, frame * w, w, w, 0, x, y, 0);
+			}
+			else
+			{
+				g.drawImage(TileMap.imgTile[frame], x, y, 0);
+			}
 		}
 	}
 
-	// Token: 0x06000A22 RID: 2594 RVA: 0x00099AB8 File Offset: 0x00097EB8
+	// Token: 0x06000A03 RID: 2563 RVA: 0x000A62FC File Offset: 0x000A44FC
 	public static void paintTilemapLOW(mGraphics g)
 	{
 		for (int i = GameScr.gssx; i < GameScr.gssxe; i++)
@@ -343,48 +376,70 @@ public class TileMap
 			for (int j = GameScr.gssy; j < GameScr.gssye; j++)
 			{
 				int num = TileMap.maps[j * TileMap.tmw + i] - 1;
-				if (num != -1)
+				bool flag = num != -1;
+				if (flag)
 				{
 					TileMap.paintTile(g, num, i, j);
 				}
-				if ((TileMap.tileTypeAt(i, j) & 32) == 32)
+				bool flag2 = (TileMap.tileTypeAt(i, j) & 32) == 32;
+				if (flag2)
 				{
 					g.drawRegion(TileMap.imgWaterfall, 0, 24 * (GameCanvas.gameTick % 4), 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size, 0);
 				}
-				else if ((TileMap.tileTypeAt(i, j) & 64) == 64)
+				else
 				{
-					if ((TileMap.tileTypeAt(i, j - 1) & 32) == 32)
+					bool flag3 = (TileMap.tileTypeAt(i, j) & 64) == 64;
+					if (flag3)
+					{
+						bool flag4 = (TileMap.tileTypeAt(i, j - 1) & 32) == 32;
+						if (flag4)
+						{
+							g.drawRegion(TileMap.imgWaterfall, 0, 24 * (GameCanvas.gameTick % 4), 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size, 0);
+						}
+						else
+						{
+							bool flag5 = (TileMap.tileTypeAt(i, j - 1) & 4096) == 4096;
+							if (flag5)
+							{
+								TileMap.paintTile(g, 21, i, j);
+							}
+						}
+						bool flag6 = TileMap.tileID == 5;
+						Image arg;
+						if (flag6)
+						{
+							arg = TileMap.imgWaterlowN;
+						}
+						else
+						{
+							bool flag7 = TileMap.tileID == 8;
+							if (flag7)
+							{
+								arg = TileMap.imgWaterlowN2;
+							}
+							else
+							{
+								arg = TileMap.imgWaterflow;
+							}
+						}
+						g.drawRegion(arg, 0, (GameCanvas.gameTick % 8 >> 2) * 24, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size, 0);
+					}
+				}
+				bool flag8 = (TileMap.tileTypeAt(i, j) & 2048) == 2048;
+				if (flag8)
+				{
+					bool flag9 = (TileMap.tileTypeAt(i, j - 1) & 32) == 32;
+					if (flag9)
 					{
 						g.drawRegion(TileMap.imgWaterfall, 0, 24 * (GameCanvas.gameTick % 4), 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size, 0);
-					}
-					else if ((TileMap.tileTypeAt(i, j - 1) & 4096) == 4096)
-					{
-						TileMap.paintTile(g, 21, i, j);
-					}
-					Image arg;
-					if (TileMap.tileID == 5)
-					{
-						arg = TileMap.imgWaterlowN;
-					}
-					else if (TileMap.tileID == 8)
-					{
-						arg = TileMap.imgWaterlowN2;
 					}
 					else
 					{
-						arg = TileMap.imgWaterflow;
-					}
-					g.drawRegion(arg, 0, (GameCanvas.gameTick % 8 >> 2) * 24, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size, 0);
-				}
-				if ((TileMap.tileTypeAt(i, j) & 2048) == 2048)
-				{
-					if ((TileMap.tileTypeAt(i, j - 1) & 32) == 32)
-					{
-						g.drawRegion(TileMap.imgWaterfall, 0, 24 * (GameCanvas.gameTick % 4), 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size, 0);
-					}
-					else if ((TileMap.tileTypeAt(i, j - 1) & 4096) == 4096)
-					{
-						TileMap.paintTile(g, 21, i, j);
+						bool flag10 = (TileMap.tileTypeAt(i, j - 1) & 4096) == 4096;
+						if (flag10)
+						{
+							TileMap.paintTile(g, 21, i, j);
+						}
 					}
 					TileMap.paintTile(g, TileMap.maps[j * TileMap.tmw + i] - 1, i, j);
 				}
@@ -392,170 +447,219 @@ public class TileMap
 		}
 	}
 
-	// Token: 0x06000A23 RID: 2595 RVA: 0x00099CCC File Offset: 0x000980CC
+	// Token: 0x06000A04 RID: 2564 RVA: 0x000A6550 File Offset: 0x000A4750
 	public static void paintTilemap(mGraphics g)
 	{
-		if (global::Char.isLoadingMap)
+		bool isLoadingMap = global::Char.isLoadingMap;
+		if (!isLoadingMap)
 		{
-			return;
-		}
-		GameScr.gI().paintBgItem(g, 1);
-		for (int i = 0; i < GameScr.vItemMap.size(); i++)
-		{
-			((ItemMap)GameScr.vItemMap.elementAt(i)).paintAuraItemEff(g);
-		}
-		for (int j = GameScr.gssx; j < GameScr.gssxe; j++)
-		{
-			for (int k = GameScr.gssy; k < GameScr.gssye; k++)
+			GameScr.gI().paintBgItem(g, 1);
+			for (int i = 0; i < GameScr.vItemMap.size(); i++)
 			{
-				if (j != 0)
+				((ItemMap)GameScr.vItemMap.elementAt(i)).paintAuraItemEff(g);
+			}
+			for (int j = GameScr.gssx; j < GameScr.gssxe; j++)
+			{
+				for (int k = GameScr.gssy; k < GameScr.gssye; k++)
 				{
-					if (j != TileMap.tmw - 1)
+					bool flag = j != 0;
+					if (flag)
 					{
-						int num = TileMap.maps[k * TileMap.tmw + j] - 1;
-						if ((TileMap.tileTypeAt(j, k) & 256) != 256)
+						bool flag2 = j != TileMap.tmw - 1;
+						if (flag2)
 						{
-							if ((TileMap.tileTypeAt(j, k) & 32) == 32)
+							int num = TileMap.maps[k * TileMap.tmw + j] - 1;
+							bool flag3 = (TileMap.tileTypeAt(j, k) & 256) != 256;
+							if (flag3)
 							{
-								g.drawRegion(TileMap.imgWaterfall, 0, 24 * (GameCanvas.gameTick % 8 >> 1), 24, 24, 0, j * (int)TileMap.size, k * (int)TileMap.size, 0);
-							}
-							else if ((TileMap.tileTypeAt(j, k) & 128) == 128)
-							{
-								g.drawRegion(TileMap.imgTopWaterfall, 0, 24 * (GameCanvas.gameTick % 8 >> 1), 24, 24, 0, j * (int)TileMap.size, k * (int)TileMap.size, 0);
-							}
-							else if (TileMap.tileID != 13 || num == -1)
-							{
-								if (TileMap.tileID == 2 && (TileMap.tileTypeAt(j, k) & 512) == 512 && num != -1)
+								bool flag4 = (TileMap.tileTypeAt(j, k) & 32) == 32;
+								if (flag4)
 								{
-									TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size, 24, 1);
-									TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size + 1, 24, 24);
+									g.drawRegion(TileMap.imgWaterfall, 0, 24 * (GameCanvas.gameTick % 8 >> 1), 24, 24, 0, j * (int)TileMap.size, k * (int)TileMap.size, 0);
 								}
-								if (TileMap.tileID == 3)
+								else
 								{
-								}
-								if ((TileMap.tileTypeAt(j, k) & 16) == 16)
-								{
-									TileMap.bx = j * (int)TileMap.size - GameScr.cmx;
-									TileMap.dbx = TileMap.bx - GameScr.gW2;
-									TileMap.dfx = ((int)TileMap.size - 2) * TileMap.dbx / (int)TileMap.size;
-									TileMap.fx = TileMap.dfx + GameScr.gW2;
-									TileMap.paintTile(g, num, TileMap.fx + GameScr.cmx, k * (int)TileMap.size, 24, 24);
-								}
-								else if ((TileMap.tileTypeAt(j, k) & 512) == 512)
-								{
-									if (num != -1)
+									bool flag5 = (TileMap.tileTypeAt(j, k) & 128) == 128;
+									if (flag5)
 									{
-										TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size, 24, 1);
-										TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size + 1, 24, 24);
+										g.drawRegion(TileMap.imgTopWaterfall, 0, 24 * (GameCanvas.gameTick % 8 >> 1), 24, 24, 0, j * (int)TileMap.size, k * (int)TileMap.size, 0);
 									}
-								}
-								else if (num != -1)
-								{
-									TileMap.paintTile(g, num, j, k);
+									else
+									{
+										bool flag6 = TileMap.tileID != 13 || num == -1;
+										if (flag6)
+										{
+											bool flag7 = TileMap.tileID == 2 && (TileMap.tileTypeAt(j, k) & 512) == 512 && num != -1;
+											if (flag7)
+											{
+												TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size, 24, 1);
+												TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size + 1, 24, 24);
+											}
+											bool flag8 = TileMap.tileID == 3;
+											if (flag8)
+											{
+											}
+											bool flag9 = (TileMap.tileTypeAt(j, k) & 16) == 16;
+											if (flag9)
+											{
+												TileMap.bx = j * (int)TileMap.size - GameScr.cmx;
+												TileMap.dbx = TileMap.bx - GameScr.gW2;
+												TileMap.dfx = (int)(TileMap.size - 2) * TileMap.dbx / (int)TileMap.size;
+												TileMap.fx = TileMap.dfx + GameScr.gW2;
+												TileMap.paintTile(g, num, TileMap.fx + GameScr.cmx, k * (int)TileMap.size, 24, 24);
+											}
+											else
+											{
+												bool flag10 = (TileMap.tileTypeAt(j, k) & 512) == 512;
+												if (flag10)
+												{
+													bool flag11 = num != -1;
+													if (flag11)
+													{
+														TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size, 24, 1);
+														TileMap.paintTile(g, num, j * (int)TileMap.size, k * (int)TileMap.size + 1, 24, 24);
+													}
+												}
+												else
+												{
+													bool flag12 = num != -1;
+													if (flag12)
+													{
+														TileMap.paintTile(g, num, j, k);
+													}
+												}
+											}
+										}
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-		if (GameScr.cmx < 24)
-		{
-			for (int l = GameScr.gssy; l < GameScr.gssye; l++)
+			bool flag13 = GameScr.cmx < 24;
+			if (flag13)
 			{
-				int num2 = TileMap.maps[l * TileMap.tmw + 1] - 1;
-				if (num2 != -1)
+				for (int l = GameScr.gssy; l < GameScr.gssye; l++)
 				{
-					TileMap.paintTile(g, num2, 0, l);
+					int num2 = TileMap.maps[l * TileMap.tmw + 1] - 1;
+					bool flag14 = num2 != -1;
+					if (flag14)
+					{
+						TileMap.paintTile(g, num2, 0, l);
+					}
 				}
 			}
-		}
-		if (GameScr.cmx > GameScr.cmxLim)
-		{
-			int num3 = TileMap.tmw - 2;
-			for (int m = GameScr.gssy; m < GameScr.gssye; m++)
+			bool flag15 = GameScr.cmx > GameScr.cmxLim;
+			if (flag15)
 			{
-				int num4 = TileMap.maps[m * TileMap.tmw + num3] - 1;
-				if (num4 != -1)
+				int num3 = TileMap.tmw - 2;
+				for (int m = GameScr.gssy; m < GameScr.gssye; m++)
 				{
-					TileMap.paintTile(g, num4, num3 + 1, m);
+					int num4 = TileMap.maps[m * TileMap.tmw + num3] - 1;
+					bool flag16 = num4 != -1;
+					if (flag16)
+					{
+						TileMap.paintTile(g, num4, num3 + 1, m);
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000A24 RID: 2596 RVA: 0x0009A05C File Offset: 0x0009845C
+	// Token: 0x06000A05 RID: 2565 RVA: 0x000A6960 File Offset: 0x000A4B60
 	public static bool isWaterEff()
 	{
 		return TileMap.mapID != 54 && TileMap.mapID != 55 && TileMap.mapID != 56 && TileMap.mapID != 57 && TileMap.mapID != 138 && TileMap.mapID != 167;
 	}
 
-	// Token: 0x06000A25 RID: 2597 RVA: 0x0009A0BC File Offset: 0x000984BC
+	// Token: 0x06000A06 RID: 2566 RVA: 0x000A69B4 File Offset: 0x000A4BB4
 	public static void paintOutTilemap(mGraphics g)
 	{
-		if (GameCanvas.lowGraphic)
+		bool lowGraphic = GameCanvas.lowGraphic;
+		if (!lowGraphic)
 		{
-			return;
-		}
-		int num = 0;
-		for (int i = GameScr.gssx; i < GameScr.gssxe; i++)
-		{
-			for (int j = GameScr.gssy; j < GameScr.gssye; j++)
+			int num = 0;
+			for (int i = GameScr.gssx; i < GameScr.gssxe; i++)
 			{
-				num++;
-				if ((TileMap.tileTypeAt(i, j) & 64) == 64)
+				for (int j = GameScr.gssy; j < GameScr.gssye; j++)
 				{
-					Image arg;
-					if (TileMap.tileID == 5)
+					num++;
+					bool flag = (TileMap.tileTypeAt(i, j) & 64) == 64;
+					if (flag)
 					{
-						arg = TileMap.imgWaterlowN;
-					}
-					else if (TileMap.tileID == 8)
-					{
-						arg = TileMap.imgWaterlowN2;
-					}
-					else
-					{
-						arg = TileMap.imgWaterflow;
-					}
-					if (!TileMap.isWaterEff())
-					{
-						g.drawRegion(arg, 0, 0, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size - 1, 0);
-						g.drawRegion(arg, 0, 0, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size - 3, 0);
-					}
-					g.drawRegion(arg, 0, (GameCanvas.gameTick % 8 >> 2) * 24, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size - 12, 0);
-					if (TileMap.yWater == 0 && TileMap.isWaterEff())
-					{
-						TileMap.yWater = j * (int)TileMap.size - 12;
-						int color = 16777215;
-						if (GameCanvas.typeBg == 2)
+						bool flag2 = TileMap.tileID == 5;
+						Image arg;
+						if (flag2)
 						{
-							color = 10871287;
+							arg = TileMap.imgWaterlowN;
 						}
-						else if (GameCanvas.typeBg == 4)
+						else
 						{
-							color = 8111470;
+							bool flag3 = TileMap.tileID == 8;
+							if (flag3)
+							{
+								arg = TileMap.imgWaterlowN2;
+							}
+							else
+							{
+								arg = TileMap.imgWaterflow;
+							}
 						}
-						else if (GameCanvas.typeBg == 7)
+						bool flag4 = !TileMap.isWaterEff();
+						if (flag4)
 						{
-							color = 5693125;
+							g.drawRegion(arg, 0, 0, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size - 1, 0);
+							g.drawRegion(arg, 0, 0, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size - 3, 0);
 						}
-						else if (GameCanvas.typeBg == 19)
+						g.drawRegion(arg, 0, (GameCanvas.gameTick % 8 >> 2) * 24, 24, 24, 0, i * (int)TileMap.size, j * (int)TileMap.size - 12, 0);
+						bool flag5 = TileMap.yWater == 0 && TileMap.isWaterEff();
+						if (flag5)
 						{
-							color = 16711680;
+							TileMap.yWater = j * (int)TileMap.size - 12;
+							int color = 16777215;
+							bool flag6 = GameCanvas.typeBg == 2;
+							if (flag6)
+							{
+								color = 10871287;
+							}
+							else
+							{
+								bool flag7 = GameCanvas.typeBg == 4;
+								if (flag7)
+								{
+									color = 8111470;
+								}
+								else
+								{
+									bool flag8 = GameCanvas.typeBg == 7;
+									if (flag8)
+									{
+										color = 5693125;
+									}
+									else
+									{
+										bool flag9 = GameCanvas.typeBg == 19;
+										if (flag9)
+										{
+											color = 16711680;
+										}
+									}
+								}
+							}
+							BackgroudEffect.addWater(color, TileMap.yWater + 15);
 						}
-						BackgroudEffect.addWater(color, TileMap.yWater + 15);
 					}
 				}
 			}
+			BackgroudEffect.paintWaterAll(g);
 		}
-		BackgroudEffect.paintWaterAll(g);
 	}
 
-	// Token: 0x06000A26 RID: 2598 RVA: 0x0009A264 File Offset: 0x00098664
+	// Token: 0x06000A07 RID: 2567 RVA: 0x000A6B98 File Offset: 0x000A4D98
 	public static void loadMapFromResource(int mapID)
 	{
-		DataInputStream dataInputStream = MyStream.readFile("/mymap/" + mapID);
+		DataInputStream dataInputStream = MyStream.readFile("/mymap/" + mapID.ToString());
 		TileMap.tmw = (int)((ushort)dataInputStream.read());
 		TileMap.tmh = (int)((ushort)dataInputStream.read());
 		TileMap.maps = new int[dataInputStream.available()];
@@ -566,7 +670,7 @@ public class TileMap
 		TileMap.types = new int[TileMap.maps.Length];
 	}
 
-	// Token: 0x06000A27 RID: 2599 RVA: 0x0009A2EC File Offset: 0x000986EC
+	// Token: 0x06000A08 RID: 2568 RVA: 0x000A6C20 File Offset: 0x000A4E20
 	public static int tileAt(int x, int y)
 	{
 		int result;
@@ -581,7 +685,7 @@ public class TileMap
 		return result;
 	}
 
-	// Token: 0x06000A28 RID: 2600 RVA: 0x0009A32C File Offset: 0x0009872C
+	// Token: 0x06000A09 RID: 2569 RVA: 0x000A6C64 File Offset: 0x000A4E64
 	public static int tileTypeAt(int x, int y)
 	{
 		int result;
@@ -596,7 +700,7 @@ public class TileMap
 		return result;
 	}
 
-	// Token: 0x06000A29 RID: 2601 RVA: 0x0009A36C File Offset: 0x0009876C
+	// Token: 0x06000A0A RID: 2570 RVA: 0x000A6CA8 File Offset: 0x000A4EA8
 	public static int tileTypeAtPixel(int px, int py)
 	{
 		int result;
@@ -611,7 +715,7 @@ public class TileMap
 		return result;
 	}
 
-	// Token: 0x06000A2A RID: 2602 RVA: 0x0009A3BC File Offset: 0x000987BC
+	// Token: 0x06000A0B RID: 2571 RVA: 0x000A6CF8 File Offset: 0x000A4EF8
 	public static bool tileTypeAt(int px, int py, int t)
 	{
 		bool result;
@@ -626,308 +730,309 @@ public class TileMap
 		return result;
 	}
 
-	// Token: 0x06000A2B RID: 2603 RVA: 0x0009A40C File Offset: 0x0009880C
+	// Token: 0x06000A0C RID: 2572 RVA: 0x000A6D48 File Offset: 0x000A4F48
 	public static void setTileTypeAtPixel(int px, int py, int t)
 	{
 		TileMap.types[py / (int)TileMap.size * TileMap.tmw + px / (int)TileMap.size] |= t;
 	}
 
-	// Token: 0x06000A2C RID: 2604 RVA: 0x0009A434 File Offset: 0x00098834
+	// Token: 0x06000A0D RID: 2573 RVA: 0x000A6D6F File Offset: 0x000A4F6F
 	public static void setTileTypeAt(int x, int y, int t)
 	{
 		TileMap.types[y * TileMap.tmw + x] = t;
 	}
 
-	// Token: 0x06000A2D RID: 2605 RVA: 0x0009A446 File Offset: 0x00098846
+	// Token: 0x06000A0E RID: 2574 RVA: 0x000A6D82 File Offset: 0x000A4F82
 	public static void killTileTypeAt(int px, int py, int t)
 	{
 		TileMap.types[py / (int)TileMap.size * TileMap.tmw + px / (int)TileMap.size] &= ~t;
 	}
 
-	// Token: 0x06000A2E RID: 2606 RVA: 0x0009A46F File Offset: 0x0009886F
+	// Token: 0x06000A0F RID: 2575 RVA: 0x000A6DAC File Offset: 0x000A4FAC
 	public static int tileYofPixel(int py)
 	{
 		return py / (int)TileMap.size * (int)TileMap.size;
 	}
 
-	// Token: 0x06000A2F RID: 2607 RVA: 0x0009A480 File Offset: 0x00098880
+	// Token: 0x06000A10 RID: 2576 RVA: 0x000A6DCC File Offset: 0x000A4FCC
 	public static int tileXofPixel(int px)
 	{
 		return px / (int)TileMap.size * (int)TileMap.size;
 	}
 
-	// Token: 0x06000A30 RID: 2608 RVA: 0x0009A491 File Offset: 0x00098891
+	// Token: 0x06000A11 RID: 2577 RVA: 0x000A6DEC File Offset: 0x000A4FEC
 	public static void loadMainTile()
 	{
-		if (TileMap.lastTileID != TileMap.tileID)
+		bool flag = TileMap.lastTileID != TileMap.tileID;
+		if (flag)
 		{
 			TileMap.getTile();
 			TileMap.lastTileID = TileMap.tileID;
 		}
 	}
 
-	// Token: 0x040012A7 RID: 4775
+	// Token: 0x040012B6 RID: 4790
 	public const int T_EMPTY = 0;
 
-	// Token: 0x040012A8 RID: 4776
+	// Token: 0x040012B7 RID: 4791
 	public const int T_TOP = 2;
 
-	// Token: 0x040012A9 RID: 4777
+	// Token: 0x040012B8 RID: 4792
 	public const int T_LEFT = 4;
 
-	// Token: 0x040012AA RID: 4778
+	// Token: 0x040012B9 RID: 4793
 	public const int T_RIGHT = 8;
 
-	// Token: 0x040012AB RID: 4779
+	// Token: 0x040012BA RID: 4794
 	public const int T_TREE = 16;
 
-	// Token: 0x040012AC RID: 4780
+	// Token: 0x040012BB RID: 4795
 	public const int T_WATERFALL = 32;
 
-	// Token: 0x040012AD RID: 4781
+	// Token: 0x040012BC RID: 4796
 	public const int T_WATERFLOW = 64;
 
-	// Token: 0x040012AE RID: 4782
+	// Token: 0x040012BD RID: 4797
 	public const int T_TOPFALL = 128;
 
-	// Token: 0x040012AF RID: 4783
+	// Token: 0x040012BE RID: 4798
 	public const int T_OUTSIDE = 256;
 
-	// Token: 0x040012B0 RID: 4784
+	// Token: 0x040012BF RID: 4799
 	public const int T_DOWN1PIXEL = 512;
 
-	// Token: 0x040012B1 RID: 4785
+	// Token: 0x040012C0 RID: 4800
 	public const int T_BRIDGE = 1024;
 
-	// Token: 0x040012B2 RID: 4786
+	// Token: 0x040012C1 RID: 4801
 	public const int T_UNDERWATER = 2048;
 
-	// Token: 0x040012B3 RID: 4787
+	// Token: 0x040012C2 RID: 4802
 	public const int T_SOLIDGROUND = 4096;
 
-	// Token: 0x040012B4 RID: 4788
+	// Token: 0x040012C3 RID: 4803
 	public const int T_BOTTOM = 8192;
 
-	// Token: 0x040012B5 RID: 4789
+	// Token: 0x040012C4 RID: 4804
 	public const int T_DIE = 16384;
 
-	// Token: 0x040012B6 RID: 4790
+	// Token: 0x040012C5 RID: 4805
 	public const int T_HEBI = 32768;
 
-	// Token: 0x040012B7 RID: 4791
+	// Token: 0x040012C6 RID: 4806
 	public const int T_BANG = 65536;
 
-	// Token: 0x040012B8 RID: 4792
+	// Token: 0x040012C7 RID: 4807
 	public const int T_JUM8 = 131072;
 
-	// Token: 0x040012B9 RID: 4793
+	// Token: 0x040012C8 RID: 4808
 	public const int T_NT0 = 262144;
 
-	// Token: 0x040012BA RID: 4794
+	// Token: 0x040012C9 RID: 4809
 	public const int T_NT1 = 524288;
 
-	// Token: 0x040012BB RID: 4795
+	// Token: 0x040012CA RID: 4810
 	public const int T_CENTER = 1;
 
-	// Token: 0x040012BC RID: 4796
+	// Token: 0x040012CB RID: 4811
 	public static int tmw;
 
-	// Token: 0x040012BD RID: 4797
+	// Token: 0x040012CC RID: 4812
 	public static int tmh;
 
-	// Token: 0x040012BE RID: 4798
+	// Token: 0x040012CD RID: 4813
 	public static int pxw;
 
-	// Token: 0x040012BF RID: 4799
+	// Token: 0x040012CE RID: 4814
 	public static int pxh;
 
-	// Token: 0x040012C0 RID: 4800
+	// Token: 0x040012CF RID: 4815
 	public static int tileID;
 
-	// Token: 0x040012C1 RID: 4801
+	// Token: 0x040012D0 RID: 4816
 	public static int lastTileID = -1;
 
-	// Token: 0x040012C2 RID: 4802
+	// Token: 0x040012D1 RID: 4817
 	public static int[] maps;
 
-	// Token: 0x040012C3 RID: 4803
+	// Token: 0x040012D2 RID: 4818
 	public static int[] types;
 
-	// Token: 0x040012C4 RID: 4804
+	// Token: 0x040012D3 RID: 4819
 	public static Image[] imgTile;
 
-	// Token: 0x040012C5 RID: 4805
+	// Token: 0x040012D4 RID: 4820
 	public static Image imgTileSmall;
 
-	// Token: 0x040012C6 RID: 4806
+	// Token: 0x040012D5 RID: 4821
 	public static Image imgMiniMap;
 
-	// Token: 0x040012C7 RID: 4807
+	// Token: 0x040012D6 RID: 4822
 	public static Image imgWaterfall;
 
-	// Token: 0x040012C8 RID: 4808
+	// Token: 0x040012D7 RID: 4823
 	public static Image imgTopWaterfall;
 
-	// Token: 0x040012C9 RID: 4809
+	// Token: 0x040012D8 RID: 4824
 	public static Image imgWaterflow;
 
-	// Token: 0x040012CA RID: 4810
+	// Token: 0x040012D9 RID: 4825
 	public static Image imgWaterlowN;
 
-	// Token: 0x040012CB RID: 4811
+	// Token: 0x040012DA RID: 4826
 	public static Image imgWaterlowN2;
 
-	// Token: 0x040012CC RID: 4812
+	// Token: 0x040012DB RID: 4827
 	public static Image imgWaterF;
 
-	// Token: 0x040012CD RID: 4813
+	// Token: 0x040012DC RID: 4828
 	public static Image imgLeaf;
 
-	// Token: 0x040012CE RID: 4814
+	// Token: 0x040012DD RID: 4829
 	public static sbyte size = 24;
 
-	// Token: 0x040012CF RID: 4815
+	// Token: 0x040012DE RID: 4830
 	private static int bx;
 
-	// Token: 0x040012D0 RID: 4816
+	// Token: 0x040012DF RID: 4831
 	private static int dbx;
 
-	// Token: 0x040012D1 RID: 4817
+	// Token: 0x040012E0 RID: 4832
 	private static int fx;
 
-	// Token: 0x040012D2 RID: 4818
+	// Token: 0x040012E1 RID: 4833
 	private static int dfx;
 
-	// Token: 0x040012D3 RID: 4819
+	// Token: 0x040012E2 RID: 4834
 	public static string[] instruction;
 
-	// Token: 0x040012D4 RID: 4820
+	// Token: 0x040012E3 RID: 4835
 	public static int[] iX;
 
-	// Token: 0x040012D5 RID: 4821
+	// Token: 0x040012E4 RID: 4836
 	public static int[] iY;
 
-	// Token: 0x040012D6 RID: 4822
+	// Token: 0x040012E5 RID: 4837
 	public static int[] iW;
 
-	// Token: 0x040012D7 RID: 4823
+	// Token: 0x040012E6 RID: 4838
 	public static int iCount;
 
-	// Token: 0x040012D8 RID: 4824
+	// Token: 0x040012E7 RID: 4839
 	public static bool isMapDouble = false;
 
-	// Token: 0x040012D9 RID: 4825
+	// Token: 0x040012E8 RID: 4840
 	public static string mapName = string.Empty;
 
-	// Token: 0x040012DA RID: 4826
+	// Token: 0x040012E9 RID: 4841
 	public static sbyte versionMap = 1;
 
-	// Token: 0x040012DB RID: 4827
+	// Token: 0x040012EA RID: 4842
 	public static int mapID;
 
-	// Token: 0x040012DC RID: 4828
+	// Token: 0x040012EB RID: 4843
 	public static int lastBgID = -1;
 
-	// Token: 0x040012DD RID: 4829
+	// Token: 0x040012EC RID: 4844
 	public static int zoneID;
 
-	// Token: 0x040012DE RID: 4830
+	// Token: 0x040012ED RID: 4845
 	public static int bgID;
 
-	// Token: 0x040012DF RID: 4831
+	// Token: 0x040012EE RID: 4846
 	public static int bgType;
 
-	// Token: 0x040012E0 RID: 4832
+	// Token: 0x040012EF RID: 4847
 	public static int lastType = -1;
 
-	// Token: 0x040012E1 RID: 4833
+	// Token: 0x040012F0 RID: 4848
 	public static int typeMap;
 
-	// Token: 0x040012E2 RID: 4834
+	// Token: 0x040012F1 RID: 4849
 	public static sbyte planetID;
 
-	// Token: 0x040012E3 RID: 4835
+	// Token: 0x040012F2 RID: 4850
 	public static sbyte lastPlanetId = -1;
 
-	// Token: 0x040012E4 RID: 4836
+	// Token: 0x040012F3 RID: 4851
 	public static long timeTranMini;
 
-	// Token: 0x040012E5 RID: 4837
+	// Token: 0x040012F4 RID: 4852
 	public static MyVector vGo = new MyVector();
 
-	// Token: 0x040012E6 RID: 4838
+	// Token: 0x040012F5 RID: 4853
 	public static MyVector vItemBg = new MyVector();
 
-	// Token: 0x040012E7 RID: 4839
+	// Token: 0x040012F6 RID: 4854
 	public static MyVector vCurrItem = new MyVector();
 
-	// Token: 0x040012E8 RID: 4840
+	// Token: 0x040012F7 RID: 4855
 	public static string[] mapNames;
 
-	// Token: 0x040012E9 RID: 4841
+	// Token: 0x040012F8 RID: 4856
 	public static sbyte MAP_NORMAL = 0;
 
-	// Token: 0x040012EA RID: 4842
+	// Token: 0x040012F9 RID: 4857
 	public static Image bong;
 
-	// Token: 0x040012EB RID: 4843
+	// Token: 0x040012FA RID: 4858
 	public const int TRAIDAT_DOINUI = 0;
 
-	// Token: 0x040012EC RID: 4844
+	// Token: 0x040012FB RID: 4859
 	public const int TRAIDAT_RUNG = 1;
 
-	// Token: 0x040012ED RID: 4845
+	// Token: 0x040012FC RID: 4860
 	public const int TRAIDAT_DAORUA = 2;
 
-	// Token: 0x040012EE RID: 4846
+	// Token: 0x040012FD RID: 4861
 	public const int TRAIDAT_DADO = 3;
 
-	// Token: 0x040012EF RID: 4847
+	// Token: 0x040012FE RID: 4862
 	public const int NAMEK_THUNGLUNG = 5;
 
-	// Token: 0x040012F0 RID: 4848
+	// Token: 0x040012FF RID: 4863
 	public const int NAMEK_DOINUI = 4;
 
-	// Token: 0x040012F1 RID: 4849
+	// Token: 0x04001300 RID: 4864
 	public const int NAMEK_RUNG = 6;
 
-	// Token: 0x040012F2 RID: 4850
+	// Token: 0x04001301 RID: 4865
 	public const int NAMEK_DAO = 7;
 
-	// Token: 0x040012F3 RID: 4851
+	// Token: 0x04001302 RID: 4866
 	public const int SAYAI_DOINUI = 8;
 
-	// Token: 0x040012F4 RID: 4852
+	// Token: 0x04001303 RID: 4867
 	public const int SAYAI_RUNG = 9;
 
-	// Token: 0x040012F5 RID: 4853
+	// Token: 0x04001304 RID: 4868
 	public const int SAYAI_CITY = 10;
 
-	// Token: 0x040012F6 RID: 4854
+	// Token: 0x04001305 RID: 4869
 	public const int SAYAI_NIGHT = 11;
 
-	// Token: 0x040012F7 RID: 4855
+	// Token: 0x04001306 RID: 4870
 	public const int KAMISAMA = 12;
 
-	// Token: 0x040012F8 RID: 4856
+	// Token: 0x04001307 RID: 4871
 	public const int TIME_ROOM = 13;
 
-	// Token: 0x040012F9 RID: 4857
+	// Token: 0x04001308 RID: 4872
 	public const int HELL = 15;
 
-	// Token: 0x040012FA RID: 4858
+	// Token: 0x04001309 RID: 4873
 	public const int BEERUS = 16;
 
-	// Token: 0x040012FB RID: 4859
+	// Token: 0x0400130A RID: 4874
 	public const int THE_HELL = 19;
 
-	// Token: 0x040012FC RID: 4860
+	// Token: 0x0400130B RID: 4875
 	public static Image[] bgItem = new Image[8];
 
-	// Token: 0x040012FD RID: 4861
+	// Token: 0x0400130C RID: 4876
 	public static MyVector vObject = new MyVector();
 
-	// Token: 0x040012FE RID: 4862
+	// Token: 0x0400130D RID: 4877
 	public static int[] offlineId = new int[]
 	{
 		21,
@@ -938,7 +1043,7 @@ public class TileMap
 		41
 	};
 
-	// Token: 0x040012FF RID: 4863
+	// Token: 0x0400130E RID: 4878
 	public static int[] highterId = new int[]
 	{
 		21,
@@ -949,7 +1054,7 @@ public class TileMap
 		26
 	};
 
-	// Token: 0x04001300 RID: 4864
+	// Token: 0x0400130F RID: 4879
 	public static int[] toOfflineId = new int[]
 	{
 		0,
@@ -957,43 +1062,43 @@ public class TileMap
 		14
 	};
 
-	// Token: 0x04001301 RID: 4865
+	// Token: 0x04001310 RID: 4880
 	public static int[][] tileType;
 
-	// Token: 0x04001302 RID: 4866
+	// Token: 0x04001311 RID: 4881
 	public static int[][][] tileIndex;
 
-	// Token: 0x04001303 RID: 4867
+	// Token: 0x04001312 RID: 4882
 	public static Image imgLight = GameCanvas.loadImage("/bg/light.png");
 
-	// Token: 0x04001304 RID: 4868
+	// Token: 0x04001313 RID: 4883
 	public static int sizeMiniMap = 2;
 
-	// Token: 0x04001305 RID: 4869
+	// Token: 0x04001314 RID: 4884
 	public static int gssx;
 
-	// Token: 0x04001306 RID: 4870
+	// Token: 0x04001315 RID: 4885
 	public static int gssxe;
 
-	// Token: 0x04001307 RID: 4871
+	// Token: 0x04001316 RID: 4886
 	public static int gssy;
 
-	// Token: 0x04001308 RID: 4872
+	// Token: 0x04001317 RID: 4887
 	public static int gssye;
 
-	// Token: 0x04001309 RID: 4873
+	// Token: 0x04001318 RID: 4888
 	public static int countx;
 
-	// Token: 0x0400130A RID: 4874
+	// Token: 0x04001319 RID: 4889
 	public static int county;
 
-	// Token: 0x0400130B RID: 4875
+	// Token: 0x0400131A RID: 4890
 	private static int[] colorMini = new int[]
 	{
 		5257738,
 		8807192
 	};
 
-	// Token: 0x0400130C RID: 4876
+	// Token: 0x0400131B RID: 4891
 	public static int yWater = 0;
 }

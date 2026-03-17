@@ -1,32 +1,32 @@
 ﻿using System;
 
-// Token: 0x02000067 RID: 103
+// Token: 0x02000059 RID: 89
 public class ItemTemplates
 {
-	// Token: 0x060003A8 RID: 936 RVA: 0x0001E6DA File Offset: 0x0001CADA
+	// Token: 0x06000486 RID: 1158 RVA: 0x00059EF0 File Offset: 0x000580F0
 	public static void add(ItemTemplate it)
 	{
 		ItemTemplates.itemTemplates.put(it.id, it);
 	}
 
-	// Token: 0x060003A9 RID: 937 RVA: 0x0001E6F2 File Offset: 0x0001CAF2
+	// Token: 0x06000487 RID: 1159 RVA: 0x00059F0C File Offset: 0x0005810C
 	public static ItemTemplate get(short id)
 	{
 		return (ItemTemplate)ItemTemplates.itemTemplates.get(id);
 	}
 
-	// Token: 0x060003AA RID: 938 RVA: 0x0001E709 File Offset: 0x0001CB09
+	// Token: 0x06000488 RID: 1160 RVA: 0x00059F34 File Offset: 0x00058134
 	public static short getPart(short itemTemplateID)
 	{
 		return ItemTemplates.get(itemTemplateID).part;
 	}
 
-	// Token: 0x060003AB RID: 939 RVA: 0x0001E716 File Offset: 0x0001CB16
+	// Token: 0x06000489 RID: 1161 RVA: 0x00059F54 File Offset: 0x00058154
 	public static short getIcon(short itemTemplateID)
 	{
 		return ItemTemplates.get(itemTemplateID).iconID;
 	}
 
-	// Token: 0x04000628 RID: 1576
+	// Token: 0x040009C9 RID: 2505
 	public static MyHashTable itemTemplates = new MyHashTable();
 }

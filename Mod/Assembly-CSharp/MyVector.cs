@@ -1,122 +1,137 @@
 ﻿using System;
 using System.Collections;
 
-// Token: 0x02000011 RID: 17
+// Token: 0x0200007C RID: 124
 public class MyVector
 {
-	// Token: 0x06000070 RID: 112 RVA: 0x00003AC0 File Offset: 0x00001EC0
+	// Token: 0x06000615 RID: 1557 RVA: 0x0006B1F0 File Offset: 0x000693F0
 	public MyVector()
 	{
 		this.a = new ArrayList();
 	}
 
-	// Token: 0x06000071 RID: 113 RVA: 0x00003AD3 File Offset: 0x00001ED3
+	// Token: 0x06000616 RID: 1558 RVA: 0x0006B1F0 File Offset: 0x000693F0
 	public MyVector(string s)
 	{
 		this.a = new ArrayList();
 	}
 
-	// Token: 0x06000072 RID: 114 RVA: 0x00003AE6 File Offset: 0x00001EE6
+	// Token: 0x06000617 RID: 1559 RVA: 0x0006B205 File Offset: 0x00069405
 	public MyVector(ArrayList a)
 	{
 		this.a = a;
 	}
 
-	// Token: 0x06000073 RID: 115 RVA: 0x00003AF5 File Offset: 0x00001EF5
+	// Token: 0x06000618 RID: 1560 RVA: 0x0006B216 File Offset: 0x00069416
 	public void addElement(object o)
 	{
 		this.a.Add(o);
 	}
 
-	// Token: 0x06000074 RID: 116 RVA: 0x00003B04 File Offset: 0x00001F04
+	// Token: 0x06000619 RID: 1561 RVA: 0x0006B228 File Offset: 0x00069428
 	public bool contains(object o)
 	{
 		return this.a.Contains(o);
 	}
 
-	// Token: 0x06000075 RID: 117 RVA: 0x00003B1A File Offset: 0x00001F1A
+	// Token: 0x0600061A RID: 1562 RVA: 0x0006B248 File Offset: 0x00069448
 	public int size()
 	{
-		if (this.a == null)
+		bool flag = this.a == null;
+		int result;
+		if (flag)
 		{
-			return 0;
+			result = 0;
 		}
-		return this.a.Count;
+		else
+		{
+			result = this.a.Count;
+		}
+		return result;
 	}
 
-	// Token: 0x06000076 RID: 118 RVA: 0x00003B34 File Offset: 0x00001F34
+	// Token: 0x0600061B RID: 1563 RVA: 0x0006B278 File Offset: 0x00069478
 	public object elementAt(int index)
 	{
-		if (index > -1 && index < this.a.Count)
+		bool flag = index > -1 && index < this.a.Count;
+		object result;
+		if (flag)
 		{
-			return this.a[index];
+			result = this.a[index];
 		}
-		return null;
+		else
+		{
+			result = null;
+		}
+		return result;
 	}
 
-	// Token: 0x06000077 RID: 119 RVA: 0x00003B5C File Offset: 0x00001F5C
+	// Token: 0x0600061C RID: 1564 RVA: 0x0006B2B4 File Offset: 0x000694B4
 	public void set(int index, object obj)
 	{
-		if (index > -1 && index < this.a.Count)
+		bool flag = index > -1 && index < this.a.Count;
+		if (flag)
 		{
 			this.a[index] = obj;
 		}
 	}
 
-	// Token: 0x06000078 RID: 120 RVA: 0x00003B83 File Offset: 0x00001F83
+	// Token: 0x0600061D RID: 1565 RVA: 0x0006B2EC File Offset: 0x000694EC
 	public void setElementAt(object obj, int index)
 	{
-		if (index > -1 && index < this.a.Count)
+		bool flag = index > -1 && index < this.a.Count;
+		if (flag)
 		{
 			this.a[index] = obj;
 		}
 	}
 
-	// Token: 0x06000079 RID: 121 RVA: 0x00003BAA File Offset: 0x00001FAA
+	// Token: 0x0600061E RID: 1566 RVA: 0x0006B324 File Offset: 0x00069524
 	public int indexOf(object o)
 	{
 		return this.a.IndexOf(o);
 	}
 
-	// Token: 0x0600007A RID: 122 RVA: 0x00003BB8 File Offset: 0x00001FB8
+	// Token: 0x0600061F RID: 1567 RVA: 0x0006B344 File Offset: 0x00069544
 	public void removeElementAt(int index)
 	{
-		if (index > -1 && index < this.a.Count)
+		bool flag = index > -1 && index < this.a.Count;
+		if (flag)
 		{
 			this.a.RemoveAt(index);
 		}
 	}
 
-	// Token: 0x0600007B RID: 123 RVA: 0x00003BDE File Offset: 0x00001FDE
+	// Token: 0x06000620 RID: 1568 RVA: 0x0006B37A File Offset: 0x0006957A
 	public void removeElement(object o)
 	{
 		this.a.Remove(o);
 	}
 
-	// Token: 0x0600007C RID: 124 RVA: 0x00003BEC File Offset: 0x00001FEC
+	// Token: 0x06000621 RID: 1569 RVA: 0x0006B38A File Offset: 0x0006958A
 	public void removeAllElements()
 	{
 		this.a.Clear();
 	}
 
-	// Token: 0x0600007D RID: 125 RVA: 0x00003BF9 File Offset: 0x00001FF9
+	// Token: 0x06000622 RID: 1570 RVA: 0x0006B399 File Offset: 0x00069599
 	public void insertElementAt(object o, int i)
 	{
 		this.a.Insert(i, o);
 	}
 
-	// Token: 0x0600007E RID: 126 RVA: 0x00003C08 File Offset: 0x00002008
+	// Token: 0x06000623 RID: 1571 RVA: 0x0006B3AC File Offset: 0x000695AC
 	public object firstElement()
 	{
 		return this.a[0];
 	}
 
-	// Token: 0x0600007F RID: 127 RVA: 0x00003C16 File Offset: 0x00002016
+	// Token: 0x06000624 RID: 1572 RVA: 0x0006B3CC File Offset: 0x000695CC
 	public object lastElement()
 	{
 		return this.a[this.a.Count - 1];
 	}
 
-	// Token: 0x04000027 RID: 39
+	// Token: 0x04000E02 RID: 3586
 	private ArrayList a;
 }

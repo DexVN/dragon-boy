@@ -1,25 +1,25 @@
 ﻿using System;
 
-// Token: 0x0200005B RID: 91
+// Token: 0x02000036 RID: 54
 public class Friend
 {
-	// Token: 0x06000338 RID: 824 RVA: 0x0001B379 File Offset: 0x00019779
+	// Token: 0x0600028B RID: 651 RVA: 0x0003BEE8 File Offset: 0x0003A0E8
 	public Friend(string friendName, sbyte type)
 	{
 		this.friendName = friendName;
 		this.type = type;
 	}
 
-	// Token: 0x06000339 RID: 825 RVA: 0x0001B38F File Offset: 0x0001978F
+	// Token: 0x0600028C RID: 652 RVA: 0x0003BF00 File Offset: 0x0003A100
 	public Friend(string friendName)
 	{
 		this.friendName = friendName;
 		this.type = 2;
 	}
 
-	// Token: 0x04000549 RID: 1353
+	// Token: 0x040005C6 RID: 1478
 	public string friendName;
 
-	// Token: 0x0400054A RID: 1354
+	// Token: 0x040005C7 RID: 1479
 	public sbyte type;
 }

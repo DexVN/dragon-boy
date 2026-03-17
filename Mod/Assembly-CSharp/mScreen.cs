@@ -1,199 +1,243 @@
 ﻿using System;
 
-// Token: 0x020000C3 RID: 195
+// Token: 0x02000073 RID: 115
 public class mScreen
 {
-	// Token: 0x060009D1 RID: 2513 RVA: 0x0005C8D2 File Offset: 0x0005ACD2
+	// Token: 0x060005AE RID: 1454 RVA: 0x00068CA0 File Offset: 0x00066EA0
 	public virtual void switchToMe()
 	{
 		GameCanvas.clearKeyPressed();
 		GameCanvas.clearKeyHold();
-		if (GameCanvas.currentScreen != null)
+		bool flag = GameCanvas.currentScreen != null;
+		if (flag)
 		{
 			GameCanvas.currentScreen.unLoad();
 		}
 		GameCanvas.currentScreen = this;
-		Cout.LogError3("cur Screen: " + GameCanvas.currentScreen);
+		string str = "cur Screen: ";
+		mScreen currentScreen = GameCanvas.currentScreen;
+		Cout.LogError3(str + ((currentScreen != null) ? currentScreen.ToString() : null));
 	}
 
-	// Token: 0x060009D2 RID: 2514 RVA: 0x0005C90C File Offset: 0x0005AD0C
+	// Token: 0x060005AF RID: 1455 RVA: 0x00003136 File Offset: 0x00001336
 	public virtual void unLoad()
 	{
 	}
 
-	// Token: 0x060009D3 RID: 2515 RVA: 0x0005C90E File Offset: 0x0005AD0E
+	// Token: 0x060005B0 RID: 1456 RVA: 0x00003136 File Offset: 0x00001336
 	public static void initPos()
 	{
 	}
 
-	// Token: 0x060009D4 RID: 2516 RVA: 0x0005C910 File Offset: 0x0005AD10
+	// Token: 0x060005B1 RID: 1457 RVA: 0x00003136 File Offset: 0x00001336
 	public virtual void keyPress(int keyCode)
 	{
 	}
 
-	// Token: 0x060009D5 RID: 2517 RVA: 0x0005C912 File Offset: 0x0005AD12
+	// Token: 0x060005B2 RID: 1458 RVA: 0x00003136 File Offset: 0x00001336
 	public virtual void update()
 	{
 	}
 
-	// Token: 0x060009D6 RID: 2518 RVA: 0x0005C914 File Offset: 0x0005AD14
+	// Token: 0x060005B3 RID: 1459 RVA: 0x00068CFC File Offset: 0x00066EFC
 	public virtual void updateKey()
 	{
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.center))
+		bool flag = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.center);
+		if (flag)
 		{
 			GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
 			mScreen.keyTouch = -1;
 			GameCanvas.isPointerJustRelease = false;
-			if (this.center != null)
+			bool flag2 = this.center != null;
+			if (flag2)
 			{
 				this.center.performAction();
 			}
 		}
-		if (GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.left))
+		bool flag3 = GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.left);
+		if (flag3)
 		{
 			GameCanvas.keyPressed[12] = false;
 			mScreen.keyTouch = -1;
 			GameCanvas.isPointerJustRelease = false;
-			if (ChatTextField.gI().isShow)
+			bool isShow = ChatTextField.gI().isShow;
+			if (isShow)
 			{
-				if (ChatTextField.gI().left != null)
+				bool flag4 = ChatTextField.gI().left != null;
+				if (flag4)
 				{
 					ChatTextField.gI().left.performAction();
 				}
 			}
-			else if (this.left != null)
+			else
 			{
-				this.left.performAction();
+				bool flag5 = this.left != null;
+				if (flag5)
+				{
+					this.left.performAction();
+				}
 			}
 		}
-		if (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.right))
+		bool flag6 = GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.right);
+		if (flag6)
 		{
 			GameCanvas.keyPressed[13] = false;
 			mScreen.keyTouch = -1;
 			GameCanvas.isPointerJustRelease = false;
-			if (ChatTextField.gI().isShow)
+			bool isShow2 = ChatTextField.gI().isShow;
+			if (isShow2)
 			{
-				if (ChatTextField.gI().right != null)
+				bool flag7 = ChatTextField.gI().right != null;
+				if (flag7)
 				{
 					ChatTextField.gI().right.performAction();
 				}
 			}
-			else if (this.right != null)
+			else
 			{
-				this.right.performAction();
+				bool flag8 = this.right != null;
+				if (flag8)
+				{
+					this.right.performAction();
+				}
 			}
 		}
 	}
 
-	// Token: 0x060009D7 RID: 2519 RVA: 0x0005CA8C File Offset: 0x0005AE8C
+	// Token: 0x060005B4 RID: 1460 RVA: 0x00068E8C File Offset: 0x0006708C
 	public static bool getCmdPointerLast(Command cmd)
 	{
-		if (cmd == null)
+		bool flag = cmd == null;
+		bool result;
+		if (flag)
 		{
-			return false;
-		}
-		if (cmd.x >= 0 && cmd.y != 0)
-		{
-			return cmd.isPointerPressInside();
-		}
-		if (GameCanvas.currentDialog != null)
-		{
-			if (GameCanvas.currentDialog.center != null && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW >> 1, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10))
-			{
-				mScreen.keyTouch = 1;
-				if (cmd == GameCanvas.currentDialog.center && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					return true;
-				}
-			}
-			if (GameCanvas.currentDialog.left != null && GameCanvas.isPointerHoldIn(0, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10))
-			{
-				mScreen.keyTouch = 0;
-				if (cmd == GameCanvas.currentDialog.left && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					return true;
-				}
-			}
-			if (GameCanvas.currentDialog.right != null && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10))
-			{
-				mScreen.keyTouch = 2;
-				if ((cmd == GameCanvas.currentDialog.right || cmd == ChatTextField.gI().right) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					return true;
-				}
-			}
+			result = false;
 		}
 		else
 		{
-			if (cmd == GameCanvas.currentScreen.left && GameCanvas.isPointerHoldIn(0, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10))
+			bool flag2 = cmd.x >= 0 && cmd.y != 0;
+			if (flag2)
 			{
-				mScreen.keyTouch = 0;
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					return true;
-				}
+				result = cmd.isPointerPressInside();
 			}
-			if (cmd == GameCanvas.currentScreen.right && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10))
+			else
 			{
-				mScreen.keyTouch = 2;
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+				bool flag3 = GameCanvas.currentDialog != null;
+				if (flag3)
 				{
-					return true;
+					bool flag4 = GameCanvas.currentDialog.center != null && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW >> 1, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10);
+					if (flag4)
+					{
+						mScreen.keyTouch = 1;
+						bool flag5 = cmd == GameCanvas.currentDialog.center && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+						if (flag5)
+						{
+							return true;
+						}
+					}
+					bool flag6 = GameCanvas.currentDialog.left != null && GameCanvas.isPointerHoldIn(0, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10);
+					if (flag6)
+					{
+						mScreen.keyTouch = 0;
+						bool flag7 = cmd == GameCanvas.currentDialog.left && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+						if (flag7)
+						{
+							return true;
+						}
+					}
+					bool flag8 = GameCanvas.currentDialog.right != null && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10);
+					if (flag8)
+					{
+						mScreen.keyTouch = 2;
+						bool flag9 = (cmd == GameCanvas.currentDialog.right || cmd == ChatTextField.gI().right) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+						if (flag9)
+						{
+							return true;
+						}
+					}
 				}
-			}
-			if ((cmd == GameCanvas.currentScreen.center || ChatPopup.currChatPopup != null) && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW >> 1, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10))
-			{
-				mScreen.keyTouch = 1;
-				if (GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+				else
 				{
-					return true;
+					bool flag10 = cmd == GameCanvas.currentScreen.left && GameCanvas.isPointerHoldIn(0, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10);
+					if (flag10)
+					{
+						mScreen.keyTouch = 0;
+						bool flag11 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+						if (flag11)
+						{
+							return true;
+						}
+					}
+					bool flag12 = cmd == GameCanvas.currentScreen.right && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10);
+					if (flag12)
+					{
+						mScreen.keyTouch = 2;
+						bool flag13 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+						if (flag13)
+						{
+							return true;
+						}
+					}
+					bool flag14 = (cmd == GameCanvas.currentScreen.center || ChatPopup.currChatPopup != null) && GameCanvas.isPointerHoldIn(GameCanvas.w - mScreen.cmdW >> 1, GameCanvas.h - mScreen.cmdH - 5, mScreen.cmdW, mScreen.cmdH + 10);
+					if (flag14)
+					{
+						mScreen.keyTouch = 1;
+						bool flag15 = GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease;
+						if (flag15)
+						{
+							return true;
+						}
+					}
 				}
+				result = false;
 			}
 		}
-		return false;
+		return result;
 	}
 
-	// Token: 0x060009D8 RID: 2520 RVA: 0x0005CD28 File Offset: 0x0005B128
+	// Token: 0x060005B5 RID: 1461 RVA: 0x00069170 File Offset: 0x00067370
 	public virtual void paint(mGraphics g)
 	{
 		g.translate(-g.getTranslateX(), -g.getTranslateY());
 		g.setClip(0, 0, GameCanvas.w, GameCanvas.h + 1);
-		if (!ChatTextField.gI().isShow || !Main.isPC)
+		bool flag = !ChatTextField.gI().isShow || !Main.isPC;
+		if (flag)
 		{
-			if (GameCanvas.currentDialog == null && !GameCanvas.menu.showMenu)
+			bool flag2 = GameCanvas.currentDialog == null && !GameCanvas.menu.showMenu;
+			if (flag2)
 			{
 				GameCanvas.paintz.paintCmdBar(g, this.left, this.center, this.right);
 			}
 		}
 	}
 
-	// Token: 0x0400121A RID: 4634
+	// Token: 0x04000DD6 RID: 3542
 	public Command left;
 
-	// Token: 0x0400121B RID: 4635
+	// Token: 0x04000DD7 RID: 3543
 	public Command center;
 
-	// Token: 0x0400121C RID: 4636
+	// Token: 0x04000DD8 RID: 3544
 	public Command right;
 
-	// Token: 0x0400121D RID: 4637
+	// Token: 0x04000DD9 RID: 3545
 	public Command cmdClose;
 
-	// Token: 0x0400121E RID: 4638
+	// Token: 0x04000DDA RID: 3546
 	public static int ITEM_HEIGHT;
 
-	// Token: 0x0400121F RID: 4639
+	// Token: 0x04000DDB RID: 3547
 	public static int yOpenKeyBoard = 100;
 
-	// Token: 0x04001220 RID: 4640
+	// Token: 0x04000DDC RID: 3548
 	public static int cmdW = 68;
 
-	// Token: 0x04001221 RID: 4641
+	// Token: 0x04000DDD RID: 3549
 	public static int cmdH = 26;
 
-	// Token: 0x04001222 RID: 4642
+	// Token: 0x04000DDE RID: 3550
 	public static int keyTouch = -1;
 
-	// Token: 0x04001223 RID: 4643
+	// Token: 0x04000DDF RID: 3551
 	public static int keyMouse = -1;
 }

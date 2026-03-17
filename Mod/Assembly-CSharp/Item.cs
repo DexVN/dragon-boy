@@ -1,45 +1,60 @@
 ﻿using System;
 
-// Token: 0x02000061 RID: 97
+// Token: 0x02000053 RID: 83
 public class Item
 {
-	// Token: 0x0600037A RID: 890 RVA: 0x0001D12D File Offset: 0x0001B52D
+	// Token: 0x06000458 RID: 1112 RVA: 0x0005867A File Offset: 0x0005687A
 	public void getCompare()
 	{
 		this.compare = GameCanvas.panel.getCompare(this);
 	}
 
-	// Token: 0x0600037B RID: 891 RVA: 0x0001D140 File Offset: 0x0001B540
+	// Token: 0x06000459 RID: 1113 RVA: 0x00058690 File Offset: 0x00056890
 	public string getPrice()
 	{
 		string result = string.Empty;
-		if (this.buyCoin <= 0 && this.buyGold <= 0)
+		bool flag = this.buyCoin <= 0 && this.buyGold <= 0;
+		string result2;
+		if (flag)
 		{
-			return null;
+			result2 = null;
 		}
-		if (this.buyCoin > 0 && this.buyGold <= 0)
+		else
 		{
-			result = this.buyCoin + mResources.XU;
-		}
-		else if (this.buyGold > 0 && this.buyCoin <= 0)
-		{
-			result = this.buyGold + mResources.LUONG;
-		}
-		else if (this.buyCoin > 0 && this.buyGold > 0)
-		{
-			result = string.Concat(new object[]
+			bool flag2 = this.buyCoin > 0 && this.buyGold <= 0;
+			if (flag2)
 			{
-				this.buyCoin,
-				mResources.XU,
-				"/",
-				this.buyGold,
-				mResources.LUONG
-			});
+				result = this.buyCoin.ToString() + mResources.XU;
+			}
+			else
+			{
+				bool flag3 = this.buyGold > 0 && this.buyCoin <= 0;
+				if (flag3)
+				{
+					result = this.buyGold.ToString() + mResources.LUONG;
+				}
+				else
+				{
+					bool flag4 = this.buyCoin > 0 && this.buyGold > 0;
+					if (flag4)
+					{
+						result = string.Concat(new object[]
+						{
+							this.buyCoin,
+							mResources.XU,
+							"/",
+							this.buyGold,
+							mResources.LUONG
+						});
+					}
+				}
+			}
+			result2 = result;
 		}
-		return result;
+		return result2;
 	}
 
-	// Token: 0x0600037C RID: 892 RVA: 0x0001D22C File Offset: 0x0001B62C
+	// Token: 0x0600045A RID: 1114 RVA: 0x0005879C File Offset: 0x0005699C
 	public void paintUpgradeEffect(int x, int y, int upgrade, mGraphics g)
 	{
 		int num = GameScr.indexSize - 2;
@@ -52,7 +67,8 @@ public class Item
 			g.setColor(this.colorBorder[num3][i]);
 			g.fillRect(num4 - this.size[i] / 2, num5 - this.size[i] / 2, this.size[i], this.size[i]);
 		}
-		if (upgrade == 4 || upgrade == 8)
+		bool flag = upgrade == 4 || upgrade == 8;
+		if (flag)
 		{
 			for (int j = num2; j < this.size.Length; j++)
 			{
@@ -62,7 +78,8 @@ public class Item
 				g.fillRect(num6 - this.size[j] / 2, num7 - this.size[j] / 2, this.size[j], this.size[j]);
 			}
 		}
-		if (upgrade != 1 && upgrade != 4 && upgrade != 8)
+		bool flag2 = upgrade != 1 && upgrade != 4 && upgrade != 8;
+		if (flag2)
 		{
 			for (int k = num2; k < this.size.Length; k++)
 			{
@@ -72,7 +89,8 @@ public class Item
 				g.fillRect(num8 - this.size[k] / 2, num9 - this.size[k] / 2, this.size[k], this.size[k]);
 			}
 		}
-		if (upgrade != 1 && upgrade != 4 && upgrade != 8 && upgrade != 12 && upgrade != 2 && upgrade != 5 && upgrade != 9)
+		bool flag3 = upgrade != 1 && upgrade != 4 && upgrade != 8 && upgrade != 12 && upgrade != 2 && upgrade != 5 && upgrade != 9;
+		if (flag3)
 		{
 			for (int l = num2; l < this.size.Length; l++)
 			{
@@ -82,7 +100,8 @@ public class Item
 				g.fillRect(num10 - this.size[l] / 2, num11 - this.size[l] / 2, this.size[l], this.size[l]);
 			}
 		}
-		if (upgrade != 1 && upgrade != 4 && upgrade != 8 && upgrade != 12 && upgrade != 2 && upgrade != 5 && upgrade != 9 && upgrade != 13 && upgrade != 3 && upgrade != 6 && upgrade != 10 && upgrade != 15)
+		bool flag4 = upgrade != 1 && upgrade != 4 && upgrade != 8 && upgrade != 12 && upgrade != 2 && upgrade != 5 && upgrade != 9 && upgrade != 13 && upgrade != 3 && upgrade != 6 && upgrade != 10 && upgrade != 15;
+		if (flag4)
 		{
 			for (int m = num2; m < this.size.Length; m++)
 			{
@@ -94,53 +113,82 @@ public class Item
 		}
 	}
 
-	// Token: 0x0600037D RID: 893 RVA: 0x0001D624 File Offset: 0x0001BA24
+	// Token: 0x0600045B RID: 1115 RVA: 0x00058BA4 File Offset: 0x00056DA4
 	private int upgradeEffectY(int tick)
 	{
 		int num = GameScr.indexSize - 2;
 		int num2 = tick % (4 * num);
-		if (0 <= num2 && num2 < num)
+		bool flag = 0 <= num2 && num2 < num;
+		int result;
+		if (flag)
 		{
-			return 0;
+			result = 0;
 		}
-		if (num <= num2 && num2 < num * 2)
+		else
 		{
-			return num2 % num;
+			bool flag2 = num <= num2 && num2 < num * 2;
+			if (flag2)
+			{
+				result = num2 % num;
+			}
+			else
+			{
+				bool flag3 = num * 2 <= num2 && num2 < num * 3;
+				if (flag3)
+				{
+					result = num;
+				}
+				else
+				{
+					result = num - num2 % num;
+				}
+			}
 		}
-		if (num * 2 <= num2 && num2 < num * 3)
-		{
-			return num;
-		}
-		return num - num2 % num;
+		return result;
 	}
 
-	// Token: 0x0600037E RID: 894 RVA: 0x0001D67C File Offset: 0x0001BA7C
+	// Token: 0x0600045C RID: 1116 RVA: 0x00058C14 File Offset: 0x00056E14
 	private int upgradeEffectX(int tick)
 	{
 		int num = GameScr.indexSize - 2;
 		int num2 = tick % (4 * num);
-		if (0 <= num2 && num2 < num)
+		bool flag = 0 <= num2 && num2 < num;
+		int result;
+		if (flag)
 		{
-			return num2 % num;
+			result = num2 % num;
 		}
-		if (num <= num2 && num2 < num * 2)
+		else
 		{
-			return num;
+			bool flag2 = num <= num2 && num2 < num * 2;
+			if (flag2)
+			{
+				result = num;
+			}
+			else
+			{
+				bool flag3 = num * 2 <= num2 && num2 < num * 3;
+				if (flag3)
+				{
+					result = num - num2 % num;
+				}
+				else
+				{
+					result = 0;
+				}
+			}
 		}
-		if (num * 2 <= num2 && num2 < num * 3)
-		{
-			return num - num2 % num;
-		}
-		return 0;
+		return result;
 	}
 
-	// Token: 0x0600037F RID: 895 RVA: 0x0001D6D4 File Offset: 0x0001BAD4
+	// Token: 0x0600045D RID: 1117 RVA: 0x00058C84 File Offset: 0x00056E84
 	public bool isHaveOption(int id)
 	{
 		for (int i = 0; i < this.itemOption.Length; i++)
 		{
 			ItemOption itemOption = this.itemOption[i];
-			if (itemOption != null && itemOption.optionTemplate.id == id)
+			bool flag = itemOption != null && itemOption.optionTemplate.id == id;
+			if (flag)
 			{
 				return true;
 			}
@@ -148,12 +196,13 @@ public class Item
 		return false;
 	}
 
-	// Token: 0x06000380 RID: 896 RVA: 0x0001D720 File Offset: 0x0001BB20
+	// Token: 0x0600045E RID: 1118 RVA: 0x00058CD8 File Offset: 0x00056ED8
 	public Item clone()
 	{
 		Item item = new Item();
 		item.template = this.template;
-		if (this.options != null)
+		bool flag = this.options != null;
+		if (flag)
 		{
 			item.options = new MyVector();
 			for (int i = 0; i < this.options.size(); i++)
@@ -181,103 +230,131 @@ public class Item
 		return item;
 	}
 
-	// Token: 0x06000381 RID: 897 RVA: 0x0001D864 File Offset: 0x0001BC64
+	// Token: 0x0600045F RID: 1119 RVA: 0x00058E2C File Offset: 0x0005702C
 	public bool isTypeBody()
 	{
-		return (0 <= (int)this.template.type && (int)this.template.type < 6) || (int)this.template.type == 32 || (int)this.template.type == 35 || (int)this.template.type == 11 || (int)this.template.type == 23;
+		return (0 <= this.template.type && this.template.type < 6) || this.template.type == 32 || this.template.type == 35 || this.template.type == 11 || this.template.type == 23;
 	}
 
-	// Token: 0x06000382 RID: 898 RVA: 0x0001D8E4 File Offset: 0x0001BCE4
+	// Token: 0x06000460 RID: 1120 RVA: 0x00058E9C File Offset: 0x0005709C
 	public string getLockstring()
 	{
 		return (!this.isLock) ? mResources.NOLOCK : mResources.LOCKED;
 	}
 
-	// Token: 0x06000383 RID: 899 RVA: 0x0001D900 File Offset: 0x0001BD00
+	// Token: 0x06000461 RID: 1121 RVA: 0x00058EC4 File Offset: 0x000570C4
 	public string getUpgradestring()
 	{
-		if ((int)this.template.level < 10 || (int)this.template.type >= 10)
+		bool flag = this.template.level < 10 || this.template.type >= 10;
+		string result;
+		if (flag)
 		{
-			return mResources.NOTUPGRADE;
+			result = mResources.NOTUPGRADE;
 		}
-		if (this.upgrade == 0)
+		else
 		{
-			return mResources.NOUPGRADE;
+			bool flag2 = this.upgrade == 0;
+			if (flag2)
+			{
+				result = mResources.NOUPGRADE;
+			}
+			else
+			{
+				result = null;
+			}
 		}
-		return null;
+		return result;
 	}
 
-	// Token: 0x06000384 RID: 900 RVA: 0x0001D940 File Offset: 0x0001BD40
+	// Token: 0x06000462 RID: 1122 RVA: 0x00058F20 File Offset: 0x00057120
 	public bool isTypeUIMe()
 	{
 		return this.typeUI == 5 || this.typeUI == 3 || this.typeUI == 4;
 	}
 
-	// Token: 0x06000385 RID: 901 RVA: 0x0001D969 File Offset: 0x0001BD69
+	// Token: 0x06000463 RID: 1123 RVA: 0x00058F50 File Offset: 0x00057150
 	public bool isTypeUIShopView()
 	{
-		return this.isTypeUIShop() || (this.isTypeUIStore() || this.isTypeUIBook() || this.isTypeUIFashion());
+		return this.isTypeUIShop() || this.isTypeUIStore() || this.isTypeUIBook() || this.isTypeUIFashion();
 	}
 
-	// Token: 0x06000386 RID: 902 RVA: 0x0001D99C File Offset: 0x0001BD9C
+	// Token: 0x06000464 RID: 1124 RVA: 0x00058F88 File Offset: 0x00057188
 	public bool isTypeUIShop()
 	{
 		return this.typeUI == 20 || this.typeUI == 21 || this.typeUI == 22 || this.typeUI == 23 || this.typeUI == 24 || this.typeUI == 25 || this.typeUI == 26 || this.typeUI == 27 || this.typeUI == 28 || this.typeUI == 29 || this.typeUI == 16 || this.typeUI == 17 || this.typeUI == 18 || this.typeUI == 19 || this.typeUI == 2 || this.typeUI == 6 || this.typeUI == 8;
 	}
 
-	// Token: 0x06000387 RID: 903 RVA: 0x0001DA86 File Offset: 0x0001BE86
+	// Token: 0x06000465 RID: 1125 RVA: 0x00059050 File Offset: 0x00057250
 	public bool isTypeUIShopLock()
 	{
 		return this.typeUI == 7 || this.typeUI == 9;
 	}
 
-	// Token: 0x06000388 RID: 904 RVA: 0x0001DAA4 File Offset: 0x0001BEA4
+	// Token: 0x06000466 RID: 1126 RVA: 0x00059078 File Offset: 0x00057278
 	public bool isTypeUIStore()
 	{
 		return this.typeUI == 14;
 	}
 
-	// Token: 0x06000389 RID: 905 RVA: 0x0001DAB6 File Offset: 0x0001BEB6
+	// Token: 0x06000467 RID: 1127 RVA: 0x00059094 File Offset: 0x00057294
 	public bool isTypeUIBook()
 	{
 		return this.typeUI == 15;
 	}
 
-	// Token: 0x0600038A RID: 906 RVA: 0x0001DAC8 File Offset: 0x0001BEC8
+	// Token: 0x06000468 RID: 1128 RVA: 0x000590B0 File Offset: 0x000572B0
 	public bool isTypeUIFashion()
 	{
 		return this.typeUI == 32;
 	}
 
-	// Token: 0x0600038B RID: 907 RVA: 0x0001DADA File Offset: 0x0001BEDA
+	// Token: 0x06000469 RID: 1129 RVA: 0x000590CC File Offset: 0x000572CC
 	public bool isUpMax()
 	{
 		return this.getUpMax() == this.upgrade;
 	}
 
-	// Token: 0x0600038C RID: 908 RVA: 0x0001DAF0 File Offset: 0x0001BEF0
+	// Token: 0x0600046A RID: 1130 RVA: 0x000590EC File Offset: 0x000572EC
 	public int getUpMax()
 	{
-		if ((int)this.template.level >= 1 && (int)this.template.level < 20)
+		bool flag = this.template.level >= 1 && this.template.level < 20;
+		int result;
+		if (flag)
 		{
-			return 4;
+			result = 4;
 		}
-		if ((int)this.template.level >= 20 && (int)this.template.level < 40)
+		else
 		{
-			return 8;
+			bool flag2 = this.template.level >= 20 && this.template.level < 40;
+			if (flag2)
+			{
+				result = 8;
+			}
+			else
+			{
+				bool flag3 = this.template.level >= 40 && this.template.level < 50;
+				if (flag3)
+				{
+					result = 12;
+				}
+				else
+				{
+					bool flag4 = this.template.level >= 50 && this.template.level < 60;
+					if (flag4)
+					{
+						result = 14;
+					}
+					else
+					{
+						result = 16;
+					}
+				}
+			}
 		}
-		if ((int)this.template.level >= 40 && (int)this.template.level < 50)
-		{
-			return 12;
-		}
-		if ((int)this.template.level >= 50 && (int)this.template.level < 60)
-		{
-			return 14;
-		}
-		return 16;
+		return result;
 	}
 
-	// Token: 0x0600038D RID: 909 RVA: 0x0001DBA0 File Offset: 0x0001BFA0
+	// Token: 0x0600046B RID: 1131 RVA: 0x000591AE File Offset: 0x000573AE
 	public void setPartTemp(int headTemp, int bodyTemp, int legTemp, int bagTemp)
 	{
 		this.headTemp = headTemp;
@@ -286,304 +363,304 @@ public class Item
 		this.bagTemp = bagTemp;
 	}
 
-	// Token: 0x0400058B RID: 1419
+	// Token: 0x0400092C RID: 2348
 	public const int OPT_STAR = 34;
 
-	// Token: 0x0400058C RID: 1420
+	// Token: 0x0400092D RID: 2349
 	public const int OPT_MOON = 35;
 
-	// Token: 0x0400058D RID: 1421
+	// Token: 0x0400092E RID: 2350
 	public const int OPT_SUN = 36;
 
-	// Token: 0x0400058E RID: 1422
+	// Token: 0x0400092F RID: 2351
 	public const int OPT_COLORNAME = 41;
 
-	// Token: 0x0400058F RID: 1423
+	// Token: 0x04000930 RID: 2352
 	public const int OPT_LVITEM = 72;
 
-	// Token: 0x04000590 RID: 1424
+	// Token: 0x04000931 RID: 2353
 	public const int OPT_STARSLOT = 102;
 
-	// Token: 0x04000591 RID: 1425
+	// Token: 0x04000932 RID: 2354
 	public const int OPT_MAXSTARSLOT = 107;
 
-	// Token: 0x04000592 RID: 1426
+	// Token: 0x04000933 RID: 2355
 	public const int TYPE_BODY_MIN = 0;
 
-	// Token: 0x04000593 RID: 1427
+	// Token: 0x04000934 RID: 2356
 	public const int TYPE_BODY_MAX = 6;
 
-	// Token: 0x04000594 RID: 1428
+	// Token: 0x04000935 RID: 2357
 	public const int TYPE_AO = 0;
 
-	// Token: 0x04000595 RID: 1429
+	// Token: 0x04000936 RID: 2358
 	public const int TYPE_QUAN = 1;
 
-	// Token: 0x04000596 RID: 1430
+	// Token: 0x04000937 RID: 2359
 	public const int TYPE_GANGTAY = 2;
 
-	// Token: 0x04000597 RID: 1431
+	// Token: 0x04000938 RID: 2360
 	public const int TYPE_GIAY = 3;
 
-	// Token: 0x04000598 RID: 1432
+	// Token: 0x04000939 RID: 2361
 	public const int TYPE_RADA = 4;
 
-	// Token: 0x04000599 RID: 1433
+	// Token: 0x0400093A RID: 2362
 	public const int TYPE_HAIR = 5;
 
-	// Token: 0x0400059A RID: 1434
+	// Token: 0x0400093B RID: 2363
 	public const int TYPE_DAUTHAN = 6;
 
-	// Token: 0x0400059B RID: 1435
+	// Token: 0x0400093C RID: 2364
 	public const int TYPE_NGOCRONG = 12;
 
-	// Token: 0x0400059C RID: 1436
+	// Token: 0x0400093D RID: 2365
 	public const int TYPE_SACH = 7;
 
-	// Token: 0x0400059D RID: 1437
+	// Token: 0x0400093E RID: 2366
 	public const int TYPE_NHIEMVU = 8;
 
-	// Token: 0x0400059E RID: 1438
+	// Token: 0x0400093F RID: 2367
 	public const int TYPE_GOLD = 9;
 
-	// Token: 0x0400059F RID: 1439
+	// Token: 0x04000940 RID: 2368
 	public const int TYPE_DIAMOND = 10;
 
-	// Token: 0x040005A0 RID: 1440
+	// Token: 0x04000941 RID: 2369
 	public const int TYPE_BALO = 11;
 
-	// Token: 0x040005A1 RID: 1441
+	// Token: 0x04000942 RID: 2370
 	public const int TYPE_MOUNT = 23;
 
-	// Token: 0x040005A2 RID: 1442
+	// Token: 0x04000943 RID: 2371
 	public const int TYPE_MOUNT_VIP = 24;
 
-	// Token: 0x040005A3 RID: 1443
+	// Token: 0x04000944 RID: 2372
 	public const int TYPE_DIAMOND_LOCK = 34;
 
-	// Token: 0x040005A4 RID: 1444
+	// Token: 0x04000945 RID: 2373
 	public const int TYPE_TRAINSUIT = 32;
 
-	// Token: 0x040005A5 RID: 1445
+	// Token: 0x04000946 RID: 2374
 	public const int TYPE_HAT = 35;
 
-	// Token: 0x040005A6 RID: 1446
+	// Token: 0x04000947 RID: 2375
 	public const sbyte UI_WEAPON = 2;
 
-	// Token: 0x040005A7 RID: 1447
+	// Token: 0x04000948 RID: 2376
 	public const sbyte UI_BAG = 3;
 
-	// Token: 0x040005A8 RID: 1448
+	// Token: 0x04000949 RID: 2377
 	public const sbyte UI_BOX = 4;
 
-	// Token: 0x040005A9 RID: 1449
+	// Token: 0x0400094A RID: 2378
 	public const sbyte UI_BODY = 5;
 
-	// Token: 0x040005AA RID: 1450
+	// Token: 0x0400094B RID: 2379
 	public const sbyte UI_STACK = 6;
 
-	// Token: 0x040005AB RID: 1451
+	// Token: 0x0400094C RID: 2380
 	public const sbyte UI_STACK_LOCK = 7;
 
-	// Token: 0x040005AC RID: 1452
+	// Token: 0x0400094D RID: 2381
 	public const sbyte UI_GROCERY = 8;
 
-	// Token: 0x040005AD RID: 1453
+	// Token: 0x0400094E RID: 2382
 	public const sbyte UI_GROCERY_LOCK = 9;
 
-	// Token: 0x040005AE RID: 1454
+	// Token: 0x0400094F RID: 2383
 	public const sbyte UI_UPGRADE = 10;
 
-	// Token: 0x040005AF RID: 1455
+	// Token: 0x04000950 RID: 2384
 	public const sbyte UI_UPPEARL = 11;
 
-	// Token: 0x040005B0 RID: 1456
+	// Token: 0x04000951 RID: 2385
 	public const sbyte UI_UPPEARL_LOCK = 12;
 
-	// Token: 0x040005B1 RID: 1457
+	// Token: 0x04000952 RID: 2386
 	public const sbyte UI_SPLIT = 13;
 
-	// Token: 0x040005B2 RID: 1458
+	// Token: 0x04000953 RID: 2387
 	public const sbyte UI_STORE = 14;
 
-	// Token: 0x040005B3 RID: 1459
+	// Token: 0x04000954 RID: 2388
 	public const sbyte UI_BOOK = 15;
 
-	// Token: 0x040005B4 RID: 1460
+	// Token: 0x04000955 RID: 2389
 	public const sbyte UI_LIEN = 16;
 
-	// Token: 0x040005B5 RID: 1461
+	// Token: 0x04000956 RID: 2390
 	public const sbyte UI_NHAN = 17;
 
-	// Token: 0x040005B6 RID: 1462
+	// Token: 0x04000957 RID: 2391
 	public const sbyte UI_NGOCBOI = 18;
 
-	// Token: 0x040005B7 RID: 1463
+	// Token: 0x04000958 RID: 2392
 	public const sbyte UI_PHU = 19;
 
-	// Token: 0x040005B8 RID: 1464
+	// Token: 0x04000959 RID: 2393
 	public const sbyte UI_NONNAM = 20;
 
-	// Token: 0x040005B9 RID: 1465
+	// Token: 0x0400095A RID: 2394
 	public const sbyte UI_NONNU = 21;
 
-	// Token: 0x040005BA RID: 1466
+	// Token: 0x0400095B RID: 2395
 	public const sbyte UI_AONAM = 22;
 
-	// Token: 0x040005BB RID: 1467
+	// Token: 0x0400095C RID: 2396
 	public const sbyte UI_AONU = 23;
 
-	// Token: 0x040005BC RID: 1468
+	// Token: 0x0400095D RID: 2397
 	public const sbyte UI_GANGTAYNAM = 24;
 
-	// Token: 0x040005BD RID: 1469
+	// Token: 0x0400095E RID: 2398
 	public const sbyte UI_GANGTAYNU = 25;
 
-	// Token: 0x040005BE RID: 1470
+	// Token: 0x0400095F RID: 2399
 	public const sbyte UI_QUANNAM = 26;
 
-	// Token: 0x040005BF RID: 1471
+	// Token: 0x04000960 RID: 2400
 	public const sbyte UI_QUANNU = 27;
 
-	// Token: 0x040005C0 RID: 1472
+	// Token: 0x04000961 RID: 2401
 	public const sbyte UI_GIAYNAM = 28;
 
-	// Token: 0x040005C1 RID: 1473
+	// Token: 0x04000962 RID: 2402
 	public const sbyte UI_GIAYNU = 29;
 
-	// Token: 0x040005C2 RID: 1474
+	// Token: 0x04000963 RID: 2403
 	public const sbyte UI_TRADE = 30;
 
-	// Token: 0x040005C3 RID: 1475
+	// Token: 0x04000964 RID: 2404
 	public const sbyte UI_UPGRADE_GOLD = 31;
 
-	// Token: 0x040005C4 RID: 1476
+	// Token: 0x04000965 RID: 2405
 	public const sbyte UI_FASHION = 32;
 
-	// Token: 0x040005C5 RID: 1477
+	// Token: 0x04000966 RID: 2406
 	public const sbyte UI_CONVERT = 33;
 
-	// Token: 0x040005C6 RID: 1478
+	// Token: 0x04000967 RID: 2407
 	public ItemOption[] itemOption;
 
-	// Token: 0x040005C7 RID: 1479
+	// Token: 0x04000968 RID: 2408
 	public ItemTemplate template;
 
-	// Token: 0x040005C8 RID: 1480
+	// Token: 0x04000969 RID: 2409
 	public MyVector options;
 
-	// Token: 0x040005C9 RID: 1481
+	// Token: 0x0400096A RID: 2410
 	public int itemId;
 
-	// Token: 0x040005CA RID: 1482
+	// Token: 0x0400096B RID: 2411
 	public int playerId;
 
-	// Token: 0x040005CB RID: 1483
+	// Token: 0x0400096C RID: 2412
 	public bool isSelect;
 
-	// Token: 0x040005CC RID: 1484
+	// Token: 0x0400096D RID: 2413
 	public int indexUI;
 
-	// Token: 0x040005CD RID: 1485
+	// Token: 0x0400096E RID: 2414
 	public int quantity;
 
-	// Token: 0x040005CE RID: 1486
+	// Token: 0x0400096F RID: 2415
 	public int quantilyToBuy;
 
-	// Token: 0x040005CF RID: 1487
+	// Token: 0x04000970 RID: 2416
 	public long powerRequire;
 
-	// Token: 0x040005D0 RID: 1488
+	// Token: 0x04000971 RID: 2417
 	public bool isLock;
 
-	// Token: 0x040005D1 RID: 1489
+	// Token: 0x04000972 RID: 2418
 	public int sys;
 
-	// Token: 0x040005D2 RID: 1490
+	// Token: 0x04000973 RID: 2419
 	public int upgrade;
 
-	// Token: 0x040005D3 RID: 1491
+	// Token: 0x04000974 RID: 2420
 	public int buyCoin;
 
-	// Token: 0x040005D4 RID: 1492
+	// Token: 0x04000975 RID: 2421
 	public int buyCoinLock;
 
-	// Token: 0x040005D5 RID: 1493
+	// Token: 0x04000976 RID: 2422
 	public int buyGold;
 
-	// Token: 0x040005D6 RID: 1494
+	// Token: 0x04000977 RID: 2423
 	public int buyGoldLock;
 
-	// Token: 0x040005D7 RID: 1495
+	// Token: 0x04000978 RID: 2424
 	public int saleCoinLock;
 
-	// Token: 0x040005D8 RID: 1496
+	// Token: 0x04000979 RID: 2425
 	public int buySpec;
 
-	// Token: 0x040005D9 RID: 1497
+	// Token: 0x0400097A RID: 2426
 	public int buyRuby;
 
-	// Token: 0x040005DA RID: 1498
+	// Token: 0x0400097B RID: 2427
 	public short iconSpec = -1;
 
-	// Token: 0x040005DB RID: 1499
+	// Token: 0x0400097C RID: 2428
 	public sbyte buyType = -1;
 
-	// Token: 0x040005DC RID: 1500
+	// Token: 0x0400097D RID: 2429
 	public int typeUI;
 
-	// Token: 0x040005DD RID: 1501
+	// Token: 0x0400097E RID: 2430
 	public bool isExpires;
 
-	// Token: 0x040005DE RID: 1502
+	// Token: 0x0400097F RID: 2431
 	public bool isBuySpec;
 
-	// Token: 0x040005DF RID: 1503
+	// Token: 0x04000980 RID: 2432
 	public EffectCharPaint eff;
 
-	// Token: 0x040005E0 RID: 1504
+	// Token: 0x04000981 RID: 2433
 	public int indexEff;
 
-	// Token: 0x040005E1 RID: 1505
+	// Token: 0x04000982 RID: 2434
 	public Image img;
 
-	// Token: 0x040005E2 RID: 1506
+	// Token: 0x04000983 RID: 2435
 	public string info;
 
-	// Token: 0x040005E3 RID: 1507
+	// Token: 0x04000984 RID: 2436
 	public string content;
 
-	// Token: 0x040005E4 RID: 1508
+	// Token: 0x04000985 RID: 2437
 	public string reason = string.Empty;
 
-	// Token: 0x040005E5 RID: 1509
+	// Token: 0x04000986 RID: 2438
 	public int compare;
 
-	// Token: 0x040005E6 RID: 1510
+	// Token: 0x04000987 RID: 2439
 	public sbyte isMe;
 
-	// Token: 0x040005E7 RID: 1511
+	// Token: 0x04000988 RID: 2440
 	public bool newItem;
 
-	// Token: 0x040005E8 RID: 1512
+	// Token: 0x04000989 RID: 2441
 	public int headTemp = -1;
 
-	// Token: 0x040005E9 RID: 1513
+	// Token: 0x0400098A RID: 2442
 	public int bodyTemp = -1;
 
-	// Token: 0x040005EA RID: 1514
+	// Token: 0x0400098B RID: 2443
 	public int legTemp = -1;
 
-	// Token: 0x040005EB RID: 1515
+	// Token: 0x0400098C RID: 2444
 	public int bagTemp = -1;
 
-	// Token: 0x040005EC RID: 1516
+	// Token: 0x0400098D RID: 2445
 	public int wpTemp = -1;
 
-	// Token: 0x040005ED RID: 1517
+	// Token: 0x0400098E RID: 2446
 	public string nameNguoiKyGui = string.Empty;
 
-	// Token: 0x040005EE RID: 1518
+	// Token: 0x0400098F RID: 2447
 	private int[] color = new int[]
 	{
 		0,
@@ -606,7 +683,7 @@ public class Item
 		3359744
 	};
 
-	// Token: 0x040005EF RID: 1519
+	// Token: 0x04000990 RID: 2448
 	private int[][] colorBorder = new int[][]
 	{
 		new int[]
@@ -656,7 +733,7 @@ public class Item
 		}
 	};
 
-	// Token: 0x040005F0 RID: 1520
+	// Token: 0x04000991 RID: 2449
 	private int[] size = new int[]
 	{
 		2,

@@ -1,18 +1,18 @@
 ﻿using System;
 
-// Token: 0x02000074 RID: 116
+// Token: 0x02000085 RID: 133
 public class Paint
 {
-	// Token: 0x060003DC RID: 988 RVA: 0x000313A0 File Offset: 0x0002F7A0
+	// Token: 0x06000687 RID: 1671 RVA: 0x0006E9EC File Offset: 0x0006CBEC
 	public static void loadbg()
 	{
 		for (int i = 0; i < Paint.goc.Length; i++)
 		{
-			Paint.goc[i] = GameCanvas.loadImage("/mainImage/myTexture2dgoc" + (i + 1) + ".png");
+			Paint.goc[i] = GameCanvas.loadImage("/mainImage/myTexture2dgoc" + (i + 1).ToString() + ".png");
 		}
 	}
 
-	// Token: 0x060003DD RID: 989 RVA: 0x000313E8 File Offset: 0x0002F7E8
+	// Token: 0x06000688 RID: 1672 RVA: 0x0006EA38 File Offset: 0x0006CC38
 	public void paintDefaultBg(mGraphics g)
 	{
 		g.setColor(8916494);
@@ -29,24 +29,24 @@ public class Paint
 		g.drawRect(GameCanvas.w - 1, 0, 0, GameCanvas.h - Paint.hTab);
 	}
 
-	// Token: 0x060003DE RID: 990 RVA: 0x0003150D File Offset: 0x0002F90D
+	// Token: 0x06000689 RID: 1673 RVA: 0x0006EB6A File Offset: 0x0006CD6A
 	public void paintfillDefaultBg(mGraphics g)
 	{
 		g.setColor(205314);
 		g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
 	}
 
-	// Token: 0x060003DF RID: 991 RVA: 0x0003152C File Offset: 0x0002F92C
+	// Token: 0x0600068A RID: 1674 RVA: 0x00003136 File Offset: 0x00001336
 	public void repaintCircleBg()
 	{
 	}
 
-	// Token: 0x060003E0 RID: 992 RVA: 0x0003152E File Offset: 0x0002F92E
+	// Token: 0x0600068B RID: 1675 RVA: 0x00003136 File Offset: 0x00001336
 	public void paintSolidBg(mGraphics g)
 	{
 	}
 
-	// Token: 0x060003E1 RID: 993 RVA: 0x00031530 File Offset: 0x0002F930
+	// Token: 0x0600068C RID: 1676 RVA: 0x0006EB8C File Offset: 0x0006CD8C
 	public void paintDefaultPopup(mGraphics g, int x, int y, int w, int h)
 	{
 		g.setColor(8411138);
@@ -55,7 +55,7 @@ public class Paint
 		g.drawRect(x, y, w, h);
 	}
 
-	// Token: 0x060003E2 RID: 994 RVA: 0x00031560 File Offset: 0x0002F960
+	// Token: 0x0600068D RID: 1677 RVA: 0x0006EBC1 File Offset: 0x0006CDC1
 	public void paintWhitePopup(mGraphics g, int y, int x, int width, int height)
 	{
 		g.setColor(16776363);
@@ -64,7 +64,7 @@ public class Paint
 		g.drawRect(x - 1, y - 1, width + 1, height + 1);
 	}
 
-	// Token: 0x060003E3 RID: 995 RVA: 0x00031594 File Offset: 0x0002F994
+	// Token: 0x0600068E RID: 1678 RVA: 0x0006EBFC File Offset: 0x0006CDFC
 	public void paintDefaultPopupH(mGraphics g, int h)
 	{
 		g.setColor(14279153);
@@ -73,17 +73,20 @@ public class Paint
 		g.fillRect(10, GameCanvas.h - (h + 35), GameCanvas.w - 20, h);
 	}
 
-	// Token: 0x060003E4 RID: 996 RVA: 0x000315F0 File Offset: 0x0002F9F0
+	// Token: 0x0600068F RID: 1679 RVA: 0x0006EC5C File Offset: 0x0006CE5C
 	public void paintCmdBar(mGraphics g, Command left, Command center, Command right)
 	{
 		mFont mFont = (!GameCanvas.isTouch) ? mFont.tahoma_7b_dark : mFont.tahoma_7b_dark;
 		int num = 3;
-		if (left != null)
+		bool flag = left != null;
+		if (flag)
 		{
 			Paint.lenCaption = mFont.getWidth(left.caption);
-			if (Paint.lenCaption > 0)
+			bool flag2 = Paint.lenCaption > 0;
+			if (flag2)
 			{
-				if (left.x >= 0 && left.y > 0)
+				bool flag3 = left.x >= 0 && left.y > 0;
+				if (flag3)
 				{
 					left.paint(g);
 				}
@@ -94,12 +97,15 @@ public class Paint
 				}
 			}
 		}
-		if (center != null)
+		bool flag4 = center != null;
+		if (flag4)
 		{
 			Paint.lenCaption = mFont.getWidth(center.caption);
-			if (Paint.lenCaption > 0)
+			bool flag5 = Paint.lenCaption > 0;
+			if (flag5)
 			{
-				if (center.x > 0 && center.y > 0)
+				bool flag6 = center.x > 0 && center.y > 0;
+				if (flag6)
 				{
 					center.paint(g);
 				}
@@ -110,12 +116,15 @@ public class Paint
 				}
 			}
 		}
-		if (right != null)
+		bool flag7 = right != null;
+		if (flag7)
 		{
 			Paint.lenCaption = mFont.getWidth(right.caption);
-			if (Paint.lenCaption > 0)
+			bool flag8 = Paint.lenCaption > 0;
+			if (flag8)
 			{
-				if (right.x > 0 && right.y > 0)
+				bool flag9 = right.x > 0 && right.y > 0;
+				if (flag9)
 				{
 					right.paint(g);
 				}
@@ -128,30 +137,30 @@ public class Paint
 		}
 	}
 
-	// Token: 0x060003E5 RID: 997 RVA: 0x000317F1 File Offset: 0x0002FBF1
+	// Token: 0x06000690 RID: 1680 RVA: 0x00003136 File Offset: 0x00001336
 	public void paintTabSoft(mGraphics g)
 	{
 	}
 
-	// Token: 0x060003E6 RID: 998 RVA: 0x000317F3 File Offset: 0x0002FBF3
+	// Token: 0x06000691 RID: 1681 RVA: 0x0006EE84 File Offset: 0x0006D084
 	public void paintSelect(mGraphics g, int x, int y, int w, int h)
 	{
 		g.setColor(16774843);
 		g.fillRect(x, y, w, h);
 	}
 
-	// Token: 0x060003E7 RID: 999 RVA: 0x0003180C File Offset: 0x0002FC0C
+	// Token: 0x06000692 RID: 1682 RVA: 0x0006EEA0 File Offset: 0x0006D0A0
 	public void paintLogo(mGraphics g, int x, int y)
 	{
 		g.drawImage(Paint.imgLogo, x, y, 3);
 	}
 
-	// Token: 0x060003E8 RID: 1000 RVA: 0x0003181C File Offset: 0x0002FC1C
+	// Token: 0x06000693 RID: 1683 RVA: 0x00003136 File Offset: 0x00001336
 	public void paintHotline(mGraphics g, string number)
 	{
 	}
 
-	// Token: 0x060003E9 RID: 1001 RVA: 0x00031820 File Offset: 0x0002FC20
+	// Token: 0x06000694 RID: 1684 RVA: 0x0006EEB4 File Offset: 0x0006D0B4
 	public void paintBackMenu(mGraphics g, int x, int y, int w, int h, bool iss)
 	{
 		if (iss)
@@ -169,39 +178,40 @@ public class Paint
 		g.fillRoundRect(x + 3, y + 3, w - 6, h - 6, 10, 10);
 	}
 
-	// Token: 0x060003EA RID: 1002 RVA: 0x0003189D File Offset: 0x0002FC9D
+	// Token: 0x06000695 RID: 1685 RVA: 0x00003136 File Offset: 0x00001336
 	public void paintMsgBG(mGraphics g, int x, int y, int w, int h, string title, string subTitle, string check)
 	{
 	}
 
-	// Token: 0x060003EB RID: 1003 RVA: 0x0003189F File Offset: 0x0002FC9F
+	// Token: 0x06000696 RID: 1686 RVA: 0x00003136 File Offset: 0x00001336
 	public void paintDefaultScrList(mGraphics g, string title, string subTitle, string check)
 	{
 	}
 
-	// Token: 0x060003EC RID: 1004 RVA: 0x000318A1 File Offset: 0x0002FCA1
+	// Token: 0x06000697 RID: 1687 RVA: 0x0006EF3C File Offset: 0x0006D13C
 	public void paintCheck(mGraphics g, int x, int y, int index)
 	{
 		g.drawImage(Paint.imgTick[1], x, y, 3);
-		if (index == 1)
+		bool flag = index == 1;
+		if (flag)
 		{
 			g.drawImage(Paint.imgTick[0], x + 1, y - 3, 3);
 		}
 	}
 
-	// Token: 0x060003ED RID: 1005 RVA: 0x000318CF File Offset: 0x0002FCCF
+	// Token: 0x06000698 RID: 1688 RVA: 0x0006EF7B File Offset: 0x0006D17B
 	public void paintImgMsg(mGraphics g, int x, int y, int index)
 	{
 		g.drawImage(Paint.imgMsg[index], x, y, 0);
 	}
 
-	// Token: 0x060003EE RID: 1006 RVA: 0x000318E2 File Offset: 0x0002FCE2
+	// Token: 0x06000699 RID: 1689 RVA: 0x0006EF90 File Offset: 0x0006D190
 	public void paintTitleBoard(mGraphics g, int roomId)
 	{
 		this.paintDefaultBg(g);
 	}
 
-	// Token: 0x060003EF RID: 1007 RVA: 0x000318EC File Offset: 0x0002FCEC
+	// Token: 0x0600069A RID: 1690 RVA: 0x0006EF9C File Offset: 0x0006D19C
 	public void paintCheckPass(mGraphics g, int x, int y, bool check, bool focus)
 	{
 		if (focus)
@@ -214,7 +224,7 @@ public class Paint
 		}
 	}
 
-	// Token: 0x060003F0 RID: 1008 RVA: 0x00031950 File Offset: 0x0002FD50
+	// Token: 0x0600069B RID: 1691 RVA: 0x0006EFF8 File Offset: 0x0006D1F8
 	public void paintInputDlg(mGraphics g, int x, int y, int w, int h, string[] str)
 	{
 		this.paintFrame(x, y, w, h, g);
@@ -229,19 +239,19 @@ public class Paint
 		}
 	}
 
-	// Token: 0x060003F1 RID: 1009 RVA: 0x000319B5 File Offset: 0x0002FDB5
+	// Token: 0x0600069C RID: 1692 RVA: 0x00003136 File Offset: 0x00001336
 	public void paintIconMainMenu(mGraphics g, int x, int y, bool iss, bool isSe, int i, int wStr)
 	{
 	}
 
-	// Token: 0x060003F2 RID: 1010 RVA: 0x000319B7 File Offset: 0x0002FDB7
+	// Token: 0x0600069D RID: 1693 RVA: 0x0006F060 File Offset: 0x0006D260
 	public void paintLineRoom(mGraphics g, int x, int y, int xTo, int yTo)
 	{
 		g.setColor(16774843);
 		g.drawLine(x, y, xTo, yTo);
 	}
 
-	// Token: 0x060003F3 RID: 1011 RVA: 0x000319D0 File Offset: 0x0002FDD0
+	// Token: 0x0600069E RID: 1694 RVA: 0x0006F07C File Offset: 0x0006D27C
 	public void paintCellContaint(mGraphics g, int x, int y, int w, int h, bool iss)
 	{
 		if (iss)
@@ -253,20 +263,20 @@ public class Paint
 		g.drawRect(x, y, w, w);
 	}
 
-	// Token: 0x060003F4 RID: 1012 RVA: 0x00031A0F File Offset: 0x0002FE0F
+	// Token: 0x0600069F RID: 1695 RVA: 0x0006F0CC File Offset: 0x0006D2CC
 	public void paintScroll(mGraphics g, int x, int y, int h)
 	{
 		g.setColor(3847752);
 		g.fillRect(x, y, 4, h);
 	}
 
-	// Token: 0x060003F5 RID: 1013 RVA: 0x00031A27 File Offset: 0x0002FE27
+	// Token: 0x060006A0 RID: 1696 RVA: 0x0006F0E8 File Offset: 0x0006D2E8
 	public int[] getColorMsg()
 	{
 		return this.color;
 	}
 
-	// Token: 0x060003F6 RID: 1014 RVA: 0x00031A2F File Offset: 0x0002FE2F
+	// Token: 0x060006A1 RID: 1697 RVA: 0x0006F100 File Offset: 0x0006D300
 	public void paintLogo(mGraphics g)
 	{
 		g.setColor(8916494);
@@ -274,11 +284,12 @@ public class Paint
 		g.drawImage(Paint.imgLogo, GameCanvas.h >> 1, GameCanvas.w >> 1, 3);
 	}
 
-	// Token: 0x060003F7 RID: 1015 RVA: 0x00031A68 File Offset: 0x0002FE68
+	// Token: 0x060006A2 RID: 1698 RVA: 0x0006F140 File Offset: 0x0006D340
 	public void paintTextLogin(mGraphics g, bool isRes)
 	{
 		int num = 0;
-		if (!isRes && GameCanvas.h <= 240)
+		bool flag = !isRes && GameCanvas.h <= 240;
+		if (flag)
 		{
 			num = 15;
 		}
@@ -286,25 +297,25 @@ public class Paint
 		mFont.tahoma_7b_green2.drawString(g, mResources.LOGINLABELS[1], GameCanvas.hw, GameCanvas.hh + 73 - num, 2);
 	}
 
-	// Token: 0x060003F8 RID: 1016 RVA: 0x00031AD3 File Offset: 0x0002FED3
+	// Token: 0x060006A3 RID: 1699 RVA: 0x0006F1B4 File Offset: 0x0006D3B4
 	public void paintSellectBoard(mGraphics g, int x, int y, int w, int h)
 	{
 		g.drawImage(Paint.imgSelectBoard, x - 7, y, 0);
 	}
 
-	// Token: 0x060003F9 RID: 1017 RVA: 0x00031AE5 File Offset: 0x0002FEE5
+	// Token: 0x060006A4 RID: 1700 RVA: 0x0006F1C8 File Offset: 0x0006D3C8
 	public int isRegisterUsingWAP()
 	{
 		return 0;
 	}
 
-	// Token: 0x060003FA RID: 1018 RVA: 0x00031AE8 File Offset: 0x0002FEE8
+	// Token: 0x060006A5 RID: 1701 RVA: 0x0006F1DC File Offset: 0x0006D3DC
 	public string getCard()
 	{
 		return "/vmg/card.on";
 	}
 
-	// Token: 0x060003FB RID: 1019 RVA: 0x00031AEF File Offset: 0x0002FEEF
+	// Token: 0x060006A6 RID: 1702 RVA: 0x0006F1F3 File Offset: 0x0006D3F3
 	public void paintSellectedShop(mGraphics g, int x, int y, int w, int h)
 	{
 		g.setColor(16777215);
@@ -312,7 +323,7 @@ public class Paint
 		g.drawRect(x + 1, y + 1, 38, 38);
 	}
 
-	// Token: 0x060003FC RID: 1020 RVA: 0x00031B18 File Offset: 0x0002FF18
+	// Token: 0x060006A7 RID: 1703 RVA: 0x0006F220 File Offset: 0x0006D420
 	public string getUrlUpdateGame()
 	{
 		return string.Concat(new object[]
@@ -324,12 +335,12 @@ public class Paint
 		});
 	}
 
-	// Token: 0x060003FD RID: 1021 RVA: 0x00031B4A File Offset: 0x0002FF4A
+	// Token: 0x060006A8 RID: 1704 RVA: 0x00003136 File Offset: 0x00001336
 	public void doSelect(int focus)
 	{
 	}
 
-	// Token: 0x060003FE RID: 1022 RVA: 0x00031B4C File Offset: 0x0002FF4C
+	// Token: 0x060006A9 RID: 1705 RVA: 0x0006F264 File Offset: 0x0006D464
 	public void paintPopUp(int x, int y, int w, int h, mGraphics g)
 	{
 		g.setColor(9340251);
@@ -355,7 +366,7 @@ public class Paint
 		g.drawImage(Paint.goc[5], x + w / 2, y + h + 1, StaticObj.BOTTOM_HCENTER);
 	}
 
-	// Token: 0x060003FF RID: 1023 RVA: 0x00031D6C File Offset: 0x0003016C
+	// Token: 0x060006AA RID: 1706 RVA: 0x0006F498 File Offset: 0x0006D698
 	public void paintFrame(int x, int y, int w, int h, mGraphics g)
 	{
 		g.setColor(13524492);
@@ -372,7 +383,7 @@ public class Paint
 		g.drawRegion(GameCanvas.imgBorder[2], 0, 0, 16, 16, 3, x + w + 1, y + h + 1, StaticObj.BOTTOM_RIGHT);
 	}
 
-	// Token: 0x06000400 RID: 1024 RVA: 0x00031E88 File Offset: 0x00030288
+	// Token: 0x060006AB RID: 1707 RVA: 0x0006F5C1 File Offset: 0x0006D7C1
 	public void paintFrameSimple(int x, int y, int w, int h, mGraphics g)
 	{
 		g.setColor(6702080);
@@ -381,90 +392,90 @@ public class Paint
 		g.fillRect(x + 1, y + 1, w - 2, h - 2);
 	}
 
-	// Token: 0x06000401 RID: 1025 RVA: 0x00031EC2 File Offset: 0x000302C2
+	// Token: 0x060006AC RID: 1708 RVA: 0x0006F600 File Offset: 0x0006D800
 	public void paintFrameBorder(int x, int y, int w, int h, mGraphics g)
 	{
 		this.paintFrame(x, y, w, h, g);
 	}
 
-	// Token: 0x06000402 RID: 1026 RVA: 0x00031ED1 File Offset: 0x000302D1
+	// Token: 0x060006AD RID: 1709 RVA: 0x0006F611 File Offset: 0x0006D811
 	public void paintFrameInside(int x, int y, int w, int h, mGraphics g)
 	{
 		g.setColor(Paint.COLORBACKGROUND);
 		g.fillRect(x, y, w, h);
 	}
 
-	// Token: 0x06000403 RID: 1027 RVA: 0x00031EEB File Offset: 0x000302EB
+	// Token: 0x060006AE RID: 1710 RVA: 0x0006F62E File Offset: 0x0006D82E
 	public void paintFrameInsideSelected(int x, int y, int w, int h, mGraphics g)
 	{
 		g.setColor(Paint.COLORLIGHT);
 		g.fillRect(x, y, w, h);
 	}
 
-	// Token: 0x040006BD RID: 1725
+	// Token: 0x04000E64 RID: 3684
 	public static int COLORBACKGROUND = 15787715;
 
-	// Token: 0x040006BE RID: 1726
+	// Token: 0x04000E65 RID: 3685
 	public static int COLORLIGHT = 16383818;
 
-	// Token: 0x040006BF RID: 1727
+	// Token: 0x04000E66 RID: 3686
 	public static int COLORDARK = 3937280;
 
-	// Token: 0x040006C0 RID: 1728
+	// Token: 0x04000E67 RID: 3687
 	public static int COLORBORDER = 15224576;
 
-	// Token: 0x040006C1 RID: 1729
+	// Token: 0x04000E68 RID: 3688
 	public static int COLORFOCUS = 16777215;
 
-	// Token: 0x040006C2 RID: 1730
+	// Token: 0x04000E69 RID: 3689
 	public static Image imgBg;
 
-	// Token: 0x040006C3 RID: 1731
+	// Token: 0x04000E6A RID: 3690
 	public static Image imgLogo;
 
-	// Token: 0x040006C4 RID: 1732
+	// Token: 0x04000E6B RID: 3691
 	public static Image imgLB;
 
-	// Token: 0x040006C5 RID: 1733
+	// Token: 0x04000E6C RID: 3692
 	public static Image imgLT;
 
-	// Token: 0x040006C6 RID: 1734
+	// Token: 0x04000E6D RID: 3693
 	public static Image imgRB;
 
-	// Token: 0x040006C7 RID: 1735
+	// Token: 0x04000E6E RID: 3694
 	public static Image imgRT;
 
-	// Token: 0x040006C8 RID: 1736
+	// Token: 0x04000E6F RID: 3695
 	public static Image imgChuong;
 
-	// Token: 0x040006C9 RID: 1737
+	// Token: 0x04000E70 RID: 3696
 	public static Image imgSelectBoard;
 
-	// Token: 0x040006CA RID: 1738
+	// Token: 0x04000E71 RID: 3697
 	public static Image imgtoiSmall;
 
-	// Token: 0x040006CB RID: 1739
+	// Token: 0x04000E72 RID: 3698
 	public static Image imgTayTren;
 
-	// Token: 0x040006CC RID: 1740
+	// Token: 0x04000E73 RID: 3699
 	public static Image imgTayDuoi;
 
-	// Token: 0x040006CD RID: 1741
+	// Token: 0x04000E74 RID: 3700
 	public static Image[] imgTick = new Image[2];
 
-	// Token: 0x040006CE RID: 1742
+	// Token: 0x04000E75 RID: 3701
 	public static Image[] imgMsg = new Image[2];
 
-	// Token: 0x040006CF RID: 1743
+	// Token: 0x04000E76 RID: 3702
 	public static Image[] goc = new Image[6];
 
-	// Token: 0x040006D0 RID: 1744
+	// Token: 0x04000E77 RID: 3703
 	public static int hTab = 24;
 
-	// Token: 0x040006D1 RID: 1745
+	// Token: 0x04000E78 RID: 3704
 	public static int lenCaption = 0;
 
-	// Token: 0x040006D2 RID: 1746
+	// Token: 0x04000E79 RID: 3705
 	public int[] color = new int[]
 	{
 		15970400,
@@ -476,6 +487,6 @@ public class Paint
 		3108954
 	};
 
-	// Token: 0x040006D3 RID: 1747
+	// Token: 0x04000E7A RID: 3706
 	public static Image imgCheck = GameCanvas.loadImage("/mainImage/myTexture2dcheck.png");
 }

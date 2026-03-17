@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x0200006F RID: 111
+// Token: 0x02000071 RID: 113
 public class MovePoint
 {
-	// Token: 0x060003CD RID: 973 RVA: 0x0003132D File Offset: 0x0002F72D
+	// Token: 0x060005A7 RID: 1447 RVA: 0x0006777C File Offset: 0x0006597C
 	public MovePoint(int xEnd, int yEnd, int act, int dir)
 	{
 		this.xEnd = xEnd;
@@ -12,28 +12,28 @@ public class MovePoint
 		this.status = act;
 	}
 
-	// Token: 0x060003CE RID: 974 RVA: 0x00031352 File Offset: 0x0002F752
+	// Token: 0x060005A8 RID: 1448 RVA: 0x000677A3 File Offset: 0x000659A3
 	public MovePoint(int xEnd, int yEnd)
 	{
 		this.xEnd = xEnd;
 		this.yEnd = yEnd;
 	}
 
-	// Token: 0x04000693 RID: 1683
+	// Token: 0x04000C0B RID: 3083
 	public int xEnd;
 
-	// Token: 0x04000694 RID: 1684
+	// Token: 0x04000C0C RID: 3084
 	public int yEnd;
 
-	// Token: 0x04000695 RID: 1685
+	// Token: 0x04000C0D RID: 3085
 	public int dir;
 
-	// Token: 0x04000696 RID: 1686
+	// Token: 0x04000C0E RID: 3086
 	public int cvx;
 
-	// Token: 0x04000697 RID: 1687
+	// Token: 0x04000C0F RID: 3087
 	public int cvy;
 
-	// Token: 0x04000698 RID: 1688
+	// Token: 0x04000C10 RID: 3088
 	public int status;
 }

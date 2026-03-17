@@ -1,13 +1,14 @@
 ﻿using System;
 
-// Token: 0x020000C5 RID: 197
+// Token: 0x02000099 RID: 153
 public class ServerScr : mScreen, IActionListener
 {
-	// Token: 0x060009F3 RID: 2547 RVA: 0x00097C00 File Offset: 0x00096000
+	// Token: 0x06000854 RID: 2132 RVA: 0x00093E60 File Offset: 0x00092060
 	public ServerScr()
 	{
 		TileMap.bgID = (int)((byte)(mSystem.currentTimeMillis() % 9L));
-		if (TileMap.bgID == 5 || TileMap.bgID == 6)
+		bool flag = TileMap.bgID == 5 || TileMap.bgID == 6;
+		if (flag)
 		{
 			TileMap.bgID = 4;
 		}
@@ -16,7 +17,7 @@ public class ServerScr : mScreen, IActionListener
 		GameScr.cmy = 200;
 	}
 
-	// Token: 0x060009F4 RID: 2548 RVA: 0x00097C64 File Offset: 0x00096064
+	// Token: 0x06000855 RID: 2133 RVA: 0x00093EC8 File Offset: 0x000920C8
 	public override void switchToMe()
 	{
 		SoundMn.gI().stopAll();
@@ -33,7 +34,7 @@ public class ServerScr : mScreen, IActionListener
 		this.sort();
 	}
 
-	// Token: 0x060009F5 RID: 2549 RVA: 0x00097D10 File Offset: 0x00096110
+	// Token: 0x06000856 RID: 2134 RVA: 0x00093F78 File Offset: 0x00092178
 	private void sort()
 	{
 		this.mainSelect = ServerListScreen.ipSelect;
@@ -41,11 +42,13 @@ public class ServerScr : mScreen, IActionListener
 		this.wc = 76;
 		this.hc = mScreen.cmdH;
 		this.numw = 2;
-		if (GameCanvas.w > 3 * (this.wc + this.w2c))
+		bool flag = GameCanvas.w > 3 * (this.wc + this.w2c);
+		if (flag)
 		{
 			this.numw = 3;
 		}
-		if (this.vecServer.size() < 3)
+		bool flag2 = this.vecServer.size() < 3;
+		if (flag2)
 		{
 			this.numw = 2;
 		}
@@ -53,7 +56,8 @@ public class ServerScr : mScreen, IActionListener
 		for (int i = 0; i < this.vecServer.size(); i++)
 		{
 			Command command = (Command)this.vecServer.elementAt(i);
-			if (command != null)
+			bool flag3 = command != null;
+			if (flag3)
 			{
 				int num = GameCanvas.hw - this.numw * (this.wc + this.w2c) / 2;
 				int x = num + i % this.numw * (this.wc + this.w2c);
@@ -65,22 +69,26 @@ public class ServerScr : mScreen, IActionListener
 		}
 	}
 
-	// Token: 0x060009F6 RID: 2550 RVA: 0x00097E6C File Offset: 0x0009626C
+	// Token: 0x06000857 RID: 2135 RVA: 0x000940E8 File Offset: 0x000922E8
 	public override void update()
 	{
 		GameScr.cmx++;
-		if (GameScr.cmx > GameCanvas.w * 3 + 100)
+		bool flag = GameScr.cmx > GameCanvas.w * 3 + 100;
+		if (flag)
 		{
 			GameScr.cmx = 100;
 		}
 		for (int i = 0; i < this.vecServer.size(); i++)
 		{
 			Command command = (Command)this.vecServer.elementAt(i);
-			if (!GameCanvas.isTouch)
+			bool flag2 = !GameCanvas.isTouch;
+			if (flag2)
 			{
-				if (i == this.mainSelect)
+				bool flag3 = i == this.mainSelect;
+				if (flag3)
 				{
-					if (GameCanvas.gameTick % 10 < 4)
+					bool flag4 = GameCanvas.gameTick % 10 < 4;
+					if (flag4)
 					{
 						command.isFocus = true;
 					}
@@ -96,20 +104,25 @@ public class ServerScr : mScreen, IActionListener
 					command.isFocus = false;
 				}
 			}
-			else if (command != null && command.isPointerPressInside())
+			else
 			{
-				command.performAction();
+				bool flag5 = command != null && command.isPointerPressInside();
+				if (flag5)
+				{
+					command.performAction();
+				}
 			}
 		}
 	}
 
-	// Token: 0x060009F7 RID: 2551 RVA: 0x00097F54 File Offset: 0x00096354
+	// Token: 0x06000858 RID: 2136 RVA: 0x000941E8 File Offset: 0x000923E8
 	public override void paint(mGraphics g)
 	{
 		GameCanvas.paintBGGameScr(g);
 		for (int i = 0; i < this.vecServer.size(); i++)
 		{
-			if (this.vecServer.elementAt(i) != null)
+			bool flag = this.vecServer.elementAt(i) != null;
+			if (flag)
 			{
 				((Command)this.vecServer.elementAt(i)).paint(g);
 			}
@@ -117,53 +130,73 @@ public class ServerScr : mScreen, IActionListener
 		base.paint(g);
 	}
 
-	// Token: 0x060009F8 RID: 2552 RVA: 0x00097FB4 File Offset: 0x000963B4
+	// Token: 0x06000859 RID: 2137 RVA: 0x00094250 File Offset: 0x00092450
 	public override void updateKey()
 	{
 		base.updateKey();
 		int num = this.mainSelect % this.numw;
 		int num2 = this.mainSelect / this.numw;
-		if (GameCanvas.keyPressed[4])
+		bool flag = GameCanvas.keyPressed[4];
+		if (flag)
 		{
-			if (num > 0)
+			bool flag2 = num > 0;
+			if (flag2)
 			{
 				this.mainSelect--;
 			}
 			GameCanvas.keyPressed[4] = false;
 		}
-		else if (GameCanvas.keyPressed[6])
+		else
 		{
-			if (num < this.numw - 1)
+			bool flag3 = GameCanvas.keyPressed[6];
+			if (flag3)
 			{
-				this.mainSelect++;
+				bool flag4 = num < this.numw - 1;
+				if (flag4)
+				{
+					this.mainSelect++;
+				}
+				GameCanvas.keyPressed[6] = false;
 			}
-			GameCanvas.keyPressed[6] = false;
-		}
-		else if (GameCanvas.keyPressed[2])
-		{
-			if (num2 > 0)
+			else
 			{
-				this.mainSelect -= this.numw;
+				bool flag5 = GameCanvas.keyPressed[2];
+				if (flag5)
+				{
+					bool flag6 = num2 > 0;
+					if (flag6)
+					{
+						this.mainSelect -= this.numw;
+					}
+					GameCanvas.keyPressed[2] = false;
+				}
+				else
+				{
+					bool flag7 = GameCanvas.keyPressed[8];
+					if (flag7)
+					{
+						bool flag8 = num2 < this.numh - 1;
+						if (flag8)
+						{
+							this.mainSelect += this.numw;
+						}
+						GameCanvas.keyPressed[8] = false;
+					}
+				}
 			}
-			GameCanvas.keyPressed[2] = false;
 		}
-		else if (GameCanvas.keyPressed[8])
-		{
-			if (num2 < this.numh - 1)
-			{
-				this.mainSelect += this.numw;
-			}
-			GameCanvas.keyPressed[8] = false;
-		}
-		if (this.mainSelect < 0)
+		bool flag9 = this.mainSelect < 0;
+		if (flag9)
 		{
 			this.mainSelect = 0;
 		}
-		if (this.mainSelect >= this.vecServer.size())
+		bool flag10 = this.mainSelect >= this.vecServer.size();
+		if (flag10)
 		{
 			this.mainSelect = this.vecServer.size() - 1;
 		}
-		if (GameCanvas.keyPressed[5])
+		bool flag11 = GameCanvas.keyPressed[5];
+		if (flag11)
 		{
 			((Command)this.vecServer.elementAt(num)).performAction();
 			GameCanvas.keyPressed[5] = false;
@@ -171,7 +204,7 @@ public class ServerScr : mScreen, IActionListener
 		GameCanvas.clearKeyPressed();
 	}
 
-	// Token: 0x060009F9 RID: 2553 RVA: 0x00098120 File Offset: 0x00096520
+	// Token: 0x0600085A RID: 2138 RVA: 0x000943E0 File Offset: 0x000925E0
 	public void perform(int idAction, object p)
 	{
 		switch (idAction)
@@ -180,7 +213,8 @@ public class ServerScr : mScreen, IActionListener
 			this.vecServer.removeAllElements();
 			for (int i = 0; i < ServerListScreen.nameServer.Length; i++)
 			{
-				if ((int)ServerListScreen.language[i] != 0)
+				bool flag = ServerListScreen.language[i] != 0;
+				if (flag)
 				{
 					this.vecServer.addElement(new Command(ServerListScreen.nameServer[i], this, 100 + i, null));
 				}
@@ -191,7 +225,8 @@ public class ServerScr : mScreen, IActionListener
 			this.vecServer.removeAllElements();
 			for (int j = 0; j < ServerListScreen.nameServer.Length; j++)
 			{
-				if ((int)ServerListScreen.language[j] == 0)
+				bool flag2 = ServerListScreen.language[j] == 0;
+				if (flag2)
 				{
 					this.vecServer.addElement(new Command(ServerListScreen.nameServer[j], this, 100 + j, null));
 				}
@@ -207,43 +242,43 @@ public class ServerScr : mScreen, IActionListener
 		default:
 			Session_ME.gI().clearSendingMessage();
 			ServerListScreen.ipSelect = idAction - 100;
-			Res.outz("Default:    ServerListScreen.ipSelect " + ServerListScreen.ipSelect);
+			Res.outz("Default:    ServerListScreen.ipSelect " + ServerListScreen.ipSelect.ToString());
 			GameCanvas.serverScreen.selectServer();
 			GameCanvas.serverScreen.switchToMe();
 			break;
 		}
 	}
 
-	// Token: 0x04001255 RID: 4693
+	// Token: 0x040010EB RID: 4331
 	private int mainSelect;
 
-	// Token: 0x04001256 RID: 4694
+	// Token: 0x040010EC RID: 4332
 	private MyVector vecServer = new MyVector();
 
-	// Token: 0x04001257 RID: 4695
+	// Token: 0x040010ED RID: 4333
 	private Command cmdCheck;
 
-	// Token: 0x04001258 RID: 4696
+	// Token: 0x040010EE RID: 4334
 	public const int icmd = 100;
 
-	// Token: 0x04001259 RID: 4697
+	// Token: 0x040010EF RID: 4335
 	private int wc;
 
-	// Token: 0x0400125A RID: 4698
+	// Token: 0x040010F0 RID: 4336
 	private int hc;
 
-	// Token: 0x0400125B RID: 4699
+	// Token: 0x040010F1 RID: 4337
 	private int w2c;
 
-	// Token: 0x0400125C RID: 4700
+	// Token: 0x040010F2 RID: 4338
 	private int numw;
 
-	// Token: 0x0400125D RID: 4701
+	// Token: 0x040010F3 RID: 4339
 	private int numh;
 
-	// Token: 0x0400125E RID: 4702
+	// Token: 0x040010F4 RID: 4340
 	private Command cmdGlobal;
 
-	// Token: 0x0400125F RID: 4703
+	// Token: 0x040010F5 RID: 4341
 	private Command cmdVietNam;
 }

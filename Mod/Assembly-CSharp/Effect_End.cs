@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x0200005A RID: 90
+// Token: 0x0200002F RID: 47
 public class Effect_End
 {
-	// Token: 0x060002FF RID: 767 RVA: 0x00017908 File Offset: 0x00015D08
+	// Token: 0x0600023B RID: 571 RVA: 0x0003763C File Offset: 0x0003583C
 	public Effect_End(int type, int typeSub, int x, int y, int levelPaint, int dir, short timeRemove, Point[] listObj)
 	{
 		this.f = 0;
@@ -19,7 +19,8 @@ public class Effect_End
 		this.timeRemove = timeRemove;
 		this.isRemove = (this.isAddSub = false);
 		this.n_frame = 4;
-		if (listObj != null)
+		bool flag = listObj != null;
+		if (flag)
 		{
 			this.listObj = new Point[listObj.Length];
 			for (int i = 0; i < this.listObj.Length; i++)
@@ -31,7 +32,7 @@ public class Effect_End
 		this.create_Effect();
 	}
 
-	// Token: 0x06000300 RID: 768 RVA: 0x00017A50 File Offset: 0x00015E50
+	// Token: 0x0600023C RID: 572 RVA: 0x00037784 File Offset: 0x00035984
 	public Effect_End(int type, int typeSub, int typePaint, global::Char charUse, Point target, int levelPaint, short timeRemove, short range)
 	{
 		this.f = 0;
@@ -40,19 +41,25 @@ public class Effect_End
 		this.typeSub = typeSub;
 		this.typePaint = typePaint;
 		this.charUse = charUse;
-		if (charUse.containsCaiTrang(1265))
+		bool flag = charUse.containsCaiTrang(1265);
+		if (flag)
 		{
-			if (this.typeEffect == 21 || this.typeEffect == 22 || this.typeEffect == 23)
+			bool flag2 = this.typeEffect == 21 || this.typeEffect == 22 || this.typeEffect == 23;
+			if (flag2)
 			{
 				this.charUse.cx += 10 * this.charUse.cdir;
 			}
-			else if (this.typeEffect == 18 || this.typeEffect == 19 || this.typeEffect == 20)
-			{
-				this.charUse.cx += -15 * this.charUse.cdir;
-			}
 			else
 			{
-				this.charUse.cx += 15 * this.charUse.cdir;
+				bool flag3 = this.typeEffect == 18 || this.typeEffect == 19 || this.typeEffect == 20;
+				if (flag3)
+				{
+					this.charUse.cx += -15 * this.charUse.cdir;
+				}
+				else
+				{
+					this.charUse.cx += 15 * this.charUse.cdir;
+				}
 			}
 		}
 		this.x = this.charUse.cx;
@@ -70,7 +77,7 @@ public class Effect_End
 		this.create_Effect();
 	}
 
-	// Token: 0x06000301 RID: 769 RVA: 0x00017C64 File Offset: 0x00016064
+	// Token: 0x0600023D RID: 573 RVA: 0x00037998 File Offset: 0x00035B98
 	public Effect_End(int type, int typeSub, int typePaint, int x, int y, int levelPaint, int dir, short timeRemove, Point[] listObj)
 	{
 		this.f = 0;
@@ -87,7 +94,8 @@ public class Effect_End
 		this.timeRemove = timeRemove;
 		this.isRemove = (this.isAddSub = false);
 		this.n_frame = 4;
-		if (listObj != null)
+		bool flag = listObj != null;
+		if (flag)
 		{
 			this.listObj = new Point[listObj.Length];
 			for (int i = 0; i < this.listObj.Length; i++)
@@ -99,33 +107,40 @@ public class Effect_End
 		this.create_Effect();
 	}
 
-	// Token: 0x06000302 RID: 770 RVA: 0x00017DB4 File Offset: 0x000161B4
+	// Token: 0x0600023E RID: 574 RVA: 0x00037AE8 File Offset: 0x00035CE8
 	public static Image getImage(int id)
 	{
-		if (id < 0)
+		bool flag = id < 0;
+		Image result2;
+		if (flag)
 		{
-			return null;
+			result2 = null;
 		}
-		string path = "/e/e_" + id + ".png";
-		Image result = null;
-		try
+		else
 		{
-			result = mSystem.loadImage(path);
+			string path = "/e/e_" + id.ToString() + ".png";
+			Image result = null;
+			try
+			{
+				result = mSystem.loadImage(path);
+			}
+			catch (Exception ex)
+			{
+			}
+			result2 = result;
 		}
-		catch (Exception ex)
-		{
-		}
-		return result;
+		return result2;
 	}
 
-	// Token: 0x06000303 RID: 771 RVA: 0x00017E08 File Offset: 0x00016208
+	// Token: 0x0600023F RID: 575 RVA: 0x00037B44 File Offset: 0x00035D44
 	public static void setSoundSkill_END(int x, int y, int typeEffect)
 	{
 		try
 		{
 			int num = -1;
 			int num2 = Res.random(3);
-			if (num >= 0)
+			bool flag = num >= 0;
+			if (flag)
 			{
 				SoundMn.playSound(x, y, num, SoundMn.volume);
 			}
@@ -136,7 +151,7 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000304 RID: 772 RVA: 0x00017E68 File Offset: 0x00016268
+	// Token: 0x06000240 RID: 576 RVA: 0x00037BA8 File Offset: 0x00035DA8
 	public void create_Effect()
 	{
 		try
@@ -197,7 +212,7 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000305 RID: 773 RVA: 0x00017FBC File Offset: 0x000163BC
+	// Token: 0x06000241 RID: 577 RVA: 0x00037D00 File Offset: 0x00035F00
 	public void update()
 	{
 		try
@@ -258,18 +273,21 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000306 RID: 774 RVA: 0x000180F4 File Offset: 0x000164F4
+	// Token: 0x06000242 RID: 578 RVA: 0x00037E38 File Offset: 0x00036038
 	public void paint(mGraphics g)
 	{
 		try
 		{
-			if (!this.isRemove && this.f >= 0)
+			bool flag = !this.isRemove && this.f >= 0;
+			if (flag)
 			{
 				int num = this.typeEffect;
 				switch (num)
 				{
 				case 16:
-					if (this.typeSub == 0)
+				{
+					bool flag2 = this.typeSub == 0;
+					if (flag2)
 					{
 						this.pnt_Sub(g, mGraphics.BOTTOM | mGraphics.HCENTER);
 					}
@@ -278,6 +296,7 @@ public class Effect_End
 						this.pnt_Sub(g, mGraphics.VCENTER | mGraphics.HCENTER);
 					}
 					break;
+				}
 				case 17:
 					this.pnt_Sub(g, mGraphics.VCENTER);
 					break;
@@ -330,13 +349,13 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000307 RID: 775 RVA: 0x00018298 File Offset: 0x00016698
+	// Token: 0x06000243 RID: 579 RVA: 0x00037FF0 File Offset: 0x000361F0
 	public void removeEff()
 	{
 		this.isRemove = true;
 	}
 
-	// Token: 0x06000308 RID: 776 RVA: 0x000182A4 File Offset: 0x000166A4
+	// Token: 0x06000244 RID: 580 RVA: 0x00037FFC File Offset: 0x000361FC
 	public void createDanFocus(bool isRandom, global::Char obj)
 	{
 		if (isRandom)
@@ -357,13 +376,17 @@ public class Effect_End
 				break;
 			}
 		}
-		else if (obj.cdir == 1)
-		{
-			this.gocT_Arc = 0;
-		}
 		else
 		{
-			this.gocT_Arc = 180;
+			bool flag = obj.cdir == 1;
+			if (flag)
+			{
+				this.gocT_Arc = 0;
+			}
+			else
+			{
+				this.gocT_Arc = 180;
+			}
 		}
 		this.va = (int)((short)(256 * this.vMax));
 		this.vx = 0;
@@ -373,70 +396,85 @@ public class Effect_End
 		this.vy1000 = this.va * Res.sin(this.gocT_Arc) >> 10;
 	}
 
-	// Token: 0x06000309 RID: 777 RVA: 0x00018398 File Offset: 0x00016798
+	// Token: 0x06000245 RID: 581 RVA: 0x000380E4 File Offset: 0x000362E4
 	public void updateAngleXP(int fmove)
 	{
-		if (this.f < fmove)
+		bool flag = this.f < fmove;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.charUse == null || this.target == null || this.f >= this.fRemove)
-		{
-			this.f = this.fRemove;
-			return;
-		}
-		int num = this.target.x - this.charUse.cx;
-		int num2 = this.target.y - this.charUse.cy;
-		this.life++;
-		if ((Res.abs(num) < 10 && Res.abs(num2) < 10) || this.life > this.fRemove)
-		{
-			this.f = this.fRemove;
-			return;
-		}
-		int num3 = Res.angle(num, num2);
-		if (Res.abs(num3 - this.gocT_Arc) < 90 || num * num + num2 * num2 > 4096)
-		{
-			if (Res.abs(num3 - this.gocT_Arc) < 15)
+			bool flag2 = this.charUse == null || this.target == null || this.f >= this.fRemove;
+			if (flag2)
 			{
-				this.gocT_Arc = num3;
-			}
-			else if ((num3 - this.gocT_Arc >= 0 && num3 - this.gocT_Arc < 180) || num3 - this.gocT_Arc < -180)
-			{
-				this.gocT_Arc = Res.fixangle(this.gocT_Arc + 15);
+				this.f = this.fRemove;
 			}
 			else
 			{
-				this.gocT_Arc = Res.fixangle(this.gocT_Arc - 15);
+				int num = this.target.x - this.charUse.cx;
+				int num2 = this.target.y - this.charUse.cy;
+				this.life++;
+				bool flag3 = (Res.abs(num) < 10 && Res.abs(num2) < 10) || this.life > this.fRemove;
+				if (flag3)
+				{
+					this.f = this.fRemove;
+				}
+				else
+				{
+					int num3 = Res.angle(num, num2);
+					bool flag4 = Res.abs(num3 - this.gocT_Arc) < 90 || num * num + num2 * num2 > 4096;
+					if (flag4)
+					{
+						bool flag5 = Res.abs(num3 - this.gocT_Arc) < 15;
+						if (flag5)
+						{
+							this.gocT_Arc = num3;
+						}
+						else
+						{
+							bool flag6 = (num3 - this.gocT_Arc >= 0 && num3 - this.gocT_Arc < 180) || num3 - this.gocT_Arc < -180;
+							if (flag6)
+							{
+								this.gocT_Arc = Res.fixangle(this.gocT_Arc + 15);
+							}
+							else
+							{
+								this.gocT_Arc = Res.fixangle(this.gocT_Arc - 15);
+							}
+						}
+					}
+					bool flag7 = this.f > this.fRemove * 2 / 3 && this.va < 8192;
+					if (flag7)
+					{
+						this.va += 3096;
+					}
+					this.vx1000 = this.va * Res.cos(this.gocT_Arc) >> 10;
+					this.vy1000 = this.va * Res.sin(this.gocT_Arc) >> 10;
+					num += this.vx1000;
+					int num4 = num >> 10;
+					this.x += num4;
+					num &= 1023;
+					num2 += this.vy1000;
+					int num5 = num2 >> 10;
+					this.y += num5;
+					num2 &= 1023;
+				}
 			}
 		}
-		if (this.f > this.fRemove * 2 / 3 && this.va < 8192)
-		{
-			this.va += 3096;
-		}
-		this.vx1000 = this.va * Res.cos(this.gocT_Arc) >> 10;
-		this.vy1000 = this.va * Res.sin(this.gocT_Arc) >> 10;
-		num += this.vx1000;
-		int num4 = num >> 10;
-		this.x += num4;
-		num &= 1023;
-		num2 += this.vy1000;
-		int num5 = num2 >> 10;
-		this.y += num5;
-		num2 &= 1023;
 	}
 
-	// Token: 0x0600030A RID: 778 RVA: 0x000185C0 File Offset: 0x000169C0
+	// Token: 0x06000246 RID: 582 RVA: 0x00038334 File Offset: 0x00036534
 	public int setFrameAngle(int goc)
 	{
+		bool flag = goc <= 15 || goc > 345;
 		int result;
-		if (goc <= 15 || goc > 345)
+		if (flag)
 		{
 			result = 12;
 		}
 		else
 		{
 			int num = (goc - 15) / 15 + 1;
-			if (num > 24)
+			bool flag2 = num > 24;
+			if (flag2)
 			{
 				num = 24;
 			}
@@ -445,13 +483,14 @@ public class Effect_End
 		return result;
 	}
 
-	// Token: 0x0600030B RID: 779 RVA: 0x00018608 File Offset: 0x00016A08
+	// Token: 0x06000247 RID: 583 RVA: 0x00038388 File Offset: 0x00036588
 	public void create_Arrow(int vMax, Point targetPoint)
 	{
 		this.vMax = vMax;
+		bool flag = targetPoint != null;
 		int num;
 		int num2;
-		if (targetPoint != null)
+		if (flag)
 		{
 			num = targetPoint.x - this.x;
 			num2 = targetPoint.y - this.y;
@@ -463,7 +502,8 @@ public class Effect_End
 			num = this.toX - this.x;
 			num2 = this.toY - this.y;
 		}
-		if (this.x > this.toX)
+		bool flag2 = this.x > this.toX;
+		if (flag2)
 		{
 			this.dir = 2;
 			this.dir_nguoc = 0;
@@ -479,29 +519,34 @@ public class Effect_End
 		this.create_Speed(num, num2);
 	}
 
-	// Token: 0x0600030C RID: 780 RVA: 0x000186D8 File Offset: 0x00016AD8
+	// Token: 0x06000248 RID: 584 RVA: 0x0003845C File Offset: 0x0003665C
 	public void create_Speed(int dx, int dy)
 	{
 		int num = Res.getDistance(dx, dy) / this.vMax;
-		if (num == 0)
+		bool flag = num == 0;
+		if (flag)
 		{
 			num = 1;
 		}
 		int num2 = dx / num;
 		int num3 = dy / num;
-		if (num2 == 0 && dx < num)
+		bool flag2 = num2 == 0 && dx < num;
+		if (flag2)
 		{
 			num2 = ((dx >= 0) ? 1 : -1);
 		}
-		if (num3 == 0 && dy < num)
+		bool flag3 = num3 == 0 && dy < num;
+		if (flag3)
 		{
 			num3 = ((dy >= 0) ? 1 : -1);
 		}
-		if (Res.abs(num2) > Res.abs(dx))
+		bool flag4 = Res.abs(num2) > Res.abs(dx);
+		if (flag4)
 		{
 			num2 = dx;
 		}
-		if (Res.abs(num3) > Res.abs(dy))
+		bool flag5 = Res.abs(num3) > Res.abs(dy);
+		if (flag5)
 		{
 			num3 = dy;
 		}
@@ -509,120 +554,148 @@ public class Effect_End
 		this.vy = num3;
 	}
 
-	// Token: 0x0600030D RID: 781 RVA: 0x00018774 File Offset: 0x00016B74
+	// Token: 0x06000249 RID: 585 RVA: 0x00038504 File Offset: 0x00036704
 	public void moveTo_xy(int toX, int toY, int fMove, int typeEff_End, int rangeEnd)
 	{
-		if (this.f < fMove)
+		bool flag = this.f < fMove;
+		if (flag)
 		{
 			this.frame = this.setFrameAngle((this.dir != -1) ? 0 : 180);
-			return;
-		}
-		this.frame = this.fSpeed;
-		if (Res.abs(this.x - toX) < Res.abs(this.vx))
-		{
-			this.x = toX;
-			this.vx = 0;
 		}
 		else
 		{
-			this.x += this.vx;
-		}
-		if (Res.abs(this.y - toY) < Res.abs(this.vy))
-		{
-			this.y = toY;
-			this.vy = 0;
-		}
-		else
-		{
-			this.y += this.vy;
-		}
-		if (Res.abs(this.x - toX) < Res.abs(this.vMax) && Res.abs(this.y - toY) < Res.abs(this.vMax) && typeEff_End >= 0)
-		{
-			if (this.target != null)
+			this.frame = this.fSpeed;
+			bool flag2 = Res.abs(this.x - toX) < Res.abs(this.vx);
+			if (flag2)
 			{
-				int num = this.target.x;
-				int num2 = this.target.y;
-				if (rangeEnd > 0)
-				{
-					num += Res.random_Am(0, rangeEnd);
-					num2 += Res.random_Am(0, rangeEnd);
-				}
-				GameScr.addEffectEnd(typeEff_End, 0, 0, num, num2, 1, 0, -1, null);
-				this.removeEff();
-			}
-			else if (this.isAddSub)
-			{
-				this.isAddSub = false;
-				int num3 = this.x;
-				int num4 = this.y;
-				if (rangeEnd > 1)
-				{
-					num3 += Res.random_Am_0(rangeEnd);
-					num4 += Res.random_Am_0(rangeEnd);
-				}
-				GameScr.addEffectEnd(typeEff_End, 0, 0, num3, num4, 1, 0, -1, null);
-			}
-		}
-	}
-
-	// Token: 0x0600030E RID: 782 RVA: 0x0001892C File Offset: 0x00016D2C
-	public void paint_Arrow(mGraphics g, FrameImage frm, int index, int x, int y, int anchor, bool isCountFr)
-	{
-		if (frm == null)
-		{
-			return;
-		}
-		int num = frm.nFrame / 3;
-		if (num < 1)
-		{
-			num = 1;
-		}
-		int num2 = 3;
-		int num3;
-		if (frm.nFrame > 6)
-		{
-			num = 1;
-			if (this.f / num2 - this.fMove > 8)
-			{
-				num3 = 6;
-			}
-			else if (this.f / num2 - this.fMove > 4)
-			{
-				num3 = 3;
+				this.x = toX;
+				this.vx = 0;
 			}
 			else
 			{
-				num3 = 0;
+				this.x += this.vx;
+			}
+			bool flag3 = Res.abs(this.y - toY) < Res.abs(this.vy);
+			if (flag3)
+			{
+				this.y = toY;
+				this.vy = 0;
+			}
+			else
+			{
+				this.y += this.vy;
+			}
+			bool flag4 = Res.abs(this.x - toX) < Res.abs(this.vMax) && Res.abs(this.y - toY) < Res.abs(this.vMax) && typeEff_End >= 0;
+			if (flag4)
+			{
+				bool flag5 = this.target != null;
+				if (flag5)
+				{
+					int num = this.target.x;
+					int num2 = this.target.y;
+					bool flag6 = rangeEnd > 0;
+					if (flag6)
+					{
+						num += Res.random_Am(0, rangeEnd);
+						num2 += Res.random_Am(0, rangeEnd);
+					}
+					GameScr.addEffectEnd(typeEff_End, 0, 0, num, num2, 1, 0, -1, null);
+					this.removeEff();
+				}
+				else
+				{
+					bool flag7 = this.isAddSub;
+					if (flag7)
+					{
+						this.isAddSub = false;
+						int num3 = this.x;
+						int num4 = this.y;
+						bool flag8 = rangeEnd > 1;
+						if (flag8)
+						{
+							num3 += Res.random_Am_0(rangeEnd);
+							num4 += Res.random_Am_0(rangeEnd);
+						}
+						GameScr.addEffectEnd(typeEff_End, 0, 0, num3, num4, 1, 0, -1, null);
+					}
+				}
 			}
 		}
-		else if (frm.nFrame > 3)
-		{
-			num3 = ((this.f / num2 % 2 != 0) ? 3 : 0);
-		}
-		else
-		{
-			num3 = this.f % num;
-		}
-		int idx = num * (int)this.mImageArrow[index] + num3;
-		if (frm.nFrame < 3)
-		{
-			idx = this.f / num2 % frm.nFrame;
-		}
-		if (isCountFr)
-		{
-			idx = this.f / num2 % frm.nFrame;
-		}
-		frm.drawFrame(idx, x, y, (int)this.mXoayArrow[index], anchor, g);
 	}
 
-	// Token: 0x0600030F RID: 783 RVA: 0x00018A2C File Offset: 0x00016E2C
+	// Token: 0x0600024A RID: 586 RVA: 0x000386EC File Offset: 0x000368EC
+	public void paint_Arrow(mGraphics g, FrameImage frm, int index, int x, int y, int anchor, bool isCountFr)
+	{
+		bool flag = frm == null;
+		if (!flag)
+		{
+			int num = frm.nFrame / 3;
+			bool flag2 = num < 1;
+			if (flag2)
+			{
+				num = 1;
+			}
+			int num2 = 3;
+			bool flag3 = frm.nFrame > 6;
+			int num3;
+			if (flag3)
+			{
+				num = 1;
+				bool flag4 = this.f / num2 - this.fMove > 8;
+				if (flag4)
+				{
+					num3 = 6;
+				}
+				else
+				{
+					bool flag5 = this.f / num2 - this.fMove > 4;
+					if (flag5)
+					{
+						num3 = 3;
+					}
+					else
+					{
+						num3 = 0;
+					}
+				}
+			}
+			else
+			{
+				bool flag6 = frm.nFrame > 3;
+				if (flag6)
+				{
+					num3 = ((this.f / num2 % 2 != 0) ? 3 : 0);
+				}
+				else
+				{
+					num3 = this.f % num;
+				}
+			}
+			int idx = num * (int)this.mImageArrow[index] + num3;
+			bool flag7 = frm.nFrame < 3;
+			if (flag7)
+			{
+				idx = this.f / num2 % frm.nFrame;
+			}
+			if (isCountFr)
+			{
+				idx = this.f / num2 % frm.nFrame;
+			}
+			frm.drawFrame(idx, x, y, (int)this.mXoayArrow[index], anchor, g);
+		}
+	}
+
+	// Token: 0x0600024B RID: 587 RVA: 0x00038808 File Offset: 0x00036A08
 	private void set_End_String(int typeEffect)
 	{
-		if (typeEffect != 0)
+		bool flag = typeEffect != 0;
+		if (flag)
 		{
-			if (typeEffect != 1)
+			bool flag2 = typeEffect != 1;
+			if (flag2)
 			{
-				if (typeEffect == 2)
+				bool flag3 = typeEffect == 2;
+				if (flag3)
 				{
 					this.fraImgEff = new FrameImage(6);
 				}
@@ -643,31 +716,36 @@ public class Effect_End
 		this.isAddSub = false;
 	}
 
-	// Token: 0x06000310 RID: 784 RVA: 0x00018AB4 File Offset: 0x00016EB4
+	// Token: 0x0600024C RID: 588 RVA: 0x00038894 File Offset: 0x00036A94
 	private void upd_End_String()
 	{
 		this.x = GameCanvas.hw;
 		this.y = this.y1000;
-		if (this.f > this.fRemove)
+		bool flag = this.f > this.fRemove;
+		if (flag)
 		{
 			this.removeEff();
 		}
 		this.vy++;
-		if (this.vy > 15)
+		bool flag2 = this.vy > 15;
+		if (flag2)
 		{
 			this.vy = 15;
 		}
-		if (this.y1000 + this.vy < this.dy_throw)
+		bool flag3 = this.y1000 + this.vy < this.dy_throw;
+		if (flag3)
 		{
 			this.y1000 += this.vy;
 		}
 		else
 		{
 			this.y1000 = this.dy_throw;
-			if (!this.isAddSub)
+			bool flag4 = !this.isAddSub;
+			if (flag4)
 			{
 				this.isAddSub = true;
-				if (this.typeSub != -1)
+				bool flag5 = this.typeSub != -1;
+				if (flag5)
 				{
 					GameScr.addEffectEnd(this.typeSub, 0, 0, this.x, this.y, this.levelPaint, 0, -1, null);
 				}
@@ -675,16 +753,17 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000311 RID: 785 RVA: 0x00018B8E File Offset: 0x00016F8E
+	// Token: 0x0600024D RID: 589 RVA: 0x00038988 File Offset: 0x00036B88
 	private void pnt_End_String(mGraphics g)
 	{
-		if (this.fraImgEff != null)
+		bool flag = this.fraImgEff != null;
+		if (flag)
 		{
 			this.fraImgEff.drawFrame(this.f / 5 % this.fraImgEff.nFrame, this.x, this.y, 0, 33, g);
 		}
 	}
 
-	// Token: 0x06000312 RID: 786 RVA: 0x00018BCC File Offset: 0x00016FCC
+	// Token: 0x0600024E RID: 590 RVA: 0x000389D8 File Offset: 0x00036BD8
 	private void set_FireWork()
 	{
 		int num = Res.random(3, 5);
@@ -694,11 +773,13 @@ public class Effect_End
 			Point point = new Point();
 			point.x = this.x + Res.random_Am_0(4);
 			point.y = this.y + Res.random_Am_0(5);
-			if (this.typeSub == 0)
+			bool flag = this.typeSub == 0;
+			if (flag)
 			{
 				point.fRe = Res.random(10);
 				int num2 = 1;
-				if (i % 2 == 0)
+				bool flag2 = i % 2 == 0;
+				if (flag2)
 				{
 					num2 = -1;
 				}
@@ -710,25 +791,29 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000313 RID: 787 RVA: 0x00018CA4 File Offset: 0x000170A4
+	// Token: 0x0600024F RID: 591 RVA: 0x00038AC4 File Offset: 0x00036CC4
 	private void upd_FireWork()
 	{
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Point point = (Point)this.VecEffEnd.elementAt(i);
 			point.update();
-			if (point.f == point.fRe)
+			bool flag = point.f == point.fRe;
+			if (flag)
 			{
 				SoundMn.playSound(point.x, point.y, SoundMn.FIREWORK, SoundMn.volume);
 			}
-			if (point.f - point.fRe > point.fraImgEff.nFrame * 3 - 1)
+			bool flag2 = point.f - point.fRe > point.fraImgEff.nFrame * 3 - 1;
+			if (flag2)
 			{
 				point.f = 0;
-				if (this.typeSub == 0)
+				bool flag3 = this.typeSub == 0;
+				if (flag3)
 				{
 					point.fRe = Res.random(10);
 					int num = 1;
-					if (i % 2 == 0)
+					bool flag4 = i % 2 == 0;
+					if (flag4)
 					{
 						num = -1;
 					}
@@ -737,26 +822,28 @@ public class Effect_End
 				}
 			}
 		}
-		if (this.f >= this.fRemove)
+		bool flag5 = this.f >= this.fRemove;
+		if (flag5)
 		{
 			this.removeEff();
 		}
 	}
 
-	// Token: 0x06000314 RID: 788 RVA: 0x00018DB0 File Offset: 0x000171B0
+	// Token: 0x06000250 RID: 592 RVA: 0x00038BFC File Offset: 0x00036DFC
 	private void pnt_FireWork(mGraphics g)
 	{
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Point point = (Point)this.VecEffEnd.elementAt(i);
-			if (point.f - point.fRe > -1 && point.fraImgEff != null)
+			bool flag = point.f - point.fRe > -1 && point.fraImgEff != null;
+			if (flag)
 			{
 				point.fraImgEff.drawFrame((point.f - point.fRe) / 3 % point.fraImgEff.nFrame, point.x, point.y, 0, 3, g);
 			}
 		}
 	}
 
-	// Token: 0x06000315 RID: 789 RVA: 0x00018E40 File Offset: 0x00017240
+	// Token: 0x06000251 RID: 593 RVA: 0x00038C94 File Offset: 0x00036E94
 	private void set_Skill_Kamex10()
 	{
 		this.w = this.fra_skill[0].frameWidth;
@@ -775,22 +862,25 @@ public class Effect_End
 		SoundMn.playSound(this.x, this.y, SoundMn.KAMEX10_1, SoundMn.volume);
 	}
 
-	// Token: 0x06000316 RID: 790 RVA: 0x00018ECC File Offset: 0x000172CC
+	// Token: 0x06000252 RID: 594 RVA: 0x00038D20 File Offset: 0x00036F20
 	private void upd_Skill_Kamex10()
 	{
 		this.fSpeed++;
 		this.w += 20;
-		if (this.w > this.vMax)
+		bool flag = this.w > this.vMax;
+		if (flag)
 		{
 			this.w = this.vMax;
 		}
 		this.x = this.charUse.cx + 10;
 		this.y = this.charUse.cy - 3;
-		if (this.dir == -1)
+		bool flag2 = this.dir == -1;
+		if (flag2)
 		{
 			this.x = this.charUse.cx - this.w - 10;
 		}
-		if (!this.isAddSub && GameCanvas.timeNow - this.time >= (long)this.timeRemove)
+		bool flag3 = !this.isAddSub && GameCanvas.timeNow - this.time >= (long)this.timeRemove;
+		if (flag3)
 		{
 			this.f = 0;
 			this.nFrame = new byte[]
@@ -804,9 +894,11 @@ public class Effect_End
 			};
 			this.isAddSub = true;
 		}
-		if (this.f > this.nFrame.Length - 1)
+		bool flag4 = this.f > this.nFrame.Length - 1;
+		if (flag4)
 		{
-			if (this.isAddSub)
+			bool flag5 = this.isAddSub;
+			if (flag5)
 			{
 				this.removeEff();
 			}
@@ -817,29 +909,31 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000317 RID: 791 RVA: 0x00018FDC File Offset: 0x000173DC
+	// Token: 0x06000253 RID: 595 RVA: 0x00038E44 File Offset: 0x00037044
 	private void pnt_Skill_Kamex10(mGraphics g)
 	{
-		if (this.fra_skill == null)
+		bool flag = this.fra_skill == null;
+		if (!flag)
 		{
-			return;
-		}
-		g.setClip(this.x, this.y - this.h / 2, this.w, this.h);
-		this.Fill_Rect_Img(g, this.fra_skill[0], this.fra_skill[1], this.fra_skill[2], (int)this.nFrame[this.f], this.x, this.y, this.vMax);
-		GameCanvas.resetTransGameScr(g);
-		if (this.dir == -1 && this.fra_skill[0] != null)
-		{
-			this.fra_skill[0].drawFrame((int)this.nFrame[this.f], this.x + this.w - this.fra_skill[0].frameWidth, this.y - this.fra_skill[0].frameHeight / 2 - 1, 2, 0, g);
+			g.setClip(this.x, this.y - this.h / 2, this.w, this.h);
+			this.Fill_Rect_Img(g, this.fra_skill[0], this.fra_skill[1], this.fra_skill[2], (int)this.nFrame[this.f], this.x, this.y, this.vMax);
+			GameCanvas.resetTransGameScr(g);
+			bool flag2 = this.dir == -1 && this.fra_skill[0] != null;
+			if (flag2)
+			{
+				this.fra_skill[0].drawFrame((int)this.nFrame[this.f], this.x + this.w - this.fra_skill[0].frameWidth, this.y - this.fra_skill[0].frameHeight / 2 - 1, 2, 0, g);
+			}
 		}
 	}
 
-	// Token: 0x06000318 RID: 792 RVA: 0x000190CC File Offset: 0x000174CC
+	// Token: 0x06000254 RID: 596 RVA: 0x00038F44 File Offset: 0x00037144
 	private void set_Skill_Destroy()
 	{
 		this.x = this.charUse.cx + 20 * this.charUse.cdir;
 		int num = 15;
 		this.fMove = (int)this.timeRemove / num;
-		if (this.target != null)
+		bool flag = this.target != null;
+		if (flag)
 		{
 			for (int i = 0; i < num; i++)
 			{
@@ -848,18 +942,21 @@ public class Effect_End
 				point.fraImgEff_2 = this.fra_skill[2];
 				point.x = this.x;
 				point.y = this.y;
-				if (this.target != null)
+				bool flag2 = this.target != null;
+				if (flag2)
 				{
 					point.toX = this.target.x;
 					point.toY = this.target.y;
-					if (this.range > 0)
+					bool flag3 = this.range > 0;
+					if (flag3)
 					{
 						point.toX += Res.random_Am(0, this.range);
 						point.toY += Res.random_Am(0, this.range);
 					}
 				}
 				this.vMax = Res.random(9, 12);
-				if (i == num - 1)
+				bool flag4 = i == num - 1;
+				if (flag4)
 				{
 					point.fraImgEff = this.fra_skill[1];
 					point.fraImgEff_2 = this.fra_skill[3];
@@ -880,18 +977,20 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000319 RID: 793 RVA: 0x00019264 File Offset: 0x00017664
+	// Token: 0x06000255 RID: 597 RVA: 0x000390FC File Offset: 0x000372FC
 	private void upd_Skill_Destroy()
 	{
 		int num = 0;
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Point point = (Point)this.VecEffEnd.elementAt(i);
-			if (!point.isPaint && GameCanvas.timeNow - this.time >= (long)(i * this.fMove))
+			bool flag = !point.isPaint && GameCanvas.timeNow - this.time >= (long)(i * this.fMove);
+			if (flag)
 			{
 				point.isPaint = true;
 				GameScr.addEffectEnd(17, 0, this.typePaint, this.charUse.cx, this.charUse.cy - 3, 2, this.dir_nguoc, -1, null);
-				if (i == this.VecEffEnd.size() - 1)
+				bool flag2 = i == this.VecEffEnd.size() - 1;
+				if (flag2)
 				{
 					SoundMn.playSound(point.x, point.y, SoundMn.DESTROY_1, SoundMn.volume);
 				}
@@ -900,51 +999,61 @@ public class Effect_End
 					SoundMn.playSound(point.x, point.y, SoundMn.DESTROY_0, SoundMn.volume);
 				}
 			}
-			if (point.isPaint && !point.isRemove)
+			bool flag3 = point.isPaint && !point.isRemove;
+			if (flag3)
 			{
 				point.f++;
-				if (!point.isChange)
+				bool flag4 = !point.isChange;
+				if (flag4)
 				{
-					if (point.f < 10 && i == this.VecEffEnd.size() - 1 && this.charUse != null && !TileMap.tileTypeAt(this.charUse.cx - (this.charUse.chw + 1) * this.charUse.cdir, this.charUse.cy, (this.charUse.cdir != 1) ? 4 : 8))
+					bool flag5 = point.f < 10 && i == this.VecEffEnd.size() - 1 && this.charUse != null && !TileMap.tileTypeAt(this.charUse.cx - (this.charUse.chw + 1) * this.charUse.cdir, this.charUse.cy, (this.charUse.cdir != 1) ? 4 : 8);
+					if (flag5)
 					{
 						this.charUse.cx -= this.charUse.cdir;
 					}
 					point.moveTo_xy(point.toX, point.toY);
-					if (point.x == point.toX)
+					bool flag6 = point.x == point.toX;
+					if (flag6)
 					{
 						point.isChange = true;
 						point.f = 0;
 					}
 				}
-				if (point.isChange && point.f >= this.n_frame * point.fraImgEff_2.nFrame)
+				bool flag7 = point.isChange && point.f >= this.n_frame * point.fraImgEff_2.nFrame;
+				if (flag7)
 				{
 					point.isRemove = true;
 				}
 			}
-			if (point.isRemove)
+			bool flag8 = point.isRemove;
+			if (flag8)
 			{
 				num++;
 			}
 		}
-		if (num == this.VecEffEnd.size())
+		bool flag9 = num == this.VecEffEnd.size();
+		if (flag9)
 		{
 			this.removeEff();
 		}
 	}
 
-	// Token: 0x0600031A RID: 794 RVA: 0x0001949C File Offset: 0x0001789C
+	// Token: 0x06000256 RID: 598 RVA: 0x00039370 File Offset: 0x00037570
 	private void pnt_Skill_Destroy(mGraphics g)
 	{
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Point point = (Point)this.VecEffEnd.elementAt(i);
-			if (point.isPaint && !point.isRemove)
+			bool flag = point.isPaint && !point.isRemove;
+			if (flag)
 			{
-				if (!point.isChange)
+				bool flag2 = !point.isChange;
+				if (flag2)
 				{
 					point.paint_Arrow(g, point.fraImgEff, mGraphics.VCENTER | mGraphics.HCENTER, false);
 				}
-				if (point.isChange)
+				bool isChange = point.isChange;
+				if (isChange)
 				{
 					point.fraImgEff_2.drawFrame(point.f / this.n_frame % point.fraImgEff_2.nFrame, point.x, point.y, this.dir_nguoc, mGraphics.VCENTER | mGraphics.HCENTER, g);
 				}
@@ -952,7 +1061,7 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x0600031B RID: 795 RVA: 0x00019560 File Offset: 0x00017960
+	// Token: 0x06000257 RID: 599 RVA: 0x00039448 File Offset: 0x00037648
 	private void set_Skill_MaFuba()
 	{
 		this.nFrame = new byte[]
@@ -973,13 +1082,18 @@ public class Effect_End
 		this.y1000 = this.y + 12;
 		this.dy = 25;
 		this.dy_throw = 19;
-		if (this.typeSub == 1)
+		bool flag = this.typeSub == 1;
+		if (flag)
 		{
 			this.dy_throw = 21;
 		}
-		else if (this.typeSub == 2)
+		else
 		{
-			this.dy_throw = 31;
+			bool flag2 = this.typeSub == 2;
+			if (flag2)
+			{
+				this.dy_throw = 31;
+			}
 		}
 		this.h = this.fra_skill[1].frameHeight + 50 - this.dy_throw;
 		this.vy = 1;
@@ -989,7 +1103,8 @@ public class Effect_End
 		this.vMax = 1;
 		this.angleS = (this.angleO = 25);
 		this.iDotS = 1;
-		if (this.listObj != null && this.listObj.Length > 0)
+		bool flag3 = this.listObj != null && this.listObj.Length != 0;
+		if (flag3)
 		{
 			this.iDotS = this.listObj.Length;
 		}
@@ -1002,87 +1117,107 @@ public class Effect_End
 		SoundMn.playSound(this.x, this.y, SoundMn.MAFUBA_0, SoundMn.volume);
 	}
 
-	// Token: 0x0600031C RID: 796 RVA: 0x00019708 File Offset: 0x00017B08
+	// Token: 0x06000258 RID: 600 RVA: 0x000395F8 File Offset: 0x000377F8
 	private void changeAngleStar()
 	{
-		if (this.vMax < 40)
+		bool flag = this.vMax < 40;
+		if (flag)
 		{
 			this.vMax += 2;
 		}
 		this.angleS = this.angleO;
 		this.angleS -= this.vMax;
-		if (this.angleS >= 360)
+		bool flag2 = this.angleS >= 360;
+		if (flag2)
 		{
 			this.angleS -= 360;
 		}
-		if (this.angleS < 0)
+		bool flag3 = this.angleS < 0;
+		if (flag3)
 		{
 			this.angleS = 360 + this.angleS;
 		}
 		this.angleO = this.angleS;
 	}
 
-	// Token: 0x0600031D RID: 797 RVA: 0x0001979C File Offset: 0x00017B9C
+	// Token: 0x06000259 RID: 601 RVA: 0x00039698 File Offset: 0x00037898
 	private void setDotStar()
 	{
 		for (int i = 0; i < this.yArgS.Length; i++)
 		{
-			if (this.angleS >= 360)
+			bool flag = this.angleS >= 360;
+			if (flag)
 			{
 				this.angleS -= 360;
 			}
-			if (this.angleS < 0)
+			bool flag2 = this.angleS < 0;
+			if (flag2)
 			{
 				this.angleS = 360 + this.angleS;
 			}
 			this.yArgS[i] = Res.abs(this.rS * Res.sin(this.angleS) / 1024);
 			this.xArgS[i] = Res.abs(this.rS * Res.cos(this.angleS) / 1024);
-			if (this.angleS < 90)
+			bool flag3 = this.angleS < 90;
+			if (flag3)
 			{
 				this.xDotS[i] = this.x + this.xArgS[i];
 				this.yDotS[i] = this.y - this.yArgS[i];
-			}
-			else if (this.angleS >= 90 && this.angleS < 180)
-			{
-				this.xDotS[i] = this.x - this.xArgS[i];
-				this.yDotS[i] = this.y - this.yArgS[i];
-			}
-			else if (this.angleS >= 180 && this.angleS < 270)
-			{
-				this.xDotS[i] = this.x - this.xArgS[i];
-				this.yDotS[i] = this.y + this.yArgS[i];
 			}
 			else
 			{
-				this.xDotS[i] = this.x + this.xArgS[i];
-				this.yDotS[i] = this.y + this.yArgS[i];
+				bool flag4 = this.angleS >= 90 && this.angleS < 180;
+				if (flag4)
+				{
+					this.xDotS[i] = this.x - this.xArgS[i];
+					this.yDotS[i] = this.y - this.yArgS[i];
+				}
+				else
+				{
+					bool flag5 = this.angleS >= 180 && this.angleS < 270;
+					if (flag5)
+					{
+						this.xDotS[i] = this.x - this.xArgS[i];
+						this.yDotS[i] = this.y + this.yArgS[i];
+					}
+					else
+					{
+						this.xDotS[i] = this.x + this.xArgS[i];
+						this.yDotS[i] = this.y + this.yArgS[i];
+					}
+				}
 			}
 			this.angleS -= this.iAngleS;
 		}
 	}
 
-	// Token: 0x0600031E RID: 798 RVA: 0x00019970 File Offset: 0x00017D70
+	// Token: 0x0600025A RID: 602 RVA: 0x0003988C File Offset: 0x00037A8C
 	private void upd_Skill_MaFuba()
 	{
-		if (this.stt == 0)
+		bool flag = this.stt == 0;
+		if (flag)
 		{
-			if (this.f == 3)
+			bool flag2 = this.f == 3;
+			if (flag2)
 			{
 				SoundMn.playSound(this.x, this.y, SoundMn.MAFUBA_1, SoundMn.volume);
 			}
 			this.frame++;
-			if (this.frame > this.nFrame.Length - 1)
+			bool flag3 = this.frame > this.nFrame.Length - 1;
+			if (flag3)
 			{
 				this.frame = this.nFrame.Length - 1;
 			}
-			if (this.f == this.fMove + 4)
+			bool flag4 = this.f == this.fMove + 4;
+			if (flag4)
 			{
 				GameScr.addEffectEnd(16, 1, this.typePaint, this.x, this.y, 3, 0, 2945, null);
 			}
-			if (this.f > this.fMove + 4)
+			bool flag5 = this.f > this.fMove + 4;
+			if (flag5)
 			{
 				this.rS--;
-				if (this.rS < 0)
+				bool flag6 = this.rS < 0;
+				if (flag6)
 				{
 					this.rS = 0;
 					this.f = 0;
@@ -1123,201 +1258,230 @@ public class Effect_End
 				}
 			}
 		}
-		else if (this.stt == 1)
-		{
-			this.fSpeed++;
-			if (this.fSpeed > this.nFrame_2.Length - 1)
-			{
-				this.fSpeed = this.nFrame_2.Length - 1;
-				if (GameCanvas.gameTick % 2 == 0)
-				{
-					this.vy1000++;
-				}
-				this.vy += this.vy1000;
-				if (this.vy >= this.h - this.fra_skill[0].frameHeight - this.dy + this.dy_throw)
-				{
-					this.vy = this.h - this.fra_skill[0].frameHeight - this.dy + this.dy_throw;
-					this.f = 0;
-					this.fSpeed = 0;
-					this.stt = 2;
-					this.nFrame_2 = new byte[]
-					{
-						3,
-						3,
-						3,
-						3,
-						3,
-						4,
-						4,
-						4,
-						5,
-						5,
-						5
-					};
-				}
-			}
-		}
-		else if (this.stt == 2)
-		{
-			this.fSpeed++;
-			if (this.fSpeed > this.nFrame_2.Length - 1)
-			{
-				this.stt = 3;
-				this.frame = 0;
-				this.nFrame = new byte[]
-				{
-					2,
-					2,
-					1,
-					1,
-					0,
-					0,
-					3,
-					3,
-					3,
-					0,
-					0,
-					0,
-					4,
-					4,
-					4,
-					0,
-					0
-				};
-			}
-		}
-		else if (this.stt == 3)
-		{
-			this.frame++;
-			if (this.frame == 3)
-			{
-				SoundMn.playSound(this.x, this.y, SoundMn.MAFUBA_1, SoundMn.volume);
-			}
-			if (this.frame > this.nFrame.Length - 1)
-			{
-				this.frame = 0;
-				this.stt = 4;
-				this.nFrame = new byte[]
-				{
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					3,
-					3,
-					3,
-					0,
-					0,
-					0,
-					4,
-					4,
-					4,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					3,
-					3,
-					0,
-					0,
-					4,
-					4
-				};
-			}
-		}
 		else
 		{
-			this.frame++;
-			if (this.frame > this.nFrame.Length - 1)
+			bool flag7 = this.stt == 1;
+			if (flag7)
 			{
-				this.frame = 0;
+				this.fSpeed++;
+				bool flag8 = this.fSpeed > this.nFrame_2.Length - 1;
+				if (flag8)
+				{
+					this.fSpeed = this.nFrame_2.Length - 1;
+					bool flag9 = GameCanvas.gameTick % 2 == 0;
+					if (flag9)
+					{
+						this.vy1000++;
+					}
+					this.vy += this.vy1000;
+					bool flag10 = this.vy >= this.h - this.fra_skill[0].frameHeight - this.dy + this.dy_throw;
+					if (flag10)
+					{
+						this.vy = this.h - this.fra_skill[0].frameHeight - this.dy + this.dy_throw;
+						this.f = 0;
+						this.fSpeed = 0;
+						this.stt = 2;
+						this.nFrame_2 = new byte[]
+						{
+							3,
+							3,
+							3,
+							3,
+							3,
+							4,
+							4,
+							4,
+							5,
+							5,
+							5
+						};
+					}
+				}
 			}
-			if (GameCanvas.timeNow - this.time >= (long)this.timeRemove)
+			else
 			{
-				GameScr.addEffectEnd(16, 0, this.typePaint, this.x1000, this.y1000, 1, 0, -1, null);
-				this.updListObj_Mafuba(false);
-				this.removeEff();
+				bool flag11 = this.stt == 2;
+				if (flag11)
+				{
+					this.fSpeed++;
+					bool flag12 = this.fSpeed > this.nFrame_2.Length - 1;
+					if (flag12)
+					{
+						this.stt = 3;
+						this.frame = 0;
+						this.nFrame = new byte[]
+						{
+							2,
+							2,
+							1,
+							1,
+							0,
+							0,
+							3,
+							3,
+							3,
+							0,
+							0,
+							0,
+							4,
+							4,
+							4,
+							0,
+							0
+						};
+					}
+				}
+				else
+				{
+					bool flag13 = this.stt == 3;
+					if (flag13)
+					{
+						this.frame++;
+						bool flag14 = this.frame == 3;
+						if (flag14)
+						{
+							SoundMn.playSound(this.x, this.y, SoundMn.MAFUBA_1, SoundMn.volume);
+						}
+						bool flag15 = this.frame > this.nFrame.Length - 1;
+						if (flag15)
+						{
+							this.frame = 0;
+							this.stt = 4;
+							this.nFrame = new byte[]
+							{
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								3,
+								3,
+								3,
+								0,
+								0,
+								0,
+								4,
+								4,
+								4,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								3,
+								3,
+								0,
+								0,
+								4,
+								4
+							};
+						}
+					}
+					else
+					{
+						this.frame++;
+						bool flag16 = this.frame > this.nFrame.Length - 1;
+						if (flag16)
+						{
+							this.frame = 0;
+						}
+						bool flag17 = GameCanvas.timeNow - this.time >= (long)this.timeRemove;
+						if (flag17)
+						{
+							GameScr.addEffectEnd(16, 0, this.typePaint, this.x1000, this.y1000, 1, 0, -1, null);
+							this.updListObj_Mafuba(false);
+							this.removeEff();
+						}
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600031F RID: 799 RVA: 0x00019CD8 File Offset: 0x000180D8
+	// Token: 0x0600025B RID: 603 RVA: 0x00039C5C File Offset: 0x00037E5C
 	private void pnt_Skill_MaFuba(mGraphics g)
 	{
-		if (this.fra_skill == null)
+		bool flag = this.fra_skill == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.nFrame != null)
-		{
-			this.fra_skill[0].drawFrame((int)this.nFrame[this.frame], this.x1000, this.y1000, 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
-		}
-		if (this.stt == 1 || this.stt == 2)
-		{
-			int anchor = mGraphics.BOTTOM | mGraphics.HCENTER;
-			int num = this.dy;
-			if (this.nFrame_2[this.fSpeed] == 0 || this.nFrame_2[this.fSpeed] == 1)
+			bool flag2 = this.nFrame != null;
+			if (flag2)
 			{
-				anchor = (mGraphics.VCENTER | mGraphics.HCENTER);
-				num = 0;
+				this.fra_skill[0].drawFrame((int)this.nFrame[this.frame], this.x1000, this.y1000, 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
 			}
-			this.fra_skill[1].drawFrame((int)this.nFrame_2[this.fSpeed], this.x, this.y + num + this.vy, 0, anchor, g);
+			bool flag3 = this.stt == 1 || this.stt == 2;
+			if (flag3)
+			{
+				int anchor = mGraphics.BOTTOM | mGraphics.HCENTER;
+				int num = this.dy;
+				bool flag4 = this.nFrame_2[this.fSpeed] == 0 || this.nFrame_2[this.fSpeed] == 1;
+				if (flag4)
+				{
+					anchor = (mGraphics.VCENTER | mGraphics.HCENTER);
+					num = 0;
+				}
+				this.fra_skill[1].drawFrame((int)this.nFrame_2[this.fSpeed], this.x, this.y + num + this.vy, 0, anchor, g);
+			}
 		}
 	}
 
-	// Token: 0x06000320 RID: 800 RVA: 0x00019DC0 File Offset: 0x000181C0
+	// Token: 0x0600025C RID: 604 RVA: 0x00039D60 File Offset: 0x00037F60
 	private void Fill_Rect_Img(mGraphics g, FrameImage head, FrameImage body, FrameImage foot, int frame, int x, int y, int w)
 	{
 		int num = w;
 		bool flag = false;
-		if (head != null && foot != null)
+		bool flag2 = head != null && foot != null;
+		if (flag2)
 		{
 			flag = true;
 			num = w - (head.frameWidth + foot.frameWidth);
 		}
-		if (num > 0)
+		bool flag3 = num > 0;
+		if (flag3)
 		{
 			int num2 = num / body.frameWidth;
-			if (num % body.frameWidth > 0)
+			bool flag4 = num % body.frameWidth > 0;
+			if (flag4)
 			{
 				num2++;
 			}
-			if (this.dir == -1)
+			bool flag5 = this.dir == -1;
+			if (flag5)
 			{
 				for (int i = 0; i < num2; i++)
 				{
+					bool flag6 = i == num2 - 1;
 					int num3;
-					if (i == num2 - 1)
+					if (flag6)
 					{
-						if (flag)
+						bool flag7 = flag;
+						if (flag7)
 						{
 							num3 = x + foot.frameWidth;
 						}
@@ -1326,13 +1490,17 @@ public class Effect_End
 							num3 = x + w - body.frameWidth;
 						}
 					}
-					else if (flag)
-					{
-						num3 = x + foot.frameWidth + body.frameWidth + i * body.frameWidth;
-					}
 					else
 					{
-						num3 = x + i * body.frameWidth;
+						bool flag8 = flag;
+						if (flag8)
+						{
+							num3 = x + foot.frameWidth + body.frameWidth + i * body.frameWidth;
+						}
+						else
+						{
+							num3 = x + i * body.frameWidth;
+						}
 					}
 					body.drawFrame(frame, num3, y - body.frameHeight / 2, 2, 0, g);
 				}
@@ -1341,10 +1509,12 @@ public class Effect_End
 			{
 				for (int j = 0; j < num2; j++)
 				{
+					bool flag9 = j == num2 - 1;
 					int num4;
-					if (j == num2 - 1)
+					if (flag9)
 					{
-						if (flag)
+						bool flag10 = flag;
+						if (flag10)
 						{
 							num4 = x + w - (body.frameWidth + foot.frameWidth);
 						}
@@ -1353,43 +1523,52 @@ public class Effect_End
 							num4 = x + w - body.frameWidth;
 						}
 					}
-					else if (flag)
-					{
-						num4 = x + j * body.frameWidth + head.frameWidth;
-					}
 					else
 					{
-						num4 = x + j * body.frameWidth;
+						bool flag11 = flag;
+						if (flag11)
+						{
+							num4 = x + j * body.frameWidth + head.frameWidth;
+						}
+						else
+						{
+							num4 = x + j * body.frameWidth;
+						}
 					}
 					body.drawFrame(frame, num4, y - body.frameHeight / 2, 0, 0, g);
 				}
 			}
 		}
-		if (this.dir == -1)
+		bool flag12 = this.dir == -1;
+		if (flag12)
 		{
-			if (head != null)
+			bool flag13 = head != null;
+			if (flag13)
 			{
 				head.drawFrame(frame, x + w - head.frameWidth, y - head.frameHeight / 2, 2, 0, g);
 			}
-			if (foot != null)
+			bool flag14 = foot != null;
+			if (flag14)
 			{
 				foot.drawFrame(frame, x, y - foot.frameHeight / 2, 2, 0, g);
 			}
 		}
 		else
 		{
-			if (head != null)
+			bool flag15 = head != null;
+			if (flag15)
 			{
 				head.drawFrame(frame, x, y - head.frameHeight / 2, 0, 0, g);
 			}
-			if (foot != null)
+			bool flag16 = foot != null;
+			if (flag16)
 			{
 				foot.drawFrame(frame, x + w - foot.frameWidth - 1, y - foot.frameHeight / 2, 0, 0, g);
 			}
 		}
 	}
 
-	// Token: 0x06000321 RID: 801 RVA: 0x0001A000 File Offset: 0x00018400
+	// Token: 0x0600025D RID: 605 RVA: 0x0003A000 File Offset: 0x00038200
 	private void set_LINE_IN()
 	{
 		this.indexColorStar = this.typeSub;
@@ -1402,22 +1581,25 @@ public class Effect_End
 		this.create_Star_Line_In(this.vMax, this.xline, this.yline, 0);
 	}
 
-	// Token: 0x06000322 RID: 802 RVA: 0x0001A07C File Offset: 0x0001847C
+	// Token: 0x0600025E RID: 606 RVA: 0x0003A07C File Offset: 0x0003827C
 	private void upd_LINE_IN()
 	{
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Line line = (Line)this.VecEffEnd.elementAt(i);
 			line.update();
-			if (this.f >= this.fRemove)
+			bool flag = this.f >= this.fRemove;
+			if (flag)
 			{
 				this.VecEffEnd.removeElement(line);
 				i--;
 			}
 		}
-		if (this.f >= this.fRemove)
+		bool flag2 = this.f >= this.fRemove;
+		if (flag2)
 		{
-			if (GameCanvas.timeNow - this.time >= (long)this.timeRemove)
+			bool flag3 = GameCanvas.timeNow - this.time >= (long)this.timeRemove;
+			if (flag3)
 			{
 				this.VecEffEnd.removeAllElements();
 				this.removeEff();
@@ -1431,22 +1613,25 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000323 RID: 803 RVA: 0x0001A14C File Offset: 0x0001854C
+	// Token: 0x0600025F RID: 607 RVA: 0x0003A168 File Offset: 0x00038368
 	private void create_Star_Line_In(int vline, int minline, int maxline, int numpoint)
 	{
-		if (this.f == -1)
+		bool flag = this.f == -1;
+		if (flag)
 		{
 			this.VecEffEnd.removeAllElements();
 		}
 		int num = 4;
 		this.colorpaint = new int[num];
-		if (maxline <= minline)
+		bool flag2 = maxline <= minline;
+		if (flag2)
 		{
 			maxline = minline + 1;
 		}
 		for (int i = 0; i < num; i++)
 		{
-			if (Res.random(2) == 0)
+			bool flag3 = Res.random(2) == 0;
+			if (flag3)
 			{
 				this.colorpaint[i] = Effect_End.colorStar[this.indexColorStar][Res.random(3)];
 			}
@@ -1460,7 +1645,8 @@ public class Effect_End
 			Line line = new Line();
 			int num2 = 5 + 180 / num * j;
 			int num3 = 180 / num + 180 / num * j - 5;
-			if (num3 <= num2)
+			bool flag4 = num3 <= num2;
+			if (flag4)
 			{
 				num3 = num2 + 1;
 			}
@@ -1471,7 +1657,8 @@ public class Effect_End
 			bool is2Line = Res.random(4) == 0;
 			num6 = Res.fixangle(num6 % 360);
 			line.setLine(this.x1000 - Res.sin(num6) * (num4 + num7), this.y1000 - Res.cos(num6) * (num4 + num7), this.x1000 - Res.sin(num6) * num7, this.y1000 - Res.cos(num6) * num7, Res.sin(num6) * num5, Res.cos(num6) * num5, is2Line);
-			if (numpoint > 0)
+			bool flag5 = numpoint > 0;
+			if (flag5)
 			{
 				line.type = Res.random(numpoint);
 			}
@@ -1480,7 +1667,8 @@ public class Effect_End
 			num6 += 180 + Res.random_Am(2, 5);
 			num6 = Res.fixangle(num6 % 360);
 			line.setLine(this.x1000 - Res.sin(num6) * (num4 + num7), this.y1000 - Res.cos(num6) * (num4 + num7), this.x1000 - Res.sin(num6) * num7, this.y1000 - Res.cos(num6) * num7, Res.sin(num6) * num5, Res.cos(num6) * num5, is2Line);
-			if (numpoint > 0)
+			bool flag6 = numpoint > 0;
+			if (flag6)
 			{
 				line.type = Res.random(numpoint);
 			}
@@ -1488,22 +1676,25 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000324 RID: 804 RVA: 0x0001A3A8 File Offset: 0x000187A8
+	// Token: 0x06000260 RID: 608 RVA: 0x0003A3FC File Offset: 0x000385FC
 	private void pnt_LINE_IN(mGraphics g)
 	{
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Line line = (Line)this.VecEffEnd.elementAt(i);
-			if (line != null)
+			bool flag = line != null;
+			if (flag)
 			{
 				int color = 0;
-				if (i / 2 < this.colorpaint.Length)
+				bool flag2 = i / 2 < this.colorpaint.Length;
+				if (flag2)
 				{
 					color = this.colorpaint[i / 2];
 				}
 				g.setColor(color);
 				g.drawLine(line.x0 / 1000, line.y0 / 1000, line.x1 / 1000, line.y1 / 1000);
-				if (line.is2Line)
+				bool is2Line = line.is2Line;
+				if (is2Line)
 				{
 					g.drawLine(line.x0 / 1000 + 1, line.y0 / 1000, line.x1 / 1000 + 1, line.y1 / 1000);
 				}
@@ -1511,7 +1702,7 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000325 RID: 805 RVA: 0x0001A490 File Offset: 0x00018890
+	// Token: 0x06000261 RID: 609 RVA: 0x0003A4F8 File Offset: 0x000386F8
 	private void set_End_Rock()
 	{
 		this.fraImgEff = new FrameImage(8);
@@ -1523,17 +1714,22 @@ public class Effect_End
 			Point point = new Point();
 			point.x = this.x + Res.random_Am(0, 20);
 			point.y = this.y + Res.random_Am_0(7);
-			if (this.typeEffect == 10)
+			bool flag = this.typeEffect == 10;
+			if (flag)
 			{
 				point.frame = Res.random(0, this.fraImgEff.nFrame - 2);
 			}
-			else if (this.typeEffect == 11)
-			{
-				point.frame = Res.random(2, this.fraImgEff.nFrame);
-			}
 			else
 			{
-				point.frame = Res.random(0, this.fraImgEff.nFrame);
+				bool flag2 = this.typeEffect == 11;
+				if (flag2)
+				{
+					point.frame = Res.random(2, this.fraImgEff.nFrame);
+				}
+				else
+				{
+					point.frame = Res.random(0, this.fraImgEff.nFrame);
+				}
 			}
 			point.dis = Res.random(2);
 			point.vy = -Res.random(1, 4);
@@ -1541,123 +1737,136 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000326 RID: 806 RVA: 0x0001A5A0 File Offset: 0x000189A0
+	// Token: 0x06000262 RID: 610 RVA: 0x0003A618 File Offset: 0x00038818
 	private void upd_End_Rock()
 	{
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Point point = (Point)this.VecEffEnd.elementAt(i);
 			point.update();
-			if (point.y < this.toY)
+			bool flag = point.y < this.toY;
+			if (flag)
 			{
 				this.VecEffEnd.removeElementAt(i);
 				i--;
 			}
 		}
-		if (this.f >= this.fRemove)
+		bool flag2 = this.f >= this.fRemove;
+		if (flag2)
 		{
 			this.removeEff();
 		}
 	}
 
-	// Token: 0x06000327 RID: 807 RVA: 0x0001A61C File Offset: 0x00018A1C
+	// Token: 0x06000263 RID: 611 RVA: 0x0003A6A0 File Offset: 0x000388A0
 	private void pnt_End_Rock(mGraphics g)
 	{
 		for (int i = 0; i < this.VecEffEnd.size(); i++)
 		{
 			Point point = (Point)this.VecEffEnd.elementAt(i);
-			if (this.fraImgEff != null)
+			bool flag = this.fraImgEff != null;
+			if (flag)
 			{
 				this.fraImgEff.drawFrame(point.frame, point.x, point.y, 0, mGraphics.VCENTER | mGraphics.HCENTER, g);
 			}
 		}
 	}
 
-	// Token: 0x06000328 RID: 808 RVA: 0x0001A68C File Offset: 0x00018A8C
+	// Token: 0x06000264 RID: 612 RVA: 0x0003A718 File Offset: 0x00038918
 	private void updListObj_Mafuba(bool ismafuba)
 	{
-		if (this.listObj == null)
+		bool flag = this.listObj == null;
+		if (!flag)
 		{
-			return;
-		}
-		for (int i = 0; i < this.listObj.Length; i++)
-		{
-			if (this.listObj[i] != null)
+			for (int i = 0; i < this.listObj.Length; i++)
 			{
-				if ((int)this.listObj[i].type == 0)
+				bool flag2 = this.listObj[i] != null;
+				if (flag2)
 				{
-					Mob mob = GameScr.findMobInMap(this.listObj[i].id);
-					if (mob != null)
+					bool flag3 = this.listObj[i].type == 0;
+					if (flag3)
 					{
-						mob.isMafuba = ismafuba;
-						mob.isHide = false;
-						mob.xMFB = this.xDotS[i];
-						mob.yMFB = this.yDotS[i];
-					}
-				}
-				else
-				{
-					global::Char @char;
-					if (global::Char.myCharz().charID == this.listObj[i].id)
-					{
-						@char = global::Char.myCharz();
+						Mob mob = GameScr.findMobInMap(this.listObj[i].id);
+						bool flag4 = mob != null;
+						if (flag4)
+						{
+							mob.isMafuba = ismafuba;
+							mob.isHide = false;
+							mob.xMFB = this.xDotS[i];
+							mob.yMFB = this.yDotS[i];
+						}
 					}
 					else
 					{
-						@char = GameScr.findCharInMap(this.listObj[i].id);
-					}
-					if (@char != null)
-					{
-						@char.isMafuba = ismafuba;
-						@char.isHide = false;
-						@char.xMFB = this.xDotS[i];
-						@char.yMFB = this.yDotS[i];
+						bool flag5 = global::Char.myCharz().charID == this.listObj[i].id;
+						global::Char @char;
+						if (flag5)
+						{
+							@char = global::Char.myCharz();
+						}
+						else
+						{
+							@char = GameScr.findCharInMap(this.listObj[i].id);
+						}
+						bool flag6 = @char != null;
+						if (flag6)
+						{
+							@char.isMafuba = ismafuba;
+							@char.isHide = false;
+							@char.xMFB = this.xDotS[i];
+							@char.yMFB = this.yDotS[i];
+						}
 					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000329 RID: 809 RVA: 0x0001A794 File Offset: 0x00018B94
+	// Token: 0x06000265 RID: 613 RVA: 0x0003A854 File Offset: 0x00038A54
 	private void hideListObj_Mafuba(bool ishide)
 	{
-		if (this.listObj == null)
+		bool flag = this.listObj == null;
+		if (!flag)
 		{
-			return;
-		}
-		for (int i = 0; i < this.listObj.Length; i++)
-		{
-			if (this.listObj[i] != null)
+			for (int i = 0; i < this.listObj.Length; i++)
 			{
-				if ((int)this.listObj[i].type == 0)
+				bool flag2 = this.listObj[i] != null;
+				if (flag2)
 				{
-					Mob mob = GameScr.findMobInMap(this.listObj[i].id);
-					if (mob != null)
+					bool flag3 = this.listObj[i].type == 0;
+					if (flag3)
 					{
-						mob.isHide = ishide;
-					}
-				}
-				else
-				{
-					global::Char @char;
-					if (global::Char.myCharz().charID == this.listObj[i].id)
-					{
-						@char = global::Char.myCharz();
+						Mob mob = GameScr.findMobInMap(this.listObj[i].id);
+						bool flag4 = mob != null;
+						if (flag4)
+						{
+							mob.isHide = ishide;
+						}
 					}
 					else
 					{
-						@char = GameScr.findCharInMap(this.listObj[i].id);
-					}
-					if (@char != null)
-					{
-						@char.isHide = ishide;
+						bool flag5 = global::Char.myCharz().charID == this.listObj[i].id;
+						global::Char @char;
+						if (flag5)
+						{
+							@char = global::Char.myCharz();
+						}
+						else
+						{
+							@char = GameScr.findCharInMap(this.listObj[i].id);
+						}
+						bool flag6 = @char != null;
+						if (flag6)
+						{
+							@char.isHide = ishide;
+						}
 					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x0600032A RID: 810 RVA: 0x0001A854 File Offset: 0x00018C54
+	// Token: 0x06000266 RID: 614 RVA: 0x0003A944 File Offset: 0x00038B44
 	private void get_Img_Skill()
 	{
 		int num = 0;
@@ -1666,8 +1875,10 @@ public class Effect_End
 		switch (this.typeEffect)
 		{
 		case 16:
+		{
 			num = 26;
-			if (this.typeSub == 0)
+			bool flag = this.typeSub == 0;
+			if (flag)
 			{
 				array = new int[]
 				{
@@ -1678,7 +1889,8 @@ public class Effect_End
 					28
 				};
 			}
-			if (this.typeSub == 1)
+			bool flag2 = this.typeSub == 1;
+			if (flag2)
 			{
 				array = new int[]
 				{
@@ -1690,6 +1902,7 @@ public class Effect_End
 				};
 			}
 			break;
+		}
 		case 17:
 			num = 25;
 			array = new int[]
@@ -1795,20 +2008,29 @@ public class Effect_End
 			num = 26;
 			int num2 = 0;
 			int num3 = 0;
-			if (this.typeSub == 0)
+			bool flag3 = this.typeSub == 0;
+			if (flag3)
 			{
 				num2 = 4;
 				num3 = 25;
 			}
-			else if (this.typeSub == 1)
+			else
 			{
-				num2 = 5;
-				num3 = 26;
-			}
-			else if (this.typeSub == 2)
-			{
-				num2 = 6;
-				num3 = 27;
+				bool flag4 = this.typeSub == 1;
+				if (flag4)
+				{
+					num2 = 5;
+					num3 = 26;
+				}
+				else
+				{
+					bool flag5 = this.typeSub == 2;
+					if (flag5)
+					{
+						num2 = 6;
+						num3 = 27;
+					}
+				}
 			}
 			array = new int[]
 			{
@@ -1823,7 +2045,8 @@ public class Effect_End
 			break;
 		}
 		}
-		if (array != null && array2 != null)
+		bool flag6 = array != null && array2 != null;
+		if (flag6)
 		{
 			this.fra_skill = new FrameImage[array.Length];
 			for (int i = 0; i < array.Length; i++)
@@ -1838,11 +2061,13 @@ public class Effect_End
 					array[i]
 				});
 				FrameImage frameImage = mSystem.getFraImage(nameImg);
-				if (frameImage == null)
+				bool flag7 = frameImage == null;
+				if (flag7)
 				{
 					frameImage = new FrameImage(array2[i]);
 				}
-				if (frameImage != null)
+				bool flag8 = frameImage != null;
+				if (flag8)
 				{
 					this.fra_skill[i] = frameImage;
 				}
@@ -1850,93 +2075,122 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x0600032B RID: 811 RVA: 0x0001AB34 File Offset: 0x00018F34
+	// Token: 0x06000267 RID: 615 RVA: 0x0003AC54 File Offset: 0x00038E54
 	private void set_Gong()
 	{
-		if (this.charUse != null)
+		bool flag = this.charUse != null;
+		if (flag)
 		{
-			if (this.typeEffect == 21)
+			bool flag2 = this.typeEffect == 21;
+			if (flag2)
 			{
 				this.x = this.charUse.cx - 3 * this.charUse.cdir;
 				this.y = this.charUse.cy;
 				SoundMn.playSound(this.x, this.y, SoundMn.KAMEX10_0, SoundMn.volume);
 			}
-			else if (this.typeEffect == 22)
-			{
-				this.x = this.charUse.cx + 20 * this.charUse.cdir;
-				this.y = this.charUse.cy - 4;
-				SoundMn.playSound(this.x, this.y, SoundMn.DESTROY_2, SoundMn.volume);
-			}
-			else if (this.typeEffect == 23)
-			{
-				this.x = this.charUse.cx;
-				this.y = this.charUse.cy - 50;
-				SoundMn.playSound(this.x, this.y, SoundMn.MAFUBA_2, SoundMn.volume);
-			}
 			else
 			{
-				this.x = this.charUse.cx;
-				this.y = this.charUse.cy;
+				bool flag3 = this.typeEffect == 22;
+				if (flag3)
+				{
+					this.x = this.charUse.cx + 20 * this.charUse.cdir;
+					this.y = this.charUse.cy - 4;
+					SoundMn.playSound(this.x, this.y, SoundMn.DESTROY_2, SoundMn.volume);
+				}
+				else
+				{
+					bool flag4 = this.typeEffect == 23;
+					if (flag4)
+					{
+						this.x = this.charUse.cx;
+						this.y = this.charUse.cy - 50;
+						SoundMn.playSound(this.x, this.y, SoundMn.MAFUBA_2, SoundMn.volume);
+					}
+					else
+					{
+						this.x = this.charUse.cx;
+						this.y = this.charUse.cy;
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600032C RID: 812 RVA: 0x0001AC80 File Offset: 0x00019080
+	// Token: 0x06000268 RID: 616 RVA: 0x0003ADB0 File Offset: 0x00038FB0
 	private void upd_Gong()
 	{
-		if (this.charUse != null)
+		bool flag = this.charUse != null;
+		if (flag)
 		{
-			if (this.typeEffect == 21)
+			bool flag2 = this.typeEffect == 21;
+			if (flag2)
 			{
 				this.x = this.charUse.cx - 3 * this.charUse.cdir;
 				this.y = this.charUse.cy;
 			}
-			else if (this.typeEffect == 22)
-			{
-				this.x = this.charUse.cx + 20 * this.charUse.cdir;
-				this.y = this.charUse.cy - 4;
-			}
-			else if (this.typeEffect == 23)
-			{
-				this.x = this.charUse.cx;
-				this.y = this.charUse.cy - 50;
-			}
 			else
 			{
-				this.x = this.charUse.cx;
-				this.y = this.charUse.cy;
+				bool flag3 = this.typeEffect == 22;
+				if (flag3)
+				{
+					this.x = this.charUse.cx + 20 * this.charUse.cdir;
+					this.y = this.charUse.cy - 4;
+				}
+				else
+				{
+					bool flag4 = this.typeEffect == 23;
+					if (flag4)
+					{
+						this.x = this.charUse.cx;
+						this.y = this.charUse.cy - 50;
+					}
+					else
+					{
+						this.x = this.charUse.cx;
+						this.y = this.charUse.cy;
+					}
+				}
 			}
 		}
-		if (this.timeRemove > 0)
+		bool flag5 = this.timeRemove > 0;
+		if (flag5)
 		{
-			if (GameCanvas.timeNow - this.time >= (long)this.timeRemove)
+			bool flag6 = GameCanvas.timeNow - this.time >= (long)this.timeRemove;
+			if (flag6)
 			{
 				this.removeEff();
 			}
 		}
-		else if (this.f >= this.fra_skill[0].nFrame * this.n_frame)
+		else
 		{
-			this.removeEff();
+			bool flag7 = this.f >= this.fra_skill[0].nFrame * this.n_frame;
+			if (flag7)
+			{
+				this.removeEff();
+			}
 		}
 	}
 
-	// Token: 0x0600032D RID: 813 RVA: 0x0001ADCC File Offset: 0x000191CC
+	// Token: 0x06000269 RID: 617 RVA: 0x0003AF20 File Offset: 0x00039120
 	private void pnt_Gong(mGraphics g, int anchor)
 	{
-		if (this.fra_skill[0] != null)
+		bool flag = this.fra_skill[0] != null;
+		if (flag)
 		{
 			this.fra_skill[0].drawFrame(this.f / this.n_frame % this.fra_skill[0].nFrame, this.x, this.y, this.dir_nguoc, anchor, g);
 		}
 	}
 
-	// Token: 0x0600032E RID: 814 RVA: 0x0001AE24 File Offset: 0x00019224
+	// Token: 0x0600026A RID: 618 RVA: 0x0003AF7C File Offset: 0x0003917C
 	private void set_Pow()
 	{
 		this.nFrame = null;
 		this.n_frame = 3;
-		if (this.typeEffect == 18)
+		bool flag = this.typeEffect == 18;
+		if (flag)
 		{
-			if (this.typeSub == 0)
+			bool flag2 = this.typeSub == 0;
+			if (flag2)
 			{
 				this.nFrame = new byte[]
 				{
@@ -1972,40 +2226,54 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x0600032F RID: 815 RVA: 0x0001AE8C File Offset: 0x0001928C
+	// Token: 0x0600026B RID: 619 RVA: 0x0003AFEC File Offset: 0x000391EC
 	private void upd_Pow()
 	{
-		if (this.charUse != null)
+		bool flag = this.charUse != null;
+		if (flag)
 		{
 			this.x = this.charUse.cx;
 			this.y = this.charUse.cy + 13;
 		}
-		if (this.timeRemove > 0)
+		bool flag2 = this.timeRemove > 0;
+		if (flag2)
 		{
-			if (GameCanvas.timeNow - this.time >= (long)this.timeRemove)
+			bool flag3 = GameCanvas.timeNow - this.time >= (long)this.timeRemove;
+			if (flag3)
 			{
 				this.removeEff();
 			}
 		}
-		else if (this.nFrame != null)
+		else
 		{
-			if (this.f > this.nFrame.Length)
+			bool flag4 = this.nFrame != null;
+			if (flag4)
 			{
-				this.removeEff();
+				bool flag5 = this.f > this.nFrame.Length;
+				if (flag5)
+				{
+					this.removeEff();
+				}
 			}
-		}
-		else if (this.f >= this.fra_skill[0].nFrame * this.n_frame)
-		{
-			this.removeEff();
+			else
+			{
+				bool flag6 = this.f >= this.fra_skill[0].nFrame * this.n_frame;
+				if (flag6)
+				{
+					this.removeEff();
+				}
+			}
 		}
 	}
 
-	// Token: 0x06000330 RID: 816 RVA: 0x0001AF48 File Offset: 0x00019348
+	// Token: 0x0600026C RID: 620 RVA: 0x0003B0C4 File Offset: 0x000392C4
 	private void pnt_Pow(mGraphics g, int anchor)
 	{
-		if (this.fra_skill[0] != null)
+		bool flag = this.fra_skill[0] != null;
+		if (flag)
 		{
-			if (this.nFrame != null)
+			bool flag2 = this.nFrame != null;
+			if (flag2)
 			{
 				this.fra_skill[0].drawFrame((int)this.nFrame[this.f % this.nFrame.Length], this.x, this.y, this.dir_nguoc, anchor, g);
 			}
@@ -2016,248 +2284,255 @@ public class Effect_End
 		}
 	}
 
-	// Token: 0x06000331 RID: 817 RVA: 0x0001AFE5 File Offset: 0x000193E5
+	// Token: 0x0600026D RID: 621 RVA: 0x0003B170 File Offset: 0x00039370
 	private void set_Sub()
 	{
-		if (this.typeEffect == 17)
+		bool flag = this.typeEffect == 17;
+		if (flag)
 		{
 			this.x += ((this.dir != 0) ? (-this.fra_skill[0].frameWidth) : 0);
 		}
 	}
 
-	// Token: 0x06000332 RID: 818 RVA: 0x0001B020 File Offset: 0x00019420
+	// Token: 0x0600026E RID: 622 RVA: 0x0003B1B4 File Offset: 0x000393B4
 	private void upd_Sub()
 	{
-		if (this.timeRemove > 0)
+		bool flag = this.timeRemove > 0;
+		if (flag)
 		{
-			if (GameCanvas.timeNow - this.time >= (long)this.timeRemove)
+			bool flag2 = GameCanvas.timeNow - this.time >= (long)this.timeRemove;
+			if (flag2)
 			{
 				this.removeEff();
 			}
 		}
-		else if (this.f >= this.fra_skill[0].nFrame * this.n_frame)
+		else
 		{
-			this.removeEff();
+			bool flag3 = this.f >= this.fra_skill[0].nFrame * this.n_frame;
+			if (flag3)
+			{
+				this.removeEff();
+			}
 		}
 	}
 
-	// Token: 0x06000333 RID: 819 RVA: 0x0001B081 File Offset: 0x00019481
+	// Token: 0x0600026F RID: 623 RVA: 0x0003B224 File Offset: 0x00039424
 	private void pnt_Sub(mGraphics g, int anchor)
 	{
 		this.fra_skill[0].drawFrame(this.f / this.n_frame % this.fra_skill[0].nFrame, this.x, this.y, this.dir, anchor, g);
 	}
 
-	// Token: 0x06000334 RID: 820 RVA: 0x0001B0BF File Offset: 0x000194BF
+	// Token: 0x06000270 RID: 624 RVA: 0x00003136 File Offset: 0x00001336
 	private void set_()
 	{
 	}
 
-	// Token: 0x06000335 RID: 821 RVA: 0x0001B0C1 File Offset: 0x000194C1
+	// Token: 0x06000271 RID: 625 RVA: 0x00003136 File Offset: 0x00001336
 	private void upd_()
 	{
 	}
 
-	// Token: 0x06000336 RID: 822 RVA: 0x0001B0C3 File Offset: 0x000194C3
+	// Token: 0x06000272 RID: 626 RVA: 0x00003136 File Offset: 0x00001336
 	private void pnt_(mGraphics g)
 	{
 	}
 
-	// Token: 0x040004F1 RID: 1265
+	// Token: 0x04000532 RID: 1330
 	public const sbyte Lvlpaint_All = -1;
 
-	// Token: 0x040004F2 RID: 1266
+	// Token: 0x04000533 RID: 1331
 	public const sbyte Lvlpaint_Front = 0;
 
-	// Token: 0x040004F3 RID: 1267
+	// Token: 0x04000534 RID: 1332
 	public const sbyte Lvlpaint_Mid = 1;
 
-	// Token: 0x040004F4 RID: 1268
+	// Token: 0x04000535 RID: 1333
 	public const sbyte Lvlpaint_Mid_2 = 2;
 
-	// Token: 0x040004F5 RID: 1269
+	// Token: 0x04000536 RID: 1334
 	public const sbyte Lvlpaint_Behind = 3;
 
-	// Token: 0x040004F6 RID: 1270
+	// Token: 0x04000537 RID: 1335
 	public const short End_String_Lose = 0;
 
-	// Token: 0x040004F7 RID: 1271
+	// Token: 0x04000538 RID: 1336
 	public const short End_String_Win = 1;
 
-	// Token: 0x040004F8 RID: 1272
+	// Token: 0x04000539 RID: 1337
 	public const short End_String_Draw = 2;
 
-	// Token: 0x040004F9 RID: 1273
+	// Token: 0x0400053A RID: 1338
 	public const short End_FireWork = 3;
 
-	// Token: 0x040004FA RID: 1274
+	// Token: 0x0400053B RID: 1339
 	public const short End_line_in = 9;
 
-	// Token: 0x040004FB RID: 1275
+	// Token: 0x0400053C RID: 1340
 	public const short End_e8_rock = 10;
 
-	// Token: 0x040004FC RID: 1276
+	// Token: 0x0400053D RID: 1341
 	public const short End_e8_ice = 11;
 
-	// Token: 0x040004FD RID: 1277
+	// Token: 0x0400053E RID: 1342
 	public const short End_SUB_MaFuBa = 16;
 
-	// Token: 0x040004FE RID: 1278
+	// Token: 0x0400053F RID: 1343
 	public const short End_SUB_Destroy = 17;
 
-	// Token: 0x040004FF RID: 1279
+	// Token: 0x04000540 RID: 1344
 	public const short End_POW_Kamex10 = 18;
 
-	// Token: 0x04000500 RID: 1280
+	// Token: 0x04000541 RID: 1345
 	public const short End_POW_Destroy = 19;
 
-	// Token: 0x04000501 RID: 1281
+	// Token: 0x04000542 RID: 1346
 	public const short End_POW_MaFuBa = 20;
 
-	// Token: 0x04000502 RID: 1282
+	// Token: 0x04000543 RID: 1347
 	public const short End_GONG_Kamex10 = 21;
 
-	// Token: 0x04000503 RID: 1283
+	// Token: 0x04000544 RID: 1348
 	public const short End_GONG_Destroy = 22;
 
-	// Token: 0x04000504 RID: 1284
+	// Token: 0x04000545 RID: 1349
 	public const short End_GONG_MaFuBa = 23;
 
-	// Token: 0x04000505 RID: 1285
+	// Token: 0x04000546 RID: 1350
 	public const short End_Skill_Kamex10 = 24;
 
-	// Token: 0x04000506 RID: 1286
+	// Token: 0x04000547 RID: 1351
 	public const short End_Skill_Destroy = 25;
 
-	// Token: 0x04000507 RID: 1287
+	// Token: 0x04000548 RID: 1352
 	public const short End_Skill_MaFuBa = 26;
 
-	// Token: 0x04000508 RID: 1288
+	// Token: 0x04000549 RID: 1353
 	private MyVector VecEffEnd = new MyVector("EffectEnd VecEffEnd");
 
-	// Token: 0x04000509 RID: 1289
+	// Token: 0x0400054A RID: 1354
 	public FrameImage fraImgEff;
 
-	// Token: 0x0400050A RID: 1290
+	// Token: 0x0400054B RID: 1355
 	public byte[] nFrame = new byte[10];
 
-	// Token: 0x0400050B RID: 1291
+	// Token: 0x0400054C RID: 1356
 	public byte[] nFrame_2 = new byte[10];
 
-	// Token: 0x0400050C RID: 1292
+	// Token: 0x0400054D RID: 1357
 	public int typePaint;
 
-	// Token: 0x0400050D RID: 1293
+	// Token: 0x0400054E RID: 1358
 	public int typeEffect;
 
-	// Token: 0x0400050E RID: 1294
+	// Token: 0x0400054F RID: 1359
 	public int typeSub;
 
-	// Token: 0x0400050F RID: 1295
+	// Token: 0x04000550 RID: 1360
 	public int range;
 
-	// Token: 0x04000510 RID: 1296
+	// Token: 0x04000551 RID: 1361
 	public short idEndeff;
 
-	// Token: 0x04000511 RID: 1297
+	// Token: 0x04000552 RID: 1362
 	public int fRemove;
 
-	// Token: 0x04000512 RID: 1298
+	// Token: 0x04000553 RID: 1363
 	public int fMove;
 
-	// Token: 0x04000513 RID: 1299
+	// Token: 0x04000554 RID: 1364
 	public int n_frame;
 
-	// Token: 0x04000514 RID: 1300
+	// Token: 0x04000555 RID: 1365
 	public int x;
 
-	// Token: 0x04000515 RID: 1301
+	// Token: 0x04000556 RID: 1366
 	public int y;
 
-	// Token: 0x04000516 RID: 1302
+	// Token: 0x04000557 RID: 1367
 	public int w;
 
-	// Token: 0x04000517 RID: 1303
+	// Token: 0x04000558 RID: 1368
 	public int h;
 
-	// Token: 0x04000518 RID: 1304
+	// Token: 0x04000559 RID: 1369
 	public int dir;
 
-	// Token: 0x04000519 RID: 1305
+	// Token: 0x0400055A RID: 1370
 	public int dir_nguoc;
 
-	// Token: 0x0400051A RID: 1306
+	// Token: 0x0400055B RID: 1371
 	public int levelPaint;
 
-	// Token: 0x0400051B RID: 1307
+	// Token: 0x0400055C RID: 1372
 	public int f;
 
-	// Token: 0x0400051C RID: 1308
+	// Token: 0x0400055D RID: 1373
 	public int frame;
 
-	// Token: 0x0400051D RID: 1309
+	// Token: 0x0400055E RID: 1374
 	public int fSpeed;
 
-	// Token: 0x0400051E RID: 1310
+	// Token: 0x0400055F RID: 1375
 	public int vx;
 
-	// Token: 0x0400051F RID: 1311
+	// Token: 0x04000560 RID: 1376
 	public int vy;
 
-	// Token: 0x04000520 RID: 1312
+	// Token: 0x04000561 RID: 1377
 	public int x1000;
 
-	// Token: 0x04000521 RID: 1313
+	// Token: 0x04000562 RID: 1378
 	public int y1000;
 
-	// Token: 0x04000522 RID: 1314
+	// Token: 0x04000563 RID: 1379
 	public int vx1000;
 
-	// Token: 0x04000523 RID: 1315
+	// Token: 0x04000564 RID: 1380
 	public int vy1000;
 
-	// Token: 0x04000524 RID: 1316
+	// Token: 0x04000565 RID: 1381
 	public int dy_throw;
 
-	// Token: 0x04000525 RID: 1317
+	// Token: 0x04000566 RID: 1382
 	public int vMax;
 
-	// Token: 0x04000526 RID: 1318
+	// Token: 0x04000567 RID: 1383
 	public int toX;
 
-	// Token: 0x04000527 RID: 1319
+	// Token: 0x04000568 RID: 1384
 	public int toY;
 
-	// Token: 0x04000528 RID: 1320
+	// Token: 0x04000569 RID: 1385
 	public int stt;
 
-	// Token: 0x04000529 RID: 1321
+	// Token: 0x0400056A RID: 1386
 	public int dx;
 
-	// Token: 0x0400052A RID: 1322
+	// Token: 0x0400056B RID: 1387
 	public int dy;
 
-	// Token: 0x0400052B RID: 1323
+	// Token: 0x0400056C RID: 1388
 	public short timeRemove;
 
-	// Token: 0x0400052C RID: 1324
+	// Token: 0x0400056D RID: 1389
 	public long time;
 
-	// Token: 0x0400052D RID: 1325
+	// Token: 0x0400056E RID: 1390
 	public bool isRemove;
 
-	// Token: 0x0400052E RID: 1326
+	// Token: 0x0400056F RID: 1391
 	public bool isAddSub;
 
-	// Token: 0x0400052F RID: 1327
+	// Token: 0x04000570 RID: 1392
 	public global::Char charUse;
 
-	// Token: 0x04000530 RID: 1328
+	// Token: 0x04000571 RID: 1393
 	public Point[] listObj;
 
-	// Token: 0x04000531 RID: 1329
+	// Token: 0x04000572 RID: 1394
 	public Point target;
 
-	// Token: 0x04000532 RID: 1330
+	// Token: 0x04000573 RID: 1395
 	public static short[][] arrInfoEff = new short[][]
 	{
 		new short[]
@@ -2436,19 +2711,19 @@ public class Effect_End
 		}
 	};
 
-	// Token: 0x04000533 RID: 1331
+	// Token: 0x04000574 RID: 1396
 	public int life;
 
-	// Token: 0x04000534 RID: 1332
+	// Token: 0x04000575 RID: 1397
 	public int goc_Arc;
 
-	// Token: 0x04000535 RID: 1333
+	// Token: 0x04000576 RID: 1398
 	public int va;
 
-	// Token: 0x04000536 RID: 1334
+	// Token: 0x04000577 RID: 1399
 	public int gocT_Arc;
 
-	// Token: 0x04000537 RID: 1335
+	// Token: 0x04000578 RID: 1400
 	public byte[] mpaintone_Arrow = new byte[]
 	{
 		12,
@@ -2477,7 +2752,7 @@ public class Effect_End
 		13
 	};
 
-	// Token: 0x04000538 RID: 1336
+	// Token: 0x04000579 RID: 1401
 	public byte[] mImageArrow = new byte[]
 	{
 		0,
@@ -2506,7 +2781,7 @@ public class Effect_End
 		2
 	};
 
-	// Token: 0x04000539 RID: 1337
+	// Token: 0x0400057A RID: 1402
 	public byte[] mXoayArrow = new byte[]
 	{
 		2,
@@ -2535,34 +2810,34 @@ public class Effect_End
 		2
 	};
 
-	// Token: 0x0400053A RID: 1338
+	// Token: 0x0400057B RID: 1403
 	private int rS;
 
-	// Token: 0x0400053B RID: 1339
+	// Token: 0x0400057C RID: 1404
 	private int angleS;
 
-	// Token: 0x0400053C RID: 1340
+	// Token: 0x0400057D RID: 1405
 	private int angleO;
 
-	// Token: 0x0400053D RID: 1341
+	// Token: 0x0400057E RID: 1406
 	private int iAngleS;
 
-	// Token: 0x0400053E RID: 1342
+	// Token: 0x0400057F RID: 1407
 	private int iDotS;
 
-	// Token: 0x0400053F RID: 1343
+	// Token: 0x04000580 RID: 1408
 	private int[] xArgS;
 
-	// Token: 0x04000540 RID: 1344
+	// Token: 0x04000581 RID: 1409
 	private int[] yArgS;
 
-	// Token: 0x04000541 RID: 1345
+	// Token: 0x04000582 RID: 1410
 	private int[] xDotS;
 
-	// Token: 0x04000542 RID: 1346
+	// Token: 0x04000583 RID: 1411
 	private int[] yDotS;
 
-	// Token: 0x04000543 RID: 1347
+	// Token: 0x04000584 RID: 1412
 	public static int[][] colorStar = new int[][]
 	{
 		new int[]
@@ -2585,18 +2860,18 @@ public class Effect_End
 		}
 	};
 
-	// Token: 0x04000544 RID: 1348
+	// Token: 0x04000585 RID: 1413
 	private int[] colorpaint;
 
-	// Token: 0x04000545 RID: 1349
+	// Token: 0x04000586 RID: 1414
 	private int indexColorStar;
 
-	// Token: 0x04000546 RID: 1350
+	// Token: 0x04000587 RID: 1415
 	private int xline;
 
-	// Token: 0x04000547 RID: 1351
+	// Token: 0x04000588 RID: 1416
 	private int yline;
 
-	// Token: 0x04000548 RID: 1352
+	// Token: 0x04000589 RID: 1417
 	private FrameImage[] fra_skill;
 }

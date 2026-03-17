@@ -2,16 +2,16 @@
 using Assets.src.e;
 using Assets.src.g;
 
-// Token: 0x020000A0 RID: 160
+// Token: 0x0200000F RID: 15
 public class Char : IMapObject
 {
-	// Token: 0x06000609 RID: 1545 RVA: 0x0001EDF8 File Offset: 0x0001D1F8
+	// Token: 0x06000094 RID: 148 RVA: 0x00007FD8 File Offset: 0x000061D8
 	public Char()
 	{
 		this.statusMe = 6;
 	}
 
-	// Token: 0x0600060A RID: 1546 RVA: 0x0001F05C File Offset: 0x0001D45C
+	// Token: 0x06000095 RID: 149 RVA: 0x0000823C File Offset: 0x0000643C
 	public void applyCharLevelPercent()
 	{
 		try
@@ -21,9 +21,11 @@ public class Char : IMapObject
 			int num3 = 0;
 			for (int i = GameScr.exps.Length - 1; i >= 0; i--)
 			{
-				if (this.cPower >= GameScr.exps[i])
+				bool flag = this.cPower >= GameScr.exps[i];
+				if (flag)
 				{
-					if (i == GameScr.exps.Length - 1)
+					bool flag2 = i == GameScr.exps.Length - 1;
+					if (flag2)
 					{
 						num = 1L;
 					}
@@ -45,45 +47,61 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x0600060B RID: 1547 RVA: 0x0001F128 File Offset: 0x0001D528
+	// Token: 0x06000096 RID: 150 RVA: 0x00008314 File Offset: 0x00006514
 	public int getdxSkill()
 	{
-		if (this.myskill != null)
+		bool flag = this.myskill != null;
+		int result;
+		if (flag)
 		{
-			return this.myskill.dx;
+			result = this.myskill.dx;
 		}
-		return 0;
+		else
+		{
+			result = 0;
+		}
+		return result;
 	}
 
-	// Token: 0x0600060C RID: 1548 RVA: 0x0001F142 File Offset: 0x0001D542
+	// Token: 0x06000097 RID: 151 RVA: 0x00008344 File Offset: 0x00006544
 	public int getdySkill()
 	{
-		if (this.myskill != null)
+		bool flag = this.myskill != null;
+		int result;
+		if (flag)
 		{
-			return this.myskill.dy;
+			result = this.myskill.dy;
 		}
-		return 0;
+		else
+		{
+			result = 0;
+		}
+		return result;
 	}
 
-	// Token: 0x0600060D RID: 1549 RVA: 0x0001F15C File Offset: 0x0001D55C
+	// Token: 0x06000098 RID: 152 RVA: 0x00008374 File Offset: 0x00006574
 	public static void taskAction(bool isNextStep)
 	{
 		Task task = global::Char.myCharz().taskMaint;
-		if (task.index > task.contentInfo.Length - 1)
+		bool flag = task.index > task.contentInfo.Length - 1;
+		if (flag)
 		{
 			task.index = task.contentInfo.Length - 1;
 		}
 		string text = task.contentInfo[task.index];
-		if (text != null && !text.Equals(string.Empty))
+		bool flag2 = text != null && !text.Equals(string.Empty);
+		if (flag2)
 		{
-			if (text.StartsWith("#"))
+			bool flag3 = text.StartsWith("#");
+			if (flag3)
 			{
 				text = NinjaUtil.replace(text, "#", string.Empty);
 				Npc npc = new Npc(5, 0, -100, -100, 5, GameScr.info1.charId[global::Char.myCharz().cgender][2]);
 				npc.cx = (npc.cy = -100);
 				npc.avatar = GameScr.info1.charId[global::Char.myCharz().cgender][2];
 				npc.charID = 5;
-				if (GameCanvas.currentScreen == GameScr.instance)
+				bool flag4 = GameCanvas.currentScreen == GameScr.instance;
+				if (flag4)
 				{
 					ChatPopup.addNextPopUpMultiLine(text, npc);
 				}
@@ -94,8 +112,9 @@ public class Char : IMapObject
 			}
 		}
 		GameScr.isHaveSelectSkill = true;
-		Cout.println("TASKx " + global::Char.myCharz().taskMaint.taskId);
-		if (global::Char.myCharz().taskMaint.taskId <= 2)
+		Cout.println("TASKx " + global::Char.myCharz().taskMaint.taskId.ToString());
+		bool flag5 = global::Char.myCharz().taskMaint.taskId <= 2;
+		if (flag5)
 		{
 			global::Char.myCharz().canFly = false;
 		}
@@ -104,38 +123,45 @@ public class Char : IMapObject
 			global::Char.myCharz().canFly = true;
 		}
 		GameScr.gI().left = null;
-		if (task.taskId == 0)
+		bool flag6 = task.taskId == 0;
+		if (flag6)
 		{
 			Hint.isViewMap = false;
 			Hint.isViewPotential = false;
 			GameScr.gI().right = null;
 			GameScr.isHaveSelectSkill = false;
 			GameScr.gI().left = null;
-			if (task.index < 4)
+			bool flag7 = task.index < 4;
+			if (flag7)
 			{
 				MagicTree.isPaint = false;
 				GameScr.isPaintRada = -1;
 			}
-			if (task.index == 4)
+			bool flag8 = task.index == 4;
+			if (flag8)
 			{
 				GameScr.isPaintRada = 1;
 				MagicTree.isPaint = true;
 			}
-			if (task.index >= 5)
+			bool flag9 = task.index >= 5;
+			if (flag9)
 			{
 				GameScr.gI().right = GameScr.gI().cmdFocus;
 			}
 		}
-		if (task.taskId == 1)
+		bool flag10 = task.taskId == 1;
+		if (flag10)
 		{
 			GameScr.isHaveSelectSkill = true;
 		}
-		if (task.taskId >= 1)
+		bool flag11 = task.taskId >= 1;
+		if (flag11)
 		{
 			GameScr.gI().right = GameScr.gI().cmdFocus;
 			GameScr.gI().left = GameScr.gI().cmdMenu;
 		}
-		if (task.taskId >= 0)
+		bool flag12 = task.taskId >= 0;
+		if (flag12)
 		{
 			Panel.isPaintMap = true;
 		}
@@ -143,7 +169,8 @@ public class Char : IMapObject
 		{
 			Panel.isPaintMap = false;
 		}
-		if (task.taskId < 12)
+		bool flag13 = task.taskId < 12;
+		if (flag13)
 		{
 			GameCanvas.panel.mainTabName = mResources.mainTab1;
 		}
@@ -152,13 +179,14 @@ public class Char : IMapObject
 			GameCanvas.panel.mainTabName = mResources.mainTab2;
 		}
 		GameCanvas.panel.tabName[0] = GameCanvas.panel.mainTabName;
-		if (global::Char.myChar.taskMaint.taskId > 10)
+		bool flag14 = global::Char.myChar.taskMaint.taskId > 10;
+		if (flag14)
 		{
 			Rms.saveRMSString("fake", "aa");
 		}
 	}
 
-	// Token: 0x0600060E RID: 1550 RVA: 0x0001F41C File Offset: 0x0001D81C
+	// Token: 0x06000099 RID: 153 RVA: 0x00008694 File Offset: 0x00006894
 	public string getStrLevel()
 	{
 		string text = string.Concat(new object[]
@@ -170,25 +198,27 @@ public class Char : IMapObject
 			this.cLevelPercent % 100L,
 			"%"
 		});
-		if (text.Length > 23 && text.IndexOf("cấp ") >= 0)
+		bool flag = text.Length > 23 && text.IndexOf("cấp ") >= 0;
+		if (flag)
 		{
 			text = Res.replace(text, "cấp ", "c");
 		}
 		return text;
 	}
 
-	// Token: 0x0600060F RID: 1551 RVA: 0x0001F4B1 File Offset: 0x0001D8B1
+	// Token: 0x0600009A RID: 154 RVA: 0x00008734 File Offset: 0x00006934
 	public int avatarz()
 	{
 		return this.getAvatar(this.head);
 	}
 
-	// Token: 0x06000610 RID: 1552 RVA: 0x0001F4C0 File Offset: 0x0001D8C0
+	// Token: 0x0600009B RID: 155 RVA: 0x00008754 File Offset: 0x00006954
 	public int getAvatar(int headId)
 	{
 		for (int i = 0; i < global::Char.idHead.Length; i++)
 		{
-			if (headId == (int)global::Char.idHead[i])
+			bool flag = headId == (int)global::Char.idHead[i];
+			if (flag)
 			{
 				return (int)global::Char.idAvatar[i];
 			}
@@ -196,7 +226,7 @@ public class Char : IMapObject
 		return -1;
 	}
 
-	// Token: 0x06000611 RID: 1553 RVA: 0x0001F4FC File Offset: 0x0001D8FC
+	// Token: 0x0600009C RID: 156 RVA: 0x00008798 File Offset: 0x00006998
 	public void setPowerInfo(string info, short p, short maxP, short sc)
 	{
 		this.powerPoint = p;
@@ -206,10 +236,11 @@ public class Char : IMapObject
 		this.lastS = (this.currS = mSystem.currentTimeMillis());
 	}
 
-	// Token: 0x06000612 RID: 1554 RVA: 0x0001F53C File Offset: 0x0001D93C
+	// Token: 0x0600009D RID: 157 RVA: 0x000087D8 File Offset: 0x000069D8
 	public void addInfo(string info)
 	{
-		if (this.chatInfo == null)
+		bool flag = this.chatInfo == null;
+		if (flag)
 		{
 			this.chatInfo = new Info();
 		}
@@ -217,28 +248,43 @@ public class Char : IMapObject
 		this.chatInfo.addInfo(info, 0, cInfo, false);
 	}
 
-	// Token: 0x06000613 RID: 1555 RVA: 0x0001F570 File Offset: 0x0001D970
+	// Token: 0x0600009E RID: 158 RVA: 0x00008814 File Offset: 0x00006A14
 	public int getSys()
 	{
-		if (this.nClass.classId == 1 || this.nClass.classId == 2)
+		bool flag = this.nClass.classId == 1 || this.nClass.classId == 2;
+		int result;
+		if (flag)
 		{
-			return 1;
+			result = 1;
 		}
-		if (this.nClass.classId == 3 || this.nClass.classId == 4)
+		else
 		{
-			return 2;
+			bool flag2 = this.nClass.classId == 3 || this.nClass.classId == 4;
+			if (flag2)
+			{
+				result = 2;
+			}
+			else
+			{
+				bool flag3 = this.nClass.classId == 5 || this.nClass.classId == 6;
+				if (flag3)
+				{
+					result = 3;
+				}
+				else
+				{
+					result = 0;
+				}
+			}
 		}
-		if (this.nClass.classId == 5 || this.nClass.classId == 6)
-		{
-			return 3;
-		}
-		return 0;
+		return result;
 	}
 
-	// Token: 0x06000614 RID: 1556 RVA: 0x0001F5EA File Offset: 0x0001D9EA
+	// Token: 0x0600009F RID: 159 RVA: 0x000088A0 File Offset: 0x00006AA0
 	public static global::Char myCharz()
 	{
-		if (global::Char.myChar == null)
+		bool flag = global::Char.myChar == null;
+		if (flag)
 		{
 			global::Char.myChar = new global::Char();
 			global::Char.myChar.me = true;
@@ -247,10 +293,11 @@ public class Char : IMapObject
 		return global::Char.myChar;
 	}
 
-	// Token: 0x06000615 RID: 1557 RVA: 0x0001F61B File Offset: 0x0001DA1B
+	// Token: 0x060000A0 RID: 160 RVA: 0x000088E8 File Offset: 0x00006AE8
 	public static global::Char myPetz()
 	{
-		if (global::Char.myPet == null)
+		bool flag = global::Char.myPet == null;
+		if (flag)
 		{
 			global::Char.myPet = new global::Char();
 			global::Char.myPet.me = false;
@@ -258,13 +305,13 @@ public class Char : IMapObject
 		return global::Char.myPet;
 	}
 
-	// Token: 0x06000616 RID: 1558 RVA: 0x0001F641 File Offset: 0x0001DA41
+	// Token: 0x060000A1 RID: 161 RVA: 0x00008922 File Offset: 0x00006B22
 	public static void clearMyChar()
 	{
 		global::Char.myChar = null;
 	}
 
-	// Token: 0x06000617 RID: 1559 RVA: 0x0001F64C File Offset: 0x0001DA4C
+	// Token: 0x060000A2 RID: 162 RVA: 0x0000892C File Offset: 0x00006B2C
 	public void bagSort()
 	{
 		try
@@ -273,7 +320,8 @@ public class Char : IMapObject
 			for (int i = 0; i < this.arrItemBag.Length; i++)
 			{
 				Item item = this.arrItemBag[i];
-				if (item != null && item.template.isUpToUp && !item.isExpires)
+				bool flag = item != null && item.template.isUpToUp && !item.isExpires;
+				if (flag)
 				{
 					myVector.addElement(item);
 				}
@@ -281,12 +329,14 @@ public class Char : IMapObject
 			for (int j = 0; j < myVector.size(); j++)
 			{
 				Item item2 = (Item)myVector.elementAt(j);
-				if (item2 != null)
+				bool flag2 = item2 != null;
+				if (flag2)
 				{
 					for (int k = j + 1; k < myVector.size(); k++)
 					{
 						Item item3 = (Item)myVector.elementAt(k);
-						if (item3 != null && item2.template.Equals(item3.template) && item2.isLock == item3.isLock)
+						bool flag3 = item3 != null && item2.template.Equals(item3.template) && item2.isLock == item3.isLock;
+						if (flag3)
 						{
 							item2.quantity += item3.quantity;
 							this.arrItemBag[item3.indexUI] = null;
@@ -297,11 +347,13 @@ public class Char : IMapObject
 			}
 			for (int l = 0; l < this.arrItemBag.Length; l++)
 			{
-				if (this.arrItemBag[l] != null)
+				bool flag4 = this.arrItemBag[l] != null;
+				if (flag4)
 				{
 					for (int m = 0; m <= l; m++)
 					{
-						if (this.arrItemBag[m] == null)
+						bool flag5 = this.arrItemBag[m] == null;
+						if (flag5)
 						{
 							this.arrItemBag[m] = this.arrItemBag[l];
 							this.arrItemBag[m].indexUI = m;
@@ -318,7 +370,7 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000618 RID: 1560 RVA: 0x0001F814 File Offset: 0x0001DC14
+	// Token: 0x060000A3 RID: 163 RVA: 0x00008B28 File Offset: 0x00006D28
 	public void boxSort()
 	{
 		try
@@ -327,7 +379,8 @@ public class Char : IMapObject
 			for (int i = 0; i < this.arrItemBox.Length; i++)
 			{
 				Item item = this.arrItemBox[i];
-				if (item != null && item.template.isUpToUp && !item.isExpires)
+				bool flag = item != null && item.template.isUpToUp && !item.isExpires;
+				if (flag)
 				{
 					myVector.addElement(item);
 				}
@@ -335,12 +388,14 @@ public class Char : IMapObject
 			for (int j = 0; j < myVector.size(); j++)
 			{
 				Item item2 = (Item)myVector.elementAt(j);
-				if (item2 != null)
+				bool flag2 = item2 != null;
+				if (flag2)
 				{
 					for (int k = j + 1; k < myVector.size(); k++)
 					{
 						Item item3 = (Item)myVector.elementAt(k);
-						if (item3 != null && item2.template.Equals(item3.template) && item2.isLock == item3.isLock)
+						bool flag3 = item3 != null && item2.template.Equals(item3.template) && item2.isLock == item3.isLock;
+						if (flag3)
 						{
 							item2.quantity += item3.quantity;
 							this.arrItemBox[item3.indexUI] = null;
@@ -351,11 +406,13 @@ public class Char : IMapObject
 			}
 			for (int l = 0; l < this.arrItemBox.Length; l++)
 			{
-				if (this.arrItemBox[l] != null)
+				bool flag4 = this.arrItemBox[l] != null;
+				if (flag4)
 				{
 					for (int m = 0; m <= l; m++)
 					{
-						if (this.arrItemBox[m] == null)
+						bool flag5 = this.arrItemBox[m] == null;
+						if (flag5)
 						{
 							this.arrItemBox[m] = this.arrItemBox[l];
 							this.arrItemBox[m].indexUI = m;
@@ -372,17 +429,19 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000619 RID: 1561 RVA: 0x0001F9DC File Offset: 0x0001DDDC
+	// Token: 0x060000A4 RID: 164 RVA: 0x00008D24 File Offset: 0x00006F24
 	public void useItem(int indexUI)
 	{
 		Item item = this.arrItemBag[indexUI];
-		if (item.isTypeBody())
+		bool flag = item.isTypeBody();
+		if (flag)
 		{
 			item.isLock = true;
 			item.typeUI = 5;
 			Item item2 = this.arrItemBody[(int)item.template.type];
 			this.arrItemBag[indexUI] = null;
-			if (item2 != null)
+			bool flag2 = item2 != null;
+			if (flag2)
 			{
 				item2.typeUI = 3;
 				this.arrItemBody[(int)item.template.type] = null;
@@ -394,27 +453,34 @@ public class Char : IMapObject
 			for (int i = 0; i < this.arrItemBody.Length; i++)
 			{
 				Item item3 = this.arrItemBody[i];
-				if (item3 != null)
+				bool flag3 = item3 != null;
+				if (flag3)
 				{
-					if ((int)item3.template.type == 0)
+					bool flag4 = item3.template.type == 0;
+					if (flag4)
 					{
 						this.body = (int)item3.template.part;
 					}
-					else if ((int)item3.template.type == 1)
+					else
 					{
-						this.leg = (int)item3.template.part;
+						bool flag5 = item3.template.type == 1;
+						if (flag5)
+						{
+							this.leg = (int)item3.template.part;
+						}
 					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x0600061A RID: 1562 RVA: 0x0001FAEC File Offset: 0x0001DEEC
+	// Token: 0x060000A5 RID: 165 RVA: 0x00008E58 File Offset: 0x00007058
 	public Skill getSkill(SkillTemplate skillTemplate)
 	{
 		for (int i = 0; i < this.vSkill.size(); i++)
 		{
-			if ((int)((Skill)this.vSkill.elementAt(i)).template.id == (int)skillTemplate.id)
+			bool flag = ((Skill)this.vSkill.elementAt(i)).template.id == skillTemplate.id;
+			if (flag)
 			{
 				return (Skill)this.vSkill.elementAt(i);
 			}
@@ -422,111 +488,144 @@ public class Char : IMapObject
 		return null;
 	}
 
-	// Token: 0x0600061B RID: 1563 RVA: 0x0001FB50 File Offset: 0x0001DF50
+	// Token: 0x060000A6 RID: 166 RVA: 0x00008EC4 File Offset: 0x000070C4
 	public Waypoint isInEnterOfflinePoint()
 	{
 		Task task = global::Char.myChar.taskMaint;
-		if (task != null && task.taskId == 0 && task.index < 6)
+		bool flag = task != null && task.taskId == 0 && task.index < 6;
+		Waypoint result;
+		if (flag)
 		{
-			return null;
+			result = null;
 		}
-		int num = TileMap.vGo.size();
-		sbyte b = 0;
-		while ((int)b < num)
+		else
 		{
-			Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt((int)b);
-			if (PopUp.vPopups.size() >= num)
+			int num = TileMap.vGo.size();
+			sbyte b = 0;
+			while ((int)b < num)
 			{
-				PopUp popUp = (PopUp)PopUp.vPopups.elementAt((int)b);
-				if (!popUp.isPaint)
+				Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt((int)b);
+				bool flag2 = PopUp.vPopups.size() >= num;
+				if (flag2)
 				{
-					return null;
+					PopUp popUp = (PopUp)PopUp.vPopups.elementAt((int)b);
+					bool flag3 = !popUp.isPaint;
+					if (flag3)
+					{
+						return null;
+					}
 				}
+				bool flag4 = this.cx >= (int)waypoint.minX && this.cx <= (int)waypoint.maxX && this.cy >= (int)waypoint.minY && this.cy <= (int)waypoint.maxY && waypoint.isEnter && waypoint.isOffline;
+				if (flag4)
+				{
+					return waypoint;
+				}
+				b += 1;
 			}
-			if (this.cx >= (int)waypoint.minX && this.cx <= (int)waypoint.maxX && this.cy >= (int)waypoint.minY && this.cy <= (int)waypoint.maxY && waypoint.isEnter && waypoint.isOffline)
-			{
-				return waypoint;
-			}
-			b = (sbyte)((int)b + 1);
+			result = null;
 		}
-		return null;
+		return result;
 	}
 
-	// Token: 0x0600061C RID: 1564 RVA: 0x0001FC48 File Offset: 0x0001E048
+	// Token: 0x060000A7 RID: 167 RVA: 0x00008FDC File Offset: 0x000071DC
 	public Waypoint isInEnterOnlinePoint()
 	{
 		Task task = global::Char.myChar.taskMaint;
-		if (task != null && task.taskId == 0 && task.index < 6)
+		bool flag = task != null && task.taskId == 0 && task.index < 6;
+		Waypoint result;
+		if (flag)
 		{
-			return null;
+			result = null;
 		}
-		int num = TileMap.vGo.size();
-		sbyte b = 0;
-		while ((int)b < num)
+		else
 		{
-			Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt((int)b);
-			if (PopUp.vPopups.size() >= num)
+			int num = TileMap.vGo.size();
+			sbyte b = 0;
+			while ((int)b < num)
 			{
-				PopUp popUp = (PopUp)PopUp.vPopups.elementAt((int)b);
-				if (!popUp.isPaint)
+				Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt((int)b);
+				bool flag2 = PopUp.vPopups.size() >= num;
+				if (flag2)
 				{
-					return null;
+					PopUp popUp = (PopUp)PopUp.vPopups.elementAt((int)b);
+					bool flag3 = !popUp.isPaint;
+					if (flag3)
+					{
+						return null;
+					}
 				}
+				bool flag4 = this.cx >= (int)waypoint.minX && this.cx <= (int)waypoint.maxX && this.cy >= (int)waypoint.minY && this.cy <= (int)waypoint.maxY && waypoint.isEnter && !waypoint.isOffline;
+				if (flag4)
+				{
+					return waypoint;
+				}
+				b += 1;
 			}
-			if (this.cx >= (int)waypoint.minX && this.cx <= (int)waypoint.maxX && this.cy >= (int)waypoint.minY && this.cy <= (int)waypoint.maxY && waypoint.isEnter && !waypoint.isOffline)
-			{
-				return waypoint;
-			}
-			b = (sbyte)((int)b + 1);
+			result = null;
 		}
-		return null;
+		return result;
 	}
 
-	// Token: 0x0600061D RID: 1565 RVA: 0x0001FD40 File Offset: 0x0001E140
+	// Token: 0x060000A8 RID: 168 RVA: 0x000090F8 File Offset: 0x000072F8
 	public bool isInWaypoint()
 	{
-		if (TileMap.isInAirMap() && this.cy >= TileMap.pxh - 48)
+		bool flag = TileMap.isInAirMap() && this.cy >= TileMap.pxh - 48;
+		bool result;
+		if (flag)
 		{
-			return true;
+			result = true;
 		}
-		if (this.isTeleport || this.isUsePlane)
+		else
 		{
-			return false;
-		}
-		int num = TileMap.vGo.size();
-		sbyte b = 0;
-		while ((int)b < num)
-		{
-			Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt((int)b);
-			if ((TileMap.mapID == 47 || TileMap.isInAirMap()) && this.cy <= (int)(waypoint.minY + waypoint.maxY) && this.cx > (int)waypoint.minX && this.cx < (int)waypoint.maxX)
+			bool flag2 = this.isTeleport || this.isUsePlane;
+			if (flag2)
 			{
-				return !TileMap.isInAirMap() || (int)this.cTypePk == 0;
+				result = false;
 			}
-			if (this.cx >= (int)waypoint.minX && this.cx <= (int)waypoint.maxX && this.cy >= (int)waypoint.minY && this.cy <= (int)waypoint.maxY && !waypoint.isEnter)
+			else
 			{
-				return true;
+				int num = TileMap.vGo.size();
+				sbyte b = 0;
+				while ((int)b < num)
+				{
+					Waypoint waypoint = (Waypoint)TileMap.vGo.elementAt((int)b);
+					bool flag3 = (TileMap.mapID == 47 || TileMap.isInAirMap()) && this.cy <= (int)(waypoint.minY + waypoint.maxY) && this.cx > (int)waypoint.minX && this.cx < (int)waypoint.maxX;
+					if (flag3)
+					{
+						return !TileMap.isInAirMap() || this.cTypePk == 0;
+					}
+					bool flag4 = this.cx >= (int)waypoint.minX && this.cx <= (int)waypoint.maxX && this.cy >= (int)waypoint.minY && this.cy <= (int)waypoint.maxY && !waypoint.isEnter;
+					if (flag4)
+					{
+						return true;
+					}
+					b += 1;
+				}
+				result = false;
 			}
-			b = (sbyte)((int)b + 1);
 		}
-		return false;
+		return result;
 	}
 
-	// Token: 0x0600061E RID: 1566 RVA: 0x0001FE78 File Offset: 0x0001E278
+	// Token: 0x060000A9 RID: 169 RVA: 0x00009244 File Offset: 0x00007444
 	public bool isPunchKickSkill()
 	{
 		return this.skillPaint != null && ((this.skillPaint.id >= 0 && this.skillPaint.id <= 6) || (this.skillPaint.id >= 14 && this.skillPaint.id <= 20) || (this.skillPaint.id >= 28 && this.skillPaint.id <= 34) || (this.skillPaint.id >= 63 && this.skillPaint.id <= 69));
 	}
 
-	// Token: 0x0600061F RID: 1567 RVA: 0x0001FF2C File Offset: 0x0001E32C
+	// Token: 0x060000AA RID: 170 RVA: 0x000092E4 File Offset: 0x000074E4
 	public void soundUpdate()
 	{
-		if (this.me && this.statusMe == 10 && this.cf == 8 && this.ty > 20 && GameCanvas.gameTick % 20 == 0)
+		bool flag = this.me && this.statusMe == 10 && this.cf == 8 && this.ty > 20 && GameCanvas.gameTick % 20 == 0;
+		if (flag)
 		{
 			SoundMn.gI().charFly();
 		}
-		if (this.skillPaint != null && this.skillInfoPaint() != null && this.indexSkill < this.skillInfoPaint().Length && this.isPunchKickSkill() && (this.me || (!this.me && this.cx >= GameScr.cmx && this.cx <= GameScr.cmx + GameCanvas.w)) && GameCanvas.gameTick % 5 == 0)
+		bool flag2 = this.skillPaint != null && this.skillInfoPaint() != null && this.indexSkill < this.skillInfoPaint().Length && this.isPunchKickSkill() && (this.me || (!this.me && this.cx >= GameScr.cmx && this.cx <= GameScr.cmx + GameCanvas.w)) && GameCanvas.gameTick % 5 == 0;
+		if (flag2)
 		{
-			if (this.cf == 9 || this.cf == 10 || this.cf == 11)
+			bool flag3 = this.cf == 9 || this.cf == 10 || this.cf == 11;
+			if (flag3)
 			{
 				SoundMn.gI().charPunch(true, (!this.me) ? 0.05f : 0.1f);
 			}
@@ -537,1195 +636,1486 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000620 RID: 1568 RVA: 0x00020073 File Offset: 0x0001E473
+	// Token: 0x060000AB RID: 171 RVA: 0x00003136 File Offset: 0x00001336
 	public void updateChargeSkill()
 	{
 	}
 
-	// Token: 0x06000621 RID: 1569 RVA: 0x00020078 File Offset: 0x0001E478
+	// Token: 0x060000AC RID: 172 RVA: 0x0000940C File Offset: 0x0000760C
 	public virtual void update()
 	{
-		if (this.isMafuba)
+		bool flag5 = this.isMafuba;
+		if (flag5)
 		{
 			this.cf = 23;
 			this.countMafuba += 1;
-			if (this.countMafuba > 150)
+			bool flag6 = this.countMafuba > 150;
+			if (flag6)
 			{
 				this.isMafuba = false;
 			}
-			return;
-		}
-		this.countMafuba = 0;
-		if (this.isHide)
-		{
-			return;
-		}
-		if (this.isMabuHold)
-		{
-			return;
-		}
-		if ((!this.isCopy && this.clevel < 14) || this.statusMe == 1 || this.statusMe == 6)
-		{
-		}
-		if (this.petFollow != null)
-		{
-			if (GameCanvas.gameTick % 3 == 0)
-			{
-				if (global::Char.myCharz().cdir == 1)
-				{
-					this.petFollow.cmtoX = this.cx - 20;
-				}
-				if (global::Char.myCharz().cdir == -1)
-				{
-					this.petFollow.cmtoX = this.cx + 20;
-				}
-				this.petFollow.cmtoY = this.cy - 40;
-				if (this.petFollow.cmx > this.cx)
-				{
-					this.petFollow.dir = -1;
-				}
-				else
-				{
-					this.petFollow.dir = 1;
-				}
-				if (this.petFollow.cmtoX < 100)
-				{
-					this.petFollow.cmtoX = 100;
-				}
-				if (this.petFollow.cmtoX > TileMap.pxw - 100)
-				{
-					this.petFollow.cmtoX = TileMap.pxw - 100;
-				}
-			}
-			this.petFollow.update();
-		}
-		if (!this.me && this.cHP <= 0 && this.clanID != -100 && this.statusMe != 14 && this.statusMe != 5)
-		{
-			this.startDie((short)this.cx, (short)this.cy);
-		}
-		if (this.isInjureHp)
-		{
-			this.twHp++;
-			if (this.twHp == 20)
-			{
-				this.twHp = 0;
-				this.isInjureHp = false;
-			}
-		}
-		else if (this.dHP > this.cHP)
-		{
-			int num = this.dHP - this.cHP >> 1;
-			if (num < 1)
-			{
-				num = 1;
-			}
-			this.dHP -= num;
 		}
 		else
 		{
-			this.dHP = this.cHP;
-		}
-		if (this.secondPower != 0)
-		{
-			this.currS = mSystem.currentTimeMillis();
-			if (this.currS - this.lastS >= 1000L)
+			this.countMafuba = 0;
+			bool flag7 = this.isHide;
+			if (!flag7)
 			{
-				this.lastS = mSystem.currentTimeMillis();
-				this.secondPower -= 1;
-			}
-		}
-		if (this.isPaintNewSkill)
-		{
-			if (GameCanvas.timeNow > this.timeReset_newSkill || this.statusMe == 14 || this.statusMe == 5)
-			{
-				this.timeReset_newSkill = 0L;
-				this.isPaintNewSkill = false;
-			}
-			this.UpdSkillPaint_NEW();
-			if (this.isShadown)
-			{
-				this.updateShadown();
-			}
-			return;
-		}
-		if (!this.me && GameScr.notPaint)
-		{
-			return;
-		}
-		if (this.sleepEff && GameCanvas.gameTick % 10 == 0)
-		{
-			EffecMn.addEff(new Effect(41, this.cx, this.cy, 3, 1, 1));
-		}
-		if (this.huytSao)
-		{
-			this.huytSao = false;
-			EffecMn.addEff(new Effect(39, this.cx, this.cy, 3, 3, 1));
-		}
-		if (this.blindEff && GameCanvas.gameTick % 5 == 0)
-		{
-			ServerEffect.addServerEffect(113, this, 1);
-		}
-		if (this.protectEff)
-		{
-			int y = this.cH_new + 73;
-			if (GameCanvas.gameTick % 5 == 0)
-			{
-				this.eProtect = new Effect(33, this.cx, y, 3, 3, 1);
-			}
-			if (this.eProtect != null)
-			{
-				this.eProtect.update();
-				this.eProtect.x = this.cx;
-				this.eProtect.y = y;
-			}
-		}
-		if (this.danhHieuEff)
-		{
-			if (this.eDanhHieu == null)
-			{
-				string text = (string)GameCanvas.danhHieu.get(this.charID + string.Empty);
-				if (text != null)
+				bool flag8 = this.isMabuHold;
+				if (!flag8)
 				{
-					string[] array = Res.split(text.Trim(), ",", 0);
-					short id = short.Parse(array[0]);
-					short num2 = short.Parse(array[1]);
-					this.eDanhHieu = new Effect((int)id, this.cx, this.cH_new + 73, 1, -1, -1);
-					this.eDanhHieu.timeExist = (long)(num2 * 1000) + mSystem.currentTimeMillis();
-				}
-			}
-			if (this.eDanhHieu != null)
-			{
-				this.eDanhHieu.update();
-				this.eDanhHieu.x = this.cx;
-				this.eDanhHieu.y = this.cH_new;
-				if (this.eDanhHieu.timeExist <= mSystem.currentTimeMillis())
-				{
-					this.eDanhHieu = null;
-					GameCanvas.danhHieu.remove(this.charID + string.Empty);
-				}
-			}
-		}
-		if (this.charFocus != null && this.charFocus.cy < 0)
-		{
-			this.charFocus = null;
-		}
-		if (this.isFusion)
-		{
-			this.tFusion++;
-		}
-		if (this.isNhapThe && GameCanvas.gameTick % 25 == 0)
-		{
-			int id2 = 114;
-			ServerEffect.addServerEffect(id2, this, 1);
-		}
-		if (this.isSetPos)
-		{
-			this.tpos++;
-			if (this.tpos == 1)
-			{
-				this.tpos = 0;
-				this.isSetPos = false;
-				this.cx = (int)this.xPos;
-				this.cy = (int)this.yPos;
-				this.cp1 = (this.cp2 = (this.cp3 = 0));
-				if ((int)this.typePos == 1)
-				{
-					if (this.me)
+					bool flag9 = (!this.isCopy && this.clevel < 14) || this.statusMe == 1 || this.statusMe == 6;
+					if (flag9)
 					{
-						this.cxSend = this.cx;
-						this.cySend = this.cy;
 					}
-					this.currentMovePoint = null;
-					this.telePortSkill = false;
-					ServerEffect.addServerEffect(173, this.cx, this.cy, 1);
-				}
-				else
-				{
-					ServerEffect.addServerEffect(60, this.cx, this.cy, 1);
-				}
-				if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2)
-				{
-					this.statusMe = 1;
-				}
-				else
-				{
-					this.statusMe = 4;
-				}
-			}
-			return;
-		}
-		this.soundUpdate();
-		if (this.stone)
-		{
-			return;
-		}
-		if (this.isFreez)
-		{
-			if (GameCanvas.gameTick % 5 == 0)
-			{
-				ServerEffect.addServerEffect(113, this.cx, this.cy, 1);
-			}
-			this.cf = 23;
-			long num3 = mSystem.currentTimeMillis();
-			if (num3 - this.lastFreez >= 1000L)
-			{
-				this.freezSeconds--;
-				this.lastFreez = num3;
-				if (this.freezSeconds < 0)
-				{
-					this.isFreez = false;
-					this.seconds = 0;
-					if (this.me)
+					bool flag10 = this.petFollow != null;
+					if (flag10)
 					{
-						global::Char.myCharz().isLockMove = false;
-						GameScr.gI().dem = 0;
-						GameScr.gI().isFreez = false;
+						bool flag11 = GameCanvas.gameTick % 3 == 0;
+						if (flag11)
+						{
+							bool flag12 = global::Char.myCharz().cdir == 1;
+							if (flag12)
+							{
+								this.petFollow.cmtoX = this.cx - 20;
+							}
+							bool flag13 = global::Char.myCharz().cdir == -1;
+							if (flag13)
+							{
+								this.petFollow.cmtoX = this.cx + 20;
+							}
+							this.petFollow.cmtoY = this.cy - 40;
+							bool flag14 = this.petFollow.cmx > this.cx;
+							if (flag14)
+							{
+								this.petFollow.dir = -1;
+							}
+							else
+							{
+								this.petFollow.dir = 1;
+							}
+							bool flag15 = this.petFollow.cmtoX < 100;
+							if (flag15)
+							{
+								this.petFollow.cmtoX = 100;
+							}
+							bool flag16 = this.petFollow.cmtoX > TileMap.pxw - 100;
+							if (flag16)
+							{
+								this.petFollow.cmtoX = TileMap.pxw - 100;
+							}
+						}
+						this.petFollow.update();
 					}
-				}
-			}
-			if (TileMap.tileTypeAt(this.cx / (int)TileMap.size, this.cy / (int)TileMap.size) == 0)
-			{
-				this.ty++;
-				this.wt++;
-				this.fy += (this.wy ? -1 : 1);
-				if (this.wt == 10)
-				{
-					this.wt = 0;
-					this.wy = !this.wy;
-				}
-			}
-			return;
-		}
-		if (this.isWaitMonkey)
-		{
-			this.isLockMove = true;
-			this.cf = 17;
-			if (GameCanvas.gameTick % 5 == 0)
-			{
-				ServerEffect.addServerEffect(154, this.cx, this.cy - 10, 2);
-			}
-			if (GameCanvas.gameTick % 5 == 0)
-			{
-				ServerEffect.addServerEffect(1, this.cx, this.cy + 10, 1);
-			}
-			this.chargeCount++;
-			if (this.chargeCount == 500)
-			{
-				this.isWaitMonkey = false;
-				this.isLockMove = false;
-			}
-			return;
-		}
-		if (this.isStandAndCharge)
-		{
-			this.chargeCount++;
-			bool flag = !TileMap.tileTypeAt(global::Char.myCharz().cx, global::Char.myCharz().cy, 2);
-			this.updateEffect();
-			this.updateSkillPaint();
-			this.moveFast = null;
-			this.currentMovePoint = null;
-			this.cf = 17;
-			if (flag && this.cgender != 2)
-			{
-				this.cf = 12;
-			}
-			if (this.cgender == 2)
-			{
-				if (GameCanvas.gameTick % 3 == 0)
-				{
-					ServerEffect.addServerEffect(154, this.cx, this.cy - this.ch / 2 + 10, 1);
-				}
-				if (GameCanvas.gameTick % 5 == 0)
-				{
-					ServerEffect.addServerEffect(114, this.cx + Res.random(-20, 20), this.cy + Res.random(-20, 20), 1);
-				}
-			}
-			if (this.cgender == 1)
-			{
-				if (GameCanvas.gameTick % 4 == 0)
-				{
-				}
-				if (GameCanvas.gameTick % 2 == 0)
-				{
-					if (this.cdir == 1)
+					bool flag17 = !this.me && this.cHP <= 0 && this.clanID != -100 && this.statusMe != 14 && this.statusMe != 5;
+					if (flag17)
 					{
-						ServerEffect.addServerEffect(70, this.cx - 18, this.cy - this.ch / 2 + 8, 1);
-						ServerEffect.addServerEffect(70, this.cx + 23, this.cy - this.ch / 2 + 15, 1);
+						this.startDie((short)this.cx, (short)this.cy);
+					}
+					bool flag18 = this.isInjureHp;
+					if (flag18)
+					{
+						this.twHp++;
+						bool flag19 = this.twHp == 20;
+						if (flag19)
+						{
+							this.twHp = 0;
+							this.isInjureHp = false;
+						}
 					}
 					else
 					{
-						ServerEffect.addServerEffect(70, this.cx + 18, this.cy - this.ch / 2 + 8, 1);
-						ServerEffect.addServerEffect(70, this.cx - 23, this.cy - this.ch / 2 + 15, 1);
-					}
-				}
-			}
-			this.cur = mSystem.currentTimeMillis();
-			if (this.cur - this.last > (long)this.seconds || this.cur - this.last > 10000L)
-			{
-				this.stopUseChargeSkill();
-				if (this.me)
-				{
-					GameScr.gI().auto = 0;
-					if (this.cgender == 2)
-					{
-						global::Char.myCharz().setAutoSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], flag ? 1 : 0);
-						Service.gI().skill_not_focus(8);
-					}
-					if (this.cgender == 1)
-					{
-						Res.outz("set skipp paint");
-						this.isCreateDark = true;
-						global::Char.myCharz().setSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], flag ? 1 : 0);
-					}
-				}
-				else if (this.cgender == 2)
-				{
-					this.setAutoSkillPaint(GameScr.sks[this.skillTemplateId], flag ? 1 : 0);
-				}
-				if (this.cgender == 2 && this.statusMe != 14 && this.statusMe != 5)
-				{
-					GameScr.gI().activeSuperPower(this.cx, this.cy);
-				}
-			}
-			this.chargeCount++;
-			if (this.chargeCount == 500)
-			{
-				this.stopUseChargeSkill();
-			}
-			return;
-		}
-		if (this.isFlyAndCharge)
-		{
-			this.updateEffect();
-			this.updateSkillPaint();
-			this.moveFast = null;
-			this.currentMovePoint = null;
-			this.posDisY++;
-			if (TileMap.tileTypeAt(this.cx, this.cy - this.ch, 8192))
-			{
-				this.stopUseChargeSkill();
-				return;
-			}
-			if (this.posDisY == 20)
-			{
-				this.last = mSystem.currentTimeMillis();
-			}
-			if (this.posDisY <= 20)
-			{
-				if (this.statusMe != 14)
-				{
-					this.statusMe = 3;
-				}
-				this.cvy = -3;
-				this.cy += this.cvy;
-				this.cf = 7;
-				return;
-			}
-			this.cur = mSystem.currentTimeMillis();
-			if (this.cur - this.last > (long)this.seconds || this.cur - this.last > 10000L)
-			{
-				this.isFlyAndCharge = false;
-				if (this.me)
-				{
-					this.isCreateDark = true;
-					bool flag2 = TileMap.tileTypeAt(global::Char.myCharz().cx, global::Char.myCharz().cy, 2);
-					this.isUseSkillAfterCharge = true;
-					global::Char.myCharz().setSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], (!flag2) ? 1 : 0);
-				}
-				return;
-			}
-			this.cf = 32;
-			if (this.cgender == 0 && GameCanvas.gameTick % 3 == 0)
-			{
-				ServerEffect.addServerEffect(153, this.cx, this.cy - this.ch, 2);
-			}
-			this.chargeCount++;
-			if (this.chargeCount == 500)
-			{
-				this.stopUseChargeSkill();
-			}
-			return;
-		}
-		else
-		{
-			if (this.me && GameCanvas.isTouch)
-			{
-				if (this.charFocus != null && this.charFocus.charID >= 0 && this.charFocus.cx > 100 && this.charFocus.cx < TileMap.pxw - 100 && this.isInEnterOnlinePoint() == null && this.isInEnterOfflinePoint() == null && !this.isAttacPlayerStatus() && TileMap.mapID != 51 && TileMap.mapID != 52 && GameCanvas.panel.vPlayerMenu.size() > 0 && GameScr.gI().popUpYesNo == null)
-				{
-					int num4 = global::Math.abs(this.cx - this.charFocus.cx);
-					int num5 = global::Math.abs(this.cy - this.charFocus.cy);
-					if (num4 < 60 && num5 < 40)
-					{
-						if (this.cmdMenu == null)
+						bool flag20 = this.dHP > this.cHP;
+						if (flag20)
 						{
-							this.cmdMenu = new Command(mResources.MENU, 11111);
-							this.cmdMenu.isPlaySoundButton = false;
-						}
-						this.cmdMenu.x = this.charFocus.cx - GameScr.cmx;
-						this.cmdMenu.y = this.charFocus.cy - this.charFocus.ch - 30 - GameScr.cmy;
-					}
-					else
-					{
-						this.cmdMenu = null;
-					}
-				}
-				else
-				{
-					this.cmdMenu = null;
-				}
-			}
-			if (this.isShadown)
-			{
-				this.updateShadown();
-			}
-			if (this.isTeleport)
-			{
-				return;
-			}
-			if (this.chatInfo != null)
-			{
-				this.chatInfo.update();
-			}
-			if (this.shadowLife > 0)
-			{
-				this.shadowLife--;
-			}
-			if ((int)this.resultTest > 0 && GameCanvas.gameTick % 2 == 0)
-			{
-				this.resultTest = (sbyte)((int)this.resultTest - 1);
-				if ((int)this.resultTest == 30 || (int)this.resultTest == 60)
-				{
-					this.resultTest = 0;
-				}
-			}
-			this.updateSkillPaint();
-			if (this.mobMe != null)
-			{
-				this.updateMobMe();
-			}
-			if (this.arr != null)
-			{
-				this.arr.update();
-			}
-			if (this.dart != null)
-			{
-				this.dart.update();
-			}
-			this.updateEffect();
-			if (this.holdEffID != 0)
-			{
-				if (GameCanvas.gameTick % 5 == 0)
-				{
-					EffecMn.addEff(new Effect(32, this.cx, this.cy + 24, 3, 5, 1));
-				}
-				return;
-			}
-			if (this.blindEff)
-			{
-				return;
-			}
-			if (this.sleepEff)
-			{
-				return;
-			}
-			if (this.holder)
-			{
-				if (this.charHold != null && (this.charHold.statusMe == 14 || this.charHold.statusMe == 5))
-				{
-					this.removeHoleEff();
-				}
-				if (this.mobHold != null && this.mobHold.status == 1)
-				{
-					this.removeHoleEff();
-				}
-				if (this.me && this.statusMe == 2 && this.currentMovePoint != null)
-				{
-					this.holder = false;
-					this.charHold = null;
-					this.mobHold = null;
-				}
-				if (TileMap.tileTypeAt(this.cx, this.cy, 2))
-				{
-					this.cf = 16;
-				}
-				else
-				{
-					this.cf = 31;
-				}
-				return;
-			}
-			if (this.cHP > 0)
-			{
-				for (int i = 0; i < this.vEff.size(); i++)
-				{
-					EffectChar effectChar = (EffectChar)this.vEff.elementAt(i);
-					if ((int)effectChar.template.type == 0 || (int)effectChar.template.type == 12)
-					{
-						if (GameCanvas.isEff1)
-						{
-							this.cHP += (int)effectChar.param;
-							this.cMP += (int)effectChar.param;
-						}
-					}
-					else if ((int)effectChar.template.type == 4 || (int)effectChar.template.type == 17)
-					{
-						if (GameCanvas.isEff1)
-						{
-							this.cHP += (int)effectChar.param;
-						}
-					}
-					else if ((int)effectChar.template.type == 13 && GameCanvas.isEff1)
-					{
-						this.cHP -= this.cHPFull * 3 / 100;
-						if (this.cHP < 1)
-						{
-							this.cHP = 1;
-						}
-					}
-				}
-				if (this.eff5BuffHp > 0 && GameCanvas.isEff2)
-				{
-					this.cHP += this.eff5BuffHp;
-				}
-				if (this.eff5BuffMp > 0 && GameCanvas.isEff2)
-				{
-					this.cMP += this.eff5BuffMp;
-				}
-				if (this.cHP > this.cHPFull)
-				{
-					this.cHP = this.cHPFull;
-				}
-				if (this.cMP > this.cMPFull)
-				{
-					this.cMP = this.cMPFull;
-				}
-			}
-			if (this.cmtoChar)
-			{
-				GameScr.cmtoX = this.cx - GameScr.gW2;
-				GameScr.cmtoY = this.cy - GameScr.gH23;
-				if (!GameCanvas.isTouchControl)
-				{
-					GameScr.cmtoX += GameScr.gW6 * this.cdir;
-				}
-			}
-			this.tick = (this.tick + 1) % 100;
-			if (this.me)
-			{
-				if (this.charFocus != null && !GameScr.vCharInMap.contains(this.charFocus))
-				{
-					this.charFocus = null;
-				}
-				if (this.cx < 10)
-				{
-					this.cvx = 0;
-					this.cx = 10;
-				}
-				else if (this.cx > TileMap.pxw - 10)
-				{
-					this.cx = TileMap.pxw - 10;
-					this.cvx = 0;
-				}
-				if (this.me && !global::Char.ischangingMap && this.isInWaypoint())
-				{
-					Service.gI().charMove();
-					if (TileMap.isTrainingMap())
-					{
-						Service.gI().getMapOffline();
-						global::Char.ischangingMap = true;
-					}
-					else
-					{
-						Service.gI().requestChangeMap();
-					}
-					global::Char.isLockKey = true;
-					global::Char.ischangingMap = true;
-					GameCanvas.clearKeyHold();
-					GameCanvas.clearKeyPressed();
-					InfoDlg.showWait();
-					return;
-				}
-				if (this.statusMe != 4 && Res.abs(this.cx - this.cxSend) + Res.abs(this.cy - this.cySend) >= 70 && this.cy - this.cySend <= 0 && this.me)
-				{
-					Service.gI().charMove();
-				}
-				if (this.isLockMove)
-				{
-					this.currentMovePoint = null;
-				}
-				if (this.currentMovePoint != null)
-				{
-					if (global::Char.abs(this.cx - this.currentMovePoint.xEnd) <= 16 && global::Char.abs(this.cy - this.currentMovePoint.yEnd) <= 16)
-					{
-						this.cx = (this.currentMovePoint.xEnd + this.cx) / 2;
-						this.cy = this.currentMovePoint.yEnd;
-						this.currentMovePoint = null;
-						GameScr.instance.clickMoving = false;
-						this.checkPerformEndMovePointAction();
-						this.cvx = (this.cvy = 0);
-						if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2)
-						{
-							this.statusMe = 1;
+							int num = this.dHP - this.cHP >> 1;
+							bool flag21 = num < 1;
+							if (flag21)
+							{
+								num = 1;
+							}
+							this.dHP -= num;
 						}
 						else
 						{
-							this.setCharFallFromJump();
+							this.dHP = this.cHP;
 						}
-						Service.gI().charMove();
+					}
+					bool flag22 = this.secondPower != 0;
+					if (flag22)
+					{
+						this.currS = mSystem.currentTimeMillis();
+						bool flag23 = this.currS - this.lastS >= 1000L;
+						if (flag23)
+						{
+							this.lastS = mSystem.currentTimeMillis();
+							this.secondPower -= 1;
+						}
+					}
+					bool flag24 = this.isPaintNewSkill;
+					if (flag24)
+					{
+						bool flag25 = GameCanvas.timeNow > this.timeReset_newSkill || this.statusMe == 14 || this.statusMe == 5;
+						if (flag25)
+						{
+							this.timeReset_newSkill = 0L;
+							this.isPaintNewSkill = false;
+						}
+						this.UpdSkillPaint_NEW();
+						bool flag26 = this.isShadown;
+						if (flag26)
+						{
+							this.updateShadown();
+						}
 					}
 					else
 					{
-						this.cdir = ((this.currentMovePoint.xEnd <= this.cx) ? -1 : 1);
-						if (TileMap.tileTypeAt(this.cx, this.cy, 2))
+						bool flag27 = !this.me && GameScr.notPaint;
+						if (!flag27)
 						{
-							this.statusMe = 2;
-							if (this.currentMovePoint != null)
+							bool flag28 = this.sleepEff && GameCanvas.gameTick % 10 == 0;
+							if (flag28)
 							{
-								this.cvx = this.cspeed * this.cdir;
-								this.cvy = 0;
+								EffecMn.addEff(new Effect(41, this.cx, this.cy, 3, 1, 1));
 							}
-							if (global::Char.abs(this.cx - this.currentMovePoint.xEnd) <= 10)
+							bool flag29 = this.huytSao;
+							if (flag29)
 							{
-								if (this.currentMovePoint.yEnd > this.cy)
+								this.huytSao = false;
+								EffecMn.addEff(new Effect(39, this.cx, this.cy, 3, 3, 1));
+							}
+							bool flag30 = this.blindEff && GameCanvas.gameTick % 5 == 0;
+							if (flag30)
+							{
+								ServerEffect.addServerEffect(113, this, 1);
+							}
+							bool flag31 = this.protectEff;
+							if (flag31)
+							{
+								int y = this.cH_new + 73;
+								bool flag32 = GameCanvas.gameTick % 5 == 0;
+								if (flag32)
 								{
-									bool flag3 = false;
-									sbyte b;
-									if (this.cdir == 1)
+									this.eProtect = new Effect(33, this.cx, y, 3, 3, 1);
+								}
+								bool flag33 = this.eProtect != null;
+								if (flag33)
+								{
+									this.eProtect.update();
+									this.eProtect.x = this.cx;
+									this.eProtect.y = y;
+								}
+							}
+							bool flag34 = this.danhHieuEff;
+							if (flag34)
+							{
+								bool flag35 = this.eDanhHieu == null;
+								if (flag35)
+								{
+									string text = (string)GameCanvas.danhHieu.get(this.charID.ToString() + string.Empty);
+									bool flag36 = text != null;
+									if (flag36)
 									{
-										b = 1;
+										string[] array = Res.split(text.Trim(), ",", 0);
+										short id = short.Parse(array[0]);
+										short num2 = short.Parse(array[1]);
+										this.eDanhHieu = new Effect((int)id, this.cx, this.cH_new + 73, 1, -1, -1);
+										this.eDanhHieu.timeExist = (long)(num2 * 1000) + mSystem.currentTimeMillis();
+									}
+								}
+								bool flag37 = this.eDanhHieu != null;
+								if (flag37)
+								{
+									this.eDanhHieu.update();
+									this.eDanhHieu.x = this.cx;
+									this.eDanhHieu.y = this.cH_new;
+									bool flag38 = this.eDanhHieu.timeExist <= mSystem.currentTimeMillis();
+									if (flag38)
+									{
+										this.eDanhHieu = null;
+										GameCanvas.danhHieu.remove(this.charID.ToString() + string.Empty);
+									}
+								}
+							}
+							bool flag39 = this.charFocus != null && this.charFocus.cy < 0;
+							if (flag39)
+							{
+								this.charFocus = null;
+							}
+							bool flag40 = this.isFusion;
+							if (flag40)
+							{
+								this.tFusion++;
+							}
+							bool flag41 = this.isNhapThe && GameCanvas.gameTick % 25 == 0;
+							if (flag41)
+							{
+								int id2 = 114;
+								ServerEffect.addServerEffect(id2, this, 1);
+							}
+							bool flag42 = this.isSetPos;
+							if (flag42)
+							{
+								this.tpos++;
+								bool flag43 = this.tpos == 1;
+								if (flag43)
+								{
+									this.tpos = 0;
+									this.isSetPos = false;
+									this.cx = (int)this.xPos;
+									this.cy = (int)this.yPos;
+									this.cp1 = (this.cp2 = (this.cp3 = 0));
+									bool flag44 = this.typePos == 1;
+									if (flag44)
+									{
+										bool flag45 = this.me;
+										if (flag45)
+										{
+											this.cxSend = this.cx;
+											this.cySend = this.cy;
+										}
+										this.currentMovePoint = null;
+										this.telePortSkill = false;
+										ServerEffect.addServerEffect(173, this.cx, this.cy, 1);
 									}
 									else
 									{
-										b = -1;
+										ServerEffect.addServerEffect(60, this.cx, this.cy, 1);
 									}
-									for (int j = 0; j < 2; j++)
+									bool flag46 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2;
+									if (flag46)
 									{
-										if (TileMap.tileTypeAt(this.currentMovePoint.xEnd + this.chw * (int)b, this.cy + this.chh * j, 2))
+										this.statusMe = 1;
+									}
+									else
+									{
+										this.statusMe = 4;
+									}
+								}
+							}
+							else
+							{
+								this.soundUpdate();
+								bool flag47 = this.stone;
+								if (!flag47)
+								{
+									bool flag48 = this.isFreez;
+									if (flag48)
+									{
+										bool flag49 = GameCanvas.gameTick % 5 == 0;
+										if (flag49)
 										{
-											flag3 = true;
-											break;
+											ServerEffect.addServerEffect(113, this.cx, this.cy, 1);
+										}
+										this.cf = 23;
+										long num3 = mSystem.currentTimeMillis();
+										bool flag50 = num3 - this.lastFreez >= 1000L;
+										if (flag50)
+										{
+											this.freezSeconds--;
+											this.lastFreez = num3;
+											bool flag51 = this.freezSeconds < 0;
+											if (flag51)
+											{
+												this.isFreez = false;
+												this.seconds = 0;
+												bool flag52 = this.me;
+												if (flag52)
+												{
+													global::Char.myCharz().isLockMove = false;
+													GameScr.gI().dem = 0;
+													GameScr.gI().isFreez = false;
+												}
+											}
+										}
+										bool flag53 = TileMap.tileTypeAt(this.cx / (int)TileMap.size, this.cy / (int)TileMap.size) == 0;
+										if (flag53)
+										{
+											this.ty++;
+											this.wt++;
+											this.fy += (this.wy ? -1 : 1);
+											bool flag54 = this.wt == 10;
+											if (flag54)
+											{
+												this.wt = 0;
+												this.wy = !this.wy;
+											}
 										}
 									}
-									if (flag3)
-									{
-										this.currentMovePoint = null;
-										GameScr.instance.clickMoving = false;
-										this.statusMe = 1;
-										this.cvx = (this.cvy = 0);
-										this.checkPerformEndMovePointAction();
-									}
 									else
 									{
-										SoundMn.gI().charJump();
-										this.cx = this.currentMovePoint.xEnd;
-										this.statusMe = 10;
-										this.cvy = -5;
-										this.cvx = 0;
-										Res.outz("Jum lun");
+										bool flag55 = this.isWaitMonkey;
+										if (flag55)
+										{
+											this.isLockMove = true;
+											this.cf = 17;
+											bool flag56 = GameCanvas.gameTick % 5 == 0;
+											if (flag56)
+											{
+												ServerEffect.addServerEffect(154, this.cx, this.cy - 10, 2);
+											}
+											bool flag57 = GameCanvas.gameTick % 5 == 0;
+											if (flag57)
+											{
+												ServerEffect.addServerEffect(1, this.cx, this.cy + 10, 1);
+											}
+											this.chargeCount++;
+											bool flag58 = this.chargeCount == 500;
+											if (flag58)
+											{
+												this.isWaitMonkey = false;
+												this.isLockMove = false;
+											}
+										}
+										else
+										{
+											bool flag59 = this.isStandAndCharge;
+											if (flag59)
+											{
+												this.chargeCount++;
+												bool flag = !TileMap.tileTypeAt(global::Char.myCharz().cx, global::Char.myCharz().cy, 2);
+												this.updateEffect();
+												this.updateSkillPaint();
+												this.moveFast = null;
+												this.currentMovePoint = null;
+												this.cf = 17;
+												bool flag60 = flag && this.cgender != 2;
+												if (flag60)
+												{
+													this.cf = 12;
+												}
+												bool flag61 = this.cgender == 2;
+												if (flag61)
+												{
+													bool flag62 = GameCanvas.gameTick % 3 == 0;
+													if (flag62)
+													{
+														ServerEffect.addServerEffect(154, this.cx, this.cy - this.ch / 2 + 10, 1);
+													}
+													bool flag63 = GameCanvas.gameTick % 5 == 0;
+													if (flag63)
+													{
+														ServerEffect.addServerEffect(114, this.cx + Res.random(-20, 20), this.cy + Res.random(-20, 20), 1);
+													}
+												}
+												bool flag64 = this.cgender == 1;
+												if (flag64)
+												{
+													bool flag65 = GameCanvas.gameTick % 4 == 0;
+													if (flag65)
+													{
+													}
+													bool flag66 = GameCanvas.gameTick % 2 == 0;
+													if (flag66)
+													{
+														bool flag67 = this.cdir == 1;
+														if (flag67)
+														{
+															ServerEffect.addServerEffect(70, this.cx - 18, this.cy - this.ch / 2 + 8, 1);
+															ServerEffect.addServerEffect(70, this.cx + 23, this.cy - this.ch / 2 + 15, 1);
+														}
+														else
+														{
+															ServerEffect.addServerEffect(70, this.cx + 18, this.cy - this.ch / 2 + 8, 1);
+															ServerEffect.addServerEffect(70, this.cx - 23, this.cy - this.ch / 2 + 15, 1);
+														}
+													}
+												}
+												this.cur = mSystem.currentTimeMillis();
+												bool flag68 = this.cur - this.last > (long)this.seconds || this.cur - this.last > 10000L;
+												if (flag68)
+												{
+													this.stopUseChargeSkill();
+													bool flag69 = this.me;
+													if (flag69)
+													{
+														GameScr.gI().auto = 0;
+														bool flag70 = this.cgender == 2;
+														if (flag70)
+														{
+															global::Char.myCharz().setAutoSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], flag ? 1 : 0);
+															Service.gI().skill_not_focus(8);
+														}
+														bool flag71 = this.cgender == 1;
+														if (flag71)
+														{
+															Res.outz("set skipp paint");
+															this.isCreateDark = true;
+															global::Char.myCharz().setSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], flag ? 1 : 0);
+														}
+													}
+													else
+													{
+														bool flag72 = this.cgender == 2;
+														if (flag72)
+														{
+															this.setAutoSkillPaint(GameScr.sks[this.skillTemplateId], flag ? 1 : 0);
+														}
+													}
+													bool flag73 = this.cgender == 2 && this.statusMe != 14 && this.statusMe != 5;
+													if (flag73)
+													{
+														GameScr.gI().activeSuperPower(this.cx, this.cy);
+													}
+												}
+												this.chargeCount++;
+												bool flag74 = this.chargeCount == 500;
+												if (flag74)
+												{
+													this.stopUseChargeSkill();
+												}
+											}
+											else
+											{
+												bool flag75 = this.isFlyAndCharge;
+												if (flag75)
+												{
+													this.updateEffect();
+													this.updateSkillPaint();
+													this.moveFast = null;
+													this.currentMovePoint = null;
+													this.posDisY++;
+													bool flag76 = TileMap.tileTypeAt(this.cx, this.cy - this.ch, 8192);
+													if (flag76)
+													{
+														this.stopUseChargeSkill();
+													}
+													else
+													{
+														bool flag77 = this.posDisY == 20;
+														if (flag77)
+														{
+															this.last = mSystem.currentTimeMillis();
+														}
+														bool flag78 = this.posDisY <= 20;
+														if (flag78)
+														{
+															bool flag79 = this.statusMe != 14;
+															if (flag79)
+															{
+																this.statusMe = 3;
+															}
+															this.cvy = -3;
+															this.cy += this.cvy;
+															this.cf = 7;
+														}
+														else
+														{
+															this.cur = mSystem.currentTimeMillis();
+															bool flag80 = this.cur - this.last > (long)this.seconds || this.cur - this.last > 10000L;
+															if (flag80)
+															{
+																this.isFlyAndCharge = false;
+																bool flag81 = this.me;
+																if (flag81)
+																{
+																	this.isCreateDark = true;
+																	bool flag2 = TileMap.tileTypeAt(global::Char.myCharz().cx, global::Char.myCharz().cy, 2);
+																	this.isUseSkillAfterCharge = true;
+																	global::Char.myCharz().setSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], (!flag2) ? 1 : 0);
+																}
+															}
+															else
+															{
+																this.cf = 32;
+																bool flag82 = this.cgender == 0 && GameCanvas.gameTick % 3 == 0;
+																if (flag82)
+																{
+																	ServerEffect.addServerEffect(153, this.cx, this.cy - this.ch, 2);
+																}
+																this.chargeCount++;
+																bool flag83 = this.chargeCount == 500;
+																if (flag83)
+																{
+																	this.stopUseChargeSkill();
+																}
+															}
+														}
+													}
+												}
+												else
+												{
+													bool flag84 = this.me && GameCanvas.isTouch;
+													if (flag84)
+													{
+														bool flag85 = this.charFocus != null && this.charFocus.charID >= 0 && this.charFocus.cx > 100 && this.charFocus.cx < TileMap.pxw - 100 && this.isInEnterOnlinePoint() == null && this.isInEnterOfflinePoint() == null && !this.isAttacPlayerStatus() && TileMap.mapID != 51 && TileMap.mapID != 52 && GameCanvas.panel.vPlayerMenu.size() > 0 && GameScr.gI().popUpYesNo == null;
+														if (flag85)
+														{
+															int num4 = global::Math.abs(this.cx - this.charFocus.cx);
+															int num5 = global::Math.abs(this.cy - this.charFocus.cy);
+															bool flag86 = num4 < 60 && num5 < 40;
+															if (flag86)
+															{
+																bool flag87 = this.cmdMenu == null;
+																if (flag87)
+																{
+																	this.cmdMenu = new Command(mResources.MENU, 11111);
+																	this.cmdMenu.isPlaySoundButton = false;
+																}
+																this.cmdMenu.x = this.charFocus.cx - GameScr.cmx;
+																this.cmdMenu.y = this.charFocus.cy - this.charFocus.ch - 30 - GameScr.cmy;
+															}
+															else
+															{
+																this.cmdMenu = null;
+															}
+														}
+														else
+														{
+															this.cmdMenu = null;
+														}
+													}
+													bool flag88 = this.isShadown;
+													if (flag88)
+													{
+														this.updateShadown();
+													}
+													bool flag89 = this.isTeleport;
+													if (!flag89)
+													{
+														bool flag90 = this.chatInfo != null;
+														if (flag90)
+														{
+															this.chatInfo.update();
+														}
+														bool flag91 = this.shadowLife > 0;
+														if (flag91)
+														{
+															this.shadowLife--;
+														}
+														bool flag92 = this.resultTest > 0 && GameCanvas.gameTick % 2 == 0;
+														if (flag92)
+														{
+															this.resultTest -= 1;
+															bool flag93 = this.resultTest == 30 || this.resultTest == 60;
+															if (flag93)
+															{
+																this.resultTest = 0;
+															}
+														}
+														this.updateSkillPaint();
+														bool flag94 = this.mobMe != null;
+														if (flag94)
+														{
+															this.updateMobMe();
+														}
+														bool flag95 = this.arr != null;
+														if (flag95)
+														{
+															this.arr.update();
+														}
+														bool flag96 = this.dart != null;
+														if (flag96)
+														{
+															this.dart.update();
+														}
+														this.updateEffect();
+														bool flag97 = this.holdEffID != 0;
+														if (flag97)
+														{
+															bool flag98 = GameCanvas.gameTick % 5 == 0;
+															if (flag98)
+															{
+																EffecMn.addEff(new Effect(32, this.cx, this.cy + 24, 3, 5, 1));
+															}
+														}
+														else
+														{
+															bool flag99 = this.blindEff;
+															if (!flag99)
+															{
+																bool flag100 = this.sleepEff;
+																if (!flag100)
+																{
+																	bool flag101 = this.holder;
+																	if (flag101)
+																	{
+																		bool flag102 = this.charHold != null && (this.charHold.statusMe == 14 || this.charHold.statusMe == 5);
+																		if (flag102)
+																		{
+																			this.removeHoleEff();
+																		}
+																		bool flag103 = this.mobHold != null && this.mobHold.status == 1;
+																		if (flag103)
+																		{
+																			this.removeHoleEff();
+																		}
+																		bool flag104 = this.me && this.statusMe == 2 && this.currentMovePoint != null;
+																		if (flag104)
+																		{
+																			this.holder = false;
+																			this.charHold = null;
+																			this.mobHold = null;
+																		}
+																		bool flag105 = TileMap.tileTypeAt(this.cx, this.cy, 2);
+																		if (flag105)
+																		{
+																			this.cf = 16;
+																		}
+																		else
+																		{
+																			this.cf = 31;
+																		}
+																	}
+																	else
+																	{
+																		bool flag106 = this.cHP > 0;
+																		if (flag106)
+																		{
+																			for (int i = 0; i < this.vEff.size(); i++)
+																			{
+																				EffectChar effectChar = (EffectChar)this.vEff.elementAt(i);
+																				bool flag107 = effectChar.template.type == 0 || effectChar.template.type == 12;
+																				if (flag107)
+																				{
+																					bool isEff = GameCanvas.isEff1;
+																					if (isEff)
+																					{
+																						this.cHP += (int)effectChar.param;
+																						this.cMP += (int)effectChar.param;
+																					}
+																				}
+																				else
+																				{
+																					bool flag108 = effectChar.template.type == 4 || effectChar.template.type == 17;
+																					if (flag108)
+																					{
+																						bool isEff2 = GameCanvas.isEff1;
+																						if (isEff2)
+																						{
+																							this.cHP += (int)effectChar.param;
+																						}
+																					}
+																					else
+																					{
+																						bool flag109 = effectChar.template.type == 13 && GameCanvas.isEff1;
+																						if (flag109)
+																						{
+																							this.cHP -= this.cHPFull * 3 / 100;
+																							bool flag110 = this.cHP < 1;
+																							if (flag110)
+																							{
+																								this.cHP = 1;
+																							}
+																						}
+																					}
+																				}
+																			}
+																			bool flag111 = this.eff5BuffHp > 0 && GameCanvas.isEff2;
+																			if (flag111)
+																			{
+																				this.cHP += this.eff5BuffHp;
+																			}
+																			bool flag112 = this.eff5BuffMp > 0 && GameCanvas.isEff2;
+																			if (flag112)
+																			{
+																				this.cMP += this.eff5BuffMp;
+																			}
+																			bool flag113 = this.cHP > this.cHPFull;
+																			if (flag113)
+																			{
+																				this.cHP = this.cHPFull;
+																			}
+																			bool flag114 = this.cMP > this.cMPFull;
+																			if (flag114)
+																			{
+																				this.cMP = this.cMPFull;
+																			}
+																		}
+																		bool flag115 = this.cmtoChar;
+																		if (flag115)
+																		{
+																			GameScr.cmtoX = this.cx - GameScr.gW2;
+																			GameScr.cmtoY = this.cy - GameScr.gH23;
+																			bool flag116 = !GameCanvas.isTouchControl;
+																			if (flag116)
+																			{
+																				GameScr.cmtoX += GameScr.gW6 * this.cdir;
+																			}
+																		}
+																		this.tick = (this.tick + 1) % 100;
+																		bool flag117 = this.me;
+																		if (flag117)
+																		{
+																			bool flag118 = this.charFocus != null && !GameScr.vCharInMap.contains(this.charFocus);
+																			if (flag118)
+																			{
+																				this.charFocus = null;
+																			}
+																			bool flag119 = this.cx < 10;
+																			if (flag119)
+																			{
+																				this.cvx = 0;
+																				this.cx = 10;
+																			}
+																			else
+																			{
+																				bool flag120 = this.cx > TileMap.pxw - 10;
+																				if (flag120)
+																				{
+																					this.cx = TileMap.pxw - 10;
+																					this.cvx = 0;
+																				}
+																			}
+																			bool flag121 = this.me && !global::Char.ischangingMap && this.isInWaypoint();
+																			if (flag121)
+																			{
+																				Service.gI().charMove();
+																				bool flag122 = TileMap.isTrainingMap();
+																				if (flag122)
+																				{
+																					Service.gI().getMapOffline();
+																					global::Char.ischangingMap = true;
+																				}
+																				else
+																				{
+																					Service.gI().requestChangeMap();
+																				}
+																				global::Char.isLockKey = true;
+																				global::Char.ischangingMap = true;
+																				GameCanvas.clearKeyHold();
+																				GameCanvas.clearKeyPressed();
+																				InfoDlg.showWait();
+																				return;
+																			}
+																			bool flag123 = this.statusMe != 4 && Res.abs(this.cx - this.cxSend) + Res.abs(this.cy - this.cySend) >= 70 && this.cy - this.cySend <= 0 && this.me;
+																			if (flag123)
+																			{
+																				Service.gI().charMove();
+																			}
+																			bool flag124 = this.isLockMove;
+																			if (flag124)
+																			{
+																				this.currentMovePoint = null;
+																			}
+																			bool flag125 = this.currentMovePoint != null;
+																			if (flag125)
+																			{
+																				bool flag126 = global::Char.abs(this.cx - this.currentMovePoint.xEnd) <= 16 && global::Char.abs(this.cy - this.currentMovePoint.yEnd) <= 16;
+																				if (flag126)
+																				{
+																					this.cx = (this.currentMovePoint.xEnd + this.cx) / 2;
+																					this.cy = this.currentMovePoint.yEnd;
+																					this.currentMovePoint = null;
+																					GameScr.instance.clickMoving = false;
+																					this.checkPerformEndMovePointAction();
+																					this.cvx = (this.cvy = 0);
+																					bool flag127 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2;
+																					if (flag127)
+																					{
+																						this.statusMe = 1;
+																					}
+																					else
+																					{
+																						this.setCharFallFromJump();
+																					}
+																					Service.gI().charMove();
+																				}
+																				else
+																				{
+																					this.cdir = ((this.currentMovePoint.xEnd <= this.cx) ? -1 : 1);
+																					bool flag128 = TileMap.tileTypeAt(this.cx, this.cy, 2);
+																					if (flag128)
+																					{
+																						this.statusMe = 2;
+																						bool flag129 = this.currentMovePoint != null;
+																						if (flag129)
+																						{
+																							this.cvx = this.cspeed * this.cdir;
+																							this.cvy = 0;
+																						}
+																						bool flag130 = global::Char.abs(this.cx - this.currentMovePoint.xEnd) <= 10;
+																						if (flag130)
+																						{
+																							bool flag131 = this.currentMovePoint.yEnd > this.cy;
+																							if (flag131)
+																							{
+																								bool flag3 = false;
+																								bool flag132 = this.cdir == 1;
+																								sbyte b;
+																								if (flag132)
+																								{
+																									b = 1;
+																								}
+																								else
+																								{
+																									b = -1;
+																								}
+																								for (int j = 0; j < 2; j++)
+																								{
+																									bool flag133 = TileMap.tileTypeAt(this.currentMovePoint.xEnd + this.chw * (int)b, this.cy + this.chh * j, 2);
+																									if (flag133)
+																									{
+																										flag3 = true;
+																										break;
+																									}
+																								}
+																								bool flag134 = flag3;
+																								if (flag134)
+																								{
+																									this.currentMovePoint = null;
+																									GameScr.instance.clickMoving = false;
+																									this.statusMe = 1;
+																									this.cvx = (this.cvy = 0);
+																									this.checkPerformEndMovePointAction();
+																								}
+																								else
+																								{
+																									SoundMn.gI().charJump();
+																									this.cx = this.currentMovePoint.xEnd;
+																									this.statusMe = 10;
+																									this.cvy = -5;
+																									this.cvx = 0;
+																									Res.outz("Jum lun");
+																								}
+																							}
+																							else
+																							{
+																								SoundMn.gI().charJump();
+																								this.cx = this.currentMovePoint.xEnd;
+																								this.statusMe = 10;
+																								this.cvy = -5;
+																								this.cvx = 0;
+																							}
+																						}
+																						bool flag135 = this.cdir == 1;
+																						if (flag135)
+																						{
+																							bool flag136 = TileMap.tileTypeAt(this.cx + this.chw, this.cy - this.chh, 4);
+																							if (flag136)
+																							{
+																								this.cvx = this.cspeed * this.cdir;
+																								this.statusMe = 10;
+																								this.cvy = -5;
+																							}
+																						}
+																						else
+																						{
+																							bool flag137 = TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - this.chh, 8);
+																							if (flag137)
+																							{
+																								this.cvx = this.cspeed * this.cdir;
+																								this.statusMe = 10;
+																								this.cvy = -5;
+																							}
+																						}
+																					}
+																					else
+																					{
+																						bool flag138 = this.currentMovePoint.yEnd < this.cy + 10;
+																						if (flag138)
+																						{
+																							this.statusMe = 10;
+																							this.cvy = -5;
+																							bool flag139 = global::Char.abs(this.cy - this.currentMovePoint.yEnd) <= 10;
+																							if (flag139)
+																							{
+																								this.cy = this.currentMovePoint.yEnd;
+																								this.cvy = 0;
+																							}
+																							bool flag140 = global::Char.abs(this.cx - this.currentMovePoint.xEnd) <= 10;
+																							if (flag140)
+																							{
+																								this.cvx = 0;
+																							}
+																							else
+																							{
+																								this.cvx = this.cspeed * this.cdir;
+																							}
+																						}
+																						else
+																						{
+																							bool flag141 = TileMap.tileTypeAt(this.cx, this.cy, 2);
+																							if (flag141)
+																							{
+																								this.currentMovePoint = null;
+																								GameScr.instance.clickMoving = false;
+																								this.statusMe = 1;
+																								this.cvx = (this.cvy = 0);
+																								this.checkPerformEndMovePointAction();
+																							}
+																							else
+																							{
+																								bool flag142 = this.statusMe == 10 || this.statusMe == 2;
+																								if (flag142)
+																								{
+																									this.cvy = 0;
+																								}
+																								this.statusMe = 4;
+																							}
+																						}
+																						bool flag143 = this.currentMovePoint.yEnd > this.cy;
+																						if (flag143)
+																						{
+																							bool flag144 = this.cdir == 1;
+																							if (flag144)
+																							{
+																								bool flag145 = TileMap.tileTypeAt(this.cx + this.chw, this.cy - this.chh, 4);
+																								if (flag145)
+																								{
+																									this.cvx = (this.cvy = 0);
+																									this.statusMe = 4;
+																									this.currentMovePoint = null;
+																									GameScr.instance.clickMoving = false;
+																									this.checkPerformEndMovePointAction();
+																								}
+																							}
+																							else
+																							{
+																								bool flag146 = TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - this.chh, 8);
+																								if (flag146)
+																								{
+																									this.cvx = (this.cvy = 0);
+																									this.statusMe = 4;
+																									this.currentMovePoint = null;
+																									GameScr.instance.clickMoving = false;
+																									this.checkPerformEndMovePointAction();
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																			this.searchFocus();
+																		}
+																		else
+																		{
+																			this.checkHideCharName();
+																			bool flag147 = this.statusMe == 1 || this.statusMe == 6;
+																			if (flag147)
+																			{
+																				bool flag4 = false;
+																				bool flag148 = this.currentMovePoint != null;
+																				if (flag148)
+																				{
+																					bool flag149 = global::Char.abs(this.currentMovePoint.xEnd - this.cx) < 17 && global::Char.abs(this.currentMovePoint.yEnd - this.cy) < 25;
+																					if (flag149)
+																					{
+																						this.cx = this.currentMovePoint.xEnd;
+																						this.cy = this.currentMovePoint.yEnd;
+																						this.currentMovePoint = null;
+																						bool flag150 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2;
+																						if (flag150)
+																						{
+																							this.statusMe = 1;
+																							this.cp3 = 0;
+																							GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+																							GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+																						}
+																						else
+																						{
+																							this.statusMe = 4;
+																							this.cvy = 0;
+																							this.cp1 = 0;
+																						}
+																						flag4 = true;
+																					}
+																					else
+																					{
+																						bool flag151 = (this.statusBeforeNothing == 10 || this.cf == 8) && this.vMovePoints.size() > 0;
+																						if (flag151)
+																						{
+																							flag4 = true;
+																						}
+																						else
+																						{
+																							bool flag152 = this.cy == this.currentMovePoint.yEnd;
+																							if (flag152)
+																							{
+																								bool flag153 = this.cx != this.currentMovePoint.xEnd;
+																								if (flag153)
+																								{
+																									this.cx = (this.cx + this.currentMovePoint.xEnd) / 2;
+																									this.cf = GameCanvas.gameTick % 5 + 2;
+																								}
+																							}
+																							else
+																							{
+																								bool flag154 = this.cy < this.currentMovePoint.yEnd;
+																								if (flag154)
+																								{
+																									this.cf = 12;
+																									this.cx = (this.cx + this.currentMovePoint.xEnd) / 2;
+																									bool flag155 = this.cvy < 0;
+																									if (flag155)
+																									{
+																										this.cvy = 0;
+																									}
+																									this.cy += this.cvy;
+																									bool flag156 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2;
+																									if (flag156)
+																									{
+																										GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+																										GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+																									}
+																									this.cvy++;
+																									bool flag157 = this.cvy > 16;
+																									if (flag157)
+																									{
+																										this.cy = (this.cy + this.currentMovePoint.yEnd) / 2;
+																									}
+																								}
+																								else
+																								{
+																									this.cf = 7;
+																									this.cx = (this.cx + this.currentMovePoint.xEnd) / 2;
+																									this.cy = (this.cy + this.currentMovePoint.yEnd) / 2;
+																								}
+																							}
+																						}
+																					}
+																				}
+																				else
+																				{
+																					flag4 = true;
+																				}
+																				bool flag158 = flag4 && this.vMovePoints.size() > 0;
+																				if (flag158)
+																				{
+																					this.currentMovePoint = (MovePoint)this.vMovePoints.firstElement();
+																					this.vMovePoints.removeElementAt(0);
+																					bool flag159 = this.currentMovePoint.status == 2;
+																					if (flag159)
+																					{
+																						bool flag160 = (TileMap.tileTypeAtPixel(this.cx, this.cy + 12) & 2) != 2;
+																						if (flag160)
+																						{
+																							this.statusMe = 10;
+																							this.cp1 = 0;
+																							this.cp2 = 0;
+																							this.cvx = -(this.cx - this.currentMovePoint.xEnd) / 10;
+																							this.cvy = -(this.cy - this.currentMovePoint.yEnd) / 10;
+																							bool flag161 = this.cx - this.currentMovePoint.xEnd > 0;
+																							if (flag161)
+																							{
+																								this.cdir = -1;
+																							}
+																							else
+																							{
+																								bool flag162 = this.cx - this.currentMovePoint.xEnd < 0;
+																								if (flag162)
+																								{
+																									this.cdir = 1;
+																								}
+																							}
+																						}
+																						else
+																						{
+																							this.statusMe = 2;
+																							bool flag163 = this.cx - this.currentMovePoint.xEnd > 0;
+																							if (flag163)
+																							{
+																								this.cdir = -1;
+																							}
+																							else
+																							{
+																								bool flag164 = this.cx - this.currentMovePoint.xEnd < 0;
+																								if (flag164)
+																								{
+																									this.cdir = 1;
+																								}
+																							}
+																							this.cvx = this.cspeed * this.cdir;
+																							this.cvy = 0;
+																						}
+																					}
+																					else
+																					{
+																						bool flag165 = this.currentMovePoint.status == 3;
+																						if (flag165)
+																						{
+																							bool flag166 = (TileMap.tileTypeAtPixel(this.cx, this.cy + 23) & 2) != 2;
+																							if (flag166)
+																							{
+																								this.statusMe = 10;
+																								this.cp1 = 0;
+																								this.cp2 = 0;
+																								this.cvx = -(this.cx - this.currentMovePoint.xEnd) / 10;
+																								this.cvy = -(this.cy - this.currentMovePoint.yEnd) / 10;
+																								bool flag167 = this.cx - this.currentMovePoint.xEnd > 0;
+																								if (flag167)
+																								{
+																									this.cdir = -1;
+																								}
+																								else
+																								{
+																									bool flag168 = this.cx - this.currentMovePoint.xEnd < 0;
+																									if (flag168)
+																									{
+																										this.cdir = 1;
+																									}
+																								}
+																							}
+																							else
+																							{
+																								this.statusMe = 3;
+																								GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+																								GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+																								bool flag169 = this.cx - this.currentMovePoint.xEnd > 0;
+																								if (flag169)
+																								{
+																									this.cdir = -1;
+																								}
+																								else
+																								{
+																									bool flag170 = this.cx - this.currentMovePoint.xEnd < 0;
+																									if (flag170)
+																									{
+																										this.cdir = 1;
+																									}
+																								}
+																								this.cvx = global::Char.abs(this.cx - this.currentMovePoint.xEnd) / 10 * this.cdir;
+																								this.cvy = -10;
+																							}
+																						}
+																						else
+																						{
+																							bool flag171 = this.currentMovePoint.status == 4;
+																							if (flag171)
+																							{
+																								this.statusMe = 4;
+																								bool flag172 = this.cx - this.currentMovePoint.xEnd > 0;
+																								if (flag172)
+																								{
+																									this.cdir = -1;
+																								}
+																								else
+																								{
+																									bool flag173 = this.cx - this.currentMovePoint.xEnd < 0;
+																									if (flag173)
+																									{
+																										this.cdir = 1;
+																									}
+																								}
+																								this.cvx = global::Char.abs(this.cx - this.currentMovePoint.xEnd) / 9 * this.cdir;
+																								this.cvy = 0;
+																							}
+																							else
+																							{
+																								this.cx = this.currentMovePoint.xEnd;
+																								this.cy = this.currentMovePoint.yEnd;
+																								this.currentMovePoint = null;
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																		switch (this.statusMe)
+																		{
+																		case 1:
+																			this.updateCharStand();
+																			break;
+																		case 2:
+																			this.updateCharRun();
+																			break;
+																		case 3:
+																			this.updateCharJump();
+																			break;
+																		case 4:
+																			this.updateCharFall();
+																			break;
+																		case 5:
+																			this.updateCharDeadFly();
+																			break;
+																		case 6:
+																		{
+																			bool flag174 = this.isInjure <= 0;
+																			if (flag174)
+																			{
+																				this.cf = 0;
+																			}
+																			else
+																			{
+																				bool flag175 = this.statusBeforeNothing == 10;
+																				if (flag175)
+																				{
+																					this.cx += this.cvx;
+																				}
+																				else
+																				{
+																					bool flag176 = this.cf <= 1;
+																					if (flag176)
+																					{
+																						this.cp1++;
+																						bool flag177 = this.cp1 > 6;
+																						if (flag177)
+																						{
+																							this.cf = 0;
+																						}
+																						else
+																						{
+																							this.cf = 1;
+																						}
+																						bool flag178 = this.cp1 > 10;
+																						if (flag178)
+																						{
+																							this.cp1 = 0;
+																						}
+																					}
+																				}
+																			}
+																			bool flag179 = this.cf != 7 && this.cf != 12 && (TileMap.tileTypeAtPixel(this.cx, this.cy + 1) & 2) != 2;
+																			if (flag179)
+																			{
+																				this.cvx = 0;
+																				this.cvy = 0;
+																				this.statusMe = 4;
+																				this.cf = 7;
+																			}
+																			bool flag180 = !this.me;
+																			if (flag180)
+																			{
+																				this.cp3++;
+																				bool flag181 = this.cp3 > 10;
+																				if (flag181)
+																				{
+																					bool flag182 = (TileMap.tileTypeAtPixel(this.cx, this.cy + 1) & 2) != 2;
+																					if (flag182)
+																					{
+																						this.cy += 5;
+																					}
+																					else
+																					{
+																						this.cf = 0;
+																					}
+																				}
+																				bool flag183 = this.cp3 > 50;
+																				if (flag183)
+																				{
+																					this.cp3 = 0;
+																					this.currentMovePoint = null;
+																				}
+																			}
+																			break;
+																		}
+																		case 9:
+																			this.updateCharAutoJump();
+																			break;
+																		case 10:
+																			this.updateCharFly();
+																			break;
+																		case 12:
+																			this.updateSkillStand();
+																			break;
+																		case 13:
+																			this.updateSkillFall();
+																			break;
+																		case 14:
+																		{
+																			this.cp1++;
+																			bool flag184 = this.cp1 > 30;
+																			if (flag184)
+																			{
+																				this.cp1 = 0;
+																			}
+																			bool flag185 = this.cp1 % 15 < 5;
+																			if (flag185)
+																			{
+																				this.cf = 0;
+																			}
+																			else
+																			{
+																				this.cf = 1;
+																			}
+																			break;
+																		}
+																		case 16:
+																			this.updateResetPoint();
+																			break;
+																		}
+																		bool flag186 = this.isInjure > 0;
+																		if (flag186)
+																		{
+																			this.cf = 23;
+																			this.isInjure -= 1;
+																		}
+																		bool flag187 = this.wdx != 0 || this.wdy != 0;
+																		if (flag187)
+																		{
+																			this.startDie(this.wdx, this.wdy);
+																			this.wdx = 0;
+																			this.wdy = 0;
+																		}
+																		bool flag188 = this.moveFast != null;
+																		if (flag188)
+																		{
+																			bool flag189 = this.moveFast[0] == 0;
+																			if (flag189)
+																			{
+																				short[] array2 = this.moveFast;
+																				int num6 = 0;
+																				short[] array4 = array2;
+																				int num9 = num6;
+																				array4[num9] += 1;
+																				ServerEffect.addServerEffect(60, this, 1);
+																			}
+																			else
+																			{
+																				bool flag190 = this.moveFast[0] < 10;
+																				if (flag190)
+																				{
+																					short[] array3 = this.moveFast;
+																					int num7 = 0;
+																					short[] array5 = array3;
+																					int num10 = num7;
+																					array5[num10] += 1;
+																				}
+																				else
+																				{
+																					this.cx = (int)this.moveFast[1];
+																					this.cy = (int)this.moveFast[2];
+																					this.moveFast = null;
+																					ServerEffect.addServerEffect(60, this, 1);
+																					bool flag191 = this.me;
+																					if (flag191)
+																					{
+																						bool flag192 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2;
+																						if (flag192)
+																						{
+																							this.statusMe = 4;
+																							global::Char.myCharz().setAutoSkillPaint(GameScr.sks[38], 1);
+																						}
+																						else
+																						{
+																							Service.gI().charMove();
+																							global::Char.myCharz().setAutoSkillPaint(GameScr.sks[38], 0);
+																						}
+																					}
+																				}
+																			}
+																		}
+																		bool flag193 = this.statusMe != 10;
+																		if (flag193)
+																		{
+																			this.fy = 0;
+																		}
+																		bool flag194 = this.isCharge;
+																		if (flag194)
+																		{
+																			this.cf = 17;
+																			bool flag195 = GameCanvas.gameTick % 4 == 0;
+																			if (flag195)
+																			{
+																				ServerEffect.addServerEffect(1, this.cx, this.cy + GameCanvas.transY, 1);
+																			}
+																			bool flag196 = this.me;
+																			if (flag196)
+																			{
+																				long num8 = mSystem.currentTimeMillis();
+																				bool flag197 = num8 - this.last >= 1000L;
+																				if (flag197)
+																				{
+																					Res.outz("%= " + this.myskill.damage.ToString());
+																					this.last = num8;
+																					this.cHP += this.cHPFull * (int)this.myskill.damage / 100;
+																					this.cMP += this.cMPFull * (int)this.myskill.damage / 100;
+																					bool flag198 = this.cHP < this.cHPFull;
+																					if (flag198)
+																					{
+																						GameScr.startFlyText(string.Concat(new object[]
+																						{
+																							"+",
+																							this.cHPFull * (int)this.myskill.damage / 100,
+																							" ",
+																							mResources.HP
+																						}), this.cx, this.cy - this.ch - 20, 0, -1, mFont.HP);
+																					}
+																					bool flag199 = this.cMP < this.cMPFull;
+																					if (flag199)
+																					{
+																						GameScr.startFlyText(string.Concat(new object[]
+																						{
+																							"+",
+																							this.cMPFull * (int)this.myskill.damage / 100,
+																							" ",
+																							mResources.KI
+																						}), this.cx, this.cy - this.ch - 20, 0, -2, mFont.MP);
+																					}
+																					Service.gI().skill_not_focus(2);
+																				}
+																			}
+																		}
+																		bool flag200 = this.isFlyUp;
+																		if (flag200)
+																		{
+																			bool flag201 = this.me;
+																			if (flag201)
+																			{
+																				global::Char.isLockKey = true;
+																				this.statusMe = 3;
+																				this.cvy = -8;
+																				bool flag202 = this.cy <= TileMap.pxh - 240;
+																				if (flag202)
+																				{
+																					this.isFlyUp = false;
+																					global::Char.isLockKey = false;
+																					this.statusMe = 4;
+																				}
+																			}
+																			else
+																			{
+																				this.statusMe = 3;
+																				this.cvy = -8;
+																				bool flag203 = this.cy <= TileMap.pxh - 240;
+																				if (flag203)
+																				{
+																					this.cvy = 0;
+																					this.isFlyUp = false;
+																					this.cvy = 0;
+																					this.statusMe = 1;
+																				}
+																			}
+																		}
+																		this.updateMount();
+																		this.updEffChar();
+																		this.updateEye();
+																		this.updateFHead();
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
 									}
 								}
-								else
-								{
-									SoundMn.gI().charJump();
-									this.cx = this.currentMovePoint.xEnd;
-									this.statusMe = 10;
-									this.cvy = -5;
-									this.cvx = 0;
-								}
 							}
-							if (this.cdir == 1)
-							{
-								if (TileMap.tileTypeAt(this.cx + this.chw, this.cy - this.chh, 4))
-								{
-									this.cvx = this.cspeed * this.cdir;
-									this.statusMe = 10;
-									this.cvy = -5;
-								}
-							}
-							else if (TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - this.chh, 8))
-							{
-								this.cvx = this.cspeed * this.cdir;
-								this.statusMe = 10;
-								this.cvy = -5;
-							}
-						}
-						else
-						{
-							if (this.currentMovePoint.yEnd < this.cy + 10)
-							{
-								this.statusMe = 10;
-								this.cvy = -5;
-								if (global::Char.abs(this.cy - this.currentMovePoint.yEnd) <= 10)
-								{
-									this.cy = this.currentMovePoint.yEnd;
-									this.cvy = 0;
-								}
-								if (global::Char.abs(this.cx - this.currentMovePoint.xEnd) <= 10)
-								{
-									this.cvx = 0;
-								}
-								else
-								{
-									this.cvx = this.cspeed * this.cdir;
-								}
-							}
-							else if (TileMap.tileTypeAt(this.cx, this.cy, 2))
-							{
-								this.currentMovePoint = null;
-								GameScr.instance.clickMoving = false;
-								this.statusMe = 1;
-								this.cvx = (this.cvy = 0);
-								this.checkPerformEndMovePointAction();
-							}
-							else
-							{
-								if (this.statusMe == 10 || this.statusMe == 2)
-								{
-									this.cvy = 0;
-								}
-								this.statusMe = 4;
-							}
-							if (this.currentMovePoint.yEnd > this.cy)
-							{
-								if (this.cdir == 1)
-								{
-									if (TileMap.tileTypeAt(this.cx + this.chw, this.cy - this.chh, 4))
-									{
-										this.cvx = (this.cvy = 0);
-										this.statusMe = 4;
-										this.currentMovePoint = null;
-										GameScr.instance.clickMoving = false;
-										this.checkPerformEndMovePointAction();
-									}
-								}
-								else if (TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - this.chh, 8))
-								{
-									this.cvx = (this.cvy = 0);
-									this.statusMe = 4;
-									this.currentMovePoint = null;
-									GameScr.instance.clickMoving = false;
-									this.checkPerformEndMovePointAction();
-								}
-							}
-						}
-					}
-				}
-				this.searchFocus();
-			}
-			else
-			{
-				this.checkHideCharName();
-				if (this.statusMe == 1 || this.statusMe == 6)
-				{
-					bool flag4 = false;
-					if (this.currentMovePoint != null)
-					{
-						if (global::Char.abs(this.currentMovePoint.xEnd - this.cx) < 17 && global::Char.abs(this.currentMovePoint.yEnd - this.cy) < 25)
-						{
-							this.cx = this.currentMovePoint.xEnd;
-							this.cy = this.currentMovePoint.yEnd;
-							this.currentMovePoint = null;
-							if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2)
-							{
-								this.statusMe = 1;
-								this.cp3 = 0;
-								GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-								GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-							}
-							else
-							{
-								this.statusMe = 4;
-								this.cvy = 0;
-								this.cp1 = 0;
-							}
-							flag4 = true;
-						}
-						else if ((this.statusBeforeNothing == 10 || this.cf == 8) && this.vMovePoints.size() > 0)
-						{
-							flag4 = true;
-						}
-						else if (this.cy == this.currentMovePoint.yEnd)
-						{
-							if (this.cx != this.currentMovePoint.xEnd)
-							{
-								this.cx = (this.cx + this.currentMovePoint.xEnd) / 2;
-								this.cf = GameCanvas.gameTick % 5 + 2;
-							}
-						}
-						else if (this.cy < this.currentMovePoint.yEnd)
-						{
-							this.cf = 12;
-							this.cx = (this.cx + this.currentMovePoint.xEnd) / 2;
-							if (this.cvy < 0)
-							{
-								this.cvy = 0;
-							}
-							this.cy += this.cvy;
-							if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2)
-							{
-								GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-								GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-							}
-							this.cvy++;
-							if (this.cvy > 16)
-							{
-								this.cy = (this.cy + this.currentMovePoint.yEnd) / 2;
-							}
-						}
-						else
-						{
-							this.cf = 7;
-							this.cx = (this.cx + this.currentMovePoint.xEnd) / 2;
-							this.cy = (this.cy + this.currentMovePoint.yEnd) / 2;
-						}
-					}
-					else
-					{
-						flag4 = true;
-					}
-					if (flag4 && this.vMovePoints.size() > 0)
-					{
-						this.currentMovePoint = (MovePoint)this.vMovePoints.firstElement();
-						this.vMovePoints.removeElementAt(0);
-						if (this.currentMovePoint.status == 2)
-						{
-							if ((TileMap.tileTypeAtPixel(this.cx, this.cy + 12) & 2) != 2)
-							{
-								this.statusMe = 10;
-								this.cp1 = 0;
-								this.cp2 = 0;
-								this.cvx = -(this.cx - this.currentMovePoint.xEnd) / 10;
-								this.cvy = -(this.cy - this.currentMovePoint.yEnd) / 10;
-								if (this.cx - this.currentMovePoint.xEnd > 0)
-								{
-									this.cdir = -1;
-								}
-								else if (this.cx - this.currentMovePoint.xEnd < 0)
-								{
-									this.cdir = 1;
-								}
-							}
-							else
-							{
-								this.statusMe = 2;
-								if (this.cx - this.currentMovePoint.xEnd > 0)
-								{
-									this.cdir = -1;
-								}
-								else if (this.cx - this.currentMovePoint.xEnd < 0)
-								{
-									this.cdir = 1;
-								}
-								this.cvx = this.cspeed * this.cdir;
-								this.cvy = 0;
-							}
-						}
-						else if (this.currentMovePoint.status == 3)
-						{
-							if ((TileMap.tileTypeAtPixel(this.cx, this.cy + 23) & 2) != 2)
-							{
-								this.statusMe = 10;
-								this.cp1 = 0;
-								this.cp2 = 0;
-								this.cvx = -(this.cx - this.currentMovePoint.xEnd) / 10;
-								this.cvy = -(this.cy - this.currentMovePoint.yEnd) / 10;
-								if (this.cx - this.currentMovePoint.xEnd > 0)
-								{
-									this.cdir = -1;
-								}
-								else if (this.cx - this.currentMovePoint.xEnd < 0)
-								{
-									this.cdir = 1;
-								}
-							}
-							else
-							{
-								this.statusMe = 3;
-								GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-								GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-								if (this.cx - this.currentMovePoint.xEnd > 0)
-								{
-									this.cdir = -1;
-								}
-								else if (this.cx - this.currentMovePoint.xEnd < 0)
-								{
-									this.cdir = 1;
-								}
-								this.cvx = global::Char.abs(this.cx - this.currentMovePoint.xEnd) / 10 * this.cdir;
-								this.cvy = -10;
-							}
-						}
-						else if (this.currentMovePoint.status == 4)
-						{
-							this.statusMe = 4;
-							if (this.cx - this.currentMovePoint.xEnd > 0)
-							{
-								this.cdir = -1;
-							}
-							else if (this.cx - this.currentMovePoint.xEnd < 0)
-							{
-								this.cdir = 1;
-							}
-							this.cvx = global::Char.abs(this.cx - this.currentMovePoint.xEnd) / 9 * this.cdir;
-							this.cvy = 0;
-						}
-						else
-						{
-							this.cx = this.currentMovePoint.xEnd;
-							this.cy = this.currentMovePoint.yEnd;
-							this.currentMovePoint = null;
 						}
 					}
 				}
 			}
-			switch (this.statusMe)
-			{
-			case 1:
-				this.updateCharStand();
-				break;
-			case 2:
-				this.updateCharRun();
-				break;
-			case 3:
-				this.updateCharJump();
-				break;
-			case 4:
-				this.updateCharFall();
-				break;
-			case 5:
-				this.updateCharDeadFly();
-				break;
-			case 6:
-				if ((int)this.isInjure <= 0)
-				{
-					this.cf = 0;
-				}
-				else if (this.statusBeforeNothing == 10)
-				{
-					this.cx += this.cvx;
-				}
-				else if (this.cf <= 1)
-				{
-					this.cp1++;
-					if (this.cp1 > 6)
-					{
-						this.cf = 0;
-					}
-					else
-					{
-						this.cf = 1;
-					}
-					if (this.cp1 > 10)
-					{
-						this.cp1 = 0;
-					}
-				}
-				if (this.cf != 7 && this.cf != 12 && (TileMap.tileTypeAtPixel(this.cx, this.cy + 1) & 2) != 2)
-				{
-					this.cvx = 0;
-					this.cvy = 0;
-					this.statusMe = 4;
-					this.cf = 7;
-				}
-				if (!this.me)
-				{
-					this.cp3++;
-					if (this.cp3 > 10)
-					{
-						if ((TileMap.tileTypeAtPixel(this.cx, this.cy + 1) & 2) != 2)
-						{
-							this.cy += 5;
-						}
-						else
-						{
-							this.cf = 0;
-						}
-					}
-					if (this.cp3 > 50)
-					{
-						this.cp3 = 0;
-						this.currentMovePoint = null;
-					}
-				}
-				break;
-			case 9:
-				this.updateCharAutoJump();
-				break;
-			case 10:
-				this.updateCharFly();
-				break;
-			case 12:
-				this.updateSkillStand();
-				break;
-			case 13:
-				this.updateSkillFall();
-				break;
-			case 14:
-				this.cp1++;
-				if (this.cp1 > 30)
-				{
-					this.cp1 = 0;
-				}
-				if (this.cp1 % 15 < 5)
-				{
-					this.cf = 0;
-				}
-				else
-				{
-					this.cf = 1;
-				}
-				break;
-			case 16:
-				this.updateResetPoint();
-				break;
-			}
-			if ((int)this.isInjure > 0)
-			{
-				this.cf = 23;
-				this.isInjure = (sbyte)((int)this.isInjure - 1);
-			}
-			if (this.wdx != 0 || this.wdy != 0)
-			{
-				this.startDie(this.wdx, this.wdy);
-				this.wdx = 0;
-				this.wdy = 0;
-			}
-			if (this.moveFast != null)
-			{
-				if (this.moveFast[0] == 0)
-				{
-					short[] array2 = this.moveFast;
-					int num6 = 0;
-					array2[num6] += 1;
-					ServerEffect.addServerEffect(60, this, 1);
-				}
-				else if (this.moveFast[0] < 10)
-				{
-					short[] array3 = this.moveFast;
-					int num7 = 0;
-					array3[num7] += 1;
-				}
-				else
-				{
-					this.cx = (int)this.moveFast[1];
-					this.cy = (int)this.moveFast[2];
-					this.moveFast = null;
-					ServerEffect.addServerEffect(60, this, 1);
-					if (this.me)
-					{
-						if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2)
-						{
-							this.statusMe = 4;
-							global::Char.myCharz().setAutoSkillPaint(GameScr.sks[38], 1);
-						}
-						else
-						{
-							Service.gI().charMove();
-							global::Char.myCharz().setAutoSkillPaint(GameScr.sks[38], 0);
-						}
-					}
-				}
-			}
-			if (this.statusMe != 10)
-			{
-				this.fy = 0;
-			}
-			if (this.isCharge)
-			{
-				this.cf = 17;
-				if (GameCanvas.gameTick % 4 == 0)
-				{
-					ServerEffect.addServerEffect(1, this.cx, this.cy + GameCanvas.transY, 1);
-				}
-				if (this.me)
-				{
-					long num8 = mSystem.currentTimeMillis();
-					if (num8 - this.last >= 1000L)
-					{
-						Res.outz("%= " + this.myskill.damage);
-						this.last = num8;
-						this.cHP += this.cHPFull * (int)this.myskill.damage / 100;
-						this.cMP += this.cMPFull * (int)this.myskill.damage / 100;
-						if (this.cHP < this.cHPFull)
-						{
-							GameScr.startFlyText(string.Concat(new object[]
-							{
-								"+",
-								this.cHPFull * (int)this.myskill.damage / 100,
-								" ",
-								mResources.HP
-							}), this.cx, this.cy - this.ch - 20, 0, -1, mFont.HP);
-						}
-						if (this.cMP < this.cMPFull)
-						{
-							GameScr.startFlyText(string.Concat(new object[]
-							{
-								"+",
-								this.cMPFull * (int)this.myskill.damage / 100,
-								" ",
-								mResources.KI
-							}), this.cx, this.cy - this.ch - 20, 0, -2, mFont.MP);
-						}
-						Service.gI().skill_not_focus(2);
-					}
-				}
-			}
-			if (this.isFlyUp)
-			{
-				if (this.me)
-				{
-					global::Char.isLockKey = true;
-					this.statusMe = 3;
-					this.cvy = -8;
-					if (this.cy <= TileMap.pxh - 240)
-					{
-						this.isFlyUp = false;
-						global::Char.isLockKey = false;
-						this.statusMe = 4;
-					}
-				}
-				else
-				{
-					this.statusMe = 3;
-					this.cvy = -8;
-					if (this.cy <= TileMap.pxh - 240)
-					{
-						this.cvy = 0;
-						this.isFlyUp = false;
-						this.cvy = 0;
-						this.statusMe = 1;
-					}
-				}
-			}
-			this.updateMount();
-			this.updEffChar();
-			this.updateEye();
-			this.updateFHead();
-			return;
 		}
 	}
 
-	// Token: 0x06000622 RID: 1570 RVA: 0x00022648 File Offset: 0x00020A48
+	// Token: 0x060000AD RID: 173 RVA: 0x0000BE38 File Offset: 0x0000A038
 	private void updateEffect()
 	{
-		if (this.effPaints != null)
+		bool flag = this.effPaints != null;
+		if (flag)
 		{
 			for (int i = 0; i < this.effPaints.Length; i++)
 			{
-				if (this.effPaints[i] != null)
+				bool flag2 = this.effPaints[i] != null;
+				if (flag2)
 				{
-					if (this.effPaints[i].eMob != null)
+					bool flag3 = this.effPaints[i].eMob != null;
+					if (flag3)
 					{
-						if (!this.effPaints[i].isFly)
+						bool flag4 = !this.effPaints[i].isFly;
+						if (flag4)
 						{
 							this.effPaints[i].eMob.setInjure();
 							this.effPaints[i].eMob.injureBy = this;
-							if (this.me)
+							bool flag5 = this.me;
+							if (flag5)
 							{
 								this.effPaints[i].eMob.hpInjure = global::Char.myCharz().cDamFull / 2 - global::Char.myCharz().cDamFull * NinjaUtil.randomNumber(11) / 100;
 							}
 							int num = this.effPaints[i].eMob.h >> 1;
-							if (this.effPaints[i].eMob.isBigBoss())
+							bool flag6 = this.effPaints[i].eMob.isBigBoss();
+							if (flag6)
 							{
 								num = this.effPaints[i].eMob.getY() + 20;
 							}
@@ -1733,36 +2123,46 @@ public class Char : IMapObject
 							this.effPaints[i].isFly = true;
 						}
 					}
-					else if (this.effPaints[i].eChar != null && !this.effPaints[i].isFly)
+					else
 					{
-						if (this.effPaints[i].eChar.charID >= 0)
+						bool flag7 = this.effPaints[i].eChar != null && !this.effPaints[i].isFly;
+						if (flag7)
 						{
-							this.effPaints[i].eChar.doInjure();
+							bool flag8 = this.effPaints[i].eChar.charID >= 0;
+							if (flag8)
+							{
+								this.effPaints[i].eChar.doInjure();
+							}
+							GameScr.startSplash(this.effPaints[i].eChar.cx, this.effPaints[i].eChar.cy - (this.effPaints[i].eChar.ch >> 1), this.cdir);
+							this.effPaints[i].isFly = true;
 						}
-						GameScr.startSplash(this.effPaints[i].eChar.cx, this.effPaints[i].eChar.cy - (this.effPaints[i].eChar.ch >> 1), this.cdir);
-						this.effPaints[i].isFly = true;
 					}
 					this.effPaints[i].index++;
-					if (this.effPaints[i].index >= this.effPaints[i].effCharPaint.arrEfInfo.Length)
+					bool flag9 = this.effPaints[i].index >= this.effPaints[i].effCharPaint.arrEfInfo.Length;
+					if (flag9)
 					{
 						this.effPaints[i] = null;
 					}
 				}
 			}
 		}
-		if (this.indexEff >= 0 && this.eff != null && GameCanvas.gameTick % 2 == 0)
+		bool flag10 = this.indexEff >= 0 && this.eff != null && GameCanvas.gameTick % 2 == 0;
+		if (flag10)
 		{
 			this.indexEff++;
-			if (this.indexEff >= this.eff.arrEfInfo.Length)
+			bool flag11 = this.indexEff >= this.eff.arrEfInfo.Length;
+			if (flag11)
 			{
 				this.indexEff = -1;
 				this.eff = null;
 			}
 		}
-		if (this.indexEffTask >= 0 && this.effTask != null && GameCanvas.gameTick % 2 == 0)
+		bool flag12 = this.indexEffTask >= 0 && this.effTask != null && GameCanvas.gameTick % 2 == 0;
+		if (flag12)
 		{
 			this.indexEffTask++;
-			if (this.indexEffTask >= this.effTask.arrEfInfo.Length)
+			bool flag13 = this.indexEffTask >= this.effTask.arrEfInfo.Length;
+			if (flag13)
 			{
 				this.indexEffTask = -1;
 				this.effTask = null;
@@ -1770,10 +2170,11 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000623 RID: 1571 RVA: 0x00022928 File Offset: 0x00020D28
+	// Token: 0x060000AE RID: 174 RVA: 0x0000C17C File Offset: 0x0000A37C
 	private void checkPerformEndMovePointAction()
 	{
-		if (this.endMovePointCommand != null)
+		bool flag = this.endMovePointCommand != null;
+		if (flag)
 		{
 			Command command = this.endMovePointCommand;
 			this.endMovePointCommand = null;
@@ -1781,10 +2182,11 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000624 RID: 1572 RVA: 0x00022954 File Offset: 0x00020D54
+	// Token: 0x060000AF RID: 175 RVA: 0x0000C1B0 File Offset: 0x0000A3B0
 	private void checkHideCharName()
 	{
-		if (GameCanvas.gameTick % 20 == 0 && this.charID >= 0)
+		bool flag = GameCanvas.gameTick % 20 == 0 && this.charID >= 0;
+		if (flag)
 		{
 			this.paintName = true;
 			for (int i = 0; i < GameScr.vCharInMap.size(); i++)
@@ -1797,9 +2199,11 @@ public class Char : IMapObject
 				catch (Exception ex)
 				{
 				}
-				if (@char != null && !@char.Equals(this))
+				bool flag2 = @char != null && !@char.Equals(this);
+				if (flag2)
 				{
-					if ((@char.cy == this.cy && Res.abs(@char.cx - this.cx) < 35) || (this.cy - @char.cy < 32 && this.cy - @char.cy > 0 && Res.abs(@char.cx - this.cx) < 24))
+					bool flag3 = (@char.cy == this.cy && Res.abs(@char.cx - this.cx) < 35) || (this.cy - @char.cy < 32 && this.cy - @char.cy > 0 && Res.abs(@char.cx - this.cx) < 24);
+					if (flag3)
 					{
 						this.paintName = false;
 					}
@@ -1815,9 +2219,11 @@ public class Char : IMapObject
 				catch (Exception ex2)
 				{
 				}
-				if (npc != null)
+				bool flag4 = npc != null;
+				if (flag4)
 				{
-					if (npc.cy == this.cy && Res.abs(npc.cx - this.cx) < 24)
+					bool flag5 = npc.cy == this.cy && Res.abs(npc.cx - this.cx) < 24;
+					if (flag5)
 					{
 						this.paintName = false;
 					}
@@ -1826,14 +2232,16 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000625 RID: 1573 RVA: 0x00022ADC File Offset: 0x00020EDC
+	// Token: 0x060000B0 RID: 176 RVA: 0x0000C354 File Offset: 0x0000A554
 	private void updateMobMe()
 	{
-		if (this.tMobMeBorn != 0)
+		bool flag = this.tMobMeBorn != 0;
+		if (flag)
 		{
 			this.tMobMeBorn--;
 		}
-		if (this.tMobMeBorn == 0)
+		bool flag2 = this.tMobMeBorn == 0;
+		if (flag2)
 		{
 			this.mobMe.xFirst = ((this.cdir != 1) ? (this.cx + 30) : (this.cx - 30));
 			this.mobMe.yFirst = this.cy - 60;
@@ -1845,243 +2253,297 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000626 RID: 1574 RVA: 0x00022BBC File Offset: 0x00020FBC
+	// Token: 0x060000B1 RID: 177 RVA: 0x0000C438 File Offset: 0x0000A638
 	private void updateSkillPaint()
 	{
-		if (this.statusMe == 14 || this.statusMe == 5)
+		bool flag = this.statusMe == 14 || this.statusMe == 5;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.skillPaint != null && ((this.charFocus != null && this.isMeCanAttackOtherPlayer(this.charFocus) && this.charFocus.statusMe == 14) || (this.mobFocus != null && this.mobFocus.status == 0)))
-		{
-			if (!this.me)
+			bool flag2 = this.skillPaint != null && ((this.charFocus != null && this.isMeCanAttackOtherPlayer(this.charFocus) && this.charFocus.statusMe == 14) || (this.mobFocus != null && this.mobFocus.status == 0));
+			if (flag2)
 			{
-				if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2)
+				bool flag3 = !this.me;
+				if (flag3)
 				{
-					this.statusMe = 1;
-				}
-				else
-				{
-					this.statusMe = 6;
-				}
-				this.cp3 = 0;
-			}
-			this.indexSkill = 0;
-			this.skillPaint = null;
-			this.skillPaintRandomPaint = null;
-			this.eff0 = (this.eff1 = (this.eff2 = null));
-			this.i0 = (this.i1 = (this.i2 = 0));
-			this.mobFocus = null;
-			this.charFocus = null;
-			this.effPaints = null;
-			this.currentMovePoint = null;
-			this.arr = null;
-			if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2)
-			{
-				this.delayFall = 5;
-			}
-		}
-		if (this.skillPaint != null && this.arr == null && this.skillInfoPaint() != null && this.indexSkill >= this.skillInfoPaint().Length)
-		{
-			if (!this.me)
-			{
-				if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2)
-				{
-					this.statusMe = 1;
-				}
-				else
-				{
-					this.statusMe = 6;
-				}
-				this.cp3 = 0;
-			}
-			this.indexSkill = 0;
-			Res.outz("remove 2");
-			this.skillPaint = null;
-			this.skillPaintRandomPaint = null;
-			this.eff0 = (this.eff1 = (this.eff2 = null));
-			this.i0 = (this.i1 = (this.i2 = 0));
-			this.arr = null;
-			if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2)
-			{
-				this.delayFall = 5;
-			}
-		}
-		SkillInfoPaint[] array = this.skillInfoPaint();
-		if (array != null && this.indexSkill >= 0 && this.indexSkill <= array.Length - 1)
-		{
-			if (array[this.indexSkill].effS0Id != 0)
-			{
-				this.eff0 = GameScr.efs[array[this.indexSkill].effS0Id - 1];
-				this.i0 = (this.dx0 = (this.dy0 = 0));
-			}
-			if (array[this.indexSkill].effS1Id != 0)
-			{
-				this.eff1 = GameScr.efs[array[this.indexSkill].effS1Id - 1];
-				this.i1 = (this.dx1 = (this.dy1 = 0));
-			}
-			if (array[this.indexSkill].effS2Id != 0)
-			{
-				this.eff2 = GameScr.efs[array[this.indexSkill].effS2Id - 1];
-				this.i2 = (this.dx2 = (this.dy2 = 0));
-			}
-			SkillInfoPaint[] array2 = array;
-			int num = this.indexSkill;
-			if (array2 != null && array2[num] != null && num >= 0 && num <= array2.Length - 1 && array2[num].arrowId != 0)
-			{
-				int arrowId = array2[num].arrowId;
-				if (arrowId >= 100)
-				{
-					IMapObject mapObject2;
-					if (this.mobFocus == null)
+					bool flag4 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2;
+					if (flag4)
 					{
-						IMapObject mapObject = this.charFocus;
-						mapObject2 = mapObject;
+						this.statusMe = 1;
 					}
 					else
 					{
-						mapObject2 = this.mobFocus;
+						this.statusMe = 6;
 					}
-					IMapObject mapObject3 = mapObject2;
-					if (mapObject3 != null)
+					this.cp3 = 0;
+				}
+				this.indexSkill = 0;
+				this.skillPaint = null;
+				this.skillPaintRandomPaint = null;
+				this.eff0 = (this.eff1 = (this.eff2 = null));
+				this.i0 = (this.i1 = (this.i2 = 0));
+				this.mobFocus = null;
+				this.charFocus = null;
+				this.effPaints = null;
+				this.currentMovePoint = null;
+				this.arr = null;
+				bool flag5 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2;
+				if (flag5)
+				{
+					this.delayFall = 5;
+				}
+			}
+			bool flag6 = this.skillPaint != null && this.arr == null && this.skillInfoPaint() != null && this.indexSkill >= this.skillInfoPaint().Length;
+			if (flag6)
+			{
+				bool flag7 = !this.me;
+				if (flag7)
+				{
+					bool flag8 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2;
+					if (flag8)
 					{
-						int num2 = Res.abs(mapObject3.getX() - this.cx);
-						int num3 = Res.abs(mapObject3.getY() - this.cy);
-						int num4;
-						if (num2 > 4 * num3)
+						this.statusMe = 1;
+					}
+					else
+					{
+						this.statusMe = 6;
+					}
+					this.cp3 = 0;
+				}
+				this.indexSkill = 0;
+				Res.outz("remove 2");
+				this.skillPaint = null;
+				this.skillPaintRandomPaint = null;
+				this.eff0 = (this.eff1 = (this.eff2 = null));
+				this.i0 = (this.i1 = (this.i2 = 0));
+				this.arr = null;
+				bool flag9 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2;
+				if (flag9)
+				{
+					this.delayFall = 5;
+				}
+			}
+			SkillInfoPaint[] array = this.skillInfoPaint();
+			bool flag10 = array != null && this.indexSkill >= 0 && this.indexSkill <= array.Length - 1;
+			if (flag10)
+			{
+				bool flag11 = array[this.indexSkill].effS0Id != 0;
+				if (flag11)
+				{
+					this.eff0 = GameScr.efs[array[this.indexSkill].effS0Id - 1];
+					this.i0 = (this.dx0 = (this.dy0 = 0));
+				}
+				bool flag12 = array[this.indexSkill].effS1Id != 0;
+				if (flag12)
+				{
+					this.eff1 = GameScr.efs[array[this.indexSkill].effS1Id - 1];
+					this.i1 = (this.dx1 = (this.dy1 = 0));
+				}
+				bool flag13 = array[this.indexSkill].effS2Id != 0;
+				if (flag13)
+				{
+					this.eff2 = GameScr.efs[array[this.indexSkill].effS2Id - 1];
+					this.i2 = (this.dx2 = (this.dy2 = 0));
+				}
+				SkillInfoPaint[] array2 = array;
+				int num = this.indexSkill;
+				bool flag14 = array2 != null && array2[num] != null && num >= 0 && num <= array2.Length - 1 && array2[num].arrowId != 0;
+				if (flag14)
+				{
+					int arrowId = array2[num].arrowId;
+					bool flag15 = arrowId >= 100;
+					if (flag15)
+					{
+						bool flag16 = this.mobFocus == null;
+						IMapObject mapObject2;
+						if (flag16)
 						{
-							num4 = 0;
+							IMapObject mapObject = this.charFocus;
+							mapObject2 = mapObject;
 						}
 						else
 						{
-							if (mapObject3.getY() < this.cy)
+							mapObject2 = this.mobFocus;
+						}
+						IMapObject mapObject3 = mapObject2;
+						bool flag17 = mapObject3 != null;
+						if (flag17)
+						{
+							int num2 = Res.abs(mapObject3.getX() - this.cx);
+							int num3 = Res.abs(mapObject3.getY() - this.cy);
+							bool flag18 = num2 > 4 * num3;
+							int num4;
+							if (flag18)
 							{
-								num4 = -3;
+								num4 = 0;
 							}
 							else
 							{
-								num4 = 3;
-							}
-							if (mapObject3 is BigBoss)
-							{
-								BigBoss bigBoss = (BigBoss)mapObject3;
-								if (bigBoss.haftBody)
+								bool flag19 = mapObject3.getY() < this.cy;
+								if (flag19)
 								{
-									num4 = -20;
+									num4 = -3;
+								}
+								else
+								{
+									num4 = 3;
+								}
+								bool flag20 = mapObject3 is BigBoss;
+								if (flag20)
+								{
+									BigBoss bigBoss = (BigBoss)mapObject3;
+									bool haftBody = bigBoss.haftBody;
+									if (haftBody)
+									{
+										num4 = -20;
+									}
+								}
+							}
+							this.dart = new PlayerDart(this, arrowId - 100, this.skillPaintRandomPaint, this.cx + (array2[num].adx - 10) * this.cdir, this.cy + array2[num].ady + num4);
+							bool flag21 = this.myskill != null;
+							if (flag21)
+							{
+								bool flag22 = this.myskill.template.id == 1;
+								if (flag22)
+								{
+									SoundMn.gI().traidatKame();
+								}
+								else
+								{
+									bool flag23 = this.myskill.template.id == 3;
+									if (flag23)
+									{
+										SoundMn.gI().namekKame();
+									}
+									else
+									{
+										bool flag24 = this.myskill.template.id == 5;
+										if (flag24)
+										{
+											SoundMn.gI().xaydaKame();
+										}
+										else
+										{
+											bool flag25 = this.myskill.template.id == 11;
+											if (flag25)
+											{
+												SoundMn.gI().nameLazer();
+											}
+										}
+									}
 								}
 							}
 						}
-						this.dart = new PlayerDart(this, arrowId - 100, this.skillPaintRandomPaint, this.cx + (array2[num].adx - 10) * this.cdir, this.cy + array2[num].ady + num4);
-						if (this.myskill != null)
-						{
-							if ((int)this.myskill.template.id == 1)
-							{
-								SoundMn.gI().traidatKame();
-							}
-							else if ((int)this.myskill.template.id == 3)
-							{
-								SoundMn.gI().namekKame();
-							}
-							else if ((int)this.myskill.template.id == 5)
-							{
-								SoundMn.gI().xaydaKame();
-							}
-							else if ((int)this.myskill.template.id == 11)
-							{
-								SoundMn.gI().nameLazer();
-							}
-						}
-					}
-					else if (this.isFlyAndCharge || this.isUseSkillAfterCharge)
-					{
-						this.stopUseChargeSkill();
-					}
-				}
-				else
-				{
-					Res.outz("g");
-					this.arr = new Arrow(this, GameScr.arrs[arrowId - 1]);
-					this.arr.life = 10;
-					this.arr.ax = this.cx + array2[num].adx;
-					this.arr.ay = this.cy + array2[num].ady;
-				}
-			}
-			if ((this.mobFocus != null || (!this.me && this.charFocus != null) || (this.me && this.charFocus != null && (this.isMeCanAttackOtherPlayer(this.charFocus) || this.isSelectingSkillBuffToPlayer()) && this.arr == null && this.dart == null)) && this.indexSkill == array.Length - 1)
-			{
-				this.setAttack();
-				if (this.me && this.myskill.template.isAttackSkill())
-				{
-					this.saveLoadPreviousSkill();
-				}
-			}
-			if (!this.me)
-			{
-				IMapObject mapObject4 = null;
-				if (this.mobFocus != null)
-				{
-					mapObject4 = this.mobFocus;
-				}
-				else if (this.charFocus != null)
-				{
-					mapObject4 = this.charFocus;
-				}
-				if (mapObject4 != null)
-				{
-					if (Res.abs(mapObject4.getX() - this.cx) < 10)
-					{
-						if (mapObject4.getX() > this.cx)
-						{
-							this.cx -= 10;
-						}
 						else
 						{
-							this.cx += 10;
+							bool flag26 = this.isFlyAndCharge || this.isUseSkillAfterCharge;
+							if (flag26)
+							{
+								this.stopUseChargeSkill();
+							}
 						}
-					}
-					if (mapObject4.getX() > this.cx)
-					{
-						this.cdir = 1;
 					}
 					else
 					{
-						this.cdir = -1;
+						Res.outz("g");
+						this.arr = new Arrow(this, GameScr.arrs[arrowId - 1]);
+						this.arr.life = 10;
+						this.arr.ax = this.cx + array2[num].adx;
+						this.arr.ay = this.cy + array2[num].ady;
+					}
+				}
+				bool flag27 = (this.mobFocus != null || (!this.me && this.charFocus != null) || (this.me && this.charFocus != null && (this.isMeCanAttackOtherPlayer(this.charFocus) || this.isSelectingSkillBuffToPlayer()) && this.arr == null && this.dart == null)) && this.indexSkill == array.Length - 1;
+				if (flag27)
+				{
+					this.setAttack();
+					bool flag28 = this.me && this.myskill.template.isAttackSkill();
+					if (flag28)
+					{
+						this.saveLoadPreviousSkill();
+					}
+				}
+				bool flag29 = !this.me;
+				if (flag29)
+				{
+					IMapObject mapObject4 = null;
+					bool flag30 = this.mobFocus != null;
+					if (flag30)
+					{
+						mapObject4 = this.mobFocus;
+					}
+					else
+					{
+						bool flag31 = this.charFocus != null;
+						if (flag31)
+						{
+							mapObject4 = this.charFocus;
+						}
+					}
+					bool flag32 = mapObject4 != null;
+					if (flag32)
+					{
+						bool flag33 = Res.abs(mapObject4.getX() - this.cx) < 10;
+						if (flag33)
+						{
+							bool flag34 = mapObject4.getX() > this.cx;
+							if (flag34)
+							{
+								this.cx -= 10;
+							}
+							else
+							{
+								this.cx += 10;
+							}
+						}
+						bool flag35 = mapObject4.getX() > this.cx;
+						if (flag35)
+						{
+							this.cdir = 1;
+						}
+						else
+						{
+							this.cdir = -1;
+						}
 					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000627 RID: 1575 RVA: 0x000232A4 File Offset: 0x000216A4
+	// Token: 0x060000B2 RID: 178 RVA: 0x00003136 File Offset: 0x00001336
 	public void saveLoadPreviousSkill()
 	{
 	}
 
-	// Token: 0x06000628 RID: 1576 RVA: 0x000232A8 File Offset: 0x000216A8
+	// Token: 0x060000B3 RID: 179 RVA: 0x0000CBEC File Offset: 0x0000ADEC
 	public void setResetPoint(int x, int y)
 	{
 		InfoDlg.hide();
 		this.currentMovePoint = null;
 		int num = this.cx - x;
-		if (this.cy - y == 0)
+		bool flag = this.cy - y == 0;
+		if (flag)
 		{
 			this.cx = x;
 			global::Char.ischangingMap = false;
 			global::Char.isLockKey = false;
-			return;
 		}
-		this.statusMe = 16;
-		this.cp2 = x;
-		this.cp3 = y;
-		this.cp1 = 0;
-		global::Char.myCharz().cxSend = x;
-		global::Char.myCharz().cySend = y;
+		else
+		{
+			this.statusMe = 16;
+			this.cp2 = x;
+			this.cp3 = y;
+			this.cp1 = 0;
+			global::Char.myCharz().cxSend = x;
+			global::Char.myCharz().cySend = y;
+		}
 	}
 
-	// Token: 0x06000629 RID: 1577 RVA: 0x00023320 File Offset: 0x00021720
+	// Token: 0x060000B4 RID: 180 RVA: 0x0000CC68 File Offset: 0x0000AE68
 	private void updateCharDeadFly()
 	{
 		this.isFreez = false;
-		if (this.isCharge)
+		bool flag = this.isCharge;
+		if (flag)
 		{
 			this.isCharge = false;
 			SoundMn.gI().taitaoPause();
@@ -2089,7 +2551,8 @@ public class Char : IMapObject
 		}
 		this.cp1++;
 		this.cx += (this.cp2 - this.cx) / 4;
-		if (this.cp1 > 7)
+		bool flag2 = this.cp1 > 7;
+		if (flag2)
 		{
 			this.cy += (this.cp3 - this.cy) / 4;
 		}
@@ -2097,12 +2560,14 @@ public class Char : IMapObject
 		{
 			this.cy += this.cp1 - 10;
 		}
-		if (Res.abs(this.cp2 - this.cx) < 4 && Res.abs(this.cp3 - this.cy) < 10)
+		bool flag3 = Res.abs(this.cp2 - this.cx) < 4 && Res.abs(this.cp3 - this.cy) < 10;
+		if (flag3)
 		{
 			this.cx = this.cp2;
 			this.cy = this.cp3;
 			this.statusMe = 14;
-			if (this.me)
+			bool flag4 = this.me;
+			if (flag4)
 			{
 				GameScr.gI().resetButton();
 				Service.gI().charMove();
@@ -2111,7 +2576,7 @@ public class Char : IMapObject
 		this.cf = 23;
 	}
 
-	// Token: 0x0600062A RID: 1578 RVA: 0x00023440 File Offset: 0x00021840
+	// Token: 0x060000B5 RID: 181 RVA: 0x0000CD94 File Offset: 0x0000AF94
 	private void updateResetPoint()
 	{
 		InfoDlg.hide();
@@ -2119,7 +2584,8 @@ public class Char : IMapObject
 		this.currentMovePoint = null;
 		this.cp1++;
 		this.cx += (this.cp2 - this.cx) / 4;
-		if (this.cp1 > 7)
+		bool flag = this.cp1 > 7;
+		if (flag)
 		{
 			this.cy += (this.cp3 - this.cy) / 4;
 		}
@@ -2127,7 +2593,8 @@ public class Char : IMapObject
 		{
 			this.cy += this.cp1 - 10;
 		}
-		if (Res.abs(this.cp2 - this.cx) < 4 && Res.abs(this.cp3 - this.cy) < 10)
+		bool flag2 = Res.abs(this.cp2 - this.cx) < 4 && Res.abs(this.cp3 - this.cy) < 10;
+		if (flag2)
 		{
 			this.cx = this.cp2;
 			this.cy = this.cp3;
@@ -2139,30 +2606,38 @@ public class Char : IMapObject
 		this.cf = 23;
 	}
 
-	// Token: 0x0600062B RID: 1579 RVA: 0x0002353A File Offset: 0x0002193A
+	// Token: 0x060000B6 RID: 182 RVA: 0x00003136 File Offset: 0x00001336
 	public void updateSkillFall()
 	{
 	}
 
-	// Token: 0x0600062C RID: 1580 RVA: 0x0002353C File Offset: 0x0002193C
+	// Token: 0x060000B7 RID: 183 RVA: 0x0000CE98 File Offset: 0x0000B098
 	public void updateSkillStand()
 	{
 		this.ty = 0;
 		this.cp1++;
-		if (this.cdir == 1)
+		bool flag = this.cdir == 1;
+		if (flag)
 		{
-			if ((TileMap.tileTypeAtPixel(this.cx + this.chw, this.cy - this.chh) & 4) == 4)
+			bool flag2 = (TileMap.tileTypeAtPixel(this.cx + this.chw, this.cy - this.chh) & 4) == 4;
+			if (flag2)
 			{
 				this.cvx = 0;
 			}
 		}
-		else if ((TileMap.tileTypeAtPixel(this.cx - this.chw, this.cy - this.chh) & 8) == 8)
+		else
 		{
-			this.cvx = 0;
+			bool flag3 = (TileMap.tileTypeAtPixel(this.cx - this.chw, this.cy - this.chh) & 8) == 8;
+			if (flag3)
+			{
+				this.cvx = 0;
+			}
 		}
-		if (this.cy > this.ch && TileMap.tileTypeAt(this.cx, this.cy - this.ch + 24, 8192))
+		bool flag4 = this.cy > this.ch && TileMap.tileTypeAt(this.cx, this.cy - this.ch + 24, 8192);
+		if (flag4)
 		{
-			if (!TileMap.tileTypeAt(this.cx, this.cy, 2))
+			bool flag5 = !TileMap.tileTypeAt(this.cx, this.cy, 2);
+			if (flag5)
 			{
 				this.statusMe = 4;
 				this.cp1 = 0;
@@ -2176,58 +2651,75 @@ public class Char : IMapObject
 		}
 		this.cx += this.cvx;
 		this.cy += this.cvy;
-		if (this.cy < 0)
+		bool flag6 = this.cy < 0;
+		if (flag6)
 		{
 			this.cy = (this.cvy = 0);
 		}
-		if (this.cvy == 0)
+		bool flag7 = this.cvy == 0;
+		if (flag7)
 		{
-			if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2)
+			bool flag8 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2;
+			if (flag8)
 			{
 				this.statusMe = 4;
 				this.cvx = (this.cspeed >> 1) * this.cdir;
 				this.cp1 = (this.cp2 = 0);
 			}
 		}
-		else if (this.cvy < 0)
-		{
-			this.cvy++;
-			if (this.cvy == 0)
-			{
-				this.cvy = 1;
-			}
-		}
 		else
 		{
-			if (this.cvy < 20 && this.cp1 % 5 == 0)
+			bool flag9 = this.cvy < 0;
+			if (flag9)
 			{
 				this.cvy++;
+				bool flag10 = this.cvy == 0;
+				if (flag10)
+				{
+					this.cvy = 1;
+				}
 			}
-			if (this.cvy > 3)
+			else
 			{
-				this.cvy = 3;
-			}
-			if ((TileMap.tileTypeAtPixel(this.cx, this.cy + 3) & 2) == 2 && this.cy <= TileMap.tileXofPixel(this.cy + 3))
-			{
-				this.cvx = (this.cvy = 0);
-				this.cy = TileMap.tileXofPixel(this.cy + 3);
+				bool flag11 = this.cvy < 20 && this.cp1 % 5 == 0;
+				if (flag11)
+				{
+					this.cvy++;
+				}
+				bool flag12 = this.cvy > 3;
+				if (flag12)
+				{
+					this.cvy = 3;
+				}
+				bool flag13 = (TileMap.tileTypeAtPixel(this.cx, this.cy + 3) & 2) == 2 && this.cy <= TileMap.tileXofPixel(this.cy + 3);
+				if (flag13)
+				{
+					this.cvx = (this.cvy = 0);
+					this.cy = TileMap.tileXofPixel(this.cy + 3);
+				}
 			}
 		}
-		if (this.cvx > 0)
+		bool flag14 = this.cvx > 0;
+		if (flag14)
 		{
 			this.cvx--;
 		}
-		else if (this.cvx < 0)
+		else
 		{
-			this.cvx++;
+			bool flag15 = this.cvx < 0;
+			if (flag15)
+			{
+				this.cvx++;
+			}
 		}
 	}
 
-	// Token: 0x0600062D RID: 1581 RVA: 0x000237DC File Offset: 0x00021BDC
+	// Token: 0x060000B8 RID: 184 RVA: 0x0000D188 File Offset: 0x0000B388
 	public void updateCharAutoJump()
 	{
 		this.isFreez = false;
-		if (this.isCharge)
+		bool flag = this.isCharge;
+		if (flag)
 		{
 			this.isCharge = false;
 			SoundMn.gI().taitaoPause();
@@ -2236,7 +2728,8 @@ public class Char : IMapObject
 		this.cx += this.cvx * this.cdir;
 		this.cy += this.cvyJump;
 		this.cvyJump++;
-		if (this.cp1 == 0)
+		bool flag2 = this.cp1 == 0;
+		if (flag2)
 		{
 			this.cf = 7;
 		}
@@ -2244,23 +2737,37 @@ public class Char : IMapObject
 		{
 			this.cf = 23;
 		}
-		if (this.cvyJump == -3)
+		bool flag3 = this.cvyJump == -3;
+		if (flag3)
 		{
 			this.cf = 8;
 		}
-		else if (this.cvyJump == -2)
+		else
 		{
-			this.cf = 9;
+			bool flag4 = this.cvyJump == -2;
+			if (flag4)
+			{
+				this.cf = 9;
+			}
+			else
+			{
+				bool flag5 = this.cvyJump == -1;
+				if (flag5)
+				{
+					this.cf = 10;
+				}
+				else
+				{
+					bool flag6 = this.cvyJump == 0;
+					if (flag6)
+					{
+						this.cf = 11;
+					}
+				}
+			}
 		}
-		else if (this.cvyJump == -1)
-		{
-			this.cf = 10;
-		}
-		else if (this.cvyJump == 0)
-		{
-			this.cf = 11;
-		}
-		if (this.cvyJump == 0)
+		bool flag7 = this.cvyJump == 0;
+		if (flag7)
 		{
 			this.statusMe = 6;
 			this.cp3 = 0;
@@ -2271,144 +2778,213 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x0600062E RID: 1582 RVA: 0x00023914 File Offset: 0x00021D14
+	// Token: 0x060000B9 RID: 185 RVA: 0x0000D2D8 File Offset: 0x0000B4D8
 	public int getVx(int size, int dx, int dy)
 	{
-		if (dy > 0 && !TileMap.tileTypeAt(this.cx, this.cy, 2))
+		bool flag = dy > 0 && !TileMap.tileTypeAt(this.cx, this.cy, 2);
+		if (flag)
 		{
-			if (dx - dy <= 10)
+			bool flag2 = dx - dy <= 10;
+			if (flag2)
 			{
 				return 5;
 			}
-			if (dx - dy <= 30)
+			bool flag3 = dx - dy <= 30;
+			if (flag3)
 			{
 				return 6;
 			}
-			if (dx - dy <= 50)
+			bool flag4 = dx - dy <= 50;
+			if (flag4)
 			{
 				return 7;
 			}
-			if (dx - dy <= 70)
+			bool flag5 = dx - dy <= 70;
+			if (flag5)
 			{
 				return 8;
 			}
 		}
-		if (dx <= 30)
+		bool flag6 = dx <= 30;
+		int result;
+		if (flag6)
 		{
-			return 4;
+			result = 4;
 		}
-		if (dx <= 160)
+		else
 		{
-			return 5;
+			bool flag7 = dx <= 160;
+			if (flag7)
+			{
+				result = 5;
+			}
+			else
+			{
+				bool flag8 = dx <= 270;
+				if (flag8)
+				{
+					result = 6;
+				}
+				else
+				{
+					bool flag9 = dx <= 320;
+					if (flag9)
+					{
+						result = 7;
+					}
+					else
+					{
+						result = 8;
+					}
+				}
+			}
 		}
-		if (dx <= 270)
-		{
-			return 6;
-		}
-		if (dx <= 320)
-		{
-			return 7;
-		}
-		return 8;
+		return result;
 	}
 
-	// Token: 0x0600062F RID: 1583 RVA: 0x000239A1 File Offset: 0x00021DA1
+	// Token: 0x060000BA RID: 186 RVA: 0x0000D3B8 File Offset: 0x0000B5B8
 	public void hide()
 	{
 		this.isHide = true;
 		EffecMn.addEff(new Effect(107, this.cx, this.cy + 25, 3, 15, 1));
 	}
 
-	// Token: 0x06000630 RID: 1584 RVA: 0x000239C9 File Offset: 0x00021DC9
+	// Token: 0x060000BB RID: 187 RVA: 0x0000D3E2 File Offset: 0x0000B5E2
 	public void show()
 	{
 		this.isHide = false;
 		EffecMn.addEff(new Effect(107, this.cx, this.cy + 25, 3, 10, 1));
 	}
 
-	// Token: 0x06000631 RID: 1585 RVA: 0x000239F1 File Offset: 0x00021DF1
+	// Token: 0x060000BC RID: 188 RVA: 0x0000D40C File Offset: 0x0000B60C
 	public int getVy(int size, int dx, int dy)
 	{
-		if (dy <= 10)
+		bool flag = dy <= 10;
+		int result;
+		if (flag)
 		{
-			return 5;
+			result = 5;
 		}
-		if (dy <= 20)
+		else
 		{
-			return 6;
+			bool flag2 = dy <= 20;
+			if (flag2)
+			{
+				result = 6;
+			}
+			else
+			{
+				bool flag3 = dy <= 30;
+				if (flag3)
+				{
+					result = 7;
+				}
+				else
+				{
+					bool flag4 = dy <= 40;
+					if (flag4)
+					{
+						result = 8;
+					}
+					else
+					{
+						bool flag5 = dy <= 50;
+						if (flag5)
+						{
+							result = 9;
+						}
+						else
+						{
+							result = 10;
+						}
+					}
+				}
+			}
 		}
-		if (dy <= 30)
-		{
-			return 7;
-		}
-		if (dy <= 40)
-		{
-			return 8;
-		}
-		if (dy <= 50)
-		{
-			return 9;
-		}
-		return 10;
+		return result;
 	}
 
-	// Token: 0x06000632 RID: 1586 RVA: 0x00023A28 File Offset: 0x00021E28
+	// Token: 0x060000BD RID: 189 RVA: 0x0000D47C File Offset: 0x0000B67C
 	public int returnAct(int xFirst, int yFirst, int xEnd, int yEnd)
 	{
 		int num = xEnd - xFirst;
 		int num2 = yEnd - yFirst;
-		if (num == 0 && num2 == 0)
+		bool flag = num == 0 && num2 == 0;
+		int result;
+		if (flag)
 		{
-			return 1;
-		}
-		if (num2 == 0 && yFirst % 24 == 0 && TileMap.tileTypeAt(xFirst, yFirst, 2))
-		{
-			return 2;
-		}
-		if (num2 > 0 && (yFirst % 24 != 0 || !TileMap.tileTypeAt(xFirst, yFirst, 2)))
-		{
-			return 4;
-		}
-		this.cvy = -10;
-		this.cp1 = 0;
-		this.cdir = ((num <= 0) ? -1 : 1);
-		if (num <= 5)
-		{
-			this.cvx = 0;
-		}
-		else if (num <= 10)
-		{
-			this.cvx = 3;
+			result = 1;
 		}
 		else
 		{
-			this.cvx = 5;
+			bool flag2 = num2 == 0 && yFirst % 24 == 0 && TileMap.tileTypeAt(xFirst, yFirst, 2);
+			if (flag2)
+			{
+				result = 2;
+			}
+			else
+			{
+				bool flag3 = num2 > 0 && (yFirst % 24 != 0 || !TileMap.tileTypeAt(xFirst, yFirst, 2));
+				if (flag3)
+				{
+					result = 4;
+				}
+				else
+				{
+					this.cvy = -10;
+					this.cp1 = 0;
+					this.cdir = ((num <= 0) ? -1 : 1);
+					bool flag4 = num <= 5;
+					if (flag4)
+					{
+						this.cvx = 0;
+					}
+					else
+					{
+						bool flag5 = num <= 10;
+						if (flag5)
+						{
+							this.cvx = 3;
+						}
+						else
+						{
+							this.cvx = 5;
+						}
+					}
+					result = 9;
+				}
+			}
 		}
-		return 9;
+		return result;
 	}
 
-	// Token: 0x06000633 RID: 1587 RVA: 0x00023ADC File Offset: 0x00021EDC
+	// Token: 0x060000BE RID: 190 RVA: 0x0000D550 File Offset: 0x0000B750
 	public void setAutoJump()
 	{
 		int num = ((MovePoint)this.vMovePoints.firstElement()).xEnd - this.cx;
 		this.cvyJump = -10;
 		this.cp1 = 0;
 		this.cdir = ((num <= 0) ? -1 : 1);
-		if (num <= 6)
+		bool flag = num <= 6;
+		if (flag)
 		{
 			this.cvx = 0;
 		}
-		else if (num <= 20)
-		{
-			this.cvx = 3;
-		}
 		else
 		{
-			this.cvx = 5;
+			bool flag2 = num <= 20;
+			if (flag2)
+			{
+				this.cvx = 3;
+			}
+			else
+			{
+				this.cvx = 5;
+			}
 		}
 	}
 
-	// Token: 0x06000634 RID: 1588 RVA: 0x00023B58 File Offset: 0x00021F58
+	// Token: 0x060000BF RID: 191 RVA: 0x0000D5D0 File Offset: 0x0000B7D0
 	public void updateCharStand()
 	{
 		this.isSoundJump = false;
@@ -2417,11 +2993,13 @@ public class Char : IMapObject
 		this.cvx = 0;
 		this.cvy = 0;
 		this.cp1++;
-		if (this.cp1 > 30)
+		bool flag = this.cp1 > 30;
+		if (flag)
 		{
 			this.cp1 = 0;
 		}
-		if (this.cp1 % 15 < 5)
+		bool flag2 = this.cp1 % 15 < 5;
+		if (flag2)
 		{
 			this.cf = 0;
 		}
@@ -2430,164 +3008,203 @@ public class Char : IMapObject
 			this.cf = 1;
 		}
 		this.updateCharInBridge();
-		if (!this.me)
+		bool flag3 = !this.me;
+		if (flag3)
 		{
 			this.cp3++;
-			if (this.cp3 > 50)
+			bool flag4 = this.cp3 > 50;
+			if (flag4)
 			{
 				this.cp3 = 0;
 				this.currentMovePoint = null;
 			}
 		}
 		this.updateSuperEff();
-		if (this.me && GameScr.vCharInMap.size() != 0 && TileMap.mapID == 50)
+		bool flag5 = this.me && GameScr.vCharInMap.size() != 0 && TileMap.mapID == 50;
+		if (flag5)
 		{
 			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(0);
-			if (!@char.changePos)
+			bool flag6 = !@char.changePos;
+			if (flag6)
 			{
-				if (@char.statusMe != 2)
+				bool flag7 = @char.statusMe != 2;
+				if (flag7)
 				{
 					@char.moveTo(this.cx - 45, this.cy, 0);
 				}
 				@char.lastUpdateTime = mSystem.currentTimeMillis();
-				if (Res.abs(this.cx - 45 - @char.cx) <= 10)
+				bool flag8 = Res.abs(this.cx - 45 - @char.cx) <= 10;
+				if (flag8)
 				{
 					@char.changePos = true;
 				}
 			}
 			else
 			{
-				if (@char.statusMe != 2)
+				bool flag9 = @char.statusMe != 2;
+				if (flag9)
 				{
 					@char.moveTo(this.cx + 45, this.cy, 0);
 				}
 				@char.lastUpdateTime = mSystem.currentTimeMillis();
-				if (Res.abs(this.cx + 45 - @char.cx) <= 10)
+				bool flag10 = Res.abs(this.cx + 45 - @char.cx) <= 10;
+				if (flag10)
 				{
 					@char.changePos = false;
 				}
 			}
-			if (GameCanvas.gameTick % 100 == 0)
+			bool flag11 = GameCanvas.gameTick % 100 == 0;
+			if (flag11)
 			{
 				@char.addInfo("Cắc cùm cum");
 			}
 		}
 	}
 
-	// Token: 0x06000635 RID: 1589 RVA: 0x00023D0C File Offset: 0x0002210C
+	// Token: 0x060000C0 RID: 192 RVA: 0x0000D7D4 File Offset: 0x0000B9D4
 	public void updateSuperEff()
 	{
-		if (GameCanvas.panel.isShow)
+		bool isShow = GameCanvas.panel.isShow;
+		if (!isShow)
 		{
-			return;
-		}
-		if (this.isCopy)
-		{
-			return;
-		}
-		if (this.isFusion)
-		{
-			return;
-		}
-		if (this.isSetPos)
-		{
-			return;
-		}
-		if (this.isPet || this.isMiniPet)
-		{
-			return;
-		}
-		if ((int)this.isMonkey == 1)
-		{
-			return;
-		}
-		if (this.me)
-		{
-			if (!global::Char.isPaintAura && this.idAuraEff > -1)
+			bool flag = this.isCopy;
+			if (!flag)
 			{
-				return;
-			}
-		}
-		else if (this.idAuraEff > -1)
-		{
-			return;
-		}
-		this.ty++;
-		if (this.clevel < 14)
-		{
-			if (this.clevel >= 9 && !GameCanvas.lowGraphic && (this.ty == 40 || this.ty == 50))
-			{
-				GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-				GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-				this.addDustEff(1);
-			}
-			if (this.ty > 50 && this.clevel >= 9)
-			{
-				if (this.cgender == 0)
+				bool flag2 = this.isFusion;
+				if (!flag2)
 				{
-					if (GameCanvas.gameTick % 25 == 0)
+					bool flag3 = this.isSetPos;
+					if (!flag3)
 					{
-						int id = 114;
-						ServerEffect.addServerEffect(id, this, 1);
-					}
-					if (this.clevel >= 13 && GameCanvas.gameTick % 4 == 0)
-					{
-						int id = 132;
-						ServerEffect.addServerEffect(id, this, 1);
-					}
-				}
-				if (this.cgender == 1)
-				{
-					if (GameCanvas.gameTick % 4 == 0)
-					{
-						int id = 132;
-						ServerEffect.addServerEffect(id, this, 1);
-					}
-					if (this.clevel >= 13 && GameCanvas.gameTick % 7 == 0)
-					{
-						int id = 131;
-						ServerEffect.addServerEffect(id, this, 1);
-					}
-				}
-				if (this.cgender == 2)
-				{
-					if (GameCanvas.gameTick % 7 == 0)
-					{
-						int id = 131;
-						ServerEffect.addServerEffect(id, this, 1);
-					}
-					if (this.clevel >= 13 && GameCanvas.gameTick % 25 == 0)
-					{
-						int id = 114;
-						ServerEffect.addServerEffect(id, this, 1);
+						bool flag4 = this.isPet || this.isMiniPet;
+						if (!flag4)
+						{
+							bool flag5 = this.isMonkey == 1;
+							if (!flag5)
+							{
+								bool flag6 = this.me;
+								if (flag6)
+								{
+									bool flag7 = !global::Char.isPaintAura && this.idAuraEff > -1;
+									if (flag7)
+									{
+										return;
+									}
+								}
+								else
+								{
+									bool flag8 = this.idAuraEff > -1;
+									if (flag8)
+									{
+										return;
+									}
+								}
+								this.ty++;
+								bool flag9 = this.clevel < 14;
+								if (flag9)
+								{
+									bool flag10 = this.clevel >= 9 && !GameCanvas.lowGraphic && (this.ty == 40 || this.ty == 50);
+									if (flag10)
+									{
+										GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+										GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+										this.addDustEff(1);
+									}
+									bool flag11 = this.ty > 50 && this.clevel >= 9;
+									if (flag11)
+									{
+										bool flag12 = this.cgender == 0;
+										if (flag12)
+										{
+											bool flag13 = GameCanvas.gameTick % 25 == 0;
+											if (flag13)
+											{
+												int id = 114;
+												ServerEffect.addServerEffect(id, this, 1);
+											}
+											bool flag14 = this.clevel >= 13 && GameCanvas.gameTick % 4 == 0;
+											if (flag14)
+											{
+												int id2 = 132;
+												ServerEffect.addServerEffect(id2, this, 1);
+											}
+										}
+										bool flag15 = this.cgender == 1;
+										if (flag15)
+										{
+											bool flag16 = GameCanvas.gameTick % 4 == 0;
+											if (flag16)
+											{
+												int id3 = 132;
+												ServerEffect.addServerEffect(id3, this, 1);
+											}
+											bool flag17 = this.clevel >= 13 && GameCanvas.gameTick % 7 == 0;
+											if (flag17)
+											{
+												int id4 = 131;
+												ServerEffect.addServerEffect(id4, this, 1);
+											}
+										}
+										bool flag18 = this.cgender == 2;
+										if (flag18)
+										{
+											bool flag19 = GameCanvas.gameTick % 7 == 0;
+											if (flag19)
+											{
+												int id5 = 131;
+												ServerEffect.addServerEffect(id5, this, 1);
+											}
+											bool flag20 = this.clevel >= 13 && GameCanvas.gameTick % 25 == 0;
+											if (flag20)
+											{
+												int id6 = 114;
+												ServerEffect.addServerEffect(id6, this, 1);
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000636 RID: 1590 RVA: 0x00023F2C File Offset: 0x0002232C
+	// Token: 0x060000C1 RID: 193 RVA: 0x0000DA7C File Offset: 0x0000BC7C
 	public float getSoundVolumn()
 	{
-		if (this.me)
+		bool flag = this.me;
+		float result;
+		if (flag)
 		{
-			return 0.1f;
+			result = 0.1f;
 		}
-		int num = Res.abs(global::Char.myChar.cx - this.cx);
-		if (num >= 0 && num <= 50)
+		else
 		{
-			return 0.1f;
+			int num = Res.abs(global::Char.myChar.cx - this.cx);
+			bool flag2 = num >= 0 && num <= 50;
+			if (flag2)
+			{
+				result = 0.1f;
+			}
+			else
+			{
+				result = 0.05f;
+			}
 		}
-		return 0.05f;
+		return result;
 	}
 
-	// Token: 0x06000637 RID: 1591 RVA: 0x00023F7C File Offset: 0x0002237C
+	// Token: 0x060000C2 RID: 194 RVA: 0x0000DADC File Offset: 0x0000BCDC
 	public void updateCharRun()
 	{
-		int num = ((int)this.isMonkey != 1 || this.me) ? 1 : 2;
-		if (this.cx >= GameScr.cmx && this.cx <= GameScr.cmx + GameCanvas.w)
+		int num = (this.isMonkey != 1 || this.me) ? 1 : 2;
+		bool flag = this.cx >= GameScr.cmx && this.cx <= GameScr.cmx + GameCanvas.w;
+		if (flag)
 		{
-			if ((int)this.isMonkey == 0)
+			bool flag2 = this.isMonkey == 0;
+			if (flag2)
 			{
 				SoundMn.gI().charRun(this.getSoundVolumn());
 			}
@@ -2598,25 +3215,29 @@ public class Char : IMapObject
 		}
 		this.ty = 0;
 		this.isFreez = false;
-		if (this.isCharge)
+		bool flag3 = this.isCharge;
+		if (flag3)
 		{
 			this.isCharge = false;
 			SoundMn.gI().taitaoPause();
 			Service.gI().skill_not_focus(3);
 		}
 		int num2 = 0;
-		if (!this.me && this.currentMovePoint != null)
+		bool flag4 = !this.me && this.currentMovePoint != null;
+		if (flag4)
 		{
 			num2 = global::Char.abs(this.cx - this.currentMovePoint.xEnd);
 		}
 		this.cp1++;
-		if (this.cp1 >= 10)
+		bool flag5 = this.cp1 >= 10;
+		if (flag5)
 		{
 			this.cp1 = 0;
 			this.cBonusSpeed = 0;
 		}
 		this.cf = (this.cp1 >> 1) + 2;
-		if ((TileMap.tileTypeAtPixel(this.cx, this.cy - 1) & 64) == 64)
+		bool flag6 = (TileMap.tileTypeAtPixel(this.cx, this.cy - 1) & 64) == 64;
+		if (flag6)
 		{
 			this.cx += this.cvx * num >> 1;
 		}
@@ -2624,11 +3245,14 @@ public class Char : IMapObject
 		{
 			this.cx += this.cvx * num;
 		}
-		if (this.cdir == 1)
+		bool flag7 = this.cdir == 1;
+		if (flag7)
 		{
-			if (TileMap.tileTypeAt(this.cx + this.chw, this.cy - this.chh, 4))
+			bool flag8 = TileMap.tileTypeAt(this.cx + this.chw, this.cy - this.chh, 4);
+			if (flag8)
 			{
-				if (this.me)
+				bool flag9 = this.me;
+				if (flag9)
 				{
 					this.cvx = 0;
 					this.cx = TileMap.tileXofPixel(this.cx + this.chw) - this.chw;
@@ -2639,43 +3263,58 @@ public class Char : IMapObject
 				}
 			}
 		}
-		else if (TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - this.chh, 8))
+		else
 		{
-			if (this.me)
+			bool flag10 = TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - this.chh, 8);
+			if (flag10)
 			{
-				this.cvx = 0;
-				this.cx = TileMap.tileXofPixel(this.cx - this.chw - 1) + (int)TileMap.size + this.chw;
-			}
-			else
-			{
-				this.stop();
+				bool flag11 = this.me;
+				if (flag11)
+				{
+					this.cvx = 0;
+					this.cx = TileMap.tileXofPixel(this.cx - this.chw - 1) + (int)TileMap.size + this.chw;
+				}
+				else
+				{
+					this.stop();
+				}
 			}
 		}
-		if (this.me)
+		bool flag12 = this.me;
+		if (flag12)
 		{
-			if (this.cvx > 0)
+			bool flag13 = this.cvx > 0;
+			if (flag13)
 			{
 				this.cvx--;
 			}
-			else if (this.cvx < 0)
-			{
-				this.cvx++;
-			}
 			else
 			{
-				if (this.cx - this.cxSend != 0 && this.me)
+				bool flag14 = this.cvx < 0;
+				if (flag14)
 				{
-					Service.gI().charMove();
+					this.cvx++;
 				}
-				this.statusMe = 1;
-				this.cBonusSpeed = 0;
+				else
+				{
+					bool flag15 = this.cx - this.cxSend != 0 && this.me;
+					if (flag15)
+					{
+						Service.gI().charMove();
+					}
+					this.statusMe = 1;
+					this.cBonusSpeed = 0;
+				}
 			}
 		}
-		if ((TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2)
+		bool flag16 = (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) != 2;
+		if (flag16)
 		{
-			if (this.me)
+			bool flag17 = this.me;
+			if (flag17)
 			{
-				if (this.cx - this.cxSend != 0 || this.cy - this.cySend != 0)
+				bool flag18 = this.cx - this.cxSend != 0 || this.cy - this.cySend != 0;
+				if (flag18)
 				{
 					Service.gI().charMove();
 				}
@@ -2690,12 +3329,15 @@ public class Char : IMapObject
 				this.stop();
 			}
 		}
-		if (!this.me)
+		bool flag19 = !this.me;
+		if (flag19)
 		{
-			if (this.currentMovePoint != null)
+			bool flag20 = this.currentMovePoint != null;
+			if (flag20)
 			{
 				int num3 = global::Char.abs(this.cx - this.currentMovePoint.xEnd);
-				if (num3 > num2)
+				bool flag21 = num3 > num2;
+				if (flag21)
 				{
 					this.stop();
 				}
@@ -2706,7 +3348,7 @@ public class Char : IMapObject
 		this.addDustEff(2);
 	}
 
-	// Token: 0x06000638 RID: 1592 RVA: 0x00024344 File Offset: 0x00022744
+	// Token: 0x060000C3 RID: 195 RVA: 0x0000DEF8 File Offset: 0x0000C0F8
 	private void stop()
 	{
 		this.statusMe = 6;
@@ -2716,19 +3358,20 @@ public class Char : IMapObject
 		this.cp1 = (this.cp2 = 0);
 	}
 
-	// Token: 0x06000639 RID: 1593 RVA: 0x0002437D File Offset: 0x0002277D
+	// Token: 0x060000C4 RID: 196 RVA: 0x0000DF34 File Offset: 0x0000C134
 	public static int abs(int i)
 	{
 		return (i <= 0) ? (-i) : i;
 	}
 
-	// Token: 0x0600063A RID: 1594 RVA: 0x00024390 File Offset: 0x00022790
+	// Token: 0x060000C5 RID: 197 RVA: 0x0000DF50 File Offset: 0x0000C150
 	public void updateCharJump()
 	{
 		this.setMountIsStart();
 		this.ty = 0;
 		this.isFreez = false;
-		if (this.isCharge)
+		bool flag = this.isCharge;
+		if (flag)
 		{
 			this.isCharge = false;
 			SoundMn.gI().taitaoPause();
@@ -2737,64 +3380,85 @@ public class Char : IMapObject
 		this.addDustEff(3);
 		this.cx += this.cvx;
 		this.cy += this.cvy;
-		if (this.cy < 0)
+		bool flag2 = this.cy < 0;
+		if (flag2)
 		{
 			this.cy = 0;
 			this.cvy = -1;
 		}
 		this.cvy++;
-		if (this.cvy > 0)
+		bool flag3 = this.cvy > 0;
+		if (flag3)
 		{
 			this.cvy = 0;
 		}
-		if (!this.me && this.currentMovePoint != null)
+		bool flag4 = !this.me && this.currentMovePoint != null;
+		if (flag4)
 		{
 			int num = this.currentMovePoint.xEnd - this.cx;
-			if (num > 0)
+			bool flag5 = num > 0;
+			if (flag5)
 			{
-				if (this.cvx > num)
+				bool flag6 = this.cvx > num;
+				if (flag6)
 				{
 					this.cvx = num;
 				}
-				if (this.cvx < 0)
-				{
-					this.cvx = num;
-				}
-			}
-			else if (num < 0)
-			{
-				if (this.cvx < num)
-				{
-					this.cvx = num;
-				}
-				if (this.cvx > 0)
+				bool flag7 = this.cvx < 0;
+				if (flag7)
 				{
 					this.cvx = num;
 				}
 			}
 			else
 			{
-				this.cvx = num;
+				bool flag8 = num < 0;
+				if (flag8)
+				{
+					bool flag9 = this.cvx < num;
+					if (flag9)
+					{
+						this.cvx = num;
+					}
+					bool flag10 = this.cvx > 0;
+					if (flag10)
+					{
+						this.cvx = num;
+					}
+				}
+				else
+				{
+					this.cvx = num;
+				}
 			}
 		}
-		if (this.cdir == 1)
+		bool flag11 = this.cdir == 1;
+		if (flag11)
 		{
-			if ((TileMap.tileTypeAtPixel(this.cx + this.chw, this.cy - 1) & 4) == 4 && this.cx <= TileMap.tileXofPixel(this.cx + this.chw) + 12)
+			bool flag12 = (TileMap.tileTypeAtPixel(this.cx + this.chw, this.cy - 1) & 4) == 4 && this.cx <= TileMap.tileXofPixel(this.cx + this.chw) + 12;
+			if (flag12)
 			{
 				this.cx = TileMap.tileXofPixel(this.cx + this.chw) - this.chw;
 				this.cvx = 0;
 			}
 		}
-		else if ((TileMap.tileTypeAtPixel(this.cx - this.chw, this.cy - 1) & 8) == 8 && this.cx >= TileMap.tileXofPixel(this.cx - this.chw) + 12)
+		else
 		{
-			this.cx = TileMap.tileXofPixel(this.cx + 24 - this.chw) + this.chw;
-			this.cvx = 0;
-		}
-		if (this.cvy == 0)
-		{
-			if (!this.isAttFly)
+			bool flag13 = (TileMap.tileTypeAtPixel(this.cx - this.chw, this.cy - 1) & 8) == 8 && this.cx >= TileMap.tileXofPixel(this.cx - this.chw) + 12;
+			if (flag13)
 			{
-				if (this.me)
+				this.cx = TileMap.tileXofPixel(this.cx + 24 - this.chw) + this.chw;
+				this.cvx = 0;
+			}
+		}
+		bool flag14 = this.cvy == 0;
+		if (flag14)
+		{
+			bool flag15 = !this.isAttFly;
+			if (flag15)
+			{
+				bool flag16 = this.me;
+				if (flag16)
 				{
 					this.setCharFallFromJump();
 				}
@@ -2808,10 +3472,12 @@ public class Char : IMapObject
 				this.setCharFallFromJump();
 			}
 		}
-		if (this.me && !global::Char.ischangingMap && this.isInWaypoint())
+		bool flag17 = this.me && !global::Char.ischangingMap && this.isInWaypoint();
+		if (flag17)
 		{
 			Service.gI().charMove();
-			if (TileMap.isTrainingMap())
+			bool flag18 = TileMap.isTrainingMap();
+			if (flag18)
 			{
 				global::Char.ischangingMap = true;
 				Service.gI().getMapOffline();
@@ -2825,43 +3491,50 @@ public class Char : IMapObject
 			GameCanvas.clearKeyHold();
 			GameCanvas.clearKeyPressed();
 			InfoDlg.showWait();
-			return;
 		}
-		if (this.statusMe != 16 && (TileMap.tileTypeAt(this.cx, this.cy - this.ch + 24, 8192) || this.cy < 0))
+		else
 		{
-			this.statusMe = 4;
-			this.cp1 = 0;
-			this.cp2 = 0;
-			this.cvy = 1;
-			this.delayFall = 0;
-			if (this.cy < 0)
+			bool flag19 = this.statusMe != 16 && (TileMap.tileTypeAt(this.cx, this.cy - this.ch + 24, 8192) || this.cy < 0);
+			if (flag19)
 			{
-				this.cy = 0;
+				this.statusMe = 4;
+				this.cp1 = 0;
+				this.cp2 = 0;
+				this.cvy = 1;
+				this.delayFall = 0;
+				bool flag20 = this.cy < 0;
+				if (flag20)
+				{
+					this.cy = 0;
+				}
+				this.cy = TileMap.tileYofPixel(this.cy + 25);
+				GameCanvas.clearKeyHold();
 			}
-			this.cy = TileMap.tileYofPixel(this.cy + 25);
-			GameCanvas.clearKeyHold();
-		}
-		if (this.cp3 < 0)
-		{
-			this.cp3++;
-		}
-		this.cf = 7;
-		if (!this.me)
-		{
-			if (this.currentMovePoint != null && this.cy < this.currentMovePoint.yEnd)
+			bool flag21 = this.cp3 < 0;
+			if (flag21)
 			{
-				this.stop();
+				this.cp3++;
+			}
+			this.cf = 7;
+			bool flag22 = !this.me;
+			if (flag22)
+			{
+				bool flag23 = this.currentMovePoint != null && this.cy < this.currentMovePoint.yEnd;
+				if (flag23)
+				{
+					this.stop();
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600063B RID: 1595 RVA: 0x00024749 File Offset: 0x00022B49
+	// Token: 0x060000C6 RID: 198 RVA: 0x0000E384 File Offset: 0x0000C584
 	public bool checkInRangeJump(int x1, int xw1, int xmob, int y1, int yh1, int ymob)
 	{
 		return xmob <= xw1 && xmob >= x1 && ymob <= y1 && ymob >= yh1;
 	}
 
-	// Token: 0x0600063C RID: 1596 RVA: 0x00024770 File Offset: 0x00022B70
+	// Token: 0x060000C7 RID: 199 RVA: 0x0000E3B0 File Offset: 0x0000C5B0
 	public void setCharFallFromJump()
 	{
 		this.cyStartFall = this.cy;
@@ -2871,199 +3544,250 @@ public class Char : IMapObject
 		this.cvx = this.cdir << 2;
 		this.cvy = 0;
 		this.cy = TileMap.tileYofPixel(this.cy) + 12;
-		if (this.me && (this.cx - this.cxSend != 0 || this.cy - this.cySend != 0) && (Res.abs(global::Char.myCharz().cx - global::Char.myCharz().cxSend) > 96 || Res.abs(global::Char.myCharz().cy - global::Char.myCharz().cySend) > 24))
+		bool flag = this.me && (this.cx - this.cxSend != 0 || this.cy - this.cySend != 0) && (Res.abs(global::Char.myCharz().cx - global::Char.myCharz().cxSend) > 96 || Res.abs(global::Char.myCharz().cy - global::Char.myCharz().cySend) > 24);
+		if (flag)
 		{
 			Service.gI().charMove();
 		}
 	}
 
-	// Token: 0x0600063D RID: 1597 RVA: 0x00024844 File Offset: 0x00022C44
+	// Token: 0x060000C8 RID: 200 RVA: 0x0000E484 File Offset: 0x0000C684
 	public void updateCharFall()
 	{
-		if (this.holder)
+		bool flag = this.holder;
+		if (!flag)
 		{
-			return;
-		}
-		this.ty = 0;
-		if (this.cy + 4 >= TileMap.pxh)
-		{
-			this.statusMe = 1;
-			if (this.me)
+			this.ty = 0;
+			bool flag2 = this.cy + 4 >= TileMap.pxh;
+			if (flag2)
 			{
-				SoundMn.gI().charFall();
-			}
-			this.cvx = (this.cvy = 0);
-			this.cp3 = 0;
-			return;
-		}
-		if (this.cy % 24 == 0 && (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2)
-		{
-			this.delayFall = 0;
-			if (this.me)
-			{
-				if (this.cy - this.cySend > 0)
-				{
-					Service.gI().charMove();
-				}
-				else if (this.cx - this.cxSend != 0 || this.cy - this.cySend < 0)
-				{
-					Service.gI().charMove();
-				}
-				this.cvx = (this.cvy = 0);
-				this.cp1 = (this.cp2 = 0);
 				this.statusMe = 1;
-				this.cp3 = 0;
-				return;
-			}
-			this.stop();
-			this.cf = 0;
-			GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-			GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-			this.addDustEff(1);
-		}
-		if (this.delayFall > 0)
-		{
-			this.delayFall--;
-			if (this.delayFall % 10 > 5)
-			{
-				this.cy++;
-			}
-			else
-			{
-				this.cy--;
-			}
-			return;
-		}
-		if (this.cvy < -4)
-		{
-			this.cf = 7;
-		}
-		else
-		{
-			this.cf = 12;
-		}
-		this.cx += this.cvx;
-		if (!this.me && this.currentMovePoint != null)
-		{
-			int num = this.currentMovePoint.xEnd - this.cx;
-			if (num > 0)
-			{
-				if (this.cvx > num)
-				{
-					this.cvx = num;
-				}
-				if (this.cvx < 0)
-				{
-					this.cvx = num;
-				}
-			}
-			else if (num < 0)
-			{
-				if (this.cvx < num)
-				{
-					this.cvx = num;
-				}
-				if (this.cvx > 0)
-				{
-					this.cvx = num;
-				}
-			}
-			else
-			{
-				this.cvx = num;
-			}
-		}
-		this.cvy++;
-		if (this.cvy > 8)
-		{
-			this.cvy = 8;
-		}
-		if (this.skillPaintRandomPaint == null)
-		{
-			this.cy += this.cvy;
-		}
-		if (this.cdir == 1)
-		{
-			if ((TileMap.tileTypeAtPixel(this.cx + this.chw, this.cy - 1) & 4) == 4 && this.cx <= TileMap.tileXofPixel(this.cx + this.chw) + 12)
-			{
-				this.cx = TileMap.tileXofPixel(this.cx + this.chw) - this.chw;
-				this.cvx = 0;
-			}
-		}
-		else if ((TileMap.tileTypeAtPixel(this.cx - this.chw, this.cy - 1) & 8) == 8 && this.cx >= TileMap.tileXofPixel(this.cx - this.chw) + 12)
-		{
-			this.cx = TileMap.tileXofPixel(this.cx + 24 - this.chw) + this.chw;
-			this.cvx = 0;
-		}
-		if (this.cvy > 3 && (this.cyStartFall == 0 || this.cyStartFall <= TileMap.tileYofPixel(this.cy + 3)) && (TileMap.tileTypeAtPixel(this.cx, this.cy + 3) & 2) == 2)
-		{
-			if (this.me)
-			{
-				this.cyStartFall = 0;
-				this.cvx = (this.cvy = 0);
-				this.cp1 = (this.cp2 = 0);
-				this.cy = TileMap.tileXofPixel(this.cy + 3);
-				this.statusMe = 1;
-				if (this.me)
+				bool flag3 = this.me;
+				if (flag3)
 				{
 					SoundMn.gI().charFall();
 				}
+				this.cvx = (this.cvy = 0);
 				this.cp3 = 0;
-				GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-				GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-				this.addDustEff(1);
-				if (this.cy - this.cySend > 0)
-				{
-					if (this.me)
-					{
-						Service.gI().charMove();
-					}
-				}
-				else if ((this.cx - this.cxSend != 0 || this.cy - this.cySend < 0) && this.me)
-				{
-					Service.gI().charMove();
-				}
 			}
 			else
 			{
-				this.stop();
-				this.cy = TileMap.tileXofPixel(this.cy + 3);
-				this.cf = 0;
-				GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-				GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-				this.addDustEff(1);
-			}
-			return;
-		}
-		this.cf = 12;
-		if (this.me)
-		{
-			if (this.isAttack)
-			{
-				return;
-			}
-		}
-		else
-		{
-			if ((TileMap.tileTypeAtPixel(this.cx, this.cy + 1) & 2) == 2)
-			{
-				this.cf = 0;
-			}
-			if (this.currentMovePoint != null && this.cy > this.currentMovePoint.yEnd)
-			{
-				this.stop();
+				bool flag4 = this.cy % 24 == 0 && (TileMap.tileTypeAtPixel(this.cx, this.cy) & 2) == 2;
+				if (flag4)
+				{
+					this.delayFall = 0;
+					bool flag5 = this.me;
+					if (flag5)
+					{
+						bool flag6 = this.cy - this.cySend > 0;
+						if (flag6)
+						{
+							Service.gI().charMove();
+						}
+						else
+						{
+							bool flag7 = this.cx - this.cxSend != 0 || this.cy - this.cySend < 0;
+							if (flag7)
+							{
+								Service.gI().charMove();
+							}
+						}
+						this.cvx = (this.cvy = 0);
+						this.cp1 = (this.cp2 = 0);
+						this.statusMe = 1;
+						this.cp3 = 0;
+						return;
+					}
+					this.stop();
+					this.cf = 0;
+					GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+					GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+					this.addDustEff(1);
+				}
+				bool flag8 = this.delayFall > 0;
+				if (flag8)
+				{
+					this.delayFall--;
+					bool flag9 = this.delayFall % 10 > 5;
+					if (flag9)
+					{
+						this.cy++;
+					}
+					else
+					{
+						this.cy--;
+					}
+				}
+				else
+				{
+					bool flag10 = this.cvy < -4;
+					if (flag10)
+					{
+						this.cf = 7;
+					}
+					else
+					{
+						this.cf = 12;
+					}
+					this.cx += this.cvx;
+					bool flag11 = !this.me && this.currentMovePoint != null;
+					if (flag11)
+					{
+						int num = this.currentMovePoint.xEnd - this.cx;
+						bool flag12 = num > 0;
+						if (flag12)
+						{
+							bool flag13 = this.cvx > num;
+							if (flag13)
+							{
+								this.cvx = num;
+							}
+							bool flag14 = this.cvx < 0;
+							if (flag14)
+							{
+								this.cvx = num;
+							}
+						}
+						else
+						{
+							bool flag15 = num < 0;
+							if (flag15)
+							{
+								bool flag16 = this.cvx < num;
+								if (flag16)
+								{
+									this.cvx = num;
+								}
+								bool flag17 = this.cvx > 0;
+								if (flag17)
+								{
+									this.cvx = num;
+								}
+							}
+							else
+							{
+								this.cvx = num;
+							}
+						}
+					}
+					this.cvy++;
+					bool flag18 = this.cvy > 8;
+					if (flag18)
+					{
+						this.cvy = 8;
+					}
+					bool flag19 = this.skillPaintRandomPaint == null;
+					if (flag19)
+					{
+						this.cy += this.cvy;
+					}
+					bool flag20 = this.cdir == 1;
+					if (flag20)
+					{
+						bool flag21 = (TileMap.tileTypeAtPixel(this.cx + this.chw, this.cy - 1) & 4) == 4 && this.cx <= TileMap.tileXofPixel(this.cx + this.chw) + 12;
+						if (flag21)
+						{
+							this.cx = TileMap.tileXofPixel(this.cx + this.chw) - this.chw;
+							this.cvx = 0;
+						}
+					}
+					else
+					{
+						bool flag22 = (TileMap.tileTypeAtPixel(this.cx - this.chw, this.cy - 1) & 8) == 8 && this.cx >= TileMap.tileXofPixel(this.cx - this.chw) + 12;
+						if (flag22)
+						{
+							this.cx = TileMap.tileXofPixel(this.cx + 24 - this.chw) + this.chw;
+							this.cvx = 0;
+						}
+					}
+					bool flag23 = this.cvy > 3 && (this.cyStartFall == 0 || this.cyStartFall <= TileMap.tileYofPixel(this.cy + 3)) && (TileMap.tileTypeAtPixel(this.cx, this.cy + 3) & 2) == 2;
+					if (flag23)
+					{
+						bool flag24 = this.me;
+						if (flag24)
+						{
+							this.cyStartFall = 0;
+							this.cvx = (this.cvy = 0);
+							this.cp1 = (this.cp2 = 0);
+							this.cy = TileMap.tileXofPixel(this.cy + 3);
+							this.statusMe = 1;
+							bool flag25 = this.me;
+							if (flag25)
+							{
+								SoundMn.gI().charFall();
+							}
+							this.cp3 = 0;
+							GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+							GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+							this.addDustEff(1);
+							bool flag26 = this.cy - this.cySend > 0;
+							if (flag26)
+							{
+								bool flag27 = this.me;
+								if (flag27)
+								{
+									Service.gI().charMove();
+								}
+							}
+							else
+							{
+								bool flag28 = (this.cx - this.cxSend != 0 || this.cy - this.cySend < 0) && this.me;
+								if (flag28)
+								{
+									Service.gI().charMove();
+								}
+							}
+						}
+						else
+						{
+							this.stop();
+							this.cy = TileMap.tileXofPixel(this.cy + 3);
+							this.cf = 0;
+							GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+							GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+							this.addDustEff(1);
+						}
+					}
+					else
+					{
+						this.cf = 12;
+						bool flag29 = this.me;
+						if (flag29)
+						{
+							bool flag30 = this.isAttack;
+							if (flag30)
+							{
+							}
+						}
+						else
+						{
+							bool flag31 = (TileMap.tileTypeAtPixel(this.cx, this.cy + 1) & 2) == 2;
+							if (flag31)
+							{
+								this.cf = 0;
+							}
+							bool flag32 = this.currentMovePoint != null && this.cy > this.currentMovePoint.yEnd;
+							if (flag32)
+							{
+								this.stop();
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600063E RID: 1598 RVA: 0x00024E08 File Offset: 0x00023208
+	// Token: 0x060000C9 RID: 201 RVA: 0x0000EAF4 File Offset: 0x0000CCF4
 	public void updateCharFly()
 	{
-		int num = ((int)this.isMonkey != 1 || this.me) ? 1 : 2;
+		int num = (this.isMonkey != 1 || this.me) ? 1 : 2;
 		this.setMountIsStart();
-		if (this.statusMe != 16 && (TileMap.tileTypeAt(this.cx, this.cy - this.ch + 24, 8192) || this.cy < 0))
+		bool flag = this.statusMe != 16 && (TileMap.tileTypeAt(this.cx, this.cy - this.ch + 24, 8192) || this.cy < 0);
+		if (flag)
 		{
-			if (this.cy - this.ch < 0)
+			bool flag2 = this.cy - this.ch < 0;
+			if (flag2)
 			{
 				this.cy = this.ch;
 			}
@@ -3072,168 +3796,216 @@ public class Char : IMapObject
 			this.cvx = 0;
 			this.cp2 = 0;
 			this.currentMovePoint = null;
-			return;
 		}
-		int num2 = this.cy;
-		this.cp1++;
-		if (this.cp1 >= 9)
+		else
 		{
-			this.cp1 = 0;
-			if (!this.me)
+			int num2 = this.cy;
+			this.cp1++;
+			bool flag3 = this.cp1 >= 9;
+			if (flag3)
 			{
-				this.cvx = (this.cvy = 0);
-			}
-			this.cBonusSpeed = 0;
-		}
-		this.cf = 8;
-		if (Res.abs(this.cvx) <= 4 && this.me)
-		{
-			if (this.currentMovePoint != null)
-			{
-				int num3 = global::Char.abs(this.cx - this.currentMovePoint.xEnd);
-				int num4 = global::Char.abs(this.cy - this.currentMovePoint.yEnd);
-				if (num3 > num4 * 10)
+				this.cp1 = 0;
+				bool flag4 = !this.me;
+				if (flag4)
 				{
-					this.cf = 8;
+					this.cvx = (this.cvy = 0);
 				}
-				else if (num3 > num4 && num3 > 48 && num4 > 32)
+				this.cBonusSpeed = 0;
+			}
+			this.cf = 8;
+			bool flag5 = Res.abs(this.cvx) <= 4 && this.me;
+			if (flag5)
+			{
+				bool flag6 = this.currentMovePoint != null;
+				if (flag6)
 				{
-					this.cf = 8;
+					int num3 = global::Char.abs(this.cx - this.currentMovePoint.xEnd);
+					int num4 = global::Char.abs(this.cy - this.currentMovePoint.yEnd);
+					bool flag7 = num3 > num4 * 10;
+					if (flag7)
+					{
+						this.cf = 8;
+					}
+					else
+					{
+						bool flag8 = num3 > num4 && num3 > 48 && num4 > 32;
+						if (flag8)
+						{
+							this.cf = 8;
+						}
+						else
+						{
+							this.cf = 7;
+						}
+					}
 				}
 				else
 				{
+					bool flag9 = this.cvy < 0;
+					if (flag9)
+					{
+						this.cvy = 0;
+					}
+					bool flag10 = this.cvy > 16;
+					if (flag10)
+					{
+						this.cvy = 16;
+					}
 					this.cf = 7;
+				}
+			}
+			bool flag11 = !this.me;
+			if (flag11)
+			{
+				bool flag12 = global::Char.abs(this.cvx) < 2;
+				if (flag12)
+				{
+					this.cvx = (this.cdir << 1) * num;
+				}
+				bool flag13 = this.cvy != 0;
+				if (flag13)
+				{
+					this.cf = 7;
+				}
+				bool flag14 = global::Char.abs(this.cvx) <= 2;
+				if (flag14)
+				{
+					this.cp2++;
+					bool flag15 = this.cp2 > 32;
+					if (flag15)
+					{
+						this.statusMe = 4;
+						this.cvx = 0;
+						this.cvy = 0;
+					}
+				}
+			}
+			bool flag16 = this.cdir == 1;
+			if (flag16)
+			{
+				bool flag17 = TileMap.tileTypeAt(this.cx + this.chw, this.cy - 1, 4);
+				if (flag17)
+				{
+					this.cvx = 0;
+					this.cx = TileMap.tileXofPixel(this.cx + this.chw) - this.chw;
+					bool flag18 = this.cvy == 0;
+					if (flag18)
+					{
+						this.currentMovePoint = null;
+					}
 				}
 			}
 			else
 			{
-				if (this.cvy < 0)
+				bool flag19 = TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - 1, 8);
+				if (flag19)
 				{
-					this.cvy = 0;
-				}
-				if (this.cvy > 16)
-				{
-					this.cvy = 16;
-				}
-				this.cf = 7;
-			}
-		}
-		if (!this.me)
-		{
-			if (global::Char.abs(this.cvx) < 2)
-			{
-				this.cvx = (this.cdir << 1) * num;
-			}
-			if (this.cvy != 0)
-			{
-				this.cf = 7;
-			}
-			if (global::Char.abs(this.cvx) <= 2)
-			{
-				this.cp2++;
-				if (this.cp2 > 32)
-				{
-					this.statusMe = 4;
 					this.cvx = 0;
-					this.cvy = 0;
+					this.cx = TileMap.tileXofPixel(this.cx - this.chw - 1) + (int)TileMap.size + this.chw;
+					bool flag20 = this.cvy == 0;
+					if (flag20)
+					{
+						this.currentMovePoint = null;
+					}
 				}
 			}
-		}
-		if (this.cdir == 1)
-		{
-			if (TileMap.tileTypeAt(this.cx + this.chw, this.cy - 1, 4))
+			this.cx += this.cvx * num;
+			this.cy += this.cvy * num;
+			bool flag21 = !this.isMount && num2 - this.cy == 0;
+			if (flag21)
 			{
-				this.cvx = 0;
-				this.cx = TileMap.tileXofPixel(this.cx + this.chw) - this.chw;
-				if (this.cvy == 0)
+				this.ty++;
+				this.wt++;
+				this.fy += (this.wy ? -1 : 1);
+				bool flag22 = this.wt == 10;
+				if (flag22)
 				{
-					this.currentMovePoint = null;
+					this.wt = 0;
+					this.wy = !this.wy;
 				}
-			}
-		}
-		else if (TileMap.tileTypeAt(this.cx - this.chw - 1, this.cy - 1, 8))
-		{
-			this.cvx = 0;
-			this.cx = TileMap.tileXofPixel(this.cx - this.chw - 1) + (int)TileMap.size + this.chw;
-			if (this.cvy == 0)
-			{
-				this.currentMovePoint = null;
-			}
-		}
-		this.cx += this.cvx * num;
-		this.cy += this.cvy * num;
-		if (!this.isMount && num2 - this.cy == 0)
-		{
-			this.ty++;
-			this.wt++;
-			this.fy += (this.wy ? -1 : 1);
-			if (this.wt == 10)
-			{
-				this.wt = 0;
-				this.wy = !this.wy;
-			}
-			if (this.ty > 20)
-			{
-				this.delayFall = 10;
-				if (GameCanvas.gameTick % 3 == 0)
+				bool flag23 = this.ty > 20;
+				if (flag23)
 				{
-					ServerEffect.addServerEffect(111, this.cx + ((this.cdir != 1) ? 27 : -17), this.cy + this.fy + 13, 1, (this.cdir == 1) ? 0 : 2);
+					this.delayFall = 10;
+					bool flag24 = GameCanvas.gameTick % 3 == 0;
+					if (flag24)
+					{
+						ServerEffect.addServerEffect(111, this.cx + ((this.cdir != 1) ? 27 : -17), this.cy + this.fy + 13, 1, (this.cdir == 1) ? 0 : 2);
+					}
 				}
 			}
-		}
-		if (this.me)
-		{
-			if (this.cvx > 0)
+			bool flag25 = this.me;
+			if (flag25)
 			{
-				this.cvx--;
-			}
-			else if (this.cvx < 0)
-			{
-				this.cvx++;
-			}
-			else if (this.cvy == 0)
-			{
-				this.statusMe = 4;
-				this.checkDelayFallIfTooHigh();
-				Service.gI().charMove();
-			}
-			if ((TileMap.tileTypeAtPixel(this.cx, this.cy + 20) & 2) == 2 || (TileMap.tileTypeAtPixel(this.cx, this.cy + 40) & 2) == 2)
-			{
-				if (this.cvy == 0)
+				bool flag26 = this.cvx > 0;
+				if (flag26)
 				{
-					this.delayFall = 0;
+					this.cvx--;
 				}
-				this.cyStartFall = 0;
-				this.cvx = (this.cvy = 0);
-				this.cp1 = (this.cp2 = 0);
-				this.statusMe = 4;
-				this.addDustEff(3);
-			}
-			if (global::Char.abs(this.cx - this.cxSend) > 96 || global::Char.abs(this.cy - this.cySend) > 24)
-			{
-				Service.gI().charMove();
+				else
+				{
+					bool flag27 = this.cvx < 0;
+					if (flag27)
+					{
+						this.cvx++;
+					}
+					else
+					{
+						bool flag28 = this.cvy == 0;
+						if (flag28)
+						{
+							this.statusMe = 4;
+							this.checkDelayFallIfTooHigh();
+							Service.gI().charMove();
+						}
+					}
+				}
+				bool flag29 = (TileMap.tileTypeAtPixel(this.cx, this.cy + 20) & 2) == 2 || (TileMap.tileTypeAtPixel(this.cx, this.cy + 40) & 2) == 2;
+				if (flag29)
+				{
+					bool flag30 = this.cvy == 0;
+					if (flag30)
+					{
+						this.delayFall = 0;
+					}
+					this.cyStartFall = 0;
+					this.cvx = (this.cvy = 0);
+					this.cp1 = (this.cp2 = 0);
+					this.statusMe = 4;
+					this.addDustEff(3);
+				}
+				bool flag31 = global::Char.abs(this.cx - this.cxSend) > 96 || global::Char.abs(this.cy - this.cySend) > 24;
+				if (flag31)
+				{
+					Service.gI().charMove();
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600063F RID: 1599 RVA: 0x0002535C File Offset: 0x0002375C
+	// Token: 0x060000CA RID: 202 RVA: 0x0000F0D4 File Offset: 0x0000D2D4
 	public void setMount(int cid, int ctrans, int cgender)
 	{
 		this.idcharMount = cid;
 		this.transMount = ctrans;
 		this.genderMount = cgender;
 		this.speedMount = 30;
-		if (this.transMount < 0)
+		bool flag = this.transMount < 0;
+		if (flag)
 		{
 			this.transMount = 0;
 			this.xMount = GameScr.cmx + GameCanvas.w + 50;
 			this.dxMount = -19;
 		}
-		else if (this.transMount == 1)
+		else
 		{
-			this.transMount = 2;
-			this.xMount = GameScr.cmx - 100;
-			this.dxMount = -33;
+			bool flag2 = this.transMount == 1;
+			if (flag2)
+			{
+				this.transMount = 2;
+				this.xMount = GameScr.cmx - 100;
+				this.dxMount = -33;
+			}
 		}
 		this.dyMount = -17;
 		this.yMount = this.cy;
@@ -3243,25 +4015,30 @@ public class Char : IMapObject
 		this.isEndMount = false;
 	}
 
-	// Token: 0x06000640 RID: 1600 RVA: 0x00025414 File Offset: 0x00023814
+	// Token: 0x060000CB RID: 203 RVA: 0x0000F190 File Offset: 0x0000D390
 	public void updateMount()
 	{
 		this.frameMount++;
-		if (this.frameMount > this.FrameMount.Length - 1)
+		bool flag = this.frameMount > this.FrameMount.Length - 1;
+		if (flag)
 		{
 			this.frameMount = 0;
 		}
 		this.frameNewMount++;
-		if (this.frameNewMount > 1000)
+		bool flag2 = this.frameNewMount > 1000;
+		if (flag2)
 		{
 			this.frameNewMount = 0;
 		}
-		if (this.isStartMount && !this.isMount)
+		bool flag3 = this.isStartMount && !this.isMount;
+		if (flag3)
 		{
 			this.yMount = this.cy;
-			if (this.transMount == 0)
+			bool flag4 = this.transMount == 0;
+			if (flag4)
 			{
-				if (this.xMount - this.cx >= this.speedMount)
+				bool flag5 = this.xMount - this.cx >= this.speedMount;
+				if (flag5)
 				{
 					this.xMount -= this.speedMount;
 				}
@@ -3272,106 +4049,141 @@ public class Char : IMapObject
 					this.isEndMount = false;
 				}
 			}
-			else if (this.transMount == 2)
+			else
 			{
-				if (this.cx - this.xMount >= this.speedMount)
+				bool flag6 = this.transMount == 2;
+				if (flag6)
 				{
-					this.xMount += this.speedMount;
-				}
-				else
-				{
-					this.xMount = this.cx;
-					this.isMount = true;
-					this.isEndMount = false;
+					bool flag7 = this.cx - this.xMount >= this.speedMount;
+					if (flag7)
+					{
+						this.xMount += this.speedMount;
+					}
+					else
+					{
+						this.xMount = this.cx;
+						this.isMount = true;
+						this.isEndMount = false;
+					}
 				}
 			}
 		}
-		else if (this.isMount)
+		else
 		{
-			if (this.statusMe == 14 || this.ySd - this.cy < 24)
+			bool flag8 = this.isMount;
+			if (flag8)
 			{
-				this.setMountIsEnd();
-			}
-			if (this.cp1 % 15 < 5)
-			{
-				this.cf = 0;
+				bool flag9 = this.statusMe == 14 || this.ySd - this.cy < 24;
+				if (flag9)
+				{
+					this.setMountIsEnd();
+				}
+				bool flag10 = this.cp1 % 15 < 5;
+				if (flag10)
+				{
+					this.cf = 0;
+				}
+				else
+				{
+					this.cf = 1;
+				}
+				this.transMount = this.cdir;
+				this.updateSuperEff();
+				bool flag11 = this.transMount < 0;
+				if (flag11)
+				{
+					this.transMount = 0;
+					this.dxMount = -19;
+				}
+				else
+				{
+					bool flag12 = this.transMount == 1;
+					if (flag12)
+					{
+						this.transMount = 2;
+						this.dxMount = -31;
+						bool flag13 = this.isEventMount;
+						if (flag13)
+						{
+							this.dxMount = -38;
+						}
+					}
+				}
+				bool flag14 = this.skillInfoPaint() != null;
+				if (flag14)
+				{
+					this.dyMount = -15;
+				}
+				else
+				{
+					this.dyMount = -17;
+				}
+				this.yMount = this.cy;
+				this.xMount = this.cx;
 			}
 			else
 			{
-				this.cf = 1;
-			}
-			this.transMount = this.cdir;
-			this.updateSuperEff();
-			if (this.transMount < 0)
-			{
-				this.transMount = 0;
-				this.dxMount = -19;
-			}
-			else if (this.transMount == 1)
-			{
-				this.transMount = 2;
-				this.dxMount = -31;
-				if (this.isEventMount)
+				bool flag15 = this.isEndMount;
+				if (flag15)
 				{
-					this.dxMount = -38;
-				}
-			}
-			if (this.skillInfoPaint() != null)
-			{
-				this.dyMount = -15;
-			}
-			else
-			{
-				this.dyMount = -17;
-			}
-			this.yMount = this.cy;
-			this.xMount = this.cx;
-		}
-		else if (this.isEndMount)
-		{
-			if (this.transMount == 0)
-			{
-				if (this.xMount > GameScr.cmx - 100)
-				{
-					this.xMount -= 20;
-				}
-				else
-				{
-					this.isStartMount = false;
-					this.isMount = false;
-					this.isEndMount = false;
-				}
-			}
-			else if (this.transMount == 2)
-			{
-				if (this.xMount < GameScr.cmx + GameCanvas.w + 50)
-				{
-					this.xMount += 20;
+					bool flag16 = this.transMount == 0;
+					if (flag16)
+					{
+						bool flag17 = this.xMount > GameScr.cmx - 100;
+						if (flag17)
+						{
+							this.xMount -= 20;
+						}
+						else
+						{
+							this.isStartMount = false;
+							this.isMount = false;
+							this.isEndMount = false;
+						}
+					}
+					else
+					{
+						bool flag18 = this.transMount == 2;
+						if (flag18)
+						{
+							bool flag19 = this.xMount < GameScr.cmx + GameCanvas.w + 50;
+							if (flag19)
+							{
+								this.xMount += 20;
+							}
+							else
+							{
+								this.isStartMount = false;
+								this.isMount = false;
+								this.isEndMount = false;
+							}
+						}
+					}
 				}
 				else
 				{
-					this.isStartMount = false;
-					this.isMount = false;
-					this.isEndMount = false;
+					bool flag20 = !this.isStartMount || !this.isMount || !this.isEndMount;
+					if (flag20)
+					{
+						this.xMount = GameScr.cmx - 100;
+						this.yMount = GameScr.cmy - 100;
+					}
 				}
 			}
-		}
-		else if (!this.isStartMount || !this.isMount || !this.isEndMount)
-		{
-			this.xMount = GameScr.cmx - 100;
-			this.yMount = GameScr.cmy - 100;
 		}
 	}
 
-	// Token: 0x06000641 RID: 1601 RVA: 0x00025720 File Offset: 0x00023B20
+	// Token: 0x060000CC RID: 204 RVA: 0x0000F4F4 File Offset: 0x0000D6F4
 	public void getMountData()
 	{
-		if (Mob.arrMobTemplate[50].data == null)
+		bool flag = Mob.arrMobTemplate[50].data == null;
+		if (flag)
 		{
 			Mob.arrMobTemplate[50].data = new EffectData();
-			string text = "/Mob/" + 50;
+			string text = "/Mob/" + 50.ToString();
 			DataInputStream dataInputStream = MyStream.readFile(text);
-			if (dataInputStream != null)
+			bool flag2 = dataInputStream != null;
+			if (flag2)
 			{
 				Mob.arrMobTemplate[50].data.readData(text + "/data");
 				Mob.arrMobTemplate[50].data.img = GameCanvas.loadImage(text + "/img.png");
@@ -3380,235 +4192,153 @@ public class Char : IMapObject
 			{
 				Service.gI().requestModTemplate(50);
 			}
-			Mob.lastMob.addElement(50 + string.Empty);
+			Mob.lastMob.addElement(50.ToString() + string.Empty);
 		}
 	}
 
-	// Token: 0x06000642 RID: 1602 RVA: 0x000257DD File Offset: 0x00023BDD
+	// Token: 0x060000CD RID: 205 RVA: 0x0000F5C8 File Offset: 0x0000D7C8
 	public void checkFrameTick(int[] array)
 	{
 		this.t++;
-		if (this.t > array.Length - 1)
+		bool flag = this.t > array.Length - 1;
+		if (flag)
 		{
 			this.t = 0;
 		}
 		this.fM = array[this.t];
 	}
 
-	// Token: 0x06000643 RID: 1603 RVA: 0x00025814 File Offset: 0x00023C14
+	// Token: 0x060000CE RID: 206 RVA: 0x0000F60C File Offset: 0x0000D80C
 	public void paintMount1(mGraphics g)
 	{
-		if (this.xMount > GameScr.cmx && this.xMount < GameScr.cmx + GameCanvas.w)
+		bool flag = this.xMount > GameScr.cmx && this.xMount < GameScr.cmx + GameCanvas.w;
+		if (flag)
 		{
-			if (this.me)
+			bool flag2 = this.me;
+			if (flag2)
 			{
-				if (this.isEndMount || this.isStartMount || this.isMount)
+				bool flag3 = this.isEndMount || this.isStartMount || this.isMount;
+				if (flag3)
 				{
-					if (this.idMount >= global::Char.ID_NEW_MOUNT)
+					bool flag4 = this.idMount >= global::Char.ID_NEW_MOUNT;
+					if (flag4)
 					{
-						string nameImg = this.strMount + (int)(this.idMount - global::Char.ID_NEW_MOUNT) + "_0";
+						string nameImg = this.strMount + ((int)(this.idMount - global::Char.ID_NEW_MOUNT)).ToString() + "_0";
 						FrameImage fraImage = mSystem.getFraImage(nameImg);
-						if (fraImage != null)
+						bool flag5 = fraImage != null;
+						if (flag5)
 						{
 							fraImage.drawFrame(this.frameNewMount / 2 % fraImage.nFrame, this.xMount, this.yMount + this.fy, this.transMount, 3, g);
 						}
-						return;
-					}
-					if (this.isSpeacialMount)
-					{
-						return;
-					}
-					if (this.isEventMount)
-					{
-						g.drawRegion(global::Char.imgEventMountWing, 0, (int)this.FrameMount[this.frameMount] * 60, 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						return;
-					}
-					if (this.genderMount == 2)
-					{
-						if (!this.isMountVip)
-						{
-							g.drawRegion(global::Char.imgMount_XD, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_XD_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-					}
-					else if (this.genderMount == 1)
-					{
-						if (!this.isMountVip)
-						{
-							g.drawRegion(global::Char.imgMount_NM, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_NM_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-					}
-				}
-			}
-			else if (!this.me)
-			{
-				if (this.idMount >= global::Char.ID_NEW_MOUNT)
-				{
-					string nameImg2 = this.strMount + (int)(this.idMount - global::Char.ID_NEW_MOUNT) + "_0";
-					FrameImage fraImage2 = mSystem.getFraImage(nameImg2);
-					if (fraImage2 != null)
-					{
-						fraImage2.drawFrame(this.frameNewMount / 2 % fraImage2.nFrame, this.xMount, this.yMount + this.fy, this.transMount, 3, g);
-					}
-					return;
-				}
-				if (this.isSpeacialMount)
-				{
-					return;
-				}
-				if (this.isEventMount)
-				{
-					g.drawRegion(global::Char.imgEventMountWing, 0, (int)this.FrameMount[this.frameMount] * 60, 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-					return;
-				}
-				if (this.isMount)
-				{
-					if (this.genderMount == 2)
-					{
-						if (!this.isMountVip)
-						{
-							g.drawRegion(global::Char.imgMount_XD, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_XD_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-					}
-					else if (this.genderMount == 1)
-					{
-						if (!this.isMountVip)
-						{
-							g.drawRegion(global::Char.imgMount_NM, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_NM_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// Token: 0x06000644 RID: 1604 RVA: 0x00025CF4 File Offset: 0x000240F4
-	public void paintMount2(mGraphics g)
-	{
-		if (this.xMount > GameScr.cmx && this.xMount < GameScr.cmx + GameCanvas.w)
-		{
-			if (this.me)
-			{
-				if (this.isEndMount || this.isStartMount || this.isMount)
-				{
-					if (this.idMount >= global::Char.ID_NEW_MOUNT)
-					{
-						string nameImg = this.strMount + (int)(this.idMount - global::Char.ID_NEW_MOUNT) + "_1";
-						FrameImage fraImage = mSystem.getFraImage(nameImg);
-						if (fraImage != null)
-						{
-							fraImage.drawFrame(this.frameNewMount / 2 % fraImage.nFrame, this.xMount, this.yMount + this.fy, this.transMount, 3, g);
-						}
-						return;
-					}
-					if (this.isSpeacialMount)
-					{
-						this.checkFrameTick(this.move);
-						if (Mob.arrMobTemplate[50] != null && Mob.arrMobTemplate[50].data != null)
-						{
-							Mob.arrMobTemplate[50].data.paintFrame(g, this.fM, this.xMount + ((this.cdir != 1) ? 8 : -8), this.yMount + 35, (this.cdir != 1) ? 1 : 0, 0);
-						}
-						else
-						{
-							this.getMountData();
-						}
-						return;
-					}
-					if (this.isEventMount)
-					{
-						g.drawRegion(global::Char.imgEventMount, 0, (int)this.FrameMount[this.frameMount] * 60, 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						return;
-					}
-					if (this.genderMount == 0)
-					{
-						if (!this.isMountVip)
-						{
-							g.drawRegion(global::Char.imgMount_TD, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_TD_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-					}
-					else if (this.genderMount == 1)
-					{
-						if (!this.isMountVip)
-						{
-							g.drawRegion(global::Char.imgMount_NM_1, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_NM_1_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-					}
-				}
-			}
-			else if (!this.me)
-			{
-				if (this.idMount >= global::Char.ID_NEW_MOUNT)
-				{
-					string nameImg2 = this.strMount + (int)(this.idMount - global::Char.ID_NEW_MOUNT) + "_1";
-					FrameImage fraImage2 = mSystem.getFraImage(nameImg2);
-					if (fraImage2 != null)
-					{
-						fraImage2.drawFrame(this.frameNewMount / 2 % fraImage2.nFrame, this.xMount, this.yMount + this.fy, this.transMount, 3, g);
-					}
-					return;
-				}
-				if (this.isSpeacialMount)
-				{
-					this.checkFrameTick(this.move);
-					if (Mob.arrMobTemplate[50] != null && Mob.arrMobTemplate[50].data != null)
-					{
-						Mob.arrMobTemplate[50].data.paintFrame(g, this.fM, this.xMount + ((this.cdir != 1) ? 8 : -8), this.yMount + 35, (this.cdir != 1) ? 1 : 0, 0);
 					}
 					else
 					{
-						this.getMountData();
+						bool flag6 = this.isSpeacialMount;
+						if (!flag6)
+						{
+							bool flag7 = this.isEventMount;
+							if (flag7)
+							{
+								g.drawRegion(global::Char.imgEventMountWing, 0, (int)(this.FrameMount[this.frameMount] * 60), 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+							}
+							else
+							{
+								bool flag8 = this.genderMount == 2;
+								if (flag8)
+								{
+									bool flag9 = !this.isMountVip;
+									if (flag9)
+									{
+										g.drawRegion(global::Char.imgMount_XD, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+									}
+									else
+									{
+										g.drawRegion(global::Char.imgMount_XD_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+									}
+								}
+								else
+								{
+									bool flag10 = this.genderMount == 1;
+									if (flag10)
+									{
+										bool flag11 = !this.isMountVip;
+										if (flag11)
+										{
+											g.drawRegion(global::Char.imgMount_NM, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+										else
+										{
+											g.drawRegion(global::Char.imgMount_NM_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+									}
+								}
+							}
+						}
 					}
-					return;
 				}
-				if (this.isEventMount)
+			}
+			else
+			{
+				bool flag12 = !this.me;
+				if (flag12)
 				{
-					g.drawRegion(global::Char.imgEventMount, 0, (int)this.FrameMount[this.frameMount] * 60, 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-				}
-				if (this.isMount)
-				{
-					if (this.genderMount == 0)
+					bool flag13 = this.idMount >= global::Char.ID_NEW_MOUNT;
+					if (flag13)
 					{
-						if (!this.isMountVip)
+						string nameImg2 = this.strMount + ((int)(this.idMount - global::Char.ID_NEW_MOUNT)).ToString() + "_0";
+						FrameImage fraImage2 = mSystem.getFraImage(nameImg2);
+						bool flag14 = fraImage2 != null;
+						if (flag14)
 						{
-							g.drawRegion(global::Char.imgMount_TD, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_TD_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+							fraImage2.drawFrame(this.frameNewMount / 2 % fraImage2.nFrame, this.xMount, this.yMount + this.fy, this.transMount, 3, g);
 						}
 					}
-					else if (this.genderMount == 1)
+					else
 					{
-						if (!this.isMountVip)
+						bool flag15 = this.isSpeacialMount;
+						if (!flag15)
 						{
-							g.drawRegion(global::Char.imgMount_NM_1, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
-						}
-						else
-						{
-							g.drawRegion(global::Char.imgMount_NM_1_VIP, 0, (int)this.FrameMount[this.frameMount] * 40, 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+							bool flag16 = this.isEventMount;
+							if (flag16)
+							{
+								g.drawRegion(global::Char.imgEventMountWing, 0, (int)(this.FrameMount[this.frameMount] * 60), 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+							}
+							else
+							{
+								bool flag17 = this.isMount;
+								if (flag17)
+								{
+									bool flag18 = this.genderMount == 2;
+									if (flag18)
+									{
+										bool flag19 = !this.isMountVip;
+										if (flag19)
+										{
+											g.drawRegion(global::Char.imgMount_XD, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+										else
+										{
+											g.drawRegion(global::Char.imgMount_XD_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+									}
+									else
+									{
+										bool flag20 = this.genderMount == 1;
+										if (flag20)
+										{
+											bool flag21 = !this.isMountVip;
+											if (flag21)
+											{
+												g.drawRegion(global::Char.imgMount_NM, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+											}
+											else
+											{
+												g.drawRegion(global::Char.imgMount_NM_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				}
@@ -3616,28 +4346,195 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000645 RID: 1605 RVA: 0x000262E0 File Offset: 0x000246E0
+	// Token: 0x060000CF RID: 207 RVA: 0x0000FB88 File Offset: 0x0000DD88
+	public void paintMount2(mGraphics g)
+	{
+		bool flag = this.xMount > GameScr.cmx && this.xMount < GameScr.cmx + GameCanvas.w;
+		if (flag)
+		{
+			bool flag2 = this.me;
+			if (flag2)
+			{
+				bool flag3 = this.isEndMount || this.isStartMount || this.isMount;
+				if (flag3)
+				{
+					bool flag4 = this.idMount >= global::Char.ID_NEW_MOUNT;
+					if (flag4)
+					{
+						string nameImg = this.strMount + ((int)(this.idMount - global::Char.ID_NEW_MOUNT)).ToString() + "_1";
+						FrameImage fraImage = mSystem.getFraImage(nameImg);
+						bool flag5 = fraImage != null;
+						if (flag5)
+						{
+							fraImage.drawFrame(this.frameNewMount / 2 % fraImage.nFrame, this.xMount, this.yMount + this.fy, this.transMount, 3, g);
+						}
+					}
+					else
+					{
+						bool flag6 = this.isSpeacialMount;
+						if (flag6)
+						{
+							this.checkFrameTick(this.move);
+							bool flag7 = Mob.arrMobTemplate[50] != null && Mob.arrMobTemplate[50].data != null;
+							if (flag7)
+							{
+								Mob.arrMobTemplate[50].data.paintFrame(g, this.fM, this.xMount + ((this.cdir != 1) ? 8 : -8), this.yMount + 35, (this.cdir != 1) ? 1 : 0, 0);
+							}
+							else
+							{
+								this.getMountData();
+							}
+						}
+						else
+						{
+							bool flag8 = this.isEventMount;
+							if (flag8)
+							{
+								g.drawRegion(global::Char.imgEventMount, 0, (int)(this.FrameMount[this.frameMount] * 60), 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+							}
+							else
+							{
+								bool flag9 = this.genderMount == 0;
+								if (flag9)
+								{
+									bool flag10 = !this.isMountVip;
+									if (flag10)
+									{
+										g.drawRegion(global::Char.imgMount_TD, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+									}
+									else
+									{
+										g.drawRegion(global::Char.imgMount_TD_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+									}
+								}
+								else
+								{
+									bool flag11 = this.genderMount == 1;
+									if (flag11)
+									{
+										bool flag12 = !this.isMountVip;
+										if (flag12)
+										{
+											g.drawRegion(global::Char.imgMount_NM_1, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+										else
+										{
+											g.drawRegion(global::Char.imgMount_NM_1_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				bool flag13 = !this.me;
+				if (flag13)
+				{
+					bool flag14 = this.idMount >= global::Char.ID_NEW_MOUNT;
+					if (flag14)
+					{
+						string nameImg2 = this.strMount + ((int)(this.idMount - global::Char.ID_NEW_MOUNT)).ToString() + "_1";
+						FrameImage fraImage2 = mSystem.getFraImage(nameImg2);
+						bool flag15 = fraImage2 != null;
+						if (flag15)
+						{
+							fraImage2.drawFrame(this.frameNewMount / 2 % fraImage2.nFrame, this.xMount, this.yMount + this.fy, this.transMount, 3, g);
+						}
+					}
+					else
+					{
+						bool flag16 = this.isSpeacialMount;
+						if (flag16)
+						{
+							this.checkFrameTick(this.move);
+							bool flag17 = Mob.arrMobTemplate[50] != null && Mob.arrMobTemplate[50].data != null;
+							if (flag17)
+							{
+								Mob.arrMobTemplate[50].data.paintFrame(g, this.fM, this.xMount + ((this.cdir != 1) ? 8 : -8), this.yMount + 35, (this.cdir != 1) ? 1 : 0, 0);
+							}
+							else
+							{
+								this.getMountData();
+							}
+						}
+						else
+						{
+							bool flag18 = this.isEventMount;
+							if (flag18)
+							{
+								g.drawRegion(global::Char.imgEventMount, 0, (int)(this.FrameMount[this.frameMount] * 60), 60, 60, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+							}
+							bool flag19 = this.isMount;
+							if (flag19)
+							{
+								bool flag20 = this.genderMount == 0;
+								if (flag20)
+								{
+									bool flag21 = !this.isMountVip;
+									if (flag21)
+									{
+										g.drawRegion(global::Char.imgMount_TD, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+									}
+									else
+									{
+										g.drawRegion(global::Char.imgMount_TD_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+									}
+								}
+								else
+								{
+									bool flag22 = this.genderMount == 1;
+									if (flag22)
+									{
+										bool flag23 = !this.isMountVip;
+										if (flag23)
+										{
+											g.drawRegion(global::Char.imgMount_NM_1, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+										else
+										{
+											g.drawRegion(global::Char.imgMount_NM_1_VIP, 0, (int)(this.FrameMount[this.frameMount] * 40), 50, 40, this.transMount, this.xMount + this.dxMount, this.yMount + this.dyMount + this.fy, 0);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Token: 0x060000D0 RID: 208 RVA: 0x0001020C File Offset: 0x0000E40C
 	public void setMountIsStart()
 	{
-		if (this.me)
+		bool flag = this.me;
+		if (flag)
 		{
 			this.isHaveMount = this.checkHaveMount();
-			if (TileMap.isVoDaiMap())
+			bool flag2 = TileMap.isVoDaiMap();
+			if (flag2)
 			{
 				this.isHaveMount = false;
 			}
 		}
-		if (this.isHaveMount)
+		bool flag3 = this.isHaveMount;
+		if (flag3)
 		{
-			if (this.ySd - this.cy <= 20)
+			bool flag4 = this.ySd - this.cy <= 20;
+			if (flag4)
 			{
 				this.xChar = this.cx;
 			}
-			if (this.xdis < 100)
+			bool flag5 = this.xdis < 100;
+			if (flag5)
 			{
 				this.xdis = Res.abs(this.xChar - this.cx);
 			}
-			if (this.xdis >= 70 && this.ySd - this.cy > 30 && !this.isStartMount && !this.isEndMount)
+			bool flag6 = this.xdis >= 70 && this.ySd - this.cy > 30 && !this.isStartMount && !this.isEndMount;
+			if (flag6)
 			{
 				this.setMount(this.charID, this.cdir, this.cgender);
 				this.isStartMount = true;
@@ -3645,10 +4542,11 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000646 RID: 1606 RVA: 0x000263BB File Offset: 0x000247BB
+	// Token: 0x060000D1 RID: 209 RVA: 0x000102FC File Offset: 0x0000E4FC
 	public void setMountIsEnd()
 	{
-		if (this.ySd - this.cy < 24 && !this.isEndMount)
+		bool flag = this.ySd - this.cy < 24 && !this.isEndMount;
+		if (flag)
 		{
 			this.isStartMount = false;
 			this.isMount = false;
@@ -3657,7 +4555,7 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000647 RID: 1607 RVA: 0x000263F8 File Offset: 0x000247F8
+	// Token: 0x060000D2 RID: 210 RVA: 0x0001034C File Offset: 0x0000E54C
 	public bool checkHaveMount()
 	{
 		bool result = false;
@@ -3665,9 +4563,11 @@ public class Char : IMapObject
 		Item[] array = this.arrItemBody;
 		for (int i = 0; i < array.Length; i++)
 		{
-			if (array[i] != null && ((int)array[i].template.type == 24 || (int)array[i].template.type == 23))
+			bool flag = array[i] != null && (array[i].template.type == 24 || array[i].template.type == 23);
+			if (flag)
 			{
-				if (array[i].template.part >= 0)
+				bool flag2 = array[i].template.part >= 0;
+				if (flag2)
 				{
 					num = (short)(global::Char.ID_NEW_MOUNT + array[i].template.part);
 				}
@@ -3683,44 +4583,59 @@ public class Char : IMapObject
 		this.isSpeacialMount = false;
 		this.isEventMount = false;
 		this.idMount = -1;
-		if (num == 349 || num == 350 || num == 351)
+		bool flag3 = num == 349 || num == 350 || num == 351;
+		if (flag3)
 		{
 			this.isMountVip = true;
 		}
-		else if (num == 396)
+		else
 		{
-			this.isEventMount = true;
-		}
-		else if (num == 532)
-		{
-			this.isSpeacialMount = true;
-		}
-		else if (num >= global::Char.ID_NEW_MOUNT)
-		{
-			this.idMount = num;
+			bool flag4 = num == 396;
+			if (flag4)
+			{
+				this.isEventMount = true;
+			}
+			else
+			{
+				bool flag5 = num == 532;
+				if (flag5)
+				{
+					this.isSpeacialMount = true;
+				}
+				else
+				{
+					bool flag6 = num >= global::Char.ID_NEW_MOUNT;
+					if (flag6)
+					{
+						this.idMount = num;
+					}
+				}
+			}
 		}
 		return result;
 	}
 
-	// Token: 0x06000648 RID: 1608 RVA: 0x00026524 File Offset: 0x00024924
+	// Token: 0x060000D3 RID: 211 RVA: 0x00010498 File Offset: 0x0000E698
 	private void checkDelayFallIfTooHigh()
 	{
 		bool flag = true;
 		for (int i = 0; i < 150; i += 24)
 		{
-			if ((TileMap.tileTypeAtPixel(this.cx, this.cy + i) & 2) == 2 || this.cy + i > TileMap.tmh * (int)TileMap.size - 24)
+			bool flag2 = (TileMap.tileTypeAtPixel(this.cx, this.cy + i) & 2) == 2 || this.cy + i > TileMap.tmh * (int)TileMap.size - 24;
+			if (flag2)
 			{
 				flag = false;
 				break;
 			}
 		}
-		if (flag)
+		bool flag3 = flag;
+		if (flag3)
 		{
 			this.delayFall = 40;
 		}
 	}
 
-	// Token: 0x06000649 RID: 1609 RVA: 0x00026596 File Offset: 0x00024996
+	// Token: 0x060000D4 RID: 212 RVA: 0x0001050C File Offset: 0x0000E70C
 	public void setDefaultPart()
 	{
 		this.setDefaultWeapon();
@@ -3728,430 +4643,530 @@ public class Char : IMapObject
 		this.setDefaultLeg();
 	}
 
-	// Token: 0x0600064A RID: 1610 RVA: 0x000265AA File Offset: 0x000249AA
+	// Token: 0x060000D5 RID: 213 RVA: 0x00010524 File Offset: 0x0000E724
 	public void setDefaultWeapon()
 	{
-		if (this.cgender == 0)
+		bool flag = this.cgender == 0;
+		if (flag)
 		{
 			this.wp = 0;
 		}
 	}
 
-	// Token: 0x0600064B RID: 1611 RVA: 0x000265C0 File Offset: 0x000249C0
+	// Token: 0x060000D6 RID: 214 RVA: 0x00010548 File Offset: 0x0000E748
 	public void setDefaultBody()
 	{
-		if (this.cgender == 0)
+		bool flag = this.cgender == 0;
+		if (flag)
 		{
 			this.body = 57;
 		}
-		else if (this.cgender == 1)
+		else
 		{
-			this.body = 59;
-		}
-		else if (this.cgender == 2)
-		{
-			this.body = 57;
+			bool flag2 = this.cgender == 1;
+			if (flag2)
+			{
+				this.body = 59;
+			}
+			else
+			{
+				bool flag3 = this.cgender == 2;
+				if (flag3)
+				{
+					this.body = 57;
+				}
+			}
 		}
 	}
 
-	// Token: 0x0600064C RID: 1612 RVA: 0x00026614 File Offset: 0x00024A14
+	// Token: 0x060000D7 RID: 215 RVA: 0x000105A0 File Offset: 0x0000E7A0
 	public void setDefaultLeg()
 	{
-		if (this.cgender == 0)
+		bool flag = this.cgender == 0;
+		if (flag)
 		{
 			this.leg = 58;
 		}
-		else if (this.cgender == 1)
+		else
 		{
-			this.leg = 60;
-		}
-		else if (this.cgender == 2)
-		{
-			this.leg = 58;
+			bool flag2 = this.cgender == 1;
+			if (flag2)
+			{
+				this.leg = 60;
+			}
+			else
+			{
+				bool flag3 = this.cgender == 2;
+				if (flag3)
+				{
+					this.leg = 58;
+				}
+			}
 		}
 	}
 
-	// Token: 0x0600064D RID: 1613 RVA: 0x00026666 File Offset: 0x00024A66
+	// Token: 0x060000D8 RID: 216 RVA: 0x000105F8 File Offset: 0x0000E7F8
 	public bool isSelectingSkillUseAlone()
 	{
 		return this.myskill != null && this.myskill.template.isUseAlone();
 	}
 
-	// Token: 0x0600064E RID: 1614 RVA: 0x00026686 File Offset: 0x00024A86
+	// Token: 0x060000D9 RID: 217 RVA: 0x00010628 File Offset: 0x0000E828
 	public bool isUseSkillSpec()
 	{
 		return this.myskill != null && this.myskill.template.isSkillSpec();
 	}
 
-	// Token: 0x0600064F RID: 1615 RVA: 0x000266A6 File Offset: 0x00024AA6
+	// Token: 0x060000DA RID: 218 RVA: 0x00010658 File Offset: 0x0000E858
 	public bool isSelectingSkillBuffToPlayer()
 	{
 		return this.myskill != null && this.myskill.template.isBuffToPlayer();
 	}
 
-	// Token: 0x06000650 RID: 1616 RVA: 0x000266C8 File Offset: 0x00024AC8
+	// Token: 0x060000DB RID: 219 RVA: 0x00010688 File Offset: 0x0000E888
 	public bool isUseChargeSkill()
 	{
-		return !this.isUseSkillAfterCharge && this.myskill != null && ((int)this.myskill.template.id == 10 || (int)this.myskill.template.id == 11);
+		return !this.isUseSkillAfterCharge && this.myskill != null && (this.myskill.template.id == 10 || this.myskill.template.id == 11);
 	}
 
-	// Token: 0x06000651 RID: 1617 RVA: 0x00026720 File Offset: 0x00024B20
+	// Token: 0x060000DC RID: 220 RVA: 0x000106D8 File Offset: 0x0000E8D8
 	public void setSkillPaint(SkillPaint skillPaint, int sType)
 	{
 		this.hasSendAttack = false;
-		if (this.stone)
+		bool flag = this.stone;
+		if (!flag)
 		{
-			return;
+			bool flag2 = this.me && this.myskill.template.id == 9 && this.cHP <= this.cHPFull / 10;
+			if (!flag2)
+			{
+				bool flag3 = this.me;
+				if (flag3)
+				{
+					bool flag4 = this.mobFocus == null && this.charFocus == null;
+					if (flag4)
+					{
+						this.stopUseChargeSkill();
+					}
+					bool flag5 = this.mobFocus != null && (this.mobFocus.status == 1 || this.mobFocus.status == 0);
+					if (flag5)
+					{
+						this.stopUseChargeSkill();
+					}
+					bool flag6 = this.charFocus != null && (this.charFocus.statusMe == 14 || this.charFocus.statusMe == 5);
+					if (flag6)
+					{
+						this.stopUseChargeSkill();
+					}
+					bool flag7 = this.myskill.template.id == 23;
+					if (flag7)
+					{
+						bool flag8 = this.charFocus != null && this.charFocus.holdEffID != 0;
+						if (flag8)
+						{
+							return;
+						}
+						bool flag9 = this.mobFocus != null && this.mobFocus.holdEffID != 0;
+						if (flag9)
+						{
+							return;
+						}
+						bool flag10 = this.holdEffID != 0;
+						if (flag10)
+						{
+							return;
+						}
+					}
+					bool flag11 = this.sleepEff || this.blindEff;
+					if (flag11)
+					{
+						return;
+					}
+				}
+				Res.outz("skill id= " + skillPaint.id.ToString());
+				bool flag12 = this.me && this.dart != null;
+				if (!flag12)
+				{
+					bool flag13 = TileMap.isOfflineMap();
+					if (!flag13)
+					{
+						long num = mSystem.currentTimeMillis();
+						bool flag14 = this.me;
+						if (flag14)
+						{
+							bool flag15 = this.isSelectingSkillBuffToPlayer() && this.charFocus == null;
+							if (flag15)
+							{
+								return;
+							}
+							bool flag16 = num - this.myskill.lastTimeUseThisSkill < (long)this.myskill.coolDown;
+							if (flag16)
+							{
+								this.myskill.paintCanNotUseSkill = true;
+								return;
+							}
+							this.myskill.lastTimeUseThisSkill = num;
+							bool flag17 = this.myskill.template.manaUseType == 2;
+							if (flag17)
+							{
+								this.cMP = 1;
+							}
+							else
+							{
+								bool flag18 = this.myskill.template.manaUseType != 1;
+								if (flag18)
+								{
+									this.cMP -= this.myskill.manaUse;
+								}
+								else
+								{
+									this.cMP -= this.myskill.manaUse * this.cMPFull / 100;
+								}
+							}
+							global::Char.myCharz().cStamina--;
+							GameScr.gI().isInjureMp = true;
+							GameScr.gI().twMp = 0;
+							bool flag19 = this.cMP < 0;
+							if (flag19)
+							{
+								this.cMP = 0;
+							}
+						}
+						bool flag20 = this.me;
+						if (flag20)
+						{
+							bool flag21 = this.myskill.template.id == 7;
+							if (flag21)
+							{
+								SoundMn.gI().hoisinh();
+							}
+							bool flag22 = this.myskill.template.id == 6;
+							if (flag22)
+							{
+								Service.gI().skill_not_focus(0);
+								GameScr.gI().isUseFreez = true;
+								SoundMn.gI().thaiduonghasan();
+							}
+							bool flag23 = this.myskill.template.id == 8;
+							if (flag23)
+							{
+								bool flag24 = !this.isCharge;
+								if (flag24)
+								{
+									SoundMn.gI().taitaoPause();
+									Service.gI().skill_not_focus(1);
+									this.isCharge = true;
+									this.last = (this.cur = mSystem.currentTimeMillis());
+								}
+								else
+								{
+									Service.gI().skill_not_focus(3);
+									this.isCharge = false;
+									SoundMn.gI().taitaoPause();
+								}
+							}
+							bool flag25 = this.myskill.template.id == 13;
+							if (flag25)
+							{
+								bool flag26 = this.isMonkey != 0;
+								if (flag26)
+								{
+									GameScr.gI().auto = 0;
+									return;
+								}
+								bool flag27 = this.isCreateDark;
+								if (flag27)
+								{
+									return;
+								}
+								SoundMn.gI().gong();
+								Service.gI().skill_not_focus(6);
+								this.chargeCount = 0;
+								this.isWaitMonkey = true;
+								return;
+							}
+							else
+							{
+								bool flag28 = this.myskill.template.id == 14;
+								if (flag28)
+								{
+									SoundMn.gI().gong();
+									Service.gI().skill_not_focus(7);
+									this.useChargeSkill(true);
+								}
+								bool flag29 = this.myskill.template.id == 21;
+								if (flag29)
+								{
+									Service.gI().skill_not_focus(10);
+									return;
+								}
+								bool flag30 = this.myskill.template.id == 12;
+								if (flag30)
+								{
+									Service.gI().skill_not_focus(8);
+								}
+								bool flag31 = this.myskill.template.id == 19;
+								if (flag31)
+								{
+									Service.gI().skill_not_focus(9);
+									return;
+								}
+							}
+						}
+						bool flag32 = this.isMonkey == 1 && skillPaint.id >= 35 && skillPaint.id <= 41;
+						if (flag32)
+						{
+							skillPaint = GameScr.sks[106];
+						}
+						bool flag33 = skillPaint.id >= 128 && skillPaint.id <= 134;
+						if (flag33)
+						{
+							skillPaint = GameScr.sks[skillPaint.id - 65];
+							bool flag34 = this.charFocus != null;
+							if (flag34)
+							{
+								this.cx = this.charFocus.cx;
+								this.cy = this.charFocus.cy;
+								this.currentMovePoint = null;
+							}
+							bool flag35 = this.mobFocus != null;
+							if (flag35)
+							{
+								this.cx = this.mobFocus.x;
+								this.cy = this.mobFocus.y;
+								this.currentMovePoint = null;
+							}
+							ServerEffect.addServerEffect(60, this.cx, this.cy, 1);
+							this.telePortSkill = true;
+						}
+						bool flag36 = skillPaint.id >= 107 && skillPaint.id <= 113;
+						if (flag36)
+						{
+							skillPaint = GameScr.sks[skillPaint.id - 44];
+							EffecMn.addEff(new Effect(23, this.cx, this.cy + this.ch / 2, 3, 2, 1));
+						}
+						this.setAutoSkillPaint(skillPaint, sType);
+					}
+				}
+			}
 		}
-		if (this.me && (int)this.myskill.template.id == 9 && this.cHP <= this.cHPFull / 10)
-		{
-			return;
-		}
-		if (this.me)
-		{
-			if (this.mobFocus == null && this.charFocus == null)
-			{
-				this.stopUseChargeSkill();
-			}
-			if (this.mobFocus != null && (this.mobFocus.status == 1 || this.mobFocus.status == 0))
-			{
-				this.stopUseChargeSkill();
-			}
-			if (this.charFocus != null && (this.charFocus.statusMe == 14 || this.charFocus.statusMe == 5))
-			{
-				this.stopUseChargeSkill();
-			}
-			if ((int)this.myskill.template.id == 23)
-			{
-				if (this.charFocus != null && this.charFocus.holdEffID != 0)
-				{
-					return;
-				}
-				if (this.mobFocus != null && this.mobFocus.holdEffID != 0)
-				{
-					return;
-				}
-				if (this.holdEffID != 0)
-				{
-					return;
-				}
-			}
-			if (this.sleepEff || this.blindEff)
-			{
-				return;
-			}
-		}
-		Res.outz("skill id= " + skillPaint.id);
-		if (this.me && this.dart != null)
-		{
-			return;
-		}
-		if (TileMap.isOfflineMap())
-		{
-			return;
-		}
-		long num = mSystem.currentTimeMillis();
-		if (this.me)
-		{
-			if (this.isSelectingSkillBuffToPlayer() && this.charFocus == null)
-			{
-				return;
-			}
-			if (num - this.myskill.lastTimeUseThisSkill < (long)this.myskill.coolDown)
-			{
-				this.myskill.paintCanNotUseSkill = true;
-				return;
-			}
-			this.myskill.lastTimeUseThisSkill = num;
-			if (this.myskill.template.manaUseType == 2)
-			{
-				this.cMP = 1;
-			}
-			else if (this.myskill.template.manaUseType != 1)
-			{
-				this.cMP -= this.myskill.manaUse;
-			}
-			else
-			{
-				this.cMP -= this.myskill.manaUse * this.cMPFull / 100;
-			}
-			global::Char.myCharz().cStamina--;
-			GameScr.gI().isInjureMp = true;
-			GameScr.gI().twMp = 0;
-			if (this.cMP < 0)
-			{
-				this.cMP = 0;
-			}
-		}
-		if (this.me)
-		{
-			if ((int)this.myskill.template.id == 7)
-			{
-				SoundMn.gI().hoisinh();
-			}
-			if ((int)this.myskill.template.id == 6)
-			{
-				Service.gI().skill_not_focus(0);
-				GameScr.gI().isUseFreez = true;
-				SoundMn.gI().thaiduonghasan();
-			}
-			if ((int)this.myskill.template.id == 8)
-			{
-				if (!this.isCharge)
-				{
-					SoundMn.gI().taitaoPause();
-					Service.gI().skill_not_focus(1);
-					this.isCharge = true;
-					this.last = (this.cur = mSystem.currentTimeMillis());
-				}
-				else
-				{
-					Service.gI().skill_not_focus(3);
-					this.isCharge = false;
-					SoundMn.gI().taitaoPause();
-				}
-			}
-			if ((int)this.myskill.template.id == 13)
-			{
-				if ((int)this.isMonkey != 0)
-				{
-					GameScr.gI().auto = 0;
-					return;
-				}
-				if (this.isCreateDark)
-				{
-					return;
-				}
-				SoundMn.gI().gong();
-				Service.gI().skill_not_focus(6);
-				this.chargeCount = 0;
-				this.isWaitMonkey = true;
-				return;
-			}
-			else
-			{
-				if ((int)this.myskill.template.id == 14)
-				{
-					SoundMn.gI().gong();
-					Service.gI().skill_not_focus(7);
-					this.useChargeSkill(true);
-				}
-				if ((int)this.myskill.template.id == 21)
-				{
-					Service.gI().skill_not_focus(10);
-					return;
-				}
-				if ((int)this.myskill.template.id == 12)
-				{
-					Service.gI().skill_not_focus(8);
-				}
-				if ((int)this.myskill.template.id == 19)
-				{
-					Service.gI().skill_not_focus(9);
-					return;
-				}
-			}
-		}
-		if ((int)this.isMonkey == 1 && skillPaint.id >= 35 && skillPaint.id <= 41)
-		{
-			skillPaint = GameScr.sks[106];
-		}
-		if (skillPaint.id >= 128 && skillPaint.id <= 134)
-		{
-			skillPaint = GameScr.sks[skillPaint.id - 65];
-			if (this.charFocus != null)
-			{
-				this.cx = this.charFocus.cx;
-				this.cy = this.charFocus.cy;
-				this.currentMovePoint = null;
-			}
-			if (this.mobFocus != null)
-			{
-				this.cx = this.mobFocus.x;
-				this.cy = this.mobFocus.y;
-				this.currentMovePoint = null;
-			}
-			ServerEffect.addServerEffect(60, this.cx, this.cy, 1);
-			this.telePortSkill = true;
-		}
-		if (skillPaint.id >= 107 && skillPaint.id <= 113)
-		{
-			skillPaint = GameScr.sks[skillPaint.id - 44];
-			EffecMn.addEff(new Effect(23, this.cx, this.cy + this.ch / 2, 3, 2, 1));
-		}
-		this.setAutoSkillPaint(skillPaint, sType);
 	}
 
-	// Token: 0x06000652 RID: 1618 RVA: 0x00026CD8 File Offset: 0x000250D8
+	// Token: 0x060000DD RID: 221 RVA: 0x00010D88 File Offset: 0x0000EF88
 	public void useSkillNotFocus()
 	{
 		GameScr.gI().auto = 0;
 		global::Char.myCharz().setSkillPaint(GameScr.sks[(int)global::Char.myCharz().myskill.skillId], (!TileMap.tileTypeAt(global::Char.myCharz().cx, global::Char.myCharz().cy, 2)) ? 1 : 0);
 	}
 
-	// Token: 0x06000653 RID: 1619 RVA: 0x00026D38 File Offset: 0x00025138
+	// Token: 0x060000DE RID: 222 RVA: 0x00010DE4 File Offset: 0x0000EFE4
 	public void sendUseChargeSkill()
 	{
-		if (this.me && (this.isFreez || this.isUsePlane))
+		bool flag = this.me && (this.isFreez || this.isUsePlane);
+		if (flag)
 		{
 			GameScr.gI().auto = 0;
-			return;
 		}
-		long num = mSystem.currentTimeMillis();
-		if (this.me && num - this.myskill.lastTimeUseThisSkill < (long)this.myskill.coolDown)
+		else
 		{
-			this.myskill.paintCanNotUseSkill = true;
-			return;
-		}
-		if ((int)this.myskill.template.id == 10)
-		{
-			this.useChargeSkill(false);
-		}
-		if ((int)this.myskill.template.id == 11)
-		{
-			this.useChargeSkill(true);
+			long num = mSystem.currentTimeMillis();
+			bool flag2 = this.me && num - this.myskill.lastTimeUseThisSkill < (long)this.myskill.coolDown;
+			if (flag2)
+			{
+				this.myskill.paintCanNotUseSkill = true;
+			}
+			else
+			{
+				bool flag3 = this.myskill.template.id == 10;
+				if (flag3)
+				{
+					this.useChargeSkill(false);
+				}
+				bool flag4 = this.myskill.template.id == 11;
+				if (flag4)
+				{
+					this.useChargeSkill(true);
+				}
+			}
 		}
 	}
 
-	// Token: 0x06000654 RID: 1620 RVA: 0x00026DEC File Offset: 0x000251EC
+	// Token: 0x060000DF RID: 223 RVA: 0x00010EA8 File Offset: 0x0000F0A8
 	public void stopUseChargeSkill()
 	{
 		this.isFlyAndCharge = false;
 		this.isStandAndCharge = false;
 		this.isUseSkillAfterCharge = false;
 		this.isCreateDark = false;
-		if (this.me && this.statusMe != 14 && this.statusMe != 5)
+		bool flag = this.me && this.statusMe != 14 && this.statusMe != 5;
+		if (flag)
 		{
 			this.isLockMove = false;
 		}
 		GameScr.gI().auto = 0;
 	}
 
-	// Token: 0x06000655 RID: 1621 RVA: 0x00026E4C File Offset: 0x0002524C
+	// Token: 0x060000E0 RID: 224 RVA: 0x00010F0C File Offset: 0x0000F10C
 	public void useChargeSkill(bool isGround)
 	{
-		if (this.isCreateDark)
+		bool flag = this.isCreateDark;
+		if (!flag)
 		{
-			return;
-		}
-		GameScr.gI().auto = 0;
-		if (isGround)
-		{
-			if (!this.isStandAndCharge)
+			GameScr.gI().auto = 0;
+			if (isGround)
 			{
-				this.chargeCount = 0;
-				this.seconds = 50000;
-				this.posDisY = 0;
-				this.last = mSystem.currentTimeMillis();
-				if (this.me)
+				bool flag2 = !this.isStandAndCharge;
+				if (flag2)
 				{
-					this.isLockMove = true;
-					if (this.cgender == 1)
+					this.chargeCount = 0;
+					this.seconds = 50000;
+					this.posDisY = 0;
+					this.last = mSystem.currentTimeMillis();
+					bool flag3 = this.me;
+					if (flag3)
 					{
+						this.isLockMove = true;
+						bool flag4 = this.cgender == 1;
+						if (flag4)
+						{
+							Service.gI().skill_not_focus(4);
+						}
+					}
+					bool flag5 = this.cgender == 1;
+					if (flag5)
+					{
+						SoundMn.gI().gongName();
+					}
+					this.isStandAndCharge = true;
+				}
+			}
+			else
+			{
+				bool flag6 = !this.isFlyAndCharge;
+				if (flag6)
+				{
+					bool flag7 = this.me;
+					if (flag7)
+					{
+						GameScr.gI().auto = 0;
+						this.isLockMove = true;
 						Service.gI().skill_not_focus(4);
 					}
+					this.isUseSkillAfterCharge = false;
+					this.chargeCount = 0;
+					this.isFlyAndCharge = true;
+					this.posDisY = 0;
+					this.seconds = 50000;
+					this.isFlying = TileMap.tileTypeAt(this.cx, this.cy, 2);
 				}
-				if (this.cgender == 1)
-				{
-					SoundMn.gI().gongName();
-				}
-				this.isStandAndCharge = true;
 			}
-		}
-		else if (!this.isFlyAndCharge)
-		{
-			if (this.me)
-			{
-				GameScr.gI().auto = 0;
-				this.isLockMove = true;
-				Service.gI().skill_not_focus(4);
-			}
-			this.isUseSkillAfterCharge = false;
-			this.chargeCount = 0;
-			this.isFlyAndCharge = true;
-			this.posDisY = 0;
-			this.seconds = 50000;
-			this.isFlying = TileMap.tileTypeAt(this.cx, this.cy, 2);
 		}
 	}
 
-	// Token: 0x06000656 RID: 1622 RVA: 0x00026F64 File Offset: 0x00025364
+	// Token: 0x060000E1 RID: 225 RVA: 0x00011044 File Offset: 0x0000F244
 	public void setAutoSkillPaint(SkillPaint skillPaint, int sType)
 	{
 		this.skillPaint = skillPaint;
 		Res.outz("set auto skill " + ((skillPaint == null) ? "null" : "ko null"));
-		if (skillPaint.id >= 0 && skillPaint.id <= 6)
+		bool flag = skillPaint.id >= 0 && skillPaint.id <= 6;
+		if (flag)
 		{
 			int num = Res.random(0, skillPaint.id + 4) - 1;
-			if (num < 0)
+			bool flag2 = num < 0;
+			if (flag2)
 			{
 				num = 0;
 			}
-			if (num > 6)
+			bool flag3 = num > 6;
+			if (flag3)
 			{
 				num = 6;
 			}
 			this.skillPaintRandomPaint = GameScr.sks[num];
 		}
-		else if (skillPaint.id >= 14 && skillPaint.id <= 20)
-		{
-			int num2 = Res.random(0, skillPaint.id - 14 + 4) - 1;
-			if (num2 < 0)
-			{
-				num2 = 0;
-			}
-			if (num2 > 6)
-			{
-				num2 = 6;
-			}
-			this.skillPaintRandomPaint = GameScr.sks[num2 + 14];
-		}
-		else if (skillPaint.id >= 28 && skillPaint.id <= 34)
-		{
-			int num3 = Res.random(0, (((int)this.isMonkey != 1) ? skillPaint.id : 105) - (((int)this.isMonkey != 1) ? 28 : 105) + 4) - 1;
-			if (num3 < 0)
-			{
-				num3 = 0;
-			}
-			if (num3 > 6)
-			{
-				num3 = 6;
-			}
-			if ((int)this.isMonkey == 1)
-			{
-				num3 = 0;
-			}
-			this.skillPaintRandomPaint = GameScr.sks[num3 + (((int)this.isMonkey != 1) ? 28 : 105)];
-		}
-		else if (skillPaint.id >= 63 && skillPaint.id <= 69)
-		{
-			int num4 = Res.random(0, skillPaint.id - 63 + 4) - 1;
-			if (num4 < 0)
-			{
-				num4 = 0;
-			}
-			if (num4 > 6)
-			{
-				num4 = 6;
-			}
-			this.skillPaintRandomPaint = GameScr.sks[num4 + 63];
-		}
-		else if (skillPaint.id >= 107 && skillPaint.id <= 109)
-		{
-			int num5 = Res.random(0, skillPaint.id - 107 + 4) - 1;
-			if (num5 < 0)
-			{
-				num5 = 0;
-			}
-			if (num5 > 6)
-			{
-				num5 = 6;
-			}
-			this.skillPaintRandomPaint = GameScr.sks[num5 + 107];
-		}
 		else
 		{
-			this.skillPaintRandomPaint = skillPaint;
+			bool flag4 = skillPaint.id >= 14 && skillPaint.id <= 20;
+			if (flag4)
+			{
+				int num2 = Res.random(0, skillPaint.id - 14 + 4) - 1;
+				bool flag5 = num2 < 0;
+				if (flag5)
+				{
+					num2 = 0;
+				}
+				bool flag6 = num2 > 6;
+				if (flag6)
+				{
+					num2 = 6;
+				}
+				this.skillPaintRandomPaint = GameScr.sks[num2 + 14];
+			}
+			else
+			{
+				bool flag7 = skillPaint.id >= 28 && skillPaint.id <= 34;
+				if (flag7)
+				{
+					int num3 = Res.random(0, ((this.isMonkey != 1) ? skillPaint.id : 105) - ((this.isMonkey != 1) ? 28 : 105) + 4) - 1;
+					bool flag8 = num3 < 0;
+					if (flag8)
+					{
+						num3 = 0;
+					}
+					bool flag9 = num3 > 6;
+					if (flag9)
+					{
+						num3 = 6;
+					}
+					bool flag10 = this.isMonkey == 1;
+					if (flag10)
+					{
+						num3 = 0;
+					}
+					this.skillPaintRandomPaint = GameScr.sks[num3 + ((this.isMonkey != 1) ? 28 : 105)];
+				}
+				else
+				{
+					bool flag11 = skillPaint.id >= 63 && skillPaint.id <= 69;
+					if (flag11)
+					{
+						int num4 = Res.random(0, skillPaint.id - 63 + 4) - 1;
+						bool flag12 = num4 < 0;
+						if (flag12)
+						{
+							num4 = 0;
+						}
+						bool flag13 = num4 > 6;
+						if (flag13)
+						{
+							num4 = 6;
+						}
+						this.skillPaintRandomPaint = GameScr.sks[num4 + 63];
+					}
+					else
+					{
+						bool flag14 = skillPaint.id >= 107 && skillPaint.id <= 109;
+						if (flag14)
+						{
+							int num5 = Res.random(0, skillPaint.id - 107 + 4) - 1;
+							bool flag15 = num5 < 0;
+							if (flag15)
+							{
+								num5 = 0;
+							}
+							bool flag16 = num5 > 6;
+							if (flag16)
+							{
+								num5 = 6;
+							}
+							this.skillPaintRandomPaint = GameScr.sks[num5 + 107];
+						}
+						else
+						{
+							this.skillPaintRandomPaint = skillPaint;
+						}
+					}
+				}
+			}
 		}
 		this.sType = sType;
 		this.indexSkill = 0;
@@ -4162,52 +5177,75 @@ public class Char : IMapObject
 		this.cvy = 0;
 	}
 
-	// Token: 0x06000657 RID: 1623 RVA: 0x0002721E File Offset: 0x0002561E
+	// Token: 0x060000E2 RID: 226 RVA: 0x00011350 File Offset: 0x0000F550
 	public SkillInfoPaint[] skillInfoPaint()
 	{
-		if (this.skillPaint == null)
+		bool flag = this.skillPaint == null;
+		SkillInfoPaint[] result;
+		if (flag)
 		{
-			return null;
+			result = null;
 		}
-		if (this.skillPaintRandomPaint == null)
+		else
 		{
-			return null;
+			bool flag2 = this.skillPaintRandomPaint == null;
+			if (flag2)
+			{
+				result = null;
+			}
+			else
+			{
+				bool flag3 = this.sType == 0;
+				if (flag3)
+				{
+					result = this.skillPaintRandomPaint.skillStand;
+				}
+				else
+				{
+					result = this.skillPaintRandomPaint.skillfly;
+				}
+			}
 		}
-		if (this.sType == 0)
-		{
-			return this.skillPaintRandomPaint.skillStand;
-		}
-		return this.skillPaintRandomPaint.skillfly;
+		return result;
 	}
 
-	// Token: 0x06000658 RID: 1624 RVA: 0x0002725C File Offset: 0x0002565C
+	// Token: 0x060000E3 RID: 227 RVA: 0x000113B0 File Offset: 0x0000F5B0
 	public void setAttack()
 	{
-		if (this.me)
+		bool flag = this.me;
+		if (flag)
 		{
 			SkillPaint skillPaint = this.skillPaintRandomPaint;
-			if (this.dart != null)
+			bool flag2 = this.dart != null;
+			if (flag2)
 			{
 				skillPaint = this.dart.skillPaint;
 			}
-			if (skillPaint != null)
+			bool flag3 = skillPaint != null;
+			if (flag3)
 			{
 				MyVector myVector = new MyVector();
 				MyVector myVector2 = new MyVector();
-				if (this.charFocus != null)
+				bool flag4 = this.charFocus != null;
+				if (flag4)
 				{
 					myVector2.addElement(this.charFocus);
 				}
-				else if (this.mobFocus != null)
+				else
 				{
-					myVector.addElement(this.mobFocus);
+					bool flag5 = this.mobFocus != null;
+					if (flag5)
+					{
+						myVector.addElement(this.mobFocus);
+					}
 				}
 				this.effPaints = new EffectPaint[myVector.size() + myVector2.size()];
 				for (int i = 0; i < myVector.size(); i++)
 				{
 					this.effPaints[i] = new EffectPaint();
 					this.effPaints[i].effCharPaint = GameScr.efs[skillPaint.effectHappenOnMob - 1];
-					if (!this.isSelectingSkillUseAlone())
+					bool flag6 = !this.isSelectingSkillUseAlone();
+					if (flag6)
 					{
 						this.effPaints[i].eMob = (Mob)myVector.elementAt(i);
 					}
@@ -4219,19 +5257,26 @@ public class Char : IMapObject
 					this.effPaints[j + myVector.size()].eChar = (global::Char)myVector2.elementAt(j);
 				}
 				int type = 0;
-				if (this.mobFocus != null)
+				bool flag7 = this.mobFocus != null;
+				if (flag7)
 				{
 					type = 1;
 				}
-				else if (this.charFocus != null)
+				else
 				{
-					type = 2;
+					bool flag8 = this.charFocus != null;
+					if (flag8)
+					{
+						type = 2;
+					}
 				}
-				if (myVector.size() == 0 && myVector2.size() == 0)
+				bool flag9 = myVector.size() == 0 && myVector2.size() == 0;
+				if (flag9)
 				{
 					this.stopUseChargeSkill();
 				}
-				if (this.me && !this.isSelectingSkillUseAlone() && !this.hasSendAttack)
+				bool flag10 = this.me && !this.isSelectingSkillUseAlone() && !this.hasSendAttack;
+				if (flag10)
 				{
 					Service.gI().sendPlayerAttack(myVector, myVector2, type);
 					this.hasSendAttack = true;
@@ -4241,13 +5286,16 @@ public class Char : IMapObject
 		else
 		{
 			SkillPaint skillPaint2 = this.skillPaintRandomPaint;
-			if (this.dart != null)
+			bool flag11 = this.dart != null;
+			if (flag11)
 			{
 				skillPaint2 = this.dart.skillPaint;
 			}
-			if (skillPaint2 != null)
+			bool flag12 = skillPaint2 != null;
+			if (flag12)
 			{
-				if (this.attMobs != null)
+				bool flag13 = this.attMobs != null;
+				if (flag13)
 				{
 					this.effPaints = new EffectPaint[this.attMobs.Length];
 					for (int k = 0; k < this.attMobs.Length; k++)
@@ -4258,34 +5306,38 @@ public class Char : IMapObject
 					}
 					this.attMobs = null;
 				}
-				else if (this.attChars != null)
+				else
 				{
-					this.effPaints = new EffectPaint[this.attChars.Length];
-					for (int l = 0; l < this.attChars.Length; l++)
+					bool flag14 = this.attChars != null;
+					if (flag14)
 					{
-						this.effPaints[l] = new EffectPaint();
-						this.effPaints[l].effCharPaint = GameScr.efs[skillPaint2.effectHappenOnMob - 1];
-						this.effPaints[l].eChar = this.attChars[l];
+						this.effPaints = new EffectPaint[this.attChars.Length];
+						for (int l = 0; l < this.attChars.Length; l++)
+						{
+							this.effPaints[l] = new EffectPaint();
+							this.effPaints[l].effCharPaint = GameScr.efs[skillPaint2.effectHappenOnMob - 1];
+							this.effPaints[l].eChar = this.attChars[l];
+						}
+						this.attChars = null;
 					}
-					this.attChars = null;
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000659 RID: 1625 RVA: 0x00027576 File Offset: 0x00025976
+	// Token: 0x060000E4 RID: 228 RVA: 0x00011740 File Offset: 0x0000F940
 	public bool isOutX()
 	{
 		return this.cx < GameScr.cmx || this.cx > GameScr.cmx + GameScr.gW;
 	}
 
-	// Token: 0x0600065A RID: 1626 RVA: 0x000275A4 File Offset: 0x000259A4
+	// Token: 0x060000E5 RID: 229 RVA: 0x00011778 File Offset: 0x0000F978
 	public bool isPaint()
 	{
 		return this.cy >= GameScr.cmy && this.cy <= GameScr.cmy + GameScr.gH + 30 && !this.isOutX() && !this.isSetPos && !this.isFusion;
 	}
 
-	// Token: 0x0600065B RID: 1627 RVA: 0x00027606 File Offset: 0x00025A06
+	// Token: 0x060000E6 RID: 230 RVA: 0x000117C9 File Offset: 0x0000F9C9
 	public void createShadow(int x, int y, int life)
 	{
 		this.shadowX = x;
@@ -4293,445 +5345,550 @@ public class Char : IMapObject
 		this.shadowLife = life;
 	}
 
-	// Token: 0x0600065C RID: 1628 RVA: 0x0002761D File Offset: 0x00025A1D
+	// Token: 0x060000E7 RID: 231 RVA: 0x000117E1 File Offset: 0x0000F9E1
 	public void setMabuHold(bool m)
 	{
 		this.isMabuHold = m;
 	}
 
-	// Token: 0x0600065D RID: 1629 RVA: 0x00027628 File Offset: 0x00025A28
+	// Token: 0x060000E8 RID: 232 RVA: 0x000117EC File Offset: 0x0000F9EC
 	public virtual void paint(mGraphics g)
 	{
-		if (this.isHide)
+		bool flag = this.isHide;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.isMafuba)
-		{
-			this.paintCharWithoutSkill(g);
-			return;
-		}
-		if (this.isMabuHold)
-		{
-			if (this.cmtoChar)
+			bool flag2 = this.isMafuba;
+			if (flag2)
 			{
-				GameScr.cmtoX = this.cx - GameScr.gW2;
-				GameScr.cmtoY = this.cy - GameScr.gH23;
-				if (!GameCanvas.isTouchControl)
-				{
-					GameScr.cmtoX += GameScr.gW6 * this.cdir;
-				}
-			}
-			return;
-		}
-		if (!this.isPaint())
-		{
-			return;
-		}
-		if (!this.me && GameScr.notPaint)
-		{
-			return;
-		}
-		if (this.petFollow != null)
-		{
-			this.petFollow.paint(g);
-		}
-		this.paintMount1(g);
-		if (TileMap.isInAirMap() && this.cy >= TileMap.pxh - 48)
-		{
-			return;
-		}
-		if (this.isTeleport)
-		{
-			return;
-		}
-		if (this.holder && GameCanvas.gameTick % 2 == 0)
-		{
-			g.setColor(16185600);
-			if (this.charHold != null)
-			{
-				g.drawLine(this.cx, this.cy - this.ch / 2, this.charHold.cx, this.charHold.cy - this.charHold.ch / 2);
-			}
-			if (this.mobHold != null)
-			{
-				g.drawLine(this.cx, this.cy - this.ch / 2, this.mobHold.x, this.mobHold.y - this.mobHold.h / 2);
-			}
-		}
-		this.paintSuperEffBehind(g);
-		this.paintAuraBehind(g);
-		this.paintEffBehind(g);
-		this.paintEff_Lvup_behind(g);
-		this.paintEff_Pet(g);
-		if (this.shadowLife > 0)
-		{
-			if (GameCanvas.gameTick % 2 == 0)
-			{
-				this.paintCharBody(g, this.shadowX, this.shadowY, this.cdir, 25, true);
-			}
-			else if (this.shadowLife > 5)
-			{
-				this.paintCharBody(g, this.shadowX, this.shadowY, this.cdir, 7, true);
-			}
-		}
-		if (!this.isPaint() && this.skillPaint != null && (this.skillPaint.id < 70 || this.skillPaint.id > 76) && (this.skillPaint.id < 77 || this.skillPaint.id > 83))
-		{
-			if (this.skillPaint != null)
-			{
-				this.indexSkill = this.skillInfoPaint().Length;
-				this.skillPaint = null;
-			}
-			this.effPaints = null;
-			this.eff = null;
-			this.effTask = null;
-			this.indexEff = -1;
-			this.indexEffTask = -1;
-			return;
-		}
-		if (this.statusMe == 15 || (this.moveFast != null && this.moveFast[0] > 0))
-		{
-			return;
-		}
-		this.paintCharName_HP_MP_Overhead(g);
-		if (this.skillPaint == null || this.skillInfoPaint() == null || this.indexSkill >= this.skillInfoPaint().Length)
-		{
-			this.paintCharWithoutSkill(g);
-		}
-		if (this.arr != null)
-		{
-			this.arr.paint(g);
-		}
-		if (this.dart != null)
-		{
-			this.dart.paint(g);
-		}
-		this.paintEffect(g);
-		if (this.mobMe != null)
-		{
-		}
-		this.paintMount2(g);
-		this.paintEff_Lvup_front(g);
-		this.paintSuperEffFront(g);
-		this.paintAuraFront(g);
-		this.paintEffFront(g);
-		this.paint_map_line(g);
-	}
-
-	// Token: 0x0600065E RID: 1630 RVA: 0x000279C0 File Offset: 0x00025DC0
-	private void paint_map_line(mGraphics g)
-	{
-		if (this.isPaintNewSkill)
-		{
-			return;
-		}
-		if (this.x_hint != 0 && this.y_hint != 0 && this.statusMe != 14)
-		{
-			int arg = 0;
-			int x = this.cx - 30;
-			int y = this.cy - 15;
-			int num = -30;
-			int num2 = 5;
-			if (Res.abs(this.cy - (int)this.y_hint) > 150)
-			{
-				if (this.cy > (int)this.y_hint)
-				{
-					arg = 7;
-					x = this.cx;
-					y = this.cy - 15 - 60;
-				}
-				else
-				{
-					arg = 5;
-					x = this.cx;
-					y = this.cy - 15 + 60;
-				}
-			}
-			else if (this.cx > (int)this.x_hint)
-			{
-				arg = 2;
-			}
-			else if (this.cx <= (int)this.x_hint)
-			{
-				x = this.cx + 30;
-			}
-			if (GameCanvas.gameTick % 10 < 5)
-			{
-				return;
-			}
-			if (Res.abs(this.cx - (int)this.x_hint) > 100)
-			{
-				g.drawRegion(GameScr.arrow, 0, 0, 13, 16, arg, x, y, StaticObj.VCENTER_HCENTER);
+				this.paintCharWithoutSkill(g);
 			}
 			else
 			{
-				g.drawImage(Panel.imgBantay, (int)this.x_hint + num, (int)(this.y_hint - 60) + num2, 0);
+				bool flag3 = this.isMabuHold;
+				if (flag3)
+				{
+					bool flag4 = this.cmtoChar;
+					if (flag4)
+					{
+						GameScr.cmtoX = this.cx - GameScr.gW2;
+						GameScr.cmtoY = this.cy - GameScr.gH23;
+						bool flag5 = !GameCanvas.isTouchControl;
+						if (flag5)
+						{
+							GameScr.cmtoX += GameScr.gW6 * this.cdir;
+						}
+					}
+				}
+				else
+				{
+					bool flag6 = !this.isPaint();
+					if (!flag6)
+					{
+						bool flag7 = !this.me && GameScr.notPaint;
+						if (!flag7)
+						{
+							bool flag8 = this.petFollow != null;
+							if (flag8)
+							{
+								this.petFollow.paint(g);
+							}
+							this.paintMount1(g);
+							bool flag9 = TileMap.isInAirMap() && this.cy >= TileMap.pxh - 48;
+							if (!flag9)
+							{
+								bool flag10 = this.isTeleport;
+								if (!flag10)
+								{
+									bool flag11 = this.holder && GameCanvas.gameTick % 2 == 0;
+									if (flag11)
+									{
+										g.setColor(16185600);
+										bool flag12 = this.charHold != null;
+										if (flag12)
+										{
+											g.drawLine(this.cx, this.cy - this.ch / 2, this.charHold.cx, this.charHold.cy - this.charHold.ch / 2);
+										}
+										bool flag13 = this.mobHold != null;
+										if (flag13)
+										{
+											g.drawLine(this.cx, this.cy - this.ch / 2, this.mobHold.x, this.mobHold.y - this.mobHold.h / 2);
+										}
+									}
+									this.paintSuperEffBehind(g);
+									this.paintAuraBehind(g);
+									this.paintEffBehind(g);
+									this.paintEff_Lvup_behind(g);
+									this.paintEff_Pet(g);
+									bool flag14 = this.shadowLife > 0;
+									if (flag14)
+									{
+										bool flag15 = GameCanvas.gameTick % 2 == 0;
+										if (flag15)
+										{
+											this.paintCharBody(g, this.shadowX, this.shadowY, this.cdir, 25, true);
+										}
+										else
+										{
+											bool flag16 = this.shadowLife > 5;
+											if (flag16)
+											{
+												this.paintCharBody(g, this.shadowX, this.shadowY, this.cdir, 7, true);
+											}
+										}
+									}
+									bool flag17 = !this.isPaint() && this.skillPaint != null && (this.skillPaint.id < 70 || this.skillPaint.id > 76) && (this.skillPaint.id < 77 || this.skillPaint.id > 83);
+									if (flag17)
+									{
+										bool flag18 = this.skillPaint != null;
+										if (flag18)
+										{
+											this.indexSkill = this.skillInfoPaint().Length;
+											this.skillPaint = null;
+										}
+										this.effPaints = null;
+										this.eff = null;
+										this.effTask = null;
+										this.indexEff = -1;
+										this.indexEffTask = -1;
+									}
+									else
+									{
+										bool flag19 = this.statusMe == 15 || (this.moveFast != null && this.moveFast[0] > 0);
+										if (!flag19)
+										{
+											this.paintCharName_HP_MP_Overhead(g);
+											bool flag20 = this.skillPaint == null || this.skillInfoPaint() == null || this.indexSkill >= this.skillInfoPaint().Length;
+											if (flag20)
+											{
+												this.paintCharWithoutSkill(g);
+											}
+											bool flag21 = this.arr != null;
+											if (flag21)
+											{
+												this.arr.paint(g);
+											}
+											bool flag22 = this.dart != null;
+											if (flag22)
+											{
+												this.dart.paint(g);
+											}
+											this.paintEffect(g);
+											bool flag23 = this.mobMe != null;
+											if (flag23)
+											{
+											}
+											this.paintMount2(g);
+											this.paintEff_Lvup_front(g);
+											this.paintSuperEffFront(g);
+											this.paintAuraFront(g);
+											this.paintEffFront(g);
+											this.paint_map_line(g);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x0600065F RID: 1631 RVA: 0x00027B14 File Offset: 0x00025F14
+	// Token: 0x060000E9 RID: 233 RVA: 0x00011C18 File Offset: 0x0000FE18
+	private void paint_map_line(mGraphics g)
+	{
+		bool flag = this.isPaintNewSkill;
+		if (!flag)
+		{
+			bool flag2 = this.x_hint != 0 && this.y_hint != 0 && this.statusMe != 14;
+			if (flag2)
+			{
+				int arg = 0;
+				int x = this.cx - 30;
+				int y = this.cy - 15;
+				int num = -30;
+				int num2 = 5;
+				bool flag3 = Res.abs(this.cy - (int)this.y_hint) > 150;
+				if (flag3)
+				{
+					bool flag4 = this.cy > (int)this.y_hint;
+					if (flag4)
+					{
+						arg = 7;
+						x = this.cx;
+						y = this.cy - 15 - 60;
+					}
+					else
+					{
+						arg = 5;
+						x = this.cx;
+						y = this.cy - 15 + 60;
+					}
+				}
+				else
+				{
+					bool flag5 = this.cx > (int)this.x_hint;
+					if (flag5)
+					{
+						arg = 2;
+					}
+					else
+					{
+						bool flag6 = this.cx <= (int)this.x_hint;
+						if (flag6)
+						{
+							x = this.cx + 30;
+						}
+					}
+				}
+				bool flag7 = GameCanvas.gameTick % 10 < 5;
+				if (!flag7)
+				{
+					bool flag8 = Res.abs(this.cx - (int)this.x_hint) > 100;
+					if (flag8)
+					{
+						g.drawRegion(GameScr.arrow, 0, 0, 13, 16, arg, x, y, StaticObj.VCENTER_HCENTER);
+					}
+					else
+					{
+						g.drawImage(Panel.imgBantay, (int)this.x_hint + num, (int)(this.y_hint - 60) + num2, 0);
+					}
+				}
+			}
+		}
+	}
+
+	// Token: 0x060000EA RID: 234 RVA: 0x00011D98 File Offset: 0x0000FF98
 	private void paintEff_Pet(mGraphics g)
 	{
 		for (int i = 0; i < this.vEffChar.size(); i++)
 		{
 			Effect effect = (Effect)this.vEffChar.elementAt(i);
-			if (effect.effId >= 201)
+			bool flag = effect.effId >= 201;
+			if (flag)
 			{
 				effect.paint(g);
 			}
 		}
 	}
 
-	// Token: 0x06000660 RID: 1632 RVA: 0x00027B68 File Offset: 0x00025F68
+	// Token: 0x060000EB RID: 235 RVA: 0x00011DF4 File Offset: 0x0000FFF4
 	private void paintSuperEffBehind(mGraphics g)
 	{
-		if (this.me)
+		bool flag = this.me;
+		if (flag)
 		{
-			if (!global::Char.isPaintAura && this.idAuraEff > -1)
+			bool flag2 = !global::Char.isPaintAura && this.idAuraEff > -1;
+			if (flag2)
 			{
 				return;
 			}
 		}
-		else if (this.idAuraEff > -1)
+		else
 		{
-			return;
+			bool flag3 = this.idAuraEff > -1;
+			if (flag3)
+			{
+				return;
+			}
 		}
-		if (!global::Char.isPaintAura2)
+		bool flag4 = !global::Char.isPaintAura2;
+		if (!flag4)
 		{
-			return;
-		}
-		if ((this.statusMe == 1 || this.statusMe == 6) && !GameCanvas.panel.isShow && mSystem.currentTimeMillis() - this.timeBlue > 0L && !this.isCopy && this.clevel >= 16)
-		{
-			int num = 7598;
-			int num2 = 4;
-			if (this.clevel >= 19)
+			bool flag5 = (this.statusMe == 1 || this.statusMe == 6) && !GameCanvas.panel.isShow && mSystem.currentTimeMillis() - this.timeBlue > 0L && !this.isCopy && this.clevel >= 16;
+			if (flag5)
 			{
-				num = 7676;
-			}
-			if (this.clevel >= 22)
-			{
-				num = 7677;
-			}
-			if (this.clevel >= 25)
-			{
-				num = 7678;
-			}
-			if (num != -1)
-			{
-				Small small = SmallImage.imgNew[num];
-				if (small == null)
+				int num = 7598;
+				int num2 = 4;
+				bool flag6 = this.clevel >= 19;
+				if (flag6)
 				{
-					SmallImage.createImage(num);
+					num = 7676;
 				}
-				else
+				bool flag7 = this.clevel >= 22;
+				if (flag7)
 				{
-					int y = GameCanvas.gameTick / 4 % num2 * (mGraphics.getImageHeight(small.img) / num2);
-					g.drawRegion(small.img, 0, y, mGraphics.getImageWidth(small.img), mGraphics.getImageHeight(small.img) / num2, 0, this.cx, this.cy + 2, mGraphics.BOTTOM | mGraphics.HCENTER);
+					num = 7677;
+				}
+				bool flag8 = this.clevel >= 25;
+				if (flag8)
+				{
+					num = 7678;
+				}
+				bool flag9 = num != -1;
+				if (flag9)
+				{
+					Small small = SmallImage.imgNew[num];
+					bool flag10 = small == null;
+					if (flag10)
+					{
+						SmallImage.createImage(num);
+					}
+					else
+					{
+						int y = GameCanvas.gameTick / 4 % num2 * (mGraphics.getImageHeight(small.img) / num2);
+						g.drawRegion(small.img, 0, y, mGraphics.getImageWidth(small.img), mGraphics.getImageHeight(small.img) / num2, 0, this.cx, this.cy + 2, mGraphics.BOTTOM | mGraphics.HCENTER);
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000661 RID: 1633 RVA: 0x00027CC0 File Offset: 0x000260C0
+	// Token: 0x060000EC RID: 236 RVA: 0x00011F9C File Offset: 0x0001019C
 	private void paintSuperEffFront(mGraphics g)
 	{
-		if (this.me)
+		bool flag2 = this.me;
+		if (flag2)
 		{
-			if (!global::Char.isPaintAura && this.idAuraEff > -1)
+			bool flag3 = !global::Char.isPaintAura && this.idAuraEff > -1;
+			if (flag3)
 			{
 				return;
 			}
 		}
-		else if (this.idAuraEff > -1)
+		else
 		{
-			return;
-		}
-		if (!global::Char.isPaintAura2)
-		{
-			return;
-		}
-		if (this.statusMe == 1 || this.statusMe == 6)
-		{
-			if (!GameCanvas.panel.isShow && mSystem.currentTimeMillis() - this.timeBlue > 0L)
+			bool flag4 = this.idAuraEff > -1;
+			if (flag4)
 			{
-				if (this.isCopy)
+				return;
+			}
+		}
+		bool flag5 = !global::Char.isPaintAura2;
+		if (!flag5)
+		{
+			bool flag6 = this.statusMe == 1 || this.statusMe == 6;
+			if (flag6)
+			{
+				bool flag7 = !GameCanvas.panel.isShow && mSystem.currentTimeMillis() - this.timeBlue > 0L;
+				if (flag7)
 				{
-					if (GameCanvas.gameTick % 2 == 0)
+					bool flag8 = this.isCopy;
+					if (flag8)
 					{
-						this.tBlue++;
-					}
-					if (this.tBlue > 6)
-					{
-						this.tBlue = 0;
-					}
-					g.drawImage(GameCanvas.imgViolet[this.tBlue], this.cx, this.cy + 9, mGraphics.BOTTOM | mGraphics.HCENTER);
-				}
-				else
-				{
-					if (this.clevel >= 14 && !GameCanvas.lowGraphic)
-					{
-						bool flag = false;
-						if (mSystem.currentTimeMillis() - this.timeBlue > -1000L && this.IsAddDust1)
-						{
-							flag = true;
-							this.IsAddDust1 = false;
-						}
-						if (mSystem.currentTimeMillis() - this.timeBlue > -500L && this.IsAddDust2)
-						{
-							flag = true;
-							this.IsAddDust2 = false;
-						}
-						if (flag)
-						{
-							GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-							GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-							this.addDustEff(1);
-						}
-					}
-					if (this.clevel == 14)
-					{
-						if (GameCanvas.gameTick % 2 == 0)
+						bool flag9 = GameCanvas.gameTick % 2 == 0;
+						if (flag9)
 						{
 							this.tBlue++;
 						}
-						if (this.tBlue > 6)
-						{
-							this.tBlue = 0;
-						}
-						g.drawImage(GameCanvas.imgBlue[this.tBlue], this.cx, this.cy + 9, mGraphics.BOTTOM | mGraphics.HCENTER);
-					}
-					else if (this.clevel == 15)
-					{
-						if (GameCanvas.gameTick % 2 == 0)
-						{
-							this.tBlue++;
-						}
-						if (this.tBlue > 6)
+						bool flag10 = this.tBlue > 6;
+						if (flag10)
 						{
 							this.tBlue = 0;
 						}
 						g.drawImage(GameCanvas.imgViolet[this.tBlue], this.cx, this.cy + 9, mGraphics.BOTTOM | mGraphics.HCENTER);
 					}
-					else if (this.clevel >= 16)
+					else
 					{
-						int num = -1;
-						int num2 = 4;
-						if (this.clevel >= 16 && this.clevel < 22)
+						bool flag11 = this.clevel >= 14 && !GameCanvas.lowGraphic;
+						if (flag11)
 						{
-							num = 7599;
-							num2 = 4;
-						}
-						if (num != -1)
-						{
-							Small small = SmallImage.imgNew[num];
-							if (small == null)
+							bool flag = false;
+							bool flag12 = mSystem.currentTimeMillis() - this.timeBlue > -1000L && this.IsAddDust1;
+							if (flag12)
 							{
-								SmallImage.createImage(num);
+								flag = true;
+								this.IsAddDust1 = false;
+							}
+							bool flag13 = mSystem.currentTimeMillis() - this.timeBlue > -500L && this.IsAddDust2;
+							if (flag13)
+							{
+								flag = true;
+								this.IsAddDust2 = false;
+							}
+							bool flag14 = flag;
+							if (flag14)
+							{
+								GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+								GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+								this.addDustEff(1);
+							}
+						}
+						bool flag15 = this.clevel == 14;
+						if (flag15)
+						{
+							bool flag16 = GameCanvas.gameTick % 2 == 0;
+							if (flag16)
+							{
+								this.tBlue++;
+							}
+							bool flag17 = this.tBlue > 6;
+							if (flag17)
+							{
+								this.tBlue = 0;
+							}
+							g.drawImage(GameCanvas.imgBlue[this.tBlue], this.cx, this.cy + 9, mGraphics.BOTTOM | mGraphics.HCENTER);
+						}
+						else
+						{
+							bool flag18 = this.clevel == 15;
+							if (flag18)
+							{
+								bool flag19 = GameCanvas.gameTick % 2 == 0;
+								if (flag19)
+								{
+									this.tBlue++;
+								}
+								bool flag20 = this.tBlue > 6;
+								if (flag20)
+								{
+									this.tBlue = 0;
+								}
+								g.drawImage(GameCanvas.imgViolet[this.tBlue], this.cx, this.cy + 9, mGraphics.BOTTOM | mGraphics.HCENTER);
 							}
 							else
 							{
-								int y = GameCanvas.gameTick / 4 % num2 * (mGraphics.getImageHeight(small.img) / num2);
-								g.drawRegion(small.img, 0, y, mGraphics.getImageWidth(small.img), mGraphics.getImageHeight(small.img) / num2, 0, this.cx, this.cy + 2, mGraphics.BOTTOM | mGraphics.HCENTER);
+								bool flag21 = this.clevel >= 16;
+								if (flag21)
+								{
+									int num = -1;
+									int num2 = 4;
+									bool flag22 = this.clevel >= 16 && this.clevel < 22;
+									if (flag22)
+									{
+										num = 7599;
+										num2 = 4;
+									}
+									bool flag23 = num != -1;
+									if (flag23)
+									{
+										Small small = SmallImage.imgNew[num];
+										bool flag24 = small == null;
+										if (flag24)
+										{
+											SmallImage.createImage(num);
+										}
+										else
+										{
+											int y = GameCanvas.gameTick / 4 % num2 * (mGraphics.getImageHeight(small.img) / num2);
+											g.drawRegion(small.img, 0, y, mGraphics.getImageWidth(small.img), mGraphics.getImageHeight(small.img) / num2, 0, this.cx, this.cy + 2, mGraphics.BOTTOM | mGraphics.HCENTER);
+										}
+									}
+								}
 							}
 						}
 					}
 				}
 			}
-		}
-		else
-		{
-			this.timeBlue = mSystem.currentTimeMillis() + 1500L;
-			this.IsAddDust1 = true;
-			this.IsAddDust2 = true;
+			else
+			{
+				this.timeBlue = mSystem.currentTimeMillis() + 1500L;
+				this.IsAddDust1 = true;
+				this.IsAddDust2 = true;
+			}
 		}
 	}
 
-	// Token: 0x06000662 RID: 1634 RVA: 0x00028008 File Offset: 0x00026408
+	// Token: 0x060000ED RID: 237 RVA: 0x00012384 File Offset: 0x00010584
 	private void paintEffect(mGraphics g)
 	{
-		if (this.effPaints != null)
+		bool flag = this.effPaints != null;
+		if (flag)
 		{
 			for (int i = 0; i < this.effPaints.Length; i++)
 			{
-				if (this.effPaints[i] != null)
+				bool flag2 = this.effPaints[i] != null;
+				if (flag2)
 				{
-					if (this.effPaints[i].eMob != null)
+					bool flag3 = this.effPaints[i].eMob != null;
+					if (flag3)
 					{
 						int y = this.effPaints[i].eMob.y;
-						if (this.effPaints[i].eMob is BigBoss)
+						bool flag4 = this.effPaints[i].eMob is BigBoss;
+						if (flag4)
 						{
 							y = this.effPaints[i].eMob.y - 60;
 						}
-						if (this.effPaints[i].eMob is BigBoss2)
+						bool flag5 = this.effPaints[i].eMob is BigBoss2;
+						if (flag5)
 						{
 							y = this.effPaints[i].eMob.y - 50;
 						}
-						if (this.effPaints[i].eMob is BachTuoc)
+						bool flag6 = this.effPaints[i].eMob is BachTuoc;
+						if (flag6)
 						{
 							y = this.effPaints[i].eMob.y - 40;
 						}
 						SmallImage.drawSmallImage(g, this.effPaints[i].getImgId(), this.effPaints[i].eMob.x, y, 0, mGraphics.BOTTOM | mGraphics.HCENTER);
 					}
-					else if (this.effPaints[i].eChar != null)
+					else
 					{
-						SmallImage.drawSmallImage(g, this.effPaints[i].getImgId(), this.effPaints[i].eChar.cx, this.effPaints[i].eChar.cy, 0, mGraphics.BOTTOM | mGraphics.HCENTER);
+						bool flag7 = this.effPaints[i].eChar != null;
+						if (flag7)
+						{
+							SmallImage.drawSmallImage(g, this.effPaints[i].getImgId(), this.effPaints[i].eChar.cx, this.effPaints[i].eChar.cy, 0, mGraphics.BOTTOM | mGraphics.HCENTER);
+						}
 					}
 				}
 			}
 		}
-		if (this.indexEff >= 0 && this.eff != null)
+		bool flag8 = this.indexEff >= 0 && this.eff != null;
+		if (flag8)
 		{
 			SmallImage.drawSmallImage(g, this.eff.arrEfInfo[this.indexEff].idImg, this.cx + this.eff.arrEfInfo[this.indexEff].dx, this.cy + this.eff.arrEfInfo[this.indexEff].dy, 0, mGraphics.VCENTER | mGraphics.HCENTER);
 		}
-		if (this.indexEffTask >= 0 && this.effTask != null)
+		bool flag9 = this.indexEffTask >= 0 && this.effTask != null;
+		if (flag9)
 		{
 			SmallImage.drawSmallImage(g, this.effTask.arrEfInfo[this.indexEffTask].idImg, this.cx + this.effTask.arrEfInfo[this.indexEffTask].dx, this.cy + this.effTask.arrEfInfo[this.indexEffTask].dy, 0, mGraphics.VCENTER | mGraphics.HCENTER);
 		}
 	}
 
-	// Token: 0x06000663 RID: 1635 RVA: 0x00028276 File Offset: 0x00026676
+	// Token: 0x060000EE RID: 238 RVA: 0x00003136 File Offset: 0x00001336
 	private void paintArrowAttack(mGraphics g)
 	{
 	}
 
-	// Token: 0x06000664 RID: 1636 RVA: 0x00028278 File Offset: 0x00026678
+	// Token: 0x060000EF RID: 239 RVA: 0x0001263C File Offset: 0x0001083C
 	public void paintHp(mGraphics g, int x, int y)
 	{
 		int num = this.cHP * 100 / this.cHPFull / 10 - 1;
-		if (num < 0)
+		bool flag = num < 0;
+		if (flag)
 		{
 			num = 0;
 		}
-		if (num > 9)
+		bool flag2 = num > 9;
+		if (flag2)
 		{
 			num = 9;
 		}
-		if (!this.me)
+		bool flag3 = !this.me;
+		if (flag3)
 		{
 			g.drawRegion(Mob.imgHP, 0, 6 * (9 - num), 9, 6, 0, x, y, 3);
 		}
-		if ((int)this.cTypePk != 0 || ((int)global::Char.myCharz().cFlag != 0 && (int)this.cFlag != 0 && ((int)this.cFlag == 8 || (int)global::Char.myCharz().cFlag == 8 || (int)this.cFlag != (int)global::Char.myCharz().cFlag)))
+		bool flag4 = this.cTypePk != 0 || (global::Char.myCharz().cFlag != 0 && this.cFlag != 0 && (this.cFlag == 8 || global::Char.myCharz().cFlag == 8 || this.cFlag != global::Char.myCharz().cFlag));
+		if (flag4)
 		{
 			this.len = (int)((long)this.cHP * 100L / (long)this.cHPFull * (long)this.w_hp_bar) / 100;
 			num = (int)((long)this.cHP * 100L / (long)this.cHPFull);
-			if (num < 30)
+			bool flag5 = num < 30;
+			if (flag5)
 			{
 				this.imgHPtem = GameScr.imgHP_tm_do;
 			}
-			else if (num < 60)
-			{
-				this.imgHPtem = GameScr.imgHP_tm_vang;
-			}
 			else
 			{
-				this.imgHPtem = GameScr.imgHP_tm_xanh;
+				bool flag6 = num < 60;
+				if (flag6)
+				{
+					this.imgHPtem = GameScr.imgHP_tm_vang;
+				}
+				else
+				{
+					this.imgHPtem = GameScr.imgHP_tm_xanh;
+				}
 			}
 			int imageWidth = mGraphics.getImageWidth(GameScr.imgHP_tm_do);
 			int imageHeight = mGraphics.getImageHeight(GameScr.imgHP_tm_do);
 			int w = imageWidth * num / 100;
 			g.drawImage(GameScr.imgHP_tm_xam, x - (imageWidth >> 1), y - 1, mGraphics.TOP | mGraphics.LEFT);
-			if (this.len < 5)
+			bool flag7 = this.len < 5;
+			if (flag7)
 			{
-				if (GameCanvas.gameTick % 6 < 3)
+				bool flag8 = GameCanvas.gameTick % 6 < 3;
+				if (flag8)
 				{
 					g.drawRegion(this.imgHPtem, 0, 0, w, imageHeight, 0, x - (imageWidth >> 1), y - 1, mGraphics.TOP | mGraphics.LEFT);
 				}
@@ -4743,248 +5900,318 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000665 RID: 1637 RVA: 0x00028448 File Offset: 0x00026848
+	// Token: 0x060000F0 RID: 240 RVA: 0x00012834 File Offset: 0x00010A34
 	public int getClassColor()
 	{
 		int result = 9145227;
-		if (this.nClass.classId == 1 || this.nClass.classId == 2)
+		bool flag = this.nClass.classId == 1 || this.nClass.classId == 2;
+		if (flag)
 		{
 			result = 16711680;
 		}
-		else if (this.nClass.classId == 3 || this.nClass.classId == 4)
+		else
 		{
-			result = 33023;
-		}
-		else if (this.nClass.classId == 5 || this.nClass.classId == 6)
-		{
-			result = 7443811;
+			bool flag2 = this.nClass.classId == 3 || this.nClass.classId == 4;
+			if (flag2)
+			{
+				result = 33023;
+			}
+			else
+			{
+				bool flag3 = this.nClass.classId == 5 || this.nClass.classId == 6;
+				if (flag3)
+				{
+					result = 7443811;
+				}
+			}
 		}
 		return result;
 	}
 
-	// Token: 0x06000666 RID: 1638 RVA: 0x000284E0 File Offset: 0x000268E0
+	// Token: 0x060000F1 RID: 241 RVA: 0x000128D4 File Offset: 0x00010AD4
 	public void paintNameInSameParty(mGraphics g)
 	{
-		if ((int)this.cTypePk == 3 || (int)this.cTypePk == 5)
+		bool flag = this.cTypePk == 3 || this.cTypePk == 5;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.isPaint())
-		{
-			if (global::Char.myCharz().charFocus == null || !global::Char.myCharz().charFocus.Equals(this))
+			bool flag2 = this.isPaint();
+			if (flag2)
 			{
-				mFont.tahoma_7_yellow.drawString(g, this.cName, this.cx, this.cy - this.ch - mFont.tahoma_7_green.getHeight() - 5, mFont.CENTER, mFont.tahoma_7_grey);
-			}
-			else if (global::Char.myCharz().charFocus != null && global::Char.myCharz().charFocus.Equals(this))
-			{
-				mFont.tahoma_7_yellow.drawString(g, this.cName, this.cx, this.cy - this.ch - mFont.tahoma_7_green.getHeight() - 10, mFont.CENTER, mFont.tahoma_7_grey);
+				bool flag3 = global::Char.myCharz().charFocus == null || !global::Char.myCharz().charFocus.Equals(this);
+				if (flag3)
+				{
+					mFont.tahoma_7_yellow.drawString(g, this.cName, this.cx, this.cy - this.ch - mFont.tahoma_7_green.getHeight() - 5, mFont.CENTER, mFont.tahoma_7_grey);
+				}
+				else
+				{
+					bool flag4 = global::Char.myCharz().charFocus != null && global::Char.myCharz().charFocus.Equals(this);
+					if (flag4)
+					{
+						mFont.tahoma_7_yellow.drawString(g, this.cName, this.cx, this.cy - this.ch - mFont.tahoma_7_green.getHeight() - 10, mFont.CENTER, mFont.tahoma_7_grey);
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x06000667 RID: 1639 RVA: 0x000285D8 File Offset: 0x000269D8
+	// Token: 0x060000F2 RID: 242 RVA: 0x000129D8 File Offset: 0x00010BD8
 	private void paintCharName_HP_MP_Overhead(mGraphics g)
 	{
 		Part part = GameScr.parts[this.getFHead(this.head)];
 		int num = global::Char.CharInfo[this.cf][0][2] - (int)part.pi[global::Char.CharInfo[this.cf][0][0]].dy + 5;
-		if (this.isInvisiblez && !this.me)
+		bool flag4 = this.isInvisiblez && !this.me;
+		if (!flag4)
 		{
-			return;
-		}
-		if (!this.me && TileMap.mapID == 113 && this.cy >= 360)
-		{
-			return;
-		}
-		if (this.me)
-		{
-			num += 5;
-			this.paintHp(g, this.cx, this.cy - num + 3);
-			if (this.fraDanhHieu != null)
+			bool flag5 = !this.me && TileMap.mapID == 113 && this.cy >= 360;
+			if (!flag5)
 			{
-				int x = this.cx - this.fraDanhHieu.frameWidth / 2;
-				int y = this.cy - num + 3 - mFont.tahoma_7.getHeight() - (this.fraDanhHieu.frameHeight + 5);
-				if (GameCanvas.gameTick % 5 == 0)
+				bool flag6 = this.me;
+				if (flag6)
 				{
-					this.danhHieuFramme++;
-				}
-				if (this.danhHieuFramme >= this.fraDanhHieu.nFrame)
-				{
-					this.danhHieuFramme = 0;
-				}
-				this.fraDanhHieu.drawFrame(this.danhHieuFramme, x, y, 0, mGraphics.TOP | mGraphics.LEFT, g);
-			}
-		}
-		else
-		{
-			bool flag = global::Char.myChar.clan != null && this.clanID == global::Char.myChar.clan.ID;
-			bool flag2 = (int)this.cTypePk == 3 || (int)this.cTypePk == 5;
-			bool flag3 = (int)this.cTypePk == 4;
-			if (this.cName.StartsWith("$"))
-			{
-				this.cName = this.cName.Substring(1);
-				this.isPet = true;
-			}
-			if (this.cName.StartsWith("#"))
-			{
-				this.cName = this.cName.Substring(1);
-				this.isMiniPet = true;
-			}
-            mFont mFont = mFont.tahoma_7_whiteSmall;
-            if (global::Char.myCharz().charFocus != null && global::Char.myCharz().charFocus.Equals(this))
-			{
-				num += 5;
-				this.paintHp(g, this.cx, this.cy - num + 3);
-				if (this.fraDanhHieu != null)
-				{
-					int x2 = this.cx - this.fraDanhHieu.frameWidth / 2;
-					int y2 = this.cy - num + 3 - mFont.tahoma_7.getHeight() - (this.fraDanhHieu.frameHeight + 5);
-					if (GameCanvas.gameTick % 5 == 0)
+					num += 5;
+					this.paintHp(g, this.cx, this.cy - num + 3);
+					bool flag7 = this.fraDanhHieu != null;
+					if (flag7)
 					{
-						this.danhHieuFramme++;
+						int x = this.cx - this.fraDanhHieu.frameWidth / 2;
+						int y = this.cy - num + 3 - mFont.tahoma_7.getHeight() - (this.fraDanhHieu.frameHeight + 5);
+						bool flag8 = GameCanvas.gameTick % 5 == 0;
+						if (flag8)
+						{
+							this.danhHieuFramme++;
+						}
+						bool flag9 = this.danhHieuFramme >= this.fraDanhHieu.nFrame;
+						if (flag9)
+						{
+							this.danhHieuFramme = 0;
+						}
+						this.fraDanhHieu.drawFrame(this.danhHieuFramme, x, y, 0, mGraphics.TOP | mGraphics.LEFT, g);
 					}
-					if (this.danhHieuFramme >= this.fraDanhHieu.nFrame)
-					{
-						this.danhHieuFramme = 0;
-					}
-					this.fraDanhHieu.drawFrame(this.danhHieuFramme, x2, y2, 0, mGraphics.TOP | mGraphics.LEFT, g);
-				}
-			}
-			num += mFont.tahoma_7_white.getHeight();
-			if (this.isPet || this.isMiniPet)
-			{
-				mFont = mFont.tahoma_7_blue1Small;
-			}
-			else if (flag2)
-			{
-				mFont = mFont.nameFontRed;
-			}
-			else if (flag3)
-			{
-				mFont = mFont.nameFontYellow;
-			}
-			else if (flag)
-			{
-				mFont = mFont.nameFontGreen;
-			}
-			if ((this.paintName || flag2 || flag3) && !flag)
-			{
-				if (mSystem.clientType == 1)
-				{
-					mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER, mFont.tahoma_7_greySmall);
-				}
-				else if (this.charID == -83)
-				{
-					mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER, mFont.tahoma_7_greySmall);
 				}
 				else
 				{
-					mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER);
-				}
-				num += mFont.tahoma_7.getHeight();
-			}
-			if (flag)
-			{
-				if (global::Char.myCharz().charFocus != null && global::Char.myCharz().charFocus.Equals(this))
-				{
-					mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER, mFont.tahoma_7_greySmall);
-				}
-				else if (this.charFocus == null)
-				{
-					mFont.drawString(g, this.cName, this.cx - 10, this.cy - num + 3, mFont.LEFT, mFont.tahoma_7_grey);
-					this.paintHp(g, this.cx - 16, this.cy - num + 10);
+					bool flag = global::Char.myChar.clan != null && this.clanID == global::Char.myChar.clan.ID;
+					bool flag2 = this.cTypePk == 3 || this.cTypePk == 5;
+					bool flag3 = this.cTypePk == 4;
+					bool flag10 = this.cName.StartsWith("$");
+					if (flag10)
+					{
+						this.cName = this.cName.Substring(1);
+						this.isPet = true;
+					}
+					bool flag11 = this.cName.StartsWith("#");
+					if (flag11)
+					{
+						this.cName = this.cName.Substring(1);
+						this.isMiniPet = true;
+					}
+					mFont mFont = mFont.tahoma_7_whiteSmall;
+					bool flag12 = global::Char.myCharz().charFocus != null && global::Char.myCharz().charFocus.Equals(this);
+					if (flag12)
+					{
+						num += 5;
+						this.paintHp(g, this.cx, this.cy - num + 3);
+						bool flag13 = this.fraDanhHieu != null;
+						if (flag13)
+						{
+							int x2 = this.cx - this.fraDanhHieu.frameWidth / 2;
+							int y2 = this.cy - num + 3 - mFont.tahoma_7.getHeight() - (this.fraDanhHieu.frameHeight + 5);
+							bool flag14 = GameCanvas.gameTick % 5 == 0;
+							if (flag14)
+							{
+								this.danhHieuFramme++;
+							}
+							bool flag15 = this.danhHieuFramme >= this.fraDanhHieu.nFrame;
+							if (flag15)
+							{
+								this.danhHieuFramme = 0;
+							}
+							this.fraDanhHieu.drawFrame(this.danhHieuFramme, x2, y2, 0, mGraphics.TOP | mGraphics.LEFT, g);
+						}
+					}
+					num += mFont.tahoma_7_white.getHeight();
+					bool flag16 = this.isPet || this.isMiniPet;
+					if (flag16)
+					{
+						mFont = mFont.tahoma_7_blue1Small;
+					}
+					else
+					{
+						bool flag17 = flag2;
+						if (flag17)
+						{
+							mFont = mFont.nameFontRed;
+						}
+						else
+						{
+							bool flag18 = flag3;
+							if (flag18)
+							{
+								mFont = mFont.nameFontYellow;
+							}
+							else
+							{
+								bool flag19 = flag;
+								if (flag19)
+								{
+									mFont = mFont.nameFontGreen;
+								}
+							}
+						}
+					}
+					bool flag20 = (this.paintName || flag2 || flag3) && !flag;
+					if (flag20)
+					{
+						bool flag21 = mSystem.clientType == 1;
+						if (flag21)
+						{
+							mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER, mFont.tahoma_7_greySmall);
+						}
+						else
+						{
+							bool flag22 = this.charID == -83;
+							if (flag22)
+							{
+								mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER, mFont.tahoma_7_greySmall);
+							}
+							else
+							{
+								mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER);
+							}
+						}
+						num += mFont.tahoma_7.getHeight();
+					}
+					bool flag23 = flag;
+					if (flag23)
+					{
+						bool flag24 = global::Char.myCharz().charFocus != null && global::Char.myCharz().charFocus.Equals(this);
+						if (flag24)
+						{
+							mFont.drawString(g, this.cName, this.cx, this.cy - num, mFont.CENTER, mFont.tahoma_7_greySmall);
+						}
+						else
+						{
+							bool flag25 = this.charFocus == null;
+							if (flag25)
+							{
+								mFont.drawString(g, this.cName, this.cx - 10, this.cy - num + 3, mFont.LEFT, mFont.tahoma_7_grey);
+								this.paintHp(g, this.cx - 16, this.cy - num + 10);
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000668 RID: 1640 RVA: 0x00028A88 File Offset: 0x00026E88
+	// Token: 0x060000F3 RID: 243 RVA: 0x00012EF4 File Offset: 0x000110F4
 	public void paintShadow(mGraphics g)
 	{
-		if (this.isMabuHold)
+		bool flag = this.isMabuHold;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.head == 377)
-		{
-			return;
-		}
-		if (this.leg == 471)
-		{
-			return;
-		}
-		if (this.isTeleport)
-		{
-			return;
-		}
-		if (this.isFlyUp)
-		{
-			return;
-		}
-		int num = (int)TileMap.size;
-		if ((TileMap.mapID < 114 || TileMap.mapID > 120) && TileMap.mapID != 127 && TileMap.mapID != 128)
-		{
-			if (!TileMap.tileTypeAt(this.xSd + num / 2, this.ySd + 1, 4))
+			bool flag2 = this.head == 377;
+			if (!flag2)
 			{
-				if (TileMap.tileTypeAt((this.xSd - num / 2) / num, (this.ySd + 1) / num) == 0)
+				bool flag3 = this.leg == 471;
+				if (!flag3)
 				{
-					g.setClip(this.xSd / num * num, (this.ySd - 30) / num * num, 100, 100);
-				}
-				else if (TileMap.tileTypeAt((this.xSd + num / 2) / num, (this.ySd + 1) / num) == 0)
-				{
-					g.setClip(this.xSd / num * num, (this.ySd - 30) / num * num, num, 100);
-				}
-				else if (TileMap.tileTypeAt(this.xSd - num / 2, this.ySd + 1, 8))
-				{
-					g.setClip(this.xSd / 24 * num, (this.ySd - 30) / num * num, num, 100);
+					bool flag4 = this.isTeleport;
+					if (!flag4)
+					{
+						bool flag5 = this.isFlyUp;
+						if (!flag5)
+						{
+							int num = (int)TileMap.size;
+							bool flag6 = (TileMap.mapID < 114 || TileMap.mapID > 120) && TileMap.mapID != 127 && TileMap.mapID != 128;
+							if (flag6)
+							{
+								bool flag7 = !TileMap.tileTypeAt(this.xSd + num / 2, this.ySd + 1, 4);
+								if (flag7)
+								{
+									bool flag8 = TileMap.tileTypeAt((this.xSd - num / 2) / num, (this.ySd + 1) / num) == 0;
+									if (flag8)
+									{
+										g.setClip(this.xSd / num * num, (this.ySd - 30) / num * num, 100, 100);
+									}
+									else
+									{
+										bool flag9 = TileMap.tileTypeAt((this.xSd + num / 2) / num, (this.ySd + 1) / num) == 0;
+										if (flag9)
+										{
+											g.setClip(this.xSd / num * num, (this.ySd - 30) / num * num, num, 100);
+										}
+										else
+										{
+											bool flag10 = TileMap.tileTypeAt(this.xSd - num / 2, this.ySd + 1, 8);
+											if (flag10)
+											{
+												g.setClip(this.xSd / 24 * num, (this.ySd - 30) / num * num, num, 100);
+											}
+										}
+									}
+								}
+							}
+							g.drawImage(TileMap.bong, this.xSd, this.ySd, 3);
+							g.setClip(GameScr.cmx, GameScr.cmy - GameCanvas.transY, GameScr.gW, GameScr.gH + 2 * GameCanvas.transY);
+						}
+					}
 				}
 			}
 		}
-		g.drawImage(TileMap.bong, this.xSd, this.ySd, 3);
-		g.setClip(GameScr.cmx, GameScr.cmy - GameCanvas.transY, GameScr.gW, GameScr.gH + 2 * GameCanvas.transY);
 	}
 
-	// Token: 0x06000669 RID: 1641 RVA: 0x00028C40 File Offset: 0x00027040
+	// Token: 0x060000F4 RID: 244 RVA: 0x000130E4 File Offset: 0x000112E4
 	public void updateShadown()
 	{
 		int i = 0;
 		this.xSd = this.cx;
-		if (TileMap.tileTypeAt(this.cx, this.cy, 2))
+		bool flag = TileMap.tileTypeAt(this.cx, this.cy, 2);
+		if (flag)
 		{
 			this.ySd = this.cy;
-			return;
 		}
-		this.ySd = this.cy;
-		while (i < 30)
+		else
 		{
-			i++;
-			this.ySd += 24;
-			if (TileMap.tileTypeAt(this.xSd, this.ySd, 2))
+			this.ySd = this.cy;
+			while (i < 30)
 			{
-				if (this.ySd % 24 != 0)
+				i++;
+				this.ySd += 24;
+				bool flag2 = TileMap.tileTypeAt(this.xSd, this.ySd, 2);
+				if (flag2)
 				{
-					this.ySd -= this.ySd % 24;
+					bool flag3 = this.ySd % 24 != 0;
+					if (flag3)
+					{
+						this.ySd -= this.ySd % 24;
+					}
+					break;
 				}
-				break;
 			}
 		}
 	}
 
-	// Token: 0x0600066A RID: 1642 RVA: 0x00028CEC File Offset: 0x000270EC
+	// Token: 0x060000F5 RID: 245 RVA: 0x00013194 File Offset: 0x00011394
 	private void paintCharWithoutSkill(mGraphics g)
 	{
 		try
 		{
-			if (this.isMafuba)
+			bool flag = this.isMafuba;
+			if (flag)
 			{
 				this.paintCharBody(g, this.xMFB, this.yMFB, this.cdir, this.cf, false);
 			}
 			else
 			{
-				if (this.isInvisiblez)
+				bool flag2 = this.isInvisiblez;
+				if (flag2)
 				{
-					if (this.me)
+					bool flag3 = this.me;
+					if (flag3)
 					{
-						if (GameCanvas.gameTick % 50 == 48 || GameCanvas.gameTick % 50 == 90)
+						bool flag4 = GameCanvas.gameTick % 50 == 48 || GameCanvas.gameTick % 50 == 90;
+						if (flag4)
 						{
 							SmallImage.drawSmallImage(g, 1196, this.cx, this.cy - 18, 0, mGraphics.VCENTER | mGraphics.HCENTER);
 						}
@@ -4998,7 +6225,8 @@ public class Char : IMapObject
 				{
 					this.paintCharBody(g, this.cx, this.cy + this.fy, this.cdir, this.cf, true);
 				}
-				if (this.isLockAttack)
+				bool flag5 = this.isLockAttack;
+				if (flag5)
 				{
 					SmallImage.drawSmallImage(g, 290, this.cx, this.cy, 0, mGraphics.BOTTOM | mGraphics.HCENTER);
 				}
@@ -5010,19 +6238,22 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x0600066B RID: 1643 RVA: 0x00028E44 File Offset: 0x00027244
+	// Token: 0x060000F6 RID: 246 RVA: 0x00013300 File Offset: 0x00011500
 	public void paintBag(mGraphics g, short[] id, int x, int y, int dir, bool isPaintChar)
 	{
 		int num = 0;
 		int num2 = 0;
-		if (this.statusMe == 6)
+		bool flag = this.statusMe == 6;
+		if (flag)
 		{
 			num = 8;
 			num2 = 17;
 		}
-		if (this.statusMe == 1)
+		bool flag2 = this.statusMe == 1;
+		if (flag2)
 		{
-			if (this.cp1 % 15 < 5)
+			bool flag3 = this.cp1 % 15 < 5;
+			if (flag3)
 			{
 				num = 8;
 				num2 = 17;
@@ -5033,9 +6264,11 @@ public class Char : IMapObject
 				num2 = 18;
 			}
 		}
-		if (this.statusMe == 2)
+		bool flag4 = this.statusMe == 2;
+		if (flag4)
 		{
-			if (this.cf <= 3)
+			bool flag5 = this.cf <= 3;
+			if (flag5)
 			{
 				num = 7;
 				num2 = 17;
@@ -5046,14 +6279,17 @@ public class Char : IMapObject
 				num2 = 18;
 			}
 		}
-		if (this.statusMe == 3 || this.statusMe == 9)
+		bool flag6 = this.statusMe == 3 || this.statusMe == 9;
+		if (flag6)
 		{
 			num = 5;
 			num2 = 20;
 		}
-		if (this.statusMe == 4)
+		bool flag7 = this.statusMe == 4;
+		if (flag7)
 		{
-			if (this.cf == 8)
+			bool flag8 = this.cf == 8;
+			if (flag8)
 			{
 				num = 5;
 				num2 = 16;
@@ -5064,9 +6300,11 @@ public class Char : IMapObject
 				num2 = 20;
 			}
 		}
-		if (this.statusMe == 10)
+		bool flag9 = this.statusMe == 10;
+		if (flag9)
 		{
-			if (this.cf == 8)
+			bool flag10 = this.cf == 8;
+			if (flag10)
 			{
 				num = 0;
 				num2 = 23;
@@ -5077,34 +6315,42 @@ public class Char : IMapObject
 				num2 = 22;
 			}
 		}
-		if ((int)this.isInjure > 0)
+		bool flag11 = this.isInjure > 0;
+		if (flag11)
 		{
 			num = 5;
 			num2 = 18;
 		}
-		if (this.skillPaint != null && this.skillInfoPaint() != null && this.indexSkill < this.skillInfoPaint().Length)
+		bool flag12 = this.skillPaint != null && this.skillInfoPaint() != null && this.indexSkill < this.skillInfoPaint().Length;
+		if (flag12)
 		{
 			num = -1;
 			num2 = 17;
 		}
 		this.fBag++;
-		if (this.fBag > 10000)
+		bool flag13 = this.fBag > 10000;
+		if (flag13)
 		{
 			this.fBag = 0;
 		}
 		sbyte b = (sbyte)(this.fBag / 4 % id.Length);
-		if (!isPaintChar)
+		bool flag14 = !isPaintChar;
+		if (flag14)
 		{
-			if (id.Length == 2)
+			bool flag15 = id.Length == 2;
+			if (flag15)
 			{
 				b = 1;
 			}
-			if (id.Length == 3)
+			bool flag16 = id.Length == 3;
+			if (flag16)
 			{
-				if (id[2] >= 0)
+				bool flag17 = id[2] >= 0;
+				if (flag17)
 				{
 					b = 2;
-					if (GameCanvas.gameTick % 10 > 5)
+					bool flag18 = GameCanvas.gameTick % 10 > 5;
+					if (flag18)
 					{
 						b = 1;
 					}
@@ -5115,73 +6361,95 @@ public class Char : IMapObject
 				}
 			}
 		}
-		else if (id.Length > 1 && ((int)b == 0 || (int)b == 1) && this.statusMe != 1 && this.statusMe != 6)
+		else
 		{
-			this.fBag = 0;
-			b = 0;
-			if (GameCanvas.gameTick % 10 > 5)
+			bool flag19 = id.Length > 1 && (b == 0 || b == 1) && this.statusMe != 1 && this.statusMe != 6;
+			if (flag19)
 			{
-				b = 1;
+				this.fBag = 0;
+				b = 0;
+				bool flag20 = GameCanvas.gameTick % 10 > 5;
+				if (flag20)
+				{
+					b = 1;
+				}
 			}
 		}
 		SmallImage.drawSmallImage(g, (int)id[(int)b], x + ((dir != 1) ? num : (-num)), y - num2, (dir != 1) ? 2 : 0, StaticObj.VCENTER_HCENTER);
 	}
 
-	// Token: 0x0600066C RID: 1644 RVA: 0x00029058 File Offset: 0x00027458
+	// Token: 0x060000F7 RID: 247 RVA: 0x0001355C File Offset: 0x0001175C
 	public bool isCharBodyImageID(int id)
 	{
 		Part part = GameScr.parts[this.head];
 		Part part2 = GameScr.parts[this.leg];
 		Part part3 = GameScr.parts[this.body];
-		for (int i = 0; i < global::Char.CharInfo.Length; i++)
+		int i = 0;
+		while (i < global::Char.CharInfo.Length)
 		{
-			if (id == (int)part.pi[global::Char.CharInfo[i][0][0]].id)
+			bool flag = id == (int)part.pi[global::Char.CharInfo[i][0][0]].id;
+			bool result;
+			if (flag)
 			{
-				return true;
+				result = true;
 			}
-			if (id == (int)part2.pi[global::Char.CharInfo[i][1][0]].id)
+			else
 			{
-				return true;
+				bool flag2 = id == (int)part2.pi[global::Char.CharInfo[i][1][0]].id;
+				if (flag2)
+				{
+					result = true;
+				}
+				else
+				{
+					bool flag3 = id == (int)part3.pi[global::Char.CharInfo[i][2][0]].id;
+					if (!flag3)
+					{
+						i++;
+						continue;
+					}
+					result = true;
+				}
 			}
-			if (id == (int)part3.pi[global::Char.CharInfo[i][2][0]].id)
-			{
-				return true;
-			}
+			return result;
 		}
 		return false;
 	}
 
-	// Token: 0x0600066D RID: 1645 RVA: 0x00029104 File Offset: 0x00027504
+	// Token: 0x060000F8 RID: 248 RVA: 0x00013628 File Offset: 0x00011828
 	public void paintHead(mGraphics g, int cx, int cy, int look)
 	{
 		Part part = GameScr.parts[this.head];
 		SmallImage.drawSmallImage(g, (int)part.pi[global::Char.CharInfo[0][0][0]].id, cx, cy, (look != 0) ? 2 : 0, mGraphics.RIGHT | mGraphics.VCENTER);
 	}
 
-	// Token: 0x0600066E RID: 1646 RVA: 0x00029158 File Offset: 0x00027558
+	// Token: 0x060000F9 RID: 249 RVA: 0x00013678 File Offset: 0x00011878
 	public void paintHeadWithXY(mGraphics g, int x, int y, int look)
 	{
 		Part part = GameScr.parts[this.head];
 		SmallImage.drawSmallImage(g, (int)part.pi[global::Char.CharInfo[0][0][0]].id, x + global::Char.CharInfo[0][0][1] + (int)part.pi[global::Char.CharInfo[0][0][0]].dx - 3, y + 3, look, mGraphics.LEFT | mGraphics.BOTTOM);
 	}
 
-	// Token: 0x0600066F RID: 1647 RVA: 0x000291C8 File Offset: 0x000275C8
+	// Token: 0x060000FA RID: 250 RVA: 0x000136E8 File Offset: 0x000118E8
 	public void paintCharBody(mGraphics g, int cx, int cy, int cdir, int cf, bool isPaintBag)
 	{
 		this.ph = GameScr.parts[this.head];
 		this.pl = GameScr.parts[this.leg];
 		this.pb = GameScr.parts[this.body];
-		if (this.bag >= 0 && this.statusMe != 14)
+		bool flag = this.bag >= 0 && this.statusMe != 14;
+		if (flag)
 		{
-			if (!ClanImage.idImages.containsKey(this.bag + string.Empty))
+			bool flag2 = !ClanImage.idImages.containsKey(this.bag.ToString() + string.Empty);
+			if (flag2)
 			{
-				ClanImage.idImages.put(this.bag + string.Empty, new ClanImage());
+				ClanImage.idImages.put(this.bag.ToString() + string.Empty, new ClanImage());
 				Service.gI().requestBagImage((sbyte)this.bag);
 			}
 			else
 			{
-				ClanImage clanImage = (ClanImage)ClanImage.idImages.get(this.bag + string.Empty);
-				if (clanImage.idImage != null && isPaintBag)
+				ClanImage clanImage = (ClanImage)ClanImage.idImages.get(this.bag.ToString() + string.Empty);
+				bool flag3 = clanImage.idImage != null && isPaintBag;
+				if (flag3)
 				{
 					this.paintBag(g, clanImage.idImage, cx, cy, cdir, true);
 				}
@@ -5191,21 +6459,25 @@ public class Char : IMapObject
 		int anchor = 24;
 		int anchor2 = StaticObj.TOP_RIGHT;
 		int num2 = -1;
-		if (cdir == 1)
+		bool flag4 = cdir == 1;
+		if (flag4)
 		{
 			num = 0;
 			anchor = 0;
 			anchor2 = 0;
 			num2 = 1;
 		}
-		if (this.statusMe == 14)
+		bool flag5 = this.statusMe == 14;
+		if (flag5)
 		{
-			if (GameCanvas.gameTick % 4 > 0)
+			bool flag6 = GameCanvas.gameTick % 4 > 0;
+			if (flag6)
 			{
 				g.drawImage(ItemMap.imageFlare, cx, cy - this.ch - 11, mGraphics.HCENTER | mGraphics.VCENTER);
 			}
 			int num3 = 0;
-			if (this.head == 89 || this.head == 457 || this.head == 460 || this.head == 461 || this.head == 462 || this.head == 463 || this.head == 464 || this.head == 465 || this.head == 466)
+			bool flag7 = this.head == 89 || this.head == 457 || this.head == 460 || this.head == 461 || this.head == 462 || this.head == 463 || this.head == 464 || this.head == 465 || this.head == 466;
+			if (flag7)
 			{
 				num3 = 15;
 			}
@@ -5213,7 +6485,8 @@ public class Char : IMapObject
 			SmallImage.drawSmallImage(g, 79, cx, cy - this.ch - 8, 0, mGraphics.HCENTER | mGraphics.BOTTOM);
 			SmallImage.drawSmallImage(g, (int)this.ph.pi[global::Char.CharInfo[cf][0][0]].id, cx + (global::Char.CharInfo[cf][0][1] + (int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dx) * num2, cy - global::Char.CharInfo[cf][0][2] + (int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy, num, anchor);
 			this.paintHat_behind(g, cf, cy - global::Char.CharInfo[cf][2][2] + (int)this.pb.pi[global::Char.CharInfo[cf][2][0]].dy);
-			if (this.isHead_2Fr(this.head))
+			bool flag8 = this.isHead_2Fr(this.head);
+			if (flag8)
 			{
 				Part part = GameScr.parts[this.getFHead(this.head)];
 				SmallImage.drawSmallImage(g, (int)part.pi[global::Char.CharInfo[cf][0][0]].id, cx + (global::Char.CharInfo[cf][0][1] + (int)part.pi[global::Char.CharInfo[cf][0][0]].dx) * num2, cy - global::Char.CharInfo[cf][0][2] + (int)part.pi[global::Char.CharInfo[cf][0][0]].dy, num, anchor);
@@ -5228,7 +6501,8 @@ public class Char : IMapObject
 		else
 		{
 			this.paintHat_behind(g, cf, cy - global::Char.CharInfo[cf][2][2] + (int)this.pb.pi[global::Char.CharInfo[cf][2][0]].dy);
-			if (this.isHead_2Fr(this.head))
+			bool flag9 = this.isHead_2Fr(this.head);
+			if (flag9)
 			{
 				Part part2 = GameScr.parts[this.getFHead(this.head)];
 				SmallImage.drawSmallImage(g, (int)part2.pi[global::Char.CharInfo[cf][0][0]].id, cx + (global::Char.CharInfo[cf][0][1] + (int)part2.pi[global::Char.CharInfo[cf][0][0]].dx) * num2, cy - global::Char.CharInfo[cf][0][2] + (int)part2.pi[global::Char.CharInfo[cf][0][0]].dy, num, anchor);
@@ -5241,82 +6515,98 @@ public class Char : IMapObject
 			SmallImage.drawSmallImage(g, (int)this.pb.pi[global::Char.CharInfo[cf][2][0]].id, cx + (global::Char.CharInfo[cf][2][1] + (int)this.pb.pi[global::Char.CharInfo[cf][2][0]].dx) * num2, cy - global::Char.CharInfo[cf][2][2] + (int)this.pb.pi[global::Char.CharInfo[cf][2][0]].dy, num, anchor);
 			this.paintRedEye(g, cx + (global::Char.CharInfo[cf][0][1] + (int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dx) * num2, cy - global::Char.CharInfo[cf][0][2] + (int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy, num, anchor);
 		}
-		this.ch = (((int)this.isMonkey != 1 && !this.isFusion) ? (global::Char.CharInfo[0][0][2] + (int)this.ph.pi[global::Char.CharInfo[0][0][0]].dy + 10) : 60);
-		int num4 = (Res.abs((int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy) < 22) ? ((int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy) : (((int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy >= 0) ? ((int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy - 5) : ((int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy + 5));
+		this.ch = ((this.isMonkey != 1 && !this.isFusion) ? (global::Char.CharInfo[0][0][2] + (int)this.ph.pi[global::Char.CharInfo[0][0][0]].dy + 10) : 60);
+		int num4 = (int)((Res.abs((int)this.ph.pi[global::Char.CharInfo[cf][0][0]].dy) < 22) ? this.ph.pi[global::Char.CharInfo[cf][0][0]].dy : ((this.ph.pi[global::Char.CharInfo[cf][0][0]].dy >= 0) ? (this.ph.pi[global::Char.CharInfo[cf][0][0]].dy - 5) : (this.ph.pi[global::Char.CharInfo[cf][0][0]].dy + 5)));
 		this.cH_new = cy - global::Char.CharInfo[cf][0][2] + num4;
-		if (this.statusMe == 1 && this.charID > 0 && !this.isMask && !this.isUseChargeSkill() && !this.isWaitMonkey && this.skillPaint == null && cf != 23 && this.bag < 0 && ((GameCanvas.gameTick + this.charID) % 30 == 0 || this.isFreez))
+		bool flag10 = this.statusMe == 1 && this.charID > 0 && !this.isMask && !this.isUseChargeSkill() && !this.isWaitMonkey && this.skillPaint == null && cf != 23 && this.bag < 0 && ((GameCanvas.gameTick + this.charID) % 30 == 0 || this.isFreez);
+		if (flag10)
 		{
 			g.drawImage((this.cgender != 1) ? global::Char.eyeTraiDat : global::Char.eyeNamek, cx + -((this.cgender != 1) ? 2 : 2) * num2, cy - 32 + ((this.cgender != 1) ? 11 : 10) - cf, anchor2);
 		}
-		if (this.eProtect != null)
+		bool flag11 = this.eProtect != null;
+		if (flag11)
 		{
 			this.eProtect.paint(g);
 		}
-		if (this.eDanhHieu != null)
+		bool flag12 = this.eDanhHieu != null;
+		if (flag12)
 		{
 			this.eDanhHieu.paint(g);
 		}
 		this.paintPKFlag(g);
 	}
 
-	// Token: 0x06000670 RID: 1648 RVA: 0x00029B80 File Offset: 0x00027F80
+	// Token: 0x060000FB RID: 251 RVA: 0x0001408C File Offset: 0x0001228C
 	public void paintCharWithSkill(mGraphics g)
 	{
 		this.ty = 0;
 		SkillInfoPaint[] array = this.skillInfoPaint();
 		this.cf = array[this.indexSkill].status;
 		this.paintCharWithoutSkill(g);
-		if (this.cdir == 1)
+		bool flag = this.cdir == 1;
+		if (flag)
 		{
-			if (this.eff0 != null)
+			bool flag2 = this.eff0 != null;
+			if (flag2)
 			{
-				if (this.dx0 == 0)
+				bool flag3 = this.dx0 == 0;
+				if (flag3)
 				{
 					this.dx0 = array[this.indexSkill].e0dx;
 				}
-				if (this.dy0 == 0)
+				bool flag4 = this.dy0 == 0;
+				if (flag4)
 				{
 					this.dy0 = array[this.indexSkill].e0dy;
 				}
 				SmallImage.drawSmallImage(g, this.eff0.arrEfInfo[this.i0].idImg, this.cx + this.dx0 + this.eff0.arrEfInfo[this.i0].dx, this.cy + this.dy0 + this.eff0.arrEfInfo[this.i0].dy, 0, mGraphics.VCENTER | mGraphics.HCENTER);
 				this.i0++;
-				if (this.i0 >= this.eff0.arrEfInfo.Length)
+				bool flag5 = this.i0 >= this.eff0.arrEfInfo.Length;
+				if (flag5)
 				{
 					this.eff0 = null;
 					this.i0 = (this.dx0 = (this.dy0 = 0));
 				}
 			}
-			if (this.eff1 != null)
+			bool flag6 = this.eff1 != null;
+			if (flag6)
 			{
-				if (this.dx1 == 0)
+				bool flag7 = this.dx1 == 0;
+				if (flag7)
 				{
 					this.dx1 = array[this.indexSkill].e1dx;
 				}
-				if (this.dy1 == 0)
+				bool flag8 = this.dy1 == 0;
+				if (flag8)
 				{
 					this.dy1 = array[this.indexSkill].e1dy;
 				}
 				SmallImage.drawSmallImage(g, this.eff1.arrEfInfo[this.i1].idImg, this.cx + this.dx1 + this.eff1.arrEfInfo[this.i1].dx, this.cy + this.dy1 + this.eff1.arrEfInfo[this.i1].dy, 0, mGraphics.VCENTER | mGraphics.HCENTER);
 				this.i1++;
-				if (this.i1 >= this.eff1.arrEfInfo.Length)
+				bool flag9 = this.i1 >= this.eff1.arrEfInfo.Length;
+				if (flag9)
 				{
 					this.eff1 = null;
 					this.i1 = (this.dx1 = (this.dy1 = 0));
 				}
 			}
-			if (this.eff2 != null)
+			bool flag10 = this.eff2 != null;
+			if (flag10)
 			{
-				if (this.dx2 == 0)
+				bool flag11 = this.dx2 == 0;
+				if (flag11)
 				{
 					this.dx2 = array[this.indexSkill].e2dx;
 				}
-				if (this.dy2 == 0)
+				bool flag12 = this.dy2 == 0;
+				if (flag12)
 				{
 					this.dy2 = array[this.indexSkill].e2dy;
 				}
 				SmallImage.drawSmallImage(g, this.eff2.arrEfInfo[this.i2].idImg, this.cx + this.dx2 + this.eff2.arrEfInfo[this.i2].dx, this.cy + this.dy2 + this.eff2.arrEfInfo[this.i2].dy, 0, mGraphics.VCENTER | mGraphics.HCENTER);
 				this.i2++;
-				if (this.i2 >= this.eff2.arrEfInfo.Length)
+				bool flag13 = this.i2 >= this.eff2.arrEfInfo.Length;
+				if (flag13)
 				{
 					this.eff2 = null;
 					this.i2 = (this.dx2 = (this.dy2 = 0));
@@ -5325,19 +6615,23 @@ public class Char : IMapObject
 		}
 		else
 		{
-			if (this.eff0 != null)
+			bool flag14 = this.eff0 != null;
+			if (flag14)
 			{
-				if (this.dx0 == 0)
+				bool flag15 = this.dx0 == 0;
+				if (flag15)
 				{
 					this.dx0 = array[this.indexSkill].e0dx;
 				}
-				if (this.dy0 == 0)
+				bool flag16 = this.dy0 == 0;
+				if (flag16)
 				{
 					this.dy0 = array[this.indexSkill].e0dy;
 				}
 				SmallImage.drawSmallImage(g, this.eff0.arrEfInfo[this.i0].idImg, this.cx - this.dx0 - this.eff0.arrEfInfo[this.i0].dx, this.cy + this.dy0 + this.eff0.arrEfInfo[this.i0].dy, 2, mGraphics.VCENTER | mGraphics.HCENTER);
 				this.i0++;
-				if (this.i0 >= this.eff0.arrEfInfo.Length)
+				bool flag17 = this.i0 >= this.eff0.arrEfInfo.Length;
+				if (flag17)
 				{
 					this.eff0 = null;
 					this.i0 = 0;
@@ -5345,19 +6639,23 @@ public class Char : IMapObject
 					this.dy0 = 0;
 				}
 			}
-			if (this.eff1 != null)
+			bool flag18 = this.eff1 != null;
+			if (flag18)
 			{
-				if (this.dx1 == 0)
+				bool flag19 = this.dx1 == 0;
+				if (flag19)
 				{
 					this.dx1 = array[this.indexSkill].e1dx;
 				}
-				if (this.dy1 == 0)
+				bool flag20 = this.dy1 == 0;
+				if (flag20)
 				{
 					this.dy1 = array[this.indexSkill].e1dy;
 				}
 				SmallImage.drawSmallImage(g, this.eff1.arrEfInfo[this.i1].idImg, this.cx - this.dx1 - this.eff1.arrEfInfo[this.i1].dx, this.cy + this.dy1 + this.eff1.arrEfInfo[this.i1].dy, 2, mGraphics.VCENTER | mGraphics.HCENTER);
 				this.i1++;
-				if (this.i1 >= this.eff1.arrEfInfo.Length)
+				bool flag21 = this.i1 >= this.eff1.arrEfInfo.Length;
+				if (flag21)
 				{
 					this.eff1 = null;
 					this.i1 = 0;
@@ -5365,19 +6663,23 @@ public class Char : IMapObject
 					this.dy1 = 0;
 				}
 			}
-			if (this.eff2 != null)
+			bool flag22 = this.eff2 != null;
+			if (flag22)
 			{
-				if (this.dx2 == 0)
+				bool flag23 = this.dx2 == 0;
+				if (flag23)
 				{
 					this.dx2 = array[this.indexSkill].e2dx;
 				}
-				if (this.dy2 == 0)
+				bool flag24 = this.dy2 == 0;
+				if (flag24)
 				{
 					this.dy2 = array[this.indexSkill].e2dy;
 				}
 				SmallImage.drawSmallImage(g, this.eff2.arrEfInfo[this.i2].idImg, this.cx - this.dx2 - this.eff2.arrEfInfo[this.i2].dx, this.cy + this.dy2 + this.eff2.arrEfInfo[this.i2].dy, 2, mGraphics.VCENTER | mGraphics.HCENTER);
 				this.i2++;
-				if (this.i2 >= this.eff2.arrEfInfo.Length)
+				bool flag25 = this.i2 >= this.eff2.arrEfInfo.Length;
+				if (flag25)
 				{
 					this.eff2 = null;
 					this.i2 = 0;
@@ -5389,13 +6691,14 @@ public class Char : IMapObject
 		this.indexSkill++;
 	}
 
-	// Token: 0x06000671 RID: 1649 RVA: 0x0002A1C8 File Offset: 0x000285C8
+	// Token: 0x060000FC RID: 252 RVA: 0x0001479C File Offset: 0x0001299C
 	public static int getIndexChar(int ID)
 	{
 		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
 		{
 			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
-			if (@char.charID == ID)
+			bool flag = @char.charID == ID;
+			if (flag)
 			{
 				return i;
 			}
@@ -5403,10 +6706,11 @@ public class Char : IMapObject
 		return -1;
 	}
 
-	// Token: 0x06000672 RID: 1650 RVA: 0x0002A210 File Offset: 0x00028610
+	// Token: 0x060000FD RID: 253 RVA: 0x000147F0 File Offset: 0x000129F0
 	public void moveTo(int toX, int toY, int type)
 	{
-		if (type == 1 || Res.abs(toX - this.cx) > 100 || Res.abs(toY - this.cy) > 300)
+		bool flag = type == 1 || Res.abs(toX - this.cx) > 100 || Res.abs(toY - this.cy) > 300;
+		if (flag)
 		{
 			this.createShadow(this.cx, this.cy, 10);
 			this.cx = toX;
@@ -5416,93 +6720,118 @@ public class Char : IMapObject
 			this.cp3 = 0;
 			this.currentMovePoint = null;
 			this.cf = 25;
-			return;
 		}
-		int dir = 0;
-		int act = 0;
-		int num = toX - this.cx;
-		int num2 = toY - this.cy;
-		if (num == 0 && num2 == 0)
+		else
 		{
-			act = 1;
+			int dir = 0;
+			int act = 0;
+			int num = toX - this.cx;
+			int num2 = toY - this.cy;
+			bool flag2 = num == 0 && num2 == 0;
+			if (flag2)
+			{
+				act = 1;
+				this.cp3 = 0;
+			}
+			else
+			{
+				bool flag3 = num2 == 0;
+				if (flag3)
+				{
+					act = 2;
+					bool flag4 = num > 0;
+					if (flag4)
+					{
+						dir = 1;
+					}
+					bool flag5 = num < 0;
+					if (flag5)
+					{
+						dir = -1;
+					}
+				}
+				else
+				{
+					bool flag6 = num2 != 0;
+					if (flag6)
+					{
+						bool flag7 = num2 < 0;
+						if (flag7)
+						{
+							act = 3;
+						}
+						bool flag8 = num2 > 0;
+						if (flag8)
+						{
+							act = 4;
+						}
+						bool flag9 = num < 0;
+						if (flag9)
+						{
+							dir = -1;
+						}
+						bool flag10 = num > 0;
+						if (flag10)
+						{
+							dir = 1;
+						}
+					}
+				}
+			}
+			this.vMovePoints.addElement(new MovePoint(toX, toY, act, dir));
+			bool flag11 = this.statusMe != 6;
+			if (flag11)
+			{
+				this.statusBeforeNothing = this.statusMe;
+			}
+			this.statusMe = 6;
 			this.cp3 = 0;
 		}
-		else if (num2 == 0)
-		{
-			act = 2;
-			if (num > 0)
-			{
-				dir = 1;
-			}
-			if (num < 0)
-			{
-				dir = -1;
-			}
-		}
-		else if (num2 != 0)
-		{
-			if (num2 < 0)
-			{
-				act = 3;
-			}
-			if (num2 > 0)
-			{
-				act = 4;
-			}
-			if (num < 0)
-			{
-				dir = -1;
-			}
-			if (num > 0)
-			{
-				dir = 1;
-			}
-		}
-		this.vMovePoints.addElement(new MovePoint(toX, toY, act, dir));
-		if (this.statusMe != 6)
-		{
-			this.statusBeforeNothing = this.statusMe;
-		}
-		this.statusMe = 6;
-		this.cp3 = 0;
 	}
 
-	// Token: 0x06000673 RID: 1651 RVA: 0x0002A350 File Offset: 0x00028750
+	// Token: 0x060000FE RID: 254 RVA: 0x00014968 File Offset: 0x00012B68
 	public static void getcharInjure(int cID, int dx, int dy, int HP)
 	{
 		global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(cID);
-		if (@char.vMovePoints.size() == 0)
+		bool flag = @char.vMovePoints.size() == 0;
+		if (!flag)
 		{
-			return;
+			MovePoint movePoint = (MovePoint)@char.vMovePoints.lastElement();
+			int xEnd = movePoint.xEnd + dx;
+			int yEnd = movePoint.yEnd + dy;
+			global::Char char2 = (global::Char)GameScr.vCharInMap.elementAt(cID);
+			char2.cHP -= HP;
+			bool flag2 = char2.cHP < 0;
+			if (flag2)
+			{
+				char2.cHP = 0;
+			}
+			char2.cHPShow = ((global::Char)GameScr.vCharInMap.elementAt(cID)).cHP - HP;
+			char2.statusMe = 6;
+			char2.cp3 = 0;
+			char2.vMovePoints.addElement(new MovePoint(xEnd, yEnd, 8, char2.cdir));
 		}
-		MovePoint movePoint = (MovePoint)@char.vMovePoints.lastElement();
-		int xEnd = movePoint.xEnd + dx;
-		int yEnd = movePoint.yEnd + dy;
-		global::Char char2 = (global::Char)GameScr.vCharInMap.elementAt(cID);
-		char2.cHP -= HP;
-		if (char2.cHP < 0)
-		{
-			char2.cHP = 0;
-		}
-		char2.cHPShow = ((global::Char)GameScr.vCharInMap.elementAt(cID)).cHP - HP;
-		char2.statusMe = 6;
-		char2.cp3 = 0;
-		char2.vMovePoints.addElement(new MovePoint(xEnd, yEnd, 8, char2.cdir));
 	}
 
-	// Token: 0x06000674 RID: 1652 RVA: 0x0002A424 File Offset: 0x00028824
+	// Token: 0x060000FF RID: 255 RVA: 0x00014A4C File Offset: 0x00012C4C
 	public bool isMagicTree()
 	{
-		if (GameScr.gI().magicTree != null)
+		bool flag = GameScr.gI().magicTree != null;
+		bool result;
+		if (flag)
 		{
 			int x = GameScr.gI().magicTree.x;
 			int y = GameScr.gI().magicTree.y;
-			return this.cx > x - 30 && this.cx < x + 30 && this.cy > y - 30 && this.cy < y + 30;
+			result = (this.cx > x - 30 && this.cx < x + 30 && this.cy > y - 30 && this.cy < y + 30);
 		}
-		return false;
+		else
+		{
+			result = false;
+		}
+		return result;
 	}
 
-	// Token: 0x06000675 RID: 1653 RVA: 0x0002A4A4 File Offset: 0x000288A4
+	// Token: 0x06000100 RID: 256 RVA: 0x00014AC8 File Offset: 0x00012CC8
 	public void searchItem()
 	{
 		int[] array = new int[]
@@ -5512,7 +6841,8 @@ public class Char : IMapObject
 			-1,
 			-1
 		};
-		if (this.itemFocus == null)
+		bool flag = this.itemFocus == null;
+		if (flag)
 		{
 			for (int i = 0; i < GameScr.vItemMap.size(); i++)
 			{
@@ -5520,11 +6850,14 @@ public class Char : IMapObject
 				int num = global::Math.abs(global::Char.myCharz().cx - itemMap.x);
 				int num2 = global::Math.abs(global::Char.myCharz().cy - itemMap.y);
 				int num3 = (num <= num2) ? num2 : num;
-				if (num <= 48 && num2 <= 48 && (this.itemFocus == null || num3 < array[3]))
+				bool flag2 = num <= 48 && num2 <= 48 && (this.itemFocus == null || num3 < array[3]);
+				if (flag2)
 				{
-					if (GameScr.gI().auto != 0 && GameScr.gI().isBagFull())
+					bool flag3 = GameScr.gI().auto != 0 && GameScr.gI().isBagFull();
+					if (flag3)
 					{
-						if ((int)itemMap.template.type == 9)
+						bool flag4 = itemMap.template.type == 9;
+						if (flag4)
 						{
 							this.itemFocus = itemMap;
 							array[3] = num3;
@@ -5540,337 +6873,398 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000676 RID: 1654 RVA: 0x0002A5B0 File Offset: 0x000289B0
+	// Token: 0x06000101 RID: 257 RVA: 0x00014BEC File Offset: 0x00012DEC
 	public void searchFocus()
 	{
-		if (global::Char.myCharz().skillPaint != null || global::Char.myCharz().arr != null || global::Char.myCharz().dart != null)
+		bool flag = global::Char.myCharz().skillPaint != null || global::Char.myCharz().arr != null || global::Char.myCharz().dart != null;
+		if (flag)
 		{
 			this.timeFocusToMob = 200;
-			return;
-		}
-		if (this.timeFocusToMob > 0)
-		{
-			this.timeFocusToMob--;
-			return;
-		}
-		if (global::Char.isManualFocus && this.charFocus != null && (this.charFocus.statusMe == 15 || this.charFocus.isInvisiblez))
-		{
-			this.charFocus = null;
-		}
-		if (GameCanvas.gameTick % 2 == 0)
-		{
-			return;
-		}
-		if (this.isMeCanAttackOtherPlayer(this.charFocus))
-		{
-			return;
-		}
-		int num = 0;
-		if (this.nClass != null && (this.nClass.classId == 0 || this.nClass.classId == 1 || this.nClass.classId == 3 || this.nClass.classId == 5))
-		{
-			num = 40;
-		}
-		int[] array = new int[]
-		{
-			-1,
-			-1,
-			-1,
-			-1
-		};
-		int num2 = GameScr.cmx - 10;
-		int num3 = GameScr.cmx + GameCanvas.w + 10;
-		int num4 = GameScr.cmy;
-		int num5 = GameScr.cmy + GameCanvas.h - GameScr.cmdBarH + 10;
-		if (global::Char.isManualFocus)
-		{
-			if ((this.mobFocus != null && this.mobFocus.status != 1 && this.mobFocus.status != 0 && num2 <= this.mobFocus.x && this.mobFocus.x <= num3 && num4 <= this.mobFocus.y && this.mobFocus.y <= num5) || (this.npcFocus != null && num2 <= this.npcFocus.cx && this.npcFocus.cx <= num3 && num4 <= this.npcFocus.cy && this.npcFocus.cy <= num5) || (this.charFocus != null && num2 <= this.charFocus.cx && this.charFocus.cx <= num3 && num4 <= this.charFocus.cy && this.charFocus.cy <= num5) || (this.itemFocus != null && num2 <= this.itemFocus.x && this.itemFocus.x <= num3 && num4 <= this.itemFocus.y && this.itemFocus.y <= num5))
-			{
-				return;
-			}
-			global::Char.isManualFocus = false;
-		}
-		num2 = global::Char.myCharz().cx - 80;
-		num3 = global::Char.myCharz().cx + 80;
-		num4 = global::Char.myCharz().cy - 30;
-		num5 = global::Char.myCharz().cy + 30;
-		if (this.npcFocus != null && this.npcFocus.template.npcTemplateId == 6)
-		{
-			num2 = global::Char.myCharz().cx - 20;
-			num3 = global::Char.myCharz().cx + 20;
-			num4 = global::Char.myCharz().cy - 10;
-			num5 = global::Char.myCharz().cy + 10;
-		}
-		if (this.npcFocus == null)
-		{
-			for (int i = 0; i < GameScr.vNpc.size(); i++)
-			{
-				Npc npc = (Npc)GameScr.vNpc.elementAt(i);
-				if (npc.statusMe != 15)
-				{
-					int num6 = global::Math.abs(global::Char.myCharz().cx - npc.cx);
-					int num7 = global::Math.abs(global::Char.myCharz().cy - npc.cy);
-					int num8 = (num6 <= num7) ? num7 : num6;
-					num2 = global::Char.myCharz().cx - 80;
-					num3 = global::Char.myCharz().cx + 80;
-					num4 = global::Char.myCharz().cy - 30;
-					num5 = global::Char.myCharz().cy + 30;
-					if (npc.template.npcTemplateId == 6)
-					{
-						num2 = global::Char.myCharz().cx - 20;
-						num3 = global::Char.myCharz().cx + 20;
-						num4 = global::Char.myCharz().cy - 10;
-						num5 = global::Char.myCharz().cy + 10;
-					}
-					if (num2 <= npc.cx && npc.cx <= num3 && num4 <= npc.cy && npc.cy <= num5 && (this.npcFocus == null || num8 < array[1]))
-					{
-						this.npcFocus = npc;
-						array[1] = num8;
-					}
-				}
-			}
 		}
 		else
 		{
-			if (num2 <= this.npcFocus.cx && this.npcFocus.cx <= num3 && num4 <= this.npcFocus.cy && this.npcFocus.cy <= num5)
+			bool flag2 = this.timeFocusToMob > 0;
+			if (flag2)
 			{
-				this.clearFocus(1);
-				return;
+				this.timeFocusToMob--;
 			}
-			this.deFocusNPC();
-			for (int j = 0; j < GameScr.vNpc.size(); j++)
+			else
 			{
-				Npc npc2 = (Npc)GameScr.vNpc.elementAt(j);
-				if (npc2.statusMe != 15)
+				bool flag3 = global::Char.isManualFocus && this.charFocus != null && (this.charFocus.statusMe == 15 || this.charFocus.isInvisiblez);
+				if (flag3)
 				{
-					int num9 = global::Math.abs(global::Char.myCharz().cx - npc2.cx);
-					int num10 = global::Math.abs(global::Char.myCharz().cy - npc2.cy);
-					int num11 = (num9 <= num10) ? num10 : num9;
-					num2 = global::Char.myCharz().cx - 80;
-					num3 = global::Char.myCharz().cx + 80;
-					num4 = global::Char.myCharz().cy - 30;
-					num5 = global::Char.myCharz().cy + 30;
-					if (npc2.template.npcTemplateId == 6)
-					{
-						num2 = global::Char.myCharz().cx - 20;
-						num3 = global::Char.myCharz().cx + 20;
-						num4 = global::Char.myCharz().cy - 10;
-						num5 = global::Char.myCharz().cy + 10;
-					}
-					if (num2 <= npc2.cx && npc2.cx <= num3 && num4 <= npc2.cy && npc2.cy <= num5 && (this.npcFocus == null || num11 < array[1]))
-					{
-						this.npcFocus = npc2;
-						array[1] = num11;
-					}
+					this.charFocus = null;
 				}
-			}
-		}
-		if (this.itemFocus == null)
-		{
-			for (int k = 0; k < GameScr.vItemMap.size(); k++)
-			{
-				ItemMap itemMap = (ItemMap)GameScr.vItemMap.elementAt(k);
-				int num12 = global::Math.abs(global::Char.myCharz().cx - itemMap.x);
-				int num13 = global::Math.abs(global::Char.myCharz().cy - itemMap.y);
-				int num14 = (num12 <= num13) ? num13 : num12;
-				if (num12 <= 48 && num13 <= 48 && (this.itemFocus == null || num14 < array[3]))
+				bool flag4 = GameCanvas.gameTick % 2 == 0;
+				if (!flag4)
 				{
-					if (GameScr.gI().auto != 0 && GameScr.gI().isBagFull())
+					bool flag5 = this.isMeCanAttackOtherPlayer(this.charFocus);
+					if (!flag5)
 					{
-						if ((int)itemMap.template.type == 9)
+						int num = 0;
+						bool flag6 = this.nClass != null && (this.nClass.classId == 0 || this.nClass.classId == 1 || this.nClass.classId == 3 || this.nClass.classId == 5);
+						if (flag6)
 						{
-							this.itemFocus = itemMap;
-							array[3] = num14;
+							num = 40;
+						}
+						int[] array = new int[]
+						{
+							-1,
+							-1,
+							-1,
+							-1
+						};
+						int num2 = GameScr.cmx - 10;
+						int num3 = GameScr.cmx + GameCanvas.w + 10;
+						int num4 = GameScr.cmy;
+						int num5 = GameScr.cmy + GameCanvas.h - GameScr.cmdBarH + 10;
+						bool flag7 = global::Char.isManualFocus;
+						if (flag7)
+						{
+							bool flag8 = (this.mobFocus != null && this.mobFocus.status != 1 && this.mobFocus.status != 0 && num2 <= this.mobFocus.x && this.mobFocus.x <= num3 && num4 <= this.mobFocus.y && this.mobFocus.y <= num5) || (this.npcFocus != null && num2 <= this.npcFocus.cx && this.npcFocus.cx <= num3 && num4 <= this.npcFocus.cy && this.npcFocus.cy <= num5) || (this.charFocus != null && num2 <= this.charFocus.cx && this.charFocus.cx <= num3 && num4 <= this.charFocus.cy && this.charFocus.cy <= num5) || (this.itemFocus != null && num2 <= this.itemFocus.x && this.itemFocus.x <= num3 && num4 <= this.itemFocus.y && this.itemFocus.y <= num5);
+							if (flag8)
+							{
+								return;
+							}
+							global::Char.isManualFocus = false;
+						}
+						num2 = global::Char.myCharz().cx - 80;
+						num3 = global::Char.myCharz().cx + 80;
+						num4 = global::Char.myCharz().cy - 30;
+						num5 = global::Char.myCharz().cy + 30;
+						bool flag9 = this.npcFocus != null && this.npcFocus.template.npcTemplateId == 6;
+						if (flag9)
+						{
+							num2 = global::Char.myCharz().cx - 20;
+							num3 = global::Char.myCharz().cx + 20;
+							num4 = global::Char.myCharz().cy - 10;
+							num5 = global::Char.myCharz().cy + 10;
+						}
+						bool flag10 = this.npcFocus == null;
+						if (flag10)
+						{
+							for (int i = 0; i < GameScr.vNpc.size(); i++)
+							{
+								Npc npc = (Npc)GameScr.vNpc.elementAt(i);
+								bool flag11 = npc.statusMe != 15;
+								if (flag11)
+								{
+									int num6 = global::Math.abs(global::Char.myCharz().cx - npc.cx);
+									int num7 = global::Math.abs(global::Char.myCharz().cy - npc.cy);
+									int num8 = (num6 <= num7) ? num7 : num6;
+									num2 = global::Char.myCharz().cx - 80;
+									num3 = global::Char.myCharz().cx + 80;
+									num4 = global::Char.myCharz().cy - 30;
+									num5 = global::Char.myCharz().cy + 30;
+									bool flag12 = npc.template.npcTemplateId == 6;
+									if (flag12)
+									{
+										num2 = global::Char.myCharz().cx - 20;
+										num3 = global::Char.myCharz().cx + 20;
+										num4 = global::Char.myCharz().cy - 10;
+										num5 = global::Char.myCharz().cy + 10;
+									}
+									bool flag13 = num2 <= npc.cx && npc.cx <= num3 && num4 <= npc.cy && npc.cy <= num5 && (this.npcFocus == null || num8 < array[1]);
+									if (flag13)
+									{
+										this.npcFocus = npc;
+										array[1] = num8;
+									}
+								}
+							}
+						}
+						else
+						{
+							bool flag14 = num2 <= this.npcFocus.cx && this.npcFocus.cx <= num3 && num4 <= this.npcFocus.cy && this.npcFocus.cy <= num5;
+							if (flag14)
+							{
+								this.clearFocus(1);
+								return;
+							}
+							this.deFocusNPC();
+							for (int j = 0; j < GameScr.vNpc.size(); j++)
+							{
+								Npc npc2 = (Npc)GameScr.vNpc.elementAt(j);
+								bool flag15 = npc2.statusMe != 15;
+								if (flag15)
+								{
+									int num9 = global::Math.abs(global::Char.myCharz().cx - npc2.cx);
+									int num10 = global::Math.abs(global::Char.myCharz().cy - npc2.cy);
+									int num11 = (num9 <= num10) ? num10 : num9;
+									num2 = global::Char.myCharz().cx - 80;
+									num3 = global::Char.myCharz().cx + 80;
+									num4 = global::Char.myCharz().cy - 30;
+									num5 = global::Char.myCharz().cy + 30;
+									bool flag16 = npc2.template.npcTemplateId == 6;
+									if (flag16)
+									{
+										num2 = global::Char.myCharz().cx - 20;
+										num3 = global::Char.myCharz().cx + 20;
+										num4 = global::Char.myCharz().cy - 10;
+										num5 = global::Char.myCharz().cy + 10;
+									}
+									bool flag17 = num2 <= npc2.cx && npc2.cx <= num3 && num4 <= npc2.cy && npc2.cy <= num5 && (this.npcFocus == null || num11 < array[1]);
+									if (flag17)
+									{
+										this.npcFocus = npc2;
+										array[1] = num11;
+									}
+								}
+							}
+						}
+						bool flag18 = this.itemFocus == null;
+						if (flag18)
+						{
+							for (int k = 0; k < GameScr.vItemMap.size(); k++)
+							{
+								ItemMap itemMap = (ItemMap)GameScr.vItemMap.elementAt(k);
+								int num12 = global::Math.abs(global::Char.myCharz().cx - itemMap.x);
+								int num13 = global::Math.abs(global::Char.myCharz().cy - itemMap.y);
+								int num14 = (num12 <= num13) ? num13 : num12;
+								bool flag19 = num12 <= 48 && num13 <= 48 && (this.itemFocus == null || num14 < array[3]);
+								if (flag19)
+								{
+									bool flag20 = GameScr.gI().auto != 0 && GameScr.gI().isBagFull();
+									if (flag20)
+									{
+										bool flag21 = itemMap.template.type == 9;
+										if (flag21)
+										{
+											this.itemFocus = itemMap;
+											array[3] = num14;
+										}
+									}
+									else
+									{
+										this.itemFocus = itemMap;
+										array[3] = num14;
+									}
+								}
+							}
+						}
+						else
+						{
+							bool flag22 = num2 <= this.itemFocus.x && this.itemFocus.x <= num3 && num4 <= this.itemFocus.y && this.itemFocus.y <= num5;
+							if (flag22)
+							{
+								this.clearFocus(3);
+								return;
+							}
+							this.itemFocus = null;
+							for (int l = 0; l < GameScr.vItemMap.size(); l++)
+							{
+								ItemMap itemMap2 = (ItemMap)GameScr.vItemMap.elementAt(l);
+								int num15 = global::Math.abs(global::Char.myCharz().cx - itemMap2.x);
+								int num16 = global::Math.abs(global::Char.myCharz().cy - itemMap2.y);
+								int num17 = (num15 <= num16) ? num16 : num15;
+								bool flag23 = num2 <= itemMap2.x && itemMap2.x <= num3 && num4 <= itemMap2.y && itemMap2.y <= num5 && (this.itemFocus == null || num17 < array[3]);
+								if (flag23)
+								{
+									bool flag24 = GameScr.gI().auto != 0 && GameScr.gI().isBagFull();
+									if (flag24)
+									{
+										bool flag25 = itemMap2.template.type == 9;
+										if (flag25)
+										{
+											this.itemFocus = itemMap2;
+											array[3] = num17;
+										}
+									}
+									else
+									{
+										this.itemFocus = itemMap2;
+										array[3] = num17;
+									}
+								}
+							}
+						}
+						num2 = global::Char.myCharz().cx - global::Char.myCharz().getdxSkill() - 10;
+						num3 = global::Char.myCharz().cx + global::Char.myCharz().getdxSkill() + 10;
+						num4 = global::Char.myCharz().cy - global::Char.myCharz().getdySkill() - num - 20;
+						num5 = global::Char.myCharz().cy + global::Char.myCharz().getdySkill() + 20;
+						bool flag26 = num5 > global::Char.myCharz().cy + 30;
+						if (flag26)
+						{
+							num5 = global::Char.myCharz().cy + 30;
+						}
+						bool flag27 = this.mobFocus == null;
+						if (flag27)
+						{
+							for (int m = 0; m < GameScr.vMob.size(); m++)
+							{
+								Mob mob = (Mob)GameScr.vMob.elementAt(m);
+								int num18 = global::Math.abs(global::Char.myCharz().cx - mob.x);
+								int num19 = global::Math.abs(global::Char.myCharz().cy - mob.y);
+								int num20 = (num18 <= num19) ? num19 : num18;
+								bool flag28 = num2 <= mob.x && mob.x <= num3 && num4 <= mob.y && mob.y <= num5 && (this.mobFocus == null || num20 < array[0]);
+								if (flag28)
+								{
+									this.mobFocus = mob;
+									array[0] = num20;
+								}
+							}
+						}
+						else
+						{
+							bool flag29 = this.mobFocus.status != 1 && this.mobFocus.status != 0 && num2 <= this.mobFocus.x && this.mobFocus.x <= num3 && num4 <= this.mobFocus.y && this.mobFocus.y <= num5;
+							if (flag29)
+							{
+								this.clearFocus(0);
+								return;
+							}
+							this.mobFocus = null;
+							for (int n = 0; n < GameScr.vMob.size(); n++)
+							{
+								Mob mob2 = (Mob)GameScr.vMob.elementAt(n);
+								int num21 = global::Math.abs(global::Char.myCharz().cx - mob2.x);
+								int num22 = global::Math.abs(global::Char.myCharz().cy - mob2.y);
+								int num23 = (num21 <= num22) ? num22 : num21;
+								bool flag30 = num2 <= mob2.x && mob2.x <= num3 && num4 <= mob2.y && mob2.y <= num5 && (this.mobFocus == null || num23 < array[0]);
+								if (flag30)
+								{
+									this.mobFocus = mob2;
+									array[0] = num23;
+								}
+							}
+						}
+						bool flag31 = this.charFocus == null;
+						if (flag31)
+						{
+							for (int num24 = 0; num24 < GameScr.vCharInMap.size(); num24++)
+							{
+								global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(num24);
+								bool flag32 = @char.statusMe != 15 && !@char.isInvisiblez;
+								if (flag32)
+								{
+									bool flag33 = this.wdx == 0 && this.wdy == 0;
+									if (flag33)
+									{
+										int num25 = global::Math.abs(global::Char.myCharz().cx - @char.cx);
+										int num26 = global::Math.abs(global::Char.myCharz().cy - @char.cy);
+										int num27 = (num25 <= num26) ? num26 : num25;
+										bool flag34 = num2 <= @char.cx && @char.cx <= num3 && num4 <= @char.cy && @char.cy <= num5 && (this.charFocus == null || num27 < array[2]);
+										if (flag34)
+										{
+											this.charFocus = @char;
+											array[2] = num27;
+										}
+									}
+								}
+							}
+						}
+						else
+						{
+							bool flag35 = num2 <= this.charFocus.cx && this.charFocus.cx <= num3 && num4 <= this.charFocus.cy && this.charFocus.cy <= num5 && this.charFocus.statusMe != 15 && !this.charFocus.isInvisiblez;
+							if (flag35)
+							{
+								this.clearFocus(2);
+								return;
+							}
+							this.charFocus = null;
+							for (int num28 = 0; num28 < GameScr.vCharInMap.size(); num28++)
+							{
+								global::Char char2 = (global::Char)GameScr.vCharInMap.elementAt(num28);
+								bool flag36 = char2.statusMe != 15 && !char2.isInvisiblez;
+								if (flag36)
+								{
+									bool flag37 = this.wdx == 0 && this.wdy == 0;
+									if (flag37)
+									{
+										int num29 = global::Math.abs(global::Char.myCharz().cx - char2.cx);
+										int num30 = global::Math.abs(global::Char.myCharz().cy - char2.cy);
+										int num31 = (num29 <= num30) ? num30 : num29;
+										bool flag38 = num2 <= char2.cx && char2.cx <= num3 && num4 <= char2.cy && char2.cy <= num5 && (this.charFocus == null || num31 < array[2]);
+										if (flag38)
+										{
+											this.charFocus = char2;
+											array[2] = num31;
+										}
+									}
+								}
+							}
+						}
+						int num32 = -1;
+						for (int num33 = 0; num33 < array.Length; num33++)
+						{
+							bool flag39 = num32 == -1;
+							if (flag39)
+							{
+								bool flag40 = array[num33] != -1;
+								if (flag40)
+								{
+									num32 = num33;
+								}
+							}
+							else
+							{
+								bool flag41 = array[num33] < array[num32] && array[num33] != -1;
+								if (flag41)
+								{
+									num32 = num33;
+								}
+							}
+						}
+						this.clearFocus(num32);
+						bool flag42 = this.me && this.isAttacPlayerStatus();
+						if (flag42)
+						{
+							bool flag43 = this.mobFocus != null && !this.mobFocus.isMobMe;
+							if (flag43)
+							{
+								this.mobFocus = null;
+							}
+							this.npcFocus = null;
+							this.itemFocus = null;
 						}
 					}
-					else
-					{
-						this.itemFocus = itemMap;
-						array[3] = num14;
-					}
 				}
 			}
-		}
-		else
-		{
-			if (num2 <= this.itemFocus.x && this.itemFocus.x <= num3 && num4 <= this.itemFocus.y && this.itemFocus.y <= num5)
-			{
-				this.clearFocus(3);
-				return;
-			}
-			this.itemFocus = null;
-			for (int l = 0; l < GameScr.vItemMap.size(); l++)
-			{
-				ItemMap itemMap2 = (ItemMap)GameScr.vItemMap.elementAt(l);
-				int num15 = global::Math.abs(global::Char.myCharz().cx - itemMap2.x);
-				int num16 = global::Math.abs(global::Char.myCharz().cy - itemMap2.y);
-				int num17 = (num15 <= num16) ? num16 : num15;
-				if (num2 <= itemMap2.x && itemMap2.x <= num3 && num4 <= itemMap2.y && itemMap2.y <= num5 && (this.itemFocus == null || num17 < array[3]))
-				{
-					if (GameScr.gI().auto != 0 && GameScr.gI().isBagFull())
-					{
-						if ((int)itemMap2.template.type == 9)
-						{
-							this.itemFocus = itemMap2;
-							array[3] = num17;
-						}
-					}
-					else
-					{
-						this.itemFocus = itemMap2;
-						array[3] = num17;
-					}
-				}
-			}
-		}
-		num2 = global::Char.myCharz().cx - global::Char.myCharz().getdxSkill() - 10;
-		num3 = global::Char.myCharz().cx + global::Char.myCharz().getdxSkill() + 10;
-		num4 = global::Char.myCharz().cy - global::Char.myCharz().getdySkill() - num - 20;
-		num5 = global::Char.myCharz().cy + global::Char.myCharz().getdySkill() + 20;
-		if (num5 > global::Char.myCharz().cy + 30)
-		{
-			num5 = global::Char.myCharz().cy + 30;
-		}
-		if (this.mobFocus == null)
-		{
-			for (int m = 0; m < GameScr.vMob.size(); m++)
-			{
-				Mob mob = (Mob)GameScr.vMob.elementAt(m);
-				int num18 = global::Math.abs(global::Char.myCharz().cx - mob.x);
-				int num19 = global::Math.abs(global::Char.myCharz().cy - mob.y);
-				int num20 = (num18 <= num19) ? num19 : num18;
-				if (num2 <= mob.x && mob.x <= num3 && num4 <= mob.y && mob.y <= num5 && (this.mobFocus == null || num20 < array[0]))
-				{
-					this.mobFocus = mob;
-					array[0] = num20;
-				}
-			}
-		}
-		else
-		{
-			if (this.mobFocus.status != 1 && this.mobFocus.status != 0 && num2 <= this.mobFocus.x && this.mobFocus.x <= num3 && num4 <= this.mobFocus.y && this.mobFocus.y <= num5)
-			{
-				this.clearFocus(0);
-				return;
-			}
-			this.mobFocus = null;
-			for (int n = 0; n < GameScr.vMob.size(); n++)
-			{
-				Mob mob2 = (Mob)GameScr.vMob.elementAt(n);
-				int num21 = global::Math.abs(global::Char.myCharz().cx - mob2.x);
-				int num22 = global::Math.abs(global::Char.myCharz().cy - mob2.y);
-				int num23 = (num21 <= num22) ? num22 : num21;
-				if (num2 <= mob2.x && mob2.x <= num3 && num4 <= mob2.y && mob2.y <= num5 && (this.mobFocus == null || num23 < array[0]))
-				{
-					this.mobFocus = mob2;
-					array[0] = num23;
-				}
-			}
-		}
-		if (this.charFocus == null)
-		{
-			for (int num24 = 0; num24 < GameScr.vCharInMap.size(); num24++)
-			{
-				global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(num24);
-				if (@char.statusMe != 15 && !@char.isInvisiblez)
-				{
-					if (this.wdx == 0 && this.wdy == 0)
-					{
-						int num25 = global::Math.abs(global::Char.myCharz().cx - @char.cx);
-						int num26 = global::Math.abs(global::Char.myCharz().cy - @char.cy);
-						int num27 = (num25 <= num26) ? num26 : num25;
-						if (num2 <= @char.cx && @char.cx <= num3 && num4 <= @char.cy && @char.cy <= num5 && (this.charFocus == null || num27 < array[2]))
-						{
-							this.charFocus = @char;
-							array[2] = num27;
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			if (num2 <= this.charFocus.cx && this.charFocus.cx <= num3 && num4 <= this.charFocus.cy && this.charFocus.cy <= num5 && this.charFocus.statusMe != 15 && !this.charFocus.isInvisiblez)
-			{
-				this.clearFocus(2);
-				return;
-			}
-			this.charFocus = null;
-			for (int num28 = 0; num28 < GameScr.vCharInMap.size(); num28++)
-			{
-				global::Char char2 = (global::Char)GameScr.vCharInMap.elementAt(num28);
-				if (char2.statusMe != 15 && !char2.isInvisiblez)
-				{
-					if (this.wdx == 0 && this.wdy == 0)
-					{
-						int num29 = global::Math.abs(global::Char.myCharz().cx - char2.cx);
-						int num30 = global::Math.abs(global::Char.myCharz().cy - char2.cy);
-						int num31 = (num29 <= num30) ? num30 : num29;
-						if (num2 <= char2.cx && char2.cx <= num3 && num4 <= char2.cy && char2.cy <= num5 && (this.charFocus == null || num31 < array[2]))
-						{
-							this.charFocus = char2;
-							array[2] = num31;
-						}
-					}
-				}
-			}
-		}
-		int num32 = -1;
-		for (int num33 = 0; num33 < array.Length; num33++)
-		{
-			if (num32 == -1)
-			{
-				if (array[num33] != -1)
-				{
-					num32 = num33;
-				}
-			}
-			else if (array[num33] < array[num32] && array[num33] != -1)
-			{
-				num32 = num33;
-			}
-		}
-		this.clearFocus(num32);
-		if (this.me && this.isAttacPlayerStatus())
-		{
-			if (this.mobFocus != null && !this.mobFocus.isMobMe)
-			{
-				this.mobFocus = null;
-			}
-			this.npcFocus = null;
-			this.itemFocus = null;
 		}
 	}
 
-	// Token: 0x06000677 RID: 1655 RVA: 0x0002B4B4 File Offset: 0x000298B4
+	// Token: 0x06000102 RID: 258 RVA: 0x00015B5C File Offset: 0x00013D5C
 	public void clearFocus(int index)
 	{
-		if (index == 0)
+		bool flag = index == 0;
+		if (flag)
 		{
 			this.deFocusNPC();
 			this.charFocus = null;
 			this.itemFocus = null;
 		}
-		else if (index == 1)
+		else
 		{
-			this.mobFocus = null;
-			this.charFocus = null;
-			this.itemFocus = null;
-		}
-		else if (index == 2)
-		{
-			this.mobFocus = null;
-			this.deFocusNPC();
-			this.itemFocus = null;
-		}
-		else if (index == 3)
-		{
-			this.mobFocus = null;
-			this.deFocusNPC();
-			this.charFocus = null;
+			bool flag2 = index == 1;
+			if (flag2)
+			{
+				this.mobFocus = null;
+				this.charFocus = null;
+				this.itemFocus = null;
+			}
+			else
+			{
+				bool flag3 = index == 2;
+				if (flag3)
+				{
+					this.mobFocus = null;
+					this.deFocusNPC();
+					this.itemFocus = null;
+				}
+				else
+				{
+					bool flag4 = index == 3;
+					if (flag4)
+					{
+						this.mobFocus = null;
+						this.deFocusNPC();
+						this.charFocus = null;
+					}
+				}
+			}
 		}
 	}
 
-	// Token: 0x06000678 RID: 1656 RVA: 0x0002B53C File Offset: 0x0002993C
+	// Token: 0x06000103 RID: 259 RVA: 0x00015BEC File Offset: 0x00013DEC
 	public static bool isCharInScreen(global::Char c)
 	{
 		int cmx = GameScr.cmx;
@@ -5880,16 +7274,17 @@ public class Char : IMapObject
 		return c.statusMe != 15 && !c.isInvisiblez && cmx <= c.cx && c.cx <= num && num2 <= c.cy && c.cy <= num3;
 	}
 
-	// Token: 0x06000679 RID: 1657 RVA: 0x0002B5BB File Offset: 0x000299BB
+	// Token: 0x06000104 RID: 260 RVA: 0x00015C64 File Offset: 0x00013E64
 	public bool isAttacPlayerStatus()
 	{
-		return (int)this.cTypePk == 4 || (int)this.cTypePk == 3;
+		return this.cTypePk == 4 || this.cTypePk == 3;
 	}
 
-	// Token: 0x0600067A RID: 1658 RVA: 0x0002B5D7 File Offset: 0x000299D7
+	// Token: 0x06000105 RID: 261 RVA: 0x00015C8C File Offset: 0x00013E8C
 	public void setHoldChar(global::Char r)
 	{
-		if (this.cx < r.cx)
+		bool flag = this.cx < r.cx;
+		if (flag)
 		{
 			this.cdir = 1;
 		}
@@ -5901,10 +7296,11 @@ public class Char : IMapObject
 		this.holder = true;
 	}
 
-	// Token: 0x0600067B RID: 1659 RVA: 0x0002B60B File Offset: 0x00029A0B
+	// Token: 0x06000106 RID: 262 RVA: 0x00015CD0 File Offset: 0x00013ED0
 	public void setHoldMob(Mob r)
 	{
-		if (this.cx < r.x)
+		bool flag = this.cx < r.x;
+		if (flag)
 		{
 			this.cdir = 1;
 		}
@@ -5916,133 +7312,152 @@ public class Char : IMapObject
 		this.holder = true;
 	}
 
-	// Token: 0x0600067C RID: 1660 RVA: 0x0002B640 File Offset: 0x00029A40
+	// Token: 0x06000107 RID: 263 RVA: 0x00015D14 File Offset: 0x00013F14
 	public void findNextFocusByKey()
 	{
-		Res.outz("focus size= " + this.focus.size());
-		if ((global::Char.myCharz().skillPaint != null || global::Char.myCharz().arr != null || global::Char.myCharz().dart != null || global::Char.myCharz().skillInfoPaint() != null) && this.focus.size() == 0)
+		Res.outz("focus size= " + this.focus.size().ToString());
+		bool flag = (global::Char.myCharz().skillPaint != null || global::Char.myCharz().arr != null || global::Char.myCharz().dart != null || global::Char.myCharz().skillInfoPaint() != null) && this.focus.size() == 0;
+		if (!flag)
 		{
-			return;
-		}
-		this.focus.removeAllElements();
-		int num = 0;
-		int num2 = GameScr.cmx + 10;
-		int num3 = GameScr.cmx + GameCanvas.w - 10;
-		int num4 = GameScr.cmy + 10;
-		int num5 = GameScr.cmy + GameScr.gH;
-		for (int i = 0; i < GameScr.vCharInMap.size(); i++)
-		{
-			global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
-			if (@char.statusMe != 15 && !@char.isInvisiblez && num2 <= @char.cx && @char.cx <= num3 && num4 <= @char.cy && @char.cy <= num5 && @char.charID != -114 && (TileMap.mapID != 129 || (TileMap.mapID == 129 && global::Char.myCharz().cy > 264)))
+			this.focus.removeAllElements();
+			int num = 0;
+			int num2 = GameScr.cmx + 10;
+			int num3 = GameScr.cmx + GameCanvas.w - 10;
+			int num4 = GameScr.cmy + 10;
+			int num5 = GameScr.cmy + GameScr.gH;
+			for (int i = 0; i < GameScr.vCharInMap.size(); i++)
 			{
-				this.focus.addElement(@char);
-				if (this.charFocus != null && @char.Equals(this.charFocus))
+				global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
+				bool flag2 = @char.statusMe != 15 && !@char.isInvisiblez && num2 <= @char.cx && @char.cx <= num3 && num4 <= @char.cy && @char.cy <= num5 && @char.charID != -114 && (TileMap.mapID != 129 || (TileMap.mapID == 129 && global::Char.myCharz().cy > 264));
+				if (flag2)
 				{
-					num = this.focus.size();
-				}
-			}
-		}
-		if (this.me && this.isAttacPlayerStatus())
-		{
-			Res.outz("co the tan cong nguoi");
-			for (int j = 0; j < GameScr.vMob.size(); j++)
-			{
-				Mob mob = (Mob)GameScr.vMob.elementAt(j);
-				if (!GameScr.gI().isMeCanAttackMob(mob))
-				{
-					Res.outz("khong the tan cong quai");
-					this.mobFocus = null;
-				}
-				else
-				{
-					Res.outz("co the tan ong quai");
-					this.focus.addElement(mob);
-					if (this.mobFocus != null)
+					this.focus.addElement(@char);
+					bool flag3 = this.charFocus != null && @char.Equals(this.charFocus);
+					if (flag3)
 					{
 						num = this.focus.size();
 					}
 				}
 			}
-			this.npcFocus = null;
-			this.itemFocus = null;
-			if (this.focus.size() > 0)
+			bool flag4 = this.me && this.isAttacPlayerStatus();
+			if (flag4)
 			{
-				if (num >= this.focus.size())
+				Res.outz("co the tan cong nguoi");
+				for (int j = 0; j < GameScr.vMob.size(); j++)
 				{
-					num = 0;
+					Mob mob = (Mob)GameScr.vMob.elementAt(j);
+					bool flag5 = !GameScr.gI().isMeCanAttackMob(mob);
+					if (flag5)
+					{
+						Res.outz("khong the tan cong quai");
+						this.mobFocus = null;
+					}
+					else
+					{
+						Res.outz("co the tan ong quai");
+						this.focus.addElement(mob);
+						bool flag6 = this.mobFocus != null;
+						if (flag6)
+						{
+							num = this.focus.size();
+						}
+					}
 				}
-				this.focusManualTo(this.focus.elementAt(num));
+				this.npcFocus = null;
+				this.itemFocus = null;
+				bool flag7 = this.focus.size() > 0;
+				if (flag7)
+				{
+					bool flag8 = num >= this.focus.size();
+					if (flag8)
+					{
+						num = 0;
+					}
+					this.focusManualTo(this.focus.elementAt(num));
+				}
+				else
+				{
+					this.mobFocus = null;
+					this.deFocusNPC();
+					this.charFocus = null;
+					this.itemFocus = null;
+					global::Char.isManualFocus = false;
+				}
 			}
 			else
 			{
-				this.mobFocus = null;
-				this.deFocusNPC();
-				this.charFocus = null;
-				this.itemFocus = null;
-				global::Char.isManualFocus = false;
-			}
-			return;
-		}
-		for (int k = 0; k < GameScr.vItemMap.size(); k++)
-		{
-			ItemMap itemMap = (ItemMap)GameScr.vItemMap.elementAt(k);
-			if (num2 <= itemMap.x && itemMap.x <= num3 && num4 <= itemMap.y && itemMap.y <= num5)
-			{
-				this.focus.addElement(itemMap);
-				if (this.itemFocus != null && itemMap.Equals(this.itemFocus))
+				for (int k = 0; k < GameScr.vItemMap.size(); k++)
 				{
-					num = this.focus.size();
+					ItemMap itemMap = (ItemMap)GameScr.vItemMap.elementAt(k);
+					bool flag9 = num2 <= itemMap.x && itemMap.x <= num3 && num4 <= itemMap.y && itemMap.y <= num5;
+					if (flag9)
+					{
+						this.focus.addElement(itemMap);
+						bool flag10 = this.itemFocus != null && itemMap.Equals(this.itemFocus);
+						if (flag10)
+						{
+							num = this.focus.size();
+						}
+					}
+				}
+				for (int l = 0; l < GameScr.vMob.size(); l++)
+				{
+					Mob mob2 = (Mob)GameScr.vMob.elementAt(l);
+					bool flag11 = mob2.status != 1 && mob2.status != 0 && num2 <= mob2.x && mob2.x <= num3 && num4 <= mob2.y && mob2.y <= num5;
+					if (flag11)
+					{
+						this.focus.addElement(mob2);
+						bool flag12 = this.mobFocus != null && mob2.Equals(this.mobFocus);
+						if (flag12)
+						{
+							num = this.focus.size();
+						}
+					}
+				}
+				for (int m = 0; m < GameScr.vNpc.size(); m++)
+				{
+					Npc npc = (Npc)GameScr.vNpc.elementAt(m);
+					bool flag13 = npc.statusMe != 15 && num2 <= npc.cx && npc.cx <= num3 && num4 <= npc.cy && npc.cy <= num5;
+					if (flag13)
+					{
+						this.focus.addElement(npc);
+						bool flag14 = this.npcFocus != null && npc.Equals(this.npcFocus);
+						if (flag14)
+						{
+							num = this.focus.size();
+						}
+					}
+				}
+				bool flag15 = this.focus.size() > 0;
+				if (flag15)
+				{
+					bool flag16 = num >= this.focus.size();
+					if (flag16)
+					{
+						num = 0;
+					}
+					this.focusManualTo(this.focus.elementAt(num));
+				}
+				else
+				{
+					this.mobFocus = null;
+					this.deFocusNPC();
+					this.charFocus = null;
+					this.itemFocus = null;
+					global::Char.isManualFocus = false;
 				}
 			}
-		}
-		for (int l = 0; l < GameScr.vMob.size(); l++)
-		{
-			Mob mob2 = (Mob)GameScr.vMob.elementAt(l);
-			if (mob2.status != 1 && mob2.status != 0 && num2 <= mob2.x && mob2.x <= num3 && num4 <= mob2.y && mob2.y <= num5)
-			{
-				this.focus.addElement(mob2);
-				if (this.mobFocus != null && mob2.Equals(this.mobFocus))
-				{
-					num = this.focus.size();
-				}
-			}
-		}
-		for (int m = 0; m < GameScr.vNpc.size(); m++)
-		{
-			Npc npc = (Npc)GameScr.vNpc.elementAt(m);
-			if (npc.statusMe != 15 && num2 <= npc.cx && npc.cx <= num3 && num4 <= npc.cy && npc.cy <= num5)
-			{
-				this.focus.addElement(npc);
-				if (this.npcFocus != null && npc.Equals(this.npcFocus))
-				{
-					num = this.focus.size();
-				}
-			}
-		}
-		if (this.focus.size() > 0)
-		{
-			if (num >= this.focus.size())
-			{
-				num = 0;
-			}
-			this.focusManualTo(this.focus.elementAt(num));
-		}
-		else
-		{
-			this.mobFocus = null;
-			this.deFocusNPC();
-			this.charFocus = null;
-			this.itemFocus = null;
-			global::Char.isManualFocus = false;
 		}
 	}
 
-	// Token: 0x0600067D RID: 1661 RVA: 0x0002BB57 File Offset: 0x00029F57
+	// Token: 0x06000108 RID: 264 RVA: 0x0001628C File Offset: 0x0001448C
 	public void deFocusNPC()
 	{
-		if (this.me && this.npcFocus != null)
+		bool flag = this.me && this.npcFocus != null;
+		if (flag)
 		{
-			if (!GameCanvas.menu.showMenu)
+			bool flag2 = !GameCanvas.menu.showMenu;
+			if (flag2)
 			{
 				global::Char.chatPopup = null;
 			}
@@ -6050,31 +7465,34 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x0600067E RID: 1662 RVA: 0x0002BB8C File Offset: 0x00029F8C
+	// Token: 0x06000109 RID: 265 RVA: 0x000162D4 File Offset: 0x000144D4
 	public void updateCharInBridge()
 	{
-		if (GameCanvas.lowGraphic)
+		bool lowGraphic = GameCanvas.lowGraphic;
+		if (!lowGraphic)
 		{
-			return;
-		}
-		if (TileMap.tileTypeAt(this.cx, this.cy + 1, 1024))
-		{
-			TileMap.setTileTypeAtPixel(this.cx, this.cy + 1, 512);
-			TileMap.setTileTypeAtPixel(this.cx, this.cy - 2, 512);
-		}
-		if (TileMap.tileTypeAt(this.cx - (int)TileMap.size, this.cy + 1, 512))
-		{
-			TileMap.killTileTypeAt(this.cx - (int)TileMap.size, this.cy + 1, 512);
-			TileMap.killTileTypeAt(this.cx - (int)TileMap.size, this.cy - 2, 512);
-		}
-		if (TileMap.tileTypeAt(this.cx + (int)TileMap.size, this.cy + 1, 512))
-		{
-			TileMap.killTileTypeAt(this.cx + (int)TileMap.size, this.cy + 1, 512);
-			TileMap.killTileTypeAt(this.cx + (int)TileMap.size, this.cy - 2, 512);
+			bool flag = TileMap.tileTypeAt(this.cx, this.cy + 1, 1024);
+			if (flag)
+			{
+				TileMap.setTileTypeAtPixel(this.cx, this.cy + 1, 512);
+				TileMap.setTileTypeAtPixel(this.cx, this.cy - 2, 512);
+			}
+			bool flag2 = TileMap.tileTypeAt(this.cx - (int)TileMap.size, this.cy + 1, 512);
+			if (flag2)
+			{
+				TileMap.killTileTypeAt(this.cx - (int)TileMap.size, this.cy + 1, 512);
+				TileMap.killTileTypeAt(this.cx - (int)TileMap.size, this.cy - 2, 512);
+			}
+			bool flag3 = TileMap.tileTypeAt(this.cx + (int)TileMap.size, this.cy + 1, 512);
+			if (flag3)
+			{
+				TileMap.killTileTypeAt(this.cx + (int)TileMap.size, this.cy + 1, 512);
+				TileMap.killTileTypeAt(this.cx + (int)TileMap.size, this.cy - 2, 512);
+			}
 		}
 	}
 
-	// Token: 0x0600067F RID: 1663 RVA: 0x0002BCB8 File Offset: 0x0002A0B8
+	// Token: 0x0600010A RID: 266 RVA: 0x00016408 File Offset: 0x00014608
 	public static void sort(int[] data)
 	{
 		int num = 5;
@@ -6082,7 +7500,8 @@ public class Char : IMapObject
 		{
 			for (int j = i + 1; j < num; j++)
 			{
-				if (data[i] < data[j])
+				bool flag = data[i] < data[j];
+				if (flag)
 				{
 					int num2 = data[j];
 					data[j] = data[i];
@@ -6092,55 +7511,78 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000680 RID: 1664 RVA: 0x0002BD08 File Offset: 0x0002A108
+	// Token: 0x0600010B RID: 267 RVA: 0x00016464 File Offset: 0x00014664
 	public static bool setInsc(int cmX, int cmWx, int x, int cmy, int cmyH, int y)
 	{
 		return x <= cmWx && x >= cmX && y <= cmyH && y >= cmy;
 	}
 
-	// Token: 0x06000681 RID: 1665 RVA: 0x0002BD2C File Offset: 0x0002A12C
+	// Token: 0x0600010C RID: 268 RVA: 0x00016490 File Offset: 0x00014690
 	public void kickOption(Item item, int maxKick)
 	{
 		int num = 0;
-		if (item != null && item.options != null)
+		bool flag = item != null && item.options != null;
+		if (flag)
 		{
 			for (int i = 0; i < item.options.size(); i++)
 			{
 				ItemOption itemOption = (ItemOption)item.options.elementAt(i);
 				itemOption.active = 0;
-				if (itemOption.optionTemplate.type == 2)
+				bool flag2 = itemOption.optionTemplate.type == 2;
+				if (flag2)
 				{
-					if (num < maxKick)
+					bool flag3 = num < maxKick;
+					if (flag3)
 					{
 						itemOption.active = 1;
 						num++;
 					}
 				}
-				else if (itemOption.optionTemplate.type == 3 && item.upgrade >= 4)
+				else
 				{
-					itemOption.active = 1;
-				}
-				else if (itemOption.optionTemplate.type == 4 && item.upgrade >= 8)
-				{
-					itemOption.active = 1;
-				}
-				else if (itemOption.optionTemplate.type == 5 && item.upgrade >= 12)
-				{
-					itemOption.active = 1;
-				}
-				else if (itemOption.optionTemplate.type == 6 && item.upgrade >= 14)
-				{
-					itemOption.active = 1;
-				}
-				else if (itemOption.optionTemplate.type == 7 && item.upgrade >= 16)
-				{
-					itemOption.active = 1;
+					bool flag4 = itemOption.optionTemplate.type == 3 && item.upgrade >= 4;
+					if (flag4)
+					{
+						itemOption.active = 1;
+					}
+					else
+					{
+						bool flag5 = itemOption.optionTemplate.type == 4 && item.upgrade >= 8;
+						if (flag5)
+						{
+							itemOption.active = 1;
+						}
+						else
+						{
+							bool flag6 = itemOption.optionTemplate.type == 5 && item.upgrade >= 12;
+							if (flag6)
+							{
+								itemOption.active = 1;
+							}
+							else
+							{
+								bool flag7 = itemOption.optionTemplate.type == 6 && item.upgrade >= 14;
+								if (flag7)
+								{
+									itemOption.active = 1;
+								}
+								else
+								{
+									bool flag8 = itemOption.optionTemplate.type == 7 && item.upgrade >= 16;
+									if (flag8)
+									{
+										itemOption.active = 1;
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000682 RID: 1666 RVA: 0x0002BE74 File Offset: 0x0002A274
+	// Token: 0x0600010D RID: 269 RVA: 0x00016614 File Offset: 0x00014814
 	public void doInjure(int HPShow, int MPShow, bool isCrit, bool isMob)
 	{
 		this.isCrit = isCrit;
@@ -6160,19 +7602,24 @@ public class Char : IMapObject
 		GameScr.gI().twHp = 0;
 		GameScr.gI().isInjureMp = true;
 		GameScr.gI().twMp = 0;
-		if (this.cHP < 0)
+		bool flag = this.cHP < 0;
+		if (flag)
 		{
 			this.cHP = 0;
 		}
-		if (this.cMP < 0)
+		bool flag2 = this.cMP < 0;
+		if (flag2)
 		{
 			this.cMP = 0;
 		}
-		if (isMob || (!isMob && (int)this.cTypePk != 4 && this.damMP != -100))
+		bool flag3 = isMob || (!isMob && this.cTypePk != 4 && this.damMP != -100);
+		if (flag3)
 		{
-			if (HPShow <= 0)
+			bool flag4 = HPShow <= 0;
+			if (flag4)
 			{
-				if (this.me)
+				bool flag5 = this.me;
+				if (flag5)
 				{
 					GameScr.startFlyText(mResources.miss, this.cx, this.cy - this.ch, 0, -2, mFont.MISS_ME);
 				}
@@ -6183,15 +7630,17 @@ public class Char : IMapObject
 			}
 			else
 			{
-				GameScr.startFlyText("-" + HPShow, this.cx, this.cy - this.ch, 0, -2, isCrit ? mFont.FATAL : mFont.RED);
+				GameScr.startFlyText("-" + HPShow.ToString(), this.cx, this.cy - this.ch, 0, -2, isCrit ? mFont.FATAL : mFont.RED);
 			}
 		}
-		if (HPShow > 0)
+		bool flag6 = HPShow > 0;
+		if (flag6)
 		{
 			this.isInjure = 6;
 		}
 		ServerEffect.addServerEffect(80, this, 1);
-		if (this.isDie)
+		bool flag7 = this.isDie;
+		if (flag7)
 		{
 			this.isDie = false;
 			global::Char.isLockKey = false;
@@ -6199,7 +7648,7 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000683 RID: 1667 RVA: 0x0002C05C File Offset: 0x0002A45C
+	// Token: 0x0600010E RID: 270 RVA: 0x00016818 File Offset: 0x00014A18
 	public void doInjure()
 	{
 		GameScr.gI().isInjureHp = true;
@@ -6212,54 +7661,58 @@ public class Char : IMapObject
 		this.twHp = 0;
 	}
 
-	// Token: 0x06000684 RID: 1668 RVA: 0x0002C0B4 File Offset: 0x0002A4B4
+	// Token: 0x0600010F RID: 271 RVA: 0x00016870 File Offset: 0x00014A70
 	public void startDie(short toX, short toY)
 	{
 		this.isMonkey = 0;
 		this.isWaitMonkey = false;
-		if (this.me && this.isDie)
+		bool flag = this.me && this.isDie;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.me)
-		{
-			this.isLockMove = true;
-			for (int i = 0; i < GameScr.vCharInMap.size(); i++)
+			bool flag2 = this.me;
+			if (flag2)
 			{
-				global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
-				@char.killCharId = -9999;
+				this.isLockMove = true;
+				for (int i = 0; i < GameScr.vCharInMap.size(); i++)
+				{
+					global::Char @char = (global::Char)GameScr.vCharInMap.elementAt(i);
+					@char.killCharId = -9999;
+				}
+				bool flag3 = GameCanvas.panel != null && GameCanvas.panel.cp != null;
+				if (flag3)
+				{
+					GameCanvas.panel.cp = null;
+				}
+				bool flag4 = GameCanvas.panel2 != null && GameCanvas.panel2.cp != null;
+				if (flag4)
+				{
+					GameCanvas.panel2.cp = null;
+				}
 			}
-			if (GameCanvas.panel != null && GameCanvas.panel.cp != null)
+			this.statusMe = 5;
+			this.cp2 = (int)toX;
+			this.cp3 = (int)toY;
+			this.cp1 = 0;
+			this.cHP = 0;
+			this.testCharId = -9999;
+			this.killCharId = -9999;
+			bool flag5 = this.me && this.myskill != null && this.myskill.template.id != 14;
+			if (flag5)
 			{
-				GameCanvas.panel.cp = null;
+				this.stopUseChargeSkill();
 			}
-			if (GameCanvas.panel2 != null && GameCanvas.panel2.cp != null)
-			{
-				GameCanvas.panel2.cp = null;
-			}
+			this.cTypePk = 0;
 		}
-		this.statusMe = 5;
-		this.cp2 = (int)toX;
-		this.cp3 = (int)toY;
-		this.cp1 = 0;
-		this.cHP = 0;
-		this.testCharId = -9999;
-		this.killCharId = -9999;
-		if (this.me && this.myskill != null && (int)this.myskill.template.id != 14)
-		{
-			this.stopUseChargeSkill();
-		}
-		this.cTypePk = 0;
 	}
 
-	// Token: 0x06000685 RID: 1669 RVA: 0x0002C1EB File Offset: 0x0002A5EB
+	// Token: 0x06000110 RID: 272 RVA: 0x000169C3 File Offset: 0x00014BC3
 	public void waitToDie(short toX, short toY)
 	{
 		this.wdx = toX;
 		this.wdy = toY;
 	}
 
-	// Token: 0x06000686 RID: 1670 RVA: 0x0002C1FC File Offset: 0x0002A5FC
+	// Token: 0x06000111 RID: 273 RVA: 0x000169D4 File Offset: 0x00014BD4
 	public void liveFromDead()
 	{
 		this.cHP = this.cHPFull;
@@ -6271,46 +7724,55 @@ public class Char : IMapObject
 		GameScr.isHaveSelectSkill = true;
 	}
 
-	// Token: 0x06000687 RID: 1671 RVA: 0x0002C25C File Offset: 0x0002A65C
+	// Token: 0x06000112 RID: 274 RVA: 0x00016A38 File Offset: 0x00014C38
 	public bool doUsePotion()
 	{
-		if (this.arrItemBag == null)
+		bool flag = this.arrItemBag == null;
+		bool result;
+		if (flag)
 		{
-			return false;
+			result = false;
 		}
-		for (int i = 0; i < this.arrItemBag.Length; i++)
+		else
 		{
-			if (this.arrItemBag[i] != null)
+			for (int i = 0; i < this.arrItemBag.Length; i++)
 			{
-				if ((int)this.arrItemBag[i].template.type == 6)
+				bool flag2 = this.arrItemBag[i] != null;
+				if (flag2)
 				{
-					Service.gI().useItem(0, 1, -1, this.arrItemBag[i].template.id);
-					return true;
+					bool flag3 = this.arrItemBag[i].template.type == 6;
+					if (flag3)
+					{
+						Service.gI().useItem(0, 1, -1, this.arrItemBag[i].template.id);
+						return true;
+					}
 				}
 			}
+			result = false;
 		}
-		return false;
+		return result;
 	}
 
-	// Token: 0x06000688 RID: 1672 RVA: 0x0002C2DC File Offset: 0x0002A6DC
+	// Token: 0x06000113 RID: 275 RVA: 0x00016ACC File Offset: 0x00014CCC
 	public bool isLang()
 	{
 		return TileMap.mapID == 1 || TileMap.mapID == 27 || TileMap.mapID == 72 || TileMap.mapID == 10 || TileMap.mapID == 17 || TileMap.mapID == 22 || TileMap.mapID == 32 || TileMap.mapID == 38 || TileMap.mapID == 43 || TileMap.mapID == 48;
 	}
 
-	// Token: 0x06000689 RID: 1673 RVA: 0x0002C364 File Offset: 0x0002A764
+	// Token: 0x06000114 RID: 276 RVA: 0x00016B3C File Offset: 0x00014D3C
 	public bool isMeCanAttackOtherPlayer(global::Char cAtt)
 	{
-		return cAtt != null && global::Char.myCharz().myskill != null && global::Char.myCharz().myskill.template.type != 2 && (global::Char.myCharz().myskill.template.type != 4 || cAtt.statusMe == 14 || cAtt.statusMe == 5) && ((((int)cAtt.cTypePk == 3 && (int)global::Char.myCharz().cTypePk == 3) || ((int)global::Char.myCharz().cTypePk == 5 || (int)cAtt.cTypePk == 5 || ((int)global::Char.myCharz().cTypePk == 1 && (int)cAtt.cTypePk == 1)) || ((int)global::Char.myCharz().cTypePk == 4 && (int)cAtt.cTypePk == 4) || (global::Char.myCharz().testCharId >= 0 && global::Char.myCharz().testCharId == cAtt.charID) || (global::Char.myCharz().killCharId >= 0 && global::Char.myCharz().killCharId == cAtt.charID && !this.isLang()) || (cAtt.killCharId >= 0 && cAtt.killCharId == global::Char.myCharz().charID && !this.isLang()) || ((int)global::Char.myCharz().cFlag == 8 && (int)cAtt.cFlag != 0) || ((int)global::Char.myCharz().cFlag != 0 && (int)cAtt.cFlag == 8) || ((int)global::Char.myCharz().cFlag != (int)cAtt.cFlag && (int)global::Char.myCharz().cFlag != 0 && (int)cAtt.cFlag != 0)) && cAtt.statusMe != 14) && cAtt.statusMe != 5;
+		return cAtt != null && global::Char.myCharz().myskill != null && global::Char.myCharz().myskill.template.type != 2 && (global::Char.myCharz().myskill.template.type != 4 || cAtt.statusMe == 14 || cAtt.statusMe == 5) && ((cAtt.cTypePk == 3 && global::Char.myCharz().cTypePk == 3) || (global::Char.myCharz().cTypePk == 5 || cAtt.cTypePk == 5 || (global::Char.myCharz().cTypePk == 1 && cAtt.cTypePk == 1)) || (global::Char.myCharz().cTypePk == 4 && cAtt.cTypePk == 4) || (global::Char.myCharz().testCharId >= 0 && global::Char.myCharz().testCharId == cAtt.charID) || (global::Char.myCharz().killCharId >= 0 && global::Char.myCharz().killCharId == cAtt.charID && !this.isLang()) || (cAtt.killCharId >= 0 && cAtt.killCharId == global::Char.myCharz().charID && !this.isLang()) || (global::Char.myCharz().cFlag == 8 && cAtt.cFlag != 0) || (global::Char.myCharz().cFlag != 0 && cAtt.cFlag == 8) || (global::Char.myCharz().cFlag != cAtt.cFlag && global::Char.myCharz().cFlag != 0 && cAtt.cFlag != 0)) && cAtt.statusMe != 14 && cAtt.statusMe != 5;
 	}
 
-	// Token: 0x0600068A RID: 1674 RVA: 0x0002C558 File Offset: 0x0002A958
+	// Token: 0x06000115 RID: 277 RVA: 0x00016CE8 File Offset: 0x00014EE8
 	public void clearTask()
 	{
 		global::Char.myCharz().taskMaint = null;
 		for (int i = 0; i < global::Char.myCharz().arrItemBag.Length; i++)
 		{
-			if (global::Char.myCharz().arrItemBag[i] != null && (int)global::Char.myCharz().arrItemBag[i].template.type == 8)
+			bool flag = global::Char.myCharz().arrItemBag[i] != null && global::Char.myCharz().arrItemBag[i].template.type == 8;
+			if (flag)
 			{
 				global::Char.myCharz().arrItemBag[i] = null;
 			}
@@ -6318,130 +7780,157 @@ public class Char : IMapObject
 		Npc.clearEffTask();
 	}
 
-	// Token: 0x0600068B RID: 1675 RVA: 0x0002C5CD File Offset: 0x0002A9CD
+	// Token: 0x06000116 RID: 278 RVA: 0x00016D64 File Offset: 0x00014F64
 	public int getX()
 	{
 		return this.cx;
 	}
 
-	// Token: 0x0600068C RID: 1676 RVA: 0x0002C5D5 File Offset: 0x0002A9D5
+	// Token: 0x06000117 RID: 279 RVA: 0x00016D7C File Offset: 0x00014F7C
 	public int getY()
 	{
 		return this.cy;
 	}
 
-	// Token: 0x0600068D RID: 1677 RVA: 0x0002C5DD File Offset: 0x0002A9DD
+	// Token: 0x06000118 RID: 280 RVA: 0x00016D94 File Offset: 0x00014F94
 	public int getH()
 	{
 		return 32;
 	}
 
-	// Token: 0x0600068E RID: 1678 RVA: 0x0002C5E1 File Offset: 0x0002A9E1
+	// Token: 0x06000119 RID: 281 RVA: 0x00016DA8 File Offset: 0x00014FA8
 	public int getW()
 	{
 		return 24;
 	}
 
-	// Token: 0x0600068F RID: 1679 RVA: 0x0002C5E8 File Offset: 0x0002A9E8
+	// Token: 0x0600011A RID: 282 RVA: 0x00016DBC File Offset: 0x00014FBC
 	public void focusManualTo(object objectz)
 	{
-		if (objectz is Mob)
+		bool flag = objectz is Mob;
+		if (flag)
 		{
 			this.mobFocus = (Mob)objectz;
 			this.deFocusNPC();
 			this.charFocus = null;
 			this.itemFocus = null;
 		}
-		else if (objectz is Npc)
+		else
 		{
-			global::Char.myCharz().mobFocus = null;
-			global::Char.myCharz().deFocusNPC();
-			global::Char.myCharz().npcFocus = (Npc)objectz;
-			global::Char.myCharz().charFocus = null;
-			global::Char.myCharz().itemFocus = null;
-		}
-		else if (objectz is global::Char)
-		{
-			global::Char.myCharz().mobFocus = null;
-			global::Char.myCharz().deFocusNPC();
-			global::Char.myCharz().charFocus = (global::Char)objectz;
-			global::Char.myCharz().itemFocus = null;
-		}
-		else if (objectz is ItemMap)
-		{
-			global::Char.myCharz().mobFocus = null;
-			global::Char.myCharz().deFocusNPC();
-			global::Char.myCharz().charFocus = null;
-			global::Char.myCharz().itemFocus = (ItemMap)objectz;
+			bool flag2 = objectz is Npc;
+			if (flag2)
+			{
+				global::Char.myCharz().mobFocus = null;
+				global::Char.myCharz().deFocusNPC();
+				global::Char.myCharz().npcFocus = (Npc)objectz;
+				global::Char.myCharz().charFocus = null;
+				global::Char.myCharz().itemFocus = null;
+			}
+			else
+			{
+				bool flag3 = objectz is global::Char;
+				if (flag3)
+				{
+					global::Char.myCharz().mobFocus = null;
+					global::Char.myCharz().deFocusNPC();
+					global::Char.myCharz().charFocus = (global::Char)objectz;
+					global::Char.myCharz().itemFocus = null;
+				}
+				else
+				{
+					bool flag4 = objectz is ItemMap;
+					if (flag4)
+					{
+						global::Char.myCharz().mobFocus = null;
+						global::Char.myCharz().deFocusNPC();
+						global::Char.myCharz().charFocus = null;
+						global::Char.myCharz().itemFocus = (ItemMap)objectz;
+					}
+				}
+			}
 		}
 		global::Char.isManualFocus = true;
 	}
 
-	// Token: 0x06000690 RID: 1680 RVA: 0x0002C6F1 File Offset: 0x0002AAF1
+	// Token: 0x0600011B RID: 283 RVA: 0x00003136 File Offset: 0x00001336
 	public void stopMoving()
 	{
 	}
 
-	// Token: 0x06000691 RID: 1681 RVA: 0x0002C6F3 File Offset: 0x0002AAF3
+	// Token: 0x0600011C RID: 284 RVA: 0x00003136 File Offset: 0x00001336
 	public void cancelAttack()
 	{
 	}
 
-	// Token: 0x06000692 RID: 1682 RVA: 0x0002C6F5 File Offset: 0x0002AAF5
+	// Token: 0x0600011D RID: 285 RVA: 0x00016ED8 File Offset: 0x000150D8
 	public bool isInvisible()
 	{
 		return false;
 	}
 
-	// Token: 0x06000693 RID: 1683 RVA: 0x0002C6F8 File Offset: 0x0002AAF8
+	// Token: 0x0600011E RID: 286 RVA: 0x00016EEC File Offset: 0x000150EC
 	public bool focusToAttack()
 	{
 		return this.mobFocus != null || (this.charFocus != null && this.isMeCanAttackOtherPlayer(this.charFocus));
 	}
 
-	// Token: 0x06000694 RID: 1684 RVA: 0x0002C724 File Offset: 0x0002AB24
+	// Token: 0x0600011F RID: 287 RVA: 0x00016F20 File Offset: 0x00015120
 	public void addDustEff(int type)
 	{
-		if (!GameCanvas.lowGraphic)
+		bool flag = !GameCanvas.lowGraphic;
+		if (flag)
 		{
-			if (type == 1)
+			bool flag2 = type == 1;
+			if (flag2)
 			{
-				if (this.clevel >= 9)
+				bool flag3 = this.clevel >= 9;
+				if (flag3)
 				{
 					Effect effect = new Effect(19, this.cx - 5, this.cy + 20, 2, 1, -1);
 					EffecMn.addEff(effect);
 				}
 			}
-			else if (type == 2)
+			else
 			{
-				if (this.me && (int)this.isMonkey == 1)
+				bool flag4 = type == 2;
+				if (flag4)
 				{
-					return;
+					bool flag5 = this.me && this.isMonkey == 1;
+					if (!flag5)
+					{
+						bool flag6 = this.isNhapThe && GameCanvas.gameTick % 5 == 0;
+						if (flag6)
+						{
+							Effect effect2 = new Effect(22, this.cx - 5, this.cy + 35, 2, 1, -1);
+							EffecMn.addEff(effect2);
+						}
+					}
 				}
-				if (this.isNhapThe && GameCanvas.gameTick % 5 == 0)
+				else
 				{
-					Effect effect2 = new Effect(22, this.cx - 5, this.cy + 35, 2, 1, -1);
-					EffecMn.addEff(effect2);
+					bool flag7 = type == 3 && this.clevel >= 9 && this.ySd - this.cy <= 5;
+					if (flag7)
+					{
+						Effect effect3 = new Effect(19, this.cx - 5, this.ySd + 20, 2, 1, -1);
+						EffecMn.addEff(effect3);
+					}
 				}
-			}
-			else if (type == 3 && this.clevel >= 9 && this.ySd - this.cy <= 5)
-			{
-				Effect effect3 = new Effect(19, this.cx - 5, this.ySd + 20, 2, 1, -1);
-				EffecMn.addEff(effect3);
 			}
 		}
 	}
 
-	// Token: 0x06000695 RID: 1685 RVA: 0x0002C820 File Offset: 0x0002AC20
+	// Token: 0x06000120 RID: 288 RVA: 0x00017048 File Offset: 0x00015248
 	public bool isGetFlagImage(sbyte getFlag)
 	{
 		bool result = true;
 		for (int i = 0; i < GameScr.vFlag.size(); i++)
 		{
 			PKFlag pkflag = (PKFlag)GameScr.vFlag.elementAt(i);
-			if (pkflag != null)
+			bool flag = pkflag != null;
+			if (flag)
 			{
-				if ((int)pkflag.cflag == (int)getFlag)
+				bool flag2 = pkflag.cflag == getFlag;
+				if (flag2)
 				{
 					return true;
 				}
@@ -6451,26 +7940,33 @@ public class Char : IMapObject
 		return result;
 	}
 
-	// Token: 0x06000696 RID: 1686 RVA: 0x0002C878 File Offset: 0x0002AC78
+	// Token: 0x06000121 RID: 289 RVA: 0x000170B0 File Offset: 0x000152B0
 	private void paintPKFlag(mGraphics g)
 	{
-		if (this.cdir == 1)
+		bool flag = this.cdir == 1;
+		if (flag)
 		{
-			if ((int)this.cFlag != 0 && (int)this.cFlag != -1)
+			bool flag2 = this.cFlag != 0 && this.cFlag != -1;
+			if (flag2)
 			{
 				SmallImage.drawSmallImage(g, this.flagImage, this.cx - 10, this.cy - this.ch - ((!this.me) ? 30 : 30) + ((GameCanvas.gameTick % 20 <= 10) ? 0 : (GameCanvas.gameTick % 4 / 2)), 2, 0);
 			}
 		}
-		else if ((int)this.cFlag != 0 && (int)this.cFlag != -1)
+		else
 		{
-			SmallImage.drawSmallImage(g, this.flagImage, this.cx, this.cy - this.ch - ((!this.me) ? 30 : 30) + ((GameCanvas.gameTick % 20 <= 10) ? 0 : (GameCanvas.gameTick % 4 / 2)), 0, 0);
+			bool flag3 = this.cFlag != 0 && this.cFlag != -1;
+			if (flag3)
+			{
+				SmallImage.drawSmallImage(g, this.flagImage, this.cx, this.cy - this.ch - ((!this.me) ? 30 : 30) + ((GameCanvas.gameTick % 20 <= 10) ? 0 : (GameCanvas.gameTick % 4 / 2)), 0, 0);
+			}
 		}
 	}
 
-	// Token: 0x06000697 RID: 1687 RVA: 0x0002C975 File Offset: 0x0002AD75
+	// Token: 0x06000122 RID: 290 RVA: 0x000171A0 File Offset: 0x000153A0
 	public void removeHoleEff()
 	{
-		if (this.holder)
+		bool flag = this.holder;
+		if (flag)
 		{
 			this.holder = false;
 			this.charHold = null;
@@ -6484,31 +7980,34 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x06000698 RID: 1688 RVA: 0x0002C9B1 File Offset: 0x0002ADB1
+	// Token: 0x06000123 RID: 291 RVA: 0x000171E8 File Offset: 0x000153E8
 	public void removeProtectEff()
 	{
 		this.protectEff = false;
 		this.eProtect = null;
 	}
 
-	// Token: 0x06000699 RID: 1689 RVA: 0x0002C9C1 File Offset: 0x0002ADC1
+	// Token: 0x06000124 RID: 292 RVA: 0x000171F9 File Offset: 0x000153F9
 	public void removeBlindEff()
 	{
 		this.blindEff = false;
 	}
 
-	// Token: 0x0600069A RID: 1690 RVA: 0x0002C9CC File Offset: 0x0002ADCC
+	// Token: 0x06000125 RID: 293 RVA: 0x00017204 File Offset: 0x00015404
 	public void removeEffect()
 	{
-		if (this.holdEffID != 0)
+		bool flag = this.holdEffID != 0;
+		if (flag)
 		{
 			this.holdEffID = 0;
 		}
-		if (this.holder)
+		bool flag2 = this.holder;
+		if (flag2)
 		{
 			this.holder = false;
 		}
-		if (this.protectEff)
+		bool flag3 = this.protectEff;
+		if (flag3)
 		{
 			this.protectEff = false;
 		}
@@ -6519,7 +8018,7 @@ public class Char : IMapObject
 		this.sleepEff = false;
 	}
 
-	// Token: 0x0600069B RID: 1691 RVA: 0x0002CA34 File Offset: 0x0002AE34
+	// Token: 0x06000126 RID: 294 RVA: 0x00017274 File Offset: 0x00015474
 	public void setPos(short xPos, short yPos, sbyte typePos)
 	{
 		this.isSetPos = true;
@@ -6527,26 +8026,29 @@ public class Char : IMapObject
 		this.yPos = yPos;
 		this.typePos = typePos;
 		this.tpos = 0;
-		if (this.me)
+		bool flag = this.me;
+		if (flag)
 		{
-			if (GameCanvas.panel != null)
+			bool flag2 = GameCanvas.panel != null;
+			if (flag2)
 			{
 				GameCanvas.panel.hide();
 			}
-			if (GameCanvas.panel2 != null)
+			bool flag3 = GameCanvas.panel2 != null;
+			if (flag3)
 			{
 				GameCanvas.panel2.hide();
 			}
 		}
 	}
 
-	// Token: 0x0600069C RID: 1692 RVA: 0x0002CA97 File Offset: 0x0002AE97
+	// Token: 0x06000127 RID: 295 RVA: 0x000172E3 File Offset: 0x000154E3
 	public void removeHuytSao()
 	{
 		this.huytSao = false;
 	}
 
-	// Token: 0x0600069D RID: 1693 RVA: 0x0002CAA0 File Offset: 0x0002AEA0
+	// Token: 0x06000128 RID: 296 RVA: 0x000172ED File Offset: 0x000154ED
 	public void fusionComplete()
 	{
 		this.isFusion = false;
@@ -6554,29 +8056,34 @@ public class Char : IMapObject
 		this.tFusion = 0;
 	}
 
-	// Token: 0x0600069E RID: 1694 RVA: 0x0002CAB8 File Offset: 0x0002AEB8
+	// Token: 0x06000129 RID: 297 RVA: 0x00017304 File Offset: 0x00015504
 	public void setFusion(sbyte fusion)
 	{
 		this.tFusion = 0;
-		if ((int)fusion == 4 || (int)fusion == 5)
+		bool flag = fusion == 4 || fusion == 5;
+		if (flag)
 		{
-			if (this.me)
+			bool flag2 = this.me;
+			if (flag2)
 			{
 				Service.gI().funsion(fusion);
 			}
 			EffecMn.addEff(new Effect(34, this.cx, this.cy + 12, 2, 1, -1));
 		}
-		if ((int)fusion == 6)
+		bool flag3 = fusion == 6;
+		if (flag3)
 		{
 			EffecMn.addEff(new Effect(38, this.cx, this.cy + 12, 2, 1, -1));
 		}
-		if (this.me)
+		bool flag4 = this.me;
+		if (flag4)
 		{
 			GameCanvas.panel.hideNow();
 			global::Char.isLockKey = true;
 		}
 		this.isFusion = true;
-		if ((int)fusion == 1)
+		bool flag5 = fusion == 1;
+		if (flag5)
 		{
 			this.isNhapThe = false;
 		}
@@ -6586,13 +8093,13 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x0600069F RID: 1695 RVA: 0x0002CB73 File Offset: 0x0002AF73
+	// Token: 0x0600012A RID: 298 RVA: 0x000173CC File Offset: 0x000155CC
 	public void removeSleepEff()
 	{
 		this.sleepEff = false;
 	}
 
-	// Token: 0x060006A0 RID: 1696 RVA: 0x0002CB7C File Offset: 0x0002AF7C
+	// Token: 0x0600012B RID: 299 RVA: 0x000173D6 File Offset: 0x000155D6
 	public void setPartOld()
 	{
 		this.headTemp = this.head;
@@ -6601,59 +8108,68 @@ public class Char : IMapObject
 		this.bagTemp = this.bag;
 	}
 
-	// Token: 0x060006A1 RID: 1697 RVA: 0x0002CBAE File Offset: 0x0002AFAE
+	// Token: 0x0600012C RID: 300 RVA: 0x0001740C File Offset: 0x0001560C
 	public void setPartTemp(int head, int body, int leg, int bag)
 	{
-		if (head != -1)
+		bool flag = head != -1;
+		if (flag)
 		{
 			this.head = head;
 		}
-		if (body != -1)
+		bool flag2 = body != -1;
+		if (flag2)
 		{
 			this.body = body;
 		}
-		if (leg != -1)
+		bool flag3 = leg != -1;
+		if (flag3)
 		{
 			this.leg = leg;
 		}
-		if (bag != -1)
+		bool flag4 = bag != -1;
+		if (flag4)
 		{
 			this.bag = bag;
 		}
 	}
 
-	// Token: 0x060006A2 RID: 1698 RVA: 0x0002CBEC File Offset: 0x0002AFEC
+	// Token: 0x0600012D RID: 301 RVA: 0x0001746C File Offset: 0x0001566C
 	public void resetPartTemp()
 	{
-		if (this.headTemp != -1)
+		bool flag = this.headTemp != -1;
+		if (flag)
 		{
 			this.head = this.headTemp;
 			this.headTemp = -1;
 		}
-		if (this.bodyTemp != -1)
+		bool flag2 = this.bodyTemp != -1;
+		if (flag2)
 		{
 			this.body = this.bodyTemp;
 			this.bodyTemp = -1;
 		}
-		if (this.legTemp != -1)
+		bool flag3 = this.legTemp != -1;
+		if (flag3)
 		{
 			this.leg = this.legTemp;
 			this.legTemp = -1;
 		}
-		if (this.bagTemp != -1)
+		bool flag4 = this.bagTemp != -1;
+		if (flag4)
 		{
 			this.bag = this.bagTemp;
 			this.bagTemp = -1;
 		}
 	}
 
-	// Token: 0x060006A3 RID: 1699 RVA: 0x0002CC78 File Offset: 0x0002B078
+	// Token: 0x0600012E RID: 302 RVA: 0x00017510 File Offset: 0x00015710
 	public Effect getEffById(int id)
 	{
 		for (int i = 0; i < this.vEffChar.size(); i++)
 		{
 			Effect effect = (Effect)this.vEffChar.elementAt(i);
-			if (effect.effId == id)
+			bool flag = effect.effId == id;
+			if (flag)
 			{
 				return effect;
 			}
@@ -6661,40 +8177,48 @@ public class Char : IMapObject
 		return null;
 	}
 
-	// Token: 0x060006A4 RID: 1700 RVA: 0x0002CCC2 File Offset: 0x0002B0C2
+	// Token: 0x0600012F RID: 303 RVA: 0x00017565 File Offset: 0x00015765
 	public void addEffChar(Effect e)
 	{
 		this.removeEffChar(0, e.effId);
 		this.vEffChar.addElement(e);
 	}
 
-	// Token: 0x060006A5 RID: 1701 RVA: 0x0002CCDD File Offset: 0x0002B0DD
+	// Token: 0x06000130 RID: 304 RVA: 0x00017584 File Offset: 0x00015784
 	public void removeEffChar(int type, int id)
 	{
-		if (type == -1)
+		bool flag = type == -1;
+		if (flag)
 		{
 			this.vEffChar.removeAllElements();
 		}
-		else if (this.getEffById(id) != null)
+		else
 		{
-			this.vEffChar.removeElement(this.getEffById(id));
+			bool flag2 = this.getEffById(id) != null;
+			if (flag2)
+			{
+				this.vEffChar.removeElement(this.getEffById(id));
+			}
 		}
 	}
 
-	// Token: 0x060006A6 RID: 1702 RVA: 0x0002CD14 File Offset: 0x0002B114
+	// Token: 0x06000131 RID: 305 RVA: 0x000175D0 File Offset: 0x000157D0
 	public void paintEffBehind(mGraphics g)
 	{
 		for (int i = 0; i < this.vEffChar.size(); i++)
 		{
 			Effect effect = (Effect)this.vEffChar.elementAt(i);
-			if (effect.layer == 0)
+			bool flag2 = effect.layer == 0;
+			if (flag2)
 			{
 				bool flag = true;
-				if (effect.isStand == 0)
+				bool flag3 = effect.isStand == 0;
+				if (flag3)
 				{
 					flag = (this.statusMe == 1 || this.statusMe == 6);
 				}
-				if (flag)
+				bool flag4 = flag;
+				if (flag4)
 				{
 					effect.paint(g);
 				}
@@ -6702,20 +8226,23 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006A7 RID: 1703 RVA: 0x0002CD98 File Offset: 0x0002B198
+	// Token: 0x06000132 RID: 306 RVA: 0x00017658 File Offset: 0x00015858
 	public void paintEffFront(mGraphics g)
 	{
 		for (int i = 0; i < this.vEffChar.size(); i++)
 		{
 			Effect effect = (Effect)this.vEffChar.elementAt(i);
-			if (effect.layer == 1)
+			bool flag2 = effect.layer == 1;
+			if (flag2)
 			{
 				bool flag = true;
-				if (effect.isStand == 0)
+				bool flag3 = effect.isStand == 0;
+				if (flag3)
 				{
 					flag = (this.statusMe == 1 || this.statusMe == 6);
 				}
-				if (flag)
+				bool flag4 = flag;
+				if (flag4)
 				{
 					effect.paint(g);
 				}
@@ -6723,7 +8250,7 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006A8 RID: 1704 RVA: 0x0002CE1C File Offset: 0x0002B21C
+	// Token: 0x06000133 RID: 307 RVA: 0x000176E0 File Offset: 0x000158E0
 	public void updEffChar()
 	{
 		for (int i = 0; i < this.vEffChar.size(); i++)
@@ -6732,26 +8259,30 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006A9 RID: 1705 RVA: 0x0002CE5B File Offset: 0x0002B25B
+	// Token: 0x06000134 RID: 308 RVA: 0x00017724 File Offset: 0x00015924
 	public int checkLuong()
 	{
 		return this.luong + this.luongKhoa;
 	}
 
-	// Token: 0x060006AA RID: 1706 RVA: 0x0002CE6C File Offset: 0x0002B26C
+	// Token: 0x06000135 RID: 309 RVA: 0x00017744 File Offset: 0x00015944
 	public void updateEye()
 	{
-		if (this.head == 934)
+		bool flag = this.head == 934;
+		if (flag)
 		{
-			if (GameCanvas.timeNow - this.timeAddChopmat > 0L)
+			bool flag2 = GameCanvas.timeNow - this.timeAddChopmat > 0L;
+			if (flag2)
 			{
 				this.fChopmat++;
-				if (this.fChopmat > this.frEye.Length - 1)
+				bool flag3 = this.fChopmat > this.frEye.Length - 1;
+				if (flag3)
 				{
 					this.fChopmat = 0;
 					this.timeAddChopmat = GameCanvas.timeNow + (long)Res.random(2000, 3500);
 					this.frEye = this.frChopCham;
-					if (Res.random(2) == 0)
+					bool flag4 = Res.random(2) == 0;
+					if (flag4)
 					{
 						this.frEye = this.frChopNhanh;
 					}
@@ -6764,35 +8295,43 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006AB RID: 1707 RVA: 0x0002CF14 File Offset: 0x0002B314
+	// Token: 0x06000136 RID: 310 RVA: 0x000177FC File Offset: 0x000159FC
 	private void paintRedEye(mGraphics g, int xx, int yy, int trans, int anchor)
 	{
-		if (this.head == 934 && (this.statusMe == 1 || this.statusMe == 6))
+		bool flag = this.head == 934 && (this.statusMe == 1 || this.statusMe == 6);
+		if (flag)
 		{
-			if (global::Char.fraRedEye == null || global::Char.fraRedEye.imgFrame == null)
+			bool flag2 = global::Char.fraRedEye == null || global::Char.fraRedEye.imgFrame == null;
+			if (flag2)
 			{
 				Image img = mSystem.loadImage("/redeye.png");
 				global::Char.fraRedEye = new FrameImage(img, 14, 10);
 			}
-			else if (this.frEye[this.fChopmat] != -1)
+			else
 			{
-				int num = 8;
-				int num2 = 15;
-				if (trans == 2)
+				bool flag3 = this.frEye[this.fChopmat] != -1;
+				if (flag3)
 				{
-					num = -8;
+					int num = 8;
+					int num2 = 15;
+					bool flag4 = trans == 2;
+					if (flag4)
+					{
+						num = -8;
+					}
+					global::Char.fraRedEye.drawFrame(this.frEye[this.fChopmat], xx + num, yy + num2, trans, anchor, g);
 				}
-				global::Char.fraRedEye.drawFrame(this.frEye[this.fChopmat], xx + num, yy + num2, trans, anchor, g);
 			}
 		}
 	}
 
-	// Token: 0x060006AC RID: 1708 RVA: 0x0002CFC8 File Offset: 0x0002B3C8
+	// Token: 0x06000137 RID: 311 RVA: 0x000178C8 File Offset: 0x00015AC8
 	public bool isHead_2Fr(int idHead)
 	{
 		for (int i = 0; i < global::Char.Arr_Head_2Fr.Length; i++)
 		{
-			if (global::Char.Arr_Head_2Fr[i][0] == idHead)
+			bool flag = global::Char.Arr_Head_2Fr[i][0] == idHead;
+			if (flag)
 			{
 				return true;
 			}
@@ -6800,13 +8339,15 @@ public class Char : IMapObject
 		return false;
 	}
 
-	// Token: 0x060006AD RID: 1709 RVA: 0x0002D000 File Offset: 0x0002B400
+	// Token: 0x06000138 RID: 312 RVA: 0x00017908 File Offset: 0x00015B08
 	private void updateFHead()
 	{
-		if (this.isHead_2Fr(this.head))
+		bool flag = this.isHead_2Fr(this.head);
+		if (flag)
 		{
 			this.fHead++;
-			if (this.fHead > 10000)
+			bool flag2 = this.fHead > 10000;
+			if (flag2)
 			{
 				this.fHead = 0;
 			}
@@ -6817,12 +8358,13 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006AE RID: 1710 RVA: 0x0002D050 File Offset: 0x0002B450
+	// Token: 0x06000139 RID: 313 RVA: 0x0001795C File Offset: 0x00015B5C
 	private int getFHead(int idHead)
 	{
 		for (int i = 0; i < global::Char.Arr_Head_2Fr.Length; i++)
 		{
-			if (global::Char.Arr_Head_2Fr[i][0] == idHead)
+			bool flag = global::Char.Arr_Head_2Fr[i][0] == idHead;
+			if (flag)
 			{
 				return global::Char.Arr_Head_2Fr[i][this.fHead / 4 % global::Char.Arr_Head_2Fr[i].Length];
 			}
@@ -6830,138 +8372,156 @@ public class Char : IMapObject
 		return idHead;
 	}
 
-	// Token: 0x060006AF RID: 1711 RVA: 0x0002D0A4 File Offset: 0x0002B4A4
+	// Token: 0x0600013A RID: 314 RVA: 0x000179B8 File Offset: 0x00015BB8
 	public void paintAuraBehind(mGraphics g)
 	{
-		if (this.me && global::Char.isPaintAura)
+		bool flag = this.me && global::Char.isPaintAura;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.idAuraEff <= -1)
-		{
-			return;
-		}
-		if ((this.statusMe == 1 || this.statusMe == 6) && !GameCanvas.panel.isShow && mSystem.currentTimeMillis() - this.timeBlue > 0L)
-		{
-			string nameImg = this.strEffAura + this.idAuraEff + "_0";
-			FrameImage fraImage = mSystem.getFraImage(nameImg);
-			if (fraImage != null)
+			bool flag2 = this.idAuraEff <= -1;
+			if (!flag2)
 			{
-				fraImage.drawFrame(GameCanvas.gameTick / 4 % fraImage.nFrame, this.cx, this.cy, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
-			}
-		}
-	}
-
-	// Token: 0x060006B0 RID: 1712 RVA: 0x0002D178 File Offset: 0x0002B578
-	public void paintAuraFront(mGraphics g)
-	{
-		if (this.me && !global::Char.isPaintAura)
-		{
-			return;
-		}
-		if (this.idAuraEff <= -1)
-		{
-			return;
-		}
-		if (this.statusMe == 1 || this.statusMe == 6)
-		{
-			if (!GameCanvas.panel.isShow && !GameCanvas.lowGraphic)
-			{
-				bool flag = false;
-				if (mSystem.currentTimeMillis() - this.timeBlue > -1000L && this.IsAddDust1)
+				bool flag3 = (this.statusMe == 1 || this.statusMe == 6) && !GameCanvas.panel.isShow && mSystem.currentTimeMillis() - this.timeBlue > 0L;
+				if (flag3)
 				{
-					flag = true;
-					this.IsAddDust1 = false;
-				}
-				if (mSystem.currentTimeMillis() - this.timeBlue > -500L && this.IsAddDust2)
-				{
-					flag = true;
-					this.IsAddDust2 = false;
-				}
-				if (flag)
-				{
-					GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
-					GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
-					this.addDustEff(1);
-				}
-				if (mSystem.currentTimeMillis() - this.timeBlue > 0L)
-				{
-					string nameImg = this.strEffAura + this.idAuraEff + "_1";
+					string nameImg = this.strEffAura + this.idAuraEff.ToString() + "_0";
 					FrameImage fraImage = mSystem.getFraImage(nameImg);
-					if (fraImage != null)
+					bool flag4 = fraImage != null;
+					if (flag4)
 					{
-						fraImage.drawFrame(GameCanvas.gameTick / 4 % fraImage.nFrame, this.cx, this.cy + 2, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
+						fraImage.drawFrame(GameCanvas.gameTick / 4 % fraImage.nFrame, this.cx, this.cy, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
 					}
 				}
 			}
 		}
-		else
+	}
+
+	// Token: 0x0600013B RID: 315 RVA: 0x00017A9C File Offset: 0x00015C9C
+	public void paintAuraFront(mGraphics g)
+	{
+		bool flag2 = this.me && !global::Char.isPaintAura;
+		if (!flag2)
 		{
-			this.timeBlue = mSystem.currentTimeMillis() + 1500L;
-			this.IsAddDust1 = true;
-			this.IsAddDust2 = true;
+			bool flag3 = this.idAuraEff <= -1;
+			if (!flag3)
+			{
+				bool flag4 = this.statusMe == 1 || this.statusMe == 6;
+				if (flag4)
+				{
+					bool flag5 = !GameCanvas.panel.isShow && !GameCanvas.lowGraphic;
+					if (flag5)
+					{
+						bool flag = false;
+						bool flag6 = mSystem.currentTimeMillis() - this.timeBlue > -1000L && this.IsAddDust1;
+						if (flag6)
+						{
+							flag = true;
+							this.IsAddDust1 = false;
+						}
+						bool flag7 = mSystem.currentTimeMillis() - this.timeBlue > -500L && this.IsAddDust2;
+						if (flag7)
+						{
+							flag = true;
+							this.IsAddDust2 = false;
+						}
+						bool flag8 = flag;
+						if (flag8)
+						{
+							GameCanvas.gI().startDust(-1, this.cx - -8, this.cy);
+							GameCanvas.gI().startDust(1, this.cx - 8, this.cy);
+							this.addDustEff(1);
+						}
+						bool flag9 = mSystem.currentTimeMillis() - this.timeBlue > 0L;
+						if (flag9)
+						{
+							string nameImg = this.strEffAura + this.idAuraEff.ToString() + "_1";
+							FrameImage fraImage = mSystem.getFraImage(nameImg);
+							bool flag10 = fraImage != null;
+							if (flag10)
+							{
+								fraImage.drawFrame(GameCanvas.gameTick / 4 % fraImage.nFrame, this.cx, this.cy + 2, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
+							}
+						}
+					}
+				}
+				else
+				{
+					this.timeBlue = mSystem.currentTimeMillis() + 1500L;
+					this.IsAddDust1 = true;
+					this.IsAddDust2 = true;
+				}
+			}
 		}
 	}
 
-	// Token: 0x060006B1 RID: 1713 RVA: 0x0002D318 File Offset: 0x0002B718
+	// Token: 0x0600013C RID: 316 RVA: 0x00017C70 File Offset: 0x00015E70
 	public void paintEff_Lvup_behind(mGraphics g)
 	{
-		if (this.idEff_Set_Item == -1)
+		bool flag = this.idEff_Set_Item == -1;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.fraEff != null)
-		{
-			this.fraEff.drawFrame(GameCanvas.gameTick / 4 % this.fraEff.nFrame, this.cx, this.cy + 3, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
-		}
-		else
-		{
-			this.fraEff = mSystem.getFraImage(this.strEff_Set_Item + this.idEff_Set_Item + "_0");
+			bool flag2 = this.fraEff != null;
+			if (flag2)
+			{
+				this.fraEff.drawFrame(GameCanvas.gameTick / 4 % this.fraEff.nFrame, this.cx, this.cy + 3, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
+			}
+			else
+			{
+				this.fraEff = mSystem.getFraImage(this.strEff_Set_Item + this.idEff_Set_Item.ToString() + "_0");
+			}
 		}
 	}
 
-	// Token: 0x060006B2 RID: 1714 RVA: 0x0002D3B4 File Offset: 0x0002B7B4
+	// Token: 0x0600013D RID: 317 RVA: 0x00017D10 File Offset: 0x00015F10
 	public void paintEff_Lvup_front(mGraphics g)
 	{
-		if (this.idEff_Set_Item == -1)
+		bool flag = this.idEff_Set_Item == -1;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.fraEffSub != null)
-		{
-			this.fraEffSub.drawFrame(GameCanvas.gameTick / 4 % this.fraEffSub.nFrame, this.cx, this.cy + 8, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
-		}
-		else
-		{
-			this.fraEffSub = mSystem.getFraImage(this.strEff_Set_Item + this.idEff_Set_Item + "_1");
+			bool flag2 = this.fraEffSub != null;
+			if (flag2)
+			{
+				this.fraEffSub.drawFrame(GameCanvas.gameTick / 4 % this.fraEffSub.nFrame, this.cx, this.cy + 8, (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
+			}
+			else
+			{
+				this.fraEffSub = mSystem.getFraImage(this.strEff_Set_Item + this.idEff_Set_Item.ToString() + "_1");
+			}
 		}
 	}
 
-	// Token: 0x060006B3 RID: 1715 RVA: 0x0002D450 File Offset: 0x0002B850
+	// Token: 0x0600013E RID: 318 RVA: 0x00017DB0 File Offset: 0x00015FB0
 	public void paintHat_behind(mGraphics g, int cf, int yh)
 	{
 		try
 		{
-			if (this.idHat != -1)
+			bool flag = this.idHat != -1;
+			if (flag)
 			{
-				if (this.isFrNgang(cf))
+				bool flag2 = this.isFrNgang(cf);
+				if (flag2)
 				{
-					if (this.fraHat_behind_2 != null)
+					bool flag3 = this.fraHat_behind_2 != null;
+					if (flag3)
 					{
 						this.fraHat_behind_2.drawFrame(GameCanvas.gameTick / 4 % this.fraHat_behind_2.nFrame, this.cx + global::Char.hatInfo[cf][0] * ((this.cdir != 1) ? -1 : 1), yh + global::Char.hatInfo[cf][1], (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
 					}
 					else
 					{
-						this.fraHat_behind_2 = mSystem.getFraImage(this.strHat_behind + this.strNgang + this.idHat);
+						this.fraHat_behind_2 = mSystem.getFraImage(this.strHat_behind + this.strNgang + this.idHat.ToString());
 					}
-				}
-				else if (this.fraHat_behind != null)
-				{
-					this.fraHat_behind.drawFrame(GameCanvas.gameTick / 4 % this.fraHat_behind.nFrame, this.cx + global::Char.hatInfo[cf][0] * ((this.cdir != 1) ? -1 : 1), yh + global::Char.hatInfo[cf][1], (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
 				}
 				else
 				{
-					this.fraHat_behind = mSystem.getFraImage(this.strHat_behind + this.idHat);
+					bool flag4 = this.fraHat_behind != null;
+					if (flag4)
+					{
+						this.fraHat_behind.drawFrame(GameCanvas.gameTick / 4 % this.fraHat_behind.nFrame, this.cx + global::Char.hatInfo[cf][0] * ((this.cdir != 1) ? -1 : 1), yh + global::Char.hatInfo[cf][1], (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
+					}
+					else
+					{
+						this.fraHat_behind = mSystem.getFraImage(this.strHat_behind + this.idHat.ToString());
+					}
 				}
 			}
 		}
@@ -6970,31 +8530,38 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006B4 RID: 1716 RVA: 0x0002D5E8 File Offset: 0x0002B9E8
+	// Token: 0x0600013F RID: 319 RVA: 0x00017F40 File Offset: 0x00016140
 	public void paintHat_front(mGraphics g, int cf, int yh)
 	{
 		try
 		{
-			if (this.idHat != -1)
+			bool flag = this.idHat != -1;
+			if (flag)
 			{
-				if (this.isFrNgang(cf))
+				bool flag2 = this.isFrNgang(cf);
+				if (flag2)
 				{
-					if (this.fraHat_font_2 != null)
+					bool flag3 = this.fraHat_font_2 != null;
+					if (flag3)
 					{
 						this.fraHat_font_2.drawFrame(GameCanvas.gameTick / 4 % this.fraHat_font_2.nFrame, this.cx + global::Char.hatInfo[cf][0] * ((this.cdir != 1) ? -1 : 1), yh + global::Char.hatInfo[cf][1], (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
 					}
 					else
 					{
-						this.fraHat_font_2 = mSystem.getFraImage(this.strHat_font + this.strNgang + this.idHat);
+						this.fraHat_font_2 = mSystem.getFraImage(this.strHat_font + this.strNgang + this.idHat.ToString());
 					}
-				}
-				else if (this.fraHat_font != null)
-				{
-					this.fraHat_font.drawFrame(GameCanvas.gameTick / 4 % this.fraHat_font.nFrame, this.cx + global::Char.hatInfo[cf][0] * ((this.cdir != 1) ? -1 : 1), yh + global::Char.hatInfo[cf][1], (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
 				}
 				else
 				{
-					this.fraHat_font = mSystem.getFraImage(this.strHat_font + this.idHat);
+					bool flag4 = this.fraHat_font != null;
+					if (flag4)
+					{
+						this.fraHat_font.drawFrame(GameCanvas.gameTick / 4 % this.fraHat_font.nFrame, this.cx + global::Char.hatInfo[cf][0] * ((this.cdir != 1) ? -1 : 1), yh + global::Char.hatInfo[cf][1], (this.cdir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER, g);
+					}
+					else
+					{
+						this.fraHat_font = mSystem.getFraImage(this.strHat_font + this.idHat.ToString());
+					}
 				}
 			}
 		}
@@ -7003,23 +8570,25 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006B5 RID: 1717 RVA: 0x0002D780 File Offset: 0x0002BB80
+	// Token: 0x06000140 RID: 320 RVA: 0x000180D0 File Offset: 0x000162D0
 	public bool isFrNgang(int fr)
 	{
 		return fr == 2 || fr == 3 || fr == 4 || fr == 5 || fr == 6 || fr == 9 || fr == 10 || fr == 13 || fr == 14 || fr == 15 || fr == 16 || fr == 26 || fr == 27 || fr == 28 || fr == 29;
 	}
 
-	// Token: 0x060006B6 RID: 1718 RVA: 0x0002D804 File Offset: 0x0002BC04
+	// Token: 0x06000141 RID: 321 RVA: 0x0001812C File Offset: 0x0001632C
 	public void sendNewAttack(short idTemplateSkill)
 	{
 		short x = -1;
 		short y = -1;
-		if (this.mobFocus != null)
+		bool flag = this.mobFocus != null;
+		if (flag)
 		{
 			x = (short)this.mobFocus.x;
 			y = (short)this.mobFocus.y;
 		}
-		if (this.charFocus != null && !this.charFocus.isPet && !this.charFocus.isMiniPet)
+		bool flag2 = this.charFocus != null && !this.charFocus.isPet && !this.charFocus.isMiniPet;
+		if (flag2)
 		{
 			x = (short)this.charFocus.cx;
 			y = (short)this.charFocus.cy;
@@ -7027,7 +8596,7 @@ public class Char : IMapObject
 		Service.gI().new_skill_not_focus((sbyte)idTemplateSkill, (sbyte)this.cdir, x, y);
 	}
 
-	// Token: 0x060006B7 RID: 1719 RVA: 0x0002D894 File Offset: 0x0002BC94
+	// Token: 0x06000142 RID: 322 RVA: 0x000181C4 File Offset: 0x000163C4
 	public void SetSkillPaint_NEW(short idskillPaint, bool isFly, sbyte typeFrame, sbyte typePaint, sbyte dir, short timeGong, sbyte typeItem)
 	{
 		this.isPaintNewSkill = true;
@@ -7041,48 +8610,66 @@ public class Char : IMapObject
 		this.count_NEW = 0;
 		this.stt = 0;
 		long lastTimeUseThisSkill = mSystem.currentTimeMillis();
-		if (this.me)
+		bool flag = this.me;
+		if (flag)
 		{
 			this.saveLoadPreviousSkill();
 			this.myskill.lastTimeUseThisSkill = lastTimeUseThisSkill;
-			if (this.myskill.template.manaUseType == 2)
+			bool flag2 = this.myskill.template.manaUseType == 2;
+			if (flag2)
 			{
 				this.cMP = 1;
 			}
-			else if (this.myskill.template.manaUseType != 1)
-			{
-				this.cMP -= this.myskill.manaUse;
-			}
 			else
 			{
-				this.cMP -= this.myskill.manaUse * this.cMPFull / 100;
+				bool flag3 = this.myskill.template.manaUseType != 1;
+				if (flag3)
+				{
+					this.cMP -= this.myskill.manaUse;
+				}
+				else
+				{
+					this.cMP -= this.myskill.manaUse * this.cMPFull / 100;
+				}
 			}
 			global::Char.myCharz().cStamina--;
 			GameScr.gI().isInjureMp = true;
 			GameScr.gI().twMp = 0;
-			if (this.cMP < 0)
+			bool flag4 = this.cMP < 0;
+			if (flag4)
 			{
 				this.cMP = 0;
 			}
 		}
-		if (idskillPaint == 24)
+		bool flag5 = idskillPaint == 24;
+		if (flag5)
 		{
 			GameScr.addEffectEnd_Target(18, 0, (int)typePaint, this.clone(), null, 3, timeGong, 0);
 			GameScr.addEffectEnd_Target(21, 0, (int)typePaint, this.clone(), null, 1, timeGong, 0);
 		}
-		else if (idskillPaint == 25)
+		else
 		{
-			GameScr.addEffectEnd_Target(19, 0, (int)typePaint, this.clone(), null, 3, timeGong, 0);
-			GameScr.addEffectEnd_Target(22, 0, (int)typePaint, this.clone(), null, 1, timeGong, 0);
+			bool flag6 = idskillPaint == 25;
+			if (flag6)
+			{
+				GameScr.addEffectEnd_Target(19, 0, (int)typePaint, this.clone(), null, 3, timeGong, 0);
+				GameScr.addEffectEnd_Target(22, 0, (int)typePaint, this.clone(), null, 1, timeGong, 0);
+			}
+			else
+			{
+				bool flag7 = idskillPaint == 26;
+				if (flag7)
+				{
+					GameScr.addEffectEnd_Target(20, 0, (int)typePaint, this.clone(), null, 3, timeGong, 0);
+					GameScr.addEffectEnd_Target(23, 0, (int)typePaint, this.clone(), null, 1, timeGong, 0);
+				}
+			}
 		}
-		else if (idskillPaint == 26)
+		bool flag8 = this.typeFrame == 1;
+		if (flag8)
 		{
-			GameScr.addEffectEnd_Target(20, 0, (int)typePaint, this.clone(), null, 3, timeGong, 0);
-			GameScr.addEffectEnd_Target(23, 0, (int)typePaint, this.clone(), null, 1, timeGong, 0);
-		}
-		if ((int)this.typeFrame == 1)
-		{
-			if (!this.isFly)
+			bool flag9 = !this.isFly;
+			if (flag9)
 			{
 				this.fr_start = new byte[]
 				{
@@ -7122,9 +8709,11 @@ public class Char : IMapObject
 				};
 			}
 		}
-		if ((int)this.typeFrame == 2)
+		bool flag10 = this.typeFrame == 2;
+		if (flag10)
 		{
-			if (!this.isFly)
+			bool flag11 = !this.isFly;
+			if (flag11)
 			{
 				this.fr_start = new byte[]
 				{
@@ -7162,9 +8751,11 @@ public class Char : IMapObject
 				};
 			}
 		}
-		if ((int)this.typeFrame == 4)
+		bool flag12 = this.typeFrame == 4;
+		if (flag12)
 		{
-			if (!this.isFly)
+			bool flag13 = !this.isFly;
+			if (flag13)
 			{
 				this.fr_start = new byte[]
 				{
@@ -7203,9 +8794,11 @@ public class Char : IMapObject
 				};
 			}
 		}
-		if ((int)this.typeFrame == 3)
+		bool flag14 = this.typeFrame == 3;
+		if (flag14)
 		{
-			if (!this.isFly)
+			bool flag15 = !this.isFly;
+			if (flag15)
 			{
 				this.fr_start = new byte[]
 				{
@@ -7252,7 +8845,7 @@ public class Char : IMapObject
 		}
 	}
 
-	// Token: 0x060006B8 RID: 1720 RVA: 0x0002DC9C File Offset: 0x0002C09C
+	// Token: 0x06000143 RID: 323 RVA: 0x00018614 File Offset: 0x00016814
 	public void SetSkillPaint_STT(int stt, short idskillPaint, Point targetDame, short timeDame, short rangeDame, sbyte typePaint, Point[] listObj, sbyte typeItem)
 	{
 		this.stt = stt;
@@ -7263,94 +8856,122 @@ public class Char : IMapObject
 		this.timeDame = mSystem.currentTimeMillis() + (long)timeDame;
 		this.rangeDame = rangeDame;
 		this.typeItem = typeItem;
-		if (this.stt != 1)
+		bool flag = this.stt != 1;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.idskillPaint == 24)
-		{
-			GameScr.addEffectEnd_Target(18, 1, (int)typePaint, this, null, 3, timeDame, 0);
-			GameScr.addEffectEnd_Target(24, 0, (int)typePaint, this, this.targetDame, 1, timeDame, rangeDame);
-		}
-		if (this.idskillPaint == 25)
-		{
-			GameScr.addEffectEnd_Target(19, 0, (int)typePaint, this, null, 3, timeDame, 0);
-			GameScr.addEffectEnd_Target(25, 0, (int)typePaint, this, this.targetDame, 1, timeDame, rangeDame);
-		}
-		if (this.idskillPaint == 26)
-		{
-			GameScr.addEffectEnd_Target(20, 0, (int)typePaint, this, null, 3, timeDame, 0);
-			GameScr.addEffectEnd(26, (int)typeItem, (int)typePaint, targetDame.x, targetDame.y, 1, 0, timeDame, listObj);
+			bool flag2 = this.idskillPaint == 24;
+			if (flag2)
+			{
+				GameScr.addEffectEnd_Target(18, 1, (int)typePaint, this, null, 3, timeDame, 0);
+				GameScr.addEffectEnd_Target(24, 0, (int)typePaint, this, this.targetDame, 1, timeDame, rangeDame);
+			}
+			bool flag3 = this.idskillPaint == 25;
+			if (flag3)
+			{
+				GameScr.addEffectEnd_Target(19, 0, (int)typePaint, this, null, 3, timeDame, 0);
+				GameScr.addEffectEnd_Target(25, 0, (int)typePaint, this, this.targetDame, 1, timeDame, rangeDame);
+			}
+			bool flag4 = this.idskillPaint == 26;
+			if (flag4)
+			{
+				GameScr.addEffectEnd_Target(20, 0, (int)typePaint, this, null, 3, timeDame, 0);
+				GameScr.addEffectEnd(26, (int)typeItem, (int)typePaint, targetDame.x, targetDame.y, 1, 0, timeDame, listObj);
+			}
 		}
 	}
 
-	// Token: 0x060006B9 RID: 1721 RVA: 0x0002DDA0 File Offset: 0x0002C1A0
+	// Token: 0x06000144 RID: 324 RVA: 0x0001872C File Offset: 0x0001692C
 	public void UpdSkillPaint_NEW()
 	{
-		if (this.stt == 0)
+		bool flag = this.stt == 0;
+		if (flag)
 		{
-			if (this.isFly && this.count_NEW < 20)
+			bool flag2 = this.isFly && this.count_NEW < 20;
+			if (flag2)
 			{
 				this.cvy = -3;
 				this.cy += this.cvy;
 			}
-			if (this.fr_start.Length == 1)
+			bool flag3 = this.fr_start.Length == 1;
+			if (flag3)
 			{
 				this.cf = (int)this.fr_start[0];
 			}
-			else if (this.count_NEW > this.fr_start.Length - 1)
+			else
 			{
-				this.cf = (int)this.fr_start[this.fr_start.Length - 1];
+				bool flag4 = this.count_NEW > this.fr_start.Length - 1;
+				if (flag4)
+				{
+					this.cf = (int)this.fr_start[this.fr_start.Length - 1];
+				}
+				else
+				{
+					this.cf = (int)this.fr_start[this.count_NEW];
+				}
+			}
+		}
+		else
+		{
+			bool flag5 = this.stt == 1;
+			if (flag5)
+			{
+				this.cf = (int)this.fr_atk[this.count_NEW % this.fr_atk.Length];
+				bool flag6 = mSystem.currentTimeMillis() - this.timeDame > 0L;
+				if (flag6)
+				{
+					this.SetSkillPaint_STT(2, 0, null, 0, 0, 0, null, 0);
+				}
+				bool flag7 = this.count_NEW % 5 == 0;
+				if (flag7)
+				{
+					GameScr.shock_scr = 5;
+				}
+				bool flag8 = this.typeFrame == 1 && this.count_NEW < 10 && !TileMap.tileTypeAt(this.cx - (this.chw + 1) * this.cdir, this.cy, (this.cdir != 1) ? 4 : 8);
+				if (flag8)
+				{
+					this.cx -= this.cdir;
+				}
+				bool flag9 = this.typeFrame == 2;
+				if (flag9)
+				{
+				}
 			}
 			else
 			{
-				this.cf = (int)this.fr_start[this.count_NEW];
+				bool flag10 = this.stt == 2;
+				if (flag10)
+				{
+					bool flag11 = this.fr_end.Length == 1;
+					if (flag11)
+					{
+						this.cf = (int)this.fr_end[0];
+					}
+					else
+					{
+						bool flag12 = this.count_NEW > this.fr_end.Length - 1;
+						if (flag12)
+						{
+							this.cf = (int)this.fr_end[this.fr_end.Length - 1];
+						}
+						else
+						{
+							this.cf = (int)this.fr_end[this.count_NEW];
+						}
+					}
+					bool flag13 = this.isFly;
+					if (flag13)
+					{
+						this.cvx = (this.cvy = 0);
+						this.statusMe = 4;
+					}
+					this.isPaintNewSkill = false;
+				}
 			}
-		}
-		else if (this.stt == 1)
-		{
-			this.cf = (int)this.fr_atk[this.count_NEW % this.fr_atk.Length];
-			if (mSystem.currentTimeMillis() - this.timeDame > 0L)
-			{
-				this.SetSkillPaint_STT(2, 0, null, 0, 0, 0, null, 0);
-			}
-			if (this.count_NEW % 5 == 0)
-			{
-				GameScr.shock_scr = 5;
-			}
-			if ((int)this.typeFrame == 1 && this.count_NEW < 10 && !TileMap.tileTypeAt(this.cx - (this.chw + 1) * this.cdir, this.cy, (this.cdir != 1) ? 4 : 8))
-			{
-				this.cx -= this.cdir;
-			}
-			if ((int)this.typeFrame == 2)
-			{
-			}
-		}
-		else if (this.stt == 2)
-		{
-			if (this.fr_end.Length == 1)
-			{
-				this.cf = (int)this.fr_end[0];
-			}
-			else if (this.count_NEW > this.fr_end.Length - 1)
-			{
-				this.cf = (int)this.fr_end[this.fr_end.Length - 1];
-			}
-			else
-			{
-				this.cf = (int)this.fr_end[this.count_NEW];
-			}
-			if (this.isFly)
-			{
-				this.cvx = (this.cvy = 0);
-				this.statusMe = 4;
-			}
-			this.isPaintNewSkill = false;
 		}
 		this.count_NEW++;
 	}
 
-	// Token: 0x060006BA RID: 1722 RVA: 0x0002DFD4 File Offset: 0x0002C3D4
+	// Token: 0x06000145 RID: 325 RVA: 0x00018994 File Offset: 0x00016B94
 	public global::Char clone()
 	{
 		global::Char @char = new global::Char();
@@ -7358,12 +8979,14 @@ public class Char : IMapObject
 		@char.cx = this.cx;
 		@char.cy = this.cy;
 		@char.cdir = this.cdir;
-		if (this.arrItemBody != null)
+		bool flag = this.arrItemBody != null;
+		if (flag)
 		{
 			@char.arrItemBody = new Item[this.arrItemBody.Length];
 			for (int i = 0; i < this.arrItemBody.Length; i++)
 			{
-				if (this.arrItemBody[i] == null)
+				bool flag2 = this.arrItemBody[i] == null;
+				if (flag2)
 				{
 					@char.arrItemBody[i] = null;
 				}
@@ -7376,27 +8999,30 @@ public class Char : IMapObject
 		return @char;
 	}
 
-	// Token: 0x060006BB RID: 1723 RVA: 0x0002E080 File Offset: 0x0002C480
+	// Token: 0x06000146 RID: 326 RVA: 0x00018A50 File Offset: 0x00016C50
 	public bool containsCaiTrang(int v)
 	{
-		if (this.arrItemBody != null)
+		bool flag = this.arrItemBody != null;
+		if (flag)
 		{
 			for (int i = 0; i < this.arrItemBody.Length; i++)
 			{
-				if (this.arrItemBody[i] != null && this.arrItemBody[i].template != null)
+				bool flag2 = this.arrItemBody[i] != null && this.arrItemBody[i].template != null;
+				if (flag2)
 				{
-					if ((int)this.arrItemBody[i].template.id == v)
+					bool flag3 = (int)this.arrItemBody[i].template.id == v;
+					if (flag3)
 					{
 						return true;
 					}
 				}
 			}
 		}
-		Res.err("tim kiem id cai trang " + v + " ko tim thay");
+		Res.err("tim kiem id cai trang " + v.ToString() + " ko tim thay");
 		return false;
 	}
 
-	// Token: 0x060006BC RID: 1724 RVA: 0x0002E10C File Offset: 0x0002C50C
+	// Token: 0x06000147 RID: 327 RVA: 0x00018AF0 File Offset: 0x00016CF0
 	public void printlog()
 	{
 		string text = string.Empty;
@@ -7587,17 +9213,20 @@ public class Char : IMapObject
 		Res.outz(text);
 	}
 
-	// Token: 0x060006BD RID: 1725 RVA: 0x0002E574 File Offset: 0x0002C974
+	// Token: 0x06000148 RID: 328 RVA: 0x00018F5C File Offset: 0x0001715C
 	public void setDanhHieu(int smallDanhHieu, int frame)
 	{
-		if (this.mainImg == null)
+		bool flag = this.mainImg == null;
+		if (flag)
 		{
-			this.mainImg = ImgByName.getImagePath("banner_" + 0, ImgByName.hashImagePath);
+			this.mainImg = ImgByName.getImagePath("banner_" + 0.ToString(), ImgByName.hashImagePath);
 		}
-		if (this.mainImg.img != null)
+		bool flag2 = this.mainImg.img != null;
+		if (flag2)
 		{
 			int num = this.mainImg.img.getHeight() / (int)this.mainImg.nFrame;
-			if (num < 1)
+			bool flag3 = num < 1;
+			if (flag3)
 			{
 				num = 1;
 			}
@@ -7606,8 +9235,7 @@ public class Char : IMapObject
 		Res.err("===== tim thay DanhHieu ve danh hieu ra");
 	}
 
-	// Token: 0x060006BE RID: 1726 RVA: 0x0002E61C File Offset: 0x0002CA1C
-	// Note: this type is marked as 'beforefieldinit'.
+	// Token: 0x06000149 RID: 329 RVA: 0x00019010 File Offset: 0x00017210
 	static Char()
 	{
 		int[][] array = new int[32][];
@@ -7771,637 +9399,637 @@ public class Char : IMapObject
 		global::Char.hatInfo = array;
 	}
 
-	// Token: 0x04000AB2 RID: 2738
+	// Token: 0x040000E7 RID: 231
 	public string xuStr;
 
-	// Token: 0x04000AB3 RID: 2739
+	// Token: 0x040000E8 RID: 232
 	public string luongStr;
 
-	// Token: 0x04000AB4 RID: 2740
+	// Token: 0x040000E9 RID: 233
 	public string luongKhoaStr;
 
-	// Token: 0x04000AB5 RID: 2741
+	// Token: 0x040000EA RID: 234
 	public long lastUpdateTime;
 
-	// Token: 0x04000AB6 RID: 2742
+	// Token: 0x040000EB RID: 235
 	public bool meLive;
 
-	// Token: 0x04000AB7 RID: 2743
+	// Token: 0x040000EC RID: 236
 	public bool isMask;
 
-	// Token: 0x04000AB8 RID: 2744
+	// Token: 0x040000ED RID: 237
 	public bool isTeleport;
 
-	// Token: 0x04000AB9 RID: 2745
+	// Token: 0x040000EE RID: 238
 	public bool isUsePlane;
 
-	// Token: 0x04000ABA RID: 2746
+	// Token: 0x040000EF RID: 239
 	public int shadowX;
 
-	// Token: 0x04000ABB RID: 2747
+	// Token: 0x040000F0 RID: 240
 	public int shadowY;
 
-	// Token: 0x04000ABC RID: 2748
+	// Token: 0x040000F1 RID: 241
 	public int shadowLife;
 
-	// Token: 0x04000ABD RID: 2749
+	// Token: 0x040000F2 RID: 242
 	public bool isNhapThe;
 
-	// Token: 0x04000ABE RID: 2750
+	// Token: 0x040000F3 RID: 243
 	public PetFollow petFollow;
 
-	// Token: 0x04000ABF RID: 2751
+	// Token: 0x040000F4 RID: 244
 	public int rank;
 
-	// Token: 0x04000AC0 RID: 2752
+	// Token: 0x040000F5 RID: 245
 	public const sbyte A_STAND = 1;
 
-	// Token: 0x04000AC1 RID: 2753
+	// Token: 0x040000F6 RID: 246
 	public const sbyte A_RUN = 2;
 
-	// Token: 0x04000AC2 RID: 2754
+	// Token: 0x040000F7 RID: 247
 	public const sbyte A_JUMP = 3;
 
-	// Token: 0x04000AC3 RID: 2755
+	// Token: 0x040000F8 RID: 248
 	public const sbyte A_FALL = 4;
 
-	// Token: 0x04000AC4 RID: 2756
+	// Token: 0x040000F9 RID: 249
 	public const sbyte A_DEADFLY = 5;
 
-	// Token: 0x04000AC5 RID: 2757
+	// Token: 0x040000FA RID: 250
 	public const sbyte A_NOTHING = 6;
 
-	// Token: 0x04000AC6 RID: 2758
+	// Token: 0x040000FB RID: 251
 	public const sbyte A_ATTK = 7;
 
-	// Token: 0x04000AC7 RID: 2759
+	// Token: 0x040000FC RID: 252
 	public const sbyte A_INJURE = 8;
 
-	// Token: 0x04000AC8 RID: 2760
+	// Token: 0x040000FD RID: 253
 	public const sbyte A_AUTOJUMP = 9;
 
-	// Token: 0x04000AC9 RID: 2761
+	// Token: 0x040000FE RID: 254
 	public const sbyte A_FLY = 10;
 
-	// Token: 0x04000ACA RID: 2762
+	// Token: 0x040000FF RID: 255
 	public const sbyte SKILL_STAND = 12;
 
-	// Token: 0x04000ACB RID: 2763
+	// Token: 0x04000100 RID: 256
 	public const sbyte SKILL_FALL = 13;
 
-	// Token: 0x04000ACC RID: 2764
+	// Token: 0x04000101 RID: 257
 	public const sbyte A_DEAD = 14;
 
-	// Token: 0x04000ACD RID: 2765
+	// Token: 0x04000102 RID: 258
 	public const sbyte A_HIDE = 15;
 
-	// Token: 0x04000ACE RID: 2766
+	// Token: 0x04000103 RID: 259
 	public const sbyte A_RESETPOINT = 16;
 
-	// Token: 0x04000ACF RID: 2767
+	// Token: 0x04000104 RID: 260
 	public static ChatPopup chatPopup;
 
-	// Token: 0x04000AD0 RID: 2768
+	// Token: 0x04000105 RID: 261
 	public long cPower;
 
-	// Token: 0x04000AD1 RID: 2769
+	// Token: 0x04000106 RID: 262
 	public Info chatInfo;
 
-	// Token: 0x04000AD2 RID: 2770
+	// Token: 0x04000107 RID: 263
 	public sbyte petStatus;
 
-	// Token: 0x04000AD3 RID: 2771
+	// Token: 0x04000108 RID: 264
 	public int cx = 24;
 
-	// Token: 0x04000AD4 RID: 2772
+	// Token: 0x04000109 RID: 265
 	public int cy = 24;
 
-	// Token: 0x04000AD5 RID: 2773
+	// Token: 0x0400010A RID: 266
 	public int cvx;
 
-	// Token: 0x04000AD6 RID: 2774
+	// Token: 0x0400010B RID: 267
 	public int cvy;
 
-	// Token: 0x04000AD7 RID: 2775
+	// Token: 0x0400010C RID: 268
 	public int cp1;
 
-	// Token: 0x04000AD8 RID: 2776
+	// Token: 0x0400010D RID: 269
 	public int cp2;
 
-	// Token: 0x04000AD9 RID: 2777
+	// Token: 0x0400010E RID: 270
 	public int cp3;
 
-	// Token: 0x04000ADA RID: 2778
+	// Token: 0x0400010F RID: 271
 	public int statusMe = 5;
 
-	// Token: 0x04000ADB RID: 2779
+	// Token: 0x04000110 RID: 272
 	public int cdir = 1;
 
-	// Token: 0x04000ADC RID: 2780
+	// Token: 0x04000111 RID: 273
 	public int charID;
 
-	// Token: 0x04000ADD RID: 2781
+	// Token: 0x04000112 RID: 274
 	public int cgender;
 
-	// Token: 0x04000ADE RID: 2782
+	// Token: 0x04000113 RID: 275
 	public int ctaskId;
 
-	// Token: 0x04000ADF RID: 2783
+	// Token: 0x04000114 RID: 276
 	public int menuSelect;
 
-	// Token: 0x04000AE0 RID: 2784
+	// Token: 0x04000115 RID: 277
 	public int cBonusSpeed;
 
-	// Token: 0x04000AE1 RID: 2785
+	// Token: 0x04000116 RID: 278
 	public int cspeed = 4;
 
-	// Token: 0x04000AE2 RID: 2786
+	// Token: 0x04000117 RID: 279
 	public int ccurrentAttack;
 
-	// Token: 0x04000AE3 RID: 2787
+	// Token: 0x04000118 RID: 280
 	public int cDamFull;
 
-	// Token: 0x04000AE4 RID: 2788
+	// Token: 0x04000119 RID: 281
 	public int cDefull;
 
-	// Token: 0x04000AE5 RID: 2789
+	// Token: 0x0400011A RID: 282
 	public int cCriticalFull;
 
-	// Token: 0x04000AE6 RID: 2790
+	// Token: 0x0400011B RID: 283
 	public int clevel;
 
-	// Token: 0x04000AE7 RID: 2791
+	// Token: 0x0400011C RID: 284
 	public int cMP;
 
-	// Token: 0x04000AE8 RID: 2792
+	// Token: 0x0400011D RID: 285
 	public int cHP;
 
-	// Token: 0x04000AE9 RID: 2793
+	// Token: 0x0400011E RID: 286
 	public int cHPNew;
 
-	// Token: 0x04000AEA RID: 2794
+	// Token: 0x0400011F RID: 287
 	public int cMaxEXP;
 
-	// Token: 0x04000AEB RID: 2795
+	// Token: 0x04000120 RID: 288
 	public int cHPShow;
 
-	// Token: 0x04000AEC RID: 2796
+	// Token: 0x04000121 RID: 289
 	public int xReload;
 
-	// Token: 0x04000AED RID: 2797
+	// Token: 0x04000122 RID: 290
 	public int yReload;
 
-	// Token: 0x04000AEE RID: 2798
+	// Token: 0x04000123 RID: 291
 	public int cyStartFall;
 
-	// Token: 0x04000AEF RID: 2799
+	// Token: 0x04000124 RID: 292
 	public int saveStatus;
 
-	// Token: 0x04000AF0 RID: 2800
+	// Token: 0x04000125 RID: 293
 	public int eff5BuffHp;
 
-	// Token: 0x04000AF1 RID: 2801
+	// Token: 0x04000126 RID: 294
 	public int eff5BuffMp;
 
-	// Token: 0x04000AF2 RID: 2802
+	// Token: 0x04000127 RID: 295
 	public int cHPFull;
 
-	// Token: 0x04000AF3 RID: 2803
+	// Token: 0x04000128 RID: 296
 	public int cMPFull;
 
-	// Token: 0x04000AF4 RID: 2804
+	// Token: 0x04000129 RID: 297
 	public int cdameDown;
 
-	// Token: 0x04000AF5 RID: 2805
+	// Token: 0x0400012A RID: 298
 	public int cStr;
 
-	// Token: 0x04000AF6 RID: 2806
+	// Token: 0x0400012B RID: 299
 	public long cLevelPercent;
 
-	// Token: 0x04000AF7 RID: 2807
+	// Token: 0x0400012C RID: 300
 	public long cTiemNang;
 
-	// Token: 0x04000AF8 RID: 2808
+	// Token: 0x0400012D RID: 301
 	public long cNangdong;
 
-	// Token: 0x04000AF9 RID: 2809
+	// Token: 0x0400012E RID: 302
 	public int damHP;
 
-	// Token: 0x04000AFA RID: 2810
+	// Token: 0x0400012F RID: 303
 	public int damMP;
 
-	// Token: 0x04000AFB RID: 2811
+	// Token: 0x04000130 RID: 304
 	public bool isMob;
 
-	// Token: 0x04000AFC RID: 2812
+	// Token: 0x04000131 RID: 305
 	public bool isCrit;
 
-	// Token: 0x04000AFD RID: 2813
+	// Token: 0x04000132 RID: 306
 	public bool isDie;
 
-	// Token: 0x04000AFE RID: 2814
+	// Token: 0x04000133 RID: 307
 	public int pointUydanh;
 
-	// Token: 0x04000AFF RID: 2815
+	// Token: 0x04000134 RID: 308
 	public int pointNon;
 
-	// Token: 0x04000B00 RID: 2816
+	// Token: 0x04000135 RID: 309
 	public int pointVukhi;
 
-	// Token: 0x04000B01 RID: 2817
+	// Token: 0x04000136 RID: 310
 	public int pointAo;
 
-	// Token: 0x04000B02 RID: 2818
+	// Token: 0x04000137 RID: 311
 	public int pointLien;
 
-	// Token: 0x04000B03 RID: 2819
+	// Token: 0x04000138 RID: 312
 	public int pointGangtay;
 
-	// Token: 0x04000B04 RID: 2820
+	// Token: 0x04000139 RID: 313
 	public int pointNhan;
 
-	// Token: 0x04000B05 RID: 2821
+	// Token: 0x0400013A RID: 314
 	public int pointQuan;
 
-	// Token: 0x04000B06 RID: 2822
+	// Token: 0x0400013B RID: 315
 	public int pointNgocboi;
 
-	// Token: 0x04000B07 RID: 2823
+	// Token: 0x0400013C RID: 316
 	public int pointGiay;
 
-	// Token: 0x04000B08 RID: 2824
+	// Token: 0x0400013D RID: 317
 	public int pointPhu;
 
-	// Token: 0x04000B09 RID: 2825
+	// Token: 0x0400013E RID: 318
 	public int countFinishDay;
 
-	// Token: 0x04000B0A RID: 2826
+	// Token: 0x0400013F RID: 319
 	public int countLoopBoos;
 
-	// Token: 0x04000B0B RID: 2827
+	// Token: 0x04000140 RID: 320
 	public int limitTiemnangso;
 
-	// Token: 0x04000B0C RID: 2828
+	// Token: 0x04000141 RID: 321
 	public int limitKynangso;
 
-	// Token: 0x04000B0D RID: 2829
+	// Token: 0x04000142 RID: 322
 	public short[] potential = new short[4];
 
-	// Token: 0x04000B0E RID: 2830
+	// Token: 0x04000143 RID: 323
 	public string cName = string.Empty;
 
-	// Token: 0x04000B0F RID: 2831
+	// Token: 0x04000144 RID: 324
 	public int clanID;
 
-	// Token: 0x04000B10 RID: 2832
+	// Token: 0x04000145 RID: 325
 	public sbyte ctypeClan;
 
-	// Token: 0x04000B11 RID: 2833
+	// Token: 0x04000146 RID: 326
 	public Clan clan;
 
-	// Token: 0x04000B12 RID: 2834
+	// Token: 0x04000147 RID: 327
 	public sbyte role;
 
-	// Token: 0x04000B13 RID: 2835
+	// Token: 0x04000148 RID: 328
 	public int cw = 22;
 
-	// Token: 0x04000B14 RID: 2836
+	// Token: 0x04000149 RID: 329
 	public int ch = 32;
 
-	// Token: 0x04000B15 RID: 2837
+	// Token: 0x0400014A RID: 330
 	public int chw = 11;
 
-	// Token: 0x04000B16 RID: 2838
+	// Token: 0x0400014B RID: 331
 	public int chh = 16;
 
-	// Token: 0x04000B17 RID: 2839
+	// Token: 0x0400014C RID: 332
 	public Command cmdMenu;
 
-	// Token: 0x04000B18 RID: 2840
+	// Token: 0x0400014D RID: 333
 	public bool canFly = true;
 
-	// Token: 0x04000B19 RID: 2841
+	// Token: 0x0400014E RID: 334
 	public bool cmtoChar;
 
-	// Token: 0x04000B1A RID: 2842
+	// Token: 0x0400014F RID: 335
 	public bool me;
 
-	// Token: 0x04000B1B RID: 2843
+	// Token: 0x04000150 RID: 336
 	public bool cFinishedAttack;
 
-	// Token: 0x04000B1C RID: 2844
+	// Token: 0x04000151 RID: 337
 	public bool cchistlast;
 
-	// Token: 0x04000B1D RID: 2845
+	// Token: 0x04000152 RID: 338
 	public bool isAttack;
 
-	// Token: 0x04000B1E RID: 2846
+	// Token: 0x04000153 RID: 339
 	public bool isAttFly;
 
-	// Token: 0x04000B1F RID: 2847
+	// Token: 0x04000154 RID: 340
 	public int cwpt;
 
-	// Token: 0x04000B20 RID: 2848
+	// Token: 0x04000155 RID: 341
 	public int cwplv;
 
-	// Token: 0x04000B21 RID: 2849
+	// Token: 0x04000156 RID: 342
 	public int cf;
 
-	// Token: 0x04000B22 RID: 2850
+	// Token: 0x04000157 RID: 343
 	public int tick;
 
-	// Token: 0x04000B23 RID: 2851
+	// Token: 0x04000158 RID: 344
 	public static bool fallAttack;
 
-	// Token: 0x04000B24 RID: 2852
+	// Token: 0x04000159 RID: 345
 	public bool isJump;
 
-	// Token: 0x04000B25 RID: 2853
+	// Token: 0x0400015A RID: 346
 	public bool autoFall;
 
-	// Token: 0x04000B26 RID: 2854
+	// Token: 0x0400015B RID: 347
 	public bool attack = true;
 
-	// Token: 0x04000B27 RID: 2855
+	// Token: 0x0400015C RID: 348
 	public long xu;
 
-	// Token: 0x04000B28 RID: 2856
+	// Token: 0x0400015D RID: 349
 	public int xuInBox;
 
-	// Token: 0x04000B29 RID: 2857
+	// Token: 0x0400015E RID: 350
 	public int yen;
 
-	// Token: 0x04000B2A RID: 2858
+	// Token: 0x0400015F RID: 351
 	public int gold_lock;
 
-	// Token: 0x04000B2B RID: 2859
+	// Token: 0x04000160 RID: 352
 	public int luong;
 
-	// Token: 0x04000B2C RID: 2860
+	// Token: 0x04000161 RID: 353
 	public int luongKhoa;
 
-	// Token: 0x04000B2D RID: 2861
+	// Token: 0x04000162 RID: 354
 	public NClass nClass;
 
-	// Token: 0x04000B2E RID: 2862
+	// Token: 0x04000163 RID: 355
 	public Command endMovePointCommand;
 
-	// Token: 0x04000B2F RID: 2863
+	// Token: 0x04000164 RID: 356
 	public MyVector vSkill = new MyVector();
 
-	// Token: 0x04000B30 RID: 2864
+	// Token: 0x04000165 RID: 357
 	public MyVector vSkillFight = new MyVector();
 
-	// Token: 0x04000B31 RID: 2865
+	// Token: 0x04000166 RID: 358
 	public MyVector vEff = new MyVector();
 
-	// Token: 0x04000B32 RID: 2866
+	// Token: 0x04000167 RID: 359
 	public Skill myskill;
 
-	// Token: 0x04000B33 RID: 2867
+	// Token: 0x04000168 RID: 360
 	public Task taskMaint;
 
-	// Token: 0x04000B34 RID: 2868
+	// Token: 0x04000169 RID: 361
 	public bool paintName = true;
 
-	// Token: 0x04000B35 RID: 2869
+	// Token: 0x0400016A RID: 362
 	public Archivement[] arrArchive;
 
-	// Token: 0x04000B36 RID: 2870
+	// Token: 0x0400016B RID: 363
 	public Item[] arrItemBag;
 
-	// Token: 0x04000B37 RID: 2871
+	// Token: 0x0400016C RID: 364
 	public Item[] arrItemBox;
 
-	// Token: 0x04000B38 RID: 2872
+	// Token: 0x0400016D RID: 365
 	public Item[] arrItemBody;
 
-	// Token: 0x04000B39 RID: 2873
+	// Token: 0x0400016E RID: 366
 	public Skill[] arrPetSkill;
 
-	// Token: 0x04000B3A RID: 2874
+	// Token: 0x0400016F RID: 367
 	public Item[][] arrItemShop;
 
-	// Token: 0x04000B3B RID: 2875
+	// Token: 0x04000170 RID: 368
 	public string[][] infoSpeacialSkill;
 
-	// Token: 0x04000B3C RID: 2876
+	// Token: 0x04000171 RID: 369
 	public short[][] imgSpeacialSkill;
 
-	// Token: 0x04000B3D RID: 2877
+	// Token: 0x04000172 RID: 370
 	public short cResFire;
 
-	// Token: 0x04000B3E RID: 2878
+	// Token: 0x04000173 RID: 371
 	public short cResIce;
 
-	// Token: 0x04000B3F RID: 2879
+	// Token: 0x04000174 RID: 372
 	public short cResWind;
 
-	// Token: 0x04000B40 RID: 2880
+	// Token: 0x04000175 RID: 373
 	public short cMiss;
 
-	// Token: 0x04000B41 RID: 2881
+	// Token: 0x04000176 RID: 374
 	public short cExactly;
 
-	// Token: 0x04000B42 RID: 2882
+	// Token: 0x04000177 RID: 375
 	public short cFatal;
 
-	// Token: 0x04000B43 RID: 2883
+	// Token: 0x04000178 RID: 376
 	public sbyte cPk;
 
-	// Token: 0x04000B44 RID: 2884
+	// Token: 0x04000179 RID: 377
 	public sbyte cTypePk;
 
-	// Token: 0x04000B45 RID: 2885
+	// Token: 0x0400017A RID: 378
 	public short cReactDame;
 
-	// Token: 0x04000B46 RID: 2886
+	// Token: 0x0400017B RID: 379
 	public short sysUp;
 
-	// Token: 0x04000B47 RID: 2887
+	// Token: 0x0400017C RID: 380
 	public short sysDown;
 
-	// Token: 0x04000B48 RID: 2888
+	// Token: 0x0400017D RID: 381
 	public int avatar;
 
-	// Token: 0x04000B49 RID: 2889
+	// Token: 0x0400017E RID: 382
 	public int skillTemplateId;
 
-	// Token: 0x04000B4A RID: 2890
+	// Token: 0x0400017F RID: 383
 	public Mob mobFocus;
 
-	// Token: 0x04000B4B RID: 2891
+	// Token: 0x04000180 RID: 384
 	public Mob mobMe;
 
-	// Token: 0x04000B4C RID: 2892
+	// Token: 0x04000181 RID: 385
 	public int tMobMeBorn;
 
-	// Token: 0x04000B4D RID: 2893
+	// Token: 0x04000182 RID: 386
 	public Npc npcFocus;
 
-	// Token: 0x04000B4E RID: 2894
+	// Token: 0x04000183 RID: 387
 	public global::Char charFocus;
 
-	// Token: 0x04000B4F RID: 2895
+	// Token: 0x04000184 RID: 388
 	public ItemMap itemFocus;
 
-	// Token: 0x04000B50 RID: 2896
+	// Token: 0x04000185 RID: 389
 	public MyVector focus = new MyVector();
 
-	// Token: 0x04000B51 RID: 2897
+	// Token: 0x04000186 RID: 390
 	public Mob[] attMobs;
 
-	// Token: 0x04000B52 RID: 2898
+	// Token: 0x04000187 RID: 391
 	public global::Char[] attChars;
 
-	// Token: 0x04000B53 RID: 2899
+	// Token: 0x04000188 RID: 392
 	public short[] moveFast;
 
-	// Token: 0x04000B54 RID: 2900
+	// Token: 0x04000189 RID: 393
 	public int testCharId = -9999;
 
-	// Token: 0x04000B55 RID: 2901
+	// Token: 0x0400018A RID: 394
 	public int killCharId = -9999;
 
-	// Token: 0x04000B56 RID: 2902
+	// Token: 0x0400018B RID: 395
 	public sbyte resultTest;
 
-	// Token: 0x04000B57 RID: 2903
+	// Token: 0x0400018C RID: 396
 	public int countKill;
 
-	// Token: 0x04000B58 RID: 2904
+	// Token: 0x0400018D RID: 397
 	public int countKillMax;
 
-	// Token: 0x04000B59 RID: 2905
+	// Token: 0x0400018E RID: 398
 	public bool isInvisiblez;
 
-	// Token: 0x04000B5A RID: 2906
+	// Token: 0x0400018F RID: 399
 	public bool isShadown = true;
 
-	// Token: 0x04000B5B RID: 2907
+	// Token: 0x04000190 RID: 400
 	public const sbyte PK_NORMAL = 0;
 
-	// Token: 0x04000B5C RID: 2908
+	// Token: 0x04000191 RID: 401
 	public const sbyte PK_PHE = 1;
 
-	// Token: 0x04000B5D RID: 2909
+	// Token: 0x04000192 RID: 402
 	public const sbyte PK_BANG = 2;
 
-	// Token: 0x04000B5E RID: 2910
+	// Token: 0x04000193 RID: 403
 	public const sbyte PK_THIDAU = 3;
 
-	// Token: 0x04000B5F RID: 2911
+	// Token: 0x04000194 RID: 404
 	public const sbyte PK_LUYENTAP = 4;
 
-	// Token: 0x04000B60 RID: 2912
+	// Token: 0x04000195 RID: 405
 	public const sbyte PK_TUDO = 5;
 
-	// Token: 0x04000B61 RID: 2913
+	// Token: 0x04000196 RID: 406
 	public MyVector taskOrders = new MyVector();
 
-	// Token: 0x04000B62 RID: 2914
+	// Token: 0x04000197 RID: 407
 	public int cStamina;
 
-	// Token: 0x04000B63 RID: 2915
+	// Token: 0x04000198 RID: 408
 	public static short[] idHead;
 
-	// Token: 0x04000B64 RID: 2916
+	// Token: 0x04000199 RID: 409
 	public static short[] idAvatar;
 
-	// Token: 0x04000B65 RID: 2917
+	// Token: 0x0400019A RID: 410
 	public int exp;
 
-	// Token: 0x04000B66 RID: 2918
+	// Token: 0x0400019B RID: 411
 	public string[] strLevel;
 
-	// Token: 0x04000B67 RID: 2919
+	// Token: 0x0400019C RID: 412
 	public string currStrLevel;
 
-	// Token: 0x04000B68 RID: 2920
+	// Token: 0x0400019D RID: 413
 	public static Image eyeTraiDat = GameCanvas.loadImage("/mainImage/myTexture2dmat-trai-dat.png");
 
-	// Token: 0x04000B69 RID: 2921
+	// Token: 0x0400019E RID: 414
 	public static Image eyeNamek = GameCanvas.loadImage("/mainImage/myTexture2dmat-namek.png");
 
-	// Token: 0x04000B6A RID: 2922
+	// Token: 0x0400019F RID: 415
 	public bool isFreez;
 
-	// Token: 0x04000B6B RID: 2923
+	// Token: 0x040001A0 RID: 416
 	public bool isCharge;
 
-	// Token: 0x04000B6C RID: 2924
+	// Token: 0x040001A1 RID: 417
 	public int seconds;
 
-	// Token: 0x04000B6D RID: 2925
+	// Token: 0x040001A2 RID: 418
 	public int freezSeconds;
 
-	// Token: 0x04000B6E RID: 2926
+	// Token: 0x040001A3 RID: 419
 	public long last;
 
-	// Token: 0x04000B6F RID: 2927
+	// Token: 0x040001A4 RID: 420
 	public long cur;
 
-	// Token: 0x04000B70 RID: 2928
+	// Token: 0x040001A5 RID: 421
 	public long lastFreez;
 
-	// Token: 0x04000B71 RID: 2929
+	// Token: 0x040001A6 RID: 422
 	public long currFreez;
 
-	// Token: 0x04000B72 RID: 2930
+	// Token: 0x040001A7 RID: 423
 	public bool isFlyUp;
 
-	// Token: 0x04000B73 RID: 2931
+	// Token: 0x040001A8 RID: 424
 	public static MyVector vItemTime = new MyVector();
 
-	// Token: 0x04000B74 RID: 2932
+	// Token: 0x040001A9 RID: 425
 	public static short ID_NEW_MOUNT = 30000;
 
-	// Token: 0x04000B75 RID: 2933
+	// Token: 0x040001AA RID: 426
 	public short idMount;
 
-	// Token: 0x04000B76 RID: 2934
+	// Token: 0x040001AB RID: 427
 	public bool isHaveMount;
 
-	// Token: 0x04000B77 RID: 2935
+	// Token: 0x040001AC RID: 428
 	public bool isMountVip;
 
-	// Token: 0x04000B78 RID: 2936
+	// Token: 0x040001AD RID: 429
 	public bool isEventMount;
 
-	// Token: 0x04000B79 RID: 2937
+	// Token: 0x040001AE RID: 430
 	public bool isSpeacialMount;
 
-	// Token: 0x04000B7A RID: 2938
+	// Token: 0x040001AF RID: 431
 	public static Image imgMount_TD = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi10.png");
 
-	// Token: 0x04000B7B RID: 2939
+	// Token: 0x040001B0 RID: 432
 	public static Image imgMount_NM = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi20.png");
 
-	// Token: 0x04000B7C RID: 2940
+	// Token: 0x040001B1 RID: 433
 	public static Image imgMount_NM_1 = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi21.png");
 
-	// Token: 0x04000B7D RID: 2941
+	// Token: 0x040001B2 RID: 434
 	public static Image imgMount_XD = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi30.png");
 
-	// Token: 0x04000B7E RID: 2942
+	// Token: 0x040001B3 RID: 435
 	public static Image imgMount_TD_VIP = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi11.png");
 
-	// Token: 0x04000B7F RID: 2943
+	// Token: 0x040001B4 RID: 436
 	public static Image imgMount_NM_VIP = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi22.png");
 
-	// Token: 0x04000B80 RID: 2944
+	// Token: 0x040001B5 RID: 437
 	public static Image imgMount_NM_1_VIP = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi23.png");
 
-	// Token: 0x04000B81 RID: 2945
+	// Token: 0x040001B6 RID: 438
 	public static Image imgMount_XD_VIP = GameCanvas.loadImage("/mainImage/myTexture2dthucuoi31.png");
 
-	// Token: 0x04000B82 RID: 2946
+	// Token: 0x040001B7 RID: 439
 	public static Image imgEventMount = GameCanvas.loadImage("/mainImage/myTexture2drong.png");
 
-	// Token: 0x04000B83 RID: 2947
+	// Token: 0x040001B8 RID: 440
 	public static Image imgEventMountWing = GameCanvas.loadImage("/mainImage/myTexture2dcanhrong.png");
 
-	// Token: 0x04000B84 RID: 2948
+	// Token: 0x040001B9 RID: 441
 	public sbyte[] FrameMount = new sbyte[]
 	{
 		0,
@@ -8414,67 +10042,67 @@ public class Char : IMapObject
 		1
 	};
 
-	// Token: 0x04000B85 RID: 2949
+	// Token: 0x040001BA RID: 442
 	public int frameMount;
 
-	// Token: 0x04000B86 RID: 2950
+	// Token: 0x040001BB RID: 443
 	public int frameNewMount;
 
-	// Token: 0x04000B87 RID: 2951
+	// Token: 0x040001BC RID: 444
 	public int transMount;
 
-	// Token: 0x04000B88 RID: 2952
+	// Token: 0x040001BD RID: 445
 	public int genderMount;
 
-	// Token: 0x04000B89 RID: 2953
+	// Token: 0x040001BE RID: 446
 	public int idcharMount;
 
-	// Token: 0x04000B8A RID: 2954
+	// Token: 0x040001BF RID: 447
 	public int xMount;
 
-	// Token: 0x04000B8B RID: 2955
+	// Token: 0x040001C0 RID: 448
 	public int yMount;
 
-	// Token: 0x04000B8C RID: 2956
+	// Token: 0x040001C1 RID: 449
 	public int dxMount;
 
-	// Token: 0x04000B8D RID: 2957
+	// Token: 0x040001C2 RID: 450
 	public int dyMount;
 
-	// Token: 0x04000B8E RID: 2958
+	// Token: 0x040001C3 RID: 451
 	public int xChar;
 
-	// Token: 0x04000B8F RID: 2959
+	// Token: 0x040001C4 RID: 452
 	public int xdis;
 
-	// Token: 0x04000B90 RID: 2960
+	// Token: 0x040001C5 RID: 453
 	public int speedMount;
 
-	// Token: 0x04000B91 RID: 2961
+	// Token: 0x040001C6 RID: 454
 	public bool isStartMount;
 
-	// Token: 0x04000B92 RID: 2962
+	// Token: 0x040001C7 RID: 455
 	public bool isMount;
 
-	// Token: 0x04000B93 RID: 2963
+	// Token: 0x040001C8 RID: 456
 	public bool isEndMount;
 
-	// Token: 0x04000B94 RID: 2964
+	// Token: 0x040001C9 RID: 457
 	public sbyte cFlag;
 
-	// Token: 0x04000B95 RID: 2965
+	// Token: 0x040001CA RID: 458
 	public int flagImage;
 
-	// Token: 0x04000B96 RID: 2966
+	// Token: 0x040001CB RID: 459
 	public short x_hint;
 
-	// Token: 0x04000B97 RID: 2967
+	// Token: 0x040001CC RID: 460
 	public short y_hint;
 
-	// Token: 0x04000B98 RID: 2968
+	// Token: 0x040001CD RID: 461
 	public short s_danhHieu1;
 
-	// Token: 0x04000B99 RID: 2969
+	// Token: 0x040001CE RID: 462
 	public static int[][][] CharInfo = new int[][][]
 	{
 		new int[][]
@@ -9255,7 +10883,7 @@ public class Char : IMapObject
 		}
 	};
 
-	// Token: 0x04000B9A RID: 2970
+	// Token: 0x040001CF RID: 463
 	public static int[] CHAR_WEAPONX = new int[]
 	{
 		-2,
@@ -9271,7 +10899,7 @@ public class Char : IMapObject
 		19
 	};
 
-	// Token: 0x04000B9B RID: 2971
+	// Token: 0x040001D0 RID: 464
 	public static int[] CHAR_WEAPONY = new int[]
 	{
 		9,
@@ -9287,46 +10915,46 @@ public class Char : IMapObject
 		36
 	};
 
-	// Token: 0x04000B9C RID: 2972
+	// Token: 0x040001D1 RID: 465
 	private static global::Char myChar;
 
-	// Token: 0x04000B9D RID: 2973
+	// Token: 0x040001D2 RID: 466
 	private static global::Char myPet;
 
-	// Token: 0x04000B9E RID: 2974
+	// Token: 0x040001D3 RID: 467
 	public static int[] listAttack;
 
-	// Token: 0x04000B9F RID: 2975
+	// Token: 0x040001D4 RID: 468
 	public static int[][] listIonC;
 
-	// Token: 0x04000BA0 RID: 2976
+	// Token: 0x040001D5 RID: 469
 	public int cvyJump;
 
-	// Token: 0x04000BA1 RID: 2977
+	// Token: 0x040001D6 RID: 470
 	private int indexUseSkill = -1;
 
-	// Token: 0x04000BA2 RID: 2978
+	// Token: 0x040001D7 RID: 471
 	public int cxSend;
 
-	// Token: 0x04000BA3 RID: 2979
+	// Token: 0x040001D8 RID: 472
 	public int cySend;
 
-	// Token: 0x04000BA4 RID: 2980
+	// Token: 0x040001D9 RID: 473
 	public int cdirSend = 1;
 
-	// Token: 0x04000BA5 RID: 2981
+	// Token: 0x040001DA RID: 474
 	public int cxFocus;
 
-	// Token: 0x04000BA6 RID: 2982
+	// Token: 0x040001DB RID: 475
 	public int cyFocus;
 
-	// Token: 0x04000BA7 RID: 2983
+	// Token: 0x040001DC RID: 476
 	public int cactFirst = 5;
 
-	// Token: 0x04000BA8 RID: 2984
+	// Token: 0x040001DD RID: 477
 	public MyVector vMovePoints = new MyVector();
 
-	// Token: 0x04000BA9 RID: 2985
+	// Token: 0x040001DE RID: 478
 	public static string[][] inforClass = new string[][]
 	{
 		new string[]
@@ -9345,7 +10973,7 @@ public class Char : IMapObject
 		}
 	};
 
-	// Token: 0x04000BAA RID: 2986
+	// Token: 0x040001DF RID: 479
 	public static int[][] inforSkill = new int[][]
 	{
 		new int[]
@@ -9500,97 +11128,97 @@ public class Char : IMapObject
 		}
 	};
 
-	// Token: 0x04000BAB RID: 2987
+	// Token: 0x040001E0 RID: 480
 	public static bool flag;
 
-	// Token: 0x04000BAC RID: 2988
+	// Token: 0x040001E1 RID: 481
 	public static bool ischangingMap;
 
-	// Token: 0x04000BAD RID: 2989
+	// Token: 0x040001E2 RID: 482
 	public static bool isLockKey;
 
-	// Token: 0x04000BAE RID: 2990
+	// Token: 0x040001E3 RID: 483
 	public static bool isLoadingMap;
 
-	// Token: 0x04000BAF RID: 2991
+	// Token: 0x040001E4 RID: 484
 	public bool isLockMove;
 
-	// Token: 0x04000BB0 RID: 2992
+	// Token: 0x040001E5 RID: 485
 	public bool isLockAttack;
 
-	// Token: 0x04000BB1 RID: 2993
+	// Token: 0x040001E6 RID: 486
 	public string strInfo;
 
-	// Token: 0x04000BB2 RID: 2994
+	// Token: 0x040001E7 RID: 487
 	public short powerPoint;
 
-	// Token: 0x04000BB3 RID: 2995
+	// Token: 0x040001E8 RID: 488
 	public short maxPowerPoint;
 
-	// Token: 0x04000BB4 RID: 2996
+	// Token: 0x040001E9 RID: 489
 	public short secondPower;
 
-	// Token: 0x04000BB5 RID: 2997
+	// Token: 0x040001EA RID: 490
 	public long lastS;
 
-	// Token: 0x04000BB6 RID: 2998
+	// Token: 0x040001EB RID: 491
 	public long currS;
 
-	// Token: 0x04000BB7 RID: 2999
+	// Token: 0x040001EC RID: 492
 	public bool havePet = true;
 
-	// Token: 0x04000BB8 RID: 3000
+	// Token: 0x040001ED RID: 493
 	public MovePoint currentMovePoint;
 
-	// Token: 0x04000BB9 RID: 3001
+	// Token: 0x040001EE RID: 494
 	public int bom;
 
-	// Token: 0x04000BBA RID: 3002
+	// Token: 0x040001EF RID: 495
 	public int delayFall;
 
-	// Token: 0x04000BBB RID: 3003
+	// Token: 0x040001F0 RID: 496
 	private bool isSoundJump;
 
-	// Token: 0x04000BBC RID: 3004
+	// Token: 0x040001F1 RID: 497
 	public int lastFrame;
 
-	// Token: 0x04000BBD RID: 3005
+	// Token: 0x040001F2 RID: 498
 	private Effect eProtect;
 
-	// Token: 0x04000BBE RID: 3006
+	// Token: 0x040001F3 RID: 499
 	private Effect eDanhHieu;
 
-	// Token: 0x04000BBF RID: 3007
+	// Token: 0x040001F4 RID: 500
 	private int twHp;
 
-	// Token: 0x04000BC0 RID: 3008
+	// Token: 0x040001F5 RID: 501
 	public bool isInjureHp;
 
-	// Token: 0x04000BC1 RID: 3009
+	// Token: 0x040001F6 RID: 502
 	public bool changePos;
 
-	// Token: 0x04000BC2 RID: 3010
+	// Token: 0x040001F7 RID: 503
 	public bool isHide;
 
-	// Token: 0x04000BC3 RID: 3011
+	// Token: 0x040001F8 RID: 504
 	private bool wy;
 
-	// Token: 0x04000BC4 RID: 3012
+	// Token: 0x040001F9 RID: 505
 	public int wt;
 
-	// Token: 0x04000BC5 RID: 3013
+	// Token: 0x040001FA RID: 506
 	public int fy;
 
-	// Token: 0x04000BC6 RID: 3014
+	// Token: 0x040001FB RID: 507
 	public int ty;
 
-	// Token: 0x04000BC7 RID: 3015
+	// Token: 0x040001FC RID: 508
 	private int t;
 
-	// Token: 0x04000BC8 RID: 3016
+	// Token: 0x040001FD RID: 509
 	private int fM;
 
-	// Token: 0x04000BC9 RID: 3017
+	// Token: 0x040001FE RID: 510
 	public int[] move = new int[]
 	{
 		1,
@@ -9610,361 +11238,361 @@ public class Char : IMapObject
 		2
 	};
 
-	// Token: 0x04000BCA RID: 3018
+	// Token: 0x040001FF RID: 511
 	private string strMount = "mount_";
 
-	// Token: 0x04000BCB RID: 3019
+	// Token: 0x04000200 RID: 512
 	public int headICON = -1;
 
-	// Token: 0x04000BCC RID: 3020
+	// Token: 0x04000201 RID: 513
 	public int head;
 
-	// Token: 0x04000BCD RID: 3021
+	// Token: 0x04000202 RID: 514
 	public int leg;
 
-	// Token: 0x04000BCE RID: 3022
+	// Token: 0x04000203 RID: 515
 	public int body;
 
-	// Token: 0x04000BCF RID: 3023
+	// Token: 0x04000204 RID: 516
 	public int bag;
 
-	// Token: 0x04000BD0 RID: 3024
+	// Token: 0x04000205 RID: 517
 	public int wp;
 
-	// Token: 0x04000BD1 RID: 3025
+	// Token: 0x04000206 RID: 518
 	public int indexEff = -1;
 
-	// Token: 0x04000BD2 RID: 3026
+	// Token: 0x04000207 RID: 519
 	public int indexEffTask = -1;
 
-	// Token: 0x04000BD3 RID: 3027
+	// Token: 0x04000208 RID: 520
 	public EffectCharPaint eff;
 
-	// Token: 0x04000BD4 RID: 3028
+	// Token: 0x04000209 RID: 521
 	public EffectCharPaint effTask;
 
-	// Token: 0x04000BD5 RID: 3029
+	// Token: 0x0400020A RID: 522
 	public int indexSkill;
 
-	// Token: 0x04000BD6 RID: 3030
+	// Token: 0x0400020B RID: 523
 	public int i0;
 
-	// Token: 0x04000BD7 RID: 3031
+	// Token: 0x0400020C RID: 524
 	public int i1;
 
-	// Token: 0x04000BD8 RID: 3032
+	// Token: 0x0400020D RID: 525
 	public int i2;
 
-	// Token: 0x04000BD9 RID: 3033
+	// Token: 0x0400020E RID: 526
 	public int dx0;
 
-	// Token: 0x04000BDA RID: 3034
+	// Token: 0x0400020F RID: 527
 	public int dx1;
 
-	// Token: 0x04000BDB RID: 3035
+	// Token: 0x04000210 RID: 528
 	public int dx2;
 
-	// Token: 0x04000BDC RID: 3036
+	// Token: 0x04000211 RID: 529
 	public int dy0;
 
-	// Token: 0x04000BDD RID: 3037
+	// Token: 0x04000212 RID: 530
 	public int dy1;
 
-	// Token: 0x04000BDE RID: 3038
+	// Token: 0x04000213 RID: 531
 	public int dy2;
 
-	// Token: 0x04000BDF RID: 3039
+	// Token: 0x04000214 RID: 532
 	public EffectCharPaint eff0;
 
-	// Token: 0x04000BE0 RID: 3040
+	// Token: 0x04000215 RID: 533
 	public EffectCharPaint eff1;
 
-	// Token: 0x04000BE1 RID: 3041
+	// Token: 0x04000216 RID: 534
 	public EffectCharPaint eff2;
 
-	// Token: 0x04000BE2 RID: 3042
+	// Token: 0x04000217 RID: 535
 	public Arrow arr;
 
-	// Token: 0x04000BE3 RID: 3043
+	// Token: 0x04000218 RID: 536
 	public PlayerDart dart;
 
-	// Token: 0x04000BE4 RID: 3044
+	// Token: 0x04000219 RID: 537
 	public bool isCreateDark;
 
-	// Token: 0x04000BE5 RID: 3045
+	// Token: 0x0400021A RID: 538
 	public SkillPaint skillPaint;
 
-	// Token: 0x04000BE6 RID: 3046
+	// Token: 0x0400021B RID: 539
 	public SkillPaint skillPaintRandomPaint;
 
-	// Token: 0x04000BE7 RID: 3047
+	// Token: 0x0400021C RID: 540
 	public EffectPaint[] effPaints;
 
-	// Token: 0x04000BE8 RID: 3048
+	// Token: 0x0400021D RID: 541
 	public int sType;
 
-	// Token: 0x04000BE9 RID: 3049
+	// Token: 0x0400021E RID: 542
 	public sbyte isInjure;
 
-	// Token: 0x04000BEA RID: 3050
+	// Token: 0x0400021F RID: 543
 	public bool isUseSkillAfterCharge;
 
-	// Token: 0x04000BEB RID: 3051
+	// Token: 0x04000220 RID: 544
 	public bool isFlyAndCharge;
 
-	// Token: 0x04000BEC RID: 3052
+	// Token: 0x04000221 RID: 545
 	public bool isStandAndCharge;
 
-	// Token: 0x04000BED RID: 3053
+	// Token: 0x04000222 RID: 546
 	private bool isFlying;
 
-	// Token: 0x04000BEE RID: 3054
+	// Token: 0x04000223 RID: 547
 	public int posDisY;
 
-	// Token: 0x04000BEF RID: 3055
+	// Token: 0x04000224 RID: 548
 	private int chargeCount;
 
-	// Token: 0x04000BF0 RID: 3056
+	// Token: 0x04000225 RID: 549
 	private bool hasSendAttack;
 
-	// Token: 0x04000BF1 RID: 3057
+	// Token: 0x04000226 RID: 550
 	public bool isMabuHold;
 
-	// Token: 0x04000BF2 RID: 3058
+	// Token: 0x04000227 RID: 551
 	private long timeBlue;
 
-	// Token: 0x04000BF3 RID: 3059
+	// Token: 0x04000228 RID: 552
 	private int tBlue;
 
-	// Token: 0x04000BF4 RID: 3060
+	// Token: 0x04000229 RID: 553
 	private bool IsAddDust1;
 
-	// Token: 0x04000BF5 RID: 3061
+	// Token: 0x0400022A RID: 554
 	private bool IsAddDust2;
 
-	// Token: 0x04000BF6 RID: 3062
+	// Token: 0x0400022B RID: 555
 	public int len = 24;
 
-	// Token: 0x04000BF7 RID: 3063
+	// Token: 0x0400022C RID: 556
 	public int w_hp_bar = 24;
 
-	// Token: 0x04000BF8 RID: 3064
+	// Token: 0x0400022D RID: 557
 	private int per = 100;
 
-	// Token: 0x04000BF9 RID: 3065
+	// Token: 0x0400022E RID: 558
 	private int per_tem = 100;
 
-	// Token: 0x04000BFA RID: 3066
+	// Token: 0x0400022F RID: 559
 	private Image imgHPtem;
 
-	// Token: 0x04000BFB RID: 3067
+	// Token: 0x04000230 RID: 560
 	private bool isPet;
 
-	// Token: 0x04000BFC RID: 3068
+	// Token: 0x04000231 RID: 561
 	private bool isMiniPet;
 
-	// Token: 0x04000BFD RID: 3069
+	// Token: 0x04000232 RID: 562
 	private int iiii;
 
-	// Token: 0x04000BFE RID: 3070
+	// Token: 0x04000233 RID: 563
 	private int danhHieuFramme;
 
-	// Token: 0x04000BFF RID: 3071
+	// Token: 0x04000234 RID: 564
 	public int xSd;
 
-	// Token: 0x04000C00 RID: 3072
+	// Token: 0x04000235 RID: 565
 	public int ySd;
 
-	// Token: 0x04000C01 RID: 3073
+	// Token: 0x04000236 RID: 566
 	private bool isOutMap;
 
-	// Token: 0x04000C02 RID: 3074
+	// Token: 0x04000237 RID: 567
 	private int fBag;
 
-	// Token: 0x04000C03 RID: 3075
+	// Token: 0x04000238 RID: 568
 	private Part ph;
 
-	// Token: 0x04000C04 RID: 3076
+	// Token: 0x04000239 RID: 569
 	private Part pl;
 
-	// Token: 0x04000C05 RID: 3077
+	// Token: 0x0400023A RID: 570
 	private Part pb;
 
-	// Token: 0x04000C06 RID: 3078
+	// Token: 0x0400023B RID: 571
 	public int cH_new = 32;
 
-	// Token: 0x04000C07 RID: 3079
+	// Token: 0x0400023C RID: 572
 	private int statusBeforeNothing;
 
-	// Token: 0x04000C08 RID: 3080
+	// Token: 0x0400023D RID: 573
 	private int timeFocusToMob;
 
-	// Token: 0x04000C09 RID: 3081
+	// Token: 0x0400023E RID: 574
 	public static bool isManualFocus = false;
 
-	// Token: 0x04000C0A RID: 3082
+	// Token: 0x0400023F RID: 575
 	private global::Char charHold;
 
-	// Token: 0x04000C0B RID: 3083
+	// Token: 0x04000240 RID: 576
 	private Mob mobHold;
 
-	// Token: 0x04000C0C RID: 3084
+	// Token: 0x04000241 RID: 577
 	private int nInjure;
 
-	// Token: 0x04000C0D RID: 3085
+	// Token: 0x04000242 RID: 578
 	public short wdx;
 
-	// Token: 0x04000C0E RID: 3086
+	// Token: 0x04000243 RID: 579
 	public short wdy;
 
-	// Token: 0x04000C0F RID: 3087
+	// Token: 0x04000244 RID: 580
 	public bool isDirtyPostion;
 
-	// Token: 0x04000C10 RID: 3088
+	// Token: 0x04000245 RID: 581
 	public Skill lastNormalSkill;
 
-	// Token: 0x04000C11 RID: 3089
+	// Token: 0x04000246 RID: 582
 	public bool currentFireByShortcut;
 
-	// Token: 0x04000C12 RID: 3090
+	// Token: 0x04000247 RID: 583
 	public int cDamGoc;
 
-	// Token: 0x04000C13 RID: 3091
+	// Token: 0x04000248 RID: 584
 	public int cHPGoc;
 
-	// Token: 0x04000C14 RID: 3092
+	// Token: 0x04000249 RID: 585
 	public int cMPGoc;
 
-	// Token: 0x04000C15 RID: 3093
+	// Token: 0x0400024A RID: 586
 	public int cDefGoc;
 
-	// Token: 0x04000C16 RID: 3094
+	// Token: 0x0400024B RID: 587
 	public int cCriticalGoc;
 
-	// Token: 0x04000C17 RID: 3095
+	// Token: 0x0400024C RID: 588
 	public sbyte hpFrom1000TiemNang;
 
-	// Token: 0x04000C18 RID: 3096
+	// Token: 0x0400024D RID: 589
 	public sbyte mpFrom1000TiemNang;
 
-	// Token: 0x04000C19 RID: 3097
+	// Token: 0x0400024E RID: 590
 	public sbyte damFrom1000TiemNang;
 
-	// Token: 0x04000C1A RID: 3098
+	// Token: 0x0400024F RID: 591
 	public sbyte defFrom1000TiemNang = 1;
 
-	// Token: 0x04000C1B RID: 3099
+	// Token: 0x04000250 RID: 592
 	public sbyte criticalFrom1000Tiemnang = 1;
 
-	// Token: 0x04000C1C RID: 3100
+	// Token: 0x04000251 RID: 593
 	public short cMaxStamina;
 
-	// Token: 0x04000C1D RID: 3101
+	// Token: 0x04000252 RID: 594
 	public short expForOneAdd;
 
-	// Token: 0x04000C1E RID: 3102
+	// Token: 0x04000253 RID: 595
 	public sbyte isMonkey;
 
-	// Token: 0x04000C1F RID: 3103
+	// Token: 0x04000254 RID: 596
 	public bool isCopy;
 
-	// Token: 0x04000C20 RID: 3104
+	// Token: 0x04000255 RID: 597
 	public bool isWaitMonkey;
 
-	// Token: 0x04000C21 RID: 3105
+	// Token: 0x04000256 RID: 598
 	private bool isFeetEff;
 
-	// Token: 0x04000C22 RID: 3106
+	// Token: 0x04000257 RID: 599
 	public bool meDead;
 
-	// Token: 0x04000C23 RID: 3107
+	// Token: 0x04000258 RID: 600
 	public int holdEffID;
 
-	// Token: 0x04000C24 RID: 3108
+	// Token: 0x04000259 RID: 601
 	public bool holder;
 
-	// Token: 0x04000C25 RID: 3109
+	// Token: 0x0400025A RID: 602
 	public bool protectEff;
 
-	// Token: 0x04000C26 RID: 3110
+	// Token: 0x0400025B RID: 603
 	public bool danhHieuEff = true;
 
-	// Token: 0x04000C27 RID: 3111
+	// Token: 0x0400025C RID: 604
 	private bool isSetPos;
 
-	// Token: 0x04000C28 RID: 3112
+	// Token: 0x0400025D RID: 605
 	private int tpos;
 
-	// Token: 0x04000C29 RID: 3113
+	// Token: 0x0400025E RID: 606
 	private short xPos;
 
-	// Token: 0x04000C2A RID: 3114
+	// Token: 0x0400025F RID: 607
 	private short yPos;
 
-	// Token: 0x04000C2B RID: 3115
+	// Token: 0x04000260 RID: 608
 	private sbyte typePos;
 
-	// Token: 0x04000C2C RID: 3116
+	// Token: 0x04000261 RID: 609
 	private bool isMyFusion;
 
-	// Token: 0x04000C2D RID: 3117
+	// Token: 0x04000262 RID: 610
 	public bool isFusion;
 
-	// Token: 0x04000C2E RID: 3118
+	// Token: 0x04000263 RID: 611
 	public int tFusion;
 
-	// Token: 0x04000C2F RID: 3119
+	// Token: 0x04000264 RID: 612
 	public bool huytSao;
 
-	// Token: 0x04000C30 RID: 3120
+	// Token: 0x04000265 RID: 613
 	public bool blindEff;
 
-	// Token: 0x04000C31 RID: 3121
+	// Token: 0x04000266 RID: 614
 	public bool telePortSkill;
 
-	// Token: 0x04000C32 RID: 3122
+	// Token: 0x04000267 RID: 615
 	public bool sleepEff;
 
-	// Token: 0x04000C33 RID: 3123
+	// Token: 0x04000268 RID: 616
 	public bool stone;
 
-	// Token: 0x04000C34 RID: 3124
+	// Token: 0x04000269 RID: 617
 	public int perCentMp = 100;
 
-	// Token: 0x04000C35 RID: 3125
+	// Token: 0x0400026A RID: 618
 	public int dHP;
 
-	// Token: 0x04000C36 RID: 3126
+	// Token: 0x0400026B RID: 619
 	public int headTemp = -1;
 
-	// Token: 0x04000C37 RID: 3127
+	// Token: 0x0400026C RID: 620
 	public int bodyTemp = -1;
 
-	// Token: 0x04000C38 RID: 3128
+	// Token: 0x0400026D RID: 621
 	public int legTemp = -1;
 
-	// Token: 0x04000C39 RID: 3129
+	// Token: 0x0400026E RID: 622
 	public int bagTemp = -1;
 
-	// Token: 0x04000C3A RID: 3130
+	// Token: 0x0400026F RID: 623
 	public int wpTemp = -1;
 
-	// Token: 0x04000C3B RID: 3131
+	// Token: 0x04000270 RID: 624
 	public MyVector vEffChar = new MyVector("vEff");
 
-	// Token: 0x04000C3C RID: 3132
+	// Token: 0x04000271 RID: 625
 	public static FrameImage fraRedEye;
 
-	// Token: 0x04000C3D RID: 3133
+	// Token: 0x04000272 RID: 626
 	private int fChopmat;
 
-	// Token: 0x04000C3E RID: 3134
+	// Token: 0x04000273 RID: 627
 	private bool isAddChopMat;
 
-	// Token: 0x04000C3F RID: 3135
+	// Token: 0x04000274 RID: 628
 	private long timeAddChopmat;
 
-	// Token: 0x04000C40 RID: 3136
+	// Token: 0x04000275 RID: 629
 	private int[] frChopNhanh = new int[]
 	{
 		-1,
@@ -10003,7 +11631,7 @@ public class Char : IMapObject
 		-1
 	};
 
-	// Token: 0x04000C41 RID: 3137
+	// Token: 0x04000276 RID: 630
 	private int[] frChopCham = new int[]
 	{
 		-1,
@@ -10031,7 +11659,7 @@ public class Char : IMapObject
 		-1
 	};
 
-	// Token: 0x04000C42 RID: 3138
+	// Token: 0x04000277 RID: 631
 	private int[] frEye = new int[]
 	{
 		-1,
@@ -10066,7 +11694,7 @@ public class Char : IMapObject
 		-1
 	};
 
-	// Token: 0x04000C43 RID: 3139
+	// Token: 0x04000278 RID: 632
 	public static int[][] Arr_Head_2Fr = new int[][]
 	{
 		new int[]
@@ -10076,135 +11704,135 @@ public class Char : IMapObject
 		}
 	};
 
-	// Token: 0x04000C44 RID: 3140
+	// Token: 0x04000279 RID: 633
 	private int fHead;
 
-	// Token: 0x04000C45 RID: 3141
+	// Token: 0x0400027A RID: 634
 	private string strEffAura = "aura_";
 
-	// Token: 0x04000C46 RID: 3142
+	// Token: 0x0400027B RID: 635
 	public short idAuraEff = -1;
 
-	// Token: 0x04000C47 RID: 3143
+	// Token: 0x0400027C RID: 636
 	public static bool isPaintAura = true;
 
-	// Token: 0x04000C48 RID: 3144
+	// Token: 0x0400027D RID: 637
 	public static bool isPaintAura2 = true;
 
-	// Token: 0x04000C49 RID: 3145
+	// Token: 0x0400027E RID: 638
 	private FrameImage fraEff;
 
-	// Token: 0x04000C4A RID: 3146
+	// Token: 0x0400027F RID: 639
 	private FrameImage fraEffSub;
 
-	// Token: 0x04000C4B RID: 3147
+	// Token: 0x04000280 RID: 640
 	private string strEff_Set_Item = "set_eff_";
 
-	// Token: 0x04000C4C RID: 3148
+	// Token: 0x04000281 RID: 641
 	public short idEff_Set_Item = -1;
 
-	// Token: 0x04000C4D RID: 3149
+	// Token: 0x04000282 RID: 642
 	private FrameImage fraHat_behind;
 
-	// Token: 0x04000C4E RID: 3150
+	// Token: 0x04000283 RID: 643
 	private FrameImage fraHat_font;
 
-	// Token: 0x04000C4F RID: 3151
+	// Token: 0x04000284 RID: 644
 	private FrameImage fraHat_behind_2;
 
-	// Token: 0x04000C50 RID: 3152
+	// Token: 0x04000285 RID: 645
 	private FrameImage fraHat_font_2;
 
-	// Token: 0x04000C51 RID: 3153
+	// Token: 0x04000286 RID: 646
 	private string strHat_behind = "hat_sau_";
 
-	// Token: 0x04000C52 RID: 3154
+	// Token: 0x04000287 RID: 647
 	private string strHat_font = "hat_truoc_";
 
-	// Token: 0x04000C53 RID: 3155
+	// Token: 0x04000288 RID: 648
 	private string strNgang = "ngang_";
 
-	// Token: 0x04000C54 RID: 3156
+	// Token: 0x04000289 RID: 649
 	public short idHat = -1;
 
-	// Token: 0x04000C55 RID: 3157
+	// Token: 0x0400028A RID: 650
 	public static int[][] hatInfo;
 
-	// Token: 0x04000C56 RID: 3158
+	// Token: 0x0400028B RID: 651
 	public const byte TYPE_SKILL_KAMEX10 = 1;
 
-	// Token: 0x04000C57 RID: 3159
+	// Token: 0x0400028C RID: 652
 	public const byte TYPE_SKILL_FINAL = 2;
 
-	// Token: 0x04000C58 RID: 3160
+	// Token: 0x0400028D RID: 653
 	public const byte TYPE_SKILL_MAFUBA = 3;
 
-	// Token: 0x04000C59 RID: 3161
+	// Token: 0x0400028E RID: 654
 	public const byte TYPE_SKILL_GENKI = 4;
 
-	// Token: 0x04000C5A RID: 3162
+	// Token: 0x0400028F RID: 655
 	public bool isPaintNewSkill;
 
-	// Token: 0x04000C5B RID: 3163
+	// Token: 0x04000290 RID: 656
 	private bool isFly;
 
-	// Token: 0x04000C5C RID: 3164
+	// Token: 0x04000291 RID: 657
 	private long timeReset_newSkill;
 
-	// Token: 0x04000C5D RID: 3165
+	// Token: 0x04000292 RID: 658
 	private sbyte typeFrame;
 
-	// Token: 0x04000C5E RID: 3166
+	// Token: 0x04000293 RID: 659
 	private short idskillPaint;
 
-	// Token: 0x04000C5F RID: 3167
+	// Token: 0x04000294 RID: 660
 	private byte[] fr_start;
 
-	// Token: 0x04000C60 RID: 3168
+	// Token: 0x04000295 RID: 661
 	private byte[] fr_atk;
 
-	// Token: 0x04000C61 RID: 3169
+	// Token: 0x04000296 RID: 662
 	private byte[] fr_end;
 
-	// Token: 0x04000C62 RID: 3170
+	// Token: 0x04000297 RID: 663
 	private int count_NEW;
 
-	// Token: 0x04000C63 RID: 3171
+	// Token: 0x04000298 RID: 664
 	private int stt;
 
-	// Token: 0x04000C64 RID: 3172
+	// Token: 0x04000299 RID: 665
 	private short rangeDame;
 
-	// Token: 0x04000C65 RID: 3173
+	// Token: 0x0400029A RID: 666
 	private sbyte typePaint;
 
-	// Token: 0x04000C66 RID: 3174
+	// Token: 0x0400029B RID: 667
 	private sbyte typeItem;
 
-	// Token: 0x04000C67 RID: 3175
+	// Token: 0x0400029C RID: 668
 	private Point targetDame;
 
-	// Token: 0x04000C68 RID: 3176
+	// Token: 0x0400029D RID: 669
 	private long timeDame;
 
-	// Token: 0x04000C69 RID: 3177
+	// Token: 0x0400029E RID: 670
 	public bool isMafuba;
 
-	// Token: 0x04000C6A RID: 3178
+	// Token: 0x0400029F RID: 671
 	private short countMafuba;
 
-	// Token: 0x04000C6B RID: 3179
+	// Token: 0x040002A0 RID: 672
 	public int xMFB;
 
-	// Token: 0x04000C6C RID: 3180
+	// Token: 0x040002A1 RID: 673
 	public int yMFB;
 
-	// Token: 0x04000C6D RID: 3181
+	// Token: 0x040002A2 RID: 674
 	public int timeGongSkill;
 
-	// Token: 0x04000C6E RID: 3182
+	// Token: 0x040002A3 RID: 675
 	private FrameImage fraDanhHieu;
 
-	// Token: 0x04000C6F RID: 3183
+	// Token: 0x040002A4 RID: 676
 	private MainImage mainImg;
 }

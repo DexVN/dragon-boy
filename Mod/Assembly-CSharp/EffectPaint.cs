@@ -1,26 +1,26 @@
 ﻿using System;
 
-// Token: 0x02000058 RID: 88
+// Token: 0x0200002C RID: 44
 public class EffectPaint
 {
-	// Token: 0x060002FD RID: 765 RVA: 0x000178E7 File Offset: 0x00015CE7
+	// Token: 0x06000234 RID: 564 RVA: 0x00037378 File Offset: 0x00035578
 	public int getImgId()
 	{
 		return this.effCharPaint.arrEfInfo[this.index].idImg;
 	}
 
-	// Token: 0x040004E8 RID: 1256
+	// Token: 0x0400051E RID: 1310
 	public int index;
 
-	// Token: 0x040004E9 RID: 1257
+	// Token: 0x0400051F RID: 1311
 	public Mob eMob;
 
-	// Token: 0x040004EA RID: 1258
+	// Token: 0x04000520 RID: 1312
 	public global::Char eChar;
 
-	// Token: 0x040004EB RID: 1259
+	// Token: 0x04000521 RID: 1313
 	public EffectCharPaint effCharPaint;
 
-	// Token: 0x040004EC RID: 1260
+	// Token: 0x04000522 RID: 1314
 	public bool isFly;
 }

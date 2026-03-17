@@ -1,19 +1,20 @@
 ﻿using System;
 
-// Token: 0x020000C8 RID: 200
+// Token: 0x020000AF RID: 175
 public class TabClanIcon : IActionListener
 {
-	// Token: 0x06000A03 RID: 2563 RVA: 0x000987F8 File Offset: 0x00096BF8
+	// Token: 0x060009B2 RID: 2482 RVA: 0x000A1F34 File Offset: 0x000A0134
 	public TabClanIcon()
 	{
 		this.left = new Command(mResources.SELECT, this, 1, null);
 		this.right = new Command(mResources.CLOSE, this, 2, null);
 	}
 
-	// Token: 0x06000A04 RID: 2564 RVA: 0x0009884C File Offset: 0x00096C4C
+	// Token: 0x060009B3 RID: 2483 RVA: 0x000A1F8C File Offset: 0x000A018C
 	public void init()
 	{
-		if (this.isGetName)
+		bool flag = this.isGetName;
+		if (flag)
 		{
 			this.w = 170;
 			this.h = 118;
@@ -26,14 +27,16 @@ public class TabClanIcon : IActionListener
 			this.h = 170;
 			this.x = GameCanvas.w / 2 - this.w / 2;
 			this.y = GameCanvas.h / 2 - this.h / 2;
-			if (GameCanvas.h < 240)
+			bool flag2 = GameCanvas.h < 240;
+			if (flag2)
 			{
 				this.y -= 10;
 			}
 		}
 		this.cmx = this.x;
 		this.cmtoX = 0;
-		if (!this.isRequest)
+		bool flag3 = !this.isRequest;
+		if (flag3)
 		{
 			this.nItem = ClanImage.vClanImage.size();
 		}
@@ -41,7 +44,8 @@ public class TabClanIcon : IActionListener
 		{
 			this.nItem = this.vItems.size();
 		}
-		if (GameCanvas.isTouch)
+		bool isTouch = GameCanvas.isTouch;
+		if (isTouch)
 		{
 			this.left.x = this.x;
 			this.left.y = this.y + this.h + 5;
@@ -52,10 +56,11 @@ public class TabClanIcon : IActionListener
 		TabClanIcon.scrMain.setStyle(this.nItem, this.WIDTH, this.x, this.y + this.disStart, this.w, this.h - this.disStart, true, 1);
 	}
 
-	// Token: 0x06000A05 RID: 2565 RVA: 0x000989FE File Offset: 0x00096DFE
+	// Token: 0x060009B4 RID: 2484 RVA: 0x000A2148 File Offset: 0x000A0348
 	public void show(bool isGetName)
 	{
-		if (global::Char.myCharz().clan != null)
+		bool flag = global::Char.myCharz().clan != null;
+		if (flag)
 		{
 			this.isUpdate = true;
 		}
@@ -64,7 +69,7 @@ public class TabClanIcon : IActionListener
 		this.init();
 	}
 
-	// Token: 0x06000A06 RID: 2566 RVA: 0x00098A2A File Offset: 0x00096E2A
+	// Token: 0x060009B5 RID: 2485 RVA: 0x000A2185 File Offset: 0x000A0385
 	public void showRequest(int msgID)
 	{
 		this.isShow = true;
@@ -73,35 +78,38 @@ public class TabClanIcon : IActionListener
 		this.init();
 	}
 
-	// Token: 0x06000A07 RID: 2567 RVA: 0x00098A47 File Offset: 0x00096E47
+	// Token: 0x060009B6 RID: 2486 RVA: 0x000A21A4 File Offset: 0x000A03A4
 	public void hide()
 	{
 		this.cmtoX = this.x + this.w;
 		SmallImage.clearHastable();
 	}
 
-	// Token: 0x06000A08 RID: 2568 RVA: 0x00098A61 File Offset: 0x00096E61
+	// Token: 0x060009B7 RID: 2487 RVA: 0x00003136 File Offset: 0x00001336
 	public void paintPeans(mGraphics g)
 	{
 	}
 
-	// Token: 0x06000A09 RID: 2569 RVA: 0x00098A64 File Offset: 0x00096E64
+	// Token: 0x060009B8 RID: 2488 RVA: 0x000A21C0 File Offset: 0x000A03C0
 	public void paintIcon(mGraphics g)
 	{
 		g.translate(-this.cmx, 0);
 		PopUp.paintPopUp(g, this.x, this.y - 17, this.w, this.h + 17, -1, true);
 		mFont.tahoma_7b_dark.drawString(g, mResources.select_clan_icon, this.x + this.w / 2, this.y - 7, 2);
-		if (this.lastSelect >= 0 && this.lastSelect <= ClanImage.vClanImage.size() - 1)
+		bool flag = this.lastSelect >= 0 && this.lastSelect <= ClanImage.vClanImage.size() - 1;
+		if (flag)
 		{
 			ClanImage clanImage = (ClanImage)ClanImage.vClanImage.elementAt(this.lastSelect);
-			if (clanImage.idImage != null)
+			bool flag2 = clanImage.idImage != null;
+			if (flag2)
 			{
 				global::Char.myCharz().paintBag(g, clanImage.idImage, GameCanvas.w / 2, this.y + 45, 1, false);
 			}
 		}
 		global::Char.myCharz().paintCharBody(g, GameCanvas.w / 2, this.y + 45, 1, global::Char.myCharz().cf, false);
 		g.setClip(this.x, this.y + this.disStart, this.w, this.h - this.disStart - 10);
-		if (TabClanIcon.scrMain != null)
+		bool flag3 = TabClanIcon.scrMain != null;
+		if (flag3)
 		{
 			g.translate(0, -TabClanIcon.scrMain.cmy);
 		}
@@ -109,27 +117,36 @@ public class TabClanIcon : IActionListener
 		{
 			int num = this.x + 10;
 			int num2 = this.y + i * this.WIDTH + this.disStart;
-			if (num2 + this.WIDTH - ((TabClanIcon.scrMain == null) ? 0 : TabClanIcon.scrMain.cmy) >= this.y + this.disStart && num2 - ((TabClanIcon.scrMain == null) ? 0 : TabClanIcon.scrMain.cmy) <= this.y + this.disStart + this.h)
+			bool flag4 = num2 + this.WIDTH - ((TabClanIcon.scrMain == null) ? 0 : TabClanIcon.scrMain.cmy) >= this.y + this.disStart && num2 - ((TabClanIcon.scrMain == null) ? 0 : TabClanIcon.scrMain.cmy) <= this.y + this.disStart + this.h;
+			if (flag4)
 			{
 				ClanImage clanImage2 = (ClanImage)ClanImage.vClanImage.elementAt(i);
 				mFont mFont = mFont.tahoma_7_grey;
-				if (i == this.lastSelect)
+				bool flag5 = i == this.lastSelect;
+				if (flag5)
 				{
 					mFont = mFont.tahoma_7_blue;
 				}
-				if (clanImage2.name != null)
+				bool flag6 = clanImage2.name != null;
+				if (flag6)
 				{
 					mFont.drawString(g, clanImage2.name, num + 20, num2, 0);
 				}
-				if (clanImage2.xu > 0)
+				bool flag7 = clanImage2.xu > 0;
+				if (flag7)
 				{
-					mFont.drawString(g, clanImage2.xu + " " + mResources.XU, num + this.w - 20, num2, mFont.RIGHT);
+					mFont.drawString(g, clanImage2.xu.ToString() + " " + mResources.XU, num + this.w - 20, num2, mFont.RIGHT);
 				}
-				else if (clanImage2.luong > 0)
+				else
 				{
-					mFont.drawString(g, clanImage2.luong + " " + mResources.LUONG, num + this.w - 20, num2, mFont.RIGHT);
+					bool flag8 = clanImage2.luong > 0;
+					if (flag8)
+					{
+						mFont.drawString(g, clanImage2.luong.ToString() + " " + mResources.LUONG, num + this.w - 20, num2, mFont.RIGHT);
+					}
 				}
-				if (clanImage2.idImage != null)
+				bool flag9 = clanImage2.idImage != null;
+				if (flag9)
 				{
 					SmallImage.drawSmallImage(g, (int)clanImage2.idImage[0], num, num2, 0, 0);
 				}
@@ -140,10 +157,11 @@ public class TabClanIcon : IActionListener
 		GameCanvas.paintz.paintCmdBar(g, this.left, this.center, this.right);
 	}
 
-	// Token: 0x06000A0A RID: 2570 RVA: 0x00098D78 File Offset: 0x00097178
+	// Token: 0x060009B9 RID: 2489 RVA: 0x000A2524 File Offset: 0x000A0724
 	public void paint(mGraphics g)
 	{
-		if (!this.isRequest)
+		bool flag = !this.isRequest;
+		if (flag)
 		{
 			this.paintIcon(g);
 		}
@@ -153,77 +171,92 @@ public class TabClanIcon : IActionListener
 		}
 	}
 
-	// Token: 0x06000A0B RID: 2571 RVA: 0x00098D98 File Offset: 0x00097198
+	// Token: 0x060009BA RID: 2490 RVA: 0x000A2558 File Offset: 0x000A0758
 	public void update()
 	{
-		if (TabClanIcon.scrMain != null)
+		bool flag = TabClanIcon.scrMain != null;
+		if (flag)
 		{
 			TabClanIcon.scrMain.updatecm();
 		}
-		if (this.cmx != this.cmtoX)
+		bool flag2 = this.cmx != this.cmtoX;
+		if (flag2)
 		{
 			this.cmvx = this.cmtoX - this.cmx << 2;
 			this.cmdx += this.cmvx;
 			this.cmx += this.cmdx >> 3;
 			this.cmdx &= 15;
 		}
-		if (global::Math.abs(this.cmtoX - this.cmx) < 10)
+		bool flag3 = global::Math.abs(this.cmtoX - this.cmx) < 10;
+		if (flag3)
 		{
 			this.cmx = this.cmtoX;
 		}
-		if (this.cmx >= this.x + this.w - 10 && this.cmtoX >= this.x + this.w - 10)
+		bool flag4 = this.cmx >= this.x + this.w - 10 && this.cmtoX >= this.x + this.w - 10;
+		if (flag4)
 		{
 			this.isShow = false;
 		}
 	}
 
-	// Token: 0x06000A0C RID: 2572 RVA: 0x00098E78 File Offset: 0x00097278
+	// Token: 0x060009BB RID: 2491 RVA: 0x000A2650 File Offset: 0x000A0850
 	public void updateKey()
 	{
-		if (this.left != null && (GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(this.left)))
+		bool flag = this.left != null && (GameCanvas.keyPressed[12] || mScreen.getCmdPointerLast(this.left));
+		if (flag)
 		{
 			this.left.performAction();
 		}
-		if (this.right != null && (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(this.right)))
+		bool flag2 = this.right != null && (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(this.right));
+		if (flag2)
 		{
 			this.right.performAction();
 		}
-		if (this.center != null && (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(this.center)))
+		bool flag3 = this.center != null && (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(this.center));
+		if (flag3)
 		{
 			this.center.performAction();
 		}
-		if (!this.isGetName)
+		bool flag4 = !this.isGetName;
+		if (flag4)
 		{
-			if (TabClanIcon.scrMain == null)
+			bool flag5 = TabClanIcon.scrMain == null;
+			if (flag5)
 			{
 				return;
 			}
-			if (GameCanvas.isTouch)
+			bool isTouch = GameCanvas.isTouch;
+			if (isTouch)
 			{
 				TabClanIcon.scrMain.updateKey();
 				this.select = TabClanIcon.scrMain.selectedItem;
 			}
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21])
+			bool flag6 = GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21];
+			if (flag6)
 			{
 				GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21] = false;
 				this.select--;
-				if (this.select < 0)
+				bool flag7 = this.select < 0;
+				if (flag7)
 				{
 					this.select = this.nItem - 1;
 				}
 				TabClanIcon.scrMain.moveTo(this.select * TabClanIcon.scrMain.ITEM_SIZE);
 			}
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22])
+			bool flag8 = GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22];
+			if (flag8)
 			{
 				GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] = false;
 				this.select++;
-				if (this.select > this.nItem - 1)
+				bool flag9 = this.select > this.nItem - 1;
+				if (flag9)
 				{
 					this.select = 0;
 				}
 				TabClanIcon.scrMain.moveTo(this.select * TabClanIcon.scrMain.ITEM_SIZE);
 			}
-			if (this.select != -1)
+			bool flag10 = this.select != -1;
+			if (flag10)
 			{
 				this.lastSelect = this.select;
 			}
@@ -232,23 +265,29 @@ public class TabClanIcon : IActionListener
 		GameCanvas.clearKeyPressed();
 	}
 
-	// Token: 0x06000A0D RID: 2573 RVA: 0x00099084 File Offset: 0x00097484
+	// Token: 0x060009BC RID: 2492 RVA: 0x000A2870 File Offset: 0x000A0A70
 	public void perform(int idAction, object p)
 	{
-		if (idAction == 2)
+		bool flag = idAction == 2;
+		if (flag)
 		{
 			this.hide();
 		}
-		if (idAction == 1)
+		bool flag2 = idAction == 1;
+		if (flag2)
 		{
-			if (!this.isGetName)
+			bool flag3 = !this.isGetName;
+			if (flag3)
 			{
-				if (!this.isRequest)
+				bool flag4 = !this.isRequest;
+				if (flag4)
 				{
-					if (this.lastSelect >= 0)
+					bool flag5 = this.lastSelect >= 0;
+					if (flag5)
 					{
 						this.hide();
-						if (global::Char.myCharz().clan == null)
+						bool flag6 = global::Char.myCharz().clan == null;
+						if (flag6)
 						{
 							Service.gI().getClan(2, (sbyte)((ClanImage)ClanImage.vClanImage.elementAt(this.lastSelect)).ID, this.text);
 						}
@@ -258,86 +297,90 @@ public class TabClanIcon : IActionListener
 						}
 					}
 				}
-				else if (this.lastSelect >= 0)
+				else
 				{
-					Item item = (Item)this.vItems.elementAt(this.select);
+					bool flag7 = this.lastSelect >= 0;
+					if (flag7)
+					{
+						Item item = (Item)this.vItems.elementAt(this.select);
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x0400128E RID: 4750
+	// Token: 0x04001221 RID: 4641
 	private int x;
 
-	// Token: 0x0400128F RID: 4751
+	// Token: 0x04001222 RID: 4642
 	private int y;
 
-	// Token: 0x04001290 RID: 4752
+	// Token: 0x04001223 RID: 4643
 	private int w;
 
-	// Token: 0x04001291 RID: 4753
+	// Token: 0x04001224 RID: 4644
 	private int h;
 
-	// Token: 0x04001292 RID: 4754
+	// Token: 0x04001225 RID: 4645
 	private Command left;
 
-	// Token: 0x04001293 RID: 4755
+	// Token: 0x04001226 RID: 4646
 	private Command right;
 
-	// Token: 0x04001294 RID: 4756
+	// Token: 0x04001227 RID: 4647
 	private Command center;
 
-	// Token: 0x04001295 RID: 4757
+	// Token: 0x04001228 RID: 4648
 	private int WIDTH = 24;
 
-	// Token: 0x04001296 RID: 4758
+	// Token: 0x04001229 RID: 4649
 	public int nItem;
 
-	// Token: 0x04001297 RID: 4759
+	// Token: 0x0400122A RID: 4650
 	private int disStart = 50;
 
-	// Token: 0x04001298 RID: 4760
+	// Token: 0x0400122B RID: 4651
 	public static Scroll scrMain;
 
-	// Token: 0x04001299 RID: 4761
+	// Token: 0x0400122C RID: 4652
 	public int cmtoX;
 
-	// Token: 0x0400129A RID: 4762
+	// Token: 0x0400122D RID: 4653
 	public int cmx;
 
-	// Token: 0x0400129B RID: 4763
+	// Token: 0x0400122E RID: 4654
 	public int cmvx;
 
-	// Token: 0x0400129C RID: 4764
+	// Token: 0x0400122F RID: 4655
 	public int cmdx;
 
-	// Token: 0x0400129D RID: 4765
+	// Token: 0x04001230 RID: 4656
 	public bool isShow;
 
-	// Token: 0x0400129E RID: 4766
+	// Token: 0x04001231 RID: 4657
 	public bool isGetName;
 
-	// Token: 0x0400129F RID: 4767
+	// Token: 0x04001232 RID: 4658
 	public string text;
 
-	// Token: 0x040012A0 RID: 4768
+	// Token: 0x04001233 RID: 4659
 	private bool isRequest;
 
-	// Token: 0x040012A1 RID: 4769
+	// Token: 0x04001234 RID: 4660
 	private bool isUpdate;
 
-	// Token: 0x040012A2 RID: 4770
+	// Token: 0x04001235 RID: 4661
 	public MyVector vItems = new MyVector();
 
-	// Token: 0x040012A3 RID: 4771
+	// Token: 0x04001236 RID: 4662
 	private int msgID;
 
-	// Token: 0x040012A4 RID: 4772
+	// Token: 0x04001237 RID: 4663
 	private int select;
 
-	// Token: 0x040012A5 RID: 4773
+	// Token: 0x04001238 RID: 4664
 	private int lastSelect;
 
-	// Token: 0x040012A6 RID: 4774
+	// Token: 0x04001239 RID: 4665
 	private ScrollResult sr;
 }

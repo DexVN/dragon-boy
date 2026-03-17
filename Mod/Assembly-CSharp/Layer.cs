@@ -1,19 +1,19 @@
 ﻿using System;
 
-// Token: 0x020000B3 RID: 179
+// Token: 0x0200005D RID: 93
 public class Layer
 {
-	// Token: 0x060007E9 RID: 2025 RVA: 0x00071CA1 File Offset: 0x000700A1
+	// Token: 0x0600049C RID: 1180 RVA: 0x00003136 File Offset: 0x00001336
 	public void update()
 	{
 	}
 
-	// Token: 0x060007EA RID: 2026 RVA: 0x00071CA3 File Offset: 0x000700A3
+	// Token: 0x0600049D RID: 1181 RVA: 0x00003136 File Offset: 0x00001336
 	public void paint(mGraphics g, int x, int y)
 	{
 	}
 
-	// Token: 0x060007EB RID: 2027 RVA: 0x00071CA5 File Offset: 0x000700A5
+	// Token: 0x0600049E RID: 1182 RVA: 0x00003136 File Offset: 0x00001336
 	public void keyPress(int keyCode)
 	{
 	}

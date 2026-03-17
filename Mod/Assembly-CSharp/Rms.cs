@@ -3,13 +3,14 @@ using System.IO;
 using System.Threading;
 using UnityEngine;
 
-// Token: 0x02000017 RID: 23
+// Token: 0x02000093 RID: 147
 public class Rms
 {
-	// Token: 0x06000089 RID: 137 RVA: 0x00003D0B File Offset: 0x0000210B
+	// Token: 0x0600080A RID: 2058 RVA: 0x00090140 File Offset: 0x0008E340
 	public static void saveRMS(string filename, sbyte[] data)
 	{
-		if (Thread.CurrentThread.Name == Main.mainThreadName)
+		bool flag = Thread.CurrentThread.Name == Main.mainThreadName;
+		if (flag)
 		{
 			Rms.__saveRMS(filename, data);
 		}
@@ -19,45 +20,58 @@ public class Rms
 		}
 	}
 
-	// Token: 0x0600008A RID: 138 RVA: 0x00003D39 File Offset: 0x00002139
+	// Token: 0x0600080B RID: 2059 RVA: 0x0009017C File Offset: 0x0008E37C
 	public static sbyte[] loadRMS(string filename)
 	{
-		if (Thread.CurrentThread.Name == Main.mainThreadName)
+		bool flag = Thread.CurrentThread.Name == Main.mainThreadName;
+		sbyte[] result;
+		if (flag)
 		{
-			return Rms.__loadRMS(filename);
+			result = Rms.__loadRMS(filename);
 		}
-		return Rms._loadRMS(filename);
+		else
+		{
+			result = Rms._loadRMS(filename);
+		}
+		return result;
 	}
 
-	// Token: 0x0600008B RID: 139 RVA: 0x00003D64 File Offset: 0x00002164
+	// Token: 0x0600080C RID: 2060 RVA: 0x000901B8 File Offset: 0x0008E3B8
 	public static string loadRMSString(string fileName)
 	{
 		sbyte[] array = Rms.loadRMS(fileName);
-		if (array == null)
+		bool flag = array == null;
+		string result2;
+		if (flag)
 		{
-			return null;
+			result2 = null;
 		}
-		DataInputStream dataInputStream = new DataInputStream(array);
-		try
+		else
 		{
-			string result = dataInputStream.readUTF();
-			dataInputStream.close();
-			return result;
+			DataInputStream dataInputStream = new DataInputStream(array);
+			try
+			{
+				string result = dataInputStream.readUTF();
+				dataInputStream.close();
+				return result;
+			}
+			catch (Exception ex)
+			{
+				Cout.println(ex.StackTrace);
+			}
+			result2 = null;
 		}
-		catch (Exception ex)
-		{
-			Cout.println(ex.StackTrace);
-		}
-		return null;
+		return result2;
 	}
 
-	// Token: 0x0600008C RID: 140 RVA: 0x00003DC4 File Offset: 0x000021C4
+	// Token: 0x0600080D RID: 2061 RVA: 0x00090220 File Offset: 0x0008E420
 	public static byte[] convertSbyteToByte(sbyte[] var)
 	{
 		byte[] array = new byte[var.Length];
 		for (int i = 0; i < var.Length; i++)
 		{
-			if ((int)var[i] > 0)
+			bool flag = var[i] > 0;
+			if (flag)
 			{
 				array[i] = (byte)var[i];
 			}
@@ -69,7 +83,7 @@ public class Rms
 		return array;
 	}
 
-	// Token: 0x0600008D RID: 141 RVA: 0x00003E14 File Offset: 0x00002214
+	// Token: 0x0600080E RID: 2062 RVA: 0x00090278 File Offset: 0x0008E478
 	public static void saveRMSString(string filename, string data)
 	{
 		DataOutputStream dataOutputStream = new DataOutputStream();
@@ -85,84 +99,102 @@ public class Rms
 		}
 	}
 
-	// Token: 0x0600008E RID: 142 RVA: 0x00003E68 File Offset: 0x00002268
+	// Token: 0x0600080F RID: 2063 RVA: 0x000902D0 File Offset: 0x0008E4D0
 	private static void _saveRMS(string filename, sbyte[] data)
 	{
-		if (Rms.status != 0)
+		bool flag = Rms.status != 0;
+		if (flag)
 		{
 			Debug.LogError("Cannot save RMS " + filename + " because current is saving " + Rms.filename);
-			return;
 		}
-		Rms.filename = filename;
-		Rms.data = data;
-		Rms.status = 2;
-		int i;
-		for (i = 0; i < 500; i++)
+		else
 		{
-			Thread.Sleep(5);
-			if (Rms.status == 0)
+			Rms.filename = filename;
+			Rms.data = data;
+			Rms.status = 2;
+			int i;
+			for (i = 0; i < 500; i++)
 			{
-				break;
+				Thread.Sleep(5);
+				bool flag2 = Rms.status == 0;
+				if (flag2)
+				{
+					break;
+				}
 			}
-		}
-		if (i == 500)
-		{
-			Debug.LogError("TOO LONG TO SAVE RMS " + filename);
+			bool flag3 = i == 500;
+			if (flag3)
+			{
+				Debug.LogError("TOO LONG TO SAVE RMS " + filename);
+			}
 		}
 	}
 
-	// Token: 0x0600008F RID: 143 RVA: 0x00003EF4 File Offset: 0x000022F4
+	// Token: 0x06000810 RID: 2064 RVA: 0x00090368 File Offset: 0x0008E568
 	private static sbyte[] _loadRMS(string filename)
 	{
-		if (Rms.status != 0)
+		bool flag = Rms.status != 0;
+		sbyte[] result;
+		if (flag)
 		{
 			Debug.LogError("Cannot load RMS " + filename + " because current is loading " + Rms.filename);
-			return null;
+			result = null;
 		}
-		Rms.filename = filename;
-		Rms.data = null;
-		Rms.status = 3;
-		int i;
-		for (i = 0; i < 500; i++)
+		else
 		{
-			Thread.Sleep(5);
-			if (Rms.status == 0)
+			Rms.filename = filename;
+			Rms.data = null;
+			Rms.status = 3;
+			int i;
+			for (i = 0; i < 500; i++)
 			{
-				break;
+				Thread.Sleep(5);
+				bool flag2 = Rms.status == 0;
+				if (flag2)
+				{
+					break;
+				}
 			}
+			bool flag3 = i == 500;
+			if (flag3)
+			{
+				Debug.LogError("TOO LONG TO LOAD RMS " + filename);
+			}
+			result = Rms.data;
 		}
-		if (i == 500)
-		{
-			Debug.LogError("TOO LONG TO LOAD RMS " + filename);
-		}
-		return Rms.data;
+		return result;
 	}
 
-	// Token: 0x06000090 RID: 144 RVA: 0x00003F84 File Offset: 0x00002384
+	// Token: 0x06000811 RID: 2065 RVA: 0x0009040C File Offset: 0x0008E60C
 	public static void update()
 	{
-		if (Rms.status == 2)
+		bool flag = Rms.status == 2;
+		if (flag)
 		{
 			Rms.status = 1;
 			Rms.__saveRMS(Rms.filename, Rms.data);
 			Rms.status = 0;
 		}
-		else if (Rms.status == 3)
+		else
 		{
-			Rms.status = 1;
-			Rms.data = Rms.__loadRMS(Rms.filename);
-			Rms.status = 0;
+			bool flag2 = Rms.status == 3;
+			if (flag2)
+			{
+				Rms.status = 1;
+				Rms.data = Rms.__loadRMS(Rms.filename);
+				Rms.status = 0;
+			}
 		}
 	}
 
-	// Token: 0x06000091 RID: 145 RVA: 0x00003FE4 File Offset: 0x000023E4
+	// Token: 0x06000812 RID: 2066 RVA: 0x00090470 File Offset: 0x0008E670
 	public static int loadRMSInt(string file)
 	{
 		sbyte[] array = Rms.loadRMS(file);
-		return (array != null) ? ((int)array[0]) : -1;
+		return (int)((array != null) ? array[0] : -1);
 	}
 
-	// Token: 0x06000092 RID: 146 RVA: 0x00004008 File Offset: 0x00002408
+	// Token: 0x06000813 RID: 2067 RVA: 0x00090494 File Offset: 0x0008E694
 	public static void saveRMSInt(string file, int x)
 	{
 		try
@@ -177,13 +209,13 @@ public class Rms
 		}
 	}
 
-	// Token: 0x06000093 RID: 147 RVA: 0x00004044 File Offset: 0x00002444
+	// Token: 0x06000814 RID: 2068 RVA: 0x000904D0 File Offset: 0x0008E6D0
 	public static string GetiPhoneDocumentsPath()
 	{
 		return Application.persistentDataPath;
 	}
 
-	// Token: 0x06000094 RID: 148 RVA: 0x0000404C File Offset: 0x0000244C
+	// Token: 0x06000815 RID: 2069 RVA: 0x000904E8 File Offset: 0x0008E6E8
 	private static void __saveRMS(string filename, sbyte[] data)
 	{
 		string text = Rms.GetiPhoneDocumentsPath() + "/" + filename;
@@ -194,7 +226,7 @@ public class Rms
 		Main.setBackupIcloud(text);
 	}
 
-	// Token: 0x06000095 RID: 149 RVA: 0x00004094 File Offset: 0x00002494
+	// Token: 0x06000816 RID: 2070 RVA: 0x00090538 File Offset: 0x0008E738
 	private static sbyte[] __loadRMS(string filename)
 	{
 		sbyte[] result;
@@ -214,7 +246,7 @@ public class Rms
 		return result;
 	}
 
-	// Token: 0x06000096 RID: 150 RVA: 0x00004104 File Offset: 0x00002504
+	// Token: 0x06000817 RID: 2071 RVA: 0x000905B0 File Offset: 0x0008E7B0
 	public static void clearAll()
 	{
 		Cout.LogError3("clean rms");
@@ -224,7 +256,7 @@ public class Rms
 		}
 	}
 
-	// Token: 0x06000097 RID: 151 RVA: 0x00004154 File Offset: 0x00002554
+	// Token: 0x06000818 RID: 2072 RVA: 0x00090600 File Offset: 0x0008E800
 	public static void DeleteStorage(string path)
 	{
 		try
@@ -236,14 +268,14 @@ public class Rms
 		}
 	}
 
-	// Token: 0x06000098 RID: 152 RVA: 0x00004194 File Offset: 0x00002594
+	// Token: 0x06000819 RID: 2073 RVA: 0x00090640 File Offset: 0x0008E840
 	public static string ByteArrayToString(byte[] ba)
 	{
 		string text = BitConverter.ToString(ba);
 		return text.Replace("-", string.Empty);
 	}
 
-	// Token: 0x06000099 RID: 153 RVA: 0x000041B8 File Offset: 0x000025B8
+	// Token: 0x0600081A RID: 2074 RVA: 0x0009066C File Offset: 0x0008E86C
 	public static byte[] StringToByteArray(string hex)
 	{
 		int length = hex.Length;
@@ -255,7 +287,7 @@ public class Rms
 		return array;
 	}
 
-	// Token: 0x0600009A RID: 154 RVA: 0x000041FC File Offset: 0x000025FC
+	// Token: 0x0600081B RID: 2075 RVA: 0x000906B8 File Offset: 0x0008E8B8
 	public static void deleteRecord(string name)
 	{
 		try
@@ -268,7 +300,7 @@ public class Rms
 		}
 	}
 
-	// Token: 0x0600009B RID: 155 RVA: 0x00004240 File Offset: 0x00002640
+	// Token: 0x0600081C RID: 2076 RVA: 0x000906FC File Offset: 0x0008E8FC
 	public static void clearRMS()
 	{
 		Rms.deleteRecord("data");
@@ -281,35 +313,41 @@ public class Rms
 		Rms.deleteRecord("itemVersion");
 	}
 
-	// Token: 0x0600009C RID: 156 RVA: 0x0000429D File Offset: 0x0000269D
+	// Token: 0x0600081D RID: 2077 RVA: 0x00090762 File Offset: 0x0008E962
 	public static void saveIP(string strID)
 	{
 		Rms.saveRMSString("NRIPlink", strID);
 	}
 
-	// Token: 0x0600009D RID: 157 RVA: 0x000042AC File Offset: 0x000026AC
+	// Token: 0x0600081E RID: 2078 RVA: 0x00090774 File Offset: 0x0008E974
 	public static string loadIP()
 	{
 		string text = Rms.loadRMSString("NRIPlink");
-		if (text == null)
+		bool flag = text == null;
+		string result;
+		if (flag)
 		{
-			return null;
+			result = null;
 		}
-		return text;
+		else
+		{
+			result = text;
+		}
+		return result;
 	}
 
-	// Token: 0x0400004D RID: 77
+	// Token: 0x0400108A RID: 4234
 	public static int status;
 
-	// Token: 0x0400004E RID: 78
+	// Token: 0x0400108B RID: 4235
 	public static sbyte[] data;
 
-	// Token: 0x0400004F RID: 79
+	// Token: 0x0400108C RID: 4236
 	public static string filename;
 
-	// Token: 0x04000050 RID: 80
+	// Token: 0x0400108D RID: 4237
 	private const int INTERVAL = 5;
 
-	// Token: 0x04000051 RID: 81
+	// Token: 0x0400108E RID: 4238
 	private const int MAXTIME = 500;
 }

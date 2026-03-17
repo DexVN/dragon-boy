@@ -1,81 +1,81 @@
 ﻿using System;
 
-// Token: 0x02000069 RID: 105
+// Token: 0x0200005B RID: 91
 public class Key
 {
-	// Token: 0x060003BA RID: 954 RVA: 0x0001EC3A File Offset: 0x0001D03A
+	// Token: 0x06000498 RID: 1176 RVA: 0x0005A504 File Offset: 0x00058704
 	public static void mapKeyPC()
 	{
-		if (!Main.isPC)
+		bool flag = !Main.isPC;
+		if (!flag)
 		{
-			return;
+			Key.UP = 15;
+			Key.DOWN = 16;
+			Key.LEFT = 17;
+			Key.RIGHT = 18;
 		}
-		Key.UP = 15;
-		Key.DOWN = 16;
-		Key.LEFT = 17;
-		Key.RIGHT = 18;
 	}
 
-	// Token: 0x04000635 RID: 1589
+	// Token: 0x040009D6 RID: 2518
 	public static int NUM0;
 
-	// Token: 0x04000636 RID: 1590
+	// Token: 0x040009D7 RID: 2519
 	public static int NUM1 = 1;
 
-	// Token: 0x04000637 RID: 1591
+	// Token: 0x040009D8 RID: 2520
 	public static int NUM2 = 2;
 
-	// Token: 0x04000638 RID: 1592
+	// Token: 0x040009D9 RID: 2521
 	public static int NUM3 = 3;
 
-	// Token: 0x04000639 RID: 1593
+	// Token: 0x040009DA RID: 2522
 	public static int NUM4 = 4;
 
-	// Token: 0x0400063A RID: 1594
+	// Token: 0x040009DB RID: 2523
 	public static int NUM5 = 5;
 
-	// Token: 0x0400063B RID: 1595
+	// Token: 0x040009DC RID: 2524
 	public static int NUM6 = 6;
 
-	// Token: 0x0400063C RID: 1596
+	// Token: 0x040009DD RID: 2525
 	public static int NUM7 = 7;
 
-	// Token: 0x0400063D RID: 1597
+	// Token: 0x040009DE RID: 2526
 	public static int NUM8 = 8;
 
-	// Token: 0x0400063E RID: 1598
+	// Token: 0x040009DF RID: 2527
 	public static int NUM9 = 9;
 
-	// Token: 0x0400063F RID: 1599
+	// Token: 0x040009E0 RID: 2528
 	public static int STAR = 10;
 
-	// Token: 0x04000640 RID: 1600
+	// Token: 0x040009E1 RID: 2529
 	public static int BOUND = 11;
 
-	// Token: 0x04000641 RID: 1601
+	// Token: 0x040009E2 RID: 2530
 	public static int UP = 12;
 
-	// Token: 0x04000642 RID: 1602
+	// Token: 0x040009E3 RID: 2531
 	public static int DOWN = 13;
 
-	// Token: 0x04000643 RID: 1603
+	// Token: 0x040009E4 RID: 2532
 	public static int LEFT = 14;
 
-	// Token: 0x04000644 RID: 1604
+	// Token: 0x040009E5 RID: 2533
 	public static int RIGHT = 15;
 
-	// Token: 0x04000645 RID: 1605
+	// Token: 0x040009E6 RID: 2534
 	public static int FIRE = 16;
 
-	// Token: 0x04000646 RID: 1606
+	// Token: 0x040009E7 RID: 2535
 	public static int LEFT_SOFTKEY = 17;
 
-	// Token: 0x04000647 RID: 1607
+	// Token: 0x040009E8 RID: 2536
 	public static int RIGHT_SOFTKEY = 18;
 
-	// Token: 0x04000648 RID: 1608
+	// Token: 0x040009E9 RID: 2537
 	public static int CLEAR = 19;
 
-	// Token: 0x04000649 RID: 1609
+	// Token: 0x040009EA RID: 2538
 	public static int BACK = 20;
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 
-// Token: 0x02000037 RID: 55
+// Token: 0x02000011 RID: 17
 public class ChatPopup : Effect2, IActionListener
 {
-	// Token: 0x06000248 RID: 584 RVA: 0x0001046A File Offset: 0x0000E86A
+	// Token: 0x0600014B RID: 331 RVA: 0x00019F7C File Offset: 0x0001817C
 	public static void addNextPopUpMultiLine(string strNext, Npc next)
 	{
 		ChatPopup.nextMultiChatPopUp = strNext;
 		ChatPopup.nextChar = next;
-		if (ChatPopup.currChatPopup == null)
+		bool flag = ChatPopup.currChatPopup == null;
+		if (flag)
 		{
 			ChatPopup.addChatPopupMultiLine(ChatPopup.nextMultiChatPopUp, 100000, ChatPopup.nextChar);
 			ChatPopup.nextMultiChatPopUp = null;
@@ -16,14 +17,15 @@ public class ChatPopup : Effect2, IActionListener
 		}
 	}
 
-	// Token: 0x06000249 RID: 585 RVA: 0x000104A4 File Offset: 0x0000E8A4
+	// Token: 0x0600014C RID: 332 RVA: 0x00019FC8 File Offset: 0x000181C8
 	public static void addBigMessage(string chat, int howLong, Npc c)
 	{
 		string[] array = new string[]
 		{
 			chat
 		};
-		if (c.charID != 5 && GameScr.info1.isDone)
+		bool flag = c.charID != 5 && GameScr.info1.isDone;
+		if (flag)
 		{
 			GameScr.info1.isUpdate = false;
 		}
@@ -40,7 +42,7 @@ public class ChatPopup : Effect2, IActionListener
 		SoundMn.gI().openDialog();
 	}
 
-	// Token: 0x0600024A RID: 586 RVA: 0x000105C0 File Offset: 0x0000E9C0
+	// Token: 0x0600014D RID: 333 RVA: 0x0001A0E8 File Offset: 0x000182E8
 	public static void addChatPopupMultiLine(string chat, int howLong, Npc c)
 	{
 		string[] array = Res.split(chat, "\n", 0);
@@ -49,7 +51,8 @@ public class ChatPopup : Effect2, IActionListener
 		ChatPopup.currChatPopup.currentLine = 0;
 		ChatPopup.currChatPopup.lines = array;
 		string caption = mResources.CONTINUE;
-		if (array.Length == 1)
+		bool flag = array.Length == 1;
+		if (flag)
 		{
 			caption = mResources.CLOSE;
 		}
@@ -59,21 +62,24 @@ public class ChatPopup : Effect2, IActionListener
 		SoundMn.gI().openDialog();
 	}
 
-	// Token: 0x0600024B RID: 587 RVA: 0x00010670 File Offset: 0x0000EA70
+	// Token: 0x0600014E RID: 334 RVA: 0x0001A19C File Offset: 0x0001839C
 	public static ChatPopup addChatPopupWithIcon(string chat, int howLong, Npc c, int idIcon)
 	{
 		ChatPopup.performDelay = 10;
 		ChatPopup chatPopup = new ChatPopup();
 		chatPopup.sayWidth = GameCanvas.w - 30 - ((!GameCanvas.menu.showMenu) ? 0 : GameCanvas.menu.menuX);
-		if (chatPopup.sayWidth > 320)
+		bool flag = chatPopup.sayWidth > 320;
+		if (flag)
 		{
 			chatPopup.sayWidth = 320;
 		}
-		if (chat.Length < 10)
+		bool flag2 = chat.Length < 10;
+		if (flag2)
 		{
 			chatPopup.sayWidth = 64;
 		}
-		if (GameCanvas.w == 128)
+		bool flag3 = GameCanvas.w == 128;
+		if (flag3)
 		{
 			chatPopup.sayWidth = 128;
 		}
@@ -83,18 +89,21 @@ public class ChatPopup : Effect2, IActionListener
 		chatPopup.iconID = idIcon;
 		global::Char.chatPopup = chatPopup;
 		chatPopup.ch = 15 - chatPopup.sayRun + chatPopup.says.Length * 12 + 10;
-		if (chatPopup.ch > GameCanvas.h - 80)
+		bool flag4 = chatPopup.ch > GameCanvas.h - 80;
+		if (flag4)
 		{
 			chatPopup.ch = GameCanvas.h - 80;
 		}
 		chatPopup.mH = 10;
-		if (GameCanvas.menu.showMenu)
+		bool showMenu = GameCanvas.menu.showMenu;
+		if (showMenu)
 		{
 			chatPopup.mH = 0;
 		}
 		Effect2.vEffect2.addElement(chatPopup);
 		ChatPopup.isHavePetNpc = false;
-		if (c != null && c.charID == 5)
+		bool flag5 = c != null && c.charID == 5;
+		if (flag5)
 		{
 			ChatPopup.isHavePetNpc = true;
 			GameScr.info1.addInfo(string.Empty, 1);
@@ -104,21 +113,24 @@ public class ChatPopup : Effect2, IActionListener
 		return chatPopup;
 	}
 
-	// Token: 0x0600024C RID: 588 RVA: 0x000107F0 File Offset: 0x0000EBF0
+	// Token: 0x0600014F RID: 335 RVA: 0x0001A334 File Offset: 0x00018534
 	public static ChatPopup addChatPopup(string chat, int howLong, Npc c)
 	{
 		ChatPopup.performDelay = 10;
 		ChatPopup chatPopup = new ChatPopup();
 		chatPopup.sayWidth = GameCanvas.w - 30 - ((!GameCanvas.menu.showMenu) ? 0 : GameCanvas.menu.menuX);
-		if (chatPopup.sayWidth > 320)
+		bool flag = chatPopup.sayWidth > 320;
+		if (flag)
 		{
 			chatPopup.sayWidth = 320;
 		}
-		if (chat.Length < 10)
+		bool flag2 = chat.Length < 10;
+		if (flag2)
 		{
 			chatPopup.sayWidth = 64;
 		}
-		if (GameCanvas.w == 128)
+		bool flag3 = GameCanvas.w == 128;
+		if (flag3)
 		{
 			chatPopup.sayWidth = 128;
 		}
@@ -127,18 +139,21 @@ public class ChatPopup : Effect2, IActionListener
 		chatPopup.c = c;
 		global::Char.chatPopup = chatPopup;
 		chatPopup.ch = 15 - chatPopup.sayRun + chatPopup.says.Length * 12 + 10;
-		if (chatPopup.ch > GameCanvas.h - 80)
+		bool flag4 = chatPopup.ch > GameCanvas.h - 80;
+		if (flag4)
 		{
 			chatPopup.ch = GameCanvas.h - 80;
 		}
 		chatPopup.mH = 10;
-		if (GameCanvas.menu.showMenu)
+		bool showMenu = GameCanvas.menu.showMenu;
+		if (showMenu)
 		{
 			chatPopup.mH = 0;
 		}
 		Effect2.vEffect2.addElement(chatPopup);
 		ChatPopup.isHavePetNpc = false;
-		if (c != null && c.charID == 5)
+		bool flag5 = c != null && c.charID == 5;
+		if (flag5)
 		{
 			ChatPopup.isHavePetNpc = true;
 			GameScr.info1.addInfo(string.Empty, 1);
@@ -147,10 +162,11 @@ public class ChatPopup : Effect2, IActionListener
 		return chatPopup;
 	}
 
-	// Token: 0x0600024D RID: 589 RVA: 0x00010958 File Offset: 0x0000ED58
+	// Token: 0x06000150 RID: 336 RVA: 0x0001A4B4 File Offset: 0x000186B4
 	public override void update()
 	{
-		if (ChatPopup.scr != null)
+		bool flag = ChatPopup.scr != null;
+		if (flag)
 		{
 			GameScr.info1.isUpdate = false;
 			ChatPopup.scr.updatecm();
@@ -159,7 +175,8 @@ public class ChatPopup : Effect2, IActionListener
 		{
 			GameScr.info1.isUpdate = true;
 		}
-		if (GameCanvas.menu.showMenu)
+		bool showMenu = GameCanvas.menu.showMenu;
+		if (showMenu)
 		{
 			this.strY = 0;
 			this.cx = GameCanvas.w / 2 - this.sayWidth / 2 - 1;
@@ -168,7 +185,8 @@ public class ChatPopup : Effect2, IActionListener
 		else
 		{
 			this.strY = 0;
-			if (GameScr.gI().right != null || GameScr.gI().left != null || GameScr.gI().center != null || this.cmdNextLine != null || this.cmdMsg1 != null)
+			bool flag2 = GameScr.gI().right != null || GameScr.gI().left != null || GameScr.gI().center != null || this.cmdNextLine != null || this.cmdMsg1 != null;
+			if (flag2)
 			{
 				this.strY = 5;
 				this.cx = GameCanvas.w / 2 - this.sayWidth / 2 - 1;
@@ -180,11 +198,13 @@ public class ChatPopup : Effect2, IActionListener
 				this.cy = GameCanvas.h - 5 - this.ch;
 			}
 		}
-		if (this.delay > 0)
+		bool flag3 = this.delay > 0;
+		if (flag3)
 		{
 			this.delay--;
 		}
-		if (ChatPopup.performDelay > 0)
+		bool flag4 = ChatPopup.performDelay > 0;
+		if (flag4)
 		{
 			ChatPopup.performDelay--;
 		}
@@ -193,239 +213,263 @@ public class ChatPopup : Effect2, IActionListener
 			GameScr.info1.info.time = 0;
 			for (int i = 0; i < GameScr.info1.info.infoWaitToShow.size(); i++)
 			{
-				if (((InfoItem)GameScr.info1.info.infoWaitToShow.elementAt(i)).speed != 70)
+				bool flag5 = ((InfoItem)GameScr.info1.info.infoWaitToShow.elementAt(i)).speed != 70;
+				if (flag5)
 				{
 					((InfoItem)GameScr.info1.info.infoWaitToShow.elementAt(i)).speed = 10;
 				}
 			}
 		}
-		if (this.sayRun > 1)
+		bool flag6 = this.sayRun > 1;
+		if (flag6)
 		{
 			this.sayRun--;
 		}
-		if ((this.c != null && global::Char.chatPopup != null && global::Char.chatPopup != this) || (this.c != null && global::Char.chatPopup == null) || this.delay <= 0)
+		bool flag7 = (this.c != null && global::Char.chatPopup != null && global::Char.chatPopup != this) || (this.c != null && global::Char.chatPopup == null) || this.delay <= 0;
+		if (flag7)
 		{
 			Effect2.vEffect2Outside.removeElement(this);
 			Effect2.vEffect2.removeElement(this);
 		}
 	}
 
-	// Token: 0x0600024E RID: 590 RVA: 0x00010BB0 File Offset: 0x0000EFB0
+	// Token: 0x06000151 RID: 337 RVA: 0x0001A72C File Offset: 0x0001892C
 	public override void paint(mGraphics g)
 	{
-		if (GameScr.gI().activeRongThan && GameScr.gI().isUseFreez)
+		bool flag = GameScr.gI().activeRongThan && GameScr.gI().isUseFreez;
+		if (!flag)
 		{
-			return;
-		}
-		GameCanvas.resetTrans(g);
-		int num = this.cx;
-		int num2 = this.cy;
-		int num3 = this.sayWidth + 2;
-		int num4 = this.ch;
-		if ((num <= 0 || num2 <= 0) && !GameCanvas.panel.isShow)
-		{
-			return;
-		}
-		PopUp.paintPopUp(g, num, num2, num3, num4, 16777215, false);
-		if (this.c != null)
-		{
-			int num5;
-			if (GameCanvas.gameTick % 10 > 2)
+			GameCanvas.resetTrans(g);
+			int num = this.cx;
+			int num2 = this.cy;
+			int num3 = this.sayWidth + 2;
+			int num4 = this.ch;
+			bool flag2 = (num <= 0 || num2 <= 0) && !GameCanvas.panel.isShow;
+			if (!flag2)
 			{
-				num5 = 0;
-			}
-			else
-			{
-				num5 = 1;
-			}
-			SmallImage.drawSmallImage(g, this.c.avatar, this.cx + 14, this.cy + num5, 0, StaticObj.BOTTOM_LEFT);
-		}
-		if (this.iconID != 0)
-		{
-			int num5;
-			if (GameCanvas.gameTick % 10 > 2)
-			{
-				num5 = 0;
-			}
-			else
-			{
-				num5 = 1;
-			}
-			SmallImage.drawSmallImage(g, this.iconID, this.cx + num3 / 2, this.cy + this.ch - 15 + num5, 0, StaticObj.VCENTER_HCENTER);
-		}
-		if (ChatPopup.scr != null)
-		{
-			g.setClip(num, num2, num3, num4 - 16);
-			g.translate(0, -ChatPopup.scr.cmy);
-		}
-		int tx = 0;
-		int ty = 0;
-		if (this.isClip)
-		{
-			tx = g.getTranslateX();
-			ty = g.getTranslateY();
-			g.setClip(num, num2 + 1, num3, num4 - 17);
-			g.translate(0, -ChatPopup.cmyText);
-		}
-		int num6 = -1;
-		for (int i = 0; i < this.says.Length; i++)
-		{
-			if (!this.says[i].StartsWith("--"))
-			{
-				mFont mFont = mFont.tahoma_7;
-				int num7 = 2;
-				string st = this.says[i];
-				int num8;
-				if (this.says[i].StartsWith("|"))
+				PopUp.paintPopUp(g, num, num2, num3, num4, 16777215, false);
+				bool flag3 = this.c != null;
+				if (flag3)
 				{
-					string[] array = Res.split(this.says[i], "|", 0);
-					if (array.Length == 3)
+					bool flag4 = GameCanvas.gameTick % 10 > 2;
+					int num5;
+					if (flag4)
 					{
-						st = array[2];
-					}
-					if (array.Length == 4)
-					{
-						st = array[3];
-						num7 = int.Parse(array[2]);
-					}
-					num8 = int.Parse(array[1]);
-					num6 = num8;
-				}
-				else
-				{
-					num8 = num6;
-				}
-				switch (num8 + 1)
-				{
-				case 0:
-					mFont = mFont.tahoma_7;
-					break;
-				case 1:
-					mFont = mFont.tahoma_7b_dark;
-					break;
-				case 2:
-					mFont = mFont.tahoma_7b_green;
-					break;
-				case 3:
-					mFont = mFont.tahoma_7b_blue;
-					break;
-				case 4:
-					mFont = mFont.tahoma_7_red;
-					break;
-				case 5:
-					mFont = mFont.tahoma_7_green;
-					break;
-				case 6:
-					mFont = mFont.tahoma_7_blue;
-					break;
-				case 8:
-					mFont = mFont.tahoma_7b_red;
-					break;
-				case 9:
-					mFont = mFont.tahoma_7b_yellow;
-					break;
-				}
-				IL_2FD:
-				if (this.says[i].StartsWith("<"))
-				{
-					string[] array2 = Res.split(this.says[i], "<", 0);
-					string[] array3 = Res.split(array2[1], ">", 1);
-					if (this.second == 0)
-					{
-						this.second = int.Parse(array3[1]);
+						num5 = 0;
 					}
 					else
 					{
-						ChatPopup.curr = mSystem.currentTimeMillis();
-						if (ChatPopup.curr - ChatPopup.last >= 1000L)
+						num5 = 1;
+					}
+					SmallImage.drawSmallImage(g, this.c.avatar, this.cx + 14, this.cy + num5, 0, StaticObj.BOTTOM_LEFT);
+				}
+				bool flag5 = this.iconID != 0;
+				if (flag5)
+				{
+					bool flag6 = GameCanvas.gameTick % 10 > 2;
+					int num6;
+					if (flag6)
+					{
+						num6 = 0;
+					}
+					else
+					{
+						num6 = 1;
+					}
+					SmallImage.drawSmallImage(g, this.iconID, this.cx + num3 / 2, this.cy + this.ch - 15 + num6, 0, StaticObj.VCENTER_HCENTER);
+				}
+				bool flag7 = ChatPopup.scr != null;
+				if (flag7)
+				{
+					g.setClip(num, num2, num3, num4 - 16);
+					g.translate(0, -ChatPopup.scr.cmy);
+				}
+				int tx = 0;
+				int ty = 0;
+				bool flag8 = this.isClip;
+				if (flag8)
+				{
+					tx = g.getTranslateX();
+					ty = g.getTranslateY();
+					g.setClip(num, num2 + 1, num3, num4 - 17);
+					g.translate(0, -ChatPopup.cmyText);
+				}
+				int num7 = -1;
+				for (int i = 0; i < this.says.Length; i++)
+				{
+					bool flag9 = !this.says[i].StartsWith("--");
+					if (flag9)
+					{
+						mFont mFont = mFont.tahoma_7;
+						int num8 = 2;
+						string st = this.says[i];
+						bool flag10 = this.says[i].StartsWith("|");
+						int num9;
+						if (flag10)
 						{
-							ChatPopup.last = ChatPopup.curr;
-							this.second--;
+							string[] array = Res.split(this.says[i], "|", 0);
+							bool flag11 = array.Length == 3;
+							if (flag11)
+							{
+								st = array[2];
+							}
+							bool flag12 = array.Length == 4;
+							if (flag12)
+							{
+								st = array[3];
+								num8 = int.Parse(array[2]);
+							}
+							num9 = int.Parse(array[1]);
+							num7 = num9;
+						}
+						else
+						{
+							num9 = num7;
+						}
+						switch (num9 + 1)
+						{
+						case 0:
+							mFont = mFont.tahoma_7;
+							break;
+						case 1:
+							mFont = mFont.tahoma_7b_dark;
+							break;
+						case 2:
+							mFont = mFont.tahoma_7b_green;
+							break;
+						case 3:
+							mFont = mFont.tahoma_7b_blue;
+							break;
+						case 4:
+							mFont = mFont.tahoma_7_red;
+							break;
+						case 5:
+							mFont = mFont.tahoma_7_green;
+							break;
+						case 6:
+							mFont = mFont.tahoma_7_blue;
+							break;
+						case 8:
+							mFont = mFont.tahoma_7b_red;
+							break;
+						case 9:
+							mFont = mFont.tahoma_7b_yellow;
+							break;
+						}
+						bool flag13 = this.says[i].StartsWith("<");
+						if (flag13)
+						{
+							string[] array2 = Res.split(this.says[i], "<", 0);
+							string[] array3 = Res.split(array2[1], ">", 1);
+							bool flag14 = this.second == 0;
+							if (flag14)
+							{
+								this.second = int.Parse(array3[1]);
+							}
+							else
+							{
+								ChatPopup.curr = mSystem.currentTimeMillis();
+								bool flag15 = ChatPopup.curr - ChatPopup.last >= 1000L;
+								if (flag15)
+								{
+									ChatPopup.last = ChatPopup.curr;
+									this.second--;
+								}
+							}
+							st = this.second.ToString() + " " + array3[2];
+							mFont.drawString(g, st, this.cx + this.sayWidth / 2, this.cy + this.sayRun + i * 12 - this.strY + 12, num8);
+						}
+						else
+						{
+							bool flag16 = num8 == 2;
+							if (flag16)
+							{
+								mFont.drawString(g, st, this.cx + this.sayWidth / 2, this.cy + this.sayRun + i * 12 - this.strY + 12, num8);
+							}
+							bool flag17 = num8 == 1;
+							if (flag17)
+							{
+								mFont.drawString(g, st, this.cx + this.sayWidth - 5, this.cy + this.sayRun + i * 12 - this.strY + 12, num8);
+							}
 						}
 					}
-					st = this.second + " " + array3[2];
-					mFont.drawString(g, st, this.cx + this.sayWidth / 2, this.cy + this.sayRun + i * 12 - this.strY + 12, num7);
-					goto IL_46B;
-				}
-				if (num7 == 2)
-				{
-					mFont.drawString(g, st, this.cx + this.sayWidth / 2, this.cy + this.sayRun + i * 12 - this.strY + 12, num7);
-				}
-				if (num7 == 1)
-				{
-					mFont.drawString(g, st, this.cx + this.sayWidth - 5, this.cy + this.sayRun + i * 12 - this.strY + 12, num7);
-					goto IL_46B;
-				}
-				goto IL_46B;
-				goto IL_2FD;
-			}
-			g.setColor(0);
-			g.fillRect(num + 10, this.cy + this.sayRun + i * 12 + 6, num3 - 20, 1);
-			IL_46B:;
-		}
-		if (this.isClip)
-		{
-			GameCanvas.resetTrans(g);
-			g.translate(tx, ty);
-		}
-		if ((int)this.maxStarSlot > 4)
-		{
-			this.nMaxslot_tren = ((int)this.maxStarSlot + 1) / 2;
-			this.nMaxslot_duoi = (int)this.maxStarSlot - this.nMaxslot_tren;
-			for (int j = 0; j < this.nMaxslot_tren; j++)
-			{
-				g.drawImage(Panel.imgMaxStar, num + num3 / 2 - this.nMaxslot_tren * 20 / 2 + j * 20 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 17, 3);
-			}
-			for (int k = 0; k < this.nMaxslot_duoi; k++)
-			{
-				g.drawImage(Panel.imgMaxStar, num + num3 / 2 - this.nMaxslot_duoi * 20 / 2 + k * 20 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 8, 3);
-			}
-			if ((int)this.starSlot > 0)
-			{
-				this.imgStar = Panel.imgStar;
-				if ((int)this.starSlot >= this.nMaxslot_tren)
-				{
-					this.nslot_duoi = (int)this.starSlot - this.nMaxslot_tren;
-					for (int l = 0; l < this.nMaxslot_tren; l++)
+					else
 					{
-						g.drawImage(this.imgStar, num + num3 / 2 - this.nMaxslot_tren * 20 / 2 + l * 20 + mGraphics.getImageWidth(this.imgStar), num2 + num4 - 17, 3);
+						g.setColor(0);
+						g.fillRect(num + 10, this.cy + this.sayRun + i * 12 + 6, num3 - 20, 1);
 					}
-					for (int m = 0; m < this.nslot_duoi; m++)
+				}
+				bool flag18 = this.isClip;
+				if (flag18)
+				{
+					GameCanvas.resetTrans(g);
+					g.translate(tx, ty);
+				}
+				bool flag19 = this.maxStarSlot > 4;
+				if (flag19)
+				{
+					this.nMaxslot_tren = (int)((this.maxStarSlot + 1) / 2);
+					this.nMaxslot_duoi = (int)this.maxStarSlot - this.nMaxslot_tren;
+					for (int j = 0; j < this.nMaxslot_tren; j++)
 					{
-						if (m + this.nMaxslot_tren >= ChatPopup.numSlot)
+						g.drawImage(Panel.imgMaxStar, num + num3 / 2 - this.nMaxslot_tren * 20 / 2 + j * 20 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 17, 3);
+					}
+					for (int k = 0; k < this.nMaxslot_duoi; k++)
+					{
+						g.drawImage(Panel.imgMaxStar, num + num3 / 2 - this.nMaxslot_duoi * 20 / 2 + k * 20 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 8, 3);
+					}
+					bool flag20 = this.starSlot > 0;
+					if (flag20)
+					{
+						this.imgStar = Panel.imgStar;
+						bool flag21 = (int)this.starSlot >= this.nMaxslot_tren;
+						if (flag21)
 						{
-							this.imgStar = Panel.imgStar8;
+							this.nslot_duoi = (int)this.starSlot - this.nMaxslot_tren;
+							for (int l = 0; l < this.nMaxslot_tren; l++)
+							{
+								g.drawImage(this.imgStar, num + num3 / 2 - this.nMaxslot_tren * 20 / 2 + l * 20 + mGraphics.getImageWidth(this.imgStar), num2 + num4 - 17, 3);
+							}
+							for (int m = 0; m < this.nslot_duoi; m++)
+							{
+								bool flag22 = m + this.nMaxslot_tren >= ChatPopup.numSlot;
+								if (flag22)
+								{
+									this.imgStar = Panel.imgStar8;
+								}
+								g.drawImage(this.imgStar, num + num3 / 2 - this.nMaxslot_duoi * 20 / 2 + m * 20 + mGraphics.getImageWidth(this.imgStar), num2 + num4 - 8, 3);
+							}
 						}
-						g.drawImage(this.imgStar, num + num3 / 2 - this.nMaxslot_duoi * 20 / 2 + m * 20 + mGraphics.getImageWidth(this.imgStar), num2 + num4 - 8, 3);
+						else
+						{
+							for (int n = 0; n < (int)this.starSlot; n++)
+							{
+								g.drawImage(this.imgStar, num + num3 / 2 - this.nMaxslot_tren * 20 / 2 + n * 20 + mGraphics.getImageWidth(this.imgStar), num2 + num4 - 17, 3);
+							}
+						}
 					}
 				}
 				else
 				{
-					for (int n = 0; n < (int)this.starSlot; n++)
+					for (int num10 = 0; num10 < (int)this.maxStarSlot; num10++)
 					{
-						g.drawImage(this.imgStar, num + num3 / 2 - this.nMaxslot_tren * 20 / 2 + n * 20 + mGraphics.getImageWidth(this.imgStar), num2 + num4 - 17, 3);
+						g.drawImage(Panel.imgMaxStar, num + num3 / 2 - (int)(this.maxStarSlot * 20 / 2) + num10 * 20 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 13, 3);
+					}
+					bool flag23 = this.starSlot > 0;
+					if (flag23)
+					{
+						for (int num11 = 0; num11 < (int)this.starSlot; num11++)
+						{
+							g.drawImage(Panel.imgStar, num + num3 / 2 - (int)(this.maxStarSlot * 20 / 2) + num11 * 20 + mGraphics.getImageWidth(Panel.imgStar), num2 + num4 - 13, 3);
+						}
 					}
 				}
+				this.paintCmd(g);
 			}
 		}
-		else
-		{
-			for (int num9 = 0; num9 < (int)this.maxStarSlot; num9++)
-			{
-				g.drawImage(Panel.imgMaxStar, num + num3 / 2 - (int)this.maxStarSlot * 20 / 2 + num9 * 20 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 13, 3);
-			}
-			if ((int)this.starSlot > 0)
-			{
-				for (int num10 = 0; num10 < (int)this.starSlot; num10++)
-				{
-					g.drawImage(Panel.imgStar, num + num3 / 2 - (int)this.maxStarSlot * 20 / 2 + num10 * 20 + mGraphics.getImageWidth(Panel.imgStar), num2 + num4 - 13, 3);
-				}
-			}
-		}
-		this.paintCmd(g);
 	}
 
-	// Token: 0x0600024F RID: 591 RVA: 0x00011338 File Offset: 0x0000F738
+	// Token: 0x06000152 RID: 338 RVA: 0x0001AF3C File Offset: 0x0001913C
 	public void paintRada(mGraphics g, int cmyText)
 	{
 		int num = this.cx;
@@ -435,143 +479,163 @@ public class ChatPopup : Effect2, IActionListener
 		int translateX = g.getTranslateX();
 		int translateY = g.getTranslateY();
 		g.translate(0, -cmyText);
-		if ((num <= 0 || num2 <= 0) && !GameCanvas.panel.isShow)
+		bool flag = (num <= 0 || num2 <= 0) && !GameCanvas.panel.isShow;
+		if (!flag)
 		{
-			return;
-		}
-		int num5 = -1;
-		for (int i = 0; i < this.says.Length; i++)
-		{
-			if (this.says[i].StartsWith("--"))
+			int num5 = -1;
+			for (int i = 0; i < this.says.Length; i++)
 			{
-				g.setColor(16777215);
-				g.fillRect(num + 10, this.cy + this.sayRun + i * 12 - 6, num3 - 20, 1);
-			}
-			else
-			{
-				mFont mFont = mFont.tahoma_7_white;
-				int num6 = 2;
-				string st = this.says[i];
-				int num7;
-				if (this.says[i].StartsWith("|"))
+				bool flag2 = this.says[i].StartsWith("--");
+				if (flag2)
 				{
-					string[] array = Res.split(this.says[i], "|", 0);
-					if (array.Length == 3)
-					{
-						st = array[2];
-					}
-					if (array.Length == 4)
-					{
-						st = array[3];
-						num6 = int.Parse(array[2]);
-					}
-					num7 = int.Parse(array[1]);
-					num5 = num7;
+					g.setColor(16777215);
+					g.fillRect(num + 10, this.cy + this.sayRun + i * 12 - 6, num3 - 20, 1);
 				}
 				else
 				{
-					num7 = num5;
-				}
-				switch (num7 + 1)
-				{
-				case 0:
-					mFont = mFont.tahoma_7_white;
-					break;
-				case 1:
-					mFont = mFont.tahoma_7b_white;
-					break;
-				case 2:
-					mFont = mFont.tahoma_7b_green;
-					break;
-				case 3:
-					mFont = mFont.tahoma_7b_red;
-					break;
-				}
-				if (this.says[i].StartsWith("<"))
-				{
-					string[] array2 = Res.split(this.says[i], "<", 0);
-					string[] array3 = Res.split(array2[1], ">", 1);
-					if (this.second == 0)
+					mFont mFont = mFont.tahoma_7_white;
+					int num6 = 2;
+					string st = this.says[i];
+					bool flag3 = this.says[i].StartsWith("|");
+					int num7;
+					if (flag3)
 					{
-						this.second = int.Parse(array3[1]);
+						string[] array = Res.split(this.says[i], "|", 0);
+						bool flag4 = array.Length == 3;
+						if (flag4)
+						{
+							st = array[2];
+						}
+						bool flag5 = array.Length == 4;
+						if (flag5)
+						{
+							st = array[3];
+							num6 = int.Parse(array[2]);
+						}
+						num7 = int.Parse(array[1]);
+						num5 = num7;
 					}
 					else
 					{
-						ChatPopup.curr = mSystem.currentTimeMillis();
-						if (ChatPopup.curr - ChatPopup.last >= 1000L)
-						{
-							ChatPopup.last = ChatPopup.curr;
-							this.second--;
-						}
+						num7 = num5;
 					}
-					st = this.second + " " + array3[2];
-					mFont.drawString(g, st, this.cx + this.sayWidth / 2, this.cy + this.sayRun + i * 12 - this.strY, num6);
-				}
-				else
-				{
-					if (num6 == 2)
+					switch (num7 + 1)
 					{
+					case 0:
+						mFont = mFont.tahoma_7_white;
+						break;
+					case 1:
+						mFont = mFont.tahoma_7b_white;
+						break;
+					case 2:
+						mFont = mFont.tahoma_7b_green;
+						break;
+					case 3:
+						mFont = mFont.tahoma_7b_red;
+						break;
+					}
+					bool flag6 = this.says[i].StartsWith("<");
+					if (flag6)
+					{
+						string[] array2 = Res.split(this.says[i], "<", 0);
+						string[] array3 = Res.split(array2[1], ">", 1);
+						bool flag7 = this.second == 0;
+						if (flag7)
+						{
+							this.second = int.Parse(array3[1]);
+						}
+						else
+						{
+							ChatPopup.curr = mSystem.currentTimeMillis();
+							bool flag8 = ChatPopup.curr - ChatPopup.last >= 1000L;
+							if (flag8)
+							{
+								ChatPopup.last = ChatPopup.curr;
+								this.second--;
+							}
+						}
+						st = this.second.ToString() + " " + array3[2];
 						mFont.drawString(g, st, this.cx + this.sayWidth / 2, this.cy + this.sayRun + i * 12 - this.strY, num6);
 					}
-					if (num6 == 1)
+					else
 					{
-						mFont.drawString(g, st, this.cx + this.sayWidth - 5, this.cy + this.sayRun + i * 12 - this.strY, num6);
+						bool flag9 = num6 == 2;
+						if (flag9)
+						{
+							mFont.drawString(g, st, this.cx + this.sayWidth / 2, this.cy + this.sayRun + i * 12 - this.strY, num6);
+						}
+						bool flag10 = num6 == 1;
+						if (flag10)
+						{
+							mFont.drawString(g, st, this.cx + this.sayWidth - 5, this.cy + this.sayRun + i * 12 - this.strY, num6);
+						}
 					}
 				}
 			}
+			GameCanvas.resetTrans(g);
+			g.translate(translateX, translateY);
 		}
-		GameCanvas.resetTrans(g);
-		g.translate(translateX, translateY);
 	}
 
-	// Token: 0x06000250 RID: 592 RVA: 0x0001165B File Offset: 0x0000FA5B
+	// Token: 0x06000153 RID: 339 RVA: 0x0001B294 File Offset: 0x00019494
 	private void doKeyText(int type)
 	{
 		ChatPopup.cmyText += 12 * type;
-		if (ChatPopup.cmyText < 0)
+		bool flag = ChatPopup.cmyText < 0;
+		if (flag)
 		{
 			ChatPopup.cmyText = 0;
 		}
-		if (ChatPopup.cmyText > this.lim)
+		bool flag2 = ChatPopup.cmyText > this.lim;
+		if (flag2)
 		{
 			ChatPopup.cmyText = this.lim;
 		}
 	}
 
-	// Token: 0x06000251 RID: 593 RVA: 0x00011698 File Offset: 0x0000FA98
+	// Token: 0x06000154 RID: 340 RVA: 0x0001B2E4 File Offset: 0x000194E4
 	public void updateKey()
 	{
-		if (this.isClip)
+		bool flag = this.isClip;
+		if (flag)
 		{
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22])
+			bool flag2 = GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22];
+			if (flag2)
 			{
 				GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] = false;
 				this.doKeyText(1);
 			}
-			if (GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21])
+			bool flag3 = GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21];
+			if (flag3)
 			{
 				GameCanvas.keyPressed[(!Main.isPC) ? 2 : 21] = false;
 				this.doKeyText(-1);
 			}
-			if (GameCanvas.isPointerHoldIn(this.cx, 0, this.sayWidth + 2, this.ch))
+			bool flag4 = GameCanvas.isPointerHoldIn(this.cx, 0, this.sayWidth + 2, this.ch);
+			if (flag4)
 			{
-				if (GameCanvas.isPointerMove)
+				bool isPointerMove = GameCanvas.isPointerMove;
+				if (isPointerMove)
 				{
-					if (this.pyy == 0)
+					bool flag5 = this.pyy == 0;
+					if (flag5)
 					{
 						this.pyy = GameCanvas.py;
 					}
 					this.pxx = this.pyy - GameCanvas.py;
-					if (this.pxx != 0)
+					bool flag6 = this.pxx != 0;
+					if (flag6)
 					{
 						ChatPopup.cmyText += this.pxx;
 						this.pyy = GameCanvas.py;
 					}
-					if (ChatPopup.cmyText < 0)
+					bool flag7 = ChatPopup.cmyText < 0;
+					if (flag7)
 					{
 						ChatPopup.cmyText = 0;
 					}
-					if (ChatPopup.cmyText > this.lim)
+					bool flag8 = ChatPopup.cmyText > this.lim;
+					if (flag8)
 					{
 						ChatPopup.cmyText = this.lim;
 					}
@@ -583,90 +647,111 @@ public class ChatPopup : Effect2, IActionListener
 				}
 			}
 		}
-		if (ChatPopup.scr != null)
+		bool flag9 = ChatPopup.scr != null;
+		if (flag9)
 		{
-			if (GameCanvas.isTouch)
+			bool isTouch = GameCanvas.isTouch;
+			if (isTouch)
 			{
 				ChatPopup.scr.updateKey();
 			}
-			if (GameCanvas.keyHold[(!Main.isPC) ? 2 : 21])
+			bool flag10 = GameCanvas.keyHold[(!Main.isPC) ? 2 : 21];
+			if (flag10)
 			{
 				ChatPopup.scr.cmtoY -= 12;
-				if (ChatPopup.scr.cmtoY < 0)
+				bool flag11 = ChatPopup.scr.cmtoY < 0;
+				if (flag11)
 				{
 					ChatPopup.scr.cmtoY = 0;
 				}
 			}
-			if (GameCanvas.keyHold[(!Main.isPC) ? 8 : 22])
+			bool flag12 = GameCanvas.keyHold[(!Main.isPC) ? 8 : 22];
+			if (flag12)
 			{
 				GameCanvas.keyPressed[(!Main.isPC) ? 8 : 22] = false;
 				ChatPopup.scr.cmtoY += 12;
-				if (ChatPopup.scr.cmtoY > ChatPopup.scr.cmyLim)
+				bool flag13 = ChatPopup.scr.cmtoY > ChatPopup.scr.cmyLim;
+				if (flag13)
 				{
 					ChatPopup.scr.cmtoY = ChatPopup.scr.cmyLim;
 				}
 			}
 		}
-		if (GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.center))
+		bool flag14 = GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(GameCanvas.currentScreen.center);
+		if (flag14)
 		{
 			GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
 			mScreen.keyTouch = -1;
-			if (this.cmdNextLine != null)
+			bool flag15 = this.cmdNextLine != null;
+			if (flag15)
 			{
 				this.cmdNextLine.performAction();
 			}
-			else if (this.cmdMsg1 != null)
+			else
 			{
+				bool flag16 = this.cmdMsg1 != null;
+				if (flag16)
+				{
+					this.cmdMsg1.performAction();
+				}
+				else
+				{
+					bool flag17 = this.cmdMsg2 != null;
+					if (flag17)
+					{
+						this.cmdMsg2.performAction();
+					}
+				}
+			}
+		}
+		bool flag18 = ChatPopup.scr != null && ChatPopup.scr.pointerIsDowning;
+		if (!flag18)
+		{
+			bool flag19 = this.cmdMsg1 != null && (GameCanvas.keyPressed[12] || GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(this.cmdMsg1));
+			if (flag19)
+			{
+				GameCanvas.keyPressed[12] = false;
+				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+				GameCanvas.isPointerClick = false;
+				GameCanvas.isPointerJustRelease = false;
 				this.cmdMsg1.performAction();
+				mScreen.keyTouch = -1;
 			}
-			else if (this.cmdMsg2 != null)
+			bool flag20 = this.cmdMsg2 != null && (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(this.cmdMsg2));
+			if (flag20)
 			{
+				GameCanvas.keyPressed[13] = false;
+				GameCanvas.isPointerClick = false;
+				GameCanvas.isPointerJustRelease = false;
 				this.cmdMsg2.performAction();
+				mScreen.keyTouch = -1;
 			}
-		}
-		if (ChatPopup.scr != null && ChatPopup.scr.pointerIsDowning)
-		{
-			return;
-		}
-		if (this.cmdMsg1 != null && (GameCanvas.keyPressed[12] || GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] || mScreen.getCmdPointerLast(this.cmdMsg1)))
-		{
-			GameCanvas.keyPressed[12] = false;
-			GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
-			GameCanvas.isPointerClick = false;
-			GameCanvas.isPointerJustRelease = false;
-			this.cmdMsg1.performAction();
-			mScreen.keyTouch = -1;
-		}
-		if (this.cmdMsg2 != null && (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(this.cmdMsg2)))
-		{
-			GameCanvas.keyPressed[13] = false;
-			GameCanvas.isPointerClick = false;
-			GameCanvas.isPointerJustRelease = false;
-			this.cmdMsg2.performAction();
-			mScreen.keyTouch = -1;
 		}
 	}
 
-	// Token: 0x06000252 RID: 594 RVA: 0x00011A4C File Offset: 0x0000FE4C
+	// Token: 0x06000155 RID: 341 RVA: 0x0001B6B4 File Offset: 0x000198B4
 	public void paintCmd(mGraphics g)
 	{
 		g.translate(-g.getTranslateX(), -g.getTranslateY());
 		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
 		GameCanvas.paintz.paintTabSoft(g);
-		if (this.cmdNextLine != null)
+		bool flag = this.cmdNextLine != null;
+		if (flag)
 		{
 			GameCanvas.paintz.paintCmdBar(g, null, this.cmdNextLine, null);
 		}
-		if (this.cmdMsg1 != null)
+		bool flag2 = this.cmdMsg1 != null;
+		if (flag2)
 		{
 			GameCanvas.paintz.paintCmdBar(g, this.cmdMsg1, null, this.cmdMsg2);
 		}
 	}
 
-	// Token: 0x06000253 RID: 595 RVA: 0x00011ACC File Offset: 0x0000FECC
+	// Token: 0x06000156 RID: 342 RVA: 0x0001B744 File Offset: 0x00019944
 	public void perform(int idAction, object p)
 	{
-		if (idAction == 1000)
+		bool flag = idAction == 1000;
+		if (flag)
 		{
 			try
 			{
@@ -675,7 +760,8 @@ public class ChatPopup : Effect2, IActionListener
 			catch (Exception ex)
 			{
 			}
-			if (!Main.isPC)
+			bool flag2 = !Main.isPC;
+			if (flag2)
 			{
 				GameMidlet.instance.notifyDestroyed();
 			}
@@ -685,189 +771,201 @@ public class ChatPopup : Effect2, IActionListener
 			}
 			GameCanvas.endDlg();
 		}
-		if (idAction == 1001)
+		bool flag3 = idAction == 1001;
+		if (flag3)
 		{
 			ChatPopup.scr = null;
 			global::Char.chatPopup = null;
 			ChatPopup.serverChatPopUp = null;
 			GameScr.info1.isUpdate = true;
 			global::Char.isLockKey = false;
-			if (ChatPopup.isHavePetNpc)
+			bool flag4 = ChatPopup.isHavePetNpc;
+			if (flag4)
 			{
 				GameScr.info1.info.time = 0;
 				GameScr.info1.info.info.speed = 10;
 			}
 		}
-		if (idAction == 8000)
+		bool flag5 = idAction == 8000;
+		if (flag5)
 		{
-			if (ChatPopup.performDelay > 0)
+			bool flag6 = ChatPopup.performDelay > 0;
+			if (!flag6)
 			{
-				return;
-			}
-			int num = ChatPopup.currChatPopup.currentLine;
-			num++;
-			if (num >= ChatPopup.currChatPopup.lines.Length)
-			{
-				global::Char.chatPopup = null;
-				ChatPopup.currChatPopup = null;
-				GameScr.info1.isUpdate = true;
-				global::Char.isLockKey = false;
-				if (ChatPopup.nextMultiChatPopUp != null)
+				int num = ChatPopup.currChatPopup.currentLine;
+				num++;
+				bool flag7 = num >= ChatPopup.currChatPopup.lines.Length;
+				if (flag7)
 				{
-					ChatPopup.addChatPopupMultiLine(ChatPopup.nextMultiChatPopUp, 100000, ChatPopup.nextChar);
-					ChatPopup.nextMultiChatPopUp = null;
-					ChatPopup.nextChar = null;
-				}
-				else if (ChatPopup.isHavePetNpc)
-				{
-					GameScr.info1.info.time = 0;
-					for (int i = 0; i < GameScr.info1.info.infoWaitToShow.size(); i++)
+					global::Char.chatPopup = null;
+					ChatPopup.currChatPopup = null;
+					GameScr.info1.isUpdate = true;
+					global::Char.isLockKey = false;
+					bool flag8 = ChatPopup.nextMultiChatPopUp != null;
+					if (flag8)
 					{
-						if (((InfoItem)GameScr.info1.info.infoWaitToShow.elementAt(i)).speed == 10000000)
+						ChatPopup.addChatPopupMultiLine(ChatPopup.nextMultiChatPopUp, 100000, ChatPopup.nextChar);
+						ChatPopup.nextMultiChatPopUp = null;
+						ChatPopup.nextChar = null;
+					}
+					else
+					{
+						bool flag9 = ChatPopup.isHavePetNpc;
+						if (flag9)
 						{
-							((InfoItem)GameScr.info1.info.infoWaitToShow.elementAt(i)).speed = 10;
+							GameScr.info1.info.time = 0;
+							for (int i = 0; i < GameScr.info1.info.infoWaitToShow.size(); i++)
+							{
+								bool flag10 = ((InfoItem)GameScr.info1.info.infoWaitToShow.elementAt(i)).speed == 10000000;
+								if (flag10)
+								{
+									((InfoItem)GameScr.info1.info.infoWaitToShow.elementAt(i)).speed = 10;
+								}
+							}
 						}
 					}
 				}
-				return;
+				else
+				{
+					ChatPopup chatPopup = ChatPopup.addChatPopup(ChatPopup.currChatPopup.lines[num], ChatPopup.currChatPopup.delay, ChatPopup.currChatPopup.c);
+					chatPopup.currentLine = num;
+					chatPopup.lines = ChatPopup.currChatPopup.lines;
+					chatPopup.cmdNextLine = ChatPopup.currChatPopup.cmdNextLine;
+					ChatPopup.currChatPopup = chatPopup;
+				}
 			}
-			ChatPopup chatPopup = ChatPopup.addChatPopup(ChatPopup.currChatPopup.lines[num], ChatPopup.currChatPopup.delay, ChatPopup.currChatPopup.c);
-			chatPopup.currentLine = num;
-			chatPopup.lines = ChatPopup.currChatPopup.lines;
-			chatPopup.cmdNextLine = ChatPopup.currChatPopup.cmdNextLine;
-			ChatPopup.currChatPopup = chatPopup;
 		}
 	}
 
-	// Token: 0x04000262 RID: 610
+	// Token: 0x040002A5 RID: 677
 	public int sayWidth = 100;
 
-	// Token: 0x04000263 RID: 611
+	// Token: 0x040002A6 RID: 678
 	public int delay;
 
-	// Token: 0x04000264 RID: 612
+	// Token: 0x040002A7 RID: 679
 	public int sayRun;
 
-	// Token: 0x04000265 RID: 613
+	// Token: 0x040002A8 RID: 680
 	public string[] says;
 
-	// Token: 0x04000266 RID: 614
+	// Token: 0x040002A9 RID: 681
 	public int cx;
 
-	// Token: 0x04000267 RID: 615
+	// Token: 0x040002AA RID: 682
 	public int cy;
 
-	// Token: 0x04000268 RID: 616
+	// Token: 0x040002AB RID: 683
 	public int ch;
 
-	// Token: 0x04000269 RID: 617
+	// Token: 0x040002AC RID: 684
 	public int cmx;
 
-	// Token: 0x0400026A RID: 618
+	// Token: 0x040002AD RID: 685
 	public int cmy;
 
-	// Token: 0x0400026B RID: 619
+	// Token: 0x040002AE RID: 686
 	public int lim;
 
-	// Token: 0x0400026C RID: 620
+	// Token: 0x040002AF RID: 687
 	public Npc c;
 
-	// Token: 0x0400026D RID: 621
+	// Token: 0x040002B0 RID: 688
 	private bool outSide;
 
-	// Token: 0x0400026E RID: 622
+	// Token: 0x040002B1 RID: 689
 	public static long curr;
 
-	// Token: 0x0400026F RID: 623
+	// Token: 0x040002B2 RID: 690
 	public static long last;
 
-	// Token: 0x04000270 RID: 624
+	// Token: 0x040002B3 RID: 691
 	private int currentLine;
 
-	// Token: 0x04000271 RID: 625
+	// Token: 0x040002B4 RID: 692
 	private string[] lines;
 
-	// Token: 0x04000272 RID: 626
+	// Token: 0x040002B5 RID: 693
 	public Command cmdNextLine;
 
-	// Token: 0x04000273 RID: 627
+	// Token: 0x040002B6 RID: 694
 	public Command cmdMsg1;
 
-	// Token: 0x04000274 RID: 628
+	// Token: 0x040002B7 RID: 695
 	public Command cmdMsg2;
 
-	// Token: 0x04000275 RID: 629
+	// Token: 0x040002B8 RID: 696
 	public static ChatPopup currChatPopup;
 
-	// Token: 0x04000276 RID: 630
+	// Token: 0x040002B9 RID: 697
 	public static ChatPopup serverChatPopUp;
 
-	// Token: 0x04000277 RID: 631
+	// Token: 0x040002BA RID: 698
 	public static string nextMultiChatPopUp;
 
-	// Token: 0x04000278 RID: 632
+	// Token: 0x040002BB RID: 699
 	public static Npc nextChar;
 
-	// Token: 0x04000279 RID: 633
+	// Token: 0x040002BC RID: 700
 	public bool isShopDetail;
 
-	// Token: 0x0400027A RID: 634
+	// Token: 0x040002BD RID: 701
 	public sbyte starSlot;
 
-	// Token: 0x0400027B RID: 635
+	// Token: 0x040002BE RID: 702
 	public sbyte maxStarSlot;
 
-	// Token: 0x0400027C RID: 636
+	// Token: 0x040002BF RID: 703
 	public static Scroll scr;
 
-	// Token: 0x0400027D RID: 637
+	// Token: 0x040002C0 RID: 704
 	public static bool isHavePetNpc;
 
-	// Token: 0x0400027E RID: 638
+	// Token: 0x040002C1 RID: 705
 	public int mH;
 
-	// Token: 0x0400027F RID: 639
+	// Token: 0x040002C2 RID: 706
 	public static int performDelay;
 
-	// Token: 0x04000280 RID: 640
+	// Token: 0x040002C3 RID: 707
 	public int dx;
 
-	// Token: 0x04000281 RID: 641
+	// Token: 0x040002C4 RID: 708
 	public int dy;
 
-	// Token: 0x04000282 RID: 642
+	// Token: 0x040002C5 RID: 709
 	public int second;
 
-	// Token: 0x04000283 RID: 643
+	// Token: 0x040002C6 RID: 710
 	public static int numSlot = 7;
 
-	// Token: 0x04000284 RID: 644
+	// Token: 0x040002C7 RID: 711
 	private int nMaxslot_duoi;
 
-	// Token: 0x04000285 RID: 645
+	// Token: 0x040002C8 RID: 712
 	private int nMaxslot_tren;
 
-	// Token: 0x04000286 RID: 646
+	// Token: 0x040002C9 RID: 713
 	private int nslot_duoi;
 
-	// Token: 0x04000287 RID: 647
+	// Token: 0x040002CA RID: 714
 	private Image imgStar;
 
-	// Token: 0x04000288 RID: 648
+	// Token: 0x040002CB RID: 715
 	public int strY;
 
-	// Token: 0x04000289 RID: 649
+	// Token: 0x040002CC RID: 716
 	private int iconID;
 
-	// Token: 0x0400028A RID: 650
+	// Token: 0x040002CD RID: 717
 	public bool isClip;
 
-	// Token: 0x0400028B RID: 651
+	// Token: 0x040002CE RID: 718
 	public static int cmyText;
 
-	// Token: 0x0400028C RID: 652
+	// Token: 0x040002CF RID: 719
 	private int pxx;
 
-	// Token: 0x0400028D RID: 653
+	// Token: 0x040002D0 RID: 720
 	private int pyy;
 }

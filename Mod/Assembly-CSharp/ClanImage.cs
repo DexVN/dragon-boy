@@ -1,22 +1,23 @@
 ﻿using System;
 
-// Token: 0x02000031 RID: 49
+// Token: 0x02000015 RID: 21
 public class ClanImage
 {
-	// Token: 0x0600021F RID: 543 RVA: 0x0000E054 File Offset: 0x0000C454
+	// Token: 0x0600016F RID: 367 RVA: 0x0001CBF6 File Offset: 0x0001ADF6
 	public static void addClanImage(ClanImage cm)
 	{
 		Service.gI().clanImage((sbyte)cm.ID);
 		ClanImage.vClanImage.addElement(cm);
 	}
 
-	// Token: 0x06000220 RID: 544 RVA: 0x0000E074 File Offset: 0x0000C474
+	// Token: 0x06000170 RID: 368 RVA: 0x0001CC18 File Offset: 0x0001AE18
 	public static ClanImage getClanImage(short ID)
 	{
 		for (int i = 0; i < ClanImage.vClanImage.size(); i++)
 		{
 			ClanImage clanImage = (ClanImage)ClanImage.vClanImage.elementAt(i);
-			if (clanImage.ID == (int)ID)
+			bool flag = clanImage.ID == (int)ID;
+			if (flag)
 			{
 				return clanImage;
 			}
@@ -24,13 +25,14 @@ public class ClanImage
 		return null;
 	}
 
-	// Token: 0x06000221 RID: 545 RVA: 0x0000E0BC File Offset: 0x0000C4BC
+	// Token: 0x06000171 RID: 369 RVA: 0x0001CC6C File Offset: 0x0001AE6C
 	public static bool isExistClanImage(int ID)
 	{
 		for (int i = 0; i < ClanImage.vClanImage.size(); i++)
 		{
 			ClanImage clanImage = (ClanImage)ClanImage.vClanImage.elementAt(i);
-			if (clanImage.ID == ID)
+			bool flag = clanImage.ID == ID;
+			if (flag)
 			{
 				return true;
 			}
@@ -38,24 +40,24 @@ public class ClanImage
 		return false;
 	}
 
-	// Token: 0x040001F5 RID: 501
+	// Token: 0x040002FA RID: 762
 	public int ID;
 
-	// Token: 0x040001F6 RID: 502
+	// Token: 0x040002FB RID: 763
 	public string name;
 
-	// Token: 0x040001F7 RID: 503
+	// Token: 0x040002FC RID: 764
 	public short[] idImage;
 
-	// Token: 0x040001F8 RID: 504
+	// Token: 0x040002FD RID: 765
 	public int xu;
 
-	// Token: 0x040001F9 RID: 505
+	// Token: 0x040002FE RID: 766
 	public int luong;
 
-	// Token: 0x040001FA RID: 506
+	// Token: 0x040002FF RID: 767
 	public static MyVector vClanImage = new MyVector();
 
-	// Token: 0x040001FB RID: 507
+	// Token: 0x04000300 RID: 768
 	public static MyHashTable idImages = new MyHashTable();
 }

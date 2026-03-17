@@ -2,14 +2,15 @@
 
 namespace Assets.src.g
 {
-	// Token: 0x020000A4 RID: 164
+	// Token: 0x020000BE RID: 190
 	public class ClientInput : mScreen, IActionListener
 	{
-		// Token: 0x060006D6 RID: 1750 RVA: 0x0005D500 File Offset: 0x0005B900
+		// Token: 0x06000A4B RID: 2635 RVA: 0x000A8EB0 File Offset: 0x000A70B0
 		private void init(string t)
 		{
 			this.w = GameCanvas.w - 20;
-			if (this.w > 320)
+			bool flag = this.w > 320;
+			if (flag)
 			{
 				this.w = 320;
 			}
@@ -27,7 +28,8 @@ namespace Assets.src.g
 				this.tf[i].y = this.y + 35 + (this.strPaint.Length - 1) * 20 + i * 35;
 				this.tf[i].width = this.w - 20;
 				this.tf[i].height = mScreen.ITEM_HEIGHT + 2;
-				if (GameCanvas.isTouch)
+				bool isTouch = GameCanvas.isTouch;
+				if (isTouch)
 				{
 					this.tf[0].isFocus = false;
 				}
@@ -35,14 +37,16 @@ namespace Assets.src.g
 				{
 					this.tf[0].isFocus = true;
 				}
-				if (!GameCanvas.isTouch)
+				bool flag2 = !GameCanvas.isTouch;
+				if (flag2)
 				{
 					this.right = this.tf[0].cmdClear;
 				}
 			}
 			this.left = new Command(mResources.CLOSE, this, 1, null);
 			this.center = new Command(mResources.OK, this, 2, null);
-			if (GameCanvas.isTouch)
+			bool isTouch2 = GameCanvas.isTouch;
+			if (isTouch2)
 			{
 				this.center.x = GameCanvas.w / 2 + 18;
 				this.left.x = GameCanvas.w / 2 - 85;
@@ -50,24 +54,25 @@ namespace Assets.src.g
 			}
 		}
 
-		// Token: 0x060006D7 RID: 1751 RVA: 0x0005D735 File Offset: 0x0005BB35
+		// Token: 0x06000A4C RID: 2636 RVA: 0x000A90FC File Offset: 0x000A72FC
 		public static ClientInput gI()
 		{
-			if (ClientInput.instance == null)
+			bool flag = ClientInput.instance == null;
+			if (flag)
 			{
 				ClientInput.instance = new ClientInput();
 			}
 			return ClientInput.instance;
 		}
 
-		// Token: 0x060006D8 RID: 1752 RVA: 0x0005D750 File Offset: 0x0005BB50
+		// Token: 0x06000A4D RID: 2637 RVA: 0x000A912B File Offset: 0x000A732B
 		public override void switchToMe()
 		{
 			this.focus = 0;
 			base.switchToMe();
 		}
 
-		// Token: 0x060006D9 RID: 1753 RVA: 0x0005D75F File Offset: 0x0005BB5F
+		// Token: 0x06000A4E RID: 2638 RVA: 0x000A913C File Offset: 0x000A733C
 		public void setInput(int type, string title)
 		{
 			this.nTf = type;
@@ -75,7 +80,7 @@ namespace Assets.src.g
 			this.switchToMe();
 		}
 
-		// Token: 0x060006DA RID: 1754 RVA: 0x0005D778 File Offset: 0x0005BB78
+		// Token: 0x06000A4F RID: 2639 RVA: 0x000A9158 File Offset: 0x000A7358
 		public override void paint(mGraphics g)
 		{
 			GameScr.gI().paint(g);
@@ -91,7 +96,7 @@ namespace Assets.src.g
 			base.paint(g);
 		}
 
-		// Token: 0x060006DB RID: 1755 RVA: 0x0005D824 File Offset: 0x0005BC24
+		// Token: 0x06000A50 RID: 2640 RVA: 0x000A920C File Offset: 0x000A740C
 		public override void update()
 		{
 			GameScr.gI().update();
@@ -101,12 +106,13 @@ namespace Assets.src.g
 			}
 		}
 
-		// Token: 0x060006DC RID: 1756 RVA: 0x0005D864 File Offset: 0x0005BC64
+		// Token: 0x06000A51 RID: 2641 RVA: 0x000A924C File Offset: 0x000A744C
 		public override void keyPress(int keyCode)
 		{
 			for (int i = 0; i < this.tf.Length; i++)
 			{
-				if (this.tf[i].isFocus)
+				bool isFocus = this.tf[i].isFocus;
+				if (isFocus)
 				{
 					this.tf[i].keyPressed(keyCode);
 					break;
@@ -115,34 +121,44 @@ namespace Assets.src.g
 			base.keyPress(keyCode);
 		}
 
-		// Token: 0x060006DD RID: 1757 RVA: 0x0005D8B8 File Offset: 0x0005BCB8
+		// Token: 0x06000A52 RID: 2642 RVA: 0x000A92A0 File Offset: 0x000A74A0
 		public override void updateKey()
 		{
-			if (GameCanvas.keyPressed[2])
+			bool flag = GameCanvas.keyPressed[2];
+			if (flag)
 			{
 				this.focus--;
-				if (this.focus < 0)
+				bool flag2 = this.focus < 0;
+				if (flag2)
 				{
 					this.focus = this.tf.Length - 1;
 				}
 			}
-			else if (GameCanvas.keyPressed[8])
+			else
 			{
-				this.focus++;
-				if (this.focus > this.tf.Length - 1)
+				bool flag3 = GameCanvas.keyPressed[8];
+				if (flag3)
 				{
-					this.focus = 0;
+					this.focus++;
+					bool flag4 = this.focus > this.tf.Length - 1;
+					if (flag4)
+					{
+						this.focus = 0;
+					}
 				}
 			}
-			if (GameCanvas.keyPressed[2] || GameCanvas.keyPressed[8])
+			bool flag5 = GameCanvas.keyPressed[2] || GameCanvas.keyPressed[8];
+			if (flag5)
 			{
 				GameCanvas.clearKeyPressed();
 				for (int i = 0; i < this.tf.Length; i++)
 				{
-					if (this.focus == i)
+					bool flag6 = this.focus == i;
+					if (flag6)
 					{
 						this.tf[i].isFocus = true;
-						if (!GameCanvas.isTouch)
+						bool flag7 = !GameCanvas.isTouch;
+						if (flag7)
 						{
 							this.right = this.tf[i].cmdClear;
 						}
@@ -151,7 +167,8 @@ namespace Assets.src.g
 					{
 						this.tf[i].isFocus = false;
 					}
-					if (GameCanvas.isPointerJustRelease && GameCanvas.isPointerHoldIn(this.tf[i].x, this.tf[i].y, this.tf[i].width, this.tf[i].height))
+					bool flag8 = GameCanvas.isPointerJustRelease && GameCanvas.isPointerHoldIn(this.tf[i].x, this.tf[i].y, this.tf[i].width, this.tf[i].height);
+					if (flag8)
 					{
 						this.focus = i;
 						break;
@@ -162,25 +179,28 @@ namespace Assets.src.g
 			GameCanvas.clearKeyPressed();
 		}
 
-		// Token: 0x060006DE RID: 1758 RVA: 0x0005DA15 File Offset: 0x0005BE15
+		// Token: 0x06000A53 RID: 2643 RVA: 0x000A942A File Offset: 0x000A762A
 		public void clearScreen()
 		{
 			ClientInput.instance = null;
 		}
 
-		// Token: 0x060006DF RID: 1759 RVA: 0x0005DA20 File Offset: 0x0005BE20
+		// Token: 0x06000A54 RID: 2644 RVA: 0x000A9434 File Offset: 0x000A7634
 		public void perform(int idAction, object p)
 		{
-			if (idAction == 1)
+			bool flag = idAction == 1;
+			if (flag)
 			{
 				GameScr.instance.switchToMe();
 				this.clearScreen();
 			}
-			if (idAction == 2)
+			bool flag2 = idAction == 2;
+			if (flag2)
 			{
 				for (int i = 0; i < this.tf.Length; i++)
 				{
-					if (this.tf[i].getText() == null || this.tf[i].getText().Equals(string.Empty))
+					bool flag3 = this.tf[i].getText() == null || this.tf[i].getText().Equals(string.Empty);
+					if (flag3)
 					{
 						GameCanvas.startOKDlg(mResources.vuilongnhapduthongtin);
 						return;
@@ -191,31 +211,31 @@ namespace Assets.src.g
 			}
 		}
 
-		// Token: 0x04000C8D RID: 3213
+		// Token: 0x0400137B RID: 4987
 		public static ClientInput instance;
 
-		// Token: 0x04000C8E RID: 3214
+		// Token: 0x0400137C RID: 4988
 		public TField[] tf;
 
-		// Token: 0x04000C8F RID: 3215
+		// Token: 0x0400137D RID: 4989
 		private int x;
 
-		// Token: 0x04000C90 RID: 3216
+		// Token: 0x0400137E RID: 4990
 		private int y;
 
-		// Token: 0x04000C91 RID: 3217
+		// Token: 0x0400137F RID: 4991
 		private int w;
 
-		// Token: 0x04000C92 RID: 3218
+		// Token: 0x04001380 RID: 4992
 		private int h;
 
-		// Token: 0x04000C93 RID: 3219
+		// Token: 0x04001381 RID: 4993
 		private string[] strPaint;
 
-		// Token: 0x04000C94 RID: 3220
+		// Token: 0x04001382 RID: 4994
 		private int focus;
 
-		// Token: 0x04000C95 RID: 3221
+		// Token: 0x04001383 RID: 4995
 		private int nTf;
 	}
 }

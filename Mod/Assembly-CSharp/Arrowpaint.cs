@@ -1,117 +1,148 @@
 ﻿using System;
 
-// Token: 0x0200004D RID: 77
+// Token: 0x02000008 RID: 8
 public class Arrowpaint
 {
-	// Token: 0x060002CA RID: 714 RVA: 0x00015E64 File Offset: 0x00014264
+	// Token: 0x06000018 RID: 24 RVA: 0x000026E8 File Offset: 0x000008E8
 	public void update()
 	{
-		if (this.charBelong.mobFocus == null && this.charBelong.charFocus == null)
+		bool flag = this.charBelong.mobFocus == null && this.charBelong.charFocus == null;
+		if (flag)
 		{
 			this.endMe();
 		}
 		else
 		{
-			if (this.charBelong.mobFocus != null)
+			bool flag2 = this.charBelong.mobFocus != null;
+			if (flag2)
 			{
 				this.axTo = this.charBelong.mobFocus.x;
 				this.ayTo = this.charBelong.mobFocus.y - this.charBelong.mobFocus.h / 4;
 			}
-			else if (this.charBelong.charFocus != null)
+			else
 			{
-				this.axTo = this.charBelong.charFocus.cx;
-				this.ayTo = this.charBelong.charFocus.cy - this.charBelong.charFocus.ch / 4;
+				bool flag3 = this.charBelong.charFocus != null;
+				if (flag3)
+				{
+					this.axTo = this.charBelong.charFocus.cx;
+					this.ayTo = this.charBelong.charFocus.cy - this.charBelong.charFocus.ch / 4;
+				}
 			}
 			int num = this.axTo - this.ax;
 			int num2 = this.ayTo - this.ay;
 			int num3 = 5;
 			int num4 = 4;
-			if (num + num2 < 60)
+			bool flag4 = num + num2 < 60;
+			if (flag4)
 			{
 				num4 = 3;
 			}
-			else if (num + num2 < 30)
+			else
 			{
-				num4 = 2;
-			}
-			if (this.ax != this.axTo)
-			{
-				if (num > 0 && num < num3)
+				bool flag5 = num + num2 < 30;
+				if (flag5)
 				{
-					this.ax = this.axTo;
+					num4 = 2;
 				}
-				else if (num < 0 && num > -num3)
+			}
+			bool flag6 = this.ax != this.axTo;
+			if (flag6)
+			{
+				bool flag7 = num > 0 && num < num3;
+				if (flag7)
 				{
 					this.ax = this.axTo;
 				}
 				else
 				{
-					this.avx = this.axTo - this.ax << 2;
-					this.adx += this.avx;
-					this.ax += this.adx >> num4;
-					this.adx &= 15;
+					bool flag8 = num < 0 && num > -num3;
+					if (flag8)
+					{
+						this.ax = this.axTo;
+					}
+					else
+					{
+						this.avx = this.axTo - this.ax << 2;
+						this.adx += this.avx;
+						this.ax += this.adx >> num4;
+						this.adx &= 15;
+					}
 				}
 			}
-			if (this.ay != this.ayTo)
+			bool flag9 = this.ay != this.ayTo;
+			if (flag9)
 			{
-				if (num2 > 0 && num2 < num3)
-				{
-					this.ay = this.ayTo;
-				}
-				else if (num2 < 0 && num2 > -num3)
+				bool flag10 = num2 > 0 && num2 < num3;
+				if (flag10)
 				{
 					this.ay = this.ayTo;
 				}
 				else
 				{
-					this.avy = this.ayTo - this.ay << 2;
-					this.ady += this.avy;
-					this.ay += this.ady >> num4;
-					this.ady &= 15;
+					bool flag11 = num2 < 0 && num2 > -num3;
+					if (flag11)
+					{
+						this.ay = this.ayTo;
+					}
+					else
+					{
+						this.avy = this.ayTo - this.ay << 2;
+						this.ady += this.avy;
+						this.ay += this.ady >> num4;
+						this.ady &= 15;
+					}
 				}
 			}
 			int num5 = 0;
 			int num6 = 0;
 			int num7 = 0;
 			int num8 = 0;
-			if (this.charBelong.mobFocus != null)
+			bool flag12 = this.charBelong.mobFocus != null;
+			if (flag12)
 			{
 				num5 = this.axTo - this.charBelong.mobFocus.w / 4;
 				num7 = this.axTo + this.charBelong.mobFocus.w / 4;
 				num6 = this.ayTo - this.charBelong.mobFocus.h / 4;
 				num8 = this.ayTo + this.charBelong.mobFocus.h / 4;
 			}
-			else if (this.charBelong.charFocus != null)
+			else
 			{
-				num5 = this.axTo - this.charBelong.charFocus.cw / 4;
-				num7 = this.axTo + this.charBelong.charFocus.cw / 4;
-				num6 = this.ayTo - this.charBelong.charFocus.ch / 4;
-				num8 = this.ayTo + this.charBelong.charFocus.ch / 4;
+				bool flag13 = this.charBelong.charFocus != null;
+				if (flag13)
+				{
+					num5 = this.axTo - this.charBelong.charFocus.cw / 4;
+					num7 = this.axTo + this.charBelong.charFocus.cw / 4;
+					num6 = this.ayTo - this.charBelong.charFocus.ch / 4;
+					num8 = this.ayTo + this.charBelong.charFocus.ch / 4;
+				}
 			}
-			if (this.life > 0)
+			bool flag14 = this.life > 0;
+			if (flag14)
 			{
 				this.life--;
 			}
-			if (this.life == 0 || (this.ax >= num5 && this.ax <= num7 && this.ay >= num6 && this.ay <= num8))
+			bool flag15 = this.life == 0 || (this.ax >= num5 && this.ax <= num7 && this.ay >= num6 && this.ay <= num8);
+			if (flag15)
 			{
 				this.endMe();
 			}
 		}
 	}
 
-	// Token: 0x060002CB RID: 715 RVA: 0x00016224 File Offset: 0x00014624
+	// Token: 0x06000019 RID: 25 RVA: 0x00002AFC File Offset: 0x00000CFC
 	private void endMe()
 	{
 		this.charBelong.arr = null;
 		this.ax = (this.ay = (this.axTo = (this.ayTo = (this.avx = (this.avy = (this.adx = (this.ady = 0)))))));
 		this.charBelong.setAttack();
-		if (this.charBelong.me)
+		bool me = this.charBelong.me;
+		if (me)
 		{
 			this.charBelong.saveLoadPreviousSkill();
 		}
 	}
 
-	// Token: 0x060002CC RID: 716 RVA: 0x000162AC File Offset: 0x000146AC
+	// Token: 0x0600001A RID: 26 RVA: 0x00002B88 File Offset: 0x00000D88
 	public void paint(mGraphics g)
 	{
 		int dx = this.axTo - this.ax;
@@ -120,65 +151,67 @@ public class Arrowpaint
 		SmallImage.drawSmallImage(g, this.imgId[(int)Arrowpaint.FRAME[num2]], this.ax, this.ay, Arrowpaint.TRANSFORM[num2], mGraphics.VCENTER | mGraphics.HCENTER);
 	}
 
-	// Token: 0x060002CD RID: 717 RVA: 0x00016318 File Offset: 0x00014718
+	// Token: 0x0600001B RID: 27 RVA: 0x00002BF4 File Offset: 0x00000DF4
 	public static int findDirIndexFromAngle(int angle)
 	{
-		int i = 0;
-		while (i < Arrowpaint.ARROWINDEX.Length - 1)
+		for (int i = 0; i < Arrowpaint.ARROWINDEX.Length - 1; i++)
 		{
-			if (angle >= Arrowpaint.ARROWINDEX[i] && angle <= Arrowpaint.ARROWINDEX[i + 1])
+			bool flag = angle >= Arrowpaint.ARROWINDEX[i] && angle <= Arrowpaint.ARROWINDEX[i + 1];
+			if (flag)
 			{
-				if (i >= 16)
+				bool flag2 = i >= 16;
+				int result;
+				if (flag2)
 				{
-					return 0;
+					result = 0;
 				}
-				return i;
-			}
-			else
-			{
-				i++;
+				else
+				{
+					result = i;
+				}
+				return result;
 			}
 		}
 		return 0;
 	}
 
-	// Token: 0x0400036D RID: 877
+	// Token: 0x04000014 RID: 20
 	public int id;
 
-	// Token: 0x0400036E RID: 878
+	// Token: 0x04000015 RID: 21
 	public int life;
 
-	// Token: 0x0400036F RID: 879
+	// Token: 0x04000016 RID: 22
 	public int ax;
 
-	// Token: 0x04000370 RID: 880
+	// Token: 0x04000017 RID: 23
 	public int ay;
 
-	// Token: 0x04000371 RID: 881
+	// Token: 0x04000018 RID: 24
 	public int axTo;
 
-	// Token: 0x04000372 RID: 882
+	// Token: 0x04000019 RID: 25
 	public int ayTo;
 
-	// Token: 0x04000373 RID: 883
+	// Token: 0x0400001A RID: 26
 	public int avx;
 
-	// Token: 0x04000374 RID: 884
+	// Token: 0x0400001B RID: 27
 	public int avy;
 
-	// Token: 0x04000375 RID: 885
+	// Token: 0x0400001C RID: 28
 	public int adx;
 
-	// Token: 0x04000376 RID: 886
+	// Token: 0x0400001D RID: 29
 	public int ady;
 
-	// Token: 0x04000377 RID: 887
+	// Token: 0x0400001E RID: 30
 	public global::Char charBelong;
 
-	// Token: 0x04000378 RID: 888
+	// Token: 0x0400001F RID: 31
 	public int[] imgId = new int[3];
 
-	// Token: 0x04000379 RID: 889
+	// Token: 0x04000020 RID: 32
 	public static sbyte[] FRAME = new sbyte[]
 	{
 		0,
@@ -208,7 +241,7 @@ public class Arrowpaint
 		0
 	};
 
-	// Token: 0x0400037A RID: 890
+	// Token: 0x04000021 RID: 33
 	public static int[] ARROWINDEX = new int[]
 	{
 		0,
@@ -231,7 +264,7 @@ public class Arrowpaint
 		370
 	};
 
-	// Token: 0x0400037B RID: 891
+	// Token: 0x04000022 RID: 34
 	public static int[] TRANSFORM = new int[]
 	{
 		0,

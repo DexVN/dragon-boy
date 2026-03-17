@@ -1,14 +1,14 @@
 ﻿using System;
 
-// Token: 0x02000065 RID: 101
+// Token: 0x02000057 RID: 87
 public class ItemOptionTemplate
 {
-	// Token: 0x04000618 RID: 1560
+	// Token: 0x040009B9 RID: 2489
 	public int id;
 
-	// Token: 0x04000619 RID: 1561
+	// Token: 0x040009BA RID: 2490
 	public string name;
 
-	// Token: 0x0400061A RID: 1562
+	// Token: 0x040009BB RID: 2491
 	public int type;
 }

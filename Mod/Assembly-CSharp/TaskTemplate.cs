@@ -1,14 +1,14 @@
 ﻿using System;
 
-// Token: 0x02000092 RID: 146
+// Token: 0x020000B2 RID: 178
 public class TaskTemplate
 {
-	// Token: 0x0400080A RID: 2058
+	// Token: 0x0400124C RID: 4684
 	public short taskId;
 
-	// Token: 0x0400080B RID: 2059
+	// Token: 0x0400124D RID: 4685
 	public string name;
 
-	// Token: 0x0400080C RID: 2060
+	// Token: 0x0400124E RID: 4686
 	public string[] subNames;
 }

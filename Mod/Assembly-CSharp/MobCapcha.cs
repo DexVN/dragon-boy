@@ -1,26 +1,30 @@
 ﻿using System;
 
-// Token: 0x0200006D RID: 109
+// Token: 0x0200006C RID: 108
 public class MobCapcha
 {
-	// Token: 0x060003C8 RID: 968 RVA: 0x00031011 File Offset: 0x0002F411
+	// Token: 0x06000581 RID: 1409 RVA: 0x000660A6 File Offset: 0x000642A6
 	public static void init()
 	{
 		MobCapcha.imgMob = GameCanvas.loadImage("/mainImage/myTexture2dmobCapcha.png");
 	}
 
-	// Token: 0x060003C9 RID: 969 RVA: 0x00031024 File Offset: 0x0002F424
+	// Token: 0x06000582 RID: 1410 RVA: 0x000660B8 File Offset: 0x000642B8
 	public static void paint(mGraphics g, int x, int y)
 	{
-		if (!MobCapcha.isAttack)
+		bool flag = !MobCapcha.isAttack;
+		if (flag)
 		{
-			if (GameCanvas.gameTick % 3 == 0)
+			bool flag2 = GameCanvas.gameTick % 3 == 0;
+			if (flag2)
 			{
-				if (global::Char.myCharz().cdir == 1)
+				bool flag3 = global::Char.myCharz().cdir == 1;
+				if (flag3)
 				{
 					MobCapcha.cmtoX = x - 20 - GameScr.cmx;
 				}
-				if (global::Char.myCharz().cdir == -1)
+				bool flag4 = global::Char.myCharz().cdir == -1;
+				if (flag4)
 				{
 					MobCapcha.cmtoX = x + 20 - GameScr.cmx;
 				}
@@ -30,7 +34,8 @@ public class MobCapcha
 		else
 		{
 			MobCapcha.delay++;
-			if (MobCapcha.delay == 5)
+			bool flag5 = MobCapcha.delay == 5;
+			if (flag5)
 			{
 				MobCapcha.isAttack = false;
 				MobCapcha.delay = 0;
@@ -38,7 +43,8 @@ public class MobCapcha
 			MobCapcha.cmtoX = x - GameScr.cmx;
 			MobCapcha.cmtoY = y - GameScr.cmy;
 		}
-		if (MobCapcha.cmx > x - GameScr.cmx)
+		bool flag6 = MobCapcha.cmx > x - GameScr.cmx;
+		if (flag6)
 		{
 			MobCapcha.dir = -1;
 		}
@@ -49,12 +55,14 @@ public class MobCapcha
 		g.drawImage(GameScr.imgCapcha, MobCapcha.cmx, MobCapcha.cmy - 40, 3);
 		PopUp.paintPopUp(g, MobCapcha.cmx - 25, MobCapcha.cmy - 70, 50, 20, 16777215, false);
 		mFont.tahoma_7b_dark.drawString(g, GameScr.gI().keyInput, MobCapcha.cmx, MobCapcha.cmy - 65, 2);
-		if (MobCapcha.isCreateMob)
+		bool flag7 = MobCapcha.isCreateMob;
+		if (flag7)
 		{
 			MobCapcha.isCreateMob = false;
 			EffecMn.addEff(new Effect(18, MobCapcha.cmx + GameScr.cmx, MobCapcha.cmy + GameScr.cmy, 2, 10, -1));
 		}
-		if (MobCapcha.explode)
+		bool flag8 = MobCapcha.explode;
+		if (flag8)
 		{
 			MobCapcha.explode = false;
 			EffecMn.addEff(new Effect(18, MobCapcha.cmx + GameScr.cmx, MobCapcha.cmy + GameScr.cmy, 2, 10, -1));
@@ -66,17 +74,19 @@ public class MobCapcha
 		MobCapcha.moveCamera();
 	}
 
-	// Token: 0x060003CA RID: 970 RVA: 0x0003123C File Offset: 0x0002F63C
+	// Token: 0x06000583 RID: 1411 RVA: 0x000662E8 File Offset: 0x000644E8
 	public static void moveCamera()
 	{
-		if (MobCapcha.cmy != MobCapcha.cmtoY)
+		bool flag = MobCapcha.cmy != MobCapcha.cmtoY;
+		if (flag)
 		{
 			MobCapcha.cmvy = MobCapcha.cmtoY - MobCapcha.cmy << 2;
 			MobCapcha.cmdy += MobCapcha.cmvy;
 			MobCapcha.cmy += MobCapcha.cmdy >> 4;
 			MobCapcha.cmdy &= 15;
 		}
-		if (MobCapcha.cmx != MobCapcha.cmtoX)
+		bool flag2 = MobCapcha.cmx != MobCapcha.cmtoX;
+		if (flag2)
 		{
 			MobCapcha.cmvx = MobCapcha.cmtoX - MobCapcha.cmx << 2;
 			MobCapcha.cmdx += MobCapcha.cmvx;
@@ -84,68 +94,70 @@ public class MobCapcha
 			MobCapcha.cmdx &= 15;
 		}
 		MobCapcha.tF++;
-		if (MobCapcha.tF == 5)
+		bool flag3 = MobCapcha.tF == 5;
+		if (flag3)
 		{
 			MobCapcha.tF = 0;
 			MobCapcha.f++;
-			if (MobCapcha.f > 2)
+			bool flag4 = MobCapcha.f > 2;
+			if (flag4)
 			{
 				MobCapcha.f = 0;
 			}
 		}
 	}
 
-	// Token: 0x04000679 RID: 1657
+	// Token: 0x04000BC4 RID: 3012
 	public static Image imgMob;
 
-	// Token: 0x0400067A RID: 1658
+	// Token: 0x04000BC5 RID: 3013
 	public static int cmtoY;
 
-	// Token: 0x0400067B RID: 1659
+	// Token: 0x04000BC6 RID: 3014
 	public static int cmy;
 
-	// Token: 0x0400067C RID: 1660
+	// Token: 0x04000BC7 RID: 3015
 	public static int cmdy;
 
-	// Token: 0x0400067D RID: 1661
+	// Token: 0x04000BC8 RID: 3016
 	public static int cmvy;
 
-	// Token: 0x0400067E RID: 1662
+	// Token: 0x04000BC9 RID: 3017
 	public static int cmyLim;
 
-	// Token: 0x0400067F RID: 1663
+	// Token: 0x04000BCA RID: 3018
 	public static int cmtoX;
 
-	// Token: 0x04000680 RID: 1664
+	// Token: 0x04000BCB RID: 3019
 	public static int cmx;
 
-	// Token: 0x04000681 RID: 1665
+	// Token: 0x04000BCC RID: 3020
 	public static int cmdx;
 
-	// Token: 0x04000682 RID: 1666
+	// Token: 0x04000BCD RID: 3021
 	public static int cmvx;
 
-	// Token: 0x04000683 RID: 1667
+	// Token: 0x04000BCE RID: 3022
 	public static int cmxLim;
 
-	// Token: 0x04000684 RID: 1668
+	// Token: 0x04000BCF RID: 3023
 	public static bool explode;
 
-	// Token: 0x04000685 RID: 1669
+	// Token: 0x04000BD0 RID: 3024
 	public static int delay;
 
-	// Token: 0x04000686 RID: 1670
+	// Token: 0x04000BD1 RID: 3025
 	public static bool isCreateMob;
 
-	// Token: 0x04000687 RID: 1671
+	// Token: 0x04000BD2 RID: 3026
 	public static int tF;
 
-	// Token: 0x04000688 RID: 1672
+	// Token: 0x04000BD3 RID: 3027
 	public static int f;
 
-	// Token: 0x04000689 RID: 1673
+	// Token: 0x04000BD4 RID: 3028
 	public static int dir;
 
-	// Token: 0x0400068A RID: 1674
+	// Token: 0x04000BD5 RID: 3029
 	public static bool isAttack;
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000060 RID: 96
+// Token: 0x02000049 RID: 73
 public class InfoPhuBan
 {
-	// Token: 0x06000375 RID: 885 RVA: 0x0001CF4C File Offset: 0x0001B34C
+	// Token: 0x06000401 RID: 1025 RVA: 0x00057924 File Offset: 0x00055B24
 	public InfoPhuBan(int type_PB, short idmapPaint, string nameTeam1, string nameTeam2, int maxPoint, short timeSecond)
 	{
 		this.type_PB = type_PB;
@@ -13,7 +13,8 @@ public class InfoPhuBan
 		this.timeSecond = timeSecond;
 		this.timeStart = GameCanvas.timeNow;
 		this.maxPoint = maxPoint;
-		if (this.maxPoint <= 0)
+		bool flag = this.maxPoint <= 0;
+		if (flag)
 		{
 			this.maxPoint = 1;
 		}
@@ -24,7 +25,7 @@ public class InfoPhuBan
 		this.color_2 = 6;
 	}
 
-	// Token: 0x06000376 RID: 886 RVA: 0x0001CFEB File Offset: 0x0001B3EB
+	// Token: 0x06000402 RID: 1026 RVA: 0x000579CB File Offset: 0x00055BCB
 	public void updateTime(int type_PB, short timeSecond)
 	{
 		this.type_PB = type_PB;
@@ -32,7 +33,7 @@ public class InfoPhuBan
 		this.timeStart = GameCanvas.timeNow;
 	}
 
-	// Token: 0x06000377 RID: 887 RVA: 0x0001D006 File Offset: 0x0001B406
+	// Token: 0x06000403 RID: 1027 RVA: 0x000579E7 File Offset: 0x00055BE7
 	public void updatePoint(int type_PB, int pointTeam1, int pointTeam2)
 	{
 		this.type_PB = type_PB;
@@ -40,7 +41,7 @@ public class InfoPhuBan
 		this.pointTeam2 = pointTeam2;
 	}
 
-	// Token: 0x06000378 RID: 888 RVA: 0x0001D01D File Offset: 0x0001B41D
+	// Token: 0x06000404 RID: 1028 RVA: 0x000579FF File Offset: 0x00055BFF
 	public void updateLife(int type_PB, int lifeTeam1, int lifeTeam2)
 	{
 		this.type_PB = type_PB;
@@ -48,57 +49,57 @@ public class InfoPhuBan
 		this.lifeTeam2 = lifeTeam2;
 	}
 
-	// Token: 0x04000579 RID: 1401
+	// Token: 0x040008E1 RID: 2273
 	public int type_PB;
 
-	// Token: 0x0400057A RID: 1402
+	// Token: 0x040008E2 RID: 2274
 	public int maxPoint;
 
-	// Token: 0x0400057B RID: 1403
+	// Token: 0x040008E3 RID: 2275
 	public int pointTeam1;
 
-	// Token: 0x0400057C RID: 1404
+	// Token: 0x040008E4 RID: 2276
 	public int pointTeam2;
 
-	// Token: 0x0400057D RID: 1405
+	// Token: 0x040008E5 RID: 2277
 	public int color_1;
 
-	// Token: 0x0400057E RID: 1406
+	// Token: 0x040008E6 RID: 2278
 	public int color_2;
 
-	// Token: 0x0400057F RID: 1407
+	// Token: 0x040008E7 RID: 2279
 	public int maxLife = 1;
 
-	// Token: 0x04000580 RID: 1408
+	// Token: 0x040008E8 RID: 2280
 	public int lifeTeam1;
 
-	// Token: 0x04000581 RID: 1409
+	// Token: 0x040008E9 RID: 2281
 	public int lifeTeam2;
 
-	// Token: 0x04000582 RID: 1410
+	// Token: 0x040008EA RID: 2282
 	public string nameTeam1;
 
-	// Token: 0x04000583 RID: 1411
+	// Token: 0x040008EB RID: 2283
 	public string nameTeam2;
 
-	// Token: 0x04000584 RID: 1412
+	// Token: 0x040008EC RID: 2284
 	public short idmapPaint;
 
-	// Token: 0x04000585 RID: 1413
+	// Token: 0x040008ED RID: 2285
 	public short timeSecond;
 
-	// Token: 0x04000586 RID: 1414
+	// Token: 0x040008EE RID: 2286
 	public short timepaintSecond;
 
-	// Token: 0x04000587 RID: 1415
+	// Token: 0x040008EF RID: 2287
 	public short maxtimeSecond = 1;
 
-	// Token: 0x04000588 RID: 1416
+	// Token: 0x040008F0 RID: 2288
 	public byte owner;
 
-	// Token: 0x04000589 RID: 1417
+	// Token: 0x040008F1 RID: 2289
 	public long timeStart;
 
-	// Token: 0x0400058A RID: 1418
+	// Token: 0x040008F2 RID: 2290
 	public MyVector vecInfo = new MyVector("vecInfo chientruong");
 }

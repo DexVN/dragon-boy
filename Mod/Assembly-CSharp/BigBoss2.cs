@@ -1,12 +1,13 @@
 ﻿using System;
 
-// Token: 0x0200009F RID: 159
+// Token: 0x0200000E RID: 14
 public class BigBoss2 : Mob, IMapObject
 {
-	// Token: 0x060005E3 RID: 1507 RVA: 0x0005AD98 File Offset: 0x00059198
+	// Token: 0x0600006E RID: 110 RVA: 0x00006D70 File Offset: 0x00004F70
 	public BigBoss2(int id, short px, short py, int templateID, int hp, int maxHp, int s)
 	{
-		if (BigBoss2.shadowBig == null)
+		bool flag = BigBoss2.shadowBig == null;
+		if (flag)
 		{
 			BigBoss2.shadowBig = GameCanvas.loadImage("/mainImage/shadowBig.png");
 		}
@@ -26,7 +27,7 @@ public class BigBoss2 : Mob, IMapObject
 		this.status = 2;
 	}
 
-	// Token: 0x060005E4 RID: 1508 RVA: 0x0005AF1C File Offset: 0x0005931C
+	// Token: 0x0600006F RID: 111 RVA: 0x00006EFC File Offset: 0x000050FC
 	public void getDataB()
 	{
 		BigBoss2.data = null;
@@ -42,7 +43,7 @@ public class BigBoss2 : Mob, IMapObject
 		try
 		{
 			BigBoss2.data.readData2(patch);
-			BigBoss2.data.img = GameCanvas.loadImage("/effectdata/" + 109 + "/img.png");
+			BigBoss2.data.img = GameCanvas.loadImage("/effectdata/" + 109.ToString() + "/img.png");
 		}
 		catch (Exception ex)
 		{
@@ -52,26 +53,27 @@ public class BigBoss2 : Mob, IMapObject
 		this.h = BigBoss2.data.height;
 	}
 
-	// Token: 0x060005E5 RID: 1509 RVA: 0x0005AFF0 File Offset: 0x000593F0
+	// Token: 0x06000070 RID: 112 RVA: 0x00002ED4 File Offset: 0x000010D4
 	public override void setBody(short id)
 	{
 		this.changBody = true;
 		this.smallBody = id;
 	}
 
-	// Token: 0x060005E6 RID: 1510 RVA: 0x0005B000 File Offset: 0x00059400
+	// Token: 0x06000071 RID: 113 RVA: 0x00002EE5 File Offset: 0x000010E5
 	public override void clearBody()
 	{
 		this.changBody = false;
 	}
 
-	// Token: 0x060005E7 RID: 1511 RVA: 0x0005B00C File Offset: 0x0005940C
+	// Token: 0x06000072 RID: 114 RVA: 0x00006FD4 File Offset: 0x000051D4
 	public new static bool isExistNewMob(string id)
 	{
 		for (int i = 0; i < Mob.newMob.size(); i++)
 		{
 			string text = (string)Mob.newMob.elementAt(i);
-			if (text.Equals(id))
+			bool flag = text.Equals(id);
+			if (flag)
 			{
 				return true;
 			}
@@ -79,57 +81,65 @@ public class BigBoss2 : Mob, IMapObject
 		return false;
 	}
 
-	// Token: 0x060005E8 RID: 1512 RVA: 0x0005B054 File Offset: 0x00059454
+	// Token: 0x06000073 RID: 115 RVA: 0x00007028 File Offset: 0x00005228
 	public new void checkFrameTick(int[] array)
 	{
 		this.tick++;
-		if (this.tick > array.Length - 1)
+		bool flag = this.tick > array.Length - 1;
+		if (flag)
 		{
 			this.tick = 0;
 		}
 		this.frame = array[this.tick];
 	}
 
-	// Token: 0x060005E9 RID: 1513 RVA: 0x0005B08C File Offset: 0x0005948C
+	// Token: 0x06000074 RID: 116 RVA: 0x0000706C File Offset: 0x0000526C
 	private void updateShadown()
 	{
 		int num = (int)TileMap.size;
 		this.xSd = this.x;
 		this.wCount = 0;
-		if (this.ySd <= 0)
+		bool flag = this.ySd <= 0;
+		if (!flag)
 		{
-			return;
-		}
-		if (TileMap.tileTypeAt(this.xSd, this.ySd, 2))
-		{
-			return;
-		}
-		if (TileMap.tileTypeAt(this.xSd / num, this.ySd / num) == 0)
-		{
-			this.isOutMap = true;
-		}
-		else if (TileMap.tileTypeAt(this.xSd / num, this.ySd / num) != 0 && !TileMap.tileTypeAt(this.xSd, this.ySd, 2))
-		{
-			this.xSd = this.x;
-			this.ySd = this.y;
-			this.isOutMap = false;
-		}
-		while (this.isOutMap && this.wCount < 10)
-		{
-			this.wCount++;
-			this.ySd += 24;
-			if (TileMap.tileTypeAt(this.xSd, this.ySd, 2))
+			bool flag2 = TileMap.tileTypeAt(this.xSd, this.ySd, 2);
+			if (!flag2)
 			{
-				if (this.ySd % 24 != 0)
+				bool flag3 = TileMap.tileTypeAt(this.xSd / num, this.ySd / num) == 0;
+				if (flag3)
 				{
-					this.ySd -= this.ySd % 24;
+					this.isOutMap = true;
 				}
-				return;
+				else
+				{
+					bool flag4 = TileMap.tileTypeAt(this.xSd / num, this.ySd / num) != 0 && !TileMap.tileTypeAt(this.xSd, this.ySd, 2);
+					if (flag4)
+					{
+						this.xSd = this.x;
+						this.ySd = this.y;
+						this.isOutMap = false;
+					}
+				}
+				while (this.isOutMap && this.wCount < 10)
+				{
+					this.wCount++;
+					this.ySd += 24;
+					bool flag5 = TileMap.tileTypeAt(this.xSd, this.ySd, 2);
+					if (flag5)
+					{
+						bool flag6 = this.ySd % 24 != 0;
+						if (flag6)
+						{
+							this.ySd -= this.ySd % 24;
+						}
+						break;
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x060005EA RID: 1514 RVA: 0x0005B1C4 File Offset: 0x000595C4
+	// Token: 0x06000075 RID: 117 RVA: 0x000071C4 File Offset: 0x000053C4
 	private void paintShadow(mGraphics g)
 	{
 		int num = (int)TileMap.size;
@@ -137,93 +147,102 @@ public class BigBoss2 : Mob, IMapObject
 		g.setClip(GameScr.cmx, GameScr.cmy - GameCanvas.transY, GameScr.gW, GameScr.gH + 2 * GameCanvas.transY);
 	}
 
-	// Token: 0x060005EB RID: 1515 RVA: 0x0005B218 File Offset: 0x00059618
+	// Token: 0x06000076 RID: 118 RVA: 0x00003136 File Offset: 0x00001336
 	public new void updateSuperEff()
 	{
 	}
 
-	// Token: 0x060005EC RID: 1516 RVA: 0x0005B21C File Offset: 0x0005961C
+	// Token: 0x06000077 RID: 119 RVA: 0x0000721C File Offset: 0x0000541C
 	public override void update()
 	{
-		if (!this.isUpdate())
+		bool flag = !this.isUpdate();
+		if (!flag)
 		{
-			return;
-		}
-		this.updateShadown();
-		switch (this.status)
-		{
-		case 0:
-		case 1:
-			this.updateDead();
-			break;
-		case 2:
-			this.updateMobStandWait();
-			break;
-		case 3:
-			this.updateMobAttack();
-			break;
-		case 4:
-			this.timeStatus = 0;
-			this.updateMobFly();
-			break;
-		case 5:
-			this.timeStatus = 0;
-			this.updateMobWalk();
-			break;
-		case 6:
-			this.timeStatus = 0;
-			this.p1++;
-			this.y += this.p1;
-			if (this.y >= this.yFirst)
+			this.updateShadown();
+			switch (this.status)
 			{
-				this.y = this.yFirst;
-				this.p1 = 0;
-				this.status = 5;
+			case 0:
+			case 1:
+				this.updateDead();
+				break;
+			case 2:
+				this.updateMobStandWait();
+				break;
+			case 3:
+				this.updateMobAttack();
+				break;
+			case 4:
+				this.timeStatus = 0;
+				this.updateMobFly();
+				break;
+			case 5:
+				this.timeStatus = 0;
+				this.updateMobWalk();
+				break;
+			case 6:
+			{
+				this.timeStatus = 0;
+				this.p1++;
+				this.y += this.p1;
+				bool flag2 = this.y >= this.yFirst;
+				if (flag2)
+				{
+					this.y = this.yFirst;
+					this.p1 = 0;
+					this.status = 5;
+				}
+				break;
 			}
-			break;
-		case 7:
-			this.updateInjure();
-			break;
+			case 7:
+				this.updateInjure();
+				break;
+			}
 		}
 	}
 
-	// Token: 0x060005ED RID: 1517 RVA: 0x0005B318 File Offset: 0x00059718
+	// Token: 0x06000078 RID: 120 RVA: 0x00007320 File Offset: 0x00005520
 	private void updateDead()
 	{
 		this.checkFrameTick(this.stand);
-		if (GameCanvas.gameTick % 5 == 0)
+		bool flag = GameCanvas.gameTick % 5 == 0;
+		if (flag)
 		{
 			ServerEffect.addServerEffect(167, Res.random(this.x - this.getW() / 2, this.x + this.getW() / 2), Res.random(this.getY() + this.getH() / 2, this.getY() + this.getH()), 1);
 		}
-		if (this.x != this.xTo || this.y != this.yTo)
+		bool flag2 = this.x != this.xTo || this.y != this.yTo;
+		if (flag2)
 		{
 			this.x += (this.xTo - this.x) / 4;
 			this.y += (this.yTo - this.y) / 4;
 		}
 	}
 
-	// Token: 0x060005EE RID: 1518 RVA: 0x0005B3E8 File Offset: 0x000597E8
+	// Token: 0x06000079 RID: 121 RVA: 0x000073FC File Offset: 0x000055FC
 	private void updateMobFly()
 	{
-		if (this.flyUp)
+		bool flag = this.flyUp;
+		if (flag)
 		{
 			this.dy++;
 			this.y -= this.dy;
 			this.checkFrameTick(this.fly);
-			if (this.y <= -500)
+			bool flag2 = this.y <= -500;
+			if (flag2)
 			{
 				this.flyUp = false;
 				this.flyDown = true;
 				this.dy = 0;
 			}
 		}
-		if (this.flyDown)
+		bool flag3 = this.flyDown;
+		if (flag3)
 		{
 			this.x = this.xTo;
 			this.dy += 2;
 			this.y += this.dy;
 			this.checkFrameTick(this.hitground);
-			if (this.y > this.yFirst)
+			bool flag4 = this.y > this.yFirst;
+			if (flag4)
 			{
 				this.y = this.yFirst;
 				this.flyDown = false;
@@ -235,12 +254,12 @@ public class BigBoss2 : Mob, IMapObject
 		}
 	}
 
-	// Token: 0x060005EF RID: 1519 RVA: 0x0005B4D6 File Offset: 0x000598D6
+	// Token: 0x0600007A RID: 122 RVA: 0x00003136 File Offset: 0x00001336
 	public new void setInjure()
 	{
 	}
 
-	// Token: 0x060005F0 RID: 1520 RVA: 0x0005B4D8 File Offset: 0x000598D8
+	// Token: 0x0600007B RID: 123 RVA: 0x000074F8 File Offset: 0x000056F8
 	public new void setAttack(global::Char cFocus)
 	{
 		this.isBusyAttackSomeOne = true;
@@ -253,9 +272,11 @@ public class BigBoss2 : Mob, IMapObject
 		this.dir = ((cFocus.cx <= this.x) ? -1 : 1);
 		int cx = cFocus.cx;
 		int cy = cFocus.cy;
-		if (Res.abs(cx - this.x) < this.w * 2 && Res.abs(cy - this.y) < this.h * 2)
+		bool flag = Res.abs(cx - this.x) < this.w * 2 && Res.abs(cy - this.y) < this.h * 2;
+		if (flag)
 		{
-			if (this.x < cx)
+			bool flag2 = this.x < cx;
+			if (flag2)
 			{
 				this.x = cx - this.w;
 			}
@@ -271,36 +292,37 @@ public class BigBoss2 : Mob, IMapObject
 		}
 	}
 
-	// Token: 0x060005F1 RID: 1521 RVA: 0x0005B5B6 File Offset: 0x000599B6
+	// Token: 0x0600007C RID: 124 RVA: 0x000075D8 File Offset: 0x000057D8
 	private bool isSpecial()
 	{
 		return (this.templateId >= 58 && this.templateId <= 65) || this.templateId == 67 || this.templateId == 68;
 	}
 
-	// Token: 0x060005F2 RID: 1522 RVA: 0x0005B5EF File Offset: 0x000599EF
+	// Token: 0x0600007D RID: 125 RVA: 0x00003136 File Offset: 0x00001336
 	private void updateInjure()
 	{
 	}
 
-	// Token: 0x060005F3 RID: 1523 RVA: 0x0005B5F4 File Offset: 0x000599F4
+	// Token: 0x0600007E RID: 126 RVA: 0x00007618 File Offset: 0x00005818
 	private void updateMobStandWait()
 	{
 		this.checkFrameTick(this.stand);
-		if (this.x != this.xTo || this.y != this.yTo)
+		bool flag = this.x != this.xTo || this.y != this.yTo;
+		if (flag)
 		{
 			this.x += (this.xTo - this.x) / 4;
 			this.y += (this.yTo - this.y) / 4;
 		}
 	}
 
-	// Token: 0x060005F4 RID: 1524 RVA: 0x0005B667 File Offset: 0x00059A67
+	// Token: 0x0600007F RID: 127 RVA: 0x00007693 File Offset: 0x00005893
 	public void setFly()
 	{
 		this.status = 4;
 		this.flyUp = true;
 	}
 
-	// Token: 0x060005F5 RID: 1525 RVA: 0x0005B677 File Offset: 0x00059A77
+	// Token: 0x06000080 RID: 128 RVA: 0x000076A4 File Offset: 0x000058A4
 	public void setAttack(global::Char[] cAttack, int[] dame, sbyte type)
 	{
 		this.status = 3;
@@ -310,12 +332,14 @@ public class BigBoss2 : Mob, IMapObject
 		this.tick = 0;
 	}
 
-	// Token: 0x060005F6 RID: 1526 RVA: 0x0005B69C File Offset: 0x00059A9C
+	// Token: 0x06000081 RID: 129 RVA: 0x000076CC File Offset: 0x000058CC
 	public new void updateMobAttack()
 	{
-		if ((int)this.type == 0)
+		bool flag = this.type == 0;
+		if (flag)
 		{
-			if (this.tick == this.attack1.Length - 1)
+			bool flag2 = this.tick == this.attack1.Length - 1;
+			if (flag2)
 			{
 				this.status = 2;
 			}
@@ -324,7 +348,8 @@ public class BigBoss2 : Mob, IMapObject
 			this.x += (this.charAttack[0].cx - this.x) / 4;
 			this.y += (this.charAttack[0].cy - this.y) / 4;
 			this.xTo = this.x;
-			if (this.tick == 8)
+			bool flag3 = this.tick == 8;
+			if (flag3)
 			{
 				for (int i = 0; i < this.charAttack.Length; i++)
 				{
@@ -333,15 +358,18 @@ public class BigBoss2 : Mob, IMapObject
 				}
 			}
 		}
-		if ((int)this.type == 1)
+		bool flag4 = this.type == 1;
+		if (flag4)
 		{
-			if (this.tick == this.attack2.Length - 1)
+			bool flag5 = this.tick == this.attack2.Length - 1;
+			if (flag5)
 			{
 				this.status = 2;
 			}
 			this.dir = ((this.x >= this.charAttack[0].cx) ? -1 : 1);
 			this.checkFrameTick(this.attack2);
-			if (this.tick == 8)
+			bool flag6 = this.tick == 8;
+			if (flag6)
 			{
 				for (int j = 0; j < this.charAttack.Length; j++)
 				{
@@ -349,9 +377,11 @@ public class BigBoss2 : Mob, IMapObject
 				}
 			}
 		}
-		if ((int)this.type == 2)
+		bool flag7 = this.type == 2;
+		if (flag7)
 		{
-			if (this.tick == this.fly.Length - 1)
+			bool flag8 = this.tick == this.fly.Length - 1;
+			if (flag8)
 			{
 				this.status = 2;
 			}
@@ -360,7 +390,8 @@ public class BigBoss2 : Mob, IMapObject
 			this.x += (this.charAttack[0].cx - this.x) / 4;
 			this.xTo = this.x;
 			this.yTo = this.y;
-			if (this.tick == 12)
+			bool flag9 = this.tick == 12;
+			if (flag9)
 			{
 				for (int k = 0; k < this.charAttack.Length; k++)
 				{
@@ -371,112 +402,122 @@ public class BigBoss2 : Mob, IMapObject
 		}
 	}
 
-	// Token: 0x060005F7 RID: 1527 RVA: 0x0005B965 File Offset: 0x00059D65
+	// Token: 0x06000082 RID: 130 RVA: 0x00003136 File Offset: 0x00001336
 	public new void updateMobWalk()
 	{
 	}
 
-	// Token: 0x060005F8 RID: 1528 RVA: 0x0005B968 File Offset: 0x00059D68
+	// Token: 0x06000083 RID: 131 RVA: 0x000079C8 File Offset: 0x00005BC8
 	public new bool isPaint()
 	{
 		return this.x >= GameScr.cmx && this.x <= GameScr.cmx + GameScr.gW && this.y >= GameScr.cmy && this.y <= GameScr.cmy + GameScr.gH + 30 && this.status != 0;
 	}
 
-	// Token: 0x060005F9 RID: 1529 RVA: 0x0005B9DA File Offset: 0x00059DDA
+	// Token: 0x06000084 RID: 132 RVA: 0x00007A2C File Offset: 0x00005C2C
 	public new bool isUpdate()
 	{
 		return this.status != 0;
 	}
 
-	// Token: 0x060005FA RID: 1530 RVA: 0x0005B9EA File Offset: 0x00059DEA
+	// Token: 0x06000085 RID: 133 RVA: 0x00007A48 File Offset: 0x00005C48
 	public new bool checkIsBoss()
 	{
-		return this.isBoss || (int)this.levelBoss > 0;
+		return this.isBoss || this.levelBoss > 0;
 	}
 
-	// Token: 0x060005FB RID: 1531 RVA: 0x0005BA08 File Offset: 0x00059E08
+	// Token: 0x06000086 RID: 134 RVA: 0x00007A70 File Offset: 0x00005C70
 	public override void paint(mGraphics g)
 	{
-		if (BigBoss2.data == null)
+		bool flag = BigBoss2.data == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.isHide)
-		{
-			return;
-		}
-		if (this.isMafuba)
-		{
-			if (!this.changBody)
+			bool isHide = this.isHide;
+			if (!isHide)
 			{
-				BigBoss2.data.paintFrame(g, this.frame, this.xMFB, this.yMFB, (this.dir != 1) ? 1 : 0, 2);
-			}
-			else
-			{
-				SmallImage.drawSmallImage(g, (int)this.smallBody, this.xMFB, this.yMFB, (this.dir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER);
-			}
-			return;
-		}
-		if (this.isShadown && this.status != 0)
-		{
-			this.paintShadow(g);
-		}
-		g.translate(0, GameCanvas.transY);
-		if (!this.changBody)
-		{
-			BigBoss2.data.paintFrame(g, this.frame, this.x, this.y + this.fy, (this.dir != 1) ? 1 : 0, 2);
-		}
-		else
-		{
-			SmallImage.drawSmallImage(g, (int)this.smallBody, this.x, this.y + this.fy - 9, (this.dir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER);
-		}
-		g.translate(0, -GameCanvas.transY);
-		int imageWidth = mGraphics.getImageWidth(this.imgHPtem);
-		int imageHeight = mGraphics.getImageHeight(this.imgHPtem);
-		int num = imageWidth;
-		int num2 = this.x - imageWidth;
-		int y = this.y - this.h - 5;
-		int num3 = imageWidth * 2 * this.per / 100;
-		int num4;
-		if (num3 > num)
-		{
-			num4 = num3 - num;
-			if (num4 <= 0)
-			{
-				num4 = 0;
-			}
-		}
-		else
-		{
-			num = num3;
-			num4 = 0;
-		}
-		g.drawImage(GameScr.imgHP_tm_xam, num2, y, mGraphics.TOP | mGraphics.LEFT);
-		g.drawImage(GameScr.imgHP_tm_xam, num2 + imageWidth, y, mGraphics.TOP | mGraphics.LEFT);
-		g.drawRegion(this.imgHPtem, 0, 0, num, imageHeight, 0, num2, y, mGraphics.TOP | mGraphics.LEFT);
-		g.drawRegion(this.imgHPtem, 0, 0, num4, imageHeight, 0, num2 + imageWidth, y, mGraphics.TOP | mGraphics.LEFT);
-		if (this.shock)
-		{
-			this.tShock++;
-			Effect me = new Effect(((int)this.type != 2) ? 22 : 19, this.x + this.tShock * 50, this.y + 25, 2, 1, -1);
-			EffecMn.addEff(me);
-			Effect me2 = new Effect(((int)this.type != 2) ? 22 : 19, this.x - this.tShock * 50, this.y + 25, 2, 1, -1);
-			EffecMn.addEff(me2);
-			if (this.tShock == 50)
-			{
-				this.tShock = 0;
-				this.shock = false;
+				bool isMafuba = this.isMafuba;
+				if (isMafuba)
+				{
+					bool flag2 = !this.changBody;
+					if (flag2)
+					{
+						BigBoss2.data.paintFrame(g, this.frame, this.xMFB, this.yMFB, (this.dir != 1) ? 1 : 0, 2);
+					}
+					else
+					{
+						SmallImage.drawSmallImage(g, (int)this.smallBody, this.xMFB, this.yMFB, (this.dir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER);
+					}
+				}
+				else
+				{
+					bool flag3 = this.isShadown && this.status != 0;
+					if (flag3)
+					{
+						this.paintShadow(g);
+					}
+					g.translate(0, GameCanvas.transY);
+					bool flag4 = !this.changBody;
+					if (flag4)
+					{
+						BigBoss2.data.paintFrame(g, this.frame, this.x, this.y + this.fy, (this.dir != 1) ? 1 : 0, 2);
+					}
+					else
+					{
+						SmallImage.drawSmallImage(g, (int)this.smallBody, this.x, this.y + this.fy - 9, (this.dir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER);
+					}
+					g.translate(0, -GameCanvas.transY);
+					int imageWidth = mGraphics.getImageWidth(this.imgHPtem);
+					int imageHeight = mGraphics.getImageHeight(this.imgHPtem);
+					int num = imageWidth;
+					int num2 = this.x - imageWidth;
+					int y = this.y - this.h - 5;
+					int num3 = imageWidth * 2 * this.per / 100;
+					bool flag5 = num3 > num;
+					int num4;
+					if (flag5)
+					{
+						num4 = num3 - num;
+						bool flag6 = num4 <= 0;
+						if (flag6)
+						{
+							num4 = 0;
+						}
+					}
+					else
+					{
+						num = num3;
+						num4 = 0;
+					}
+					g.drawImage(GameScr.imgHP_tm_xam, num2, y, mGraphics.TOP | mGraphics.LEFT);
+					g.drawImage(GameScr.imgHP_tm_xam, num2 + imageWidth, y, mGraphics.TOP | mGraphics.LEFT);
+					g.drawRegion(this.imgHPtem, 0, 0, num, imageHeight, 0, num2, y, mGraphics.TOP | mGraphics.LEFT);
+					g.drawRegion(this.imgHPtem, 0, 0, num4, imageHeight, 0, num2 + imageWidth, y, mGraphics.TOP | mGraphics.LEFT);
+					bool flag7 = this.shock;
+					if (flag7)
+					{
+						this.tShock++;
+						Effect me = new Effect((this.type != 2) ? 22 : 19, this.x + this.tShock * 50, this.y + 25, 2, 1, -1);
+						EffecMn.addEff(me);
+						Effect me2 = new Effect((this.type != 2) ? 22 : 19, this.x - this.tShock * 50, this.y + 25, 2, 1, -1);
+						EffecMn.addEff(me2);
+						bool flag8 = this.tShock == 50;
+						if (flag8)
+						{
+							this.tShock = 0;
+							this.shock = false;
+						}
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x060005FC RID: 1532 RVA: 0x0005BCFF File Offset: 0x0005A0FF
+	// Token: 0x06000087 RID: 135 RVA: 0x00007D8C File Offset: 0x00005F8C
 	public new int getHPColor()
 	{
 		return 16711680;
 	}
 
-	// Token: 0x060005FD RID: 1533 RVA: 0x0005BD06 File Offset: 0x0005A106
+	// Token: 0x06000088 RID: 136 RVA: 0x00007DA3 File Offset: 0x00005FA3
 	public new void startDie()
 	{
 		this.hp = 0;
@@ -488,7 +529,7 @@ public class BigBoss2 : Mob, IMapObject
 		this.p3 = 0;
 	}
 
-	// Token: 0x060005FE RID: 1534 RVA: 0x0005BD40 File Offset: 0x0005A140
+	// Token: 0x06000089 RID: 137 RVA: 0x00007DE0 File Offset: 0x00005FE0
 	public new void attackOtherMob(Mob mobToAttack)
 	{
 		this.mobToAttack = mobToAttack;
@@ -501,9 +542,11 @@ public class BigBoss2 : Mob, IMapObject
 		this.dir = ((mobToAttack.x <= this.x) ? -1 : 1);
 		int x = mobToAttack.x;
 		int y = mobToAttack.y;
-		if (Res.abs(x - this.x) < this.w * 2 && Res.abs(y - this.y) < this.h * 2)
+		bool flag = Res.abs(x - this.x) < this.w * 2 && Res.abs(y - this.y) < this.h * 2;
+		if (flag)
 		{
-			if (this.x < x)
+			bool flag2 = this.x < x;
+			if (flag2)
 			{
 				this.x = x - this.w;
 			}
@@ -519,34 +562,35 @@ public class BigBoss2 : Mob, IMapObject
 		}
 	}
 
-	// Token: 0x060005FF RID: 1535 RVA: 0x0005BE1E File Offset: 0x0005A21E
+	// Token: 0x0600008A RID: 138 RVA: 0x00007EC0 File Offset: 0x000060C0
 	public new int getX()
 	{
 		return this.x;
 	}
 
-	// Token: 0x06000600 RID: 1536 RVA: 0x0005BE26 File Offset: 0x0005A226
+	// Token: 0x0600008B RID: 139 RVA: 0x00007ED8 File Offset: 0x000060D8
 	public new int getY()
 	{
 		return this.y - 50;
 	}
 
-	// Token: 0x06000601 RID: 1537 RVA: 0x0005BE31 File Offset: 0x0005A231
+	// Token: 0x0600008C RID: 140 RVA: 0x00007EF4 File Offset: 0x000060F4
 	public new int getH()
 	{
 		return 40;
 	}
 
-	// Token: 0x06000602 RID: 1538 RVA: 0x0005BE35 File Offset: 0x0005A235
+	// Token: 0x0600008D RID: 141 RVA: 0x00007F08 File Offset: 0x00006108
 	public new int getW()
 	{
 		return 50;
 	}
 
-	// Token: 0x06000603 RID: 1539 RVA: 0x0005BE3C File Offset: 0x0005A23C
+	// Token: 0x0600008E RID: 142 RVA: 0x00007F1C File Offset: 0x0000611C
 	public new void stopMoving()
 	{
-		if (this.status == 5)
+		bool flag = this.status == 5;
+		if (flag)
 		{
 			this.status = 2;
 			this.p1 = (this.p2 = (this.p3 = 0));
@@ -554,130 +598,131 @@ public class BigBoss2 : Mob, IMapObject
 		}
 	}
 
-	// Token: 0x06000604 RID: 1540 RVA: 0x0005BE7D File Offset: 0x0005A27D
+	// Token: 0x0600008F RID: 143 RVA: 0x00007F64 File Offset: 0x00006164
 	public new bool isInvisible()
 	{
 		return this.status == 0 || this.status == 1;
 	}
 
-	// Token: 0x06000605 RID: 1541 RVA: 0x0005BE96 File Offset: 0x0005A296
+	// Token: 0x06000090 RID: 144 RVA: 0x00007F8C File Offset: 0x0000618C
 	public new void removeHoldEff()
 	{
-		if (this.holdEffID != 0)
+		bool flag = this.holdEffID != 0;
+		if (flag)
 		{
 			this.holdEffID = 0;
 		}
 	}
 
-	// Token: 0x06000606 RID: 1542 RVA: 0x0005BEAA File Offset: 0x0005A2AA
+	// Token: 0x06000091 RID: 145 RVA: 0x00007FB0 File Offset: 0x000061B0
 	public new void removeBlindEff()
 	{
 		this.blindEff = false;
 	}
 
-	// Token: 0x06000607 RID: 1543 RVA: 0x0005BEB3 File Offset: 0x0005A2B3
+	// Token: 0x06000092 RID: 146 RVA: 0x00007FBA File Offset: 0x000061BA
 	public new void removeSleepEff()
 	{
 		this.sleepEff = false;
 	}
 
-	// Token: 0x04000A82 RID: 2690
+	// Token: 0x040000B7 RID: 183
 	public static Image shadowBig;
 
-	// Token: 0x04000A83 RID: 2691
+	// Token: 0x040000B8 RID: 184
 	public static EffectData data;
 
-	// Token: 0x04000A84 RID: 2692
+	// Token: 0x040000B9 RID: 185
 	public int xTo;
 
-	// Token: 0x04000A85 RID: 2693
+	// Token: 0x040000BA RID: 186
 	public int yTo;
 
-	// Token: 0x04000A86 RID: 2694
+	// Token: 0x040000BB RID: 187
 	public bool haftBody;
 
-	// Token: 0x04000A87 RID: 2695
+	// Token: 0x040000BC RID: 188
 	public bool change;
 
-	// Token: 0x04000A88 RID: 2696
+	// Token: 0x040000BD RID: 189
 	private Mob mob1;
 
-	// Token: 0x04000A89 RID: 2697
+	// Token: 0x040000BE RID: 190
 	public new int xSd;
 
-	// Token: 0x04000A8A RID: 2698
+	// Token: 0x040000BF RID: 191
 	public new int ySd;
 
-	// Token: 0x04000A8B RID: 2699
+	// Token: 0x040000C0 RID: 192
 	private bool isOutMap;
 
-	// Token: 0x04000A8C RID: 2700
+	// Token: 0x040000C1 RID: 193
 	private int wCount;
 
-	// Token: 0x04000A8D RID: 2701
+	// Token: 0x040000C2 RID: 194
 	public new bool isShadown = true;
 
-	// Token: 0x04000A8E RID: 2702
+	// Token: 0x040000C3 RID: 195
 	private int tick;
 
-	// Token: 0x04000A8F RID: 2703
+	// Token: 0x040000C4 RID: 196
 	private int frame;
 
-	// Token: 0x04000A90 RID: 2704
+	// Token: 0x040000C5 RID: 197
 	public new static Image imgHP = GameCanvas.loadImage("/mainImage/myTexture2dmobHP.png");
 
-	// Token: 0x04000A91 RID: 2705
+	// Token: 0x040000C6 RID: 198
 	private bool wy;
 
-	// Token: 0x04000A92 RID: 2706
+	// Token: 0x040000C7 RID: 199
 	private int wt;
 
-	// Token: 0x04000A93 RID: 2707
+	// Token: 0x040000C8 RID: 200
 	private int fy;
 
-	// Token: 0x04000A94 RID: 2708
+	// Token: 0x040000C9 RID: 201
 	private int ty;
 
-	// Token: 0x04000A95 RID: 2709
+	// Token: 0x040000CA RID: 202
 	public new int typeSuperEff;
 
-	// Token: 0x04000A96 RID: 2710
+	// Token: 0x040000CB RID: 203
 	private global::Char focus;
 
-	// Token: 0x04000A97 RID: 2711
+	// Token: 0x040000CC RID: 204
 	private int timeDead;
 
-	// Token: 0x04000A98 RID: 2712
+	// Token: 0x040000CD RID: 205
 	private bool flyUp;
 
-	// Token: 0x04000A99 RID: 2713
+	// Token: 0x040000CE RID: 206
 	private bool flyDown;
 
-	// Token: 0x04000A9A RID: 2714
+	// Token: 0x040000CF RID: 207
 	private int dy;
 
-	// Token: 0x04000A9B RID: 2715
+	// Token: 0x040000D0 RID: 208
 	public bool changePos;
 
-	// Token: 0x04000A9C RID: 2716
+	// Token: 0x040000D1 RID: 209
 	private int tShock;
 
-	// Token: 0x04000A9D RID: 2717
+	// Token: 0x040000D2 RID: 210
 	public new bool isBusyAttackSomeOne = true;
 
-	// Token: 0x04000A9E RID: 2718
+	// Token: 0x040000D3 RID: 211
 	private int tA;
 
-	// Token: 0x04000A9F RID: 2719
+	// Token: 0x040000D4 RID: 212
 	private global::Char[] charAttack;
 
-	// Token: 0x04000AA0 RID: 2720
+	// Token: 0x040000D5 RID: 213
 	private int[] dameHP;
 
-	// Token: 0x04000AA1 RID: 2721
+	// Token: 0x040000D6 RID: 214
 	private sbyte type;
 
-	// Token: 0x04000AA2 RID: 2722
+	// Token: 0x040000D7 RID: 215
 	public new int[] stand = new int[]
 	{
 		0,
@@ -694,7 +739,7 @@ public class BigBoss2 : Mob, IMapObject
 		1
 	};
 
-	// Token: 0x04000AA3 RID: 2723
+	// Token: 0x040000D8 RID: 216
 	public new int[] move = new int[]
 	{
 		1,
@@ -714,7 +759,7 @@ public class BigBoss2 : Mob, IMapObject
 		2
 	};
 
-	// Token: 0x04000AA4 RID: 2724
+	// Token: 0x040000D9 RID: 217
 	public new int[] moveFast = new int[]
 	{
 		1,
@@ -726,7 +771,7 @@ public class BigBoss2 : Mob, IMapObject
 		2
 	};
 
-	// Token: 0x04000AA5 RID: 2725
+	// Token: 0x040000DA RID: 218
 	public new int[] attack1 = new int[]
 	{
 		0,
@@ -743,7 +788,7 @@ public class BigBoss2 : Mob, IMapObject
 		9
 	};
 
-	// Token: 0x04000AA6 RID: 2726
+	// Token: 0x040000DB RID: 219
 	public new int[] attack2 = new int[]
 	{
 		0,
@@ -760,7 +805,7 @@ public class BigBoss2 : Mob, IMapObject
 		12
 	};
 
-	// Token: 0x04000AA7 RID: 2727
+	// Token: 0x040000DC RID: 220
 	public int[] attack3 = new int[]
 	{
 		0,
@@ -789,7 +834,7 @@ public class BigBoss2 : Mob, IMapObject
 		1
 	};
 
-	// Token: 0x04000AA8 RID: 2728
+	// Token: 0x040000DD RID: 221
 	public int[] fly = new int[]
 	{
 		4,
@@ -815,7 +860,7 @@ public class BigBoss2 : Mob, IMapObject
 		1
 	};
 
-	// Token: 0x04000AA9 RID: 2729
+	// Token: 0x040000DE RID: 222
 	public int[] hitground = new int[]
 	{
 		6,
@@ -832,31 +877,31 @@ public class BigBoss2 : Mob, IMapObject
 		1
 	};
 
-	// Token: 0x04000AAA RID: 2730
+	// Token: 0x040000DF RID: 223
 	private bool shock;
 
-	// Token: 0x04000AAB RID: 2731
+	// Token: 0x040000E0 RID: 224
 	private sbyte[] cou = new sbyte[]
 	{
 		-1,
 		1
 	};
 
-	// Token: 0x04000AAC RID: 2732
+	// Token: 0x040000E1 RID: 225
 	public new global::Char injureBy;
 
-	// Token: 0x04000AAD RID: 2733
+	// Token: 0x040000E2 RID: 226
 	public new bool injureThenDie;
 
-	// Token: 0x04000AAE RID: 2734
+	// Token: 0x040000E3 RID: 227
 	public new Mob mobToAttack;
 
-	// Token: 0x04000AAF RID: 2735
+	// Token: 0x040000E4 RID: 228
 	public new int forceWait;
 
-	// Token: 0x04000AB0 RID: 2736
+	// Token: 0x040000E5 RID: 229
 	public new bool blindEff;
 
-	// Token: 0x04000AB1 RID: 2737
+	// Token: 0x040000E6 RID: 230
 	public new bool sleepEff;
 }

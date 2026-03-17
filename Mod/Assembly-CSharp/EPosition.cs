@@ -1,16 +1,16 @@
 ﻿using System;
 
-// Token: 0x02000038 RID: 56
+// Token: 0x02000030 RID: 48
 public class EPosition
 {
-	// Token: 0x06000255 RID: 597 RVA: 0x00011D00 File Offset: 0x00010100
+	// Token: 0x06000274 RID: 628 RVA: 0x0003B515 File Offset: 0x00039715
 	public EPosition(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
 
-	// Token: 0x06000256 RID: 598 RVA: 0x00011D24 File Offset: 0x00010124
+	// Token: 0x06000275 RID: 629 RVA: 0x0003B53B File Offset: 0x0003973B
 	public EPosition(int x, int y, int fol)
 	{
 		this.x = x;
@@ -18,29 +18,29 @@ public class EPosition
 		this.follow = (sbyte)fol;
 	}
 
-	// Token: 0x06000257 RID: 599 RVA: 0x00011D50 File Offset: 0x00010150
+	// Token: 0x06000276 RID: 630 RVA: 0x0003B569 File Offset: 0x00039769
 	public EPosition()
 	{
 	}
 
-	// Token: 0x0400028E RID: 654
+	// Token: 0x0400058A RID: 1418
 	public int x;
 
-	// Token: 0x0400028F RID: 655
+	// Token: 0x0400058B RID: 1419
 	public int y;
 
-	// Token: 0x04000290 RID: 656
+	// Token: 0x0400058C RID: 1420
 	public int anchor;
 
-	// Token: 0x04000291 RID: 657
+	// Token: 0x0400058D RID: 1421
 	public sbyte follow;
 
-	// Token: 0x04000292 RID: 658
+	// Token: 0x0400058E RID: 1422
 	public sbyte count;
 
-	// Token: 0x04000293 RID: 659
+	// Token: 0x0400058F RID: 1423
 	public sbyte dir = 1;
 
-	// Token: 0x04000294 RID: 660
+	// Token: 0x04000590 RID: 1424
 	public short index = -1;
 }

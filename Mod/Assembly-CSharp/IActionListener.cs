@@ -1,8 +1,8 @@
 ﻿using System;
 
-// Token: 0x0200005D RID: 93
+// Token: 0x0200003D RID: 61
 public interface IActionListener
 {
-	// Token: 0x06000345 RID: 837
+	// Token: 0x060003AB RID: 939
 	void perform(int idAction, object p);
 }

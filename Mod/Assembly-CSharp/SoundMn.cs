@@ -1,25 +1,26 @@
 ﻿using System;
 
-// Token: 0x02000089 RID: 137
+// Token: 0x020000A8 RID: 168
 public class SoundMn
 {
-	// Token: 0x06000469 RID: 1129 RVA: 0x000355E5 File Offset: 0x000339E5
+	// Token: 0x06000965 RID: 2405 RVA: 0x0009C48A File Offset: 0x0009A68A
 	public static void init(SoundMn.AssetManager ac)
 	{
 		Sound.setActivity(ac);
 	}
 
-	// Token: 0x0600046A RID: 1130 RVA: 0x000355ED File Offset: 0x000339ED
+	// Token: 0x06000966 RID: 2406 RVA: 0x0009C494 File Offset: 0x0009A694
 	public static SoundMn gI()
 	{
-		if (SoundMn.gIz == null)
+		bool flag = SoundMn.gIz == null;
+		if (flag)
 		{
 			SoundMn.gIz = new SoundMn();
 		}
 		return SoundMn.gIz;
 	}
 
-	// Token: 0x0600046B RID: 1131 RVA: 0x00035608 File Offset: 0x00033A08
+	// Token: 0x06000967 RID: 2407 RVA: 0x0009C4C4 File Offset: 0x0009A6C4
 	public void loadSound(int mapID)
 	{
 		Sound.init(new int[]
@@ -71,10 +72,11 @@ public class SoundMn
 		});
 	}
 
-	// Token: 0x0600046C RID: 1132 RVA: 0x00035798 File Offset: 0x00033B98
+	// Token: 0x06000968 RID: 2408 RVA: 0x0009C654 File Offset: 0x0009A854
 	public void getSoundOption()
 	{
-		if (GameCanvas.loginScr.isLogin2 && global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId >= 2)
+		bool flag = GameCanvas.loginScr.isLogin2 && global::Char.myCharz().taskMaint != null && global::Char.myCharz().taskMaint.taskId >= 2;
+		if (flag)
 		{
 			Panel.strTool = new string[]
 			{
@@ -89,7 +91,8 @@ public class SoundMn
 				mResources.change_account,
 				mResources.REGISTOPROTECT
 			};
-			if (global::Char.myCharz().havePet)
+			bool havePet = global::Char.myCharz().havePet;
+			if (havePet)
 			{
 				Panel.strTool = new string[]
 				{
@@ -121,7 +124,8 @@ public class SoundMn
 				mResources.option,
 				mResources.change_account
 			};
-			if (global::Char.myCharz().havePet)
+			bool havePet2 = global::Char.myCharz().havePet;
+			if (havePet2)
 			{
 				Panel.strTool = new string[]
 				{
@@ -138,7 +142,8 @@ public class SoundMn
 				};
 			}
 		}
-		if (SoundMn.IsDelAcc)
+		bool isDelAcc = SoundMn.IsDelAcc;
+		if (isDelAcc)
 		{
 			string[] array = new string[Panel.strTool.Length + 1];
 			for (int i = 0; i < Panel.strTool.Length; i++)
@@ -150,12 +155,13 @@ public class SoundMn
 		}
 	}
 
-	// Token: 0x0600046D RID: 1133 RVA: 0x000359C0 File Offset: 0x00033DC0
+	// Token: 0x06000969 RID: 2409 RVA: 0x0009C894 File Offset: 0x0009AA94
 	public void getStrOption()
 	{
 		string str = "[x]   ";
 		string str2 = "[  ]   ";
-		if (Main.isPC)
+		bool isPC = Main.isPC;
+		if (isPC)
 		{
 			Panel.strCauhinh = new string[]
 			{
@@ -168,7 +174,8 @@ public class SoundMn
 		else
 		{
 			string text = (GameScr.isAnalog != 0) ? (str + mResources.turnOffAnalog) : (str2 + mResources.turnOnAnalog);
-			if (!GameCanvas.isTouch)
+			bool flag = !GameCanvas.isTouch;
+			if (flag)
 			{
 				text = (GameScr.isPaintChatVip ? (str + mResources.serverchat_off) : (str2 + mResources.serverchat_off));
 			}
@@ -183,20 +190,22 @@ public class SoundMn
 		}
 	}
 
-	// Token: 0x0600046E RID: 1134 RVA: 0x00035B99 File Offset: 0x00033F99
+	// Token: 0x0600096A RID: 2410 RVA: 0x0009CA3E File Offset: 0x0009AC3E
 	public void HP_MPup()
 	{
 		Sound.playSound(SoundMn.HP_UP, 0.5f);
 	}
 
-	// Token: 0x0600046F RID: 1135 RVA: 0x00035BAC File Offset: 0x00033FAC
+	// Token: 0x0600096B RID: 2411 RVA: 0x0009CA54 File Offset: 0x0009AC54
 	public void charPunch(bool isKick, float volumn)
 	{
-		if (!global::Char.myCharz().me)
+		bool flag = !global::Char.myCharz().me;
+		if (flag)
 		{
 			SoundMn.volume /= 2f;
 		}
-		if (volumn <= 0f)
+		bool flag2 = volumn <= 0f;
+		if (flag2)
 		{
 			volumn = 0.01f;
 		}
@@ -212,45 +221,46 @@ public class SoundMn
 		this.poolCount++;
 	}
 
-	// Token: 0x06000470 RID: 1136 RVA: 0x00035C49 File Offset: 0x00034049
+	// Token: 0x0600096C RID: 2412 RVA: 0x0009CAF2 File Offset: 0x0009ACF2
 	public void thaiduonghasan()
 	{
 		Sound.playSound(SoundMn.THAIDUONGHASAN, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000471 RID: 1137 RVA: 0x00035C68 File Offset: 0x00034068
+	// Token: 0x0600096D RID: 2413 RVA: 0x0009CB13 File Offset: 0x0009AD13
 	public void rain()
 	{
 		Sound.playMus(SoundMn.RAIN, 0.3f, true);
 	}
 
-	// Token: 0x06000472 RID: 1138 RVA: 0x00035C7A File Offset: 0x0003407A
+	// Token: 0x0600096E RID: 2414 RVA: 0x0009CB27 File Offset: 0x0009AD27
 	public void gongName()
 	{
 		Sound.playSound(SoundMn.NAMEK_CHARGE, 0.3f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000473 RID: 1139 RVA: 0x00035C99 File Offset: 0x00034099
+	// Token: 0x0600096F RID: 2415 RVA: 0x0009CB48 File Offset: 0x0009AD48
 	public void gong()
 	{
 		Sound.playSound(SoundMn.GONG, 0.2f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000474 RID: 1140 RVA: 0x00035CB8 File Offset: 0x000340B8
+	// Token: 0x06000970 RID: 2416 RVA: 0x0009CB69 File Offset: 0x0009AD69
 	public void getItem()
 	{
 		Sound.playSound(SoundMn.GET_ITEM, 0.3f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000475 RID: 1141 RVA: 0x00035CD8 File Offset: 0x000340D8
+	// Token: 0x06000971 RID: 2417 RVA: 0x0009CB8C File Offset: 0x0009AD8C
 	public void soundToolOption()
 	{
 		GameCanvas.isPlaySound = !GameCanvas.isPlaySound;
-		if (GameCanvas.isPlaySound)
+		bool isPlaySound = GameCanvas.isPlaySound;
+		if (isPlaySound)
 		{
 			SoundMn.gI().loadSound(TileMap.mapID);
 			Rms.saveRMSInt("isPlaySound", 1);
@@ -263,11 +273,12 @@ public class SoundMn
 		this.getStrOption();
 	}
 
-	// Token: 0x06000476 RID: 1142 RVA: 0x00035D36 File Offset: 0x00034136
+	// Token: 0x06000972 RID: 2418 RVA: 0x0009CBF0 File Offset: 0x0009ADF0
 	public void chatVipToolOption()
 	{
 		GameScr.isPaintChatVip = !GameScr.isPaintChatVip;
-		if (GameScr.isPaintChatVip)
+		bool isPaintChatVip = GameScr.isPaintChatVip;
+		if (isPaintChatVip)
 		{
 			Rms.saveRMSInt("serverchat", 0);
 		}
@@ -278,10 +289,11 @@ public class SoundMn
 		this.getStrOption();
 	}
 
-	// Token: 0x06000477 RID: 1143 RVA: 0x00035D70 File Offset: 0x00034170
+	// Token: 0x06000973 RID: 2419 RVA: 0x0009CC3C File Offset: 0x0009AE3C
 	public void analogToolOption()
 	{
-		if (GameScr.isAnalog == 0)
+		bool flag = GameScr.isAnalog == 0;
+		if (flag)
 		{
 			GameScr.isAnalog = 1;
 			Rms.saveRMSInt("analog", GameScr.isAnalog);
@@ -296,12 +308,14 @@ public class SoundMn
 		this.getStrOption();
 	}
 
-	// Token: 0x06000478 RID: 1144 RVA: 0x00035DC6 File Offset: 0x000341C6
+	// Token: 0x06000974 RID: 2420 RVA: 0x0009CC9C File Offset: 0x0009AE9C
 	public void CaseAnalog()
 	{
-		if (!Main.isPC)
+		bool flag = !Main.isPC;
+		if (flag)
 		{
-			if (!GameCanvas.isTouch)
+			bool flag2 = !GameCanvas.isTouch;
+			if (flag2)
 			{
 				this.chatVipToolOption();
 			}
@@ -312,10 +326,11 @@ public class SoundMn
 		}
 	}
 
-	// Token: 0x06000479 RID: 1145 RVA: 0x00035DF4 File Offset: 0x000341F4
+	// Token: 0x06000975 RID: 2421 RVA: 0x0009CCD8 File Offset: 0x0009AED8
 	public void CaseSizeScr()
 	{
-		if (GameCanvas.lowGraphic)
+		bool lowGraphic = GameCanvas.lowGraphic;
+		if (lowGraphic)
 		{
 			Rms.saveRMSInt("lowGraphic", 0);
 			GameCanvas.startOK(mResources.plsRestartGame, 8885, null);
@@ -328,10 +343,11 @@ public class SoundMn
 		this.getStrOption();
 	}
 
-	// Token: 0x0600047A RID: 1146 RVA: 0x00035E4C File Offset: 0x0003424C
+	// Token: 0x06000976 RID: 2422 RVA: 0x0009CD38 File Offset: 0x0009AF38
 	public void AuraToolOption()
 	{
-		if (global::Char.isPaintAura)
+		bool isPaintAura = global::Char.isPaintAura;
+		if (isPaintAura)
 		{
 			Rms.saveRMSInt("isPaintAura", 0);
 			global::Char.isPaintAura = false;
@@ -344,10 +360,11 @@ public class SoundMn
 		this.getStrOption();
 	}
 
-	// Token: 0x0600047B RID: 1147 RVA: 0x00035E85 File Offset: 0x00034285
+	// Token: 0x06000977 RID: 2423 RVA: 0x0009CD80 File Offset: 0x0009AF80
 	public void AuraToolOption2()
 	{
-		if (global::Char.isPaintAura2)
+		bool isPaintAura = global::Char.isPaintAura2;
+		if (isPaintAura)
 		{
 			Rms.saveRMSInt("isPaintAura2", 0);
 			global::Char.isPaintAura2 = false;
@@ -360,88 +377,90 @@ public class SoundMn
 		this.getStrOption();
 	}
 
-	// Token: 0x0600047C RID: 1148 RVA: 0x00035EBE File Offset: 0x000342BE
+	// Token: 0x06000978 RID: 2424 RVA: 0x0009CDC8 File Offset: 0x0009AFC8
 	public void HatToolOption()
 	{
 		Service.gI().sendOptHat(0);
 	}
 
-	// Token: 0x0600047D RID: 1149 RVA: 0x00035ECB File Offset: 0x000342CB
+	// Token: 0x06000979 RID: 2425 RVA: 0x00003136 File Offset: 0x00001336
 	public void update()
 	{
 	}
 
-	// Token: 0x0600047E RID: 1150 RVA: 0x00035ECD File Offset: 0x000342CD
+	// Token: 0x0600097A RID: 2426 RVA: 0x0009CDD7 File Offset: 0x0009AFD7
 	public void closeSound()
 	{
 		Sound.stopAll = true;
 		this.stopAll();
 	}
 
-	// Token: 0x0600047F RID: 1151 RVA: 0x00035EDB File Offset: 0x000342DB
+	// Token: 0x0600097B RID: 2427 RVA: 0x0009CDE8 File Offset: 0x0009AFE8
 	public void openSound()
 	{
-		if (Sound.music == null)
+		bool flag = Sound.music == null;
+		if (flag)
 		{
 			this.loadSound(0);
 		}
 		Sound.stopAll = false;
 	}
 
-	// Token: 0x06000480 RID: 1152 RVA: 0x00035EF4 File Offset: 0x000342F4
+	// Token: 0x0600097C RID: 2428 RVA: 0x0009CE12 File Offset: 0x0009B012
 	public void bigeExlode()
 	{
 		Sound.playSound(SoundMn.BIG_EXPLODE, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000481 RID: 1153 RVA: 0x00035F13 File Offset: 0x00034313
+	// Token: 0x0600097D RID: 2429 RVA: 0x0009CE33 File Offset: 0x0009B033
 	public void explode_1()
 	{
 		Sound.playSound(SoundMn.EXPLODE_1, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000482 RID: 1154 RVA: 0x00035F32 File Offset: 0x00034332
+	// Token: 0x0600097E RID: 2430 RVA: 0x0009CE33 File Offset: 0x0009B033
 	public void explode_2()
 	{
 		Sound.playSound(SoundMn.EXPLODE_1, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000483 RID: 1155 RVA: 0x00035F51 File Offset: 0x00034351
+	// Token: 0x0600097F RID: 2431 RVA: 0x0009CE54 File Offset: 0x0009B054
 	public void traidatKame()
 	{
 		Sound.playSound(SoundMn.TRAIDAT_KAME, 1f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000484 RID: 1156 RVA: 0x00035F70 File Offset: 0x00034370
+	// Token: 0x06000980 RID: 2432 RVA: 0x0009CE75 File Offset: 0x0009B075
 	public void namekKame()
 	{
 		Sound.playSound(SoundMn.NAMEK_KAME, 0.3f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000485 RID: 1157 RVA: 0x00035F8F File Offset: 0x0003438F
+	// Token: 0x06000981 RID: 2433 RVA: 0x0009CE96 File Offset: 0x0009B096
 	public void nameLazer()
 	{
 		Sound.playSound(SoundMn.NAMEK_LAZER, 0.3f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000486 RID: 1158 RVA: 0x00035FAE File Offset: 0x000343AE
+	// Token: 0x06000982 RID: 2434 RVA: 0x0009CEB7 File Offset: 0x0009B0B7
 	public void xaydaKame()
 	{
 		Sound.playSound(SoundMn.XAYDA_KAME, 0.3f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000487 RID: 1159 RVA: 0x00035FD0 File Offset: 0x000343D0
+	// Token: 0x06000983 RID: 2435 RVA: 0x0009CED8 File Offset: 0x0009B0D8
 	public void mobKame(int type)
 	{
 		int id = SoundMn.XAYDA_KAME;
-		if (type == 13)
+		bool flag = type == 13;
+		if (flag)
 		{
 			id = SoundMn.NORMAL_KAME;
 		}
@@ -449,132 +468,136 @@ public class SoundMn
 		this.poolCount++;
 	}
 
-	// Token: 0x06000488 RID: 1160 RVA: 0x0003600C File Offset: 0x0003440C
+	// Token: 0x06000984 RID: 2436 RVA: 0x0009CF18 File Offset: 0x0009B118
 	public void charRun(float volumn)
 	{
-		if (!global::Char.myCharz().me)
+		bool flag = !global::Char.myCharz().me;
+		if (flag)
 		{
 			SoundMn.volume /= 2f;
-			if (volumn <= 0f)
+			bool flag2 = volumn <= 0f;
+			if (flag2)
 			{
 				volumn = 0.01f;
 			}
 		}
-		if (GameCanvas.gameTick % 8 == 0)
+		bool flag3 = GameCanvas.gameTick % 8 == 0;
+		if (flag3)
 		{
 			Sound.playSound(SoundMn.MOVE, volumn);
 			this.poolCount++;
 		}
 	}
 
-	// Token: 0x06000489 RID: 1161 RVA: 0x0003606F File Offset: 0x0003446F
+	// Token: 0x06000985 RID: 2437 RVA: 0x0009CF8C File Offset: 0x0009B18C
 	public void monkeyRun(float volumn)
 	{
-		if (GameCanvas.gameTick % 8 == 0)
+		bool flag = GameCanvas.gameTick % 8 == 0;
+		if (flag)
 		{
 			Sound.playSound(SoundMn.KHICHAY, 0.2f);
 			this.poolCount++;
 		}
 	}
 
-	// Token: 0x0600048A RID: 1162 RVA: 0x0003609A File Offset: 0x0003449A
+	// Token: 0x06000986 RID: 2438 RVA: 0x0009CFC8 File Offset: 0x0009B1C8
 	public void charFall()
 	{
 		Sound.playSound(SoundMn.MOVE, 0.1f);
 		this.poolCount++;
 	}
 
-	// Token: 0x0600048B RID: 1163 RVA: 0x000360B9 File Offset: 0x000344B9
+	// Token: 0x06000987 RID: 2439 RVA: 0x0009CFE9 File Offset: 0x0009B1E9
 	public void charJump()
 	{
 		Sound.playSound(SoundMn.MOVE, 0.2f);
 		this.poolCount++;
 	}
 
-	// Token: 0x0600048C RID: 1164 RVA: 0x000360D8 File Offset: 0x000344D8
+	// Token: 0x06000988 RID: 2440 RVA: 0x0009D00A File Offset: 0x0009B20A
 	public void panelOpen()
 	{
 		Sound.playSound(SoundMn.PANEL_OPEN, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x0600048D RID: 1165 RVA: 0x000360F7 File Offset: 0x000344F7
+	// Token: 0x06000989 RID: 2441 RVA: 0x0009D02B File Offset: 0x0009B22B
 	public void buttonClose()
 	{
 		Sound.playSound(SoundMn.BUTTON_CLOSE, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x0600048E RID: 1166 RVA: 0x00036116 File Offset: 0x00034516
+	// Token: 0x0600098A RID: 2442 RVA: 0x0009D04C File Offset: 0x0009B24C
 	public void buttonClick()
 	{
 		Sound.playSound(SoundMn.BUTTON_CLICK, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x0600048F RID: 1167 RVA: 0x00036135 File Offset: 0x00034535
+	// Token: 0x0600098B RID: 2443 RVA: 0x00003136 File Offset: 0x00001336
 	public void stopMove()
 	{
 	}
 
-	// Token: 0x06000490 RID: 1168 RVA: 0x00036137 File Offset: 0x00034537
+	// Token: 0x0600098C RID: 2444 RVA: 0x0009D06D File Offset: 0x0009B26D
 	public void charFly()
 	{
 		Sound.playSound(SoundMn.FLY, 0.2f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000491 RID: 1169 RVA: 0x00036156 File Offset: 0x00034556
+	// Token: 0x0600098D RID: 2445 RVA: 0x00003136 File Offset: 0x00001336
 	public void stopFly()
 	{
 	}
 
-	// Token: 0x06000492 RID: 1170 RVA: 0x00036158 File Offset: 0x00034558
+	// Token: 0x0600098E RID: 2446 RVA: 0x0009D02B File Offset: 0x0009B22B
 	public void openMenu()
 	{
 		Sound.playSound(SoundMn.BUTTON_CLOSE, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000493 RID: 1171 RVA: 0x00036177 File Offset: 0x00034577
+	// Token: 0x0600098F RID: 2447 RVA: 0x0009D08E File Offset: 0x0009B28E
 	public void panelClick()
 	{
 		Sound.playSound(SoundMn.PANEL_CLICK, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000494 RID: 1172 RVA: 0x00036196 File Offset: 0x00034596
+	// Token: 0x06000990 RID: 2448 RVA: 0x0009D0AF File Offset: 0x0009B2AF
 	public void eatPeans()
 	{
 		Sound.playSound(SoundMn.EAT_PEAN, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000495 RID: 1173 RVA: 0x000361B5 File Offset: 0x000345B5
+	// Token: 0x06000991 RID: 2449 RVA: 0x0009D0D0 File Offset: 0x0009B2D0
 	public void openDialog()
 	{
 		Sound.playSound(SoundMn.OPEN_DIALOG, 0.5f);
 	}
 
-	// Token: 0x06000496 RID: 1174 RVA: 0x000361C6 File Offset: 0x000345C6
+	// Token: 0x06000992 RID: 2450 RVA: 0x0009D0E3 File Offset: 0x0009B2E3
 	public void hoisinh()
 	{
 		Sound.playSound(SoundMn.HOISINH, 0.5f);
 		this.poolCount++;
 	}
 
-	// Token: 0x06000497 RID: 1175 RVA: 0x000361E5 File Offset: 0x000345E5
+	// Token: 0x06000993 RID: 2451 RVA: 0x0009D104 File Offset: 0x0009B304
 	public void taitao()
 	{
 		Sound.playMus(SoundMn.TAITAONANGLUONG, 0.5f, true);
 	}
 
-	// Token: 0x06000498 RID: 1176 RVA: 0x000361F7 File Offset: 0x000345F7
+	// Token: 0x06000994 RID: 2452 RVA: 0x00003136 File Offset: 0x00001336
 	public void taitaoPause()
 	{
 	}
 
-	// Token: 0x06000499 RID: 1177 RVA: 0x000361FC File Offset: 0x000345FC
+	// Token: 0x06000995 RID: 2453 RVA: 0x0009D118 File Offset: 0x0009B318
 	public bool isPlayRain()
 	{
 		bool result;
@@ -589,39 +612,40 @@ public class SoundMn
 		return result;
 	}
 
-	// Token: 0x0600049A RID: 1178 RVA: 0x00036230 File Offset: 0x00034630
+	// Token: 0x06000996 RID: 2454 RVA: 0x0009D14C File Offset: 0x0009B34C
 	public bool isPlayAirShip()
 	{
 		return false;
 	}
 
-	// Token: 0x0600049B RID: 1179 RVA: 0x00036233 File Offset: 0x00034633
+	// Token: 0x06000997 RID: 2455 RVA: 0x0009D160 File Offset: 0x0009B360
 	public void airShip()
 	{
 		SoundMn.cout++;
-		if (SoundMn.cout % 2 == 0)
+		bool flag = SoundMn.cout % 2 == 0;
+		if (flag)
 		{
 			Sound.playMus(SoundMn.AIR_SHIP, 0.3f, false);
 		}
 	}
 
-	// Token: 0x0600049C RID: 1180 RVA: 0x0003625D File Offset: 0x0003465D
+	// Token: 0x06000998 RID: 2456 RVA: 0x00003136 File Offset: 0x00001336
 	public void pauseAirShip()
 	{
 	}
 
-	// Token: 0x0600049D RID: 1181 RVA: 0x0003625F File Offset: 0x0003465F
+	// Token: 0x06000999 RID: 2457 RVA: 0x00003136 File Offset: 0x00001336
 	public void resumeAirShip()
 	{
 	}
 
-	// Token: 0x0600049E RID: 1182 RVA: 0x00036261 File Offset: 0x00034661
+	// Token: 0x0600099A RID: 2458 RVA: 0x0009D19B File Offset: 0x0009B39B
 	public void stopAll()
 	{
 		Sound.stopAllz();
 	}
 
-	// Token: 0x0600049F RID: 1183 RVA: 0x00036268 File Offset: 0x00034668
+	// Token: 0x0600099B RID: 2459 RVA: 0x0009D1A4 File Offset: 0x0009B3A4
 	public void backToRegister()
 	{
 		Session_ME.gI().close();
@@ -630,204 +654,205 @@ public class SoundMn
 		GameCanvas.loginScr.switchToMe();
 	}
 
-	// Token: 0x060004A0 RID: 1184 RVA: 0x00036292 File Offset: 0x00034692
+	// Token: 0x0600099C RID: 2460 RVA: 0x0009D1D4 File Offset: 0x0009B3D4
 	public void newKame()
 	{
 		this.poolCount++;
-		if (this.poolCount % 15 == 0)
+		bool flag = this.poolCount % 15 == 0;
+		if (flag)
 		{
 			Sound.playSound(SoundMn.TRAIDAT_KAME, 0.5f);
 		}
 	}
 
-	// Token: 0x060004A1 RID: 1185 RVA: 0x000362BF File Offset: 0x000346BF
+	// Token: 0x0600099D RID: 2461 RVA: 0x0009D212 File Offset: 0x0009B412
 	public void radarClick()
 	{
 		Sound.playSound(SoundMn.RADAR_CLICK, 0.5f);
 	}
 
-	// Token: 0x060004A2 RID: 1186 RVA: 0x000362D0 File Offset: 0x000346D0
+	// Token: 0x0600099E RID: 2462 RVA: 0x0009D225 File Offset: 0x0009B425
 	public void radarItem()
 	{
 		Sound.playSound(SoundMn.RADAR_ITEM, 0.5f);
 	}
 
-	// Token: 0x060004A3 RID: 1187 RVA: 0x000362E1 File Offset: 0x000346E1
+	// Token: 0x0600099F RID: 2463 RVA: 0x0009D238 File Offset: 0x0009B438
 	public static void playSound(int x, int y, int id, float volume)
 	{
 		Sound.playSound(id, volume);
 	}
 
-	// Token: 0x040007C3 RID: 1987
+	// Token: 0x040011B6 RID: 4534
 	public static bool IsDelAcc;
 
-	// Token: 0x040007C4 RID: 1988
+	// Token: 0x040011B7 RID: 4535
 	public static SoundMn gIz;
 
-	// Token: 0x040007C5 RID: 1989
+	// Token: 0x040011B8 RID: 4536
 	public static bool isSound = true;
 
-	// Token: 0x040007C6 RID: 1990
+	// Token: 0x040011B9 RID: 4537
 	public static float volume = 0.5f;
 
-	// Token: 0x040007C7 RID: 1991
+	// Token: 0x040011BA RID: 4538
 	private static int MAX_VOLUME = 10;
 
-	// Token: 0x040007C8 RID: 1992
+	// Token: 0x040011BB RID: 4539
 	public static SoundMn.MediaPlayer[] music;
 
-	// Token: 0x040007C9 RID: 1993
+	// Token: 0x040011BC RID: 4540
 	public static SoundMn.SoundPool[] sound;
 
-	// Token: 0x040007CA RID: 1994
+	// Token: 0x040011BD RID: 4541
 	public static int[] soundID;
 
-	// Token: 0x040007CB RID: 1995
+	// Token: 0x040011BE RID: 4542
 	public static int AIR_SHIP;
 
-	// Token: 0x040007CC RID: 1996
+	// Token: 0x040011BF RID: 4543
 	public static int RAIN = 1;
 
-	// Token: 0x040007CD RID: 1997
+	// Token: 0x040011C0 RID: 4544
 	public static int TAITAONANGLUONG = 2;
 
-	// Token: 0x040007CE RID: 1998
+	// Token: 0x040011C1 RID: 4545
 	public static int GET_ITEM;
 
-	// Token: 0x040007CF RID: 1999
+	// Token: 0x040011C2 RID: 4546
 	public static int MOVE = 1;
 
-	// Token: 0x040007D0 RID: 2000
+	// Token: 0x040011C3 RID: 4547
 	public static int LOW_PUNCH = 2;
 
-	// Token: 0x040007D1 RID: 2001
+	// Token: 0x040011C4 RID: 4548
 	public static int LOW_KICK = 3;
 
-	// Token: 0x040007D2 RID: 2002
+	// Token: 0x040011C5 RID: 4549
 	public static int FLY = 4;
 
-	// Token: 0x040007D3 RID: 2003
+	// Token: 0x040011C6 RID: 4550
 	public static int JUMP = 5;
 
-	// Token: 0x040007D4 RID: 2004
+	// Token: 0x040011C7 RID: 4551
 	public static int PANEL_OPEN = 6;
 
-	// Token: 0x040007D5 RID: 2005
+	// Token: 0x040011C8 RID: 4552
 	public static int BUTTON_CLOSE = 7;
 
-	// Token: 0x040007D6 RID: 2006
+	// Token: 0x040011C9 RID: 4553
 	public static int BUTTON_CLICK = 8;
 
-	// Token: 0x040007D7 RID: 2007
+	// Token: 0x040011CA RID: 4554
 	public static int MEDIUM_PUNCH = 9;
 
-	// Token: 0x040007D8 RID: 2008
+	// Token: 0x040011CB RID: 4555
 	public static int MEDIUM_KICK = 10;
 
-	// Token: 0x040007D9 RID: 2009
+	// Token: 0x040011CC RID: 4556
 	public static int PANEL_CLICK = 11;
 
-	// Token: 0x040007DA RID: 2010
+	// Token: 0x040011CD RID: 4557
 	public static int EAT_PEAN = 12;
 
-	// Token: 0x040007DB RID: 2011
+	// Token: 0x040011CE RID: 4558
 	public static int OPEN_DIALOG = 13;
 
-	// Token: 0x040007DC RID: 2012
+	// Token: 0x040011CF RID: 4559
 	public static int NORMAL_KAME = 14;
 
-	// Token: 0x040007DD RID: 2013
+	// Token: 0x040011D0 RID: 4560
 	public static int NAMEK_KAME = 15;
 
-	// Token: 0x040007DE RID: 2014
+	// Token: 0x040011D1 RID: 4561
 	public static int XAYDA_KAME = 16;
 
-	// Token: 0x040007DF RID: 2015
+	// Token: 0x040011D2 RID: 4562
 	public static int EXPLODE_1 = 17;
 
-	// Token: 0x040007E0 RID: 2016
+	// Token: 0x040011D3 RID: 4563
 	public static int EXPLODE_2 = 18;
 
-	// Token: 0x040007E1 RID: 2017
+	// Token: 0x040011D4 RID: 4564
 	public static int TRAIDAT_KAME = 19;
 
-	// Token: 0x040007E2 RID: 2018
+	// Token: 0x040011D5 RID: 4565
 	public static int HP_UP = 20;
 
-	// Token: 0x040007E3 RID: 2019
+	// Token: 0x040011D6 RID: 4566
 	public static int THAIDUONGHASAN = 21;
 
-	// Token: 0x040007E4 RID: 2020
+	// Token: 0x040011D7 RID: 4567
 	public static int HOISINH = 22;
 
-	// Token: 0x040007E5 RID: 2021
+	// Token: 0x040011D8 RID: 4568
 	public static int GONG = 23;
 
-	// Token: 0x040007E6 RID: 2022
+	// Token: 0x040011D9 RID: 4569
 	public static int KHICHAY = 24;
 
-	// Token: 0x040007E7 RID: 2023
+	// Token: 0x040011DA RID: 4570
 	public static int BIG_EXPLODE = 25;
 
-	// Token: 0x040007E8 RID: 2024
+	// Token: 0x040011DB RID: 4571
 	public static int NAMEK_LAZER = 26;
 
-	// Token: 0x040007E9 RID: 2025
+	// Token: 0x040011DC RID: 4572
 	public static int NAMEK_CHARGE = 27;
 
-	// Token: 0x040007EA RID: 2026
+	// Token: 0x040011DD RID: 4573
 	public static int RADAR_CLICK = 28;
 
-	// Token: 0x040007EB RID: 2027
+	// Token: 0x040011DE RID: 4574
 	public static int RADAR_ITEM = 29;
 
-	// Token: 0x040007EC RID: 2028
+	// Token: 0x040011DF RID: 4575
 	public static int FIREWORK = 30;
 
-	// Token: 0x040007ED RID: 2029
+	// Token: 0x040011E0 RID: 4576
 	public static int KAMEX10_0 = 31;
 
-	// Token: 0x040007EE RID: 2030
+	// Token: 0x040011E1 RID: 4577
 	public static int KAMEX10_1 = 32;
 
-	// Token: 0x040007EF RID: 2031
+	// Token: 0x040011E2 RID: 4578
 	public static int DESTROY_0 = 33;
 
-	// Token: 0x040007F0 RID: 2032
+	// Token: 0x040011E3 RID: 4579
 	public static int DESTROY_1 = 34;
 
-	// Token: 0x040007F1 RID: 2033
+	// Token: 0x040011E4 RID: 4580
 	public static int MAFUBA_0 = 35;
 
-	// Token: 0x040007F2 RID: 2034
+	// Token: 0x040011E5 RID: 4581
 	public static int MAFUBA_1 = 36;
 
-	// Token: 0x040007F3 RID: 2035
+	// Token: 0x040011E6 RID: 4582
 	public static int MAFUBA_2 = 37;
 
-	// Token: 0x040007F4 RID: 2036
+	// Token: 0x040011E7 RID: 4583
 	public static int DESTROY_2 = 38;
 
-	// Token: 0x040007F5 RID: 2037
+	// Token: 0x040011E8 RID: 4584
 	public bool freePool;
 
-	// Token: 0x040007F6 RID: 2038
+	// Token: 0x040011E9 RID: 4585
 	public int poolCount;
 
-	// Token: 0x040007F7 RID: 2039
+	// Token: 0x040011EA RID: 4586
 	public static int cout = 1;
 
-	// Token: 0x0200008A RID: 138
+	// Token: 0x020000D0 RID: 208
 	public class MediaPlayer
 	{
 	}
 
-	// Token: 0x0200008B RID: 139
+	// Token: 0x020000D1 RID: 209
 	public class SoundPool
 	{
 	}
 
-	// Token: 0x0200008C RID: 140
+	// Token: 0x020000D2 RID: 210
 	public class AssetManager
 	{
 	}

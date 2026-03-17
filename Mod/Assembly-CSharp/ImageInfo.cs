@@ -1,26 +1,26 @@
 ﻿using System;
 
-// Token: 0x02000043 RID: 67
+// Token: 0x02000041 RID: 65
 public class ImageInfo
 {
-	// Token: 0x04000326 RID: 806
+	// Token: 0x04000896 RID: 2198
 	public int ID;
 
-	// Token: 0x04000327 RID: 807
+	// Token: 0x04000897 RID: 2199
 	public int x;
 
-	// Token: 0x04000328 RID: 808
+	// Token: 0x04000898 RID: 2200
 	public int y;
 
-	// Token: 0x04000329 RID: 809
+	// Token: 0x04000899 RID: 2201
 	public int x0;
 
-	// Token: 0x0400032A RID: 810
+	// Token: 0x0400089A RID: 2202
 	public int y0;
 
-	// Token: 0x0400032B RID: 811
+	// Token: 0x0400089B RID: 2203
 	public int w;
 
-	// Token: 0x0400032C RID: 812
+	// Token: 0x0400089C RID: 2204
 	public int h;
 }

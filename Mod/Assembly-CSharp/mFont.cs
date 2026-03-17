@@ -2,10 +2,10 @@
 using System.Collections;
 using UnityEngine;
 
-// Token: 0x0200002B RID: 43
+// Token: 0x02000068 RID: 104
 public class mFont
 {
-	// Token: 0x0600018F RID: 399 RVA: 0x0000A168 File Offset: 0x00008568
+	// Token: 0x060004F8 RID: 1272 RVA: 0x0005EF44 File Offset: 0x0005D144
 	public mFont(string strFont, string pathImage, string pathData, int space)
 	{
 		try
@@ -48,23 +48,32 @@ public class mFont
 		}
 	}
 
-	// Token: 0x06000190 RID: 400 RVA: 0x0000A2C4 File Offset: 0x000086C4
+	// Token: 0x060004F9 RID: 1273 RVA: 0x0005F0A4 File Offset: 0x0005D2A4
 	public mFont(sbyte id)
 	{
 		string text = "chelthm";
-		if (((int)id > 0 && (int)id < 10) || (int)id == 19)
+		bool flag = (id > 0 && id < 10) || id == 19;
+		if (flag)
 		{
 			this.yAdd = 1;
 			text = "barmeneb";
 		}
-		else if ((int)id >= 10 && (int)id <= 18)
+		else
 		{
-			text = "chelthm";
-			this.yAdd = 2;
-		}
-		else if ((int)id > 24)
-		{
-			text = "staccato";
+			bool flag2 = id >= 10 && id <= 18;
+			if (flag2)
+			{
+				text = "chelthm";
+				this.yAdd = 2;
+			}
+			else
+			{
+				bool flag3 = id > 24;
+				if (flag3)
+				{
+					text = "staccato";
+				}
+			}
 		}
 		this.id = id;
 		text = string.Concat(new object[]
@@ -75,7 +84,8 @@ public class mFont
 			text
 		});
 		this.myFont = (Font)Resources.Load(text);
-		if ((int)id < 25)
+		bool flag4 = id < 25;
+		if (flag4)
 		{
 			this.color1 = this.setColorFont(id);
 			this.color2 = this.setColorFont(id);
@@ -88,10 +98,11 @@ public class mFont
 		this.wO = this.getWidthExactOf("o");
 	}
 
-	// Token: 0x06000191 RID: 401 RVA: 0x0000A404 File Offset: 0x00008804
+	// Token: 0x060004FA RID: 1274 RVA: 0x0005F1E4 File Offset: 0x0005D3E4
 	public static void init()
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		if (flag)
 		{
 			mFont.tahoma_7b_red = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7b_red.png", "/myfont/tahoma_7b", 0);
 			mFont.tahoma_7b_blue = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7b_blue.png", "/myfont/tahoma_7b", 0);
@@ -179,20 +190,21 @@ public class mFont
 			mFont.tahoma_7_whiteSmall = mFont.tahoma_7_white;
 			mFont.tahoma_7b_greenSmall = mFont.tahoma_7b_green;
 			mFont.yAddFont = 1;
-			if (mGraphics.zoomLevel == 1)
+			bool flag2 = mGraphics.zoomLevel == 1;
+			if (flag2)
 			{
 				mFont.yAddFont = -3;
 			}
 		}
 	}
 
-	// Token: 0x06000192 RID: 402 RVA: 0x0000A935 File Offset: 0x00008D35
+	// Token: 0x060004FB RID: 1275 RVA: 0x0005F721 File Offset: 0x0005D921
 	public void setHeight(int height)
 	{
 		this.height = height;
 	}
 
-	// Token: 0x06000193 RID: 403 RVA: 0x0000A940 File Offset: 0x00008D40
+	// Token: 0x060004FC RID: 1276 RVA: 0x0005F72C File Offset: 0x0005D92C
 	public Color setColor(int rgb)
 	{
 		int num = rgb & 255;
@@ -205,7 +217,7 @@ public class mFont
 		return result;
 	}
 
-	// Token: 0x06000194 RID: 404 RVA: 0x0000A998 File Offset: 0x00008D98
+	// Token: 0x060004FD RID: 1277 RVA: 0x0005F788 File Offset: 0x0005D988
 	public Color bigColor(int id)
 	{
 		Color[] array = new Color[]
@@ -221,23 +233,25 @@ public class mFont
 		return array[id - 25];
 	}
 
-	// Token: 0x06000195 RID: 405 RVA: 0x0000AA38 File Offset: 0x00008E38
+	// Token: 0x060004FE RID: 1278 RVA: 0x0005F805 File Offset: 0x0005DA05
 	public void setColorByID(int ID)
 	{
 		this.color1 = this.setColor(mFont.colorJava[ID]);
 		this.color2 = this.setColor(mFont.colorJava[ID]);
 	}
 
-	// Token: 0x06000196 RID: 406 RVA: 0x0000AA60 File Offset: 0x00008E60
+	// Token: 0x060004FF RID: 1279 RVA: 0x0005F830 File Offset: 0x0005DA30
 	public void setTypePaint(mGraphics g, string st, int x, int y, int align, sbyte idFont)
 	{
 		sbyte b = this.id;
-		if ((int)idFont > 0)
+		bool flag = idFont > 0;
+		if (flag)
 		{
 			b = idFont;
 		}
 		x--;
-		if ((int)this.id > 24)
+		bool flag2 = this.id > 24;
+		if (flag2)
 		{
 			Color[] array = new Color[]
 			{
@@ -248,8 +262,8 @@ public class mFont
 				this.setColor(9264),
 				this.setColor(6029312)
 			};
-			this.color1 = array[(int)this.id - 25];
-			this.color2 = array[(int)this.id - 25];
+			this.color1 = array[(int)(this.id - 25)];
+			this.color2 = array[(int)(this.id - 25)];
 			this._drawString(g, st, x + 1, y, align);
 			this._drawString(g, st, x - 1, y, align);
 			this._drawString(g, st, x, y - 1, align);
@@ -268,45 +282,54 @@ public class mFont
 		this._drawString(g, st, x, y - this.yAdd, align);
 	}
 
-	// Token: 0x06000197 RID: 407 RVA: 0x0000AC1D File Offset: 0x0000901D
+	// Token: 0x06000500 RID: 1280 RVA: 0x0005F9D4 File Offset: 0x0005DBD4
 	public Color setColorFont(sbyte id)
 	{
 		return this.setColor(mFont.colorJava[(int)id]);
 	}
 
-	// Token: 0x06000198 RID: 408 RVA: 0x0000AC30 File Offset: 0x00009030
+	// Token: 0x06000501 RID: 1281 RVA: 0x0005F9F4 File Offset: 0x0005DBF4
 	public void drawString(mGraphics g, string st, int x, int y, int align)
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		if (flag)
 		{
 			int length = st.Length;
+			bool flag2 = align == 0;
 			int num;
-			if (align == 0)
+			if (flag2)
 			{
 				num = x;
 			}
-			else if (align == 1)
-			{
-				num = x - this.getWidth(st);
-			}
 			else
 			{
-				num = x - (this.getWidth(st) >> 1);
+				bool flag3 = align == 1;
+				if (flag3)
+				{
+					num = x - this.getWidth(st);
+				}
+				else
+				{
+					num = x - (this.getWidth(st) >> 1);
+				}
 			}
 			for (int i = 0; i < length; i++)
 			{
-				int num2 = this.strFont.IndexOf(st[i] + string.Empty);
-				if (num2 == -1)
+				int num2 = this.strFont.IndexOf(st[i].ToString() + string.Empty);
+				bool flag4 = num2 == -1;
+				if (flag4)
 				{
 					num2 = 0;
 				}
-				if (num2 > -1)
+				bool flag5 = num2 > -1;
+				if (flag5)
 				{
 					int x2 = this.fImages[num2][0];
 					int num3 = this.fImages[num2][1];
 					int w = this.fImages[num2][2];
 					int num4 = this.fImages[num2][3];
-					if (num3 + num4 > this.imgFont.texture.height)
+					bool flag6 = num3 + num4 > this.imgFont.texture.height;
+					if (flag6)
 					{
 						num3 -= this.imgFont.texture.height;
 						x2 = this.imgFont.texture.width / 2;
@@ -322,10 +345,11 @@ public class mFont
 		}
 	}
 
-	// Token: 0x06000199 RID: 409 RVA: 0x0000AD78 File Offset: 0x00009178
+	// Token: 0x06000502 RID: 1282 RVA: 0x0005FB78 File Offset: 0x0005DD78
 	public void drawStringBorder(mGraphics g, string st, int x, int y, int align)
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		if (flag)
 		{
 			this.drawString(g, st, x, y, align);
 		}
@@ -335,10 +359,11 @@ public class mFont
 		}
 	}
 
-	// Token: 0x0600019A RID: 410 RVA: 0x0000ADA5 File Offset: 0x000091A5
+	// Token: 0x06000503 RID: 1283 RVA: 0x0005FBB8 File Offset: 0x0005DDB8
 	public void drawStringBorder(mGraphics g, string st, int x, int y, int align, mFont font2)
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		if (flag)
 		{
 			this.drawString(g, st, x, y, align, font2);
 		}
@@ -348,7 +373,7 @@ public class mFont
 		}
 	}
 
-	// Token: 0x0600019B RID: 411 RVA: 0x0000ADD8 File Offset: 0x000091D8
+	// Token: 0x06000504 RID: 1284 RVA: 0x0005FBF8 File Offset: 0x0005DDF8
 	public void drawStringBd(mGraphics g, string st, int x, int y, int align, mFont font)
 	{
 		this.setTypePaint(g, st, x - 1, y - 1, align, 0);
@@ -362,44 +387,54 @@ public class mFont
 		this.setTypePaint(g, st, x, y, align, 0);
 	}
 
-	// Token: 0x0600019C RID: 412 RVA: 0x0000AE7C File Offset: 0x0000927C
+	// Token: 0x06000505 RID: 1285 RVA: 0x0005FCA8 File Offset: 0x0005DEA8
 	public void drawString(mGraphics g, string st, int x, int y, int align, mFont font)
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		if (flag)
 		{
 			int length = st.Length;
+			bool flag2 = align == 0;
 			int num;
-			if (align == 0)
+			if (flag2)
 			{
 				num = x;
 			}
-			else if (align == 1)
-			{
-				num = x - this.getWidth(st);
-			}
 			else
 			{
-				num = x - (this.getWidth(st) >> 1);
+				bool flag3 = align == 1;
+				if (flag3)
+				{
+					num = x - this.getWidth(st);
+				}
+				else
+				{
+					num = x - (this.getWidth(st) >> 1);
+				}
 			}
 			for (int i = 0; i < length; i++)
 			{
 				int num2 = this.strFont.IndexOf(st[i]);
-				if (num2 == -1)
+				bool flag4 = num2 == -1;
+				if (flag4)
 				{
 					num2 = 0;
 				}
-				if (num2 > -1)
+				bool flag5 = num2 > -1;
+				if (flag5)
 				{
 					int x2 = this.fImages[num2][0];
 					int num3 = this.fImages[num2][1];
 					int w = this.fImages[num2][2];
 					int num4 = this.fImages[num2][3];
-					if (num3 + num4 > this.imgFont.texture.height)
+					bool flag6 = num3 + num4 > this.imgFont.texture.height;
+					if (flag6)
 					{
 						num3 -= this.imgFont.texture.height;
 						x2 = this.imgFont.texture.width / 2;
 					}
-					if (!GameCanvas.lowGraphic && font != null)
+					bool flag7 = !GameCanvas.lowGraphic && font != null;
+					if (flag7)
 					{
 						g.drawRegion(font.imgFont, x2, num3, w, num4, 0, num + 1, y, 20);
 						g.drawRegion(font.imgFont, x2, num3, w, num4, 0, num, y + 1, 20);
@@ -416,32 +451,36 @@ public class mFont
 		}
 	}
 
-	// Token: 0x0600019D RID: 413 RVA: 0x0000B018 File Offset: 0x00009418
+	// Token: 0x06000506 RID: 1286 RVA: 0x0005FE80 File Offset: 0x0005E080
 	public MyVector splitFontVector(string src, int lineWidth)
 	{
 		MyVector myVector = new MyVector();
 		string text = string.Empty;
 		for (int i = 0; i < src.Length; i++)
 		{
-			if (src[i] == '\n' || src[i] == '\b')
+			bool flag = src[i] == '\n' || src[i] == '\b';
+			if (flag)
 			{
 				myVector.addElement(text);
 				text = string.Empty;
 			}
 			else
 			{
-				text += src[i];
-				if (this.getWidth(text) > lineWidth)
+				text += src[i].ToString();
+				bool flag2 = this.getWidth(text) > lineWidth;
+				if (flag2)
 				{
 					int j;
 					for (j = text.Length - 1; j >= 0; j--)
 					{
-						if (text[j] == ' ')
+						bool flag3 = text[j] == ' ';
+						if (flag3)
 						{
 							break;
 						}
 					}
-					if (j < 0)
+					bool flag4 = j < 0;
+					if (flag4)
 					{
 						j = text.Length - 1;
 					}
@@ -449,7 +488,8 @@ public class mFont
 					i = i - (text.Length - j) + 1;
 					text = string.Empty;
 				}
-				if (i == src.Length - 1 && !text.Trim().Equals(string.Empty))
+				bool flag5 = i == src.Length - 1 && !text.Trim().Equals(string.Empty);
+				if (flag5)
 				{
 					myVector.addElement(text);
 				}
@@ -458,19 +498,21 @@ public class mFont
 		return myVector;
 	}
 
-	// Token: 0x0600019E RID: 414 RVA: 0x0000B120 File Offset: 0x00009520
+	// Token: 0x06000507 RID: 1287 RVA: 0x0005FFC0 File Offset: 0x0005E1C0
 	public string splitFirst(string str)
 	{
 		string text = string.Empty;
 		bool flag = false;
 		for (int i = 0; i < str.Length; i++)
 		{
-			if (!flag)
+			bool flag2 = !flag;
+			if (flag2)
 			{
 				string text2 = str.Substring(i);
-				if (this.compare(text2, " "))
+				bool flag3 = this.compare(text2, " ");
+				if (flag3)
 				{
-					text = text + str[i] + "-";
+					text = text + str[i].ToString() + "-";
 				}
 				else
 				{
@@ -478,15 +520,19 @@ public class mFont
 				}
 				flag = true;
 			}
-			else if (str[i] == ' ')
+			else
 			{
-				flag = false;
+				bool flag4 = str[i] == ' ';
+				if (flag4)
+				{
+					flag = false;
+				}
 			}
 		}
 		return text;
 	}
 
-	// Token: 0x0600019F RID: 415 RVA: 0x0000B1A8 File Offset: 0x000095A8
+	// Token: 0x06000508 RID: 1288 RVA: 0x00060060 File Offset: 0x0005E260
 	public string[] splitStrInLine(string src, int lineWidth)
 	{
 		ArrayList arrayList = this.splitStrInLineA(src, lineWidth);
@@ -498,108 +544,122 @@ public class mFont
 		return array;
 	}
 
-	// Token: 0x060001A0 RID: 416 RVA: 0x0000B1F4 File Offset: 0x000095F4
+	// Token: 0x06000509 RID: 1289 RVA: 0x000600B0 File Offset: 0x0005E2B0
 	public ArrayList splitStrInLineA(string src, int lineWidth)
 	{
 		ArrayList arrayList = new ArrayList();
 		int num = 0;
 		int num2 = 0;
 		int length = src.Length;
-		if (length < 5)
+		bool flag = length < 5;
+		ArrayList result;
+		if (flag)
 		{
 			arrayList.Add(src);
-			return arrayList;
+			result = arrayList;
 		}
-		string text = string.Empty;
-		try
+		else
 		{
-			for (;;)
+			string text = string.Empty;
+			try
 			{
-				while (this.getWidthNotExactOf(text) < lineWidth)
+				for (;;)
 				{
-					text += src[num2];
-					num2++;
-					if (src[num2] == '\n')
+					while (this.getWidthNotExactOf(text) < lineWidth)
 					{
-						break;
-					}
-					if (num2 >= length - 1)
-					{
-						num2 = length - 1;
-						break;
-					}
-				}
-				if (num2 != length - 1 && src[num2 + 1] != ' ')
-				{
-					int num3 = num2;
-					while (src[num2 + 1] != '\n')
-					{
-						if (src[num2 + 1] != ' ' || src[num2] == ' ')
+						text += src[num2].ToString();
+						num2++;
+						bool flag2 = src[num2] == '\n';
+						if (flag2)
 						{
-							if (num2 != num)
+							break;
+						}
+						bool flag3 = num2 >= length - 1;
+						if (flag3)
+						{
+							num2 = length - 1;
+							break;
+						}
+					}
+					bool flag4 = num2 != length - 1 && src[num2 + 1] != ' ';
+					if (flag4)
+					{
+						int num3 = num2;
+						while (src[num2 + 1] != '\n')
+						{
+							bool flag5 = src[num2 + 1] != ' ' || src[num2] == ' ';
+							if (flag5)
 							{
-								num2--;
-								continue;
+								bool flag6 = num2 != num;
+								if (flag6)
+								{
+									num2--;
+									continue;
+								}
 							}
+							bool flag7 = num2 == num;
+							if (flag7)
+							{
+								num2 = num3;
+								goto IL_122;
+							}
+							goto IL_122;
 						}
-						IL_E3:
-						if (num2 == num)
-						{
-							num2 = num3;
-							goto IL_ED;
-						}
-						goto IL_ED;
+						continue;
 					}
-					//goto IL_E3;
-					continue;
+					IL_122:
+					string text2 = src.Substring(num, num2 + 1 - num);
+					bool flag8 = text2[0] == '\n';
+					if (flag8)
+					{
+						text2 = text2.Substring(1, text2.Length - 1);
+					}
+					bool flag9 = text2[text2.Length - 1] == '\n';
+					if (flag9)
+					{
+						text2 = text2.Substring(0, text2.Length - 1);
+					}
+					arrayList.Add(text2);
+					bool flag10 = num2 == length - 1;
+					if (flag10)
+					{
+						break;
+					}
+					num = num2 + 1;
+					while (num != length - 1 && src[num] == ' ')
+					{
+						num++;
+					}
+					bool flag11 = num == length - 1;
+					if (flag11)
+					{
+						break;
+					}
+					num2 = num;
+					text = string.Empty;
 				}
-				IL_ED:
-				string text2 = src.Substring(num, num2 + 1 - num);
-				if (text2[0] == '\n')
-				{
-					text2 = text2.Substring(1, text2.Length - 1);
-				}
-				if (text2[text2.Length - 1] == '\n')
-				{
-					text2 = text2.Substring(0, text2.Length - 1);
-				}
-				arrayList.Add(text2);
-				if (num2 == length - 1)
-				{
-					break;
-				}
-				num = num2 + 1;
-				while (num != length - 1 && src[num] == ' ')
-				{
-					num++;
-				}
-				if (num == length - 1)
-				{
-					break;
-				}
-				num2 = num;
-				text = string.Empty;
 			}
-		}
-		catch (Exception ex)
-		{
-			Cout.LogWarning(string.Concat(new object[]
+			catch (Exception ex)
 			{
-				"EXCEPTION WHEN REAL SPLIT ",
-				src,
-				"\nend=",
-				num2,
-				"\n",
-				ex.Message,
-				"\n",
-				ex.StackTrace
-			}));
-			arrayList.Add(src);
+				Cout.LogWarning(string.Concat(new object[]
+				{
+					"EXCEPTION WHEN REAL SPLIT ",
+					src,
+					"\nend=",
+					num2,
+					"\n",
+					ex.Message,
+					"\n",
+					ex.StackTrace
+				}));
+				arrayList.Add(src);
+			}
+			result = arrayList;
 		}
-		return arrayList;
+		return result;
 	}
 
-	// Token: 0x060001A1 RID: 417 RVA: 0x0000B424 File Offset: 0x00009824
+	// Token: 0x0600050A RID: 1290 RVA: 0x00060328 File Offset: 0x0005E528
 	public string[] splitFontArray(string src, int lineWidth)
 	{
 		MyVector myVector = this.splitFontVector(src, lineWidth);
@@ -611,12 +671,13 @@ public class mFont
 		return array;
 	}
 
-	// Token: 0x060001A2 RID: 418 RVA: 0x0000B470 File Offset: 0x00009870
+	// Token: 0x0600050B RID: 1291 RVA: 0x00060378 File Offset: 0x0005E578
 	public bool compare(string strSource, string str)
 	{
 		for (int i = 0; i < strSource.Length; i++)
 		{
-			if ((string.Empty + strSource[i]).Equals(str))
+			bool flag = (string.Empty + strSource[i].ToString()).Equals(str);
+			if (flag)
 			{
 				return true;
 			}
@@ -624,27 +685,34 @@ public class mFont
 		return false;
 	}
 
-	// Token: 0x060001A3 RID: 419 RVA: 0x0000B4B8 File Offset: 0x000098B8
+	// Token: 0x0600050C RID: 1292 RVA: 0x000603CC File Offset: 0x0005E5CC
 	public int getWidth(string s)
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		int result;
+		if (flag)
 		{
 			int num = 0;
 			for (int i = 0; i < s.Length; i++)
 			{
 				int num2 = this.strFont.IndexOf(s[i]);
-				if (num2 == -1)
+				bool flag2 = num2 == -1;
+				if (flag2)
 				{
 					num2 = 0;
 				}
 				num += this.fImages[num2][2] + this.space;
 			}
-			return num;
+			result = num;
 		}
-		return this.getWidthExactOf(s);
+		else
+		{
+			result = this.getWidthExactOf(s);
+		}
+		return result;
 	}
 
-	// Token: 0x060001A4 RID: 420 RVA: 0x0000B524 File Offset: 0x00009924
+	// Token: 0x0600050D RID: 1293 RVA: 0x0006044C File Offset: 0x0005E64C
 	public int getWidthExactOf(string s)
 	{
 		int result;
@@ -671,38 +739,48 @@ public class mFont
 		return result;
 	}
 
-	// Token: 0x060001A5 RID: 421 RVA: 0x0000B5C4 File Offset: 0x000099C4
+	// Token: 0x0600050E RID: 1294 RVA: 0x000604EC File Offset: 0x0005E6EC
 	public int getWidthNotExactOf(string s)
 	{
 		return s.Length * this.wO / mGraphics.zoomLevel;
 	}
 
-	// Token: 0x060001A6 RID: 422 RVA: 0x0000B5DC File Offset: 0x000099DC
+	// Token: 0x0600050F RID: 1295 RVA: 0x00060514 File Offset: 0x0005E714
 	public int getHeight()
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		int result;
+		if (flag)
 		{
-			return this.height;
+			result = this.height;
 		}
-		if (this.height > 0)
+		else
 		{
-			return this.height / mGraphics.zoomLevel;
+			bool flag2 = this.height > 0;
+			if (flag2)
+			{
+				result = this.height / mGraphics.zoomLevel;
+			}
+			else
+			{
+				GUIStyle guistyle = new GUIStyle();
+				guistyle.font = this.myFont;
+				try
+				{
+					this.height = (int)guistyle.CalcSize(new GUIContent("Adg")).y + 2;
+				}
+				catch (Exception ex)
+				{
+					Cout.LogError("FAIL GET HEIGHT " + ex.StackTrace);
+					this.height = 20;
+				}
+				result = this.height / mGraphics.zoomLevel;
+			}
 		}
-		GUIStyle guistyle = new GUIStyle();
-		guistyle.font = this.myFont;
-		try
-		{
-			this.height = (int)guistyle.CalcSize(new GUIContent("Adg")).y + 2;
-		}
-		catch (Exception ex)
-		{
-			Cout.LogError("FAIL GET HEIGHT " + ex.StackTrace);
-			this.height = 20;
-		}
-		return this.height / mGraphics.zoomLevel;
+		return result;
 	}
 
-	// Token: 0x060001A7 RID: 423 RVA: 0x0000B68C File Offset: 0x00009A8C
+	// Token: 0x06000510 RID: 1296 RVA: 0x000605D4 File Offset: 0x0005E7D4
 	public void _drawString(mGraphics g, string st, int x0, int y0, int align)
 	{
 		y0 += mFont.yAddFont;
@@ -733,7 +811,7 @@ public class mFont
 		g.drawString(st, (int)num, (int)num2, guistyle);
 	}
 
-	// Token: 0x060001A8 RID: 424 RVA: 0x0000B74C File Offset: 0x00009B4C
+	// Token: 0x06000511 RID: 1297 RVA: 0x00060694 File Offset: 0x0005E894
 	public static string[] splitStringSv(string _text, string _searchStr)
 	{
 		int num = 0;
@@ -761,78 +839,79 @@ public class mFont
 		return array;
 	}
 
-	// Token: 0x060001A9 RID: 425 RVA: 0x0000B7F1 File Offset: 0x00009BF1
+	// Token: 0x06000512 RID: 1298 RVA: 0x0006074C File Offset: 0x0005E94C
 	public void reloadImage()
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		if (flag)
 		{
 			this.imgFont = GameCanvas.loadImage(this.pathImage);
 		}
 	}
 
-	// Token: 0x060001AA RID: 426 RVA: 0x0000B80F File Offset: 0x00009C0F
+	// Token: 0x06000513 RID: 1299 RVA: 0x00003136 File Offset: 0x00001336
 	public void freeImage()
 	{
 	}
 
-	// Token: 0x04000161 RID: 353
+	// Token: 0x04000AD4 RID: 2772
 	public static int LEFT = 0;
 
-	// Token: 0x04000162 RID: 354
+	// Token: 0x04000AD5 RID: 2773
 	public static int RIGHT = 1;
 
-	// Token: 0x04000163 RID: 355
+	// Token: 0x04000AD6 RID: 2774
 	public static int CENTER = 2;
 
-	// Token: 0x04000164 RID: 356
+	// Token: 0x04000AD7 RID: 2775
 	public static int RED = 0;
 
-	// Token: 0x04000165 RID: 357
+	// Token: 0x04000AD8 RID: 2776
 	public static int YELLOW = 1;
 
-	// Token: 0x04000166 RID: 358
+	// Token: 0x04000AD9 RID: 2777
 	public static int GREEN = 2;
 
-	// Token: 0x04000167 RID: 359
+	// Token: 0x04000ADA RID: 2778
 	public static int FATAL = 3;
 
-	// Token: 0x04000168 RID: 360
+	// Token: 0x04000ADB RID: 2779
 	public static int MISS = 4;
 
-	// Token: 0x04000169 RID: 361
+	// Token: 0x04000ADC RID: 2780
 	public static int ORANGE = 5;
 
-	// Token: 0x0400016A RID: 362
+	// Token: 0x04000ADD RID: 2781
 	public static int ADDMONEY = 6;
 
-	// Token: 0x0400016B RID: 363
+	// Token: 0x04000ADE RID: 2782
 	public static int MISS_ME = 7;
 
-	// Token: 0x0400016C RID: 364
+	// Token: 0x04000ADF RID: 2783
 	public static int FATAL_ME = 8;
 
-	// Token: 0x0400016D RID: 365
+	// Token: 0x04000AE0 RID: 2784
 	public static int HP = 9;
 
-	// Token: 0x0400016E RID: 366
+	// Token: 0x04000AE1 RID: 2785
 	public static int MP = 10;
 
-	// Token: 0x0400016F RID: 367
+	// Token: 0x04000AE2 RID: 2786
 	private int space;
 
-	// Token: 0x04000170 RID: 368
+	// Token: 0x04000AE3 RID: 2787
 	private Image imgFont;
 
-	// Token: 0x04000171 RID: 369
+	// Token: 0x04000AE4 RID: 2788
 	private string strFont;
 
-	// Token: 0x04000172 RID: 370
+	// Token: 0x04000AE5 RID: 2789
 	private int[][] fImages;
 
-	// Token: 0x04000173 RID: 371
+	// Token: 0x04000AE6 RID: 2790
 	public static int yAddFont;
 
-	// Token: 0x04000174 RID: 372
+	// Token: 0x04000AE7 RID: 2791
 	public static int[] colorJava = new int[]
 	{
 		0,
@@ -868,165 +947,165 @@ public class mFont
 		16096312
 	};
 
-	// Token: 0x04000175 RID: 373
+	// Token: 0x04000AE8 RID: 2792
 	public static mFont gI;
 
-	// Token: 0x04000176 RID: 374
+	// Token: 0x04000AE9 RID: 2793
 	public static mFont tahoma_7b_red;
 
-	// Token: 0x04000177 RID: 375
+	// Token: 0x04000AEA RID: 2794
 	public static mFont tahoma_7b_blue;
 
-	// Token: 0x04000178 RID: 376
+	// Token: 0x04000AEB RID: 2795
 	public static mFont tahoma_7b_white;
 
-	// Token: 0x04000179 RID: 377
+	// Token: 0x04000AEC RID: 2796
 	public static mFont tahoma_7b_yellow;
 
-	// Token: 0x0400017A RID: 378
+	// Token: 0x04000AED RID: 2797
 	public static mFont tahoma_7b_yellowSmall;
 
-	// Token: 0x0400017B RID: 379
+	// Token: 0x04000AEE RID: 2798
 	public static mFont tahoma_7b_dark;
 
-	// Token: 0x0400017C RID: 380
+	// Token: 0x04000AEF RID: 2799
 	public static mFont tahoma_7b_green2;
 
-	// Token: 0x0400017D RID: 381
+	// Token: 0x04000AF0 RID: 2800
 	public static mFont tahoma_7b_green;
 
-	// Token: 0x0400017E RID: 382
+	// Token: 0x04000AF1 RID: 2801
 	public static mFont tahoma_7b_focus;
 
-	// Token: 0x0400017F RID: 383
+	// Token: 0x04000AF2 RID: 2802
 	public static mFont tahoma_7b_unfocus;
 
-	// Token: 0x04000180 RID: 384
+	// Token: 0x04000AF3 RID: 2803
 	public static mFont tahoma_7;
 
-	// Token: 0x04000181 RID: 385
+	// Token: 0x04000AF4 RID: 2804
 	public static mFont tahoma_7_blue1;
 
-	// Token: 0x04000182 RID: 386
+	// Token: 0x04000AF5 RID: 2805
 	public static mFont tahoma_7_blue1Small;
 
-	// Token: 0x04000183 RID: 387
+	// Token: 0x04000AF6 RID: 2806
 	public static mFont tahoma_7_green2;
 
-	// Token: 0x04000184 RID: 388
+	// Token: 0x04000AF7 RID: 2807
 	public static mFont tahoma_7_yellow;
 
-	// Token: 0x04000185 RID: 389
+	// Token: 0x04000AF8 RID: 2808
 	public static mFont tahoma_7_grey;
 
-	// Token: 0x04000186 RID: 390
+	// Token: 0x04000AF9 RID: 2809
 	public static mFont tahoma_7_red;
 
-	// Token: 0x04000187 RID: 391
+	// Token: 0x04000AFA RID: 2810
 	public static mFont tahoma_7_blue;
 
-	// Token: 0x04000188 RID: 392
+	// Token: 0x04000AFB RID: 2811
 	public static mFont tahoma_7_green;
 
-	// Token: 0x04000189 RID: 393
+	// Token: 0x04000AFC RID: 2812
 	public static mFont tahoma_7_white;
 
-	// Token: 0x0400018A RID: 394
+	// Token: 0x04000AFD RID: 2813
 	public static mFont tahoma_8b;
 
-	// Token: 0x0400018B RID: 395
+	// Token: 0x04000AFE RID: 2814
 	public static mFont number_yellow;
 
-	// Token: 0x0400018C RID: 396
+	// Token: 0x04000AFF RID: 2815
 	public static mFont number_red;
 
-	// Token: 0x0400018D RID: 397
+	// Token: 0x04000B00 RID: 2816
 	public static mFont number_green;
 
-	// Token: 0x0400018E RID: 398
+	// Token: 0x04000B01 RID: 2817
 	public static mFont number_gray;
 
-	// Token: 0x0400018F RID: 399
+	// Token: 0x04000B02 RID: 2818
 	public static mFont number_orange;
 
-	// Token: 0x04000190 RID: 400
+	// Token: 0x04000B03 RID: 2819
 	public static mFont bigNumber_red;
 
-	// Token: 0x04000191 RID: 401
+	// Token: 0x04000B04 RID: 2820
 	public static mFont bigNumber_While;
 
-	// Token: 0x04000192 RID: 402
+	// Token: 0x04000B05 RID: 2821
 	public static mFont bigNumber_yellow;
 
-	// Token: 0x04000193 RID: 403
+	// Token: 0x04000B06 RID: 2822
 	public static mFont bigNumber_green;
 
-	// Token: 0x04000194 RID: 404
+	// Token: 0x04000B07 RID: 2823
 	public static mFont bigNumber_orange;
 
-	// Token: 0x04000195 RID: 405
+	// Token: 0x04000B08 RID: 2824
 	public static mFont bigNumber_blue;
 
-	// Token: 0x04000196 RID: 406
+	// Token: 0x04000B09 RID: 2825
 	public static mFont bigNumber_black;
 
-	// Token: 0x04000197 RID: 407
+	// Token: 0x04000B0A RID: 2826
 	public static mFont nameFontRed;
 
-	// Token: 0x04000198 RID: 408
+	// Token: 0x04000B0B RID: 2827
 	public static mFont nameFontYellow;
 
-	// Token: 0x04000199 RID: 409
+	// Token: 0x04000B0C RID: 2828
 	public static mFont nameFontGreen;
 
-	// Token: 0x0400019A RID: 410
+	// Token: 0x04000B0D RID: 2829
 	public static mFont tahoma_7_greySmall;
 
-	// Token: 0x0400019B RID: 411
+	// Token: 0x04000B0E RID: 2830
 	public static mFont tahoma_7b_yellowSmall2;
 
-	// Token: 0x0400019C RID: 412
+	// Token: 0x04000B0F RID: 2831
 	public static mFont tahoma_7b_green2Small;
 
-	// Token: 0x0400019D RID: 413
+	// Token: 0x04000B10 RID: 2832
 	public static mFont tahoma_7_whiteSmall;
 
-	// Token: 0x0400019E RID: 414
+	// Token: 0x04000B11 RID: 2833
 	public static mFont tahoma_7b_greenSmall;
 
-	// Token: 0x0400019F RID: 415
+	// Token: 0x04000B12 RID: 2834
 	public Font myFont;
 
-	// Token: 0x040001A0 RID: 416
+	// Token: 0x04000B13 RID: 2835
 	private int height;
 
-	// Token: 0x040001A1 RID: 417
+	// Token: 0x04000B14 RID: 2836
 	private int wO;
 
-	// Token: 0x040001A2 RID: 418
+	// Token: 0x04000B15 RID: 2837
 	public Color color1 = Color.white;
 
-	// Token: 0x040001A3 RID: 419
+	// Token: 0x04000B16 RID: 2838
 	public Color color2 = Color.gray;
 
-	// Token: 0x040001A4 RID: 420
+	// Token: 0x04000B17 RID: 2839
 	public sbyte id;
 
-	// Token: 0x040001A5 RID: 421
+	// Token: 0x04000B18 RID: 2840
 	public int fstyle;
 
-	// Token: 0x040001A6 RID: 422
+	// Token: 0x04000B19 RID: 2841
 	public string st1 = "áàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴĐ";
 
-	// Token: 0x040001A7 RID: 423
+	// Token: 0x04000B1A RID: 2842
 	public string st2 = "¸µ¶·¹¨¾»¼½Æ©ÊÇÈÉËÐÌÎÏÑªÕÒÓÔÖÝ×ØÜÞãßáâä«èåæçé¬íêëìîóïñòô­øõö÷ùýúûüþ®¸µ¶·¹¡¾»¼½Æ¢ÊÇÈÉËÐÌÎÏÑ£ÕÒÓÔÖÝ×ØÜÞãßáâä¤èåæçé¥íêëìîóïñòô¦øõö÷ùýúûüþ§";
 
-	// Token: 0x040001A8 RID: 424
+	// Token: 0x04000B1B RID: 2843
 	public const string str = " 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW";
 
-	// Token: 0x040001A9 RID: 425
+	// Token: 0x04000B1C RID: 2844
 	private int yAdd;
 
-	// Token: 0x040001AA RID: 426
+	// Token: 0x04000B1D RID: 2845
 	private string pathImage;
 }

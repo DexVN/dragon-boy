@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000094 RID: 148
+// Token: 0x020000B4 RID: 180
 public class TextInfo
 {
-	// Token: 0x060004B8 RID: 1208 RVA: 0x0003CC28 File Offset: 0x0003B028
+	// Token: 0x060009C6 RID: 2502 RVA: 0x000A37D1 File Offset: 0x000A19D1
 	public static void reset()
 	{
 		TextInfo.dx = 0;
@@ -11,10 +11,11 @@ public class TextInfo
 		TextInfo.isBack = false;
 	}
 
-	// Token: 0x060004B9 RID: 1209 RVA: 0x0003CC3C File Offset: 0x0003B03C
+	// Token: 0x060009C7 RID: 2503 RVA: 0x000A37E8 File Offset: 0x000A19E8
 	public static void paint(mGraphics g, string str, int x, int y, int w, int h, mFont f)
 	{
-		if (TextInfo.wStr != f.getWidth(str) || !TextInfo.laststring.Equals(str))
+		bool flag = TextInfo.wStr != f.getWidth(str) || !TextInfo.laststring.Equals(str);
+		if (flag)
 		{
 			TextInfo.laststring = str;
 			TextInfo.dx = 0;
@@ -23,7 +24,8 @@ public class TextInfo
 			TextInfo.tx = 0;
 		}
 		g.setClip(x, y, w, h);
-		if (TextInfo.wStr > w)
+		bool flag2 = TextInfo.wStr > w;
+		if (flag2)
 		{
 			f.drawString(g, str, x - TextInfo.dx, y, 0);
 		}
@@ -32,15 +34,19 @@ public class TextInfo
 			f.drawString(g, str, x + w / 2, y, 2);
 		}
 		GameCanvas.resetTrans(g);
-		if (TextInfo.wStr > w)
+		bool flag3 = TextInfo.wStr > w;
+		if (flag3)
 		{
-			if (!TextInfo.isBack)
+			bool flag4 = !TextInfo.isBack;
+			if (flag4)
 			{
 				TextInfo.tx++;
-				if (TextInfo.tx > 50)
+				bool flag5 = TextInfo.tx > 50;
+				if (flag5)
 				{
 					TextInfo.dx++;
-					if (TextInfo.dx >= TextInfo.wStr)
+					bool flag6 = TextInfo.dx >= TextInfo.wStr;
+					if (flag6)
 					{
 						TextInfo.tx = 0;
 						TextInfo.dx = -w + 30;
@@ -50,19 +56,23 @@ public class TextInfo
 			}
 			else
 			{
-				if (TextInfo.dx < 0)
+				bool flag7 = TextInfo.dx < 0;
+				if (flag7)
 				{
 					int num = w + TextInfo.dx >> 1;
 					TextInfo.dx += num;
 				}
-				if (TextInfo.dx > 0)
+				bool flag8 = TextInfo.dx > 0;
+				if (flag8)
 				{
 					TextInfo.dx = 0;
 				}
-				if (TextInfo.dx == 0)
+				bool flag9 = TextInfo.dx == 0;
+				if (flag9)
 				{
 					TextInfo.tx++;
-					if (TextInfo.tx == 50)
+					bool flag10 = TextInfo.tx == 50;
+					if (flag10)
 					{
 						TextInfo.tx = 0;
 						TextInfo.isBack = false;
@@ -72,18 +82,18 @@ public class TextInfo
 		}
 	}
 
-	// Token: 0x04000824 RID: 2084
+	// Token: 0x04001266 RID: 4710
 	public static int dx;
 
-	// Token: 0x04000825 RID: 2085
+	// Token: 0x04001267 RID: 4711
 	public static int tx;
 
-	// Token: 0x04000826 RID: 2086
+	// Token: 0x04001268 RID: 4712
 	public static int wStr;
 
-	// Token: 0x04000827 RID: 2087
+	// Token: 0x04001269 RID: 4713
 	public static bool isBack;
 
-	// Token: 0x04000828 RID: 2088
+	// Token: 0x0400126A RID: 4714
 	public static string laststring = string.Empty;
 }

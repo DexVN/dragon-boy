@@ -1,31 +1,35 @@
 ﻿using System;
 
-// Token: 0x0200005F RID: 95
+// Token: 0x02000045 RID: 69
 public class Info : IActionListener
 {
-	// Token: 0x0600036B RID: 875 RVA: 0x0001C4A9 File Offset: 0x0001A8A9
+	// Token: 0x060003E3 RID: 995 RVA: 0x00055DF6 File Offset: 0x00053FF6
 	public void hide()
 	{
 		this.says = null;
 		this.infoWaitToShow.removeAllElements();
 	}
 
-	// Token: 0x0600036C RID: 876 RVA: 0x0001C4C0 File Offset: 0x0001A8C0
+	// Token: 0x060003E4 RID: 996 RVA: 0x00055E0C File Offset: 0x0005400C
 	public void paint(mGraphics g, int x, int y, int dir)
 	{
-		if (this.infoWaitToShow.size() != 0)
+		bool flag = this.infoWaitToShow.size() != 0;
+		if (flag)
 		{
 			g.translate(x, y);
-			if (this.says != null && this.says.Length != 0 && this.type != 1)
+			bool flag2 = this.says != null && this.says.Length != 0 && this.type != 1;
+			if (flag2)
 			{
-				if (this.outSide)
+				bool flag3 = this.outSide;
+				if (flag3)
 				{
 					this.cx -= GameScr.cmx;
 					this.cy -= GameScr.cmy;
 					this.cy += 35;
 				}
 				int num = (mGraphics.zoomLevel != 1) ? 10 : 0;
-				if (this.info.charInfo == null)
+				bool flag4 = this.info.charInfo == null;
+				if (flag4)
 				{
 					PopUp.paintPopUp(g, this.X, this.Y, this.W, this.H, 16777215, false);
 				}
@@ -33,25 +37,28 @@ public class Info : IActionListener
 				{
 					mSystem.paintPopUp2(g, this.X - 23, this.Y - num / 2, this.W + 15, this.H + ((!GameCanvas.isTouch) ? 14 : 0) + num);
 				}
-				if (this.info.charInfo == null)
+				bool flag5 = this.info.charInfo == null;
+				if (flag5)
 				{
 					g.drawRegion(Info.gocnhon, 0, 0, 9, 8, (dir != 1) ? 2 : 0, this.cx - 3 + ((dir != 1) ? 20 : -15), this.cy - this.ch - 20 + this.sayRun + 2, mGraphics.TOP | mGraphics.HCENTER);
 				}
 				int num2 = -1;
-				int i = 0;
-				while (i < this.says.Length)
+				for (int i = 0; i < this.says.Length; i++)
 				{
 					mFont mFont = mFont.tahoma_7;
 					string text = this.says[i];
+					bool flag6 = this.says[i].StartsWith("|");
 					int num4;
-					if (this.says[i].StartsWith("|"))
+					if (flag6)
 					{
 						string[] array = Res.split(this.says[i], "|", 0);
-						if (array.Length == 3)
+						bool flag7 = array.Length == 3;
+						if (flag7)
 						{
 							text = array[2];
 						}
-						if (array.Length == 4)
+						bool flag8 = array.Length == 4;
+						if (flag8)
 						{
 							text = array[3];
 							int num3 = int.Parse(array[2]);
@@ -90,8 +97,8 @@ public class Info : IActionListener
 						mFont = mFont.tahoma_7b_red;
 						break;
 					}
-					IL_28C:
-					if (this.info.charInfo == null)
+					bool flag9 = this.info.charInfo == null;
+					if (flag9)
 					{
 						mFont.drawString(g, text, this.cx, this.cy - this.ch - 15 + this.sayRun + i * 12 - this.says.Length * 12 - 9, 2);
 					}
@@ -104,18 +111,21 @@ public class Info : IActionListener
 						g.setColor(4465169);
 						g.fillRect(num5, num6 + num8, num7, 2);
 						int num9 = this.info.timeCount * num7 / this.info.maxTime;
-						if (num9 < 0)
+						bool flag10 = num9 < 0;
+						if (flag10)
 						{
 							num9 = 0;
 						}
 						g.setColor(43758);
 						g.fillRect(num5, num6 + num8, num9, 2);
-						if (this.info.timeCount == 0)
+						bool flag11 = this.info.timeCount == 0;
+						if (flag11)
 						{
 							return;
 						}
 						this.info.charInfo.paintHead(g, this.X + 5, this.Y + this.H / 2, 0);
-						if (mGraphics.zoomLevel == 1)
+						bool flag12 = mGraphics.zoomLevel == 1;
+						if (flag12)
 						{
 							((!this.info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2).drawString(g, this.info.charInfo.cName, this.X + 12, this.Y + 3, 0);
 						}
@@ -123,9 +133,11 @@ public class Info : IActionListener
 						{
 							((!this.info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2).drawString(g, this.info.charInfo.cName, this.X + 12, this.Y - 3, 0);
 						}
-						if (!GameCanvas.isTouch)
+						bool flag13 = !GameCanvas.isTouch;
+						if (flag13)
 						{
-							if (!TField.isQwerty)
+							bool flag14 = !TField.isQwerty;
+							if (flag14)
 							{
 								mFont.tahoma_7b_green2Small.drawString(g, "Nhấn # để chat", this.X + this.W / 2 + 10, this.Y + this.H, mFont.CENTER);
 							}
@@ -134,7 +146,8 @@ public class Info : IActionListener
 								mFont.tahoma_7b_green2Small.drawString(g, "Nhấn Y để chat", this.X + this.W / 2 + 10, this.Y + this.H, mFont.CENTER);
 							}
 						}
-						if (mGraphics.zoomLevel == 1)
+						bool flag15 = mGraphics.zoomLevel == 1;
+						if (flag15)
 						{
 							TextInfo.paint(g, text, this.X + 14, this.Y + this.H / 2 + 2, this.W - 16, this.H, mFont.tahoma_7_whiteSmall);
 						}
@@ -148,11 +161,9 @@ public class Info : IActionListener
 							GameCanvas.resetTrans(g);
 						}
 					}
-					i++;
-					continue;
-					goto IL_28C;
 				}
-				if (this.info.charInfo != null)
+				bool flag16 = this.info.charInfo != null;
+				if (flag16)
 				{
 				}
 			}
@@ -160,43 +171,48 @@ public class Info : IActionListener
 		}
 	}
 
-	// Token: 0x0600036D RID: 877 RVA: 0x0001CA84 File Offset: 0x0001AE84
+	// Token: 0x060003E5 RID: 997 RVA: 0x0005640C File Offset: 0x0005460C
 	public void update()
 	{
-		if (this.infoWaitToShow.size() != 0 && this.info.timeCount == 0)
+		bool flag = this.infoWaitToShow.size() != 0 && this.info.timeCount == 0;
+		if (flag)
 		{
 			this.time++;
-			if (this.time >= this.info.speed)
+			bool flag2 = this.time >= this.info.speed;
+			if (flag2)
 			{
 				this.time = 0;
 				this.infoWaitToShow.removeElementAt(0);
-				if (this.infoWaitToShow.size() == 0)
+				bool flag3 = this.infoWaitToShow.size() == 0;
+				if (!flag3)
 				{
-					return;
+					InfoItem infoItem = (InfoItem)this.infoWaitToShow.firstElement();
+					this.info = infoItem;
+					this.getInfo();
 				}
-				InfoItem infoItem = (InfoItem)this.infoWaitToShow.firstElement();
-				this.info = infoItem;
-				this.getInfo();
 			}
 		}
 	}
 
-	// Token: 0x0600036E RID: 878 RVA: 0x0001CB1C File Offset: 0x0001AF1C
+	// Token: 0x060003E6 RID: 998 RVA: 0x000564B0 File Offset: 0x000546B0
 	public void getInfo()
 	{
 		this.sayWidth = 100;
-		if (GameCanvas.w == 128)
+		bool flag = GameCanvas.w == 128;
+		if (flag)
 		{
 			this.sayWidth = 128;
 		}
+		bool flag2 = this.info.charInfo != null;
 		int num;
-		if (this.info.charInfo != null)
+		if (flag2)
 		{
 			this.says = new string[]
 			{
 				this.info.s
 			};
-			if (mGraphics.zoomLevel == 1)
+			bool flag3 = mGraphics.zoomLevel == 1;
+			if (flag3)
 			{
 				num = this.says.Length;
 			}
@@ -218,193 +234,210 @@ public class Info : IActionListener
 		this.H = (num + 1) * 12 + 1 + ((this.info.charInfo == null) ? 0 : 5);
 	}
 
-	// Token: 0x0600036F RID: 879 RVA: 0x0001CC6C File Offset: 0x0001B06C
+	// Token: 0x060003E7 RID: 999 RVA: 0x00056600 File Offset: 0x00054800
 	public void addInfo(string s, int Type, global::Char cInfo, bool isChatServer)
 	{
 		this.type = Type;
-		if (GameCanvas.w == 128)
+		bool flag = GameCanvas.w == 128;
+		if (flag)
 		{
 			this.limLeft = 1;
 		}
-		if (this.infoWaitToShow.size() > 10)
+		bool flag2 = this.infoWaitToShow.size() > 10;
+		if (flag2)
 		{
 			this.infoWaitToShow.removeElementAt(0);
 		}
-		if (this.infoWaitToShow.size() <= 0 || s.Equals(((InfoItem)this.infoWaitToShow.lastElement()).s))
+		bool flag3 = this.infoWaitToShow.size() <= 0 || s.Equals(((InfoItem)this.infoWaitToShow.lastElement()).s);
+		if (flag3)
 		{
 		}
 		InfoItem infoItem = new InfoItem(s);
-		if (this.type == 0)
+		bool flag4 = this.type == 0;
+		if (flag4)
 		{
 			infoItem.speed = s.Length;
 		}
-		if (infoItem.speed < 70)
+		bool flag5 = infoItem.speed < 70;
+		if (flag5)
 		{
 			infoItem.speed = 70;
 		}
-		if (this.type == 1)
+		bool flag6 = this.type == 1;
+		if (flag6)
 		{
 			infoItem.speed = 10000000;
 		}
-		if (this.type == 3)
+		bool flag7 = this.type == 3;
+		if (flag7)
 		{
 			infoItem.speed = 300;
 			infoItem.last = mSystem.currentTimeMillis();
 			infoItem.timeCount = s.Length;
-			if (infoItem.timeCount < 15)
+			bool flag8 = infoItem.timeCount < 15;
+			if (flag8)
 			{
 				infoItem.timeCount = 15;
 			}
-			if (infoItem.timeCount > 100)
+			bool flag9 = infoItem.timeCount > 100;
+			if (flag9)
 			{
 				infoItem.timeCount = 100;
 			}
 			infoItem.maxTime = infoItem.timeCount;
 		}
-		if (cInfo != null)
+		bool flag10 = cInfo != null;
+		if (flag10)
 		{
 			infoItem.charInfo = cInfo;
 			infoItem.isChatServer = isChatServer;
 			GameCanvas.panel.addChatMessage(infoItem);
-			if (GameCanvas.isTouch && GameCanvas.panel.isViewChatServer)
+			bool flag11 = GameCanvas.isTouch && GameCanvas.panel.isViewChatServer;
+			if (flag11)
 			{
 				GameScr.info2.cmdChat = new Command(mResources.CHAT, this, 1000, infoItem);
 			}
 		}
-		if ((cInfo != null && GameCanvas.panel.isViewChatServer) || cInfo == null)
+		bool flag12 = (cInfo != null && GameCanvas.panel.isViewChatServer) || cInfo == null;
+		if (flag12)
 		{
 			this.infoWaitToShow.addElement(infoItem);
 		}
-		if (this.infoWaitToShow.size() == 1)
+		bool flag13 = this.infoWaitToShow.size() == 1;
+		if (flag13)
 		{
 			this.info = (InfoItem)this.infoWaitToShow.firstElement();
 			this.getInfo();
 		}
-		if (GameCanvas.isTouch && cInfo != null && GameCanvas.panel.isViewChatServer && GameCanvas.w - 50 > 155 + this.W)
+		bool flag14 = GameCanvas.isTouch && cInfo != null && GameCanvas.panel.isViewChatServer && GameCanvas.w - 50 > 155 + this.W;
+		if (flag14)
 		{
 			GameScr.info2.cmdChat.x = GameCanvas.w - this.W - 50;
 			GameScr.info2.cmdChat.y = 35;
 		}
 	}
 
-	// Token: 0x06000370 RID: 880 RVA: 0x0001CEA4 File Offset: 0x0001B2A4
+	// Token: 0x060003E8 RID: 1000 RVA: 0x00056874 File Offset: 0x00054A74
 	public void addInfo(string s, int speed, mFont f)
 	{
-		if (GameCanvas.w == 128)
+		bool flag = GameCanvas.w == 128;
+		if (flag)
 		{
 			this.limLeft = 1;
 		}
-		if (this.infoWaitToShow.size() > 10)
+		bool flag2 = this.infoWaitToShow.size() > 10;
+		if (flag2)
 		{
 			this.infoWaitToShow.removeElementAt(0);
 		}
 		this.infoWaitToShow.addElement(new InfoItem(s, f, speed));
 	}
 
-	// Token: 0x06000371 RID: 881 RVA: 0x0001CEF8 File Offset: 0x0001B2F8
+	// Token: 0x060003E9 RID: 1001 RVA: 0x000568D4 File Offset: 0x00054AD4
 	public bool isEmpty()
 	{
 		return this.p1 == 5 && this.infoWaitToShow.size() == 0;
 	}
 
-	// Token: 0x06000372 RID: 882 RVA: 0x0001CF17 File Offset: 0x0001B317
+	// Token: 0x060003EA RID: 1002 RVA: 0x00056900 File Offset: 0x00054B00
 	public void perform(int idAction, object p)
 	{
-		if (idAction == 1000)
+		bool flag = idAction == 1000;
+		if (flag)
 		{
 			ChatTextField.gI().startChat(GameScr.gI(), mResources.chat_player);
 		}
 	}
 
-	// Token: 0x06000373 RID: 883 RVA: 0x0001CF38 File Offset: 0x0001B338
+	// Token: 0x060003EB RID: 1003 RVA: 0x00003136 File Offset: 0x00001336
 	public void onCancelChat()
 	{
 	}
 
-	// Token: 0x0400055C RID: 1372
+	// Token: 0x0400089E RID: 2206
 	public MyVector infoWaitToShow = new MyVector();
 
-	// Token: 0x0400055D RID: 1373
+	// Token: 0x0400089F RID: 2207
 	public InfoItem info;
 
-	// Token: 0x0400055E RID: 1374
+	// Token: 0x040008A0 RID: 2208
 	public int p1 = 5;
 
-	// Token: 0x0400055F RID: 1375
+	// Token: 0x040008A1 RID: 2209
 	public int p2;
 
-	// Token: 0x04000560 RID: 1376
+	// Token: 0x040008A2 RID: 2210
 	public int p3;
 
-	// Token: 0x04000561 RID: 1377
+	// Token: 0x040008A3 RID: 2211
 	public int x;
 
-	// Token: 0x04000562 RID: 1378
+	// Token: 0x040008A4 RID: 2212
 	public int strWidth;
 
-	// Token: 0x04000563 RID: 1379
+	// Token: 0x040008A5 RID: 2213
 	public int limLeft = 2;
 
-	// Token: 0x04000564 RID: 1380
+	// Token: 0x040008A6 RID: 2214
 	public int hI = 20;
 
-	// Token: 0x04000565 RID: 1381
+	// Token: 0x040008A7 RID: 2215
 	public int xChar;
 
-	// Token: 0x04000566 RID: 1382
+	// Token: 0x040008A8 RID: 2216
 	public int yChar;
 
-	// Token: 0x04000567 RID: 1383
+	// Token: 0x040008A9 RID: 2217
 	public int sayWidth = 100;
 
-	// Token: 0x04000568 RID: 1384
+	// Token: 0x040008AA RID: 2218
 	public int sayRun;
 
-	// Token: 0x04000569 RID: 1385
+	// Token: 0x040008AB RID: 2219
 	public string[] says;
 
-	// Token: 0x0400056A RID: 1386
+	// Token: 0x040008AC RID: 2220
 	public int cx;
 
-	// Token: 0x0400056B RID: 1387
+	// Token: 0x040008AD RID: 2221
 	public int cy;
 
-	// Token: 0x0400056C RID: 1388
+	// Token: 0x040008AE RID: 2222
 	public int ch;
 
-	// Token: 0x0400056D RID: 1389
+	// Token: 0x040008AF RID: 2223
 	public bool outSide;
 
-	// Token: 0x0400056E RID: 1390
+	// Token: 0x040008B0 RID: 2224
 	public int f;
 
-	// Token: 0x0400056F RID: 1391
+	// Token: 0x040008B1 RID: 2225
 	public int tF;
 
-	// Token: 0x04000570 RID: 1392
+	// Token: 0x040008B2 RID: 2226
 	public Image img;
 
-	// Token: 0x04000571 RID: 1393
+	// Token: 0x040008B3 RID: 2227
 	public static Image gocnhon = GameCanvas.loadImage("/mainImage/myTexture2dgocnhon.png");
 
-	// Token: 0x04000572 RID: 1394
+	// Token: 0x040008B4 RID: 2228
 	public int time;
 
-	// Token: 0x04000573 RID: 1395
+	// Token: 0x040008B5 RID: 2229
 	public int timeW;
 
-	// Token: 0x04000574 RID: 1396
+	// Token: 0x040008B6 RID: 2230
 	public int type;
 
-	// Token: 0x04000575 RID: 1397
+	// Token: 0x040008B7 RID: 2231
 	public int X;
 
-	// Token: 0x04000576 RID: 1398
+	// Token: 0x040008B8 RID: 2232
 	public int Y;
 
-	// Token: 0x04000577 RID: 1399
+	// Token: 0x040008B9 RID: 2233
 	public int W;
 
-	// Token: 0x04000578 RID: 1400
+	// Token: 0x040008BA RID: 2234
 	public int H;
 }

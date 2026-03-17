@@ -1,27 +1,31 @@
 ﻿using System;
 
-// Token: 0x020000A2 RID: 162
+// Token: 0x02000012 RID: 18
 public class ChatTextField : IActionListener
 {
-	// Token: 0x060006C0 RID: 1728 RVA: 0x0005BED8 File Offset: 0x0005A2D8
+	// Token: 0x06000159 RID: 345 RVA: 0x0001B9D8 File Offset: 0x00019BD8
 	public ChatTextField()
 	{
 		this.tfChat = new TField();
-		if (Main.isWindowsPhone)
+		bool isWindowsPhone = Main.isWindowsPhone;
+		if (isWindowsPhone)
 		{
 			this.tfChat.showSubTextField = false;
 		}
-		if (Main.isIPhone)
+		bool isIPhone = Main.isIPhone;
+		if (isIPhone)
 		{
 			this.tfChat.isPaintMouse = false;
 		}
 		this.tfChat.name = "chat";
-		if (Main.isWindowsPhone)
+		bool isWindowsPhone2 = Main.isWindowsPhone;
+		if (isWindowsPhone2)
 		{
 			this.tfChat.strInfo = this.tfChat.name;
 		}
 		this.tfChat.width = GameCanvas.w - 6;
-		if (Main.isPC && this.tfChat.width > 250)
+		bool flag = Main.isPC && this.tfChat.width > 250;
+		if (flag)
 		{
 			this.tfChat.width = 250;
 		}
@@ -31,7 +35,7 @@ public class ChatTextField : IActionListener
 		this.tfChat.setMaxTextLenght(80);
 	}
 
-	// Token: 0x060006C1 RID: 1729 RVA: 0x0005BFEC File Offset: 0x0005A3EC
+	// Token: 0x0600015A RID: 346 RVA: 0x0001BAF4 File Offset: 0x00019CF4
 	public void initChatTextField()
 	{
 		this.left = new Command(mResources.OK, this, 8000, null, 1, GameCanvas.h - mScreen.cmdH + 1);
@@ -41,13 +45,15 @@ public class ChatTextField : IActionListener
 		this.h = this.tfChat.height + 26;
 		this.x = GameCanvas.w / 2 - this.w / 2;
 		this.y = this.tfChat.y - 18;
-		if (Main.isPC && this.w > 320)
+		bool flag = Main.isPC && this.w > 320;
+		if (flag)
 		{
 			this.w = 320;
 		}
 		this.left.x = this.x;
 		this.right.x = this.x + this.w - 68;
-		if (GameCanvas.isTouch)
+		bool isTouch = GameCanvas.isTouch;
+		if (isTouch)
 		{
 			this.tfChat.y -= 5;
 			this.y -= 20;
@@ -71,13 +77,15 @@ public class ChatTextField : IActionListener
 		this.cmdChat2.actionChat = delegate(string str)
 		{
 			this.tfChat.justReturnFromTextBox = false;
-			if (this.parentScreen != null)
+			bool flag2 = this.parentScreen != null;
+			if (flag2)
 			{
 				this.tfChat.setText(str);
 				this.parentScreen.onChatFromMe(str, this.to);
 				this.tfChat.setText(string.Empty);
 				this.tfChat.clearKb();
-				if (this.right != null)
+				bool flag3 = this.right != null;
+				if (flag3)
 				{
 					this.right.performAction();
 				}
@@ -86,29 +94,33 @@ public class ChatTextField : IActionListener
 		};
 		this.yBegin = this.tfChat.y;
 		this.yUp = GameCanvas.h / 2 - 2 * this.tfChat.height;
-		if (Main.isWindowsPhone)
+		bool isWindowsPhone = Main.isWindowsPhone;
+		if (isWindowsPhone)
 		{
 			this.tfChat.showSubTextField = false;
 		}
-		if (Main.isIPhone)
+		bool isIPhone = Main.isIPhone;
+		if (isIPhone)
 		{
 			this.tfChat.isPaintMouse = false;
 		}
 	}
 
-	// Token: 0x060006C2 RID: 1730 RVA: 0x0005C21E File Offset: 0x0005A61E
+	// Token: 0x0600015B RID: 347 RVA: 0x00003136 File Offset: 0x00001336
 	public void updateWhenKeyBoardVisible()
 	{
 	}
 
-	// Token: 0x060006C3 RID: 1731 RVA: 0x0005C220 File Offset: 0x0005A620
+	// Token: 0x0600015C RID: 348 RVA: 0x0001BD34 File Offset: 0x00019F34
 	public void keyPressed(int keyCode)
 	{
-		if (this.isShow)
+		bool flag = this.isShow;
+		if (flag)
 		{
 			this.tfChat.keyPressed(keyCode);
 		}
-		if (this.tfChat.getText().Equals(string.Empty))
+		bool flag2 = this.tfChat.getText().Equals(string.Empty);
+		if (flag2)
 		{
 			this.right.caption = mResources.CLOSE;
 		}
@@ -118,51 +130,58 @@ public class ChatTextField : IActionListener
 		}
 	}
 
-	// Token: 0x060006C4 RID: 1732 RVA: 0x0005C284 File Offset: 0x0005A684
+	// Token: 0x0600015D RID: 349 RVA: 0x0001BD9C File Offset: 0x00019F9C
 	public static ChatTextField gI()
 	{
 		return (ChatTextField.instance != null) ? ChatTextField.instance : (ChatTextField.instance = new ChatTextField());
 	}
 
-	// Token: 0x060006C5 RID: 1733 RVA: 0x0005C2A8 File Offset: 0x0005A6A8
+	// Token: 0x0600015E RID: 350 RVA: 0x0001BDC8 File Offset: 0x00019FC8
 	public void startChat(int firstCharacter, IChatable parentScreen, string to)
 	{
 		this.right.caption = mResources.CLOSE;
 		this.to = to;
-		if (Main.isWindowsPhone)
+		bool isWindowsPhone = Main.isWindowsPhone;
+		if (isWindowsPhone)
 		{
 			this.tfChat.showSubTextField = false;
 		}
-		if (Main.isIPhone)
+		bool isIPhone = Main.isIPhone;
+		if (isIPhone)
 		{
 			this.tfChat.isPaintMouse = false;
 		}
 		this.tfChat.keyPressed(firstCharacter);
-		if (!this.tfChat.getText().Equals(string.Empty) && GameCanvas.currentDialog == null)
+		bool flag = !this.tfChat.getText().Equals(string.Empty) && GameCanvas.currentDialog == null;
+		if (flag)
 		{
 			this.parentScreen = parentScreen;
 			this.isShow = true;
 		}
 	}
 
-	// Token: 0x060006C6 RID: 1734 RVA: 0x0005C338 File Offset: 0x0005A738
+	// Token: 0x0600015F RID: 351 RVA: 0x0001BE60 File Offset: 0x0001A060
 	public void startChat(IChatable parentScreen, string to)
 	{
 		this.right.caption = mResources.CLOSE;
 		this.to = to;
-		if (Main.isWindowsPhone)
+		bool isWindowsPhone = Main.isWindowsPhone;
+		if (isWindowsPhone)
 		{
 			this.tfChat.showSubTextField = false;
 		}
-		if (Main.isIPhone)
+		bool isIPhone = Main.isIPhone;
+		if (isIPhone)
 		{
 			this.tfChat.isPaintMouse = false;
 		}
-		if (GameCanvas.currentDialog == null)
+		bool flag = GameCanvas.currentDialog == null;
+		if (flag)
 		{
 			this.isShow = true;
 			this.tfChat.isFocus = true;
-			if (!Main.isPC)
+			bool flag2 = !Main.isPC;
+			if (flag2)
 			{
 				ipKeyboard.openKeyBoard(this.strChat, ipKeyboard.TEXT, string.Empty, this.cmdChat);
 				this.tfChat.setFocusWithKb(true);
@@ -173,24 +192,28 @@ public class ChatTextField : IActionListener
 		this.isPublic = false;
 	}
 
-	// Token: 0x060006C7 RID: 1735 RVA: 0x0005C3F8 File Offset: 0x0005A7F8
+	// Token: 0x06000160 RID: 352 RVA: 0x0001BF30 File Offset: 0x0001A130
 	public void startChat2(IChatable parentScreen, string to)
 	{
 		this.tfChat.setFocusWithKb(true);
 		this.to = to;
 		this.parentScreen = parentScreen;
-		if (Main.isWindowsPhone)
+		bool isWindowsPhone = Main.isWindowsPhone;
+		if (isWindowsPhone)
 		{
 			this.tfChat.showSubTextField = false;
 		}
-		if (Main.isIPhone)
+		bool isIPhone = Main.isIPhone;
+		if (isIPhone)
 		{
 			this.tfChat.isPaintMouse = false;
 		}
-		if (GameCanvas.currentDialog == null)
+		bool flag = GameCanvas.currentDialog == null;
+		if (flag)
 		{
 			this.isShow = true;
-			if (!Main.isPC)
+			bool flag2 = !Main.isPC;
+			if (flag2)
 			{
 				ipKeyboard.openKeyBoard(this.strChat, ipKeyboard.TEXT, string.Empty, this.cmdChat2);
 				this.tfChat.setFocusWithKb(true);
@@ -201,172 +224,184 @@ public class ChatTextField : IActionListener
 		this.isPublic = false;
 	}
 
-	// Token: 0x060006C8 RID: 1736 RVA: 0x0005C4AF File Offset: 0x0005A8AF
+	// Token: 0x06000161 RID: 353 RVA: 0x00003136 File Offset: 0x00001336
 	public void updateKey()
 	{
 	}
 
-	// Token: 0x060006C9 RID: 1737 RVA: 0x0005C4B4 File Offset: 0x0005A8B4
+	// Token: 0x06000162 RID: 354 RVA: 0x0001BFF8 File Offset: 0x0001A1F8
 	public void update()
 	{
-		if (!this.isShow)
+		bool flag = !this.isShow;
+		if (!flag)
 		{
-			return;
-		}
-		this.tfChat.update();
-		if (Main.isWindowsPhone)
-		{
-			this.updateWhenKeyBoardVisible();
-		}
-		if (this.tfChat.justReturnFromTextBox)
-		{
-			this.tfChat.justReturnFromTextBox = false;
-			this.parentScreen.onChatFromMe(this.tfChat.getText(), this.to);
-			this.tfChat.setText(string.Empty);
-			this.right.caption = mResources.CLOSE;
-		}
-		if (Main.isPC)
-		{
-			if (GameCanvas.keyPressed[15])
+			this.tfChat.update();
+			bool isWindowsPhone = Main.isWindowsPhone;
+			if (isWindowsPhone)
 			{
-				if (this.left != null && this.tfChat.getText() != string.Empty)
-				{
-					this.left.performAction();
-				}
-				GameCanvas.keyPressed[15] = false;
-				GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
+				this.updateWhenKeyBoardVisible();
 			}
-			if (GameCanvas.keyPressed[14])
+			bool justReturnFromTextBox = this.tfChat.justReturnFromTextBox;
+			if (justReturnFromTextBox)
 			{
-				if (this.right != null)
+				this.tfChat.justReturnFromTextBox = false;
+				this.parentScreen.onChatFromMe(this.tfChat.getText(), this.to);
+				this.tfChat.setText(string.Empty);
+				this.right.caption = mResources.CLOSE;
+			}
+			bool isPC = Main.isPC;
+			if (isPC)
+			{
+				bool flag2 = GameCanvas.keyPressed[15];
+				if (flag2)
 				{
-					this.right.performAction();
+					bool flag3 = this.left != null && this.tfChat.getText() != string.Empty;
+					if (flag3)
+					{
+						this.left.performAction();
+					}
+					GameCanvas.keyPressed[15] = false;
+					GameCanvas.keyPressed[(!Main.isPC) ? 5 : 25] = false;
 				}
-				GameCanvas.keyPressed[14] = false;
+				bool flag4 = GameCanvas.keyPressed[14];
+				if (flag4)
+				{
+					bool flag5 = this.right != null;
+					if (flag5)
+					{
+						this.right.performAction();
+					}
+					GameCanvas.keyPressed[14] = false;
+				}
 			}
 		}
 	}
 
-	// Token: 0x060006CA RID: 1738 RVA: 0x0005C5D5 File Offset: 0x0005A9D5
+	// Token: 0x06000163 RID: 355 RVA: 0x0001C136 File Offset: 0x0001A336
 	public void close()
 	{
 		this.tfChat.setText(string.Empty);
 		this.isShow = false;
 	}
 
-	// Token: 0x060006CB RID: 1739 RVA: 0x0005C5F0 File Offset: 0x0005A9F0
+	// Token: 0x06000164 RID: 356 RVA: 0x0001C154 File Offset: 0x0001A354
 	public void paint(mGraphics g)
 	{
-		if (!this.isShow)
+		bool flag = !this.isShow;
+		if (!flag)
 		{
-			return;
+			bool isIPhone = Main.isIPhone;
+			if (!isIPhone)
+			{
+				int num = (!Main.isWindowsPhone) ? (this.y - this.KC) : (this.tfChat.y - 5);
+				int num2 = (!Main.isWindowsPhone) ? this.x : 0;
+				int num3 = (!Main.isWindowsPhone) ? this.w : GameCanvas.w;
+				PopUp.paintPopUp(g, num2, num, num3, this.h, -1, true);
+				bool isPC = Main.isPC;
+				if (isPC)
+				{
+					mFont.tahoma_7b_green2.drawString(g, this.strChat + this.to, this.tfChat.x, this.tfChat.y - ((!GameCanvas.isTouch) ? 12 : 17), 0);
+					GameCanvas.paintz.paintCmdBar(g, this.left, this.center, this.right);
+				}
+				this.tfChat.paint(g);
+			}
 		}
-		if (Main.isIPhone)
-		{
-			return;
-		}
-		int num = (!Main.isWindowsPhone) ? (this.y - this.KC) : (this.tfChat.y - 5);
-		int num2 = (!Main.isWindowsPhone) ? this.x : 0;
-		int num3 = (!Main.isWindowsPhone) ? this.w : GameCanvas.w;
-		PopUp.paintPopUp(g, num2, num, num3, this.h, -1, true);
-		if (Main.isPC)
-		{
-			mFont.tahoma_7b_green2.drawString(g, this.strChat + this.to, this.tfChat.x, this.tfChat.y - ((!GameCanvas.isTouch) ? 12 : 17), 0);
-			GameCanvas.paintz.paintCmdBar(g, this.left, this.center, this.right);
-		}
-		this.tfChat.paint(g);
 	}
 
-	// Token: 0x060006CC RID: 1740 RVA: 0x0005C6FC File Offset: 0x0005AAFC
+	// Token: 0x06000165 RID: 357 RVA: 0x0001C25C File Offset: 0x0001A45C
 	public void perform(int idAction, object p)
 	{
-		switch (idAction)
+		if (idAction != 8000)
 		{
-		case 8000:
+			if (idAction == 8001)
+			{
+				Cout.LogError("perform chat 8001");
+				bool flag = this.tfChat.getText().Equals(string.Empty);
+				if (flag)
+				{
+					this.isShow = false;
+					this.parentScreen.onCancelChat();
+				}
+				this.tfChat.clear();
+			}
+		}
+		else
+		{
 			Cout.LogError("perform chat 8000");
-			if (this.parentScreen != null)
+			bool flag2 = this.parentScreen != null;
+			if (flag2)
 			{
 				long num = mSystem.currentTimeMillis();
-				if (num - this.lastChatTime < 1000L)
+				bool flag3 = num - this.lastChatTime < 1000L;
+				if (!flag3)
 				{
-					return;
+					this.lastChatTime = num;
+					this.parentScreen.onChatFromMe(this.tfChat.getText(), this.to);
+					this.tfChat.setText(string.Empty);
+					this.right.caption = mResources.CLOSE;
+					this.tfChat.clearKb();
 				}
-				this.lastChatTime = num;
-				this.parentScreen.onChatFromMe(this.tfChat.getText(), this.to);
-				this.tfChat.setText(string.Empty);
-				this.right.caption = mResources.CLOSE;
-				this.tfChat.clearKb();
 			}
-			break;
-		case 8001:
-			Cout.LogError("perform chat 8001");
-			if (this.tfChat.getText().Equals(string.Empty))
-			{
-				this.isShow = false;
-				this.parentScreen.onCancelChat();
-			}
-			this.tfChat.clear();
-			break;
 		}
 	}
 
-	// Token: 0x04000C70 RID: 3184
+	// Token: 0x040002D1 RID: 721
 	private static ChatTextField instance;
 
-	// Token: 0x04000C71 RID: 3185
+	// Token: 0x040002D2 RID: 722
 	public TField tfChat;
 
-	// Token: 0x04000C72 RID: 3186
+	// Token: 0x040002D3 RID: 723
 	public bool isShow;
 
-	// Token: 0x04000C73 RID: 3187
+	// Token: 0x040002D4 RID: 724
 	public IChatable parentScreen;
 
-	// Token: 0x04000C74 RID: 3188
+	// Token: 0x040002D5 RID: 725
 	private long lastChatTime;
 
-	// Token: 0x04000C75 RID: 3189
+	// Token: 0x040002D6 RID: 726
 	public Command left;
 
-	// Token: 0x04000C76 RID: 3190
+	// Token: 0x040002D7 RID: 727
 	public Command cmdChat;
 
-	// Token: 0x04000C77 RID: 3191
+	// Token: 0x040002D8 RID: 728
 	public Command right;
 
-	// Token: 0x04000C78 RID: 3192
+	// Token: 0x040002D9 RID: 729
 	public Command center;
 
-	// Token: 0x04000C79 RID: 3193
+	// Token: 0x040002DA RID: 730
 	private int x;
 
-	// Token: 0x04000C7A RID: 3194
+	// Token: 0x040002DB RID: 731
 	private int y;
 
-	// Token: 0x04000C7B RID: 3195
+	// Token: 0x040002DC RID: 732
 	private int w;
 
-	// Token: 0x04000C7C RID: 3196
+	// Token: 0x040002DD RID: 733
 	private int h;
 
-	// Token: 0x04000C7D RID: 3197
+	// Token: 0x040002DE RID: 734
 	private bool isPublic;
 
-	// Token: 0x04000C7E RID: 3198
+	// Token: 0x040002DF RID: 735
 	public Command cmdChat2;
 
-	// Token: 0x04000C7F RID: 3199
+	// Token: 0x040002E0 RID: 736
 	public int yBegin;
 
-	// Token: 0x04000C80 RID: 3200
+	// Token: 0x040002E1 RID: 737
 	public int yUp;
 
-	// Token: 0x04000C81 RID: 3201
+	// Token: 0x040002E2 RID: 738
 	public int KC;
 
-	// Token: 0x04000C82 RID: 3202
+	// Token: 0x040002E3 RID: 739
 	public string to;
 
-	// Token: 0x04000C83 RID: 3203
+	// Token: 0x040002E4 RID: 740
 	public string strChat = "Chat ";
 }

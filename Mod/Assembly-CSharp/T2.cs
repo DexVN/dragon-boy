@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x0200008E RID: 142
+// Token: 0x020000AD RID: 173
 public class T2 : mResources
 {
-	// Token: 0x060004AB RID: 1195 RVA: 0x0003908C File Offset: 0x0003748C
+	// Token: 0x060009AE RID: 2478 RVA: 0x0009F0F8 File Offset: 0x0009D2F8
 	public static void load()
 	{
 		mResources.confirmChangeServer = "Do you want to change server?";
@@ -182,7 +182,8 @@ public class T2 : mResources
 			"Namekian",
 			"Saiyan"
 		};
-		if (mSystem.clientType == 7)
+		bool flag = mSystem.clientType == 7;
+		if (flag)
 		{
 			mResources.MENUGENDER = new string[]
 			{
@@ -705,7 +706,8 @@ public class T2 : mResources
 				"Kakarot"
 			}
 		};
-		if (mSystem.clientType == 7)
+		bool flag2 = mSystem.clientType == 7;
+		if (flag2)
 		{
 			mResources.hairStyleName = new string[][]
 			{

@@ -2,129 +2,153 @@
 using System.Text;
 using UnityEngine;
 
-// Token: 0x0200002E RID: 46
+// Token: 0x0200007A RID: 122
 public class myReader
 {
-	// Token: 0x060001E8 RID: 488 RVA: 0x00002F43 File Offset: 0x00001343
+	// Token: 0x060005F8 RID: 1528 RVA: 0x00059D71 File Offset: 0x00057F71
 	public myReader()
 	{
 	}
 
-	// Token: 0x060001E9 RID: 489 RVA: 0x00002F4B File Offset: 0x0000134B
+	// Token: 0x060005F9 RID: 1529 RVA: 0x0006AC73 File Offset: 0x00068E73
 	public myReader(sbyte[] data)
 	{
 		this.buffer = data;
 	}
 
-	// Token: 0x060001EA RID: 490 RVA: 0x00002F5C File Offset: 0x0000135C
+	// Token: 0x060005FA RID: 1530 RVA: 0x0006AC84 File Offset: 0x00068E84
 	public myReader(string filename)
 	{
 		TextAsset textAsset = (TextAsset)Resources.Load(filename, typeof(TextAsset));
 		this.buffer = mSystem.convertToSbyte(textAsset.bytes);
 	}
 
-	// Token: 0x060001EB RID: 491 RVA: 0x00002F98 File Offset: 0x00001398
+	// Token: 0x060005FB RID: 1531 RVA: 0x0006ACC0 File Offset: 0x00068EC0
 	public sbyte readSByte()
 	{
-		if (this.posRead < this.buffer.Length)
+		bool flag = this.posRead < this.buffer.Length;
+		if (flag)
 		{
-			return this.buffer[this.posRead++];
+			sbyte[] array = this.buffer;
+			int num = this.posRead;
+			this.posRead = num + 1;
+			return array[num];
 		}
 		this.posRead = this.buffer.Length;
 		throw new Exception(" loi doc sbyte eof ");
 	}
 
-	// Token: 0x060001EC RID: 492 RVA: 0x00002FE9 File Offset: 0x000013E9
+	// Token: 0x060005FC RID: 1532 RVA: 0x0006AD18 File Offset: 0x00068F18
 	public sbyte readsbyte()
 	{
 		return this.readSByte();
 	}
 
-	// Token: 0x060001ED RID: 493 RVA: 0x00002FF1 File Offset: 0x000013F1
+	// Token: 0x060005FD RID: 1533 RVA: 0x0006AD30 File Offset: 0x00068F30
 	public sbyte readByte()
 	{
 		return this.readSByte();
 	}
 
-	// Token: 0x060001EE RID: 494 RVA: 0x00002FF9 File Offset: 0x000013F9
+	// Token: 0x060005FE RID: 1534 RVA: 0x0006AD48 File Offset: 0x00068F48
 	public void mark(int readlimit)
 	{
 		this.posMark = this.posRead;
 	}
 
-	// Token: 0x060001EF RID: 495 RVA: 0x00003007 File Offset: 0x00001407
+	// Token: 0x060005FF RID: 1535 RVA: 0x0006AD57 File Offset: 0x00068F57
 	public void reset()
 	{
 		this.posRead = this.posMark;
 	}
 
-	// Token: 0x060001F0 RID: 496 RVA: 0x00003015 File Offset: 0x00001415
+	// Token: 0x06000600 RID: 1536 RVA: 0x0006AD68 File Offset: 0x00068F68
 	public byte readUnsignedByte()
 	{
 		return myReader.convertSbyteToByte(this.readSByte());
 	}
 
-	// Token: 0x060001F1 RID: 497 RVA: 0x00003024 File Offset: 0x00001424
+	// Token: 0x06000601 RID: 1537 RVA: 0x0006AD88 File Offset: 0x00068F88
 	public short readShort()
 	{
 		short num = 0;
 		for (int i = 0; i < 2; i++)
 		{
 			num = (short)(num << 8);
-			num |= (short)(255 & (int)this.buffer[this.posRead++]);
+			short num2 = num;
+			short num3 = 255;
+			sbyte[] array = this.buffer;
+			int num4 = this.posRead;
+			this.posRead = num4 + 1;
+			num = (short)((num2 | (num3 & array[num4])));
 		}
 		return num;
 	}
 
-	// Token: 0x060001F2 RID: 498 RVA: 0x00003070 File Offset: 0x00001470
+	// Token: 0x06000602 RID: 1538 RVA: 0x0006ADDC File Offset: 0x00068FDC
 	public ushort readUnsignedShort()
 	{
 		ushort num = 0;
 		for (int i = 0; i < 2; i++)
 		{
 			num = (ushort)(num << 8);
-			num |= (ushort)(255 & (int)this.buffer[this.posRead++]);
+			ushort num2 = num;
+			ushort num3 = 255;
+			sbyte[] array = this.buffer;
+			int num4 = this.posRead;
+			this.posRead = num4 + 1;
+			num = (ushort)((num2 | (num3 & array[num4])));
 		}
 		return num;
 	}
 
-	// Token: 0x060001F3 RID: 499 RVA: 0x000030BC File Offset: 0x000014BC
+	// Token: 0x06000603 RID: 1539 RVA: 0x0006AE30 File Offset: 0x00069030
 	public int readInt()
 	{
 		int num = 0;
 		for (int i = 0; i < 4; i++)
 		{
 			num <<= 8;
-			num |= (255 & (int)this.buffer[this.posRead++]);
+			int num2 = num;
+			int num3 = 255;
+			sbyte[] array = this.buffer;
+			int num4 = this.posRead;
+			this.posRead = num4 + 1;
+			num = (num2 | (num3 & array[num4]));
 		}
 		return num;
 	}
 
-	// Token: 0x060001F4 RID: 500 RVA: 0x00003104 File Offset: 0x00001504
+	// Token: 0x06000604 RID: 1540 RVA: 0x0006AE80 File Offset: 0x00069080
 	public long readLong()
 	{
 		long num = 0L;
 		for (int i = 0; i < 8; i++)
 		{
 			num <<= 8;
-			num |= (long)(255 & (int)this.buffer[this.posRead++]);
+			long num2 = num;
+			long num3 = 255L;
+			sbyte[] array = this.buffer;
+			int num4 = this.posRead;
+			this.posRead = num4 + 1;
+			num = (num2 | (num3 & array[num4]));
 		}
 		return num;
 	}
 
-	// Token: 0x060001F5 RID: 501 RVA: 0x0000314E File Offset: 0x0000154E
+	// Token: 0x06000605 RID: 1541 RVA: 0x0006AED0 File Offset: 0x000690D0
 	public bool readBool()
 	{
-		return (int)this.readSByte() > 0;
+		return this.readSByte() > 0;
 	}
 
-	// Token: 0x060001F6 RID: 502 RVA: 0x00003164 File Offset: 0x00001564
+	// Token: 0x06000606 RID: 1542 RVA: 0x0006AEEC File Offset: 0x000690EC
 	public bool readBoolean()
 	{
-		return (int)this.readSByte() > 0;
+		return this.readSByte() > 0;
 	}
 
-	// Token: 0x060001F7 RID: 503 RVA: 0x0000317C File Offset: 0x0000157C
+	// Token: 0x06000607 RID: 1543 RVA: 0x0006AF08 File Offset: 0x00069108
 	public string readString()
 	{
 		short num = this.readShort();
@@ -137,7 +161,7 @@ public class myReader
 		return utf8Encoding.GetString(array);
 	}
 
-	// Token: 0x060001F8 RID: 504 RVA: 0x000031C4 File Offset: 0x000015C4
+	// Token: 0x06000608 RID: 1544 RVA: 0x0006AF5C File Offset: 0x0006915C
 	public string readStringUTF()
 	{
 		short num = this.readShort();
@@ -150,78 +174,98 @@ public class myReader
 		return utf8Encoding.GetString(array);
 	}
 
-	// Token: 0x060001F9 RID: 505 RVA: 0x0000320C File Offset: 0x0000160C
+	// Token: 0x06000609 RID: 1545 RVA: 0x0006AFB0 File Offset: 0x000691B0
 	public string readUTF()
 	{
 		return this.readStringUTF();
 	}
 
-	// Token: 0x060001FA RID: 506 RVA: 0x00003214 File Offset: 0x00001614
+	// Token: 0x0600060A RID: 1546 RVA: 0x0006AFC8 File Offset: 0x000691C8
 	public int read()
 	{
-		if (this.posRead < this.buffer.Length)
+		bool flag = this.posRead < this.buffer.Length;
+		int result;
+		if (flag)
 		{
-			return (int)this.readSByte();
+			result = (int)this.readSByte();
 		}
-		return -1;
+		else
+		{
+			result = -1;
+		}
+		return result;
 	}
 
-	// Token: 0x060001FB RID: 507 RVA: 0x00003234 File Offset: 0x00001634
+	// Token: 0x0600060B RID: 1547 RVA: 0x0006AFFC File Offset: 0x000691FC
 	public int read(ref sbyte[] data)
 	{
-		if (data == null)
+		bool flag = data == null;
+		int result;
+		if (flag)
 		{
-			return 0;
+			result = 0;
 		}
-		int num = 0;
-		for (int i = 0; i < data.Length; i++)
+		else
 		{
-			data[i] = this.readSByte();
-			if (this.posRead > this.buffer.Length)
+			int num = 0;
+			for (int i = 0; i < data.Length; i++)
 			{
-				return -1;
+				data[i] = this.readSByte();
+				bool flag2 = this.posRead > this.buffer.Length;
+				if (flag2)
+				{
+					return -1;
+				}
+				num++;
 			}
-			num++;
+			result = num;
 		}
-		return num;
+		return result;
 	}
 
-	// Token: 0x060001FC RID: 508 RVA: 0x00003288 File Offset: 0x00001688
+	// Token: 0x0600060C RID: 1548 RVA: 0x0006B060 File Offset: 0x00069260
 	public void readFully(ref sbyte[] data)
 	{
-		if (data == null || data.Length + this.posRead > this.buffer.Length)
+		bool flag = data == null || data.Length + this.posRead > this.buffer.Length;
+		if (!flag)
 		{
-			return;
-		}
-		for (int i = 0; i < data.Length; i++)
-		{
-			data[i] = this.readSByte();
+			for (int i = 0; i < data.Length; i++)
+			{
+				data[i] = this.readSByte();
+			}
 		}
 	}
 
-	// Token: 0x060001FD RID: 509 RVA: 0x000032D4 File Offset: 0x000016D4
+	// Token: 0x0600060D RID: 1549 RVA: 0x0006B0B0 File Offset: 0x000692B0
 	public int available()
 	{
 		return this.buffer.Length - this.posRead;
 	}
 
-	// Token: 0x060001FE RID: 510 RVA: 0x000032E5 File Offset: 0x000016E5
+	// Token: 0x0600060E RID: 1550 RVA: 0x0006B0D4 File Offset: 0x000692D4
 	public static byte convertSbyteToByte(sbyte var)
 	{
-		if ((int)var > 0)
+		bool flag = var > 0;
+		byte result;
+		if (flag)
 		{
-			return (byte)var;
+			result = (byte)var;
 		}
-		return (byte)((int)var + 256);
+		else
+		{
+			result = (byte)((int)var + 256);
+		}
+		return result;
 	}
 
-	// Token: 0x060001FF RID: 511 RVA: 0x000032FC File Offset: 0x000016FC
+	// Token: 0x0600060F RID: 1551 RVA: 0x0006B0FC File Offset: 0x000692FC
 	public static byte[] convertSbyteToByte(sbyte[] var)
 	{
 		byte[] array = new byte[var.Length];
 		for (int i = 0; i < var.Length; i++)
 		{
-			if ((int)var[i] > 0)
+			bool flag = var[i] > 0;
+			if (flag)
 			{
 				array[i] = (byte)var[i];
 			}
@@ -233,47 +277,48 @@ public class myReader
 		return array;
 	}
 
-	// Token: 0x06000200 RID: 512 RVA: 0x0000334B File Offset: 0x0000174B
+	// Token: 0x06000610 RID: 1552 RVA: 0x0006B152 File Offset: 0x00069352
 	public void Close()
 	{
 		this.buffer = null;
 	}
 
-	// Token: 0x06000201 RID: 513 RVA: 0x00003354 File Offset: 0x00001754
+	// Token: 0x06000611 RID: 1553 RVA: 0x0006B152 File Offset: 0x00069352
 	public void close()
 	{
 		this.buffer = null;
 	}
 
-	// Token: 0x06000202 RID: 514 RVA: 0x00003360 File Offset: 0x00001760
+	// Token: 0x06000612 RID: 1554 RVA: 0x0006B15C File Offset: 0x0006935C
 	public void read(ref sbyte[] data, int arg1, int arg2)
 	{
-		if (data == null)
+		bool flag = data == null;
+		if (!flag)
 		{
-			return;
-		}
-		for (int i = 0; i < arg2; i++)
-		{
-			data[i + arg1] = this.readSByte();
-			if (this.posRead > this.buffer.Length)
+			for (int i = 0; i < arg2; i++)
 			{
-				return;
+				data[i + arg1] = this.readSByte();
+				bool flag2 = this.posRead > this.buffer.Length;
+				if (flag2)
+				{
+					break;
+				}
 			}
 		}
 	}
 
-	// Token: 0x040001E1 RID: 481
+	// Token: 0x04000DFD RID: 3581
 	public sbyte[] buffer;
 
-	// Token: 0x040001E2 RID: 482
+	// Token: 0x04000DFE RID: 3582
 	private int posRead;
 
-	// Token: 0x040001E3 RID: 483
+	// Token: 0x04000DFF RID: 3583
 	private int posMark;
 
-	// Token: 0x040001E4 RID: 484
+	// Token: 0x04000E00 RID: 3584
 	private static string fileName;
 
-	// Token: 0x040001E5 RID: 485
+	// Token: 0x04000E01 RID: 3585
 	private static int status;
 }

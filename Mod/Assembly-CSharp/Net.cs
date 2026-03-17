@@ -1,31 +1,35 @@
 ﻿using System;
 using UnityEngine;
 
-// Token: 0x02000012 RID: 18
+// Token: 0x0200007F RID: 127
 internal class Net
 {
-	// Token: 0x06000081 RID: 129 RVA: 0x00003C38 File Offset: 0x00002038
+	// Token: 0x0600063F RID: 1599 RVA: 0x0006B884 File Offset: 0x00069A84
 	public static void update()
 	{
-		if (Net.www != null && Net.www.isDone)
+		bool flag = Net.www != null && Net.www.isDone;
+		if (flag)
 		{
 			string str = string.Empty;
-			if (Net.www.error == null || Net.www.error.Equals(string.Empty))
+			bool flag2 = Net.www.error == null || Net.www.error.Equals(string.Empty);
+			if (flag2)
 			{
 				str = Net.www.text;
 			}
 			Net.www = null;
-			if (Net.h != null)
+			bool flag3 = Net.h != null;
+			if (flag3)
 			{
 				Net.h.perform(str);
 			}
 		}
 	}
 
-	// Token: 0x06000082 RID: 130 RVA: 0x00003CB2 File Offset: 0x000020B2
+	// Token: 0x06000640 RID: 1600 RVA: 0x0006B908 File Offset: 0x00069B08
 	public static void connectHTTP(string link, Command h)
 	{
-		if (Net.www != null)
+		bool flag = Net.www != null;
+		if (flag)
 		{
 			Cout.LogError("GET HTTP BUSY");
 		}
@@ -33,19 +37,20 @@ internal class Net
 		Net.h = h;
 	}
 
-	// Token: 0x06000083 RID: 131 RVA: 0x00003CD9 File Offset: 0x000020D9
+	// Token: 0x06000641 RID: 1601 RVA: 0x0006B940 File Offset: 0x00069B40
 	public static void connectHTTP2(string link, Command h)
 	{
 		Net.h = h;
-		if (link != null)
+		bool flag = link != null;
+		if (flag)
 		{
 			h.perform(link);
 		}
 	}
 
-	// Token: 0x04000028 RID: 40
+	// Token: 0x04000E09 RID: 3593
 	public static WWW www;
 
-	// Token: 0x04000029 RID: 41
+	// Token: 0x04000E0A RID: 3594
 	public static Command h;
 }

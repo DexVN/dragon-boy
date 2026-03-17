@@ -2,10 +2,10 @@
 using System.Collections;
 using UnityEngine;
 
-// Token: 0x0200000E RID: 14
+// Token: 0x02000078 RID: 120
 public class MyKeyMap
 {
-	// Token: 0x06000067 RID: 103 RVA: 0x00003510 File Offset: 0x00001910
+	// Token: 0x060005F1 RID: 1521 RVA: 0x0006A6A0 File Offset: 0x000688A0
 	static MyKeyMap()
 	{
 		MyKeyMap.h.Add(KeyCode.A, 97);
@@ -61,17 +61,23 @@ public class MyKeyMap
 		MyKeyMap.h.Add(KeyCode.Tab, -26);
 	}
 
-	// Token: 0x06000069 RID: 105 RVA: 0x00003A0C File Offset: 0x00001E0C
+	// Token: 0x060005F2 RID: 1522 RVA: 0x0006ABC8 File Offset: 0x00068DC8
 	public static int map(KeyCode k)
 	{
 		object obj = MyKeyMap.h[k];
-		if (obj == null)
+		bool flag = obj == null;
+		int result;
+		if (flag)
 		{
-			return 0;
+			result = 0;
 		}
-		return (int)obj;
+		else
+		{
+			result = (int)obj;
+		}
+		return result;
 	}
 
-	// Token: 0x04000025 RID: 37
+	// Token: 0x04000DFB RID: 3579
 	private static Hashtable h = new Hashtable();
 }

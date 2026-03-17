@@ -1,23 +1,23 @@
 ﻿using System;
 
-// Token: 0x02000063 RID: 99
+// Token: 0x02000055 RID: 85
 public class ItemObject
 {
-	// Token: 0x0400060E RID: 1550
+	// Token: 0x040009AF RID: 2479
 	public int id;
 
-	// Token: 0x0400060F RID: 1551
+	// Token: 0x040009B0 RID: 2480
 	public int where;
 
-	// Token: 0x04000610 RID: 1552
+	// Token: 0x040009B1 RID: 2481
 	public int type;
 
-	// Token: 0x04000611 RID: 1553
+	// Token: 0x040009B2 RID: 2482
 	public int indexX;
 
-	// Token: 0x04000612 RID: 1554
+	// Token: 0x040009B3 RID: 2483
 	public int indexY;
 
-	// Token: 0x04000613 RID: 1555
+	// Token: 0x040009B4 RID: 2484
 	public Image image;
 }

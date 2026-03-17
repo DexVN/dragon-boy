@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x0200002D RID: 45
+// Token: 0x0200006A RID: 106
 public class mLine
 {
-	// Token: 0x060001E6 RID: 486 RVA: 0x0000DB39 File Offset: 0x0000BF39
+	// Token: 0x0600054F RID: 1359 RVA: 0x00062DE1 File Offset: 0x00060FE1
 	public mLine(int x1, int y1, int x2, int y2, int cl)
 	{
 		this.x1 = x1;
@@ -13,7 +13,7 @@ public class mLine
 		this.setColor(cl);
 	}
 
-	// Token: 0x060001E7 RID: 487 RVA: 0x0000DB68 File Offset: 0x0000BF68
+	// Token: 0x06000550 RID: 1360 RVA: 0x00062E14 File Offset: 0x00061014
 	public void setColor(int rgb)
 	{
 		int num = rgb & 255;
@@ -25,27 +25,27 @@ public class mLine
 		this.a = 255f;
 	}
 
-	// Token: 0x040001D9 RID: 473
+	// Token: 0x04000B4C RID: 2892
 	public int x1;
 
-	// Token: 0x040001DA RID: 474
+	// Token: 0x04000B4D RID: 2893
 	public int x2;
 
-	// Token: 0x040001DB RID: 475
+	// Token: 0x04000B4E RID: 2894
 	public int y1;
 
-	// Token: 0x040001DC RID: 476
+	// Token: 0x04000B4F RID: 2895
 	public int y2;
 
-	// Token: 0x040001DD RID: 477
+	// Token: 0x04000B50 RID: 2896
 	public float r;
 
-	// Token: 0x040001DE RID: 478
+	// Token: 0x04000B51 RID: 2897
 	public float b;
 
-	// Token: 0x040001DF RID: 479
+	// Token: 0x04000B52 RID: 2898
 	public float g;
 
-	// Token: 0x040001E0 RID: 480
+	// Token: 0x04000B53 RID: 2899
 	public float a;
 }

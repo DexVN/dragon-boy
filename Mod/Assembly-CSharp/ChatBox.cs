@@ -1,6 +1,6 @@
 ﻿using System;
 
-// Token: 0x020000A1 RID: 161
+// Token: 0x02000010 RID: 16
 internal class ChatBox
 {
 }

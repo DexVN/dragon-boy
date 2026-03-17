@@ -1,5 +1,5 @@
 ﻿using System;
 
-// Token: 0x02000022 RID: 34
-// (Invoke) Token: 0x06000137 RID: 311
+// Token: 0x02000004 RID: 4
+// (Invoke) Token: 0x0600000A RID: 10
 public delegate void ActionUpdate();

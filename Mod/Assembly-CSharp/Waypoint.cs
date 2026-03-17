@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000096 RID: 150
+// Token: 0x020000BC RID: 188
 public class Waypoint : IActionListener
 {
-	// Token: 0x060004BC RID: 1212 RVA: 0x0003CDB8 File Offset: 0x0003B1B8
+	// Token: 0x06000A22 RID: 2594 RVA: 0x000A75A0 File Offset: 0x000A57A0
 	public Waypoint(short minX, short minY, short maxX, short maxY, bool isEnter, bool isOffline, string name)
 	{
 		this.minX = minX;
@@ -13,87 +13,99 @@ public class Waypoint : IActionListener
 		name = Res.changeString(name);
 		this.isEnter = isEnter;
 		this.isOffline = isOffline;
-		if ((TileMap.mapID == 21 || TileMap.mapID == 22 || TileMap.mapID == 23) && this.minX >= 0 && this.minX <= 24)
+		bool flag = (TileMap.mapID == 21 || TileMap.mapID == 22 || TileMap.mapID == 23) && this.minX >= 0 && this.minX <= 24;
+		if (!flag)
 		{
-			return;
-		}
-		if (((TileMap.mapID == 0 && global::Char.myCharz().cgender != 0) || (TileMap.mapID == 7 && global::Char.myCharz().cgender != 1) || (TileMap.mapID == 14 && global::Char.myCharz().cgender != 2)) && isOffline)
-		{
-			return;
-		}
-		if (!TileMap.isInAirMap() && TileMap.mapID != 47)
-		{
-			if (!isEnter && !isOffline)
+			bool flag2 = ((TileMap.mapID == 0 && global::Char.myCharz().cgender != 0) || (TileMap.mapID == 7 && global::Char.myCharz().cgender != 1) || (TileMap.mapID == 14 && global::Char.myCharz().cgender != 2)) && isOffline;
+			if (!flag2)
 			{
-				this.popup = new PopUp(name, (int)minX, (int)(minY - 24));
-				this.popup.command = new Command(null, this, 1, this);
-				this.popup.isWayPoint = true;
-				this.popup.isPaint = false;
-				PopUp.addPopUp(this.popup);
-			}
-			else
-			{
-				if (TileMap.isTrainingMap())
+				bool flag3 = !TileMap.isInAirMap() && TileMap.mapID != 47;
+				if (flag3)
 				{
-					this.popup = new PopUp(name, (int)minX, (int)(minY - 16));
+					bool flag4 = !isEnter && !isOffline;
+					if (flag4)
+					{
+						this.popup = new PopUp(name, (int)minX, (int)(minY - 24));
+						this.popup.command = new Command(null, this, 1, this);
+						this.popup.isWayPoint = true;
+						this.popup.isPaint = false;
+						PopUp.addPopUp(this.popup);
+					}
+					else
+					{
+						bool flag5 = TileMap.isTrainingMap();
+						if (flag5)
+						{
+							this.popup = new PopUp(name, (int)minX, (int)(minY - 16));
+						}
+						else
+						{
+							int x = (int)(minX + (maxX - minX) / 2);
+							this.popup = new PopUp(name, x, (int)(minY - ((minY == 0) ? -32 : 16)));
+						}
+						this.popup.command = new Command(null, this, 2, this);
+						this.popup.isWayPoint = true;
+						this.popup.isPaint = false;
+						PopUp.addPopUp(this.popup);
+					}
+					TileMap.vGo.addElement(this);
 				}
 				else
 				{
-					int x = (int)(minX + (maxX - minX) / 2);
-					this.popup = new PopUp(name, x, (int)(minY - ((minY == 0) ? -32 : 16)));
+					bool flag6 = minY > 150 && TileMap.isInAirMap();
+					if (!flag6)
+					{
+						this.popup = new PopUp(name, (int)(minX + (maxX - minX) / 2), (int)(maxY - ((minX <= 100) ? 48 : 24)));
+						this.popup.command = new Command(null, this, 1, this);
+						this.popup.isWayPoint = true;
+						this.popup.isPaint = false;
+						PopUp.addPopUp(this.popup);
+						TileMap.vGo.addElement(this);
+					}
 				}
-				this.popup.command = new Command(null, this, 2, this);
-				this.popup.isWayPoint = true;
-				this.popup.isPaint = false;
-				PopUp.addPopUp(this.popup);
 			}
-			TileMap.vGo.addElement(this);
-			return;
 		}
-		if (minY > 150 && TileMap.isInAirMap())
-		{
-			return;
-		}
-		this.popup = new PopUp(name, (int)(minX + (maxX - minX) / 2), (int)(maxY - ((minX <= 100) ? 48 : 24)));
-		this.popup.command = new Command(null, this, 1, this);
-		this.popup.isWayPoint = true;
-		this.popup.isPaint = false;
-		PopUp.addPopUp(this.popup);
-		TileMap.vGo.addElement(this);
 	}
 
-	// Token: 0x060004BD RID: 1213 RVA: 0x0003D014 File Offset: 0x0003B414
+	// Token: 0x06000A23 RID: 2595 RVA: 0x000A780C File Offset: 0x000A5A0C
 	public void perform(int idAction, object p)
 	{
-		if (idAction != 1)
+		bool flag = idAction != 1;
+		if (flag)
 		{
-			if (idAction == 2)
+			bool flag2 = idAction == 2;
+			if (flag2)
 			{
 				GameScr.gI().auto = 0;
-				if (global::Char.myCharz().isInEnterOfflinePoint() != null)
+				bool flag3 = global::Char.myCharz().isInEnterOfflinePoint() != null;
+				if (flag3)
 				{
 					Service.gI().charMove();
 					InfoDlg.showWait();
 					Service.gI().getMapOffline();
 					global::Char.ischangingMap = true;
 				}
-				else if (global::Char.myCharz().isInEnterOnlinePoint() != null)
-				{
-					Service.gI().charMove();
-					Service.gI().requestChangeMap();
-					global::Char.isLockKey = true;
-					global::Char.ischangingMap = true;
-					GameCanvas.clearKeyHold();
-					GameCanvas.clearKeyPressed();
-					InfoDlg.showWait();
-				}
 				else
 				{
-					int xEnd = (int)((this.minX + this.maxX) / 2);
-					int yEnd = (int)this.maxY;
-					global::Char.myCharz().currentMovePoint = new MovePoint(xEnd, yEnd);
-					global::Char.myCharz().cdir = ((global::Char.myCharz().cx - global::Char.myCharz().currentMovePoint.xEnd <= 0) ? 1 : -1);
-					global::Char.myCharz().endMovePointCommand = new Command(null, this, 2, null);
+					bool flag4 = global::Char.myCharz().isInEnterOnlinePoint() != null;
+					if (flag4)
+					{
+						Service.gI().charMove();
+						Service.gI().requestChangeMap();
+						global::Char.isLockKey = true;
+						global::Char.ischangingMap = true;
+						GameCanvas.clearKeyHold();
+						GameCanvas.clearKeyPressed();
+						InfoDlg.showWait();
+					}
+					else
+					{
+						int xEnd = (int)((this.minX + this.maxX) / 2);
+						int yEnd = (int)this.maxY;
+						global::Char.myCharz().currentMovePoint = new MovePoint(xEnd, yEnd);
+						global::Char.myCharz().cdir = ((global::Char.myCharz().cx - global::Char.myCharz().currentMovePoint.xEnd <= 0) ? 1 : -1);
+						global::Char.myCharz().endMovePointCommand = new Command(null, this, 2, null);
+					}
 				}
 			}
 		}
@@ -101,7 +113,8 @@ public class Waypoint : IActionListener
 		{
 			int xEnd2 = (int)((this.minX + this.maxX) / 2);
 			int yEnd2 = (int)this.maxY;
-			if (this.maxY > this.minY + 24)
+			bool flag5 = this.maxY > this.minY + 24;
+			if (flag5)
 			{
 				yEnd2 = (int)((this.minY + this.maxY) / 2);
 			}
@@ -112,24 +125,24 @@ public class Waypoint : IActionListener
 		}
 	}
 
-	// Token: 0x04000832 RID: 2098
+	// Token: 0x04001344 RID: 4932
 	public short minX;
 
-	// Token: 0x04000833 RID: 2099
+	// Token: 0x04001345 RID: 4933
 	public short minY;
 
-	// Token: 0x04000834 RID: 2100
+	// Token: 0x04001346 RID: 4934
 	public short maxX;
 
-	// Token: 0x04000835 RID: 2101
+	// Token: 0x04001347 RID: 4935
 	public short maxY;
 
-	// Token: 0x04000836 RID: 2102
+	// Token: 0x04001348 RID: 4936
 	public bool isEnter;
 
-	// Token: 0x04000837 RID: 2103
+	// Token: 0x04001349 RID: 4937
 	public bool isOffline;
 
-	// Token: 0x04000838 RID: 2104
+	// Token: 0x0400134A RID: 4938
 	public PopUp popup;
 }

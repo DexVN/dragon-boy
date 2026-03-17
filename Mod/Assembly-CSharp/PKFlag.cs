@@ -1,11 +1,11 @@
 ﻿using System;
 
-// Token: 0x02000073 RID: 115
+// Token: 0x02000089 RID: 137
 public class PKFlag
 {
-	// Token: 0x040006BB RID: 1723
+	// Token: 0x04000FBA RID: 4026
 	public sbyte cflag;
 
-	// Token: 0x040006BC RID: 1724
+	// Token: 0x04000FBB RID: 4027
 	public int IDimageFlag;
 }

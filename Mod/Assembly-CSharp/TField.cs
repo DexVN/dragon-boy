@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 
-// Token: 0x0200001C RID: 28
+// Token: 0x020000B5 RID: 181
 public class TField : IActionListener
 {
-	// Token: 0x060000CF RID: 207 RVA: 0x00005020 File Offset: 0x00003420
+	// Token: 0x060009CA RID: 2506 RVA: 0x000A398C File Offset: 0x000A1B8C
 	public TField(mScreen parentScr)
 	{
 		this.text = string.Empty;
@@ -12,14 +12,14 @@ public class TField : IActionListener
 		this.init();
 	}
 
-	// Token: 0x060000D0 RID: 208 RVA: 0x000050C0 File Offset: 0x000034C0
+	// Token: 0x060009CB RID: 2507 RVA: 0x000A3A30 File Offset: 0x000A1C30
 	public TField()
 	{
 		this.text = string.Empty;
 		this.init();
 	}
 
-	// Token: 0x060000D1 RID: 209 RVA: 0x00005158 File Offset: 0x00003558
+	// Token: 0x060009CC RID: 2508 RVA: 0x000A3ACC File Offset: 0x000A1CCC
 	public TField(int x, int y, int w, int h)
 	{
 		this.text = string.Empty;
@@ -30,7 +30,7 @@ public class TField : IActionListener
 		this.height = h;
 	}
 
-	// Token: 0x060000D2 RID: 210 RVA: 0x00005210 File Offset: 0x00003610
+	// Token: 0x060009CD RID: 2509 RVA: 0x000A3B84 File Offset: 0x000A1D84
 	public TField(string text, int maxLen, int inputType)
 	{
 		this.text = text;
@@ -40,81 +40,94 @@ public class TField : IActionListener
 		this.isTfield = true;
 	}
 
-	// Token: 0x060000D3 RID: 211 RVA: 0x000052B9 File Offset: 0x000036B9
+	// Token: 0x060009CE RID: 2510 RVA: 0x000A3C30 File Offset: 0x000A1E30
 	public static bool setNormal(char ch)
 	{
 		return (ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 	}
 
-	// Token: 0x060000D4 RID: 212 RVA: 0x000052EE File Offset: 0x000036EE
+	// Token: 0x060009CF RID: 2511 RVA: 0x00003136 File Offset: 0x00001336
 	public void doChangeToTextBox()
 	{
 	}
 
-	// Token: 0x060000D5 RID: 213 RVA: 0x000052F0 File Offset: 0x000036F0
+	// Token: 0x060009D0 RID: 2512 RVA: 0x000A3C6C File Offset: 0x000A1E6C
 	public static void setVendorTypeMode(int mode)
 	{
-		if (mode == TField.MOTO)
+		bool flag = mode == TField.MOTO;
+		if (flag)
 		{
 			TField.print[0] = "0";
 			TField.print[10] = " *";
 			TField.print[11] = "#";
 			TField.changeModeKey = 35;
 		}
-		else if (mode == TField.NOKIA)
+		else
 		{
-			TField.print[0] = " 0";
-			TField.print[10] = "*";
-			TField.print[11] = "#";
-			TField.changeModeKey = 35;
-		}
-		else if (mode == TField.ORTHER)
-		{
-			TField.print[0] = "0";
-			TField.print[10] = "*";
-			TField.print[11] = " #";
-			TField.changeModeKey = 42;
+			bool flag2 = mode == TField.NOKIA;
+			if (flag2)
+			{
+				TField.print[0] = " 0";
+				TField.print[10] = "*";
+				TField.print[11] = "#";
+				TField.changeModeKey = 35;
+			}
+			else
+			{
+				bool flag3 = mode == TField.ORTHER;
+				if (flag3)
+				{
+					TField.print[0] = "0";
+					TField.print[10] = "*";
+					TField.print[11] = " #";
+					TField.changeModeKey = 42;
+				}
+			}
 		}
 	}
 
-	// Token: 0x060000D6 RID: 214 RVA: 0x000053B0 File Offset: 0x000037B0
+	// Token: 0x060009D1 RID: 2513 RVA: 0x000A3D30 File Offset: 0x000A1F30
 	public void init()
 	{
 		TField.CARET_HEIGHT = mScreen.ITEM_HEIGHT + 1;
 		this.cmdClear = new Command(mResources.DELETE, this, 1000, null);
-		if (Main.isPC)
+		bool isPC = Main.isPC;
+		if (isPC)
 		{
 			TField.typeXpeed = 0;
 		}
-		if (TField.imgTf == null)
+		bool flag = TField.imgTf == null;
+		if (flag)
 		{
 			TField.imgTf = GameCanvas.loadImage("/mainImage/myTexture2dtf.png");
 		}
 	}
 
-	// Token: 0x060000D7 RID: 215 RVA: 0x00005409 File Offset: 0x00003809
+	// Token: 0x060009D2 RID: 2514 RVA: 0x000A3D90 File Offset: 0x000A1F90
 	public void clearKeyWhenPutText(int keyCode)
 	{
-		if (keyCode != -8)
+		bool flag = keyCode != -8;
+		if (!flag)
 		{
-			return;
+			bool flag2 = this.timeDelayKyCode > 0;
+			if (!flag2)
+			{
+				bool flag3 = this.timeDelayKyCode <= 0;
+				if (flag3)
+				{
+					this.timeDelayKyCode = 1;
+				}
+				this.clear();
+			}
 		}
-		if (this.timeDelayKyCode > 0)
-		{
-			return;
-		}
-		if (this.timeDelayKyCode <= 0)
-		{
-			this.timeDelayKyCode = 1;
-		}
-		this.clear();
 	}
 
-	// Token: 0x060000D8 RID: 216 RVA: 0x0000543A File Offset: 0x0000383A
+	// Token: 0x060009D3 RID: 2515 RVA: 0x000A3DE0 File Offset: 0x000A1FE0
 	public void clearAllText()
 	{
 		this.text = string.Empty;
-		if (TField.kb != null)
+		bool flag = TField.kb != null;
+		if (flag)
 		{
 			TField.kb.text = string.Empty;
 		}
@@ -123,78 +136,91 @@ public class TField : IActionListener
 		this.setPasswordTest();
 	}
 
-	// Token: 0x060000D9 RID: 217 RVA: 0x00005474 File Offset: 0x00003874
+	// Token: 0x060009D4 RID: 2516 RVA: 0x000A3E2C File Offset: 0x000A202C
 	public void clear()
 	{
-		if (this.caretPos > 0 && this.text.Length > 0)
+		bool flag = this.caretPos > 0 && this.text.Length > 0;
+		if (flag)
 		{
 			this.text = this.text.Substring(0, this.caretPos - 1);
 			this.caretPos--;
 			this.setOffset(0);
 			this.setPasswordTest();
-			if (TField.kb != null)
+			bool flag2 = TField.kb != null;
+			if (flag2)
 			{
 				TField.kb.text = this.text;
 			}
 		}
 	}
 
-	// Token: 0x060000DA RID: 218 RVA: 0x000054F0 File Offset: 0x000038F0
+	// Token: 0x060009D5 RID: 2517 RVA: 0x000A3EB0 File Offset: 0x000A20B0
 	public void clearAll()
 	{
-		if (this.caretPos > 0 && this.text.Length > 0)
+		bool flag = this.caretPos > 0 && this.text.Length > 0;
+		if (flag)
 		{
 			this.text = this.text.Substring(0, this.text.Length - 1);
 			this.caretPos--;
 			this.setOffset();
 			this.setPasswordTest();
 			this.setFocusWithKb(true);
-			if (TField.kb != null)
+			bool flag2 = TField.kb != null;
+			if (flag2)
 			{
 				TField.kb.text = string.Empty;
 			}
 		}
 	}
 
-	// Token: 0x060000DB RID: 219 RVA: 0x00005574 File Offset: 0x00003974
+	// Token: 0x060009D6 RID: 2518 RVA: 0x000A3F40 File Offset: 0x000A2140
 	public void setOffset()
 	{
-		if (this.paintedText == null || mFont.tahoma_8b == null)
+		bool flag = this.paintedText == null || mFont.tahoma_8b == null;
+		if (!flag)
 		{
-			return;
-		}
-		if (this.inputType == TField.INPUT_TYPE_PASSWORD)
-		{
-			this.paintedText = this.passwordText;
-		}
-		else
-		{
-			this.paintedText = this.text;
-		}
-		if (this.offsetX < 0 && mFont.tahoma_8b.getWidth(this.paintedText) + this.offsetX < this.width - TField.TEXT_GAP_X - 13 - TField.typingModeAreaWidth)
-		{
-			this.offsetX = this.width - 10 - TField.typingModeAreaWidth - mFont.tahoma_8b.getWidth(this.paintedText);
-		}
-		if (this.offsetX + mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos)) <= 0)
-		{
-			this.offsetX = -mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos));
-			this.offsetX += 40;
-		}
-		else if (this.offsetX + mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos)) >= this.width - 12 - TField.typingModeAreaWidth)
-		{
-			this.offsetX = this.width - 10 - TField.typingModeAreaWidth - mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos)) - 2 * TField.TEXT_GAP_X;
-		}
-		if (this.offsetX > 0)
-		{
-			this.offsetX = 0;
+			bool flag2 = this.inputType == TField.INPUT_TYPE_PASSWORD;
+			if (flag2)
+			{
+				this.paintedText = this.passwordText;
+			}
+			else
+			{
+				this.paintedText = this.text;
+			}
+			bool flag3 = this.offsetX < 0 && mFont.tahoma_8b.getWidth(this.paintedText) + this.offsetX < this.width - TField.TEXT_GAP_X - 13 - TField.typingModeAreaWidth;
+			if (flag3)
+			{
+				this.offsetX = this.width - 10 - TField.typingModeAreaWidth - mFont.tahoma_8b.getWidth(this.paintedText);
+			}
+			bool flag4 = this.offsetX + mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos)) <= 0;
+			if (flag4)
+			{
+				this.offsetX = -mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos));
+				this.offsetX += 40;
+			}
+			else
+			{
+				bool flag5 = this.offsetX + mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos)) >= this.width - 12 - TField.typingModeAreaWidth;
+				if (flag5)
+				{
+					this.offsetX = this.width - 10 - TField.typingModeAreaWidth - mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos)) - 2 * TField.TEXT_GAP_X;
+				}
+			}
+			bool flag6 = this.offsetX > 0;
+			if (flag6)
+			{
+				this.offsetX = 0;
+			}
 		}
 	}
 
-	// Token: 0x060000DC RID: 220 RVA: 0x0000570C File Offset: 0x00003B0C
+	// Token: 0x060009D7 RID: 2519 RVA: 0x000A40F4 File Offset: 0x000A22F4
 	private void keyPressedAny(int keyCode)
 	{
+		bool flag = this.inputType == TField.INPUT_TYPE_PASSWORD || this.inputType == TField.INPUT_ALPHA_NUMBER_ONLY;
 		string[] array;
-		if (this.inputType == TField.INPUT_TYPE_PASSWORD || this.inputType == TField.INPUT_ALPHA_NUMBER_ONLY)
+		if (flag)
 		{
 			array = TField.printA;
 		}
@@ -202,28 +228,39 @@ public class TField : IActionListener
 		{
 			array = TField.print;
 		}
-		if (keyCode == TField.lastKey)
+		bool flag2 = keyCode == TField.lastKey;
+		if (flag2)
 		{
 			this.indexOfActiveChar = (this.indexOfActiveChar + 1) % array[keyCode - 48].Length;
 			char c = array[keyCode - 48][this.indexOfActiveChar];
-			if (TField.mode == 0)
+			bool flag3 = TField.mode == 0;
+			if (flag3)
 			{
 				c = char.ToLower(c);
 			}
-			else if (TField.mode == 1)
-			{
-				c = char.ToUpper(c);
-			}
-			else if (TField.mode == 2)
-			{
-				c = char.ToUpper(c);
-			}
 			else
 			{
-				c = array[keyCode - 48][array[keyCode - 48].Length - 1];
+				bool flag4 = TField.mode == 1;
+				if (flag4)
+				{
+					c = char.ToUpper(c);
+				}
+				else
+				{
+					bool flag5 = TField.mode == 2;
+					if (flag5)
+					{
+						c = char.ToUpper(c);
+					}
+					else
+					{
+						c = array[keyCode - 48][array[keyCode - 48].Length - 1];
+					}
+				}
 			}
-			string str = this.text.Substring(0, this.caretPos - 1) + c;
-			if (this.caretPos < this.text.Length)
+			string str = this.text.Substring(0, this.caretPos - 1) + c.ToString();
+			bool flag6 = this.caretPos < this.text.Length;
+			if (flag6)
 			{
 				str += this.text.Substring(this.caretPos, this.text.Length);
 			}
@@ -231,74 +268,93 @@ public class TField : IActionListener
 			this.keyInActiveState = TField.MAX_TIME_TO_CONFIRM_KEY[TField.typeXpeed];
 			this.setPasswordTest();
 		}
-		else if (this.text.Length < this.maxTextLenght)
+		else
 		{
-			if (TField.mode == 1 && TField.lastKey != -1984)
+			bool flag7 = this.text.Length < this.maxTextLenght;
+			if (flag7)
 			{
-				TField.mode = 0;
+				bool flag8 = TField.mode == 1 && TField.lastKey != -1984;
+				if (flag8)
+				{
+					TField.mode = 0;
+				}
+				this.indexOfActiveChar = 0;
+				char c2 = array[keyCode - 48][this.indexOfActiveChar];
+				bool flag9 = TField.mode == 0;
+				if (flag9)
+				{
+					c2 = char.ToLower(c2);
+				}
+				else
+				{
+					bool flag10 = TField.mode == 1;
+					if (flag10)
+					{
+						c2 = char.ToUpper(c2);
+					}
+					else
+					{
+						bool flag11 = TField.mode == 2;
+						if (flag11)
+						{
+							c2 = char.ToUpper(c2);
+						}
+						else
+						{
+							c2 = array[keyCode - 48][array[keyCode - 48].Length - 1];
+						}
+					}
+				}
+				string str2 = this.text.Substring(0, this.caretPos) + c2.ToString();
+				bool flag12 = this.caretPos < this.text.Length;
+				if (flag12)
+				{
+					str2 += this.text.Substring(this.caretPos, this.text.Length);
+				}
+				this.text = str2;
+				this.keyInActiveState = TField.MAX_TIME_TO_CONFIRM_KEY[TField.typeXpeed];
+				this.caretPos++;
+				this.setPasswordTest();
+				this.setOffset();
 			}
-			this.indexOfActiveChar = 0;
-			char c2 = array[keyCode - 48][this.indexOfActiveChar];
-			if (TField.mode == 0)
-			{
-				c2 = char.ToLower(c2);
-			}
-			else if (TField.mode == 1)
-			{
-				c2 = char.ToUpper(c2);
-			}
-			else if (TField.mode == 2)
-			{
-				c2 = char.ToUpper(c2);
-			}
-			else
-			{
-				c2 = array[keyCode - 48][array[keyCode - 48].Length - 1];
-			}
-			string str2 = this.text.Substring(0, this.caretPos) + c2;
-			if (this.caretPos < this.text.Length)
-			{
-				str2 += this.text.Substring(this.caretPos, this.text.Length);
-			}
-			this.text = str2;
-			this.keyInActiveState = TField.MAX_TIME_TO_CONFIRM_KEY[TField.typeXpeed];
-			this.caretPos++;
-			this.setPasswordTest();
-			this.setOffset();
 		}
 		TField.lastKey = keyCode;
 	}
 
-	// Token: 0x060000DD RID: 221 RVA: 0x0000599C File Offset: 0x00003D9C
+	// Token: 0x060009D8 RID: 2520 RVA: 0x000A43C8 File Offset: 0x000A25C8
 	private void keyPressedAscii(int keyCode)
 	{
-		if ((this.inputType == TField.INPUT_TYPE_PASSWORD || this.inputType == TField.INPUT_ALPHA_NUMBER_ONLY) && (keyCode < 48 || keyCode > 57) && (keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122))
+		bool flag = (this.inputType == TField.INPUT_TYPE_PASSWORD || this.inputType == TField.INPUT_ALPHA_NUMBER_ONLY) && (keyCode < 48 || keyCode > 57) && (keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122);
+		if (!flag)
 		{
-			return;
-		}
-		if (this.text.Length < this.maxTextLenght)
-		{
-			string str = this.text.Substring(0, this.caretPos) + (char)keyCode;
-			if (this.caretPos < this.text.Length)
+			bool flag2 = this.text.Length < this.maxTextLenght;
+			if (flag2)
 			{
-				str += this.text.Substring(this.caretPos, this.text.Length - this.caretPos);
+				string str = this.text.Substring(0, this.caretPos) + ((char)keyCode).ToString();
+				bool flag3 = this.caretPos < this.text.Length;
+				if (flag3)
+				{
+					str += this.text.Substring(this.caretPos, this.text.Length - this.caretPos);
+				}
+				this.text = str;
+				this.caretPos++;
+				this.setPasswordTest();
+				this.setOffset(0);
 			}
-			this.text = str;
-			this.caretPos++;
-			this.setPasswordTest();
-			this.setOffset(0);
-		}
-		if (TField.kb != null)
-		{
-			TField.kb.text = this.text;
+			bool flag4 = TField.kb != null;
+			if (flag4)
+			{
+				TField.kb.text = this.text;
+			}
 		}
 	}
 
-	// Token: 0x060000DE RID: 222 RVA: 0x00005AAB File Offset: 0x00003EAB
+	// Token: 0x060009D9 RID: 2521 RVA: 0x000A44E8 File Offset: 0x000A26E8
 	public static void setMode()
 	{
 		TField.mode++;
-		if (TField.mode > 3)
+		bool flag = TField.mode > 3;
+		if (flag)
 		{
 			TField.mode = 0;
 		}
@@ -306,11 +362,12 @@ public class TField : IActionListener
 		TField.timeChangeMode = (long)(Environment.TickCount / 1000);
 	}
 
-	// Token: 0x060000DF RID: 223 RVA: 0x00005AE8 File Offset: 0x00003EE8
+	// Token: 0x060009DA RID: 2522 RVA: 0x000A4534 File Offset: 0x000A2734
 	private void setDau()
 	{
 		this.timeDau = (long)(Environment.TickCount / 100);
-		if (this.indexDau == -1)
+		bool flag = this.indexDau == -1;
+		if (flag)
 		{
 			for (int i = this.caretPos; i > 0; i--)
 			{
@@ -318,7 +375,8 @@ public class TField : IActionListener
 				for (int j = 0; j < TField.printDau.Length; j++)
 				{
 					char c2 = TField.printDau[j];
-					if (c == c2)
+					bool flag2 = c == c2;
+					if (flag2)
 					{
 						this.indexTemplate = j;
 						this.indexCong = 0;
@@ -332,7 +390,8 @@ public class TField : IActionListener
 		else
 		{
 			this.indexCong++;
-			if (this.indexCong >= 6)
+			bool flag3 = this.indexCong >= 6;
+			if (flag3)
 			{
 				this.indexCong = 0;
 			}
@@ -343,90 +402,125 @@ public class TField : IActionListener
 		}
 	}
 
-	// Token: 0x060000E0 RID: 224 RVA: 0x00005C00 File Offset: 0x00004000
+	// Token: 0x060009DB RID: 2523 RVA: 0x000A4668 File Offset: 0x000A2868
 	public bool keyPressed(int keyCode)
 	{
-		if (Main.isPC && keyCode == -8)
+		bool flag = Main.isPC && keyCode == -8;
+		bool result;
+		if (flag)
 		{
 			this.clearKeyWhenPutText(-8);
-			return true;
-		}
-		if (keyCode == 8 || keyCode == -8 || keyCode == 204)
-		{
-			this.clear();
-			return true;
-		}
-		if (TField.isQwerty && keyCode >= 32)
-		{
-			this.keyPressedAscii(keyCode);
-			return false;
-		}
-		if (keyCode == TField.changeDau && this.inputType == TField.INPUT_TYPE_ANY)
-		{
-			this.setDau();
-			return false;
-		}
-		if (keyCode == 42)
-		{
-			keyCode = 58;
-		}
-		if (keyCode == 35)
-		{
-			keyCode = 59;
-		}
-		if (keyCode >= 48 && keyCode <= 59)
-		{
-			if (this.inputType == TField.INPUT_TYPE_ANY || this.inputType == TField.INPUT_TYPE_PASSWORD || this.inputType == TField.INPUT_ALPHA_NUMBER_ONLY)
-			{
-				this.keyPressedAny(keyCode);
-			}
-			else if (this.inputType == TField.INPUT_TYPE_NUMERIC)
-			{
-				this.keyPressedAscii(keyCode);
-				this.keyInActiveState = 1;
-			}
+			result = true;
 		}
 		else
 		{
-			this.indexOfActiveChar = 0;
-			TField.lastKey = -1984;
-			if (keyCode == 14 && !this.lockArrow)
+			bool flag2 = keyCode == 8 || keyCode == -8 || keyCode == 204;
+			if (flag2)
 			{
-				if (this.caretPos > 0)
-				{
-					this.caretPos--;
-					this.setOffset(0);
-					this.showCaretCounter = TField.MAX_SHOW_CARET_COUNER;
-					return false;
-				}
-			}
-			else if (keyCode == 15 && !this.lockArrow)
-			{
-				if (this.caretPos < this.text.Length)
-				{
-					this.caretPos++;
-					this.setOffset(0);
-					this.showCaretCounter = TField.MAX_SHOW_CARET_COUNER;
-					return false;
-				}
+				this.clear();
+				result = true;
 			}
 			else
 			{
-				if (keyCode == 19)
+				bool flag3 = TField.isQwerty && keyCode >= 32;
+				if (flag3)
 				{
-					this.clear();
-					return false;
+					this.keyPressedAscii(keyCode);
+					result = false;
 				}
-				TField.lastKey = keyCode;
+				else
+				{
+					bool flag4 = keyCode == TField.changeDau && this.inputType == TField.INPUT_TYPE_ANY;
+					if (flag4)
+					{
+						this.setDau();
+						result = false;
+					}
+					else
+					{
+						bool flag5 = keyCode == 42;
+						if (flag5)
+						{
+							keyCode = 58;
+						}
+						bool flag6 = keyCode == 35;
+						if (flag6)
+						{
+							keyCode = 59;
+						}
+						bool flag7 = keyCode >= 48 && keyCode <= 59;
+						if (flag7)
+						{
+							bool flag8 = this.inputType == TField.INPUT_TYPE_ANY || this.inputType == TField.INPUT_TYPE_PASSWORD || this.inputType == TField.INPUT_ALPHA_NUMBER_ONLY;
+							if (flag8)
+							{
+								this.keyPressedAny(keyCode);
+							}
+							else
+							{
+								bool flag9 = this.inputType == TField.INPUT_TYPE_NUMERIC;
+								if (flag9)
+								{
+									this.keyPressedAscii(keyCode);
+									this.keyInActiveState = 1;
+								}
+							}
+						}
+						else
+						{
+							this.indexOfActiveChar = 0;
+							TField.lastKey = -1984;
+							bool flag10 = keyCode == 14 && !this.lockArrow;
+							if (flag10)
+							{
+								bool flag11 = this.caretPos > 0;
+								if (flag11)
+								{
+									this.caretPos--;
+									this.setOffset(0);
+									this.showCaretCounter = TField.MAX_SHOW_CARET_COUNER;
+									return false;
+								}
+							}
+							else
+							{
+								bool flag12 = keyCode == 15 && !this.lockArrow;
+								if (flag12)
+								{
+									bool flag13 = this.caretPos < this.text.Length;
+									if (flag13)
+									{
+										this.caretPos++;
+										this.setOffset(0);
+										this.showCaretCounter = TField.MAX_SHOW_CARET_COUNER;
+										return false;
+									}
+								}
+								else
+								{
+									bool flag14 = keyCode == 19;
+									if (flag14)
+									{
+										this.clear();
+										return false;
+									}
+									TField.lastKey = keyCode;
+								}
+							}
+						}
+						result = true;
+					}
+				}
 			}
 		}
-		return true;
+		return result;
 	}
 
-	// Token: 0x060000E1 RID: 225 RVA: 0x00005DD0 File Offset: 0x000041D0
+	// Token: 0x060009DC RID: 2524 RVA: 0x000A4898 File Offset: 0x000A2A98
 	public void setOffset(int index)
 	{
-		if (this.inputType == TField.INPUT_TYPE_PASSWORD)
+		bool flag = this.inputType == TField.INPUT_TYPE_PASSWORD;
+		if (flag)
 		{
 			this.paintedText = this.passwordText;
 		}
@@ -435,39 +529,52 @@ public class TField : IActionListener
 			this.paintedText = this.text;
 		}
 		int num = mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos));
-		if (index == -1)
+		bool flag2 = index == -1;
+		if (flag2)
 		{
-			if (num + this.offsetX < 15 && this.caretPos > 0 && this.caretPos < this.paintedText.Length)
+			bool flag3 = num + this.offsetX < 15 && this.caretPos > 0 && this.caretPos < this.paintedText.Length;
+			if (flag3)
 			{
 				this.offsetX += mFont.tahoma_8b.getWidth(this.paintedText.Substring(this.caretPos, 1));
 			}
 		}
-		else if (index == 1)
-		{
-			if (num + this.offsetX > this.width - 25 && this.caretPos < this.paintedText.Length && this.caretPos > 0)
-			{
-				this.offsetX -= mFont.tahoma_8b.getWidth(this.paintedText.Substring(this.caretPos - 1, 1));
-			}
-		}
 		else
 		{
-			this.offsetX = -(num - (this.width - 12));
+			bool flag4 = index == 1;
+			if (flag4)
+			{
+				bool flag5 = num + this.offsetX > this.width - 25 && this.caretPos < this.paintedText.Length && this.caretPos > 0;
+				if (flag5)
+				{
+					this.offsetX -= mFont.tahoma_8b.getWidth(this.paintedText.Substring(this.caretPos - 1, 1));
+				}
+			}
+			else
+			{
+				this.offsetX = -(num - (this.width - 12));
+			}
 		}
-		if (this.offsetX > 0)
+		bool flag6 = this.offsetX > 0;
+		if (flag6)
 		{
 			this.offsetX = 0;
 		}
-		else if (this.offsetX < 0)
+		else
 		{
-			int num2 = mFont.tahoma_8b.getWidth(this.paintedText) - (this.width - 12);
-			if (this.offsetX < -num2)
+			bool flag7 = this.offsetX < 0;
+			if (flag7)
 			{
-				this.offsetX = -num2;
+				int num2 = mFont.tahoma_8b.getWidth(this.paintedText) - (this.width - 12);
+				bool flag8 = this.offsetX < -num2;
+				if (flag8)
+				{
+					this.offsetX = -num2;
+				}
 			}
 		}
 	}
 
-	// Token: 0x060000E2 RID: 226 RVA: 0x00005F64 File Offset: 0x00004364
+	// Token: 0x060009DD RID: 2525 RVA: 0x000A4A48 File Offset: 0x000A2C48
 	public void paintInputTf(mGraphics g, bool iss, int x, int y, int w, int h, int xText, int yText, string text, string info)
 	{
 		g.setColor(0);
@@ -492,29 +599,35 @@ public class TField : IActionListener
 			}
 		}
 		g.setClip(x + 3, y + 1, w - 4, h);
-		if (text != null && !text.Equals(string.Empty))
+		bool flag = text != null && !text.Equals(string.Empty);
+		if (flag)
 		{
 			mFont.tahoma_8b.drawString(g, text, xText, yText, 0);
 		}
-		else if (info != null)
+		else
 		{
-			if (iss)
+			bool flag2 = info != null;
+			if (flag2)
 			{
-				mFont.tahoma_7b_focus.drawString(g, info, xText, yText, 0);
-			}
-			else
-			{
-				mFont.tahoma_7b_unfocus.drawString(g, info, xText, yText, 0);
+				if (iss)
+				{
+					mFont.tahoma_7b_focus.drawString(g, info, xText, yText, 0);
+				}
+				else
+				{
+					mFont.tahoma_7b_unfocus.drawString(g, info, xText, yText, 0);
+				}
 			}
 		}
 	}
 
-	// Token: 0x060000E3 RID: 227 RVA: 0x00006110 File Offset: 0x00004510
+	// Token: 0x060009DE RID: 2526 RVA: 0x000A4C14 File Offset: 0x000A2E14
 	public void paint(mGraphics g)
 	{
 		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
 		bool flag = this.isFocused();
-		if (this.inputType == TField.INPUT_TYPE_PASSWORD)
+		bool flag2 = this.inputType == TField.INPUT_TYPE_PASSWORD;
+		if (flag2)
 		{
 			this.paintedText = this.passwordText;
 		}
@@ -525,97 +638,121 @@ public class TField : IActionListener
 		this.paintInputTf(g, flag, this.x, this.y - 1, this.width, this.height + 5, TField.TEXT_GAP_X + this.offsetX + this.x + 1, this.y + (this.height - mFont.tahoma_8b.getHeight()) / 2 + 2, this.paintedText, this.name);
 		g.setClip(this.x + 3, this.y + 1, this.width - 4, this.height - 2);
 		g.setColor(0);
-		if (flag && this.isPaintMouse && this.isPaintCarret)
+		bool flag3 = flag && this.isPaintMouse && this.isPaintCarret;
+		if (flag3)
 		{
-			if (this.keyInActiveState == 0 && (this.showCaretCounter > 0 || this.counter / TField.CARET_SHOWING_TIME % 4 == 0))
+			bool flag4 = this.keyInActiveState == 0 && (this.showCaretCounter > 0 || this.counter / TField.CARET_SHOWING_TIME % 4 == 0);
+			if (flag4)
 			{
 				g.setColor(7999781);
 				g.fillRect(TField.TEXT_GAP_X + 1 + this.offsetX + this.x + mFont.tahoma_8b.getWidth(this.paintedText.Substring(0, this.caretPos) + "a") - TField.CARET_WIDTH - mFont.tahoma_8b.getWidth("a"), this.y + (this.height - TField.CARET_HEIGHT) / 2 + 5, TField.CARET_WIDTH, TField.CARET_HEIGHT);
 			}
 			GameCanvas.resetTrans(g);
-			if (this.text != null && this.text.Length > 0 && GameCanvas.isTouch)
+			bool flag5 = this.text != null && this.text.Length > 0 && GameCanvas.isTouch;
+			if (flag5)
 			{
 				g.drawImage(GameCanvas.imgClear, this.x + this.width - 13, this.y + this.height / 2 + 3, mGraphics.VCENTER | mGraphics.HCENTER);
 			}
 		}
 	}
 
-	// Token: 0x060000E4 RID: 228 RVA: 0x0000631E File Offset: 0x0000471E
+	// Token: 0x060009DF RID: 2527 RVA: 0x000A4E38 File Offset: 0x000A3038
 	private bool isFocused()
 	{
 		return this.isFocus;
 	}
 
-	// Token: 0x060000E5 RID: 229 RVA: 0x00006328 File Offset: 0x00004728
+	// Token: 0x060009E0 RID: 2528 RVA: 0x000A4E50 File Offset: 0x000A3050
 	public string subString(string str, int index, int indexTo)
 	{
-		if (index >= 0 && indexTo > str.Length - 1)
+		bool flag = index >= 0 && indexTo > str.Length - 1;
+		string result;
+		if (flag)
 		{
-			return str.Substring(index);
+			result = str.Substring(index);
 		}
-		if (index < 0 || index > str.Length - 1 || indexTo < 0 || indexTo > str.Length - 1)
+		else
 		{
-			return string.Empty;
+			bool flag2 = index < 0 || index > str.Length - 1 || indexTo < 0 || indexTo > str.Length - 1;
+			if (flag2)
+			{
+				result = string.Empty;
+			}
+			else
+			{
+				string text = string.Empty;
+				for (int i = index; i < indexTo; i++)
+				{
+					text += str[i].ToString();
+				}
+				result = text;
+			}
 		}
-		string text = string.Empty;
-		for (int i = index; i < indexTo; i++)
-		{
-			text += str[i];
-		}
-		return text;
+		return result;
 	}
 
-	// Token: 0x060000E6 RID: 230 RVA: 0x000063B0 File Offset: 0x000047B0
+	// Token: 0x060009E1 RID: 2529 RVA: 0x000A4EE8 File Offset: 0x000A30E8
 	private void setPasswordTest()
 	{
-		if (this.inputType == TField.INPUT_TYPE_PASSWORD)
+		bool flag = this.inputType == TField.INPUT_TYPE_PASSWORD;
+		if (flag)
 		{
 			this.passwordText = string.Empty;
 			for (int i = 0; i < this.text.Length; i++)
 			{
 				this.passwordText += "*";
 			}
-			if (this.keyInActiveState > 0 && this.caretPos > 0)
+			bool flag2 = this.keyInActiveState > 0 && this.caretPos > 0;
+			if (flag2)
 			{
-				this.passwordText = this.passwordText.Substring(0, this.caretPos - 1) + this.text[this.caretPos - 1] + this.passwordText.Substring(this.caretPos, this.passwordText.Length);
+				this.passwordText = this.passwordText.Substring(0, this.caretPos - 1) + this.text[this.caretPos - 1].ToString() + this.passwordText.Substring(this.caretPos, this.passwordText.Length);
 			}
 		}
 	}
 
-	// Token: 0x060000E7 RID: 231 RVA: 0x00006478 File Offset: 0x00004878
+	// Token: 0x060009E2 RID: 2530 RVA: 0x000A4FBC File Offset: 0x000A31BC
 	public void update()
 	{
 		this.isPaintCarret = true;
-		if (Main.isPC)
+		bool isPC = Main.isPC;
+		if (isPC)
 		{
-			if (this.timeDelayKyCode > 0)
+			bool flag = this.timeDelayKyCode > 0;
+			if (flag)
 			{
 				this.timeDelayKyCode--;
 			}
-			if (this.timeDelayKyCode <= 0)
+			bool flag2 = this.timeDelayKyCode <= 0;
+			if (flag2)
 			{
 				this.timeDelayKyCode = 0;
 			}
 		}
-		if (TField.kb != null && TField.currentTField == this)
+		bool flag3 = TField.kb != null && TField.currentTField == this;
+		if (flag3)
 		{
-			if (TField.kb.text.Length < 40 && this.isFocus)
+			bool flag4 = TField.kb.text.Length < 40 && this.isFocus;
+			if (flag4)
 			{
 				this.setText(TField.kb.text);
 			}
-			if (TField.kb.done && this.cmdDoneAction != null)
+			bool flag5 = TField.kb.done && this.cmdDoneAction != null;
+			if (flag5)
 			{
 				this.cmdDoneAction.performAction();
 			}
 		}
 		this.counter++;
-		if (this.keyInActiveState > 0)
+		bool flag6 = this.keyInActiveState > 0;
+		if (flag6)
 		{
 			this.keyInActiveState--;
-			if (this.keyInActiveState == 0)
+			bool flag7 = this.keyInActiveState == 0;
+			if (flag7)
 			{
 				this.indexOfActiveChar = 0;
-				if (TField.mode == 1 && TField.lastKey != TField.changeModeKey && this.isFocus)
+				bool flag8 = TField.mode == 1 && TField.lastKey != TField.changeModeKey && this.isFocus;
+				if (flag8)
 				{
 					TField.mode = 0;
 				}
@@ -623,42 +760,51 @@ public class TField : IActionListener
 				this.setPasswordTest();
 			}
 		}
-		if (this.showCaretCounter > 0)
+		bool flag9 = this.showCaretCounter > 0;
+		if (flag9)
 		{
 			this.showCaretCounter--;
 		}
-		if (GameCanvas.isPointerJustRelease)
+		bool isPointerJustRelease = GameCanvas.isPointerJustRelease;
+		if (isPointerJustRelease)
 		{
 			this.setTextBox();
 		}
-		if (this.indexDau != -1 && (long)(Environment.TickCount / 100) - this.timeDau > 5L)
+		bool flag10 = this.indexDau != -1 && (long)(Environment.TickCount / 100) - this.timeDau > 5L;
+		if (flag10)
 		{
 			this.indexDau = -1;
 		}
 	}
 
-	// Token: 0x060000E8 RID: 232 RVA: 0x000065F8 File Offset: 0x000049F8
+	// Token: 0x060009E3 RID: 2531 RVA: 0x000A5170 File Offset: 0x000A3370
 	public void setTextBox()
 	{
-		if (GameCanvas.isPointerHoldIn(this.x + this.width - 20, this.y, 40, this.height))
+		bool flag = GameCanvas.isPointerHoldIn(this.x + this.width - 20, this.y, 40, this.height);
+		if (flag)
 		{
 			this.clearAllText();
 			this.isFocus = true;
 		}
-		else if (GameCanvas.isPointerHoldIn(this.x, this.y, this.width - 20, this.height))
-		{
-			this.setFocusWithKb(true);
-		}
 		else
 		{
-			this.setFocus(false);
+			bool flag2 = GameCanvas.isPointerHoldIn(this.x, this.y, this.width - 20, this.height);
+			if (flag2)
+			{
+				this.setFocusWithKb(true);
+			}
+			else
+			{
+				this.setFocus(false);
+			}
 		}
 	}
 
-	// Token: 0x060000E9 RID: 233 RVA: 0x00006678 File Offset: 0x00004A78
+	// Token: 0x060009E4 RID: 2532 RVA: 0x000A51F4 File Offset: 0x000A33F4
 	public void setFocus(bool isFocus)
 	{
-		if (this.isFocus != isFocus)
+		bool flag = this.isFocus != isFocus;
+		if (flag)
 		{
 			TField.mode = 0;
 		}
@@ -668,47 +814,58 @@ public class TField : IActionListener
 		if (isFocus)
 		{
 			TField.currentTField = this;
-			if (TField.kb != null)
+			bool flag2 = TField.kb != null;
+			if (flag2)
 			{
 				TField.kb.text = TField.currentTField.text;
 			}
 		}
 	}
 
-	// Token: 0x060000EA RID: 234 RVA: 0x000066F0 File Offset: 0x00004AF0
+	// Token: 0x060009E5 RID: 2533 RVA: 0x000A5278 File Offset: 0x000A3478
 	public void setFocusWithKb(bool isFocus)
 	{
-		if (this.isFocus != isFocus)
+		bool flag = this.isFocus != isFocus;
+		if (flag)
 		{
 			TField.mode = 0;
 		}
 		TField.lastKey = -1984;
 		TField.timeChangeMode = (long)((int)(DateTime.Now.Ticks / 1000L));
 		this.isFocus = isFocus;
-		if (isFocus)
+		bool flag2 = isFocus;
+		if (flag2)
 		{
 			TField.currentTField = this;
 		}
-		else if (TField.currentTField == this)
+		else
 		{
-			TField.currentTField = null;
+			bool flag3 = TField.currentTField == this;
+			if (flag3)
+			{
+				TField.currentTField = null;
+			}
 		}
-		if (Thread.CurrentThread.Name == Main.mainThreadName && TField.currentTField != null)
+		bool flag4 = Thread.CurrentThread.Name == Main.mainThreadName && TField.currentTField != null;
+		if (flag4)
 		{
 			isFocus = true;
 			TouchScreenKeyboard.hideInput = !TField.currentTField.showSubTextField;
 			TouchScreenKeyboardType t = TouchScreenKeyboardType.ASCIICapable;
-			if (this.inputType == TField.INPUT_TYPE_NUMERIC)
+			bool flag5 = this.inputType == TField.INPUT_TYPE_NUMERIC;
+			if (flag5)
 			{
 				t = TouchScreenKeyboardType.NumberPad;
 			}
 			bool type = false;
-			if (this.inputType == TField.INPUT_TYPE_PASSWORD)
+			bool flag6 = this.inputType == TField.INPUT_TYPE_PASSWORD;
+			if (flag6)
 			{
 				type = true;
 			}
 			TField.kb = TouchScreenKeyboard.Open(TField.currentTField.text, t, false, false, type, false, TField.currentTField.name);
-			if (TField.kb != null)
+			bool flag7 = TField.kb != null;
+			if (flag7)
 			{
 				TField.kb.text = TField.currentTField.text;
 			}
@@ -716,43 +873,45 @@ public class TField : IActionListener
 		}
 	}
 
-	// Token: 0x060000EB RID: 235 RVA: 0x00006817 File Offset: 0x00004C17
+	// Token: 0x060009E6 RID: 2534 RVA: 0x000A53C8 File Offset: 0x000A35C8
 	public string getText()
 	{
 		return this.text;
 	}
 
-	// Token: 0x060000EC RID: 236 RVA: 0x0000681F File Offset: 0x00004C1F
+	// Token: 0x060009E7 RID: 2535 RVA: 0x000A53E0 File Offset: 0x000A35E0
 	public void clearKb()
 	{
-		if (TField.kb != null)
+		bool flag = TField.kb != null;
+		if (flag)
 		{
 			TField.kb.text = string.Empty;
 		}
 	}
 
-	// Token: 0x060000ED RID: 237 RVA: 0x0000683C File Offset: 0x00004C3C
+	// Token: 0x060009E8 RID: 2536 RVA: 0x000A540C File Offset: 0x000A360C
 	public void setText(string text)
 	{
-		if (text == null)
+		bool flag = text == null;
+		if (!flag)
 		{
-			return;
+			TField.lastKey = -1984;
+			this.keyInActiveState = 0;
+			this.indexOfActiveChar = 0;
+			this.text = text;
+			this.paintedText = text;
+			bool flag2 = text == string.Empty;
+			if (flag2)
+			{
+				TouchScreenKeyboard.Clear();
+			}
+			this.setPasswordTest();
+			this.caretPos = text.Length;
+			this.setOffset();
 		}
-		TField.lastKey = -1984;
-		this.keyInActiveState = 0;
-		this.indexOfActiveChar = 0;
-		this.text = text;
-		this.paintedText = text;
-		if (text == string.Empty)
-		{
-			TouchScreenKeyboard.Clear();
-		}
-		this.setPasswordTest();
-		this.caretPos = text.Length;
-		this.setOffset();
 	}
 
-	// Token: 0x060000EE RID: 238 RVA: 0x000068A4 File Offset: 0x00004CA4
+	// Token: 0x060009E9 RID: 2537 RVA: 0x000A547C File Offset: 0x000A367C
 	public void insertText(string text)
 	{
 		this.text = this.text.Substring(0, this.caretPos) + text + this.text.Substring(this.caretPos);
@@ -761,77 +920,78 @@ public class TField : IActionListener
 		this.setOffset();
 	}
 
-	// Token: 0x060000EF RID: 239 RVA: 0x000068FF File Offset: 0x00004CFF
+	// Token: 0x060009EA RID: 2538 RVA: 0x000A54DC File Offset: 0x000A36DC
 	public int getMaxTextLenght()
 	{
 		return this.maxTextLenght;
 	}
 
-	// Token: 0x060000F0 RID: 240 RVA: 0x00006907 File Offset: 0x00004D07
+	// Token: 0x060009EB RID: 2539 RVA: 0x000A54F4 File Offset: 0x000A36F4
 	public void setMaxTextLenght(int maxTextLenght)
 	{
 		this.maxTextLenght = maxTextLenght;
 	}
 
-	// Token: 0x060000F1 RID: 241 RVA: 0x00006910 File Offset: 0x00004D10
+	// Token: 0x060009EC RID: 2540 RVA: 0x000A5500 File Offset: 0x000A3700
 	public int getIputType()
 	{
 		return this.inputType;
 	}
 
-	// Token: 0x060000F2 RID: 242 RVA: 0x00006918 File Offset: 0x00004D18
+	// Token: 0x060009ED RID: 2541 RVA: 0x000A5518 File Offset: 0x000A3718
 	public void setIputType(int iputType)
 	{
 		this.inputType = iputType;
 		this.setMaxTextLenght(500);
 	}
 
-	// Token: 0x060000F3 RID: 243 RVA: 0x0000692C File Offset: 0x00004D2C
+	// Token: 0x060009EE RID: 2542 RVA: 0x000A5530 File Offset: 0x000A3730
 	public void perform(int idAction, object p)
 	{
-		if (idAction == 1000)
+		bool flag = idAction == 1000;
+		if (flag)
 		{
 			this.clear();
 		}
 	}
 
-	// Token: 0x0400009A RID: 154
+	// Token: 0x0400126B RID: 4715
 	public bool isFocus;
 
-	// Token: 0x0400009B RID: 155
+	// Token: 0x0400126C RID: 4716
 	public int x;
 
-	// Token: 0x0400009C RID: 156
+	// Token: 0x0400126D RID: 4717
 	public int y;
 
-	// Token: 0x0400009D RID: 157
+	// Token: 0x0400126E RID: 4718
 	public int width;
 
-	// Token: 0x0400009E RID: 158
+	// Token: 0x0400126F RID: 4719
 	public int height;
 
-	// Token: 0x0400009F RID: 159
+	// Token: 0x04001270 RID: 4720
 	public bool lockArrow;
 
-	// Token: 0x040000A0 RID: 160
+	// Token: 0x04001271 RID: 4721
 	public bool justReturnFromTextBox;
 
-	// Token: 0x040000A1 RID: 161
+	// Token: 0x04001272 RID: 4722
 	public bool paintFocus = true;
 
-	// Token: 0x040000A2 RID: 162
+	// Token: 0x04001273 RID: 4723
 	public const sbyte KEY_LEFT = 14;
 
-	// Token: 0x040000A3 RID: 163
+	// Token: 0x04001274 RID: 4724
 	public const sbyte KEY_RIGHT = 15;
 
-	// Token: 0x040000A4 RID: 164
+	// Token: 0x04001275 RID: 4725
 	public const sbyte KEY_CLEAR = 19;
 
-	// Token: 0x040000A5 RID: 165
+	// Token: 0x04001276 RID: 4726
 	public static int typeXpeed = 2;
 
-	// Token: 0x040000A6 RID: 166
+	// Token: 0x04001277 RID: 4727
 	private static readonly int[] MAX_TIME_TO_CONFIRM_KEY = new int[]
 	{
 		30,
@@ -843,34 +1003,34 @@ public class TField : IActionListener
 		2
 	};
 
-	// Token: 0x040000A7 RID: 167
+	// Token: 0x04001278 RID: 4728
 	private static int CARET_HEIGHT = 0;
 
-	// Token: 0x040000A8 RID: 168
+	// Token: 0x04001279 RID: 4729
 	private static readonly int CARET_WIDTH = 1;
 
-	// Token: 0x040000A9 RID: 169
+	// Token: 0x0400127A RID: 4730
 	private static readonly int CARET_SHOWING_TIME = 5;
 
-	// Token: 0x040000AA RID: 170
+	// Token: 0x0400127B RID: 4731
 	private static readonly int TEXT_GAP_X = 4;
 
-	// Token: 0x040000AB RID: 171
+	// Token: 0x0400127C RID: 4732
 	private static readonly int MAX_SHOW_CARET_COUNER = 10;
 
-	// Token: 0x040000AC RID: 172
+	// Token: 0x0400127D RID: 4733
 	public static readonly int INPUT_TYPE_ANY = 0;
 
-	// Token: 0x040000AD RID: 173
+	// Token: 0x0400127E RID: 4734
 	public static readonly int INPUT_TYPE_NUMERIC = 1;
 
-	// Token: 0x040000AE RID: 174
+	// Token: 0x0400127F RID: 4735
 	public static readonly int INPUT_TYPE_PASSWORD = 2;
 
-	// Token: 0x040000AF RID: 175
+	// Token: 0x04001280 RID: 4736
 	public static readonly int INPUT_ALPHA_NUMBER_ONLY = 3;
 
-	// Token: 0x040000B0 RID: 176
+	// Token: 0x04001281 RID: 4737
 	private static string[] print = new string[]
 	{
 		" 0",
@@ -887,7 +1047,7 @@ public class TField : IActionListener
 		"#"
 	};
 
-	// Token: 0x040000B1 RID: 177
+	// Token: 0x04001282 RID: 4738
 	private static string[] printA = new string[]
 	{
 		"0",
@@ -904,7 +1064,7 @@ public class TField : IActionListener
 		"0"
 	};
 
-	// Token: 0x040000B2 RID: 178
+	// Token: 0x04001283 RID: 4739
 	private static string[] printBB = new string[]
 	{
 		" 0",
@@ -926,55 +1086,55 @@ public class TField : IActionListener
 		"l,"
 	};
 
-	// Token: 0x040000B3 RID: 179
+	// Token: 0x04001284 RID: 4740
 	private string text = string.Empty;
 
-	// Token: 0x040000B4 RID: 180
+	// Token: 0x04001285 RID: 4741
 	private string passwordText = string.Empty;
 
-	// Token: 0x040000B5 RID: 181
+	// Token: 0x04001286 RID: 4742
 	private string paintedText = string.Empty;
 
-	// Token: 0x040000B6 RID: 182
+	// Token: 0x04001287 RID: 4743
 	private int caretPos;
 
-	// Token: 0x040000B7 RID: 183
+	// Token: 0x04001288 RID: 4744
 	private int counter;
 
-	// Token: 0x040000B8 RID: 184
+	// Token: 0x04001289 RID: 4745
 	private int maxTextLenght = 500;
 
-	// Token: 0x040000B9 RID: 185
+	// Token: 0x0400128A RID: 4746
 	private int offsetX;
 
-	// Token: 0x040000BA RID: 186
+	// Token: 0x0400128B RID: 4747
 	private static int lastKey = -1984;
 
-	// Token: 0x040000BB RID: 187
+	// Token: 0x0400128C RID: 4748
 	private int keyInActiveState;
 
-	// Token: 0x040000BC RID: 188
+	// Token: 0x0400128D RID: 4749
 	private int indexOfActiveChar;
 
-	// Token: 0x040000BD RID: 189
+	// Token: 0x0400128E RID: 4750
 	private int showCaretCounter = TField.MAX_SHOW_CARET_COUNER;
 
-	// Token: 0x040000BE RID: 190
+	// Token: 0x0400128F RID: 4751
 	private int inputType = TField.INPUT_TYPE_ANY;
 
-	// Token: 0x040000BF RID: 191
+	// Token: 0x04001290 RID: 4752
 	public static bool isQwerty = true;
 
-	// Token: 0x040000C0 RID: 192
+	// Token: 0x04001291 RID: 4753
 	public static int typingModeAreaWidth;
 
-	// Token: 0x040000C1 RID: 193
+	// Token: 0x04001292 RID: 4754
 	public static int mode = 0;
 
-	// Token: 0x040000C2 RID: 194
+	// Token: 0x04001293 RID: 4755
 	public static long timeChangeMode;
 
-	// Token: 0x040000C3 RID: 195
+	// Token: 0x04001294 RID: 4756
 	public static readonly string[] modeNotify = new string[]
 	{
 		"abc",
@@ -983,103 +1143,103 @@ public class TField : IActionListener
 		"123"
 	};
 
-	// Token: 0x040000C4 RID: 196
+	// Token: 0x04001295 RID: 4757
 	public static readonly int NOKIA = 0;
 
-	// Token: 0x040000C5 RID: 197
+	// Token: 0x04001296 RID: 4758
 	public static readonly int MOTO = 1;
 
-	// Token: 0x040000C6 RID: 198
+	// Token: 0x04001297 RID: 4759
 	public static readonly int ORTHER = 2;
 
-	// Token: 0x040000C7 RID: 199
+	// Token: 0x04001298 RID: 4760
 	public static readonly int BB = 3;
 
-	// Token: 0x040000C8 RID: 200
+	// Token: 0x04001299 RID: 4761
 	public static int changeModeKey = 11;
 
-	// Token: 0x040000C9 RID: 201
+	// Token: 0x0400129A RID: 4762
 	public static readonly sbyte abc = 0;
 
-	// Token: 0x040000CA RID: 202
+	// Token: 0x0400129B RID: 4763
 	public static readonly sbyte Abc = 1;
 
-	// Token: 0x040000CB RID: 203
+	// Token: 0x0400129C RID: 4764
 	public static readonly sbyte ABC = 2;
 
-	// Token: 0x040000CC RID: 204
+	// Token: 0x0400129D RID: 4765
 	public static readonly sbyte number123 = 3;
 
-	// Token: 0x040000CD RID: 205
+	// Token: 0x0400129E RID: 4766
 	public static TField currentTField;
 
-	// Token: 0x040000CE RID: 206
+	// Token: 0x0400129F RID: 4767
 	public bool isTfield;
 
-	// Token: 0x040000CF RID: 207
+	// Token: 0x040012A0 RID: 4768
 	public bool isPaintMouse = true;
 
-	// Token: 0x040000D0 RID: 208
+	// Token: 0x040012A1 RID: 4769
 	public string name = string.Empty;
 
-	// Token: 0x040000D1 RID: 209
+	// Token: 0x040012A2 RID: 4770
 	public string title = string.Empty;
 
-	// Token: 0x040000D2 RID: 210
+	// Token: 0x040012A3 RID: 4771
 	public string strInfo;
 
-	// Token: 0x040000D3 RID: 211
+	// Token: 0x040012A4 RID: 4772
 	public Command cmdClear;
 
-	// Token: 0x040000D4 RID: 212
+	// Token: 0x040012A5 RID: 4773
 	public Command cmdDoneAction;
 
-	// Token: 0x040000D5 RID: 213
+	// Token: 0x040012A6 RID: 4774
 	private mScreen parentScr;
 
-	// Token: 0x040000D6 RID: 214
+	// Token: 0x040012A7 RID: 4775
 	private int timeDelayKyCode;
 
-	// Token: 0x040000D7 RID: 215
+	// Token: 0x040012A8 RID: 4776
 	private int holdCount;
 
-	// Token: 0x040000D8 RID: 216
+	// Token: 0x040012A9 RID: 4777
 	public static int changeDau;
 
-	// Token: 0x040000D9 RID: 217
+	// Token: 0x040012AA RID: 4778
 	private int indexDau = -1;
 
-	// Token: 0x040000DA RID: 218
+	// Token: 0x040012AB RID: 4779
 	private int indexTemplate;
 
-	// Token: 0x040000DB RID: 219
+	// Token: 0x040012AC RID: 4780
 	private int indexCong;
 
-	// Token: 0x040000DC RID: 220
+	// Token: 0x040012AD RID: 4781
 	private long timeDau;
 
-	// Token: 0x040000DD RID: 221
+	// Token: 0x040012AE RID: 4782
 	private static string printDau = "aáàảãạâấầẩẫậăắằẳẵặeéèẻẽẹêếềểễệiíìỉĩịoóòỏõọôốồổỗộơớờởỡợuúùủũụưứừửữựyýỳỷỹỵ";
 
-	// Token: 0x040000DE RID: 222
+	// Token: 0x040012AF RID: 4783
 	public static Image imgTf;
 
-	// Token: 0x040000DF RID: 223
+	// Token: 0x040012B0 RID: 4784
 	public int timePutKeyClearAll;
 
-	// Token: 0x040000E0 RID: 224
+	// Token: 0x040012B1 RID: 4785
 	public int timeClearFirt;
 
-	// Token: 0x040000E1 RID: 225
+	// Token: 0x040012B2 RID: 4786
 	public bool isPaintCarret;
 
-	// Token: 0x040000E2 RID: 226
+	// Token: 0x040012B3 RID: 4787
 	public bool showSubTextField = true;
 
-	// Token: 0x040000E3 RID: 227
+	// Token: 0x040012B4 RID: 4788
 	public static TouchScreenKeyboard kb;
 
-	// Token: 0x040000E4 RID: 228
+	// Token: 0x040012B5 RID: 4789
 	public static int[][] BBKEY = new int[][]
 	{
 		new int[]

@@ -1,14 +1,14 @@
 ﻿using System;
 
-// Token: 0x02000045 RID: 69
+// Token: 0x02000062 RID: 98
 public class MainImage
 {
-	// Token: 0x060002A2 RID: 674 RVA: 0x00014B3E File Offset: 0x00012F3E
+	// Token: 0x060004D7 RID: 1239 RVA: 0x0005D91D File Offset: 0x0005BB1D
 	public MainImage()
 	{
 	}
 
-	// Token: 0x060002A3 RID: 675 RVA: 0x00014B60 File Offset: 0x00012F60
+	// Token: 0x060004D8 RID: 1240 RVA: 0x0005D941 File Offset: 0x0005BB41
 	public MainImage(Image im, sbyte nFrame)
 	{
 		this.img = im;
@@ -16,24 +16,24 @@ public class MainImage
 		this.nFrame = nFrame;
 	}
 
-	// Token: 0x0400032E RID: 814
+	// Token: 0x04000A8D RID: 2701
 	public Image img;
 
-	// Token: 0x0400032F RID: 815
+	// Token: 0x04000A8E RID: 2702
 	public long count = -1L;
 
-	// Token: 0x04000330 RID: 816
+	// Token: 0x04000A8F RID: 2703
 	public int timeImageNull;
 
-	// Token: 0x04000331 RID: 817
+	// Token: 0x04000A90 RID: 2704
 	public int idImage;
 
-	// Token: 0x04000332 RID: 818
+	// Token: 0x04000A91 RID: 2705
 	public long timerequest;
 
-	// Token: 0x04000333 RID: 819
+	// Token: 0x04000A92 RID: 2706
 	public sbyte nFrame = 1;
 
-	// Token: 0x04000334 RID: 820
+	// Token: 0x04000A93 RID: 2707
 	public long timeUse = mSystem.currentTimeMillis();
 }

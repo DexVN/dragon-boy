@@ -1,20 +1,21 @@
 ﻿using System;
 using Assets.src.g;
 
-// Token: 0x0200009B RID: 155
+// Token: 0x0200009A RID: 154
 public class Service
 {
-	// Token: 0x060004FB RID: 1275 RVA: 0x00050977 File Offset: 0x0004ED77
+	// Token: 0x0600085B RID: 2139 RVA: 0x00094548 File Offset: 0x00092748
 	public static Service gI()
 	{
-		if (Service.instance == null)
+		bool flag = Service.instance == null;
+		if (flag)
 		{
 			Service.instance = new Service();
 		}
 		return Service.instance;
 	}
 
-	// Token: 0x060004FC RID: 1276 RVA: 0x00050994 File Offset: 0x0004ED94
+	// Token: 0x0600085C RID: 2140 RVA: 0x00094578 File Offset: 0x00092778
 	public void gotoPlayer(int id)
 	{
 		Message message = null;
@@ -34,31 +35,31 @@ public class Service
 		}
 	}
 
-	// Token: 0x060004FD RID: 1277 RVA: 0x00050A00 File Offset: 0x0004EE00
+	// Token: 0x0600085D RID: 2141 RVA: 0x000945E8 File Offset: 0x000927E8
 	public void androidPack()
 	{
-		if (mSystem.android_pack == null)
+		bool flag = mSystem.android_pack == null;
+		if (!flag)
 		{
-			return;
-		}
-		Message message = null;
-		try
-		{
-			message = new Message(126);
-			message.writer().writeUTF(mSystem.android_pack);
-			this.session.sendMessage(message);
-		}
-		catch (Exception ex)
-		{
-			ex.StackTrace.ToString();
-		}
-		finally
-		{
-			message.cleanup();
+			Message message = null;
+			try
+			{
+				message = new Message(126);
+				message.writer().writeUTF(mSystem.android_pack);
+				this.session.sendMessage(message);
+			}
+			catch (Exception ex)
+			{
+				ex.StackTrace.ToString();
+			}
+			finally
+			{
+				message.cleanup();
+			}
 		}
 	}
 
-	// Token: 0x060004FE RID: 1278 RVA: 0x00050A78 File Offset: 0x0004EE78
+	// Token: 0x0600085E RID: 2142 RVA: 0x0009466C File Offset: 0x0009286C
 	public void charInfo(string day, string month, string year, string address, string cmnd, string dayCmnd, string noiCapCmnd, string sdt, string name)
 	{
 		Message message = null;
@@ -86,40 +87,41 @@ public class Service
 		}
 	}
 
-	// Token: 0x060004FF RID: 1279 RVA: 0x00050B48 File Offset: 0x0004EF48
+	// Token: 0x0600085F RID: 2143 RVA: 0x0009474C File Offset: 0x0009294C
 	public void androidPack2()
 	{
-		if (mSystem.android_pack == null)
+		bool flag = mSystem.android_pack == null;
+		if (!flag)
 		{
-			return;
-		}
-		Message message = null;
-		try
-		{
-			message = new Message(126);
-			message.writer().writeUTF(mSystem.android_pack);
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			Message message = null;
+			try
 			{
-				this.session = Session_ME2.gI();
-			}
-			else
-			{
+				message = new Message(126);
+				message.writer().writeUTF(mSystem.android_pack);
+				bool flag2 = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+				if (flag2)
+				{
+					this.session = Session_ME2.gI();
+				}
+				else
+				{
+					this.session = Session_ME.gI();
+				}
+				this.session.sendMessage(message);
 				this.session = Session_ME.gI();
 			}
-			this.session.sendMessage(message);
-			this.session = Session_ME.gI();
-		}
-		catch (Exception ex)
-		{
-			ex.StackTrace.ToString();
-		}
-		finally
-		{
-			message.cleanup();
+			catch (Exception ex)
+			{
+				ex.StackTrace.ToString();
+			}
+			finally
+			{
+				message.cleanup();
+			}
 		}
 	}
 
-	// Token: 0x06000500 RID: 1280 RVA: 0x00050C00 File Offset: 0x0004F000
+	// Token: 0x06000860 RID: 2144 RVA: 0x00094814 File Offset: 0x00092A14
 	public void checkAd(sbyte status)
 	{
 		Message message = null;
@@ -139,7 +141,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000501 RID: 1281 RVA: 0x00050C6C File Offset: 0x0004F06C
+	// Token: 0x06000861 RID: 2145 RVA: 0x00094884 File Offset: 0x00092A84
 	public void combine(sbyte action, MyVector id)
 	{
 		Res.outz("combine");
@@ -148,13 +150,14 @@ public class Service
 		{
 			message = new Message(-81);
 			message.writer().writeByte(action);
-			if ((int)action == 1)
+			bool flag = action == 1;
+			if (flag)
 			{
 				message.writer().writeByte(id.size());
 				for (int i = 0; i < id.size(); i++)
 				{
 					message.writer().writeByte(((Item)id.elementAt(i)).indexUI);
-					Res.outz("gui id " + ((Item)id.elementAt(i)).indexUI);
+					Res.outz("gui id " + ((Item)id.elementAt(i)).indexUI.ToString());
 				}
 			}
 			this.session.sendMessage(message);
@@ -168,21 +171,23 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000502 RID: 1282 RVA: 0x00050D44 File Offset: 0x0004F144
+	// Token: 0x06000862 RID: 2146 RVA: 0x0009496C File Offset: 0x00092B6C
 	public void giaodich(sbyte action, int playerID, sbyte index, int num)
 	{
-		Res.outz2("giao dich action = " + action);
+		Res.outz2("giao dich action = " + action.ToString());
 		Message message = null;
 		try
 		{
 			message = new Message(-86);
 			message.writer().writeByte(action);
-			if ((int)action == 0 || (int)action == 1)
+			bool flag = action == 0 || action == 1;
+			if (flag)
 			{
-				Res.outz2(">>>> len playerID =" + playerID);
+				Res.outz2(">>>> len playerID =" + playerID.ToString());
 				message.writer().writeInt(playerID);
 			}
-			if ((int)action == 2)
+			bool flag2 = action == 2;
+			if (flag2)
 			{
 				Res.outz2(string.Concat(new object[]
 				{
@@ -194,9 +199,10 @@ public class Service
 				message.writer().writeByte(index);
 				message.writer().writeInt(num);
 			}
-			if ((int)action == 4)
+			bool flag3 = action == 4;
+			if (flag3)
 			{
-				Res.outz2(">>>> len index =" + index);
+				Res.outz2(">>>> len index =" + index.ToString());
 				message.writer().writeByte(index);
 			}
 			this.session.sendMessage(message);
@@ -210,7 +216,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000503 RID: 1283 RVA: 0x00050E64 File Offset: 0x0004F264
+	// Token: 0x06000863 RID: 2147 RVA: 0x00094AA4 File Offset: 0x00092CA4
 	public void sendClientInput(TField[] t)
 	{
 		Message message = null;
@@ -218,7 +224,7 @@ public class Service
 		{
 			Res.outz(" gui input ");
 			message = new Message(-125);
-			Res.outz("byte lent = " + t.Length);
+			Res.outz("byte lent = " + t.Length.ToString());
 			message.writer().writeByte(t.Length);
 			for (int i = 0; i < t.Length; i++)
 			{
@@ -235,7 +241,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000504 RID: 1284 RVA: 0x00050F0C File Offset: 0x0004F30C
+	// Token: 0x06000864 RID: 2148 RVA: 0x00094B58 File Offset: 0x00092D58
 	public void speacialSkill(sbyte index)
 	{
 		Message message = null;
@@ -255,7 +261,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000505 RID: 1285 RVA: 0x00050F78 File Offset: 0x0004F378
+	// Token: 0x06000865 RID: 2149 RVA: 0x00094BC8 File Offset: 0x00092DC8
 	public void test(short x, short y)
 	{
 		Res.outz(string.Concat(new object[]
@@ -283,7 +289,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000506 RID: 1286 RVA: 0x00051020 File Offset: 0x0004F420
+	// Token: 0x06000866 RID: 2150 RVA: 0x00094C78 File Offset: 0x00092E78
 	public void test2()
 	{
 		Res.outz("gui test1");
@@ -303,15 +309,15 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000507 RID: 1287 RVA: 0x00051088 File Offset: 0x0004F488
+	// Token: 0x06000867 RID: 2151 RVA: 0x00003136 File Offset: 0x00001336
 	public void testJoint()
 	{
 	}
 
-	// Token: 0x06000508 RID: 1288 RVA: 0x0005108C File Offset: 0x0004F48C
+	// Token: 0x06000868 RID: 2152 RVA: 0x00094CE4 File Offset: 0x00092EE4
 	public void mobCapcha(char ch)
 	{
-		Res.outz("cap char c= " + ch);
+		Res.outz("cap char c= " + ch.ToString());
 		Message message = null;
 		try
 		{
@@ -328,7 +334,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000509 RID: 1289 RVA: 0x00051100 File Offset: 0x0004F500
+	// Token: 0x06000869 RID: 2153 RVA: 0x00094D60 File Offset: 0x00092F60
 	public void friend(sbyte action, int playerId)
 	{
 		Res.outz("add friend");
@@ -337,7 +343,8 @@ public class Service
 		{
 			message = new Message(-80);
 			message.writer().writeByte(action);
-			if (playerId != -1)
+			bool flag = playerId != -1;
+			if (flag)
 			{
 				message.writer().writeInt(playerId);
 			}
@@ -353,7 +360,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600050A RID: 1290 RVA: 0x00051190 File Offset: 0x0004F590
+	// Token: 0x0600086A RID: 2154 RVA: 0x00094E00 File Offset: 0x00093000
 	public void getArchivemnt(int index)
 	{
 		Res.outz("get ngoc");
@@ -374,7 +381,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600050B RID: 1291 RVA: 0x00051210 File Offset: 0x0004F610
+	// Token: 0x0600086B RID: 2155 RVA: 0x00094E88 File Offset: 0x00093088
 	public void getPlayerMenu(int playerID)
 	{
 		Message message = null;
@@ -393,7 +400,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600050C RID: 1292 RVA: 0x00051270 File Offset: 0x0004F670
+	// Token: 0x0600086C RID: 2156 RVA: 0x00094EEC File Offset: 0x000930EC
 	public void clanImage(sbyte id)
 	{
 		Message message = null;
@@ -413,7 +420,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600050D RID: 1293 RVA: 0x000512E4 File Offset: 0x0004F6E4
+	// Token: 0x0600086D RID: 2157 RVA: 0x00094F68 File Offset: 0x00093168
 	public void skill_not_focus(sbyte status)
 	{
 		Message message = null;
@@ -433,7 +440,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600050E RID: 1294 RVA: 0x00051358 File Offset: 0x0004F758
+	// Token: 0x0600086E RID: 2158 RVA: 0x00094FE4 File Offset: 0x000931E4
 	public void clanDonate(int id)
 	{
 		Message message = null;
@@ -453,7 +460,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600050F RID: 1295 RVA: 0x000513CC File Offset: 0x0004F7CC
+	// Token: 0x0600086F RID: 2159 RVA: 0x00095060 File Offset: 0x00093260
 	public void clanMessage(int type, string text, int clanID)
 	{
 		Message message = null;
@@ -461,11 +468,13 @@ public class Service
 		{
 			message = new Message(-51);
 			message.writer().writeByte(type);
-			if (type == 0)
+			bool flag = type == 0;
+			if (flag)
 			{
 				message.writer().writeUTF(text);
 			}
-			if (type == 2)
+			bool flag2 = type == 2;
+			if (flag2)
 			{
 				message.writer().writeInt(clanID);
 			}
@@ -481,37 +490,38 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000510 RID: 1296 RVA: 0x00051464 File Offset: 0x0004F864
+	// Token: 0x06000870 RID: 2160 RVA: 0x00095108 File Offset: 0x00093308
 	public void useItem(sbyte type, sbyte where, sbyte index, short template)
 	{
-		Cout.println("USE ITEM! " + type);
-		if (global::Char.myCharz().statusMe == 14)
+		Cout.println("USE ITEM! " + type.ToString());
+		bool flag = global::Char.myCharz().statusMe == 14;
+		if (!flag)
 		{
-			return;
-		}
-		Message message = null;
-		try
-		{
-			message = new Message(-43);
-			message.writer().writeByte(type);
-			message.writer().writeByte(where);
-			message.writer().writeByte(index);
-			if ((int)index == -1)
+			Message message = null;
+			try
 			{
-				message.writer().writeShort(template);
+				message = new Message(-43);
+				message.writer().writeByte(type);
+				message.writer().writeByte(where);
+				message.writer().writeByte(index);
+				bool flag2 = index == -1;
+				if (flag2)
+				{
+					message.writer().writeShort(template);
+				}
+				this.session.sendMessage(message);
 			}
-			this.session.sendMessage(message);
-		}
-		catch (Exception ex)
-		{
-		}
-		finally
-		{
-			message.cleanup();
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				message.cleanup();
+			}
 		}
 	}
 
-	// Token: 0x06000511 RID: 1297 RVA: 0x00051518 File Offset: 0x0004F918
+	// Token: 0x06000871 RID: 2161 RVA: 0x000951CC File Offset: 0x000933CC
 	public void joinClan(int id, sbyte action)
 	{
 		Message message = null;
@@ -532,7 +542,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000512 RID: 1298 RVA: 0x00051598 File Offset: 0x0004F998
+	// Token: 0x06000872 RID: 2162 RVA: 0x00095254 File Offset: 0x00093454
 	public void clanMember(int id)
 	{
 		Message message = null;
@@ -552,7 +562,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000513 RID: 1299 RVA: 0x0005160C File Offset: 0x0004FA0C
+	// Token: 0x06000873 RID: 2163 RVA: 0x000952D0 File Offset: 0x000934D0
 	public void searchClan(string text)
 	{
 		Message message = null;
@@ -572,7 +582,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000514 RID: 1300 RVA: 0x00051680 File Offset: 0x0004FA80
+	// Token: 0x06000874 RID: 2164 RVA: 0x0009534C File Offset: 0x0009354C
 	public void requestClan(short id)
 	{
 		Message message = null;
@@ -592,7 +602,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000515 RID: 1301 RVA: 0x000516F4 File Offset: 0x0004FAF4
+	// Token: 0x06000875 RID: 2165 RVA: 0x000953C8 File Offset: 0x000935C8
 	public void clanRemote(int id, sbyte role)
 	{
 		Message message = null;
@@ -613,7 +623,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000516 RID: 1302 RVA: 0x00051774 File Offset: 0x0004FB74
+	// Token: 0x06000876 RID: 2166 RVA: 0x00095450 File Offset: 0x00093650
 	public void leaveClan()
 	{
 		Message message = null;
@@ -632,7 +642,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000517 RID: 1303 RVA: 0x000517DC File Offset: 0x0004FBDC
+	// Token: 0x06000877 RID: 2167 RVA: 0x000954C0 File Offset: 0x000936C0
 	public void clanInvite(sbyte action, int playerID, int clanID, int code)
 	{
 		Message message = null;
@@ -640,11 +650,13 @@ public class Service
 		{
 			message = new Message(-57);
 			message.writer().writeByte(action);
-			if ((int)action == 0)
+			bool flag = action == 0;
+			if (flag)
 			{
 				message.writer().writeInt(playerID);
 			}
-			if ((int)action == 1 || (int)action == 2)
+			bool flag2 = action == 1 || action == 2;
+			if (flag2)
 			{
 				message.writer().writeInt(clanID);
 				message.writer().writeInt(code);
@@ -661,7 +673,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000518 RID: 1304 RVA: 0x0005188C File Offset: 0x0004FC8C
+	// Token: 0x06000878 RID: 2168 RVA: 0x00095580 File Offset: 0x00093780
 	public void getClan(sbyte action, sbyte id, string text)
 	{
 		Message message = null;
@@ -669,7 +681,8 @@ public class Service
 		{
 			message = new Message(-46);
 			message.writer().writeByte(action);
-			if ((int)action == 2 || (int)action == 4)
+			bool flag = action == 2 || action == 4;
+			if (flag)
 			{
 				message.writer().writeByte(id);
 				message.writer().writeUTF(text);
@@ -686,7 +699,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000519 RID: 1305 RVA: 0x00051928 File Offset: 0x0004FD28
+	// Token: 0x06000879 RID: 2169 RVA: 0x00095628 File Offset: 0x00093828
 	public void updateCaption(sbyte gender)
 	{
 		Message message = null;
@@ -706,7 +719,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600051A RID: 1306 RVA: 0x0005199C File Offset: 0x0004FD9C
+	// Token: 0x0600087A RID: 2170 RVA: 0x000956A4 File Offset: 0x000938A4
 	public void getItem(sbyte type, sbyte id)
 	{
 		Message message = null;
@@ -727,7 +740,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600051B RID: 1307 RVA: 0x00051A1C File Offset: 0x0004FE1C
+	// Token: 0x0600087B RID: 2171 RVA: 0x0009572C File Offset: 0x0009392C
 	public void getTask(int npcTemplateId, int menuId, int optionId)
 	{
 		Message message = null;
@@ -736,7 +749,8 @@ public class Service
 			message = new Message(40);
 			message.writer().writeByte(npcTemplateId);
 			message.writer().writeByte(menuId);
-			if (optionId >= 0)
+			bool flag = optionId >= 0;
+			if (flag)
 			{
 				message.writer().writeByte(optionId);
 			}
@@ -752,7 +766,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600051C RID: 1308 RVA: 0x00051AB0 File Offset: 0x0004FEB0
+	// Token: 0x0600087C RID: 2172 RVA: 0x000957D0 File Offset: 0x000939D0
 	public Message messageNotLogin(sbyte command)
 	{
 		Message message = new Message(-29);
@@ -760,7 +774,7 @@ public class Service
 		return message;
 	}
 
-	// Token: 0x0600051D RID: 1309 RVA: 0x00051AD4 File Offset: 0x0004FED4
+	// Token: 0x0600087D RID: 2173 RVA: 0x000957F8 File Offset: 0x000939F8
 	public Message messageNotMap(sbyte command)
 	{
 		Message message = new Message(-28);
@@ -768,7 +782,7 @@ public class Service
 		return message;
 	}
 
-	// Token: 0x0600051E RID: 1310 RVA: 0x00051AF8 File Offset: 0x0004FEF8
+	// Token: 0x0600087E RID: 2174 RVA: 0x00095820 File Offset: 0x00093A20
 	public static Message messageSubCommand(sbyte command)
 	{
 		Message message = new Message(-30);
@@ -776,10 +790,11 @@ public class Service
 		return message;
 	}
 
-	// Token: 0x0600051F RID: 1311 RVA: 0x00051B1C File Offset: 0x0004FF1C
+	// Token: 0x0600087F RID: 2175 RVA: 0x00095848 File Offset: 0x00093A48
 	public void setClientType()
 	{
-		if (Rms.loadRMSInt("clienttype") != -1)
+		bool flag = Rms.loadRMSInt("clienttype") != -1;
+		if (flag)
 		{
 			Main.typeClient = Rms.loadRMSInt("clienttype");
 		}
@@ -795,11 +810,13 @@ public class Service
 			message.writer().writeBoolean(GameCanvas.isTouch);
 			message.writer().writeUTF(GameCanvas.getPlatformName() + "|" + GameMidlet.VERSION);
 			DataInputStream dataInputStream = MyStream.readFile("/info");
-			if (dataInputStream != null)
+			bool flag2 = dataInputStream != null;
+			if (flag2)
 			{
 				sbyte[] array = new sbyte[dataInputStream.r.buffer.Length];
 				dataInputStream.read(ref array);
-				if (array != null)
+				bool flag3 = array != null;
+				if (flag3)
 				{
 					message.writer().writeShort(array.Length);
 					message.writer().write(array);
@@ -821,11 +838,12 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000520 RID: 1312 RVA: 0x00051CAC File Offset: 0x000500AC
+	// Token: 0x06000880 RID: 2176 RVA: 0x000959FC File Offset: 0x00093BFC
 	public void setClientType2()
 	{
 		Res.outz("SET CLIENT TYPE");
-		if (Rms.loadRMSInt("clienttype") != -1)
+		bool flag = Rms.loadRMSInt("clienttype") != -1;
+		if (flag)
 		{
 			mSystem.clientType = Rms.loadRMSInt("clienttype");
 		}
@@ -835,7 +853,7 @@ public class Service
 			Message message = this.messageNotLogin(2);
 			message.writer().writeByte(mSystem.clientType);
 			message.writer().writeByte(mGraphics.zoomLevel);
-			Res.outz("gui zoomlevel = " + mGraphics.zoomLevel);
+			Res.outz("gui zoomlevel = " + mGraphics.zoomLevel.ToString());
 			message.writer().writeBoolean(false);
 			message.writer().writeInt(GameCanvas.w);
 			message.writer().writeInt(GameCanvas.h);
@@ -843,11 +861,13 @@ public class Service
 			message.writer().writeBoolean(GameCanvas.isTouch);
 			message.writer().writeUTF(GameCanvas.getPlatformName() + "|" + GameMidlet.VERSION);
 			DataInputStream dataInputStream = MyStream.readFile("/info");
-			if (dataInputStream != null)
+			bool flag2 = dataInputStream != null;
+			if (flag2)
 			{
 				sbyte[] array = new sbyte[dataInputStream.r.buffer.Length];
 				dataInputStream.read(ref array);
-				if (array != null)
+				bool flag3 = array != null;
+				if (flag3)
 				{
 					message.writer().writeShort(array.Length);
 					message.writer().write(array);
@@ -871,7 +891,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000521 RID: 1313 RVA: 0x00051E74 File Offset: 0x00050274
+	// Token: 0x06000881 RID: 2177 RVA: 0x00095BEC File Offset: 0x00093DEC
 	public void sendCheckController()
 	{
 		Message message = null;
@@ -890,7 +910,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000522 RID: 1314 RVA: 0x00051ED0 File Offset: 0x000502D0
+	// Token: 0x06000882 RID: 2178 RVA: 0x00095C4C File Offset: 0x00093E4C
 	public void sendCheckMap()
 	{
 		Message message = null;
@@ -909,7 +929,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000523 RID: 1315 RVA: 0x00051F2C File Offset: 0x0005032C
+	// Token: 0x06000883 RID: 2179 RVA: 0x00095CAC File Offset: 0x00093EAC
 	public void login(string username, string pass, string version, sbyte type)
 	{
 		try
@@ -928,7 +948,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000524 RID: 1316 RVA: 0x00051FB8 File Offset: 0x000503B8
+	// Token: 0x06000884 RID: 2180 RVA: 0x00095D3C File Offset: 0x00093F3C
 	public void requestRegister(string username, string pass, string usernameAo, string passAo, string version)
 	{
 		try
@@ -936,7 +956,8 @@ public class Service
 			Message message = this.messageNotLogin(1);
 			message.writer().writeUTF(username);
 			message.writer().writeUTF(pass);
-			if (usernameAo != null && !usernameAo.Equals(string.Empty))
+			bool flag = usernameAo != null && !usernameAo.Equals(string.Empty);
+			if (flag)
 			{
 				message.writer().writeUTF(usernameAo);
 				message.writer().writeUTF("a");
@@ -950,7 +971,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000525 RID: 1317 RVA: 0x0005205C File Offset: 0x0005045C
+	// Token: 0x06000885 RID: 2181 RVA: 0x00095DE8 File Offset: 0x00093FE8
 	public void requestChangeMap()
 	{
 		Message message = new Message(-23);
@@ -958,7 +979,7 @@ public class Service
 		message.cleanup();
 	}
 
-	// Token: 0x06000526 RID: 1318 RVA: 0x00052084 File Offset: 0x00050484
+	// Token: 0x06000886 RID: 2182 RVA: 0x00095E14 File Offset: 0x00094014
 	public void magicTree(sbyte type)
 	{
 		Message message = new Message(-34);
@@ -973,7 +994,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000527 RID: 1319 RVA: 0x000520D4 File Offset: 0x000504D4
+	// Token: 0x06000887 RID: 2183 RVA: 0x00095E64 File Offset: 0x00094064
 	public void requestChangeZone(int zoneId, int indexUI)
 	{
 		Message message = new Message(21);
@@ -988,7 +1009,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000528 RID: 1320 RVA: 0x00052124 File Offset: 0x00050524
+	// Token: 0x06000888 RID: 2184 RVA: 0x00095EB4 File Offset: 0x000940B4
 	public void checkMMove(int second)
 	{
 		Message message = new Message(-78);
@@ -1003,59 +1024,64 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000529 RID: 1321 RVA: 0x00052174 File Offset: 0x00050574
+	// Token: 0x06000889 RID: 2185 RVA: 0x00095F04 File Offset: 0x00094104
 	public void charMove()
 	{
 		int num = global::Char.myCharz().cx - global::Char.myCharz().cxSend;
 		int num2 = global::Char.myCharz().cy - global::Char.myCharz().cySend;
-		if (global::Char.ischangingMap || (num == 0 && num2 == 0) || Controller.isStopReadMessage || global::Char.myCharz().isTeleport || global::Char.myCharz().cy <= 0 || global::Char.myCharz().telePortSkill)
+		bool flag = global::Char.ischangingMap || (num == 0 && num2 == 0) || Controller.isStopReadMessage || global::Char.myCharz().isTeleport || global::Char.myCharz().cy <= 0 || global::Char.myCharz().telePortSkill;
+		if (!flag)
 		{
-			return;
-		}
-		try
-		{
-			Message message = new Message(-7);
-			global::Char.myCharz().cxSend = global::Char.myCharz().cx;
-			global::Char.myCharz().cySend = global::Char.myCharz().cy;
-			global::Char.myCharz().cdirSend = global::Char.myCharz().cdir;
-			global::Char.myCharz().cactFirst = global::Char.myCharz().statusMe;
-			if (TileMap.tileTypeAt(global::Char.myCharz().cx / (int)TileMap.size, global::Char.myCharz().cy / (int)TileMap.size) == 0)
+			try
 			{
-				message.writer().writeByte(1);
-				if (global::Char.myCharz().canFly)
+				Message message = new Message(-7);
+				global::Char.myCharz().cxSend = global::Char.myCharz().cx;
+				global::Char.myCharz().cySend = global::Char.myCharz().cy;
+				global::Char.myCharz().cdirSend = global::Char.myCharz().cdir;
+				global::Char.myCharz().cactFirst = global::Char.myCharz().statusMe;
+				bool flag2 = TileMap.tileTypeAt(global::Char.myCharz().cx / (int)TileMap.size, global::Char.myCharz().cy / (int)TileMap.size) == 0;
+				if (flag2)
 				{
-					if (!global::Char.myCharz().isHaveMount)
+					message.writer().writeByte(1);
+					bool canFly = global::Char.myCharz().canFly;
+					if (canFly)
 					{
-						global::Char.myCharz().cMP -= global::Char.myCharz().cMPGoc / 100 * (((int)global::Char.myCharz().isMonkey != 1) ? 1 : 2);
+						bool flag3 = !global::Char.myCharz().isHaveMount;
+						if (flag3)
+						{
+							global::Char.myCharz().cMP -= global::Char.myCharz().cMPGoc / 100 * ((global::Char.myCharz().isMonkey != 1) ? 1 : 2);
+						}
+						bool flag4 = global::Char.myCharz().cMP < 0;
+						if (flag4)
+						{
+							global::Char.myCharz().cMP = 0;
+						}
+						GameScr.gI().isInjureMp = true;
+						GameScr.gI().twMp = 0;
 					}
-					if (global::Char.myCharz().cMP < 0)
-					{
-						global::Char.myCharz().cMP = 0;
-					}
-					GameScr.gI().isInjureMp = true;
-					GameScr.gI().twMp = 0;
 				}
+				else
+				{
+					message.writer().writeByte(0);
+				}
+				message.writer().writeShort(global::Char.myCharz().cx);
+				bool flag5 = num2 != 0;
+				if (flag5)
+				{
+					message.writer().writeShort(global::Char.myCharz().cy);
+				}
+				this.session.sendMessage(message);
+				GameScr.tickMove++;
+				message.cleanup();
 			}
-			else
+			catch (Exception ex)
 			{
-				message.writer().writeByte(0);
+				Cout.LogError("LOI CHAR MOVE " + ex.ToString());
 			}
-			message.writer().writeShort(global::Char.myCharz().cx);
-			if (num2 != 0)
-			{
-				message.writer().writeShort(global::Char.myCharz().cy);
-			}
-			this.session.sendMessage(message);
-			GameScr.tickMove++;
-			message.cleanup();
-		}
-		catch (Exception ex)
-		{
-			Cout.LogError("LOI CHAR MOVE " + ex.ToString());
 		}
 	}
 
-	// Token: 0x0600052A RID: 1322 RVA: 0x000523B0 File Offset: 0x000507B0
+	// Token: 0x0600088A RID: 2186 RVA: 0x00096150 File Offset: 0x00094350
 	public void selectCharToPlay(string charname)
 	{
 		Message message = new Message(-28);
@@ -1071,12 +1097,12 @@ public class Service
 		this.session.sendMessage(message);
 	}
 
-	// Token: 0x0600052B RID: 1323 RVA: 0x0005241C File Offset: 0x0005081C
+	// Token: 0x0600088B RID: 2187 RVA: 0x00003136 File Offset: 0x00001336
 	public void selectZone(sbyte sub, int value)
 	{
 	}
 
-	// Token: 0x0600052C RID: 1324 RVA: 0x00052420 File Offset: 0x00050820
+	// Token: 0x0600088C RID: 2188 RVA: 0x000961C0 File Offset: 0x000943C0
 	public void createChar(string name, int gender, int hair)
 	{
 		Message message = new Message(-28);
@@ -1094,7 +1120,7 @@ public class Service
 		this.session.sendMessage(message);
 	}
 
-	// Token: 0x0600052D RID: 1325 RVA: 0x000524A4 File Offset: 0x000508A4
+	// Token: 0x0600088D RID: 2189 RVA: 0x00096248 File Offset: 0x00094448
 	public void requestModTemplate(int modTemplateId)
 	{
 		Message message = null;
@@ -1114,7 +1140,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600052E RID: 1326 RVA: 0x00052518 File Offset: 0x00050918
+	// Token: 0x0600088E RID: 2190 RVA: 0x000962C4 File Offset: 0x000944C4
 	public void requestNpcTemplate(int npcTemplateId)
 	{
 		Message message = null;
@@ -1134,7 +1160,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600052F RID: 1327 RVA: 0x0005258C File Offset: 0x0005098C
+	// Token: 0x0600088F RID: 2191 RVA: 0x00096340 File Offset: 0x00094540
 	public void requestSkill(int skillId)
 	{
 		Message message = null;
@@ -1154,7 +1180,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000530 RID: 1328 RVA: 0x00052600 File Offset: 0x00050A00
+	// Token: 0x06000890 RID: 2192 RVA: 0x000963BC File Offset: 0x000945BC
 	public void requestItemInfo(int typeUI, int indexUI)
 	{
 		Message message = null;
@@ -1175,7 +1201,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000531 RID: 1329 RVA: 0x00052680 File Offset: 0x00050A80
+	// Token: 0x06000891 RID: 2193 RVA: 0x00096444 File Offset: 0x00094644
 	public void requestItemPlayer(int charId, int indexUI)
 	{
 		Message message = null;
@@ -1196,7 +1222,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000532 RID: 1330 RVA: 0x00052700 File Offset: 0x00050B00
+	// Token: 0x06000892 RID: 2194 RVA: 0x000964CC File Offset: 0x000946CC
 	public void upSkill(int skillTemplateId, int point)
 	{
 		Message message = null;
@@ -1217,7 +1243,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000533 RID: 1331 RVA: 0x00052780 File Offset: 0x00050B80
+	// Token: 0x06000893 RID: 2195 RVA: 0x00096554 File Offset: 0x00094754
 	public void saleItem(sbyte action, sbyte type, short id)
 	{
 		Message message = null;
@@ -1239,7 +1265,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000534 RID: 1332 RVA: 0x0005280C File Offset: 0x00050C0C
+	// Token: 0x06000894 RID: 2196 RVA: 0x000965E8 File Offset: 0x000947E8
 	public void buyItem(sbyte type, int id, int quantity)
 	{
 		Message message = null;
@@ -1248,7 +1274,8 @@ public class Service
 			message = new Message(6);
 			message.writer().writeByte(type);
 			message.writer().writeShort(id);
-			if (quantity > 1)
+			bool flag = quantity > 1;
+			if (flag)
 			{
 				message.writer().writeShort(quantity);
 			}
@@ -1264,10 +1291,10 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000535 RID: 1333 RVA: 0x000528A0 File Offset: 0x00050CA0
+	// Token: 0x06000895 RID: 2197 RVA: 0x00096688 File Offset: 0x00094888
 	public void selectSkill(int skillTemplateId)
 	{
-		Cout.println(global::Char.myCharz().cName + " SELECT SKILL " + skillTemplateId);
+		Cout.println(global::Char.myCharz().cName + " SELECT SKILL " + skillTemplateId.ToString());
 		Message message = null;
 		try
 		{
@@ -1285,7 +1312,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000536 RID: 1334 RVA: 0x00052934 File Offset: 0x00050D34
+	// Token: 0x06000896 RID: 2198 RVA: 0x00096724 File Offset: 0x00094924
 	public void getEffData(short id)
 	{
 		Message message = null;
@@ -1305,7 +1332,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000537 RID: 1335 RVA: 0x000529A8 File Offset: 0x00050DA8
+	// Token: 0x06000897 RID: 2199 RVA: 0x000967A0 File Offset: 0x000949A0
 	public void openUIZone()
 	{
 		Message message = null;
@@ -1324,10 +1351,10 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000538 RID: 1336 RVA: 0x00052A10 File Offset: 0x00050E10
+	// Token: 0x06000898 RID: 2200 RVA: 0x00096810 File Offset: 0x00094A10
 	public void confirmMenu(short npcID, sbyte select)
 	{
-		Res.outz("confirme menu" + select);
+		Res.outz("confirme menu" + select.ToString());
 		Message message = null;
 		try
 		{
@@ -1346,7 +1373,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000539 RID: 1337 RVA: 0x00052AA4 File Offset: 0x00050EA4
+	// Token: 0x06000899 RID: 2201 RVA: 0x000968B0 File Offset: 0x00094AB0
 	public void openMenu(int npcId)
 	{
 		Message message = null;
@@ -1366,10 +1393,10 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600053A RID: 1338 RVA: 0x00052B18 File Offset: 0x00050F18
+	// Token: 0x0600089A RID: 2202 RVA: 0x0009692C File Offset: 0x00094B2C
 	public void menu(int npcId, int menuId, int optionId)
 	{
-		Cout.println("menuid: " + menuId);
+		Cout.println("menuid: " + menuId.ToString());
 		Message message = null;
 		try
 		{
@@ -1389,7 +1416,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600053B RID: 1339 RVA: 0x00052BB8 File Offset: 0x00050FB8
+	// Token: 0x0600089B RID: 2203 RVA: 0x000969D8 File Offset: 0x00094BD8
 	public void menuId(short menuId)
 	{
 		Message message = null;
@@ -1409,7 +1436,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600053C RID: 1340 RVA: 0x00052C2C File Offset: 0x0005102C
+	// Token: 0x0600089C RID: 2204 RVA: 0x00096A54 File Offset: 0x00094C54
 	public void textBoxId(short menuId, string str)
 	{
 		Message message = null;
@@ -1430,7 +1457,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600053D RID: 1341 RVA: 0x00052CAC File Offset: 0x000510AC
+	// Token: 0x0600089D RID: 2205 RVA: 0x00096ADC File Offset: 0x00094CDC
 	public void requestItem(int typeUI)
 	{
 		Message message = null;
@@ -1450,7 +1477,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600053E RID: 1342 RVA: 0x00052D20 File Offset: 0x00051120
+	// Token: 0x0600089E RID: 2206 RVA: 0x00096B58 File Offset: 0x00094D58
 	public void boxSort()
 	{
 		Message message = null;
@@ -1469,7 +1496,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600053F RID: 1343 RVA: 0x00052D88 File Offset: 0x00051188
+	// Token: 0x0600089F RID: 2207 RVA: 0x00096BC8 File Offset: 0x00094DC8
 	public void boxCoinOut(int coinOut)
 	{
 		Message message = null;
@@ -1489,7 +1516,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000540 RID: 1344 RVA: 0x00052DFC File Offset: 0x000511FC
+	// Token: 0x060008A0 RID: 2208 RVA: 0x00096C44 File Offset: 0x00094E44
 	public void upgradeItem(Item item, Item[] items, bool isGold)
 	{
 		GameCanvas.msgdlg.pleasewait();
@@ -1501,7 +1528,8 @@ public class Service
 			message.writer().writeByte(item.indexUI);
 			for (int i = 0; i < items.Length; i++)
 			{
-				if (items[i] != null)
+				bool flag = items[i] != null;
+				if (flag)
 				{
 					message.writer().writeByte(items[i].indexUI);
 				}
@@ -1518,7 +1546,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000541 RID: 1345 RVA: 0x00052EBC File Offset: 0x000512BC
+	// Token: 0x060008A1 RID: 2209 RVA: 0x00096D14 File Offset: 0x00094F14
 	public void crystalCollectLock(Item[] items)
 	{
 		GameCanvas.msgdlg.pleasewait();
@@ -1528,7 +1556,8 @@ public class Service
 			message = new Message(13);
 			for (int i = 0; i < items.Length; i++)
 			{
-				if (items[i] != null)
+				bool flag = items[i] != null;
+				if (flag)
 				{
 					message.writer().writeByte(items[i].indexUI);
 				}
@@ -1545,7 +1574,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000542 RID: 1346 RVA: 0x00052F5C File Offset: 0x0005135C
+	// Token: 0x060008A2 RID: 2210 RVA: 0x00096DC4 File Offset: 0x00094FC4
 	public void acceptInviteTrade(int playerMapId)
 	{
 		Message message = null;
@@ -1565,7 +1594,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000543 RID: 1347 RVA: 0x00052FD0 File Offset: 0x000513D0
+	// Token: 0x060008A3 RID: 2211 RVA: 0x00096E40 File Offset: 0x00095040
 	public void cancelInviteTrade()
 	{
 		Message message = null;
@@ -1584,7 +1613,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000544 RID: 1348 RVA: 0x00053038 File Offset: 0x00051438
+	// Token: 0x060008A4 RID: 2212 RVA: 0x00096EB0 File Offset: 0x000950B0
 	public void tradeAccept()
 	{
 		Message message = null;
@@ -1603,7 +1632,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000545 RID: 1349 RVA: 0x000530A0 File Offset: 0x000514A0
+	// Token: 0x060008A5 RID: 2213 RVA: 0x00096F20 File Offset: 0x00095120
 	public void tradeItemLock(int coin, Item[] items)
 	{
 		Message message = null;
@@ -1614,7 +1643,8 @@ public class Service
 			int num = 0;
 			for (int i = 0; i < items.Length; i++)
 			{
-				if (items[i] != null)
+				bool flag = items[i] != null;
+				if (flag)
 				{
 					num++;
 				}
@@ -1622,7 +1652,8 @@ public class Service
 			message.writer().writeByte(num);
 			for (int j = 0; j < items.Length; j++)
 			{
-				if (items[j] != null)
+				bool flag2 = items[j] != null;
+				if (flag2)
 				{
 					message.writer().writeByte(items[j].indexUI);
 				}
@@ -1639,7 +1670,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000546 RID: 1350 RVA: 0x00053174 File Offset: 0x00051574
+	// Token: 0x060008A6 RID: 2214 RVA: 0x00097010 File Offset: 0x00095210
 	public void sendPlayerAttack(MyVector vMob, MyVector vChar, int type)
 	{
 		try
@@ -1652,17 +1683,24 @@ public class Service
 				vChar.size()
 			}));
 			Message message = null;
-			if (type != 0)
+			bool flag = type != 0;
+			if (flag)
 			{
-				if (vMob.size() > 0 && vChar.size() > 0)
+				bool flag2 = vMob.size() > 0 && vChar.size() > 0;
+				if (flag2)
 				{
-					if (type == 1)
+					bool flag3 = type == 1;
+					if (flag3)
 					{
 						message = new Message(-4);
 					}
-					else if (type == 2)
+					else
 					{
-						message = new Message(67);
+						bool flag4 = type == 2;
+						if (flag4)
+						{
+							message = new Message(67);
+						}
 					}
 					message.writer().writeByte(vMob.size());
 					for (int i = 0; i < vMob.size(); i++)
@@ -1673,7 +1711,8 @@ public class Service
 					for (int j = 0; j < vChar.size(); j++)
 					{
 						global::Char @char = (global::Char)vChar.elementAt(j);
-						if (@char != null)
+						bool flag5 = @char != null;
+						if (flag5)
 						{
 							message.writer().writeInt(@char.charID);
 						}
@@ -1683,34 +1722,44 @@ public class Service
 						}
 					}
 				}
-				else if (vMob.size() > 0)
+				else
 				{
-					message = new Message(54);
-					for (int k = 0; k < vMob.size(); k++)
+					bool flag6 = vMob.size() > 0;
+					if (flag6)
 					{
-						Mob mob2 = (Mob)vMob.elementAt(k);
-						if (!mob2.isMobMe)
+						message = new Message(54);
+						for (int k = 0; k < vMob.size(); k++)
 						{
-							message.writer().writeByte(mob2.mobId);
-						}
-						else
-						{
-							message.writer().writeByte(-1);
-							message.writer().writeInt(mob2.mobId);
+							Mob mob2 = (Mob)vMob.elementAt(k);
+							bool flag7 = !mob2.isMobMe;
+							if (flag7)
+							{
+								message.writer().writeByte(mob2.mobId);
+							}
+							else
+							{
+								message.writer().writeByte(-1);
+								message.writer().writeInt(mob2.mobId);
+							}
 						}
 					}
-				}
-				else if (vChar.size() > 0)
-				{
-					message = new Message(-60);
-					for (int l = 0; l < vChar.size(); l++)
+					else
 					{
-						global::Char char2 = (global::Char)vChar.elementAt(l);
-						message.writer().writeInt(char2.charID);
+						bool flag8 = vChar.size() > 0;
+						if (flag8)
+						{
+							message = new Message(-60);
+							for (int l = 0; l < vChar.size(); l++)
+							{
+								global::Char char2 = (global::Char)vChar.elementAt(l);
+								message.writer().writeInt(char2.charID);
+							}
+						}
 					}
 				}
 				message.writer().writeSByte((sbyte)global::Char.myCharz().cdir);
-				if (message != null)
+				bool flag9 = message != null;
+				if (flag9)
 				{
 					this.session.sendMessage(message);
 				}
@@ -1728,7 +1777,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000547 RID: 1351 RVA: 0x00053404 File Offset: 0x00051804
+	// Token: 0x060008A7 RID: 2215 RVA: 0x000972E4 File Offset: 0x000954E4
 	public void pickItem(int itemMapId)
 	{
 		Message message = null;
@@ -1748,7 +1797,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000548 RID: 1352 RVA: 0x00053478 File Offset: 0x00051878
+	// Token: 0x060008A8 RID: 2216 RVA: 0x00097360 File Offset: 0x00095560
 	public void throwItem(int index)
 	{
 		Message message = null;
@@ -1768,7 +1817,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000549 RID: 1353 RVA: 0x000534EC File Offset: 0x000518EC
+	// Token: 0x060008A9 RID: 2217 RVA: 0x000973DC File Offset: 0x000955DC
 	public void returnTownFromDead()
 	{
 		Message message = null;
@@ -1787,7 +1836,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600054A RID: 1354 RVA: 0x00053554 File Offset: 0x00051954
+	// Token: 0x060008AA RID: 2218 RVA: 0x0009744C File Offset: 0x0009564C
 	public void wakeUpFromDead()
 	{
 		Message message = null;
@@ -1806,7 +1855,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600054B RID: 1355 RVA: 0x000535BC File Offset: 0x000519BC
+	// Token: 0x060008AB RID: 2219 RVA: 0x000974BC File Offset: 0x000956BC
 	public void chat(string text)
 	{
 		Message message = null;
@@ -1826,14 +1875,15 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600054C RID: 1356 RVA: 0x00053630 File Offset: 0x00051A30
+	// Token: 0x060008AC RID: 2220 RVA: 0x00097538 File Offset: 0x00095738
 	public void updateData()
 	{
 		Message message = null;
 		try
 		{
 			message = new Message(-87);
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -1854,14 +1904,15 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600054D RID: 1357 RVA: 0x000536D8 File Offset: 0x00051AD8
+	// Token: 0x060008AD RID: 2221 RVA: 0x000975E8 File Offset: 0x000957E8
 	public void updateMap()
 	{
 		Message message = null;
 		try
 		{
 			message = this.messageNotMap(6);
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -1882,14 +1933,15 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600054E RID: 1358 RVA: 0x00053780 File Offset: 0x00051B80
+	// Token: 0x060008AE RID: 2222 RVA: 0x00097698 File Offset: 0x00095898
 	public void updateSkill()
 	{
 		Message message = null;
 		try
 		{
 			message = this.messageNotMap(7);
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -1910,14 +1962,15 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600054F RID: 1359 RVA: 0x0005381C File Offset: 0x00051C1C
+	// Token: 0x060008AF RID: 2223 RVA: 0x0009773C File Offset: 0x0009593C
 	public void updateItem()
 	{
 		Message message = null;
 		try
 		{
 			message = this.messageNotMap(8);
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -1938,7 +1991,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000550 RID: 1360 RVA: 0x000538B8 File Offset: 0x00051CB8
+	// Token: 0x060008B0 RID: 2224 RVA: 0x000977E0 File Offset: 0x000959E0
 	public void clientOk()
 	{
 		Message message = null;
@@ -1957,7 +2010,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000551 RID: 1361 RVA: 0x00053920 File Offset: 0x00051D20
+	// Token: 0x060008B1 RID: 2225 RVA: 0x00097850 File Offset: 0x00095A50
 	public void tradeInvite(int charId)
 	{
 		Message message = null;
@@ -1977,7 +2030,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000552 RID: 1362 RVA: 0x00053994 File Offset: 0x00051D94
+	// Token: 0x060008B2 RID: 2226 RVA: 0x000978CC File Offset: 0x00095ACC
 	public void addFriend(string name)
 	{
 		Message message = null;
@@ -1997,7 +2050,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000553 RID: 1363 RVA: 0x00053A08 File Offset: 0x00051E08
+	// Token: 0x060008B3 RID: 2227 RVA: 0x00097948 File Offset: 0x00095B48
 	public void addPartyAccept(int charId)
 	{
 		Message message = null;
@@ -2017,7 +2070,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000554 RID: 1364 RVA: 0x00053A7C File Offset: 0x00051E7C
+	// Token: 0x060008B4 RID: 2228 RVA: 0x000979C4 File Offset: 0x00095BC4
 	public void addPartyCancel(int charId)
 	{
 		Message message = null;
@@ -2037,7 +2090,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000555 RID: 1365 RVA: 0x00053AF0 File Offset: 0x00051EF0
+	// Token: 0x060008B5 RID: 2229 RVA: 0x00097A40 File Offset: 0x00095C40
 	public void testInvite(int charId)
 	{
 		Message message = null;
@@ -2057,7 +2110,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000556 RID: 1366 RVA: 0x00053B64 File Offset: 0x00051F64
+	// Token: 0x060008B6 RID: 2230 RVA: 0x00097ABC File Offset: 0x00095CBC
 	public void addCuuSat(int charId)
 	{
 		Message message = null;
@@ -2077,7 +2130,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000557 RID: 1367 RVA: 0x00053BD8 File Offset: 0x00051FD8
+	// Token: 0x060008B7 RID: 2231 RVA: 0x00097B38 File Offset: 0x00095D38
 	public void addParty(string name)
 	{
 		Message message = null;
@@ -2097,7 +2150,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000558 RID: 1368 RVA: 0x00053C4C File Offset: 0x0005204C
+	// Token: 0x060008B8 RID: 2232 RVA: 0x00097BB4 File Offset: 0x00095DB4
 	public void player_vs_player(sbyte action, sbyte type, int playerId)
 	{
 		Message message = null;
@@ -2119,7 +2172,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000559 RID: 1369 RVA: 0x00053CD8 File Offset: 0x000520D8
+	// Token: 0x060008B9 RID: 2233 RVA: 0x00097C48 File Offset: 0x00095E48
 	public void requestMaptemplate(int maptemplateId)
 	{
 		Message message = null;
@@ -2139,7 +2192,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600055A RID: 1370 RVA: 0x00053D4C File Offset: 0x0005214C
+	// Token: 0x060008BA RID: 2234 RVA: 0x00097CC4 File Offset: 0x00095EC4
 	public void outParty()
 	{
 		Message message = null;
@@ -2158,7 +2211,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600055B RID: 1371 RVA: 0x00053DB4 File Offset: 0x000521B4
+	// Token: 0x060008BB RID: 2235 RVA: 0x00097D34 File Offset: 0x00095F34
 	public void requestPlayerInfo(MyVector chars)
 	{
 		Message message = null;
@@ -2183,7 +2236,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600055C RID: 1372 RVA: 0x00053E64 File Offset: 0x00052264
+	// Token: 0x060008BC RID: 2236 RVA: 0x00097DEC File Offset: 0x00095FEC
 	public void pleaseInputParty(string str)
 	{
 		Message message = null;
@@ -2203,7 +2256,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600055D RID: 1373 RVA: 0x00053ED8 File Offset: 0x000522D8
+	// Token: 0x060008BD RID: 2237 RVA: 0x00097E68 File Offset: 0x00096068
 	public void acceptPleaseParty(string str)
 	{
 		Message message = null;
@@ -2223,7 +2276,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600055E RID: 1374 RVA: 0x00053F4C File Offset: 0x0005234C
+	// Token: 0x060008BE RID: 2238 RVA: 0x00097EE4 File Offset: 0x000960E4
 	public void chatPlayer(string text, int id)
 	{
 		Res.outz("chat player text = " + text);
@@ -2245,7 +2298,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600055F RID: 1375 RVA: 0x00053FDC File Offset: 0x000523DC
+	// Token: 0x060008BF RID: 2239 RVA: 0x00097F7C File Offset: 0x0009617C
 	public void chatGlobal(string text)
 	{
 		Message message = null;
@@ -2265,7 +2318,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000560 RID: 1376 RVA: 0x00054050 File Offset: 0x00052450
+	// Token: 0x060008C0 RID: 2240 RVA: 0x00097FF8 File Offset: 0x000961F8
 	public void chatPrivate(string to, string text)
 	{
 		Message message = null;
@@ -2286,7 +2339,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000561 RID: 1377 RVA: 0x000540D0 File Offset: 0x000524D0
+	// Token: 0x060008C1 RID: 2241 RVA: 0x00098080 File Offset: 0x00096280
 	public void sendCardInfo(string NAP, string PIN)
 	{
 		Message message = null;
@@ -2307,7 +2360,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000562 RID: 1378 RVA: 0x00054150 File Offset: 0x00052550
+	// Token: 0x060008C2 RID: 2242 RVA: 0x00098108 File Offset: 0x00096308
 	public void saveRms(string key, sbyte[] data)
 	{
 		Message message = null;
@@ -2329,7 +2382,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000563 RID: 1379 RVA: 0x000541E0 File Offset: 0x000525E0
+	// Token: 0x060008C3 RID: 2243 RVA: 0x000981A0 File Offset: 0x000963A0
 	public void loadRMS(string key)
 	{
 		Cout.println("REQUEST RMS");
@@ -2350,7 +2403,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000564 RID: 1380 RVA: 0x00054260 File Offset: 0x00052660
+	// Token: 0x060008C4 RID: 2244 RVA: 0x00098228 File Offset: 0x00096428
 	public void clearTask()
 	{
 		Message message = null;
@@ -2369,7 +2422,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000565 RID: 1381 RVA: 0x000542C8 File Offset: 0x000526C8
+	// Token: 0x060008C5 RID: 2245 RVA: 0x00098298 File Offset: 0x00096498
 	public void changeName(string name, int id)
 	{
 		Message message = null;
@@ -2390,17 +2443,18 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000566 RID: 1382 RVA: 0x00054348 File Offset: 0x00052748
+	// Token: 0x060008C6 RID: 2246 RVA: 0x00098320 File Offset: 0x00096520
 	public void requestIcon(int id)
 	{
 		GameCanvas.connect();
 		Message message = null;
 		try
 		{
-			Res.outz("REQUEST ICON " + id);
+			Res.outz("REQUEST ICON " + id.ToString());
 			message = new Message(-67);
 			message.writer().writeInt(id);
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -2421,7 +2475,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000567 RID: 1383 RVA: 0x00054414 File Offset: 0x00052814
+	// Token: 0x060008C7 RID: 2247 RVA: 0x000983FC File Offset: 0x000965FC
 	public void doConvertUpgrade(int index1, int index2, int index3)
 	{
 		Message message = null;
@@ -2443,7 +2497,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000568 RID: 1384 RVA: 0x000544A0 File Offset: 0x000528A0
+	// Token: 0x060008C8 RID: 2248 RVA: 0x00098494 File Offset: 0x00096694
 	public void inviteClanDun(string name)
 	{
 		Message message = null;
@@ -2463,7 +2517,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000569 RID: 1385 RVA: 0x00054514 File Offset: 0x00052914
+	// Token: 0x060008C9 RID: 2249 RVA: 0x00098510 File Offset: 0x00096710
 	public void inputNumSplit(int indexItem, int numSplit)
 	{
 		Message message = null;
@@ -2484,7 +2538,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600056A RID: 1386 RVA: 0x00054594 File Offset: 0x00052994
+	// Token: 0x060008CA RID: 2250 RVA: 0x00098598 File Offset: 0x00096798
 	public void activeAccProtect(int pass)
 	{
 		Message message = null;
@@ -2504,7 +2558,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600056B RID: 1387 RVA: 0x00054608 File Offset: 0x00052A08
+	// Token: 0x060008CB RID: 2251 RVA: 0x00098614 File Offset: 0x00096814
 	public void clearAccProtect(int pass)
 	{
 		Message message = null;
@@ -2524,7 +2578,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600056C RID: 1388 RVA: 0x0005467C File Offset: 0x00052A7C
+	// Token: 0x060008CC RID: 2252 RVA: 0x00098690 File Offset: 0x00096890
 	public void updateActive(int passOld, int passNew)
 	{
 		Message message = null;
@@ -2545,7 +2599,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600056D RID: 1389 RVA: 0x000546FC File Offset: 0x00052AFC
+	// Token: 0x060008CD RID: 2253 RVA: 0x00098718 File Offset: 0x00096918
 	public void openLockAccProtect(int pass2)
 	{
 		Message message = null;
@@ -2565,7 +2619,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600056E RID: 1390 RVA: 0x00054770 File Offset: 0x00052B70
+	// Token: 0x060008CE RID: 2254 RVA: 0x00098794 File Offset: 0x00096994
 	public void getBgTemplate(short id)
 	{
 		Message message = null;
@@ -2573,7 +2627,8 @@ public class Service
 		{
 			message = new Message(-32);
 			message.writer().writeShort(id);
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -2594,7 +2649,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600056F RID: 1391 RVA: 0x00054824 File Offset: 0x00052C24
+	// Token: 0x060008CF RID: 2255 RVA: 0x00098850 File Offset: 0x00096A50
 	public void getMapOffline()
 	{
 		Message message = null;
@@ -2613,7 +2668,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000570 RID: 1392 RVA: 0x0005488C File Offset: 0x00052C8C
+	// Token: 0x060008D0 RID: 2256 RVA: 0x000988C0 File Offset: 0x00096AC0
 	public void finishUpdate()
 	{
 		Message message = null;
@@ -2632,7 +2687,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000571 RID: 1393 RVA: 0x000548F4 File Offset: 0x00052CF4
+	// Token: 0x060008D1 RID: 2257 RVA: 0x00098930 File Offset: 0x00096B30
 	public void finishUpdate(int playerID)
 	{
 		Message message = null;
@@ -2651,7 +2706,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000572 RID: 1394 RVA: 0x00054954 File Offset: 0x00052D54
+	// Token: 0x060008D2 RID: 2258 RVA: 0x00098994 File Offset: 0x00096B94
 	public void finishLoadMap()
 	{
 		Message message = null;
@@ -2670,7 +2725,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000573 RID: 1395 RVA: 0x000549BC File Offset: 0x00052DBC
+	// Token: 0x060008D3 RID: 2259 RVA: 0x00098A04 File Offset: 0x00096C04
 	public void getChest(sbyte action)
 	{
 		Message message = null;
@@ -2690,7 +2745,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000574 RID: 1396 RVA: 0x00054A30 File Offset: 0x00052E30
+	// Token: 0x060008D4 RID: 2260 RVA: 0x00098A80 File Offset: 0x00096C80
 	public void requestBagImage(sbyte ID)
 	{
 		Message message = null;
@@ -2710,7 +2765,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000575 RID: 1397 RVA: 0x00054AA4 File Offset: 0x00052EA4
+	// Token: 0x060008D5 RID: 2261 RVA: 0x00098AFC File Offset: 0x00096CFC
 	public void getBag(sbyte action)
 	{
 		Message message = null;
@@ -2730,7 +2785,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000576 RID: 1398 RVA: 0x00054B18 File Offset: 0x00052F18
+	// Token: 0x060008D6 RID: 2262 RVA: 0x00098B78 File Offset: 0x00096D78
 	public void getBody(sbyte action)
 	{
 		Message message = null;
@@ -2750,7 +2805,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000577 RID: 1399 RVA: 0x00054B8C File Offset: 0x00052F8C
+	// Token: 0x060008D7 RID: 2263 RVA: 0x00098BF4 File Offset: 0x00096DF4
 	public void login2(string user)
 	{
 		Res.outz("Login 2");
@@ -2771,7 +2826,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000578 RID: 1400 RVA: 0x00054C00 File Offset: 0x00053000
+	// Token: 0x060008D8 RID: 2264 RVA: 0x00098C70 File Offset: 0x00096E70
 	public void getMagicTree(sbyte action)
 	{
 		Message message = null;
@@ -2791,7 +2846,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000579 RID: 1401 RVA: 0x00054C74 File Offset: 0x00053074
+	// Token: 0x060008D9 RID: 2265 RVA: 0x00098CEC File Offset: 0x00096EEC
 	public void upPotential(int typePotential, int num)
 	{
 		Message message = null;
@@ -2812,16 +2867,17 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600057A RID: 1402 RVA: 0x00054CF4 File Offset: 0x000530F4
+	// Token: 0x060008DA RID: 2266 RVA: 0x00098D74 File Offset: 0x00096F74
 	public void getResource(sbyte action, MyVector vResourceIndex)
 	{
-		Res.outz("request resource action= " + action);
+		Res.outz("request resource action= " + action.ToString());
 		Message message = null;
 		try
 		{
 			message = new Message(-74);
 			message.writer().writeByte(action);
-			if ((int)action == 2 && vResourceIndex != null)
+			bool flag = action == 2 && vResourceIndex != null;
+			if (flag)
 			{
 				message.writer().writeShort(vResourceIndex.size());
 				for (int i = 0; i < vResourceIndex.size(); i++)
@@ -2829,7 +2885,8 @@ public class Service
 					message.writer().writeShort(short.Parse((string)vResourceIndex.elementAt(i)));
 				}
 			}
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag2 = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag2)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -2851,7 +2908,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600057B RID: 1403 RVA: 0x00054E14 File Offset: 0x00053214
+	// Token: 0x060008DB RID: 2267 RVA: 0x00098EAC File Offset: 0x000970AC
 	public void requestMapSelect(int selected)
 	{
 		Res.outz("request magic tree");
@@ -2871,7 +2928,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600057C RID: 1404 RVA: 0x00054E7C File Offset: 0x0005327C
+	// Token: 0x060008DC RID: 2268 RVA: 0x00098F1C File Offset: 0x0009711C
 	public void petInfo()
 	{
 		Message message = null;
@@ -2889,7 +2946,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600057D RID: 1405 RVA: 0x00054ED0 File Offset: 0x000532D0
+	// Token: 0x060008DD RID: 2269 RVA: 0x00098F74 File Offset: 0x00097174
 	public void sendTop(string topName, sbyte selected)
 	{
 		Message message = null;
@@ -2909,7 +2966,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600057E RID: 1406 RVA: 0x00054F3C File Offset: 0x0005333C
+	// Token: 0x060008DE RID: 2270 RVA: 0x00098FE4 File Offset: 0x000971E4
 	public void enemy(sbyte b, int charID)
 	{
 		Message message = null;
@@ -2918,7 +2975,8 @@ public class Service
 		{
 			message = new Message(-99);
 			message.writer().writeByte(b);
-			if ((int)b == 1 || (int)b == 2)
+			bool flag = b == 1 || b == 2;
+			if (flag)
 			{
 				message.writer().writeInt(charID);
 			}
@@ -2933,33 +2991,37 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600057F RID: 1407 RVA: 0x00054FC0 File Offset: 0x000533C0
+	// Token: 0x060008DF RID: 2271 RVA: 0x00099070 File Offset: 0x00097270
 	public void kigui(sbyte action, int itemId, sbyte moneyType, int money, int quaintly)
 	{
 		Message message = null;
 		try
 		{
-			Res.outz("ki gui action= " + action);
+			Res.outz("ki gui action= " + action.ToString());
 			message = new Message(-100);
 			message.writer().writeByte(action);
-			if ((int)action == 0)
+			bool flag = action == 0;
+			if (flag)
 			{
 				message.writer().writeShort(itemId);
 				message.writer().writeByte(moneyType);
 				message.writer().writeInt(money);
 				message.writer().writeInt(quaintly);
 			}
-			if ((int)action == 1 || (int)action == 2)
+			bool flag2 = action == 1 || action == 2;
+			if (flag2)
 			{
 				message.writer().writeShort(itemId);
 			}
-			if ((int)action == 3)
+			bool flag3 = action == 3;
+			if (flag3)
 			{
 				message.writer().writeShort(itemId);
 				message.writer().writeByte(moneyType);
 				message.writer().writeInt(money);
 			}
-			if ((int)action == 4)
+			bool flag4 = action == 4;
+			if (flag4)
 			{
 				message.writer().writeByte(moneyType);
 				message.writer().writeByte(money);
@@ -2971,7 +3033,8 @@ public class Service
 					money
 				}));
 			}
-			if ((int)action == 5)
+			bool flag5 = action == 5;
+			if (flag5)
 			{
 				message.writer().writeShort(itemId);
 			}
@@ -2986,7 +3049,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000580 RID: 1408 RVA: 0x00055134 File Offset: 0x00053534
+	// Token: 0x060008E0 RID: 2272 RVA: 0x00099208 File Offset: 0x00097408
 	public void getFlag(sbyte action, sbyte flagType)
 	{
 		Message message = null;
@@ -3001,7 +3064,8 @@ public class Service
 				"   ",
 				flagType
 			}));
-			if ((int)action != 0)
+			bool flag = action != 0;
+			if (flag)
 			{
 				message.writer().writeByte(flagType);
 			}
@@ -3016,13 +3080,13 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000581 RID: 1409 RVA: 0x000551D8 File Offset: 0x000535D8
+	// Token: 0x060008E1 RID: 2273 RVA: 0x000992B8 File Offset: 0x000974B8
 	public void setLockInventory(int pass)
 	{
 		Message message = null;
 		try
 		{
-			Res.outz("------------setLockInventory:     " + pass);
+			Res.outz("------------setLockInventory:     " + pass.ToString());
 			message = new Message(-104);
 			message.writer().writeInt(pass);
 			this.session.sendMessage(message);
@@ -3036,7 +3100,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000582 RID: 1410 RVA: 0x0005524C File Offset: 0x0005364C
+	// Token: 0x060008E2 RID: 2274 RVA: 0x00099334 File Offset: 0x00097534
 	public void petStatus(sbyte status)
 	{
 		Message message = null;
@@ -3055,7 +3119,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000583 RID: 1411 RVA: 0x000552AC File Offset: 0x000536AC
+	// Token: 0x060008E3 RID: 2275 RVA: 0x00099398 File Offset: 0x00097598
 	public void transportNow()
 	{
 		Message message = null;
@@ -3074,7 +3138,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000584 RID: 1412 RVA: 0x00055308 File Offset: 0x00053708
+	// Token: 0x060008E4 RID: 2276 RVA: 0x000993FC File Offset: 0x000975FC
 	public void funsion(sbyte type)
 	{
 		Message message = null;
@@ -3095,16 +3159,17 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000585 RID: 1413 RVA: 0x0005537C File Offset: 0x0005377C
+	// Token: 0x060008E5 RID: 2277 RVA: 0x00099478 File Offset: 0x00097678
 	public void imageSource(MyVector vID)
 	{
 		Message message = null;
 		try
 		{
-			Res.outz("IMAGE SOURCE size= " + vID.size());
+			Res.outz("IMAGE SOURCE size= " + vID.size().ToString());
 			message = new Message(-111);
 			message.writer().writeShort(vID.size());
-			if (vID.size() > 0)
+			bool flag = vID.size() > 0;
+			if (flag)
 			{
 				for (int i = 0; i < vID.size(); i++)
 				{
@@ -3112,7 +3177,8 @@ public class Service
 					message.writer().writeUTF(((ImageSource)vID.elementAt(i)).id);
 				}
 			}
-			if (Session_ME2.gI().isConnected() && !Session_ME2.connecting)
+			bool flag2 = Session_ME2.gI().isConnected() && !Session_ME2.connecting;
+			if (flag2)
 			{
 				this.session = Session_ME2.gI();
 			}
@@ -3134,7 +3200,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000586 RID: 1414 RVA: 0x000554A8 File Offset: 0x000538A8
+	// Token: 0x060008E6 RID: 2278 RVA: 0x000995D4 File Offset: 0x000977D4
 	public void getQuayso()
 	{
 		Message message = null;
@@ -3153,7 +3219,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000587 RID: 1415 RVA: 0x00055508 File Offset: 0x00053908
+	// Token: 0x060008E7 RID: 2279 RVA: 0x00099638 File Offset: 0x00097838
 	public void sendServerData(sbyte action, int id, sbyte[] data)
 	{
 		Message message = null;
@@ -3162,10 +3228,12 @@ public class Service
 			Res.outz("SERVER DATA");
 			message = new Message(-110);
 			message.writer().writeByte(action);
-			if ((int)action == 1)
+			bool flag = action == 1;
+			if (flag)
 			{
 				message.writer().writeInt(id);
-				if (data != null)
+				bool flag2 = data != null;
+				if (flag2)
 				{
 					int num = data.Length;
 					message.writer().writeShort(num);
@@ -3183,7 +3251,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000588 RID: 1416 RVA: 0x000555A8 File Offset: 0x000539A8
+	// Token: 0x060008E8 RID: 2280 RVA: 0x000996EC File Offset: 0x000978EC
 	public void changeOnKeyScr(sbyte[] skill)
 	{
 		Message message = null;
@@ -3206,7 +3274,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000589 RID: 1417 RVA: 0x0005562C File Offset: 0x00053A2C
+	// Token: 0x060008E9 RID: 2281 RVA: 0x00099778 File Offset: 0x00097978
 	public void requestPean()
 	{
 		Message message = null;
@@ -3225,7 +3293,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600058A RID: 1418 RVA: 0x0005568C File Offset: 0x00053A8C
+	// Token: 0x060008EA RID: 2282 RVA: 0x000997DC File Offset: 0x000979DC
 	public void sendThachDau(int id)
 	{
 		Res.outz("GUI THACH DAU");
@@ -3246,7 +3314,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600058B RID: 1419 RVA: 0x00055700 File Offset: 0x00053B00
+	// Token: 0x060008EB RID: 2283 RVA: 0x00099858 File Offset: 0x00097A58
 	public void messagePlayerMenu(int charId)
 	{
 		Message message = null;
@@ -3267,7 +3335,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600058C RID: 1420 RVA: 0x00055778 File Offset: 0x00053B78
+	// Token: 0x060008EC RID: 2284 RVA: 0x000998D8 File Offset: 0x00097AD8
 	public void playerMenuAction(int charId, short select)
 	{
 		Message message = null;
@@ -3289,7 +3357,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600058D RID: 1421 RVA: 0x000557FC File Offset: 0x00053BFC
+	// Token: 0x060008ED RID: 2285 RVA: 0x00099964 File Offset: 0x00097B64
 	public void getImgByName(string nameImg)
 	{
 		Message message = null;
@@ -3308,14 +3376,15 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600058E RID: 1422 RVA: 0x0005585C File Offset: 0x00053C5C
+	// Token: 0x060008EE RID: 2286 RVA: 0x000999C8 File Offset: 0x00097BC8
 	public void SendCrackBall(byte type, byte soluong)
 	{
 		Message message = new Message(-127);
 		try
 		{
 			message.writer().writeByte((int)type);
-			if (soluong > 0)
+			bool flag = soluong > 0;
+			if (flag)
 			{
 				message.writer().writeByte((int)soluong);
 			}
@@ -3330,14 +3399,15 @@ public class Service
 		}
 	}
 
-	// Token: 0x0600058F RID: 1423 RVA: 0x000558CC File Offset: 0x00053CCC
+	// Token: 0x060008EF RID: 2287 RVA: 0x00099A40 File Offset: 0x00097C40
 	public void SendRada(int i, int id)
 	{
 		Message message = new Message(sbyte.MaxValue);
 		try
 		{
 			message.writer().writeByte(i);
-			if (id != -1)
+			bool flag = id != -1;
+			if (flag)
 			{
 				message.writer().writeShort(id);
 			}
@@ -3352,13 +3422,14 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000590 RID: 1424 RVA: 0x0005593C File Offset: 0x00053D3C
+	// Token: 0x060008F0 RID: 2288 RVA: 0x00099ABC File Offset: 0x00097CBC
 	public void sendOptHat(sbyte action)
 	{
 		Message message = new Message(24);
 		try
 		{
-			if ((int)action == 1)
+			bool flag = action == 1;
+			if (flag)
 			{
 				sbyte[] array = Res.TakeSnapShot();
 				message.writer().writeByte(1);
@@ -3380,7 +3451,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000591 RID: 1425 RVA: 0x000559E8 File Offset: 0x00053DE8
+	// Token: 0x060008F1 RID: 2289 RVA: 0x00099B6C File Offset: 0x00097D6C
 	public void sendDelAcc()
 	{
 		Message message = new Message(69);
@@ -3397,7 +3468,7 @@ public class Service
 		}
 	}
 
-	// Token: 0x06000592 RID: 1426 RVA: 0x00055A38 File Offset: 0x00053E38
+	// Token: 0x060008F2 RID: 2290 RVA: 0x00099BC0 File Offset: 0x00097DC0
 	public void new_skill_not_focus(sbyte idTemplateSkill, sbyte dir, short x, short y)
 	{
 		Message message = null;
@@ -3423,27 +3494,27 @@ public class Service
 		}
 	}
 
-	// Token: 0x04000A11 RID: 2577
+	// Token: 0x040010F6 RID: 4342
 	private ISession session = Session_ME.gI();
 
-	// Token: 0x04000A12 RID: 2578
+	// Token: 0x040010F7 RID: 4343
 	protected static Service instance;
 
-	// Token: 0x04000A13 RID: 2579
+	// Token: 0x040010F8 RID: 4344
 	public static long curCheckController;
 
-	// Token: 0x04000A14 RID: 2580
+	// Token: 0x040010F9 RID: 4345
 	public static long curCheckMap;
 
-	// Token: 0x04000A15 RID: 2581
+	// Token: 0x040010FA RID: 4346
 	public static long logController;
 
-	// Token: 0x04000A16 RID: 2582
+	// Token: 0x040010FB RID: 4347
 	public static long logMap;
 
-	// Token: 0x04000A17 RID: 2583
+	// Token: 0x040010FC RID: 4348
 	public int demGui;
 
-	// Token: 0x04000A18 RID: 2584
+	// Token: 0x040010FD RID: 4349
 	public static bool reciveFromMainSession;
 }

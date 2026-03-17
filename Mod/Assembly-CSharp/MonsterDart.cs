@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000046 RID: 70
+// Token: 0x0200006F RID: 111
 public class MonsterDart : Effect2
 {
-	// Token: 0x060002A4 RID: 676 RVA: 0x00014B98 File Offset: 0x00012F98
+	// Token: 0x06000590 RID: 1424 RVA: 0x00066BA4 File Offset: 0x00064DA4
 	public MonsterDart(int x, int y, bool isBoss, int dame, int dameMp, global::Char c, int dartType)
 	{
 		this.info = GameScr.darts[dartType];
@@ -15,13 +15,14 @@ public class MonsterDart : Effect2
 		this.c = c;
 		this.va = this.info.va;
 		this.setAngle(Res.angle(c.cx - x, c.cy - y));
-		if (x >= GameScr.cmx && x <= GameScr.cmx + GameCanvas.w)
+		bool flag = x >= GameScr.cmx && x <= GameScr.cmx + GameCanvas.w;
+		if (flag)
 		{
 			SoundMn.gI().mobKame(dartType);
 		}
 	}
 
-	// Token: 0x060002A5 RID: 677 RVA: 0x00014C48 File Offset: 0x00013048
+	// Token: 0x06000591 RID: 1425 RVA: 0x00066C60 File Offset: 0x00064E60
 	public MonsterDart(int x, int y, bool isBoss, int dame, int dameMp, int xTo, int yTo, int dartType)
 	{
 		this.info = GameScr.darts[dartType];
@@ -34,14 +35,15 @@ public class MonsterDart : Effect2
 		this.yTo = yTo;
 		this.va = this.info.va;
 		this.setAngle(Res.angle(xTo - x, yTo - y));
-		if (x >= GameScr.cmx && x <= GameScr.cmx + GameCanvas.w)
+		bool flag = x >= GameScr.cmx && x <= GameScr.cmx + GameCanvas.w;
+		if (flag)
 		{
 			SoundMn.gI().mobKame(dartType);
 		}
 		this.c = null;
 	}
 
-	// Token: 0x060002A6 RID: 678 RVA: 0x00014CFC File Offset: 0x000130FC
+	// Token: 0x06000592 RID: 1426 RVA: 0x00066D1E File Offset: 0x00064F1E
 	public void setAngle(int angle)
 	{
 		this.angle = angle;
@@ -49,45 +51,51 @@ public class MonsterDart : Effect2
 		this.vy = this.va * Res.sin(angle) >> 10;
 	}
 
-	// Token: 0x060002A7 RID: 679 RVA: 0x00014D31 File Offset: 0x00013131
+	// Token: 0x06000593 RID: 1427 RVA: 0x00066D54 File Offset: 0x00064F54
 	public static void addMonsterDart(int x, int y, bool isBoss, int dame, int dameMp, global::Char c, int dartType)
 	{
 		Effect2.vEffect2.addElement(new MonsterDart(x, y, isBoss, dame, dameMp, c, dartType));
 	}
 
-	// Token: 0x060002A8 RID: 680 RVA: 0x00014D4C File Offset: 0x0001314C
+	// Token: 0x06000594 RID: 1428 RVA: 0x00066D74 File Offset: 0x00064F74
 	public static void addMonsterDart(int x, int y, bool isBoss, int dame, int dameMp, int xTo, int yTo, int dartType)
 	{
 		Effect2.vEffect2.addElement(new MonsterDart(x, y, isBoss, dame, dameMp, xTo, yTo, dartType));
 	}
 
-	// Token: 0x060002A9 RID: 681 RVA: 0x00014D74 File Offset: 0x00013174
+	// Token: 0x06000595 RID: 1429 RVA: 0x00066DA0 File Offset: 0x00064FA0
 	public override void update()
 	{
 		for (int i = 0; i < (int)this.info.nUpdate; i++)
 		{
-			if (this.info.tail.Length > 0)
+			bool flag = this.info.tail.Length != 0;
+			if (flag)
 			{
 				this.darts.addElement(new SmallDart(this.x, this.y));
 			}
 			this.dx = ((this.c == null) ? this.xTo : this.c.cx) - this.x;
 			this.dy = ((this.c == null) ? this.yTo : this.c.cy) - 10 - this.y;
 			int num = 60;
-			if (TileMap.mapID == 0)
+			bool flag2 = TileMap.mapID == 0;
+			if (flag2)
 			{
 				num = 600;
 			}
 			this.life++;
-			if ((this.c != null && (this.c.statusMe == 5 || this.c.statusMe == 14)) || this.c == null)
+			bool flag3 = (this.c != null && (this.c.statusMe == 5 || this.c.statusMe == 14)) || this.c == null;
+			if (flag3)
 			{
 				this.x += (((this.c == null) ? this.xTo : this.c.cx) - this.x) / 2;
 				this.y += (((this.c == null) ? this.yTo : this.c.cy) - this.y) / 2;
 			}
-			if ((Res.abs(this.dx) < 16 && Res.abs(this.dy) < 16) || this.life > num)
+			bool flag4 = (Res.abs(this.dx) < 16 && Res.abs(this.dy) < 16) || this.life > num;
+			if (flag4)
 			{
-				if (this.c != null && this.c.charID >= 0 && this.dameMp != -1)
+				bool flag5 = this.c != null && this.c.charID >= 0 && this.dameMp != -1;
+				if (flag5)
 				{
-					if (this.dameMp != -100)
+					bool flag6 = this.dameMp != -100;
+					if (flag6)
 					{
 						this.c.doInjure(this.dame, this.dameMp, false, true);
 					}
@@ -97,32 +105,41 @@ public class MonsterDart : Effect2
 					}
 				}
 				Effect2.vEffect2.removeElement(this);
-				if (this.dameMp != -100)
+				bool flag7 = this.dameMp != -100;
+				if (flag7)
 				{
 					ServerEffect.addServerEffect(81, this.c, 1);
-					if (this.x >= GameScr.cmx && this.x <= GameScr.cmx + GameCanvas.w)
+					bool flag8 = this.x >= GameScr.cmx && this.x <= GameScr.cmx + GameCanvas.w;
+					if (flag8)
 					{
 						SoundMn.gI().explode_2();
 					}
 				}
 			}
 			int num2 = Res.angle(this.dx, this.dy);
-			if (global::Math.abs(num2 - this.angle) < 90 || this.dx * this.dx + this.dy * this.dy > 4096)
+			bool flag9 = global::Math.abs(num2 - this.angle) < 90 || this.dx * this.dx + this.dy * this.dy > 4096;
+			if (flag9)
 			{
-				if (global::Math.abs(num2 - this.angle) < 15)
+				bool flag10 = global::Math.abs(num2 - this.angle) < 15;
+				if (flag10)
 				{
 					this.angle = num2;
 				}
-				else if ((num2 - this.angle >= 0 && num2 - this.angle < 180) || num2 - this.angle < -180)
-				{
-					this.angle = Res.fixangle(this.angle + 15);
-				}
 				else
 				{
-					this.angle = Res.fixangle(this.angle - 15);
+					bool flag11 = (num2 - this.angle >= 0 && num2 - this.angle < 180) || num2 - this.angle < -180;
+					if (flag11)
+					{
+						this.angle = Res.fixangle(this.angle + 15);
+					}
+					else
+					{
+						this.angle = Res.fixangle(this.angle - 15);
+					}
 				}
 			}
-			if (!this.isSpeedUp && this.va < 8192)
+			bool flag12 = !this.isSpeedUp && this.va < 8192;
+			if (flag12)
 			{
 				this.va += 1024;
 			}
@@ -141,36 +158,39 @@ public class MonsterDart : Effect2
 		{
 			SmallDart smallDart = (SmallDart)this.darts.elementAt(j);
 			smallDart.index++;
-			if (smallDart.index >= this.info.tail.Length)
+			bool flag13 = smallDart.index >= this.info.tail.Length;
+			if (flag13)
 			{
 				this.darts.removeElementAt(j);
 			}
 		}
 	}
 
-	// Token: 0x060002AA RID: 682 RVA: 0x000151EC File Offset: 0x000135EC
+	// Token: 0x06000596 RID: 1430 RVA: 0x00067258 File Offset: 0x00065458
 	public static int findDirIndexFromAngle(int angle)
 	{
-		int i = 0;
-		while (i < MonsterDart.ARROWINDEX.Length - 1)
+		for (int i = 0; i < MonsterDart.ARROWINDEX.Length - 1; i++)
 		{
-			if (angle >= MonsterDart.ARROWINDEX[i] && angle <= MonsterDart.ARROWINDEX[i + 1])
+			bool flag = angle >= MonsterDart.ARROWINDEX[i] && angle <= MonsterDart.ARROWINDEX[i + 1];
+			if (flag)
 			{
-				if (i >= 16)
+				bool flag2 = i >= 16;
+				int result;
+				if (flag2)
 				{
-					return 0;
+					result = 0;
 				}
-				return i;
-			}
-			else
-			{
-				i++;
+				else
+				{
+					result = i;
+				}
+				return result;
 			}
 		}
 		return 0;
 	}
 
-	// Token: 0x060002AB RID: 683 RVA: 0x0001523C File Offset: 0x0001363C
+	// Token: 0x06000597 RID: 1431 RVA: 0x000672C0 File Offset: 0x000654C0
 	public override void paint(mGraphics g)
 	{
 		int num = MonsterDart.findDirIndexFromAngle(360 - this.angle);
@@ -192,80 +212,81 @@ public class MonsterDart : Effect2
 		for (int k = 0; k < this.darts.size(); k++)
 		{
 			SmallDart smallDart3 = (SmallDart)this.darts.elementAt(k);
-			if (Res.abs(MonsterDart.r.nextInt(100)) < (int)this.info.xdPercent)
+			bool flag = Res.abs(MonsterDart.r.nextInt(100)) < (int)this.info.xdPercent;
+			if (flag)
 			{
 				SmallImage.drawSmallImage(g, (int)((GameCanvas.gameTick % 2 != 0) ? this.info.xd2[smallDart3.index] : this.info.xd1[smallDart3.index]), smallDart3.x, smallDart3.y, 0, 3);
 			}
 		}
 	}
 
-	// Token: 0x060002AC RID: 684 RVA: 0x0001542C File Offset: 0x0001382C
+	// Token: 0x06000598 RID: 1432 RVA: 0x000674C2 File Offset: 0x000656C2
 	public static void addMonsterDart(int x2, int y2, bool checkIsBoss, int dame2, int dameMp2, Mob mobToAttack, sbyte dartType)
 	{
 		MonsterDart.addMonsterDart(x2, y2, checkIsBoss, dame2, dameMp2, mobToAttack.x, mobToAttack.y, (int)dartType);
 	}
 
-	// Token: 0x04000335 RID: 821
+	// Token: 0x04000BEB RID: 3051
 	public int va;
 
-	// Token: 0x04000336 RID: 822
+	// Token: 0x04000BEC RID: 3052
 	private DartInfo info;
 
-	// Token: 0x04000337 RID: 823
+	// Token: 0x04000BED RID: 3053
 	public static MyRandom r = new MyRandom();
 
-	// Token: 0x04000338 RID: 824
+	// Token: 0x04000BEE RID: 3054
 	public int angle;
 
-	// Token: 0x04000339 RID: 825
+	// Token: 0x04000BEF RID: 3055
 	public int vx;
 
-	// Token: 0x0400033A RID: 826
+	// Token: 0x04000BF0 RID: 3056
 	public int vy;
 
-	// Token: 0x0400033B RID: 827
+	// Token: 0x04000BF1 RID: 3057
 	public int x;
 
-	// Token: 0x0400033C RID: 828
+	// Token: 0x04000BF2 RID: 3058
 	public int y;
 
-	// Token: 0x0400033D RID: 829
+	// Token: 0x04000BF3 RID: 3059
 	public int z;
 
-	// Token: 0x0400033E RID: 830
+	// Token: 0x04000BF4 RID: 3060
 	public int xTo;
 
-	// Token: 0x0400033F RID: 831
+	// Token: 0x04000BF5 RID: 3061
 	public int yTo;
 
-	// Token: 0x04000340 RID: 832
+	// Token: 0x04000BF6 RID: 3062
 	private int life;
 
-	// Token: 0x04000341 RID: 833
+	// Token: 0x04000BF7 RID: 3063
 	public bool isSpeedUp;
 
-	// Token: 0x04000342 RID: 834
+	// Token: 0x04000BF8 RID: 3064
 	public int dame;
 
-	// Token: 0x04000343 RID: 835
+	// Token: 0x04000BF9 RID: 3065
 	public int dameMp;
 
-	// Token: 0x04000344 RID: 836
+	// Token: 0x04000BFA RID: 3066
 	public global::Char c;
 
-	// Token: 0x04000345 RID: 837
+	// Token: 0x04000BFB RID: 3067
 	public bool isBoss;
 
-	// Token: 0x04000346 RID: 838
+	// Token: 0x04000BFC RID: 3068
 	public MyVector darts = new MyVector();
 
-	// Token: 0x04000347 RID: 839
+	// Token: 0x04000BFD RID: 3069
 	private int dx;
 
-	// Token: 0x04000348 RID: 840
+	// Token: 0x04000BFE RID: 3070
 	private int dy;
 
-	// Token: 0x04000349 RID: 841
+	// Token: 0x04000BFF RID: 3071
 	public static int[] ARROWINDEX = new int[]
 	{
 		0,
@@ -288,7 +309,7 @@ public class MonsterDart : Effect2
 		370
 	};
 
-	// Token: 0x0400034A RID: 842
+	// Token: 0x04000C00 RID: 3072
 	public static int[] TRANSFORM = new int[]
 	{
 		0,
@@ -309,7 +330,7 @@ public class MonsterDart : Effect2
 		1
 	};
 
-	// Token: 0x0400034B RID: 843
+	// Token: 0x04000C01 RID: 3073
 	public static sbyte[] FRAME = new sbyte[]
 	{
 		0,

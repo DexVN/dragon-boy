@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000036 RID: 54
+// Token: 0x0200000A RID: 10
 public class BackgroudEffect
 {
-	// Token: 0x0600022D RID: 557 RVA: 0x0000E4B4 File Offset: 0x0000C8B4
+	// Token: 0x06000044 RID: 68 RVA: 0x00003D88 File Offset: 0x00001F88
 	public BackgroudEffect(int typeS)
 	{
 		BackgroudEffect.isFog = true;
@@ -13,15 +13,19 @@ public class BackgroudEffect
 		{
 		case 0:
 		case 12:
-			if (BackgroudEffect.imgHatMua == null)
+		{
+			bool flag = BackgroudEffect.imgHatMua == null;
+			if (flag)
 			{
 				BackgroudEffect.imgHatMua = GameCanvas.loadImageRMS("/bg/mua.png");
 			}
-			if (BackgroudEffect.imgMua1 == null)
+			bool flag2 = BackgroudEffect.imgMua1 == null;
+			if (flag2)
 			{
 				BackgroudEffect.imgMua1 = GameCanvas.loadImageRMS("/bg/mua1.png");
 			}
-			if (BackgroudEffect.imgMua2 == null)
+			bool flag3 = BackgroudEffect.imgMua2 == null;
+			if (flag3)
 			{
 				BackgroudEffect.imgMua2 = GameCanvas.loadImageRMS("/bg/mua2.png");
 			}
@@ -44,7 +48,8 @@ public class BackgroudEffect
 				this.vy[i] = 12;
 				this.type[i] = Res.random(1, 3);
 				this.isRainEffect[i] = false;
-				if (this.type[i] == 2 && i % 2 == 0)
+				bool flag4 = this.type[i] == 2 && i % 2 == 0;
+				if (flag4)
 				{
 					this.isRainEffect[i] = true;
 				}
@@ -52,6 +57,7 @@ public class BackgroudEffect
 				this.frame[i] = Res.random(1, 2);
 			}
 			break;
+		}
 		case 1:
 		case 2:
 		case 5:
@@ -59,45 +65,55 @@ public class BackgroudEffect
 		case 7:
 		case 11:
 		case 15:
-			if (this.typeEff == 1)
+		{
+			bool flag5 = this.typeEff == 1;
+			if (flag5)
 			{
 				BackgroudEffect.imgLacay = GameCanvas.loadImageRMS("/bg/lacay.png");
 				BackgroudEffect.PIXEL = 10;
 			}
-			if (this.typeEff == 2)
+			bool flag6 = this.typeEff == 2;
+			if (flag6)
 			{
 				BackgroudEffect.imgLacay = GameCanvas.loadImageRMS("/bg/lacay2.png");
 				BackgroudEffect.PIXEL = 18;
 			}
-			if (this.typeEff == 5)
+			bool flag7 = this.typeEff == 5;
+			if (flag7)
 			{
 				BackgroudEffect.imgLacay = GameCanvas.loadImageRMS("/bg/lacay3.png");
 				BackgroudEffect.PIXEL = 14;
 			}
-			if (this.typeEff == 6)
+			bool flag8 = this.typeEff == 6;
+			if (flag8)
 			{
 				BackgroudEffect.imgLacay = GameCanvas.loadImageRMS("/bg/lacay4.png");
 				BackgroudEffect.PIXEL = 14;
 			}
-			if (this.typeEff == 7)
+			bool flag9 = this.typeEff == 7;
+			if (flag9)
 			{
 				BackgroudEffect.imgLacay = GameCanvas.loadImageRMS("/bg/lacay5.png");
 				BackgroudEffect.PIXEL = 12;
 			}
-			if (this.typeEff == 11)
+			bool flag10 = this.typeEff == 11;
+			if (flag10)
 			{
 				BackgroudEffect.imgLacay = GameCanvas.loadImageRMS("/bg/tuyet.png");
 			}
-			if (this.typeEff == 15)
+			bool flag11 = this.typeEff == 15;
+			if (flag11)
 			{
-				if (SmallImage.imgNew[11120] == null)
+				bool flag12 = SmallImage.imgNew[11120] == null;
+				if (flag12)
 				{
 					SmallImage.createImage(11120);
 				}
 				BackgroudEffect.PIXEL = 16;
 			}
 			this.sum = Res.random(15, 25);
-			if (this.typeEff == 11)
+			bool flag13 = this.typeEff == 11;
+			if (flag13)
 			{
 				this.sum = 100;
 			}
@@ -116,13 +132,15 @@ public class BackgroudEffect
 				this.t[j] = Res.random(0, 1);
 				this.vx[j] = Res.random(-3, 3);
 				this.vy[j] = Res.random(1, 4);
-				if (this.typeEff == 11)
+				bool flag14 = this.typeEff == 11;
+				if (flag14)
 				{
 					this.frame[j] = Res.random(0, 2);
 					this.vx[j] = Res.abs(Res.random(1, 3));
 					this.vy[j] = Res.abs(Res.random(1, 3));
 				}
-				if (this.typeEff == 15)
+				bool flag15 = this.typeEff == 15;
+				if (flag15)
 				{
 					this.frame[j] = Res.random(0, 2);
 					this.vx[j] = Res.abs(Res.random(1, 3));
@@ -130,12 +148,15 @@ public class BackgroudEffect
 				}
 			}
 			break;
+		}
 		case 3:
 			GameCanvas.isBoltEff = true;
-			return;
+			break;
 		case 4:
+		{
 			this.sum = Res.random(5, 10);
-			if (BackgroudEffect.imgSao == null)
+			bool flag16 = BackgroudEffect.imgSao == null;
+			if (flag16)
 			{
 				BackgroudEffect.imgSao = GameCanvas.loadImageRMS("/bg/sao.png");
 			}
@@ -148,48 +169,66 @@ public class BackgroudEffect
 			{
 				this.x[k] = Res.random(0, GameCanvas.w);
 				this.y[k] = Res.random(0, 50);
-				if (k % 2 == 0)
+				bool flag17 = k % 2 == 0;
+				if (flag17)
 				{
 					this.tick[k] = 0;
 				}
-				else if (k % 3 == 0)
-				{
-					this.tick[k] = 1;
-				}
-				else if (k % 4 == 0)
-				{
-					this.tick[k] = 2;
-				}
 				else
 				{
-					this.tick[k] = 3;
+					bool flag18 = k % 3 == 0;
+					if (flag18)
+					{
+						this.tick[k] = 1;
+					}
+					else
+					{
+						bool flag19 = k % 4 == 0;
+						if (flag19)
+						{
+							this.tick[k] = 2;
+						}
+						else
+						{
+							this.tick[k] = 3;
+						}
+					}
 				}
 				this.t[k] = Res.random(0, 10);
 			}
 			break;
+		}
 		case 8:
+		{
 			this.tStart = Res.random(100, 300);
-			if (BackgroudEffect.imgShip == null)
+			bool flag20 = BackgroudEffect.imgShip == null;
+			if (flag20)
 			{
 				BackgroudEffect.imgShip = GameCanvas.loadImageRMS("/bg/ship.png");
 			}
-			if (BackgroudEffect.imgFire1 == null)
+			bool flag21 = BackgroudEffect.imgFire1 == null;
+			if (flag21)
 			{
 				BackgroudEffect.imgFire1 = GameCanvas.loadImageRMS("/bg/fire1.png");
 			}
-			if (BackgroudEffect.imgFire2 == null)
+			bool flag22 = BackgroudEffect.imgFire2 == null;
+			if (flag22)
 			{
 				BackgroudEffect.imgFire2 = GameCanvas.loadImageRMS("/bg/fire2.png");
 			}
 			this.isFly = false;
 			this.reloadShip();
 			break;
+		}
 		case 9:
-			if (BackgroudEffect.imgChamTron1 == null)
+		{
+			bool flag23 = BackgroudEffect.imgChamTron1 == null;
+			if (flag23)
 			{
 				BackgroudEffect.imgChamTron1 = GameCanvas.loadImageRMS("/bg/cham-tron1.png");
 			}
-			if (BackgroudEffect.imgChamTron2 == null)
+			bool flag24 = BackgroudEffect.imgChamTron2 == null;
+			if (flag24)
 			{
 				BackgroudEffect.imgChamTron2 = GameCanvas.loadImageRMS("/bg/cham-tron2.png");
 			}
@@ -206,6 +245,7 @@ public class BackgroudEffect
 				this.vx[l] = BackgroudEffect.wP[l];
 			}
 			break;
+		}
 		case 10:
 		{
 			this.num = 30;
@@ -218,7 +258,8 @@ public class BackgroudEffect
 			{
 				this.x[m] = Res.abs(Res.random(0, GameCanvas.w)) + GameScr.cmx;
 				num++;
-				if (num > this.num / 2)
+				bool flag25 = num > this.num / 2;
+				if (flag25)
 				{
 					this.y[m] = Res.abs(Res.random(20, 60));
 					BackgroudEffect.wP[m] = 10;
@@ -233,9 +274,12 @@ public class BackgroudEffect
 			break;
 		}
 		case 13:
-			if (Res.abs(Res.random(0, 2)) == 0)
+		{
+			bool flag26 = Res.abs(Res.random(0, 2)) == 0;
+			if (flag26)
 			{
-				if (Res.abs(Res.random(0, 2)) == 0)
+				bool flag27 = Res.abs(Res.random(0, 2)) == 0;
+				if (flag27)
 				{
 					BackgroudEffect.isPaintFar = true;
 				}
@@ -247,29 +291,34 @@ public class BackgroudEffect
 				BackgroudEffect.initCloud();
 			}
 			break;
+		}
 		case 14:
-			if (Res.abs(Res.random(0, 2)) == 0)
+		{
+			bool flag28 = Res.abs(Res.random(0, 2)) == 0;
+			if (flag28)
 			{
 				BackgroudEffect.isFog = true;
 				BackgroudEffect.initCloud();
 			}
 			break;
 		}
+		}
 	}
 
-	// Token: 0x0600022E RID: 558 RVA: 0x0000EDB8 File Offset: 0x0000D1B8
+	// Token: 0x06000045 RID: 69 RVA: 0x00004746 File Offset: 0x00002946
 	public static void clearImage()
 	{
 		TileMap.yWater = 0;
 	}
 
-	// Token: 0x0600022F RID: 559 RVA: 0x0000EDC0 File Offset: 0x0000D1C0
+	// Token: 0x06000046 RID: 70 RVA: 0x00004750 File Offset: 0x00002950
 	public static bool isHaveRain()
 	{
 		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
 		{
 			BackgroudEffect backgroudEffect = (BackgroudEffect)BackgroudEffect.vBgEffect.elementAt(i);
-			if (backgroudEffect.typeEff == 0 || backgroudEffect.typeEff == 12)
+			bool flag = backgroudEffect.typeEff == 0 || backgroudEffect.typeEff == 12;
+			if (flag)
 			{
 				return true;
 			}
@@ -277,154 +326,173 @@ public class BackgroudEffect
 		return false;
 	}
 
-	// Token: 0x06000230 RID: 560 RVA: 0x0000EE14 File Offset: 0x0000D214
+	// Token: 0x06000047 RID: 71 RVA: 0x000047B0 File Offset: 0x000029B0
 	public static void initCloud()
 	{
-		if (mSystem.clientType == 1)
+		bool flag = mSystem.clientType == 1;
+		if (flag)
 		{
 			BackgroudEffect.imgCloud1 = null;
-			BackgroudEffect.imgFog = null;
-			return;
-		}
-		if (GameCanvas.lowGraphic)
-		{
-			BackgroudEffect.imgCloud1 = null;
-			BackgroudEffect.imgFog = null;
-			return;
-		}
-		if (BackgroudEffect.nCloud > 0)
-		{
-			if (BackgroudEffect.imgCloud1 == null)
-			{
-				BackgroudEffect.imgCloud1 = GameCanvas.loadImage("/bg/fog1.png");
-				BackgroudEffect.cloudw = BackgroudEffect.imgCloud1.getWidth();
-			}
-		}
-		else
-		{
-			BackgroudEffect.imgCloud1 = null;
-		}
-		if (!BackgroudEffect.isFog)
-		{
 			BackgroudEffect.imgFog = null;
 		}
 		else
 		{
-			if (BackgroudEffect.imgFog == null)
+			bool lowGraphic = GameCanvas.lowGraphic;
+			if (lowGraphic)
 			{
-				BackgroudEffect.imgFog = GameCanvas.loadImage("/bg/fog0.png");
+				BackgroudEffect.imgCloud1 = null;
+				BackgroudEffect.imgFog = null;
 			}
-			BackgroudEffect.fogw = 287;
+			else
+			{
+				bool flag2 = BackgroudEffect.nCloud > 0;
+				if (flag2)
+				{
+					bool flag3 = BackgroudEffect.imgCloud1 == null;
+					if (flag3)
+					{
+						BackgroudEffect.imgCloud1 = GameCanvas.loadImage("/bg/fog1.png");
+						BackgroudEffect.cloudw = BackgroudEffect.imgCloud1.getWidth();
+					}
+				}
+				else
+				{
+					BackgroudEffect.imgCloud1 = null;
+				}
+				bool flag4 = !BackgroudEffect.isFog;
+				if (flag4)
+				{
+					BackgroudEffect.imgFog = null;
+				}
+				else
+				{
+					bool flag5 = BackgroudEffect.imgFog == null;
+					if (flag5)
+					{
+						BackgroudEffect.imgFog = GameCanvas.loadImage("/bg/fog0.png");
+					}
+					BackgroudEffect.fogw = 287;
+				}
+			}
 		}
 	}
 
-	// Token: 0x06000231 RID: 561 RVA: 0x0000EEC8 File Offset: 0x0000D2C8
+	// Token: 0x06000048 RID: 72 RVA: 0x00004880 File Offset: 0x00002A80
 	public static void updateCloud2()
 	{
-		if (mSystem.clientType == 1)
+		bool flag = mSystem.clientType == 1;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameCanvas.lowGraphic)
-		{
-			return;
-		}
-		if (BackgroudEffect.nCloud > 0)
-		{
-			int num = (GameCanvas.currentScreen != GameScr.gI()) ? (GameScr.cmx + GameCanvas.w) : TileMap.pxw;
-			for (int i = 0; i < BackgroudEffect.nCloud; i++)
+			bool lowGraphic = GameCanvas.lowGraphic;
+			if (!lowGraphic)
 			{
-				int num2 = i + 1;
-				GameCanvas.cloudX[i] -= num2;
-				if (GameCanvas.cloudX[i] < -BackgroudEffect.cloudw)
+				bool flag2 = BackgroudEffect.nCloud > 0;
+				if (flag2)
 				{
-					GameCanvas.cloudX[i] = num + 100;
+					int num = (GameCanvas.currentScreen != GameScr.gI()) ? (GameScr.cmx + GameCanvas.w) : TileMap.pxw;
+					for (int i = 0; i < BackgroudEffect.nCloud; i++)
+					{
+						int num2 = i + 1;
+						GameCanvas.cloudX[i] -= num2;
+						bool flag3 = GameCanvas.cloudX[i] < -BackgroudEffect.cloudw;
+						if (flag3)
+						{
+							GameCanvas.cloudX[i] = num + 100;
+						}
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000232 RID: 562 RVA: 0x0000EF64 File Offset: 0x0000D364
+	// Token: 0x06000049 RID: 73 RVA: 0x00004934 File Offset: 0x00002B34
 	public static void updateFog()
 	{
-		if (mSystem.clientType == 1)
+		bool flag = mSystem.clientType == 1;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameCanvas.lowGraphic)
-		{
-			return;
-		}
-		if (BackgroudEffect.isFog)
-		{
-			BackgroudEffect.xfog--;
-			if (BackgroudEffect.xfog < -BackgroudEffect.fogw)
+			bool lowGraphic = GameCanvas.lowGraphic;
+			if (!lowGraphic)
 			{
-				BackgroudEffect.xfog = 0;
+				bool flag2 = BackgroudEffect.isFog;
+				if (flag2)
+				{
+					BackgroudEffect.xfog--;
+					bool flag3 = BackgroudEffect.xfog < -BackgroudEffect.fogw;
+					if (flag3)
+					{
+						BackgroudEffect.xfog = 0;
+					}
+				}
 			}
 		}
 	}
 
-	// Token: 0x06000233 RID: 563 RVA: 0x0000EFB4 File Offset: 0x0000D3B4
+	// Token: 0x0600004A RID: 74 RVA: 0x00004990 File Offset: 0x00002B90
 	public static void paintCloud2(mGraphics g)
 	{
-		if (mSystem.clientType == 1)
+		bool flag = mSystem.clientType == 1;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameCanvas.lowGraphic)
-		{
-			return;
-		}
-		if (BackgroudEffect.nCloud == 0)
-		{
-			return;
-		}
-		if (BackgroudEffect.imgCloud1 != null)
-		{
-			for (int i = 0; i < BackgroudEffect.nCloud; i++)
+			bool lowGraphic = GameCanvas.lowGraphic;
+			if (!lowGraphic)
 			{
-				int num = i;
-				if (num > 3)
+				bool flag2 = BackgroudEffect.nCloud == 0;
+				if (!flag2)
 				{
-					num = 3;
+					bool flag3 = BackgroudEffect.imgCloud1 != null;
+					if (flag3)
+					{
+						for (int i = 0; i < BackgroudEffect.nCloud; i++)
+						{
+							int num = i;
+							bool flag4 = num > 3;
+							if (flag4)
+							{
+								num = 3;
+							}
+							bool flag5 = num == 0;
+							if (flag5)
+							{
+							}
+							g.drawImage(BackgroudEffect.imgCloud1, GameCanvas.cloudX[i], GameCanvas.cloudY[i], 3);
+						}
+					}
 				}
-				if (num == 0)
-				{
-				}
-				g.drawImage(BackgroudEffect.imgCloud1, GameCanvas.cloudX[i], GameCanvas.cloudY[i], 3);
 			}
 		}
 	}
 
-	// Token: 0x06000234 RID: 564 RVA: 0x0000F030 File Offset: 0x0000D430
+	// Token: 0x0600004B RID: 75 RVA: 0x00004A34 File Offset: 0x00002C34
 	public static void paintFog(mGraphics g)
 	{
-		if (mSystem.clientType == 1)
+		bool flag = mSystem.clientType == 1;
+		if (!flag)
 		{
-			return;
-		}
-		if (GameCanvas.lowGraphic)
-		{
-			return;
-		}
-		if (!BackgroudEffect.isFog)
-		{
-			return;
-		}
-		if (BackgroudEffect.imgFog != null)
-		{
-			for (int i = BackgroudEffect.xfog; i < TileMap.pxw; i += BackgroudEffect.fogw)
+			bool lowGraphic = GameCanvas.lowGraphic;
+			if (!lowGraphic)
 			{
-				if (i >= GameScr.cmx - BackgroudEffect.fogw)
+				bool flag2 = !BackgroudEffect.isFog;
+				if (!flag2)
 				{
-					g.drawImageFog(BackgroudEffect.imgFog, i, BackgroudEffect.yfog, 0);
+					bool flag3 = BackgroudEffect.imgFog != null;
+					if (flag3)
+					{
+						for (int i = BackgroudEffect.xfog; i < TileMap.pxw; i += BackgroudEffect.fogw)
+						{
+							bool flag4 = i >= GameScr.cmx - BackgroudEffect.fogw;
+							if (flag4)
+							{
+								g.drawImageFog(BackgroudEffect.imgFog, i, BackgroudEffect.yfog, 0);
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x06000235 RID: 565 RVA: 0x0000F0AC File Offset: 0x0000D4AC
+	// Token: 0x0600004C RID: 76 RVA: 0x00004ACC File Offset: 0x00002CCC
 	private void reloadShip()
 	{
 		int cmx = GameScr.cmx;
@@ -432,47 +500,63 @@ public class BackgroudEffect
 		this.way = Res.random(1, 3);
 		this.isFly = false;
 		this.speed = Res.random(3, 5);
-		if (this.way == 1)
+		bool flag = this.way == 1;
+		if (flag)
 		{
 			this.xShip = -50;
 			this.yShip = Res.random(cmy, GameCanvas.h - 100 + cmy);
 			this.trans = 0;
 		}
-		else if (this.way == 2)
+		else
 		{
-			this.xShip = TileMap.pxw + 50;
-			this.yShip = Res.random(cmy, GameCanvas.h - 100 + cmy);
-			this.trans = 2;
-		}
-		else if (this.way == 3)
-		{
-			this.xShip = Res.random(50 + cmx, GameCanvas.w - 50 + cmx);
-			this.yShip = -50;
-			this.trans = ((Res.random(0, 2) != 0) ? 2 : 0);
-		}
-		else if (this.way == 4)
-		{
-			this.xShip = Res.random(50 + cmx, GameCanvas.w - 50 + cmx);
-			this.yShip = TileMap.pxh + 50;
-			this.trans = ((Res.random(0, 2) != 0) ? 2 : 0);
+			bool flag2 = this.way == 2;
+			if (flag2)
+			{
+				this.xShip = TileMap.pxw + 50;
+				this.yShip = Res.random(cmy, GameCanvas.h - 100 + cmy);
+				this.trans = 2;
+			}
+			else
+			{
+				bool flag3 = this.way == 3;
+				if (flag3)
+				{
+					this.xShip = Res.random(50 + cmx, GameCanvas.w - 50 + cmx);
+					this.yShip = -50;
+					this.trans = ((Res.random(0, 2) != 0) ? 2 : 0);
+				}
+				else
+				{
+					bool flag4 = this.way == 4;
+					if (flag4)
+					{
+						this.xShip = Res.random(50 + cmx, GameCanvas.w - 50 + cmx);
+						this.yShip = TileMap.pxh + 50;
+						this.trans = ((Res.random(0, 2) != 0) ? 2 : 0);
+					}
+				}
+			}
 		}
 	}
 
-	// Token: 0x06000236 RID: 566 RVA: 0x0000F1F4 File Offset: 0x0000D5F4
+	// Token: 0x0600004D RID: 77 RVA: 0x00004C14 File Offset: 0x00002E14
 	public void paintWater(mGraphics g)
 	{
-		if (this.typeEff == 10)
+		bool flag = this.typeEff == 10;
+		if (flag)
 		{
 			g.setColor(this.colorWater);
 			for (int i = 0; i < this.num; i++)
 			{
 				g.drawImage((i >= this.num / 2) ? BackgroudEffect.water1 : BackgroudEffect.water2, this.x[i], this.y[i] + this.yWater, 0);
 			}
-			if (BackgroudEffect.id_water1 != 0 && BackgroudEffect.water3 == null)
+			bool flag2 = BackgroudEffect.id_water1 != 0 && BackgroudEffect.water3 == null;
+			if (flag2)
 			{
 				BackgroudEffect.water3 = SmallImage.imgNew[(int)BackgroudEffect.id_water1].img;
 			}
-			if (BackgroudEffect.water3 != null)
+			bool flag3 = BackgroudEffect.water3 != null;
+			if (flag3)
 			{
 				for (int j = 0; j < this.num / 2; j++)
 				{
@@ -482,18 +566,20 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000237 RID: 567 RVA: 0x0000F2DC File Offset: 0x0000D6DC
+	// Token: 0x0600004E RID: 78 RVA: 0x00004D14 File Offset: 0x00002F14
 	public void paintFar(mGraphics g)
 	{
 		g.translate(-g.getTranslateX(), -g.getTranslateY());
-		if (this.typeEff == 4)
+		bool flag = this.typeEff == 4;
+		if (flag)
 		{
 			for (int i = 0; i < this.sum; i++)
 			{
 				g.drawRegion(BackgroudEffect.imgSao, 0, 16 * this.frame[i], 16, 16, 0, this.x[i], this.y[i], 0);
 			}
 		}
-		if (this.typeEff == 9)
+		bool flag2 = this.typeEff == 9;
+		if (flag2)
 		{
 			g.setColor(16777215);
 			for (int j = 0; j < this.num; j++)
@@ -503,7 +589,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000238 RID: 568 RVA: 0x0000F3B0 File Offset: 0x0000D7B0
+	// Token: 0x0600004F RID: 79 RVA: 0x00004DF8 File Offset: 0x00002FF8
 	public void update()
 	{
 		try
@@ -514,28 +600,34 @@ public class BackgroudEffect
 			case 12:
 				for (int i = 0; i < this.sum; i++)
 				{
-					if (i % 3 != 0 && this.typeEff != 12 && TileMap.tileTypeAt(this.x[i], this.y[i] - GameCanvas.transY, 2))
+					bool flag = i % 3 != 0 && this.typeEff != 12 && TileMap.tileTypeAt(this.x[i], this.y[i] - GameCanvas.transY, 2);
+					if (flag)
 					{
 						this.activeEff[i] = true;
 					}
-					if (i % 3 == 0 && this.y[i] > GameCanvas.h + GameScr.cmy)
+					bool flag2 = i % 3 == 0 && this.y[i] > GameCanvas.h + GameScr.cmy;
+					if (flag2)
 					{
 						this.x[i] = Res.random(-10, GameCanvas.w + 300) + GameScr.cmx;
 						this.y[i] = Res.random(-100, 0) + GameScr.cmy;
 					}
-					if (!this.activeEff[i])
+					bool flag3 = !this.activeEff[i];
+					if (flag3)
 					{
 						this.y[i] += this.vy[i];
 						this.x[i] += this.vx[i];
 					}
-					if (this.activeEff[i])
+					bool flag4 = this.activeEff[i];
+					if (flag4)
 					{
 						this.t[i]++;
-						if (this.t[i] > 2)
+						bool flag5 = this.t[i] > 2;
+						if (flag5)
 						{
 							this.frame[i]++;
 							this.t[i] = 0;
-							if (this.frame[i] > 1)
+							bool flag6 = this.frame[i] > 1;
+							if (flag6)
 							{
 								this.frame[i] = 0;
 								this.activeEff[i] = false;
@@ -555,21 +647,25 @@ public class BackgroudEffect
 			case 15:
 				for (int j = 0; j < this.sum; j++)
 				{
-					if (j % 3 != 0 && TileMap.tileTypeAt(this.x[j], this.y[j] + ((TileMap.tileID != 15) ? 0 : 10), 2))
+					bool flag7 = j % 3 != 0 && TileMap.tileTypeAt(this.x[j], this.y[j] + ((TileMap.tileID != 15) ? 0 : 10), 2);
+					if (flag7)
 					{
 						this.activeEff[j] = true;
 					}
-					if (j % 3 == 0 && this.y[j] > TileMap.pxh)
+					bool flag8 = j % 3 == 0 && this.y[j] > TileMap.pxh;
+					if (flag8)
 					{
 						this.x[j] = Res.random(-10, TileMap.pxw + 50);
 						this.y[j] = Res.random(-50, 0);
 					}
-					if (!this.activeEff[j])
+					bool flag9 = !this.activeEff[j];
+					if (flag9)
 					{
 						for (int k = 0; k < Teleport.vTeleport.size(); k++)
 						{
 							Teleport teleport = (Teleport)Teleport.vTeleport.elementAt(k);
-							if (teleport != null && teleport.paintFire && this.x[j] < teleport.x + 80 && this.x[j] > teleport.x - 80 && this.y[j] < teleport.y + 80 && this.y[j] > teleport.y - 80)
+							bool flag10 = teleport != null && teleport.paintFire && this.x[j] < teleport.x + 80 && this.x[j] > teleport.x - 80 && this.y[j] < teleport.y + 80 && this.y[j] > teleport.y - 80;
+							if (flag10)
 							{
 								this.x[j] += ((this.x[j] >= teleport.x) ? 10 : -10);
 							}
@@ -577,16 +673,19 @@ public class BackgroudEffect
 						this.y[j] += this.vy[j];
 						this.x[j] += this.vx[j];
 						this.t[j]++;
-						int num = (this.typeEff != 11) ? 4 : 3;
+						int num3 = (this.typeEff != 11) ? 4 : 3;
 						int num2 = (this.typeEff != 15) ? 4 : 4;
-						if (this.t[j] > ((this.typeEff == 2) ? 4 : 2))
+						bool flag11 = this.t[j] > ((this.typeEff == 2) ? 4 : 2);
+						if (flag11)
 						{
-							if (this.typeEff != 11 && this.typeEff != 15)
+							bool flag12 = this.typeEff != 11 && this.typeEff != 15;
+							if (flag12)
 							{
 								this.frame[j]++;
 							}
 							this.t[j] = 0;
-							if (this.frame[j] > num2 - 1)
+							bool flag13 = this.frame[j] > num2 - 1;
+							if (flag13)
 							{
 								this.frame[j] = 0;
 							}
@@ -595,7 +694,8 @@ public class BackgroudEffect
 					else
 					{
 						this.t[j]++;
-						if (this.t[j] == 100)
+						bool flag14 = this.t[j] == 100;
+						if (flag14)
 						{
 							this.t[j] = 0;
 							this.x[j] = Res.random(-10, TileMap.pxw + 50);
@@ -609,11 +709,13 @@ public class BackgroudEffect
 				for (int l = 0; l < this.sum; l++)
 				{
 					this.t[l]++;
-					if (this.t[l] > 10)
+					bool flag15 = this.t[l] > 10;
+					if (flag15)
 					{
 						this.tick[l]++;
 						this.t[l] = 0;
-						if (this.tick[l] > 5)
+						bool flag16 = this.tick[l] > 5;
+						if (flag16)
 						{
 							this.tick[l] = 0;
 						}
@@ -622,61 +724,85 @@ public class BackgroudEffect
 				}
 				break;
 			case 8:
+			{
 				this.tFire++;
-				if (this.tFire == 3)
+				bool flag17 = this.tFire == 3;
+				if (flag17)
 				{
 					this.tFire = 0;
 					this.frameFire++;
-					if (this.frameFire > 1)
+					bool flag18 = this.frameFire > 1;
+					if (flag18)
 					{
 						this.frameFire = 0;
 					}
 				}
-				if (GameCanvas.gameTick % this.tStart == 0)
+				bool flag19 = GameCanvas.gameTick % this.tStart == 0;
+				if (flag19)
 				{
 					this.isFly = true;
 				}
-				if (this.isFly)
+				bool flag20 = this.isFly;
+				if (flag20)
 				{
-					if (this.way == 1)
+					bool flag21 = this.way == 1;
+					if (flag21)
 					{
 						this.xShip += this.speed;
-						if (this.xShip > TileMap.pxw + 50)
+						bool flag22 = this.xShip > TileMap.pxw + 50;
+						if (flag22)
 						{
 							this.reloadShip();
 						}
 					}
-					else if (this.way == 2)
+					else
 					{
-						this.xShip -= this.speed;
-						if (this.xShip < -50)
+						bool flag23 = this.way == 2;
+						if (flag23)
 						{
-							this.reloadShip();
+							this.xShip -= this.speed;
+							bool flag24 = this.xShip < -50;
+							if (flag24)
+							{
+								this.reloadShip();
+							}
 						}
-					}
-					else if (this.way == 3)
-					{
-						this.yShip += this.speed;
-						if (this.yShip > TileMap.pxh + 50)
+						else
 						{
-							this.reloadShip();
-						}
-					}
-					else if (this.way == 4)
-					{
-						this.yShip -= this.speed;
-						if (this.yShip < -50)
-						{
-							this.reloadShip();
+							bool flag25 = this.way == 3;
+							if (flag25)
+							{
+								this.yShip += this.speed;
+								bool flag26 = this.yShip > TileMap.pxh + 50;
+								if (flag26)
+								{
+									this.reloadShip();
+								}
+							}
+							else
+							{
+								bool flag27 = this.way == 4;
+								if (flag27)
+								{
+									this.yShip -= this.speed;
+									bool flag28 = this.yShip < -50;
+									if (flag28)
+									{
+										this.reloadShip();
+									}
+								}
+							}
 						}
 					}
 				}
 				break;
+			}
 			case 9:
 				for (int m = 0; m < this.num; m++)
 				{
 					this.x[m] -= this.vx[m];
-					if (this.x[m] < -this.vx[m])
+					bool flag29 = this.x[m] < -this.vx[m];
+					if (flag29)
 					{
 						BackgroudEffect.wP[m] = Res.abs(Res.random(1, 3));
 						this.vx[m] = BackgroudEffect.wP[m];
@@ -688,7 +814,8 @@ public class BackgroudEffect
 				for (int n = 0; n < this.num; n++)
 				{
 					this.x[n] -= this.vx[n];
-					if (this.x[n] < -this.vx[n] + GameScr.cmx)
+					bool flag30 = this.x[n] < -this.vx[n] + GameScr.cmx;
+					if (flag30)
 					{
 						this.x[n] = GameCanvas.w + this.vx[n] + GameScr.cmx;
 					}
@@ -707,7 +834,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000239 RID: 569 RVA: 0x0000FB80 File Offset: 0x0000DF80
+	// Token: 0x06000050 RID: 80 RVA: 0x00005664 File Offset: 0x00003864
 	public void paintFront(mGraphics g)
 	{
 		try
@@ -721,11 +848,14 @@ public class BackgroudEffect
 				int cmy = GameScr.cmy;
 				for (int i = 0; i < this.sum; i++)
 				{
-					if (this.type[i] == 2)
+					bool flag = this.type[i] == 2;
+					if (flag)
 					{
-						if (this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy)
+						bool flag2 = this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy;
+						if (flag2)
 						{
-							if (this.activeEff[i])
+							bool flag3 = this.activeEff[i];
+							if (flag3)
 							{
 								g.drawRegion(BackgroudEffect.imgHatMua, 0, 10 * this.frame[i], 13, 10, 0, this.x[i], this.y[i] - 10, 0);
 							}
@@ -745,25 +875,33 @@ public class BackgroudEffect
 			case 7:
 			case 11:
 			case 15:
-				if (this.typeEff == 15)
+			{
+				bool flag4 = this.typeEff == 15;
+				if (flag4)
 				{
-					if (SmallImage.imgNew[11120] != null && SmallImage.imgNew[11120].img != null)
+					bool flag5 = SmallImage.imgNew[11120] != null && SmallImage.imgNew[11120].img != null;
+					if (flag5)
 					{
 						BackgroudEffect.imgLacay = SmallImage.imgNew[11120].img;
 					}
-					if (BackgroudEffect.imgLacay == null)
+					bool flag6 = BackgroudEffect.imgLacay == null;
+					if (flag6)
 					{
 						break;
 					}
 				}
 				this.paintLacay1(g, BackgroudEffect.imgLacay);
 				break;
+			}
 			case 13:
-				if (!BackgroudEffect.isPaintFar)
+			{
+				bool flag7 = !BackgroudEffect.isPaintFar;
+				if (flag7)
 				{
 					BackgroudEffect.paintCloud2(g);
 				}
 				break;
+			}
 			}
 		}
 		catch (Exception ex)
@@ -771,18 +909,21 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x0600023A RID: 570 RVA: 0x0000FD7C File Offset: 0x0000E17C
+	// Token: 0x06000051 RID: 81 RVA: 0x00005888 File Offset: 0x00003A88
 	public void paintLacay1(mGraphics g, Image img)
 	{
 		int num = (this.typeEff != 11) ? 4 : 3;
 		int num2 = (this.typeEff != 15) ? 4 : 4;
 		for (int i = 0; i < this.sum; i++)
 		{
-			if (i % 3 == 0)
+			bool flag = i % 3 == 0;
+			if (flag)
 			{
-				if (this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy)
+				bool flag2 = this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy;
+				if (flag2)
 				{
-					if (img != null)
+					bool flag3 = img != null;
+					if (flag3)
 					{
 						g.drawRegion(img, 0, BackgroudEffect.PIXEL * this.frame[i], img.getWidth(), BackgroudEffect.PIXEL, 0, this.x[i], this.y[i], 0);
 					}
@@ -791,18 +932,21 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x0600023B RID: 571 RVA: 0x0000FE6C File Offset: 0x0000E26C
+	// Token: 0x06000052 RID: 82 RVA: 0x00005978 File Offset: 0x00003B78
 	public void paintLacay2(mGraphics g, Image img)
 	{
 		int num = (this.typeEff != 11) ? 4 : 3;
 		int num2 = (this.typeEff != 15) ? 4 : 4;
 		for (int i = 0; i < this.sum; i++)
 		{
-			if (i % 3 != 0)
+			bool flag = i % 3 != 0;
+			if (flag)
 			{
-				if (this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy)
+				bool flag2 = this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy;
+				if (flag2)
 				{
-					if (img != null)
+					bool flag3 = img != null;
+					if (flag3)
 					{
 						g.drawRegion(img, 0, BackgroudEffect.PIXEL * this.frame[i], img.getWidth(), BackgroudEffect.PIXEL, 0, this.x[i], this.y[i], 0);
 					}
@@ -811,15 +955,18 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x0600023C RID: 572 RVA: 0x0000FF5C File Offset: 0x0000E35C
+	// Token: 0x06000053 RID: 83 RVA: 0x00005A68 File Offset: 0x00003C68
 	public void paintBehindTile(mGraphics g)
 	{
 		int num = this.typeEff;
-		if (num != 8)
+		bool flag = num != 8;
+		if (flag)
 		{
-			if (num == 13)
+			bool flag2 = num == 13;
+			if (flag2)
 			{
-				if (BackgroudEffect.isPaintFar)
+				bool flag3 = BackgroudEffect.isPaintFar;
+				if (flag3)
 				{
 					BackgroudEffect.paintCloud2(g);
 				}
@@ -828,7 +975,8 @@ public class BackgroudEffect
 		else
 		{
 			g.drawRegion(BackgroudEffect.imgShip, 0, 0, BackgroudEffect.imgShip.getWidth(), BackgroudEffect.imgShip.getHeight(), this.trans, this.xShip, this.yShip, 3);
-			if (this.way == 1 || this.way == 2)
+			bool flag4 = this.way == 1 || this.way == 2;
+			if (flag4)
 			{
 				int num2 = (this.trans != 0) ? 25 : -25;
 				g.drawRegion(BackgroudEffect.imgFire1, 0, this.frameFire * 8, 20, 8, this.trans, this.xShip + num2, this.yShip + 5, 3);
@@ -841,7 +989,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x0600023D RID: 573 RVA: 0x0001007C File Offset: 0x0000E47C
+	// Token: 0x06000054 RID: 84 RVA: 0x00005B88 File Offset: 0x00003D88
 	public void paintBack(mGraphics g)
 	{
 		switch (this.typeEff)
@@ -853,9 +1001,11 @@ public class BackgroudEffect
 			g.setColor(10742731);
 			for (int i = 0; i < this.sum; i++)
 			{
-				if (this.type[i] != 2)
+				bool flag = this.type[i] != 2;
+				if (flag)
 				{
-					if (this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy)
+					bool flag2 = this.x[i] >= GameScr.cmx && this.x[i] <= GameCanvas.w + GameScr.cmx && this.y[i] >= GameScr.cmy && this.y[i] <= GameCanvas.h + GameScr.cmy;
+					if (flag2)
 					{
 						g.drawImage(BackgroudEffect.imgMua2, this.x[i], this.y[i], 0);
 					}
@@ -870,36 +1020,39 @@ public class BackgroudEffect
 		case 7:
 		case 11:
 		case 15:
-			if (this.typeEff == 15)
+		{
+			bool flag3 = this.typeEff == 15;
+			if (flag3)
 			{
-				if (SmallImage.imgNew[11120] != null && SmallImage.imgNew[11120].img != null)
+				bool flag4 = SmallImage.imgNew[11120] != null && SmallImage.imgNew[11120].img != null;
+				if (flag4)
 				{
 					BackgroudEffect.imgLacay = SmallImage.imgNew[11120].img;
 				}
-				if (BackgroudEffect.imgLacay == null)
+				bool flag5 = BackgroudEffect.imgLacay == null;
+				if (flag5)
 				{
 					break;
 				}
 			}
 			this.paintLacay2(g, BackgroudEffect.imgLacay);
 			break;
-		case 3:
-			return;
+		}
 		}
 	}
 
-	// Token: 0x0600023E RID: 574 RVA: 0x00010200 File Offset: 0x0000E600
+	// Token: 0x06000055 RID: 85 RVA: 0x00005D2C File Offset: 0x00003F2C
 	public static void addEffect(int id)
 	{
-		if (GameCanvas.lowGraphic)
+		bool lowGraphic = GameCanvas.lowGraphic;
+		if (!lowGraphic)
 		{
-			return;
+			BackgroudEffect o = new BackgroudEffect(id);
+			BackgroudEffect.vBgEffect.addElement(o);
 		}
-		BackgroudEffect o = new BackgroudEffect(id);
-		BackgroudEffect.vBgEffect.addElement(o);
 	}
 
-	// Token: 0x0600023F RID: 575 RVA: 0x0001022C File Offset: 0x0000E62C
+	// Token: 0x06000056 RID: 86 RVA: 0x00005D5C File Offset: 0x00003F5C
 	public static void addWater(int color, int yWater)
 	{
 		BackgroudEffect backgroudEffect = new BackgroudEffect(10);
@@ -908,7 +1061,7 @@ public class BackgroudEffect
 		BackgroudEffect.vBgEffect.addElement(backgroudEffect);
 	}
 
-	// Token: 0x06000240 RID: 576 RVA: 0x0001025C File Offset: 0x0000E65C
+	// Token: 0x06000057 RID: 87 RVA: 0x00005D8C File Offset: 0x00003F8C
 	public static void paintWaterAll(mGraphics g)
 	{
 		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
@@ -917,7 +1070,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000241 RID: 577 RVA: 0x0001029C File Offset: 0x0000E69C
+	// Token: 0x06000058 RID: 88 RVA: 0x00005DCC File Offset: 0x00003FCC
 	public static void paintBehindTileAll(mGraphics g)
 	{
 		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
@@ -926,7 +1079,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000242 RID: 578 RVA: 0x000102DC File Offset: 0x0000E6DC
+	// Token: 0x06000059 RID: 89 RVA: 0x00005E0C File Offset: 0x0000400C
 	public static void paintFrontAll(mGraphics g)
 	{
 		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
@@ -935,7 +1088,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000243 RID: 579 RVA: 0x0001031C File Offset: 0x0000E71C
+	// Token: 0x0600005A RID: 90 RVA: 0x00005E4C File Offset: 0x0000404C
 	public static void paintFarAll(mGraphics g)
 	{
 		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
@@ -944,7 +1097,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000244 RID: 580 RVA: 0x0001035C File Offset: 0x0000E75C
+	// Token: 0x0600005B RID: 91 RVA: 0x00005E8C File Offset: 0x0000408C
 	public static void paintBackAll(mGraphics g)
 	{
 		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
@@ -953,7 +1106,7 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x06000245 RID: 581 RVA: 0x0001039C File Offset: 0x0000E79C
+	// Token: 0x0600005C RID: 92 RVA: 0x00005ECC File Offset: 0x000040CC
 	public static void updateEff()
 	{
 		for (int i = 0; i < BackgroudEffect.vBgEffect.size(); i++)
@@ -962,214 +1115,214 @@ public class BackgroudEffect
 		}
 	}
 
-	// Token: 0x0400021B RID: 539
+	// Token: 0x0400004F RID: 79
 	public static MyVector vBgEffect = new MyVector();
 
-	// Token: 0x0400021C RID: 540
+	// Token: 0x04000050 RID: 80
 	private int[] x;
 
-	// Token: 0x0400021D RID: 541
+	// Token: 0x04000051 RID: 81
 	private int[] y;
 
-	// Token: 0x0400021E RID: 542
+	// Token: 0x04000052 RID: 82
 	private int[] vx;
 
-	// Token: 0x0400021F RID: 543
+	// Token: 0x04000053 RID: 83
 	private int[] vy;
 
-	// Token: 0x04000220 RID: 544
+	// Token: 0x04000054 RID: 84
 	public static int[] wP;
 
-	// Token: 0x04000221 RID: 545
+	// Token: 0x04000055 RID: 85
 	private int num;
 
-	// Token: 0x04000222 RID: 546
+	// Token: 0x04000056 RID: 86
 	private int xShip;
 
-	// Token: 0x04000223 RID: 547
+	// Token: 0x04000057 RID: 87
 	private int yShip;
 
-	// Token: 0x04000224 RID: 548
+	// Token: 0x04000058 RID: 88
 	private int way;
 
-	// Token: 0x04000225 RID: 549
+	// Token: 0x04000059 RID: 89
 	private int trans;
 
-	// Token: 0x04000226 RID: 550
+	// Token: 0x0400005A RID: 90
 	private int frameFire;
 
-	// Token: 0x04000227 RID: 551
+	// Token: 0x0400005B RID: 91
 	private int tFire;
 
-	// Token: 0x04000228 RID: 552
+	// Token: 0x0400005C RID: 92
 	private int tStart;
 
-	// Token: 0x04000229 RID: 553
+	// Token: 0x0400005D RID: 93
 	private int speed;
 
-	// Token: 0x0400022A RID: 554
+	// Token: 0x0400005E RID: 94
 	private bool isFly;
 
-	// Token: 0x0400022B RID: 555
+	// Token: 0x0400005F RID: 95
 	public static Image imgSnow;
 
-	// Token: 0x0400022C RID: 556
+	// Token: 0x04000060 RID: 96
 	public static Image imgHatMua;
 
-	// Token: 0x0400022D RID: 557
+	// Token: 0x04000061 RID: 97
 	public static Image imgMua1;
 
-	// Token: 0x0400022E RID: 558
+	// Token: 0x04000062 RID: 98
 	public static Image imgMua2;
 
-	// Token: 0x0400022F RID: 559
+	// Token: 0x04000063 RID: 99
 	public static Image imgSao;
 
-	// Token: 0x04000230 RID: 560
+	// Token: 0x04000064 RID: 100
 	private static Image imgLacay;
 
-	// Token: 0x04000231 RID: 561
+	// Token: 0x04000065 RID: 101
 	private static Image imgShip;
 
-	// Token: 0x04000232 RID: 562
+	// Token: 0x04000066 RID: 102
 	private static Image imgFire1;
 
-	// Token: 0x04000233 RID: 563
+	// Token: 0x04000067 RID: 103
 	private static Image imgFire2;
 
-	// Token: 0x04000234 RID: 564
+	// Token: 0x04000068 RID: 104
 	private int[] type;
 
-	// Token: 0x04000235 RID: 565
+	// Token: 0x04000069 RID: 105
 	private int sum;
 
-	// Token: 0x04000236 RID: 566
+	// Token: 0x0400006A RID: 106
 	public int typeEff;
 
-	// Token: 0x04000237 RID: 567
+	// Token: 0x0400006B RID: 107
 	public int xx;
 
-	// Token: 0x04000238 RID: 568
+	// Token: 0x0400006C RID: 108
 	public int waterY;
 
-	// Token: 0x04000239 RID: 569
+	// Token: 0x0400006D RID: 109
 	private bool[] isRainEffect;
 
-	// Token: 0x0400023A RID: 570
+	// Token: 0x0400006E RID: 110
 	private int[] frame;
 
-	// Token: 0x0400023B RID: 571
+	// Token: 0x0400006F RID: 111
 	private int[] t;
 
-	// Token: 0x0400023C RID: 572
+	// Token: 0x04000070 RID: 112
 	private bool[] activeEff;
 
-	// Token: 0x0400023D RID: 573
+	// Token: 0x04000071 RID: 113
 	private int yWater;
 
-	// Token: 0x0400023E RID: 574
+	// Token: 0x04000072 RID: 114
 	private int colorWater;
 
-	// Token: 0x0400023F RID: 575
+	// Token: 0x04000073 RID: 115
 	public const int TYPE_MUA = 0;
 
-	// Token: 0x04000240 RID: 576
+	// Token: 0x04000074 RID: 116
 	public const int TYPE_LATRAIDAT_1 = 1;
 
-	// Token: 0x04000241 RID: 577
+	// Token: 0x04000075 RID: 117
 	public const int TYPE_LATRAIDAT_2 = 2;
 
-	// Token: 0x04000242 RID: 578
+	// Token: 0x04000076 RID: 118
 	public const int TYPE_SAMSET = 3;
 
-	// Token: 0x04000243 RID: 579
+	// Token: 0x04000077 RID: 119
 	public const int TYPE_SAO = 4;
 
-	// Token: 0x04000244 RID: 580
+	// Token: 0x04000078 RID: 120
 	public const int TYPE_LANAMEK_1 = 5;
 
-	// Token: 0x04000245 RID: 581
+	// Token: 0x04000079 RID: 121
 	public const int TYPE_LASAYAI_1 = 6;
 
-	// Token: 0x04000246 RID: 582
+	// Token: 0x0400007A RID: 122
 	public const int TYPE_LANAMEK_2 = 7;
 
-	// Token: 0x04000247 RID: 583
+	// Token: 0x0400007B RID: 123
 	public const int TYPE_SHIP_TRAIDAT = 8;
 
-	// Token: 0x04000248 RID: 584
+	// Token: 0x0400007C RID: 124
 	public const int TYPE_HANHTINH = 9;
 
-	// Token: 0x04000249 RID: 585
+	// Token: 0x0400007D RID: 125
 	public const int TYPE_WATER = 10;
 
-	// Token: 0x0400024A RID: 586
+	// Token: 0x0400007E RID: 126
 	public const int TYPE_SNOW = 11;
 
-	// Token: 0x0400024B RID: 587
+	// Token: 0x0400007F RID: 127
 	public const int TYPE_MUA_FRONT = 12;
 
-	// Token: 0x0400024C RID: 588
+	// Token: 0x04000080 RID: 128
 	public const int TYPE_CLOUD = 13;
 
-	// Token: 0x0400024D RID: 589
+	// Token: 0x04000081 RID: 129
 	public const int TYPE_FOG = 14;
 
-	// Token: 0x0400024E RID: 590
+	// Token: 0x04000082 RID: 130
 	public const int TYPE_LUNAR_YEAR = 15;
 
-	// Token: 0x0400024F RID: 591
+	// Token: 0x04000083 RID: 131
 	public static int PIXEL = 16;
 
-	// Token: 0x04000250 RID: 592
+	// Token: 0x04000084 RID: 132
 	public static Image water1 = GameCanvas.loadImage("/mainImage/myTexture2dwater1.png");
 
-	// Token: 0x04000251 RID: 593
+	// Token: 0x04000085 RID: 133
 	public static Image water2 = GameCanvas.loadImage("/mainImage/myTexture2dwater2.png");
 
-	// Token: 0x04000252 RID: 594
+	// Token: 0x04000086 RID: 134
 	public static Image imgChamTron1;
 
-	// Token: 0x04000253 RID: 595
+	// Token: 0x04000087 RID: 135
 	public static Image imgChamTron2;
 
-	// Token: 0x04000254 RID: 596
+	// Token: 0x04000088 RID: 136
 	public static short id_water1;
 
-	// Token: 0x04000255 RID: 597
+	// Token: 0x04000089 RID: 137
 	public static short id_water2;
 
-	// Token: 0x04000256 RID: 598
+	// Token: 0x0400008A RID: 138
 	public static Image water3 = null;
 
-	// Token: 0x04000257 RID: 599
+	// Token: 0x0400008B RID: 139
 	public static bool isFog;
 
-	// Token: 0x04000258 RID: 600
+	// Token: 0x0400008C RID: 140
 	public static bool isPaintFar;
 
-	// Token: 0x04000259 RID: 601
+	// Token: 0x0400008D RID: 141
 	public static int nCloud;
 
-	// Token: 0x0400025A RID: 602
+	// Token: 0x0400008E RID: 142
 	public static Image imgCloud1;
 
-	// Token: 0x0400025B RID: 603
+	// Token: 0x0400008F RID: 143
 	public static Image imgFog;
 
-	// Token: 0x0400025C RID: 604
+	// Token: 0x04000090 RID: 144
 	public static int cloudw;
 
-	// Token: 0x0400025D RID: 605
+	// Token: 0x04000091 RID: 145
 	public static int xfog;
 
-	// Token: 0x0400025E RID: 606
+	// Token: 0x04000092 RID: 146
 	public static int yfog;
 
-	// Token: 0x0400025F RID: 607
+	// Token: 0x04000093 RID: 147
 	public static int fogw;
 
-	// Token: 0x04000260 RID: 608
+	// Token: 0x04000094 RID: 148
 	private int[] dem = new int[]
 	{
 		0,
@@ -1180,6 +1333,6 @@ public class BackgroudEffect
 		0
 	};
 
-	// Token: 0x04000261 RID: 609
+	// Token: 0x04000095 RID: 149
 	private int[] tick;
 }

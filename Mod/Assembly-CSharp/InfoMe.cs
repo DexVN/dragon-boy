@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x020000AF RID: 175
+// Token: 0x02000048 RID: 72
 public class InfoMe
 {
-	// Token: 0x060007CA RID: 1994 RVA: 0x00070844 File Offset: 0x0006EC44
+	// Token: 0x060003F7 RID: 1015 RVA: 0x00056BB0 File Offset: 0x00054DB0
 	public InfoMe()
 	{
 		for (int i = 0; i < this.charId.Length; i++)
@@ -12,17 +12,18 @@ public class InfoMe
 		}
 	}
 
-	// Token: 0x060007CB RID: 1995 RVA: 0x0007089C File Offset: 0x0006EC9C
+	// Token: 0x060003F8 RID: 1016 RVA: 0x00056C0C File Offset: 0x00054E0C
 	public static InfoMe gI()
 	{
-		if (InfoMe.me == null)
+		bool flag = InfoMe.me == null;
+		if (flag)
 		{
 			InfoMe.me = new InfoMe();
 		}
 		return InfoMe.me;
 	}
 
-	// Token: 0x060007CC RID: 1996 RVA: 0x000708B8 File Offset: 0x0006ECB8
+	// Token: 0x060003F9 RID: 1017 RVA: 0x00056C3C File Offset: 0x00054E3C
 	public void loadCharId()
 	{
 		for (int i = 0; i < this.charId.Length; i++)
@@ -31,77 +32,83 @@ public class InfoMe
 		}
 	}
 
-	// Token: 0x060007CD RID: 1997 RVA: 0x000708EC File Offset: 0x0006ECEC
+	// Token: 0x060003FA RID: 1018 RVA: 0x00056C74 File Offset: 0x00054E74
 	public void paint(mGraphics g)
 	{
-		if (this.Equals(GameScr.info2) && GameScr.gI().isVS())
+		bool flag = this.Equals(GameScr.info2) && GameScr.gI().isVS();
+		if (!flag)
 		{
-			return;
-		}
-		if (this.Equals(GameScr.info2) && GameScr.gI().popUpYesNo != null)
-		{
-			return;
-		}
-		if (!GameScr.isPaint)
-		{
-			return;
-		}
-		if (GameCanvas.currentScreen != GameScr.gI() && GameCanvas.currentScreen != CrackBallScr.gI())
-		{
-			return;
-		}
-		if (ChatPopup.serverChatPopUp != null)
-		{
-			return;
-		}
-		if (!this.isUpdate)
-		{
-			return;
-		}
-		if (global::Char.ischangingMap)
-		{
-			return;
-		}
-		if (GameCanvas.panel.isShow && this.Equals(GameScr.info2))
-		{
-			return;
-		}
-		g.translate(-g.getTranslateX(), -g.getTranslateY());
-		g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
-		if (this.info != null)
-		{
-			this.info.paint(g, this.cmx, this.cmy, this.dir);
-			if (this.info.info == null || this.info.info.charInfo == null || this.cmdChat != null || !GameCanvas.isTouch)
+			bool flag2 = this.Equals(GameScr.info2) && GameScr.gI().popUpYesNo != null;
+			if (!flag2)
 			{
-			}
-			if (this.info.info == null || this.info.info.charInfo == null || this.cmdChat != null)
-			{
+				bool flag3 = !GameScr.isPaint;
+				if (!flag3)
+				{
+					bool flag4 = GameCanvas.currentScreen != GameScr.gI() && GameCanvas.currentScreen != CrackBallScr.gI();
+					if (!flag4)
+					{
+						bool flag5 = ChatPopup.serverChatPopUp != null;
+						if (!flag5)
+						{
+							bool flag6 = !this.isUpdate;
+							if (!flag6)
+							{
+								bool ischangingMap = global::Char.ischangingMap;
+								if (!ischangingMap)
+								{
+									bool flag7 = GameCanvas.panel.isShow && this.Equals(GameScr.info2);
+									if (!flag7)
+									{
+										g.translate(-g.getTranslateX(), -g.getTranslateY());
+										g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+										bool flag8 = this.info != null;
+										if (flag8)
+										{
+											this.info.paint(g, this.cmx, this.cmy, this.dir);
+											bool flag9 = this.info.info == null || this.info.info.charInfo == null || this.cmdChat != null || !GameCanvas.isTouch;
+											if (flag9)
+											{
+											}
+											bool flag10 = this.info.info == null || this.info.info.charInfo == null || this.cmdChat != null;
+											if (flag10)
+											{
+											}
+										}
+										bool flag11 = this.info.info != null && this.info.info.charInfo == null && this.charId != null;
+										if (flag11)
+										{
+											SmallImage.drawSmallImage(g, this.charId[global::Char.myCharz().cgender][this.f], this.cmx, this.cmy + 3 + ((GameCanvas.gameTick % 10 <= 5) ? 0 : 1), (this.dir != 1) ? 2 : 0, StaticObj.VCENTER_HCENTER);
+										}
+										g.translate(-g.getTranslateX(), -g.getTranslateY());
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
-		if (this.info.info != null && this.info.info.charInfo == null && this.charId != null)
-		{
-			SmallImage.drawSmallImage(g, this.charId[global::Char.myCharz().cgender][this.f], this.cmx, this.cmy + 3 + ((GameCanvas.gameTick % 10 <= 5) ? 0 : 1), (this.dir != 1) ? 2 : 0, StaticObj.VCENTER_HCENTER);
-		}
-		g.translate(-g.getTranslateX(), -g.getTranslateY());
 	}
 
-	// Token: 0x060007CE RID: 1998 RVA: 0x00070AFC File Offset: 0x0006EEFC
+	// Token: 0x060003FB RID: 1019 RVA: 0x00056EC6 File Offset: 0x000550C6
 	public void hide()
 	{
 		this.info.hide();
 	}
 
-	// Token: 0x060007CF RID: 1999 RVA: 0x00070B0C File Offset: 0x0006EF0C
+	// Token: 0x060003FC RID: 1020 RVA: 0x00056ED8 File Offset: 0x000550D8
 	public void moveCamera()
 	{
-		if (this.cmy != this.cmtoY)
+		bool flag = this.cmy != this.cmtoY;
+		if (flag)
 		{
 			this.cmvy = this.cmtoY - this.cmy << 2;
 			this.cmdy += this.cmvy;
 			this.cmy += this.cmdy >> 4;
 			this.cmdy &= 15;
 		}
-		if (this.cmx != this.cmtoX)
+		bool flag2 = this.cmx != this.cmtoX;
+		if (flag2)
 		{
 			this.cmvx = this.cmtoX - this.cmx << 2;
 			this.cmdx += this.cmvx;
@@ -109,10 +116,12 @@ public class InfoMe
 			this.cmdx &= 15;
 		}
 		this.tF++;
-		if (this.tF == 5)
+		bool flag3 = this.tF == 5;
+		if (flag3)
 		{
 			this.tF = 0;
-			if (this.f == 0)
+			bool flag4 = this.f == 0;
+			if (flag4)
 			{
 				this.f = 1;
 			}
@@ -123,19 +132,21 @@ public class InfoMe
 		}
 	}
 
-	// Token: 0x060007D0 RID: 2000 RVA: 0x00070C12 File Offset: 0x0006F012
+	// Token: 0x060003FD RID: 1021 RVA: 0x00056FF1 File Offset: 0x000551F1
 	public void doClick(int t)
 	{
 		this.timeDelay = t;
 	}
 
-	// Token: 0x060007D1 RID: 2001 RVA: 0x00070C1C File Offset: 0x0006F01C
+	// Token: 0x060003FE RID: 1022 RVA: 0x00056FFC File Offset: 0x000551FC
 	public void update()
 	{
-		if (this.info != null && this.info.infoWaitToShow != null && this.info.infoWaitToShow.size() == 0 && this.cmy != -40)
+		bool flag = this.info != null && this.info.infoWaitToShow != null && this.info.infoWaitToShow.size() == 0 && this.cmy != -40;
+		if (flag)
 		{
 			this.info.timeW--;
-			if (this.info.timeW <= 0)
+			bool flag2 = this.info.timeW <= 0;
+			if (flag2)
 			{
 				this.cmy = -40;
 				this.info.time = 0;
@@ -144,168 +155,197 @@ public class InfoMe
 				this.info.timeW = 200;
 			}
 		}
-		if (this.Equals(GameScr.info2) && GameScr.gI().popUpYesNo != null)
+		bool flag3 = this.Equals(GameScr.info2) && GameScr.gI().popUpYesNo != null;
+		if (!flag3)
 		{
-			return;
-		}
-		if (!this.isUpdate)
-		{
-			return;
-		}
-		this.moveCamera();
-		if (this.info == null)
-		{
-			return;
-		}
-		if (this.info != null && this.info.info == null)
-		{
-			return;
-		}
-		if (!this.isDone)
-		{
-			if (this.timeDelay > 0)
+			bool flag4 = !this.isUpdate;
+			if (!flag4)
 			{
-				this.timeDelay--;
-				if (this.timeDelay == 0)
+				this.moveCamera();
+				bool flag5 = this.info == null;
+				if (!flag5)
 				{
-					GameCanvas.panel.setTypeMessage();
-					GameCanvas.panel.show();
-				}
-			}
-			if (GameCanvas.gameTick % 3 == 0)
-			{
-				if (global::Char.myCharz().cdir == 1)
-				{
-					this.cmtoX = global::Char.myCharz().cx - 20 - GameScr.cmx;
-				}
-				if (global::Char.myCharz().cdir == -1)
-				{
-					this.cmtoX = global::Char.myCharz().cx + 20 - GameScr.cmx;
-				}
-				if (this.cmtoX <= 24)
-				{
-					this.cmtoX += this.info.sayWidth / 2;
-				}
-				if (this.cmtoX >= GameCanvas.w - 24)
-				{
-					this.cmtoX -= this.info.sayWidth / 2;
-				}
-				this.cmtoY = global::Char.myCharz().cy - 40 - GameScr.cmy;
-				if (this.info.says != null && this.cmtoY < (this.info.says.Length + 1) * 12 + 10)
-				{
-					this.cmtoY = (this.info.says.Length + 1) * 12 + 10;
-				}
-				if (this.info.info.charInfo != null)
-				{
-					if (GameCanvas.w - 50 > 155 + this.info.W)
+					bool flag6 = this.info != null && this.info.info == null;
+					if (!flag6)
 					{
-						this.cmtoX = GameCanvas.w - 60 - this.info.W / 2;
-						this.cmtoY = this.info.H + 10;
-					}
-					else
-					{
-						this.cmtoX = GameCanvas.w - 20 - this.info.W / 2;
-						this.cmtoY = 45 + this.info.H;
-						if (GameCanvas.w > GameCanvas.h || GameCanvas.w < 220)
+						bool flag7 = !this.isDone;
+						if (flag7)
 						{
-							this.cmtoX = GameCanvas.w - 20 - this.info.W / 2;
-							this.cmtoY = this.info.H + 10;
+							bool flag8 = this.timeDelay > 0;
+							if (flag8)
+							{
+								this.timeDelay--;
+								bool flag9 = this.timeDelay == 0;
+								if (flag9)
+								{
+									GameCanvas.panel.setTypeMessage();
+									GameCanvas.panel.show();
+								}
+							}
+							bool flag10 = GameCanvas.gameTick % 3 == 0;
+							if (flag10)
+							{
+								bool flag11 = global::Char.myCharz().cdir == 1;
+								if (flag11)
+								{
+									this.cmtoX = global::Char.myCharz().cx - 20 - GameScr.cmx;
+								}
+								bool flag12 = global::Char.myCharz().cdir == -1;
+								if (flag12)
+								{
+									this.cmtoX = global::Char.myCharz().cx + 20 - GameScr.cmx;
+								}
+								bool flag13 = this.cmtoX <= 24;
+								if (flag13)
+								{
+									this.cmtoX += this.info.sayWidth / 2;
+								}
+								bool flag14 = this.cmtoX >= GameCanvas.w - 24;
+								if (flag14)
+								{
+									this.cmtoX -= this.info.sayWidth / 2;
+								}
+								this.cmtoY = global::Char.myCharz().cy - 40 - GameScr.cmy;
+								bool flag15 = this.info.says != null && this.cmtoY < (this.info.says.Length + 1) * 12 + 10;
+								if (flag15)
+								{
+									this.cmtoY = (this.info.says.Length + 1) * 12 + 10;
+								}
+								bool flag16 = this.info.info.charInfo != null;
+								if (flag16)
+								{
+									bool flag17 = GameCanvas.w - 50 > 155 + this.info.W;
+									if (flag17)
+									{
+										this.cmtoX = GameCanvas.w - 60 - this.info.W / 2;
+										this.cmtoY = this.info.H + 10;
+									}
+									else
+									{
+										this.cmtoX = GameCanvas.w - 20 - this.info.W / 2;
+										this.cmtoY = 45 + this.info.H;
+										bool flag18 = GameCanvas.w > GameCanvas.h || GameCanvas.w < 220;
+										if (flag18)
+										{
+											this.cmtoX = GameCanvas.w - 20 - this.info.W / 2;
+											this.cmtoY = this.info.H + 10;
+										}
+									}
+								}
+							}
+							bool flag19 = this.cmx > global::Char.myCharz().cx - GameScr.cmx;
+							if (flag19)
+							{
+								this.dir = -1;
+							}
+							else
+							{
+								this.dir = 1;
+							}
 						}
-					}
-				}
-			}
-			if (this.cmx > global::Char.myCharz().cx - GameScr.cmx)
-			{
-				this.dir = -1;
-			}
-			else
-			{
-				this.dir = 1;
-			}
-		}
-		if (this.info.info != null)
-		{
-			if (this.info.infoWaitToShow.size() > 1)
-			{
-				if (this.info.info.timeCount == 0)
-				{
-					this.info.time++;
-					if (this.info.time >= this.info.info.speed)
-					{
-						this.info.time = 0;
-						this.info.infoWaitToShow.removeElementAt(0);
-						InfoItem infoItem = (InfoItem)this.info.infoWaitToShow.firstElement();
-						this.info.info = infoItem;
-						this.info.getInfo();
-					}
-				}
-				else
-				{
-					this.info.info.curr = mSystem.currentTimeMillis();
-					if (this.info.info.curr - this.info.info.last >= 100L)
-					{
-						this.info.info.last = mSystem.currentTimeMillis();
-						this.info.info.timeCount--;
-					}
-					if (this.info.info.timeCount == 0)
-					{
-						this.info.infoWaitToShow.removeElementAt(0);
-						if (this.info.infoWaitToShow.size() == 0)
+						bool flag20 = this.info.info != null;
+						if (flag20)
 						{
-							return;
+							bool flag21 = this.info.infoWaitToShow.size() > 1;
+							if (flag21)
+							{
+								bool flag22 = this.info.info.timeCount == 0;
+								if (flag22)
+								{
+									this.info.time++;
+									bool flag23 = this.info.time >= this.info.info.speed;
+									if (flag23)
+									{
+										this.info.time = 0;
+										this.info.infoWaitToShow.removeElementAt(0);
+										InfoItem infoItem = (InfoItem)this.info.infoWaitToShow.firstElement();
+										this.info.info = infoItem;
+										this.info.getInfo();
+									}
+								}
+								else
+								{
+									this.info.info.curr = mSystem.currentTimeMillis();
+									bool flag24 = this.info.info.curr - this.info.info.last >= 100L;
+									if (flag24)
+									{
+										this.info.info.last = mSystem.currentTimeMillis();
+										this.info.info.timeCount--;
+									}
+									bool flag25 = this.info.info.timeCount == 0;
+									if (flag25)
+									{
+										this.info.infoWaitToShow.removeElementAt(0);
+										bool flag26 = this.info.infoWaitToShow.size() == 0;
+										if (!flag26)
+										{
+											InfoItem infoItem2 = (InfoItem)this.info.infoWaitToShow.firstElement();
+											this.info.info = infoItem2;
+											this.info.getInfo();
+										}
+									}
+								}
+							}
+							else
+							{
+								bool flag27 = this.info.infoWaitToShow.size() == 1;
+								if (flag27)
+								{
+									bool flag28 = this.info.info.timeCount == 0;
+									if (flag28)
+									{
+										this.info.time++;
+										bool flag29 = this.info.time >= this.info.info.speed;
+										if (flag29)
+										{
+											this.isDone = true;
+										}
+										bool flag30 = this.info.time == this.info.info.speed;
+										if (flag30)
+										{
+											this.cmtoY = -40;
+											this.cmtoX = global::Char.myCharz().cx - GameScr.cmx + ((global::Char.myCharz().cdir != 1) ? 20 : -20);
+										}
+										bool flag31 = this.info.time >= this.info.info.speed + 20;
+										if (flag31)
+										{
+											this.info.time = 0;
+											this.info.infoWaitToShow.removeAllElements();
+											this.info.says = null;
+											this.info.timeW = 200;
+										}
+									}
+									else
+									{
+										this.info.info.curr = mSystem.currentTimeMillis();
+										bool flag32 = this.info.info.curr - this.info.info.last >= 100L;
+										if (flag32)
+										{
+											this.info.info.last = mSystem.currentTimeMillis();
+											this.info.info.timeCount--;
+										}
+										bool flag33 = this.info.info.timeCount == 0;
+										if (flag33)
+										{
+											this.isDone = true;
+											this.cmtoY = -40;
+											this.cmtoX = global::Char.myCharz().cx - GameScr.cmx + ((global::Char.myCharz().cdir != 1) ? 20 : -20);
+											this.info.time = 0;
+											this.info.infoWaitToShow.removeAllElements();
+											this.info.says = null;
+											this.cmdChat = null;
+										}
+									}
+								}
+							}
 						}
-						InfoItem infoItem2 = (InfoItem)this.info.infoWaitToShow.firstElement();
-						this.info.info = infoItem2;
-						this.info.getInfo();
-					}
-				}
-			}
-			else if (this.info.infoWaitToShow.size() == 1)
-			{
-				if (this.info.info.timeCount == 0)
-				{
-					this.info.time++;
-					if (this.info.time >= this.info.info.speed)
-					{
-						this.isDone = true;
-					}
-					if (this.info.time == this.info.info.speed)
-					{
-						this.cmtoY = -40;
-						this.cmtoX = global::Char.myCharz().cx - GameScr.cmx + ((global::Char.myCharz().cdir != 1) ? 20 : -20);
-					}
-					if (this.info.time >= this.info.info.speed + 20)
-					{
-						this.info.time = 0;
-						this.info.infoWaitToShow.removeAllElements();
-						this.info.says = null;
-						this.info.timeW = 200;
-					}
-				}
-				else
-				{
-					this.info.info.curr = mSystem.currentTimeMillis();
-					if (this.info.info.curr - this.info.info.last >= 100L)
-					{
-						this.info.info.last = mSystem.currentTimeMillis();
-						this.info.info.timeCount--;
-					}
-					if (this.info.info.timeCount == 0)
-					{
-						this.isDone = true;
-						this.cmtoY = -40;
-						this.cmtoX = global::Char.myCharz().cx - GameScr.cmx + ((global::Char.myCharz().cdir != 1) ? 20 : -20);
-						this.info.time = 0;
-						this.info.infoWaitToShow.removeAllElements();
-						this.info.says = null;
-						this.cmdChat = null;
 					}
 				}
 			}
 		}
 	}
 
-	// Token: 0x060007D2 RID: 2002 RVA: 0x00071333 File Offset: 0x0006F733
+	// Token: 0x060003FF RID: 1023 RVA: 0x00057802 File Offset: 0x00055A02
 	public void addInfoWithChar(string s, global::Char c, bool isChatServer)
 	{
 		this.playerID = c.charID;
@@ -313,97 +353,99 @@ public class InfoMe
 		this.isDone = false;
 	}
 
-	// Token: 0x060007D3 RID: 2003 RVA: 0x00071358 File Offset: 0x0006F758
+	// Token: 0x06000400 RID: 1024 RVA: 0x00057828 File Offset: 0x00055A28
 	public void addInfo(string s, int Type)
 	{
 		s = Res.changeString(s);
-		if (this.info.infoWaitToShow.size() > 0 && s.Equals(((InfoItem)this.info.infoWaitToShow.lastElement()).s))
+		bool flag = this.info.infoWaitToShow.size() > 0 && s.Equals(((InfoItem)this.info.infoWaitToShow.lastElement()).s);
+		if (!flag)
 		{
-			return;
-		}
-		if (this.info.infoWaitToShow.size() > 10)
-		{
-			for (int i = 0; i < 5; i++)
+			bool flag2 = this.info.infoWaitToShow.size() > 10;
+			if (flag2)
 			{
-				this.info.infoWaitToShow.removeElementAt(0);
+				for (int i = 0; i < 5; i++)
+				{
+					this.info.infoWaitToShow.removeElementAt(0);
+				}
 			}
+			global::Char cInfo = null;
+			this.info.addInfo(s, Type, cInfo, false);
+			bool flag3 = this.info.infoWaitToShow.size() == 1;
+			if (flag3)
+			{
+				this.cmy = 0;
+				this.cmx = global::Char.myCharz().cx - GameScr.cmx + ((global::Char.myCharz().cdir != 1) ? 20 : -20);
+			}
+			this.isDone = false;
 		}
-		global::Char cInfo = null;
-		this.info.addInfo(s, Type, cInfo, false);
-		if (this.info.infoWaitToShow.size() == 1)
-		{
-			this.cmy = 0;
-			this.cmx = global::Char.myCharz().cx - GameScr.cmx + ((global::Char.myCharz().cdir != 1) ? 20 : -20);
-		}
-		this.isDone = false;
 	}
 
-	// Token: 0x04000EC1 RID: 3777
+	// Token: 0x040008CA RID: 2250
 	public static InfoMe me;
 
-	// Token: 0x04000EC2 RID: 3778
+	// Token: 0x040008CB RID: 2251
 	public int[][] charId = new int[3][];
 
-	// Token: 0x04000EC3 RID: 3779
+	// Token: 0x040008CC RID: 2252
 	public Info info = new Info();
 
-	// Token: 0x04000EC4 RID: 3780
+	// Token: 0x040008CD RID: 2253
 	public int dir;
 
-	// Token: 0x04000EC5 RID: 3781
+	// Token: 0x040008CE RID: 2254
 	public int f;
 
-	// Token: 0x04000EC6 RID: 3782
+	// Token: 0x040008CF RID: 2255
 	public int tF;
 
-	// Token: 0x04000EC7 RID: 3783
+	// Token: 0x040008D0 RID: 2256
 	public int cmtoY;
 
-	// Token: 0x04000EC8 RID: 3784
+	// Token: 0x040008D1 RID: 2257
 	public int cmy;
 
-	// Token: 0x04000EC9 RID: 3785
+	// Token: 0x040008D2 RID: 2258
 	public int cmdy;
 
-	// Token: 0x04000ECA RID: 3786
+	// Token: 0x040008D3 RID: 2259
 	public int cmvy;
 
-	// Token: 0x04000ECB RID: 3787
+	// Token: 0x040008D4 RID: 2260
 	public int cmyLim;
 
-	// Token: 0x04000ECC RID: 3788
+	// Token: 0x040008D5 RID: 2261
 	public int cmtoX;
 
-	// Token: 0x04000ECD RID: 3789
+	// Token: 0x040008D6 RID: 2262
 	public int cmx;
 
-	// Token: 0x04000ECE RID: 3790
+	// Token: 0x040008D7 RID: 2263
 	public int cmdx;
 
-	// Token: 0x04000ECF RID: 3791
+	// Token: 0x040008D8 RID: 2264
 	public int cmvx;
 
-	// Token: 0x04000ED0 RID: 3792
+	// Token: 0x040008D9 RID: 2265
 	public int cmxLim;
 
-	// Token: 0x04000ED1 RID: 3793
+	// Token: 0x040008DA RID: 2266
 	public bool isDone;
 
-	// Token: 0x04000ED2 RID: 3794
+	// Token: 0x040008DB RID: 2267
 	public bool isUpdate = true;
 
-	// Token: 0x04000ED3 RID: 3795
+	// Token: 0x040008DC RID: 2268
 	public int timeDelay;
 
-	// Token: 0x04000ED4 RID: 3796
+	// Token: 0x040008DD RID: 2269
 	public int playerID;
 
-	// Token: 0x04000ED5 RID: 3797
+	// Token: 0x040008DE RID: 2270
 	public int timeCount;
 
-	// Token: 0x04000ED6 RID: 3798
+	// Token: 0x040008DF RID: 2271
 	public Command cmdChat;
 
-	// Token: 0x04000ED7 RID: 3799
+	// Token: 0x040008E0 RID: 2272
 	public bool isShow;
 }

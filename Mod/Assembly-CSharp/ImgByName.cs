@@ -5,21 +5,23 @@ using UnityEngine;
 // Token: 0x02000044 RID: 68
 public class ImgByName
 {
-	// Token: 0x0600029C RID: 668 RVA: 0x00014865 File Offset: 0x00012C65
+	// Token: 0x060003DC RID: 988 RVA: 0x00055AD8 File Offset: 0x00053CD8
 	public static void SetImage(string name, Image img, sbyte nFrame)
 	{
 		ImgByName.hashImagePath.put(string.Empty + name, new MainImage(img, nFrame));
 	}
 
-	// Token: 0x0600029D RID: 669 RVA: 0x00014884 File Offset: 0x00012C84
+	// Token: 0x060003DD RID: 989 RVA: 0x00055AF8 File Offset: 0x00053CF8
 	public static MainImage getImagePath(string nameImg, MyHashTable hash)
 	{
 		MainImage mainImage = (MainImage)hash.get(string.Empty + nameImg);
-		if (mainImage == null)
+		bool flag = mainImage == null;
+		if (flag)
 		{
 			mainImage = new MainImage();
 			MainImage fromRms = ImgByName.getFromRms(nameImg);
-			if (fromRms != null)
+			bool flag2 = fromRms != null;
+			if (flag2)
 			{
 				mainImage.img = fromRms.img;
 				mainImage.nFrame = fromRms.nFrame;
@@ -27,10 +29,12 @@ public class ImgByName
 			hash.put(string.Empty + nameImg, mainImage);
 		}
 		mainImage.count = GameCanvas.timeNow / 1000L;
-		if (mainImage.img == null)
+		bool flag3 = mainImage.img == null;
+		if (flag3)
 		{
 			mainImage.timeImageNull--;
-			if (mainImage.timeImageNull <= 0)
+			bool flag4 = mainImage.timeImageNull <= 0;
+			if (flag4)
 			{
 				Service.gI().getImgByName(nameImg);
 				mainImage.timeImageNull = 200;
@@ -39,37 +43,44 @@ public class ImgByName
 		return mainImage;
 	}
 
-	// Token: 0x0600029E RID: 670 RVA: 0x0001493C File Offset: 0x00012D3C
+	// Token: 0x060003DE RID: 990 RVA: 0x00055BCC File Offset: 0x00053DCC
 	public static MainImage getFromRms(string nameImg)
 	{
-		string text = mGraphics.zoomLevel + "ImgByName_" + nameImg;
+		string text = mGraphics.zoomLevel.ToString() + "ImgByName_" + nameImg;
 		MainImage mainImage = null;
 		sbyte[] array = Rms.loadRMS(text);
-		if (array == null)
+		bool flag = array == null;
+		MainImage result;
+		if (flag)
 		{
-			return mainImage;
+			result = mainImage;
 		}
-		try
+		else
 		{
-			mainImage = new MainImage();
-			mainImage.nFrame = array[0];
-			mainImage.img = Image.createImage(array, 1, array.Length - 1);
-			if (mainImage.img == null)
+			try
 			{
+				mainImage = new MainImage();
+				mainImage.nFrame = array[0];
+				mainImage.img = Image.createImage(array, 1, array.Length - 1);
+				bool flag2 = mainImage.img == null;
+				if (flag2)
+				{
+				}
 			}
+			catch (Exception ex)
+			{
+				Debug.LogError(text + ">>>>>getFromRms: nulllllllllll 2222");
+				return null;
+			}
+			result = mainImage;
 		}
-		catch (Exception ex)
-		{
-			Debug.LogError(text + ">>>>>getFromRms: nulllllllllll 2222");
-			return null;
-		}
-		return mainImage;
+		return result;
 	}
 
-	// Token: 0x0600029F RID: 671 RVA: 0x000149D0 File Offset: 0x00012DD0
+	// Token: 0x060003DF RID: 991 RVA: 0x00055C70 File Offset: 0x00053E70
 	public static void saveRMS(string nameImg, sbyte nFrame, sbyte[] data)
 	{
-		string text = mGraphics.zoomLevel + "ImgByName_" + nameImg;
+		string text = mGraphics.zoomLevel.ToString() + "ImgByName_" + nameImg;
 		DataOutputStream dataOutputStream = new DataOutputStream(data.Length + 1);
 		int i = 0;
 		try
@@ -95,7 +106,7 @@ public class ImgByName
 		}
 	}
 
-	// Token: 0x060002A0 RID: 672 RVA: 0x00014A88 File Offset: 0x00012E88
+	// Token: 0x060003E0 RID: 992 RVA: 0x00055D30 File Offset: 0x00053F30
 	public static void checkDelHash(MyHashTable hash, int minute, bool isTrue)
 	{
 		MyVector myVector = new MyVector("checkDelHash");
@@ -109,7 +120,8 @@ public class ImgByName
 			while (enumerator.MoveNext())
 			{
 				MainImage mainImage = (MainImage)enumerator.Value;
-				if (GameCanvas.timeNow / 1000L - mainImage.count > (long)(minute * 60))
+				bool flag = GameCanvas.timeNow / 1000L - mainImage.count > (long)(minute * 60);
+				if (flag)
 				{
 					string o = (string)enumerator.Key;
 					myVector.addElement(o);
@@ -122,6 +134,6 @@ public class ImgByName
 		}
 	}
 
-	// Token: 0x0400032D RID: 813
+	// Token: 0x0400089D RID: 2205
 	public static MyHashTable hashImagePath = new MyHashTable();
 }

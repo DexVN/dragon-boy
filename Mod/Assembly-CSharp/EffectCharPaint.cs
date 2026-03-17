@@ -1,11 +1,11 @@
 ﻿using System;
 
-// Token: 0x02000055 RID: 85
+// Token: 0x02000027 RID: 39
 public class EffectCharPaint
 {
-	// Token: 0x040004DF RID: 1247
+	// Token: 0x04000505 RID: 1285
 	public int idEf;
 
-	// Token: 0x040004E0 RID: 1248
+	// Token: 0x04000506 RID: 1286
 	public EffectInfoPaint[] arrEfInfo;
 }

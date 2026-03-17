@@ -1,14 +1,15 @@
 ﻿using System;
 
-// Token: 0x02000006 RID: 6
+// Token: 0x02000035 RID: 53
 public class FrameImage
 {
-	// Token: 0x0600002B RID: 43 RVA: 0x00002478 File Offset: 0x00000878
+	// Token: 0x06000287 RID: 647 RVA: 0x0003BCFC File Offset: 0x00039EFC
 	public FrameImage(int ID)
 	{
 		this.Id = ID;
 		Image image = Effect_End.getImage(ID);
-		if (image != null)
+		bool flag = image != null;
+		if (flag)
 		{
 			this.imgFrame = image;
 			this.frameWidth = (int)Effect_End.arrInfoEff[ID][0];
@@ -17,26 +18,29 @@ public class FrameImage
 		}
 	}
 
-	// Token: 0x0600002C RID: 44 RVA: 0x000024E4 File Offset: 0x000008E4
+	// Token: 0x06000288 RID: 648 RVA: 0x0003BD70 File Offset: 0x00039F70
 	public FrameImage(Image img, int width, int height)
 	{
-		if (img != null)
+		bool flag = img != null;
+		if (flag)
 		{
 			this.imgFrame = img;
 			this.frameWidth = width;
 			this.frameHeight = height;
 			this.nFrame = img.getHeight() / height;
-			if (this.nFrame < 1)
+			bool flag2 = this.nFrame < 1;
+			if (flag2)
 			{
 				this.nFrame = 1;
 			}
 		}
 	}
 
-	// Token: 0x0600002D RID: 45 RVA: 0x0000253C File Offset: 0x0000093C
+	// Token: 0x06000289 RID: 649 RVA: 0x0003BDD0 File Offset: 0x00039FD0
 	public FrameImage(Image img, int numW, int numH, int numNull)
 	{
-		if (img != null)
+		bool flag = img != null;
+		if (flag)
 		{
 			this.imgFrame = img;
 			this.numWidth = numW;
@@ -47,19 +51,22 @@ public class FrameImage
 		}
 	}
 
-	// Token: 0x0600002E RID: 46 RVA: 0x000025A4 File Offset: 0x000009A4
+	// Token: 0x0600028A RID: 650 RVA: 0x0003BE40 File Offset: 0x0003A040
 	public void drawFrame(int idx, int x, int y, int trans, int anchor, mGraphics g)
 	{
 		try
 		{
-			if (this.imgFrame != null)
+			bool flag = this.imgFrame != null;
+			if (flag)
 			{
-				if (idx > this.nFrame)
+				bool flag2 = idx > this.nFrame;
+				if (flag2)
 				{
 					idx = this.nFrame;
 				}
 				int num = idx * this.frameHeight;
-				if (num > this.frameHeight * (this.nFrame - 1) || num < 0)
+				bool flag3 = num > this.frameHeight * (this.nFrame - 1) || num < 0;
+				if (flag3)
 				{
 					num = this.frameHeight * (this.nFrame - 1);
 				}
@@ -71,24 +78,24 @@ public class FrameImage
 		}
 	}
 
-	// Token: 0x04000009 RID: 9
+	// Token: 0x040005BF RID: 1471
 	public int frameWidth;
 
-	// Token: 0x0400000A RID: 10
+	// Token: 0x040005C0 RID: 1472
 	public int frameHeight;
 
-	// Token: 0x0400000B RID: 11
+	// Token: 0x040005C1 RID: 1473
 	public int nFrame;
 
-	// Token: 0x0400000C RID: 12
+	// Token: 0x040005C2 RID: 1474
 	public Image imgFrame;
 
-	// Token: 0x0400000D RID: 13
+	// Token: 0x040005C3 RID: 1475
 	public int Id = -1;
 
-	// Token: 0x0400000E RID: 14
+	// Token: 0x040005C4 RID: 1476
 	public int numWidth;
 
-	// Token: 0x0400000F RID: 15
+	// Token: 0x040005C5 RID: 1477
 	public int numHeight;
 }

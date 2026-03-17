@@ -1,40 +1,45 @@
 ﻿using System;
 
-// Token: 0x020000C6 RID: 198
+// Token: 0x020000A9 RID: 169
 public class SplashScr : mScreen
 {
-	// Token: 0x060009FA RID: 2554 RVA: 0x0009826A File Offset: 0x0009666A
+	// Token: 0x060009A2 RID: 2466 RVA: 0x0009D37C File Offset: 0x0009B57C
 	public SplashScr()
 	{
 		SplashScr.instance = this;
 	}
 
-	// Token: 0x060009FB RID: 2555 RVA: 0x00098280 File Offset: 0x00096680
+	// Token: 0x060009A3 RID: 2467 RVA: 0x0009D394 File Offset: 0x0009B594
 	public static void loadSplashScr()
 	{
 		SplashScr.splashScrStat = 0;
 	}
 
-	// Token: 0x060009FC RID: 2556 RVA: 0x00098288 File Offset: 0x00096688
+	// Token: 0x060009A4 RID: 2468 RVA: 0x0009D3A0 File Offset: 0x0009B5A0
 	public override void update()
 	{
-		if (SplashScr.splashScrStat == 30 && !this.isCheckConnect)
+		bool flag = SplashScr.splashScrStat == 30 && !this.isCheckConnect;
+		if (flag)
 		{
 			this.isCheckConnect = true;
-			if (Rms.loadRMSInt("serverchat") != -1)
+			bool flag2 = Rms.loadRMSInt("serverchat") != -1;
+			if (flag2)
 			{
 				GameScr.isPaintChatVip = (Rms.loadRMSInt("serverchat") == 0);
 			}
-			if (Rms.loadRMSInt("isPlaySound") != -1)
+			bool flag3 = Rms.loadRMSInt("isPlaySound") != -1;
+			if (flag3)
 			{
 				GameCanvas.isPlaySound = (Rms.loadRMSInt("isPlaySound") == 1);
 			}
-			if (GameCanvas.isPlaySound)
+			bool isPlaySound = GameCanvas.isPlaySound;
+			if (isPlaySound)
 			{
 				SoundMn.gI().loadSound(TileMap.mapID);
 			}
 			SoundMn.gI().getStrOption();
-			if (Rms.loadRMSInt("svselect") == -1)
+			bool flag4 = Rms.loadRMSInt("svselect") == -1;
+			if (flag4)
 			{
 				string linkDefault = ServerListScreen.linkDefault;
 				string[] array = Res.split(linkDefault.Trim(), ",", 0);
@@ -61,10 +66,12 @@ public class SplashScr : mScreen
 		}
 		SplashScr.splashScrStat++;
 		ServerListScreen.updateDeleteData();
-		if (SplashScr.splashScrStat >= 150)
+		bool flag5 = SplashScr.splashScrStat >= 150;
+		if (flag5)
 		{
 			Res.outz("cho man hinh nay qa lau");
-			if (Session_ME.gI().isConnected())
+			bool flag6 = Session_ME.gI().isConnected();
+			if (flag6)
 			{
 				ServerListScreen.loadScreen = true;
 				GameCanvas.serverScreen.switchToMe();
@@ -76,20 +83,23 @@ public class SplashScr : mScreen
 		}
 	}
 
-	// Token: 0x060009FD RID: 2557 RVA: 0x00098478 File Offset: 0x00096878
+	// Token: 0x060009A5 RID: 2469 RVA: 0x0009D5C4 File Offset: 0x0009B7C4
 	public static void loadIP()
 	{
-		if (Rms.loadRMSInt("svselect") == -1)
+		bool flag = Rms.loadRMSInt("svselect") == -1;
+		if (flag)
 		{
 			int num = 0;
-			if ((int)mResources.language > 0)
+			bool flag2 = mResources.language > 0;
+			if (flag2)
 			{
 				for (int i = 0; i < (int)mResources.language; i++)
 				{
 					num += ServerListScreen.lengthServer[i];
 				}
 			}
-			if ((int)ServerListScreen.serverPriority == -1)
+			bool flag3 = ServerListScreen.serverPriority == -1;
+			if (flag3)
 			{
 				ServerListScreen.ipSelect = num + Res.random(0, ServerListScreen.lengthServer[(int)mResources.language]);
 			}
@@ -107,7 +117,8 @@ public class SplashScr : mScreen
 		else
 		{
 			ServerListScreen.ipSelect = Rms.loadRMSInt("svselect");
-			if (ServerListScreen.ipSelect > ServerListScreen.nameServer.Length - 1)
+			bool flag4 = ServerListScreen.ipSelect > ServerListScreen.nameServer.Length - 1;
+			if (flag4)
 			{
 				ServerListScreen.ipSelect = (int)ServerListScreen.serverPriority;
 				Rms.saveRMSInt("svselect", ServerListScreen.ipSelect);
@@ -120,65 +131,72 @@ public class SplashScr : mScreen
 		}
 	}
 
-	// Token: 0x060009FE RID: 2558 RVA: 0x000985D4 File Offset: 0x000969D4
+	// Token: 0x060009A6 RID: 2470 RVA: 0x0009D738 File Offset: 0x0009B938
 	public override void paint(mGraphics g)
 	{
-		if (SplashScr.imgLogo != null && SplashScr.splashScrStat < 30)
+		bool flag = SplashScr.imgLogo != null && SplashScr.splashScrStat < 30;
+		if (flag)
 		{
 			g.setColor(16777215);
 			g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
 			g.drawImage(SplashScr.imgLogo, GameCanvas.w / 2, GameCanvas.h / 2, 3);
 		}
-		if (SplashScr.nData != -1)
+		bool flag2 = SplashScr.nData != -1;
+		if (flag2)
 		{
 			g.setColor(0);
 			g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
 			g.drawImage(LoginScr.imgTitle, GameCanvas.w / 2, GameCanvas.h / 2 - 24, StaticObj.BOTTOM_HCENTER);
 			GameCanvas.paintShukiren(GameCanvas.hw, GameCanvas.h / 2 + 24, g);
-			mFont.tahoma_7b_white.drawString(g, mResources.downloading_data + SplashScr.nData * 100 / SplashScr.maxData + "%", GameCanvas.w / 2, GameCanvas.h / 2, 2);
+			mFont.tahoma_7b_white.drawString(g, mResources.downloading_data + (SplashScr.nData * 100 / SplashScr.maxData).ToString() + "%", GameCanvas.w / 2, GameCanvas.h / 2, 2);
 		}
-		else if (SplashScr.splashScrStat >= 30)
+		else
 		{
-			g.setColor(0);
-			g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-			GameCanvas.paintShukiren(GameCanvas.hw, GameCanvas.hh, g);
-			if (ServerListScreen.cmdDeleteRMS != null)
+			bool flag3 = SplashScr.splashScrStat >= 30;
+			if (flag3)
 			{
-				mFont.tahoma_7_white.drawString(g, mResources.xoadulieu, GameCanvas.w - 2, GameCanvas.h - 15, 1, mFont.tahoma_7_grey);
+				g.setColor(0);
+				g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
+				GameCanvas.paintShukiren(GameCanvas.hw, GameCanvas.hh, g);
+				bool flag4 = ServerListScreen.cmdDeleteRMS != null;
+				if (flag4)
+				{
+					mFont.tahoma_7_white.drawString(g, mResources.xoadulieu, GameCanvas.w - 2, GameCanvas.h - 15, 1, mFont.tahoma_7_grey);
+				}
 			}
 		}
 	}
 
-	// Token: 0x060009FF RID: 2559 RVA: 0x0009872D File Offset: 0x00096B2D
+	// Token: 0x060009A7 RID: 2471 RVA: 0x0009D8B6 File Offset: 0x0009BAB6
 	public static void loadImg()
 	{
 		SplashScr.imgLogo = GameCanvas.loadImage("/gamelogo.png");
 	}
 
-	// Token: 0x04001260 RID: 4704
+	// Token: 0x040011EB RID: 4587
 	public static int splashScrStat;
 
-	// Token: 0x04001261 RID: 4705
+	// Token: 0x040011EC RID: 4588
 	private bool isCheckConnect;
 
-	// Token: 0x04001262 RID: 4706
+	// Token: 0x040011ED RID: 4589
 	private bool isSwitchToLogin;
 
-	// Token: 0x04001263 RID: 4707
+	// Token: 0x040011EE RID: 4590
 	public static int nData = -1;
 
-	// Token: 0x04001264 RID: 4708
+	// Token: 0x040011EF RID: 4591
 	public static int maxData = -1;
 
-	// Token: 0x04001265 RID: 4709
+	// Token: 0x040011F0 RID: 4592
 	public static SplashScr instance;
 
-	// Token: 0x04001266 RID: 4710
+	// Token: 0x040011F1 RID: 4593
 	public static Image imgLogo;
 
-	// Token: 0x04001267 RID: 4711
+	// Token: 0x040011F2 RID: 4594
 	private int timeLoading = 10;
 
-	// Token: 0x04001268 RID: 4712
+	// Token: 0x040011F3 RID: 4595
 	public long TIMEOUT;
 }

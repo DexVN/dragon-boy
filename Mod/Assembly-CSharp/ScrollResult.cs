@@ -1,14 +1,14 @@
 ﻿using System;
 
-// Token: 0x0200007E RID: 126
+// Token: 0x02000096 RID: 150
 public class ScrollResult
 {
-	// Token: 0x04000778 RID: 1912
+	// Token: 0x040010AD RID: 4269
 	public bool isDowning;
 
-	// Token: 0x04000779 RID: 1913
+	// Token: 0x040010AE RID: 4270
 	public int selected = -1;
 
-	// Token: 0x0400077A RID: 1914
+	// Token: 0x040010AF RID: 4271
 	public bool isFinish;
 }

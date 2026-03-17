@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x020000B0 RID: 176
+// Token: 0x0200004A RID: 74
 public class Info_RadaScr
 {
-	// Token: 0x060007D5 RID: 2005 RVA: 0x00071478 File Offset: 0x0006F878
+	// Token: 0x06000405 RID: 1029 RVA: 0x00057A18 File Offset: 0x00055C18
 	public void SetInfo(int id, int no, int idIcon, sbyte rank, sbyte typeMonster, short templateId, string name, string info, global::Char charInfo, ItemOption[] itemOption)
 	{
 		this.id = id;
@@ -11,7 +11,8 @@ public class Info_RadaScr
 		this.idIcon = idIcon;
 		this.rank = rank;
 		this.typeMonster = typeMonster;
-		if (templateId != -1)
+		bool flag = templateId != -1;
+		if (flag)
 		{
 			this.mobInfo = new Mob();
 			this.mobInfo.templateId = (int)templateId;
@@ -23,28 +24,28 @@ public class Info_RadaScr
 		this.addItemDetail();
 	}
 
-	// Token: 0x060007D6 RID: 2006 RVA: 0x000714F0 File Offset: 0x0006F8F0
+	// Token: 0x06000406 RID: 1030 RVA: 0x00057A98 File Offset: 0x00055C98
 	public void SetAmount(sbyte amount, sbyte max_amount)
 	{
 		this.amount = amount;
 		this.max_amount = max_amount;
 	}
 
-	// Token: 0x060007D7 RID: 2007 RVA: 0x00071500 File Offset: 0x0006F900
+	// Token: 0x06000407 RID: 1031 RVA: 0x00057AA9 File Offset: 0x00055CA9
 	public void SetLevel(sbyte level)
 	{
 		this.level = level;
 		this.addItemDetail();
 	}
 
-	// Token: 0x060007D8 RID: 2008 RVA: 0x0007150F File Offset: 0x0006F90F
+	// Token: 0x06000408 RID: 1032 RVA: 0x00057ABA File Offset: 0x00055CBA
 	public void SetUse(sbyte isUse)
 	{
 		this.isUse = isUse;
 		this.addItemDetail();
 	}
 
-	// Token: 0x060007D9 RID: 2009 RVA: 0x00071520 File Offset: 0x0006F920
+	// Token: 0x06000409 RID: 1033 RVA: 0x00057ACC File Offset: 0x00055CCC
 	public static global::Char SetCharInfo(int head, int body, int leg, int bag)
 	{
 		return new global::Char
@@ -56,15 +57,17 @@ public class Info_RadaScr
 		};
 	}
 
-	// Token: 0x060007DA RID: 2010 RVA: 0x00071550 File Offset: 0x0006F950
+	// Token: 0x0600040A RID: 1034 RVA: 0x00057B00 File Offset: 0x00055D00
 	public static Info_RadaScr GetInfo(MyVector vec, int id)
 	{
-		if (vec != null)
+		bool flag = vec != null;
+		if (flag)
 		{
 			for (int i = 0; i < vec.size(); i++)
 			{
 				Info_RadaScr info_RadaScr = (Info_RadaScr)vec.elementAt(i);
-				if (info_RadaScr != null && info_RadaScr.id == id)
+				bool flag2 = info_RadaScr != null && info_RadaScr.id == id;
+				if (flag2)
 				{
 					return info_RadaScr;
 				}
@@ -73,36 +76,48 @@ public class Info_RadaScr
 		return null;
 	}
 
-	// Token: 0x060007DB RID: 2011 RVA: 0x0007159C File Offset: 0x0006F99C
+	// Token: 0x0600040B RID: 1035 RVA: 0x00057B60 File Offset: 0x00055D60
 	public void paintInfo(mGraphics g, int x, int y)
 	{
 		this.count++;
-		if (this.count > this.f.Length - 1)
+		bool flag = this.count > this.f.Length - 1;
+		if (flag)
 		{
 			this.count = 0;
 		}
-		if ((int)this.typeMonster == 0)
+		bool flag2 = this.typeMonster == 0;
+		if (flag2)
 		{
-			if (Mob.arrMobTemplate[this.mobInfo.templateId] != null)
+			bool flag3 = Mob.arrMobTemplate[this.mobInfo.templateId] != null;
+			if (flag3)
 			{
-				if (Mob.arrMobTemplate[this.mobInfo.templateId].data != null)
+				bool flag4 = Mob.arrMobTemplate[this.mobInfo.templateId].data != null;
+				if (flag4)
 				{
 					Mob.arrMobTemplate[this.mobInfo.templateId].data.paintFrame(g, this.f[this.count], x, y, 0, 0);
 				}
-				else if (this.timeRequest - GameCanvas.timeNow < 0L)
+				else
 				{
-					this.timeRequest = GameCanvas.timeNow + 1500L;
-					this.mobInfo.getData();
+					bool flag5 = this.timeRequest - GameCanvas.timeNow < 0L;
+					if (flag5)
+					{
+						this.timeRequest = GameCanvas.timeNow + 1500L;
+						this.mobInfo.getData();
+					}
 				}
 			}
 		}
-		else if (this.charInfo != null)
+		else
 		{
-			this.charInfo.paintCharBody(g, x, y, 1, this.f[this.count], true);
+			bool flag6 = this.charInfo != null;
+			if (flag6)
+			{
+				this.charInfo.paintCharBody(g, x, y, 1, this.f[this.count], true);
+			}
 		}
 	}
 
-	// Token: 0x060007DC RID: 2012 RVA: 0x000716A0 File Offset: 0x0006FAA0
+	// Token: 0x0600040C RID: 1036 RVA: 0x00057C80 File Offset: 0x00055E80
 	public void addItemDetail()
 	{
 		this.cp = new ChatPopup();
@@ -110,7 +125,8 @@ public class Info_RadaScr
 		string text2 = string.Empty;
 		text2 = text2 + "\n|6|" + this.info;
 		text2 += "\n--";
-		if (this.itemOption != null)
+		bool flag2 = this.itemOption != null;
+		if (flag2)
 		{
 			int num = 0;
 			bool flag = true;
@@ -120,17 +136,20 @@ public class Info_RadaScr
 				for (int i = 0; i < this.itemOption.Length; i++)
 				{
 					text = this.itemOption[i].getOptionString();
-					if (!text.Equals(string.Empty) && num == (int)this.itemOption[i].activeCard)
+					bool flag3 = !text.Equals(string.Empty) && num == (int)this.itemOption[i].activeCard;
+					if (flag3)
 					{
 						num2++;
 						break;
 					}
 				}
-				if (num2 == 0)
+				bool flag4 = num2 == 0;
+				if (flag4)
 				{
 					break;
 				}
-				if (num == 0)
+				bool flag5 = num == 0;
+				if (flag5)
 				{
 					text2 = text2 + "\n|6|2|--" + mResources.unlock + "--";
 				}
@@ -150,28 +169,39 @@ public class Info_RadaScr
 				for (int j = 0; j < this.itemOption.Length; j++)
 				{
 					text = this.itemOption[j].getOptionString();
-					if (!text.Equals(string.Empty) && num == (int)this.itemOption[j].activeCard)
+					bool flag6 = !text.Equals(string.Empty) && num == (int)this.itemOption[j].activeCard;
+					if (flag6)
 					{
 						string text4 = "1";
-						if ((int)this.level == 0)
+						bool flag7 = this.level == 0;
+						if (flag7)
 						{
 							text4 = "2";
 						}
-						else if ((int)this.itemOption[j].activeCard != 0)
+						else
 						{
-							if ((int)this.isUse == 0)
+							bool flag8 = this.itemOption[j].activeCard != 0;
+							if (flag8)
 							{
-								text4 = "2";
-							}
-							else if ((int)this.level < (int)this.itemOption[j].activeCard)
-							{
-								text4 = "2";
+								bool flag9 = this.isUse == 0;
+								if (flag9)
+								{
+									text4 = "2";
+								}
+								else
+								{
+									bool flag10 = this.level < this.itemOption[j].activeCard;
+									if (flag10)
+									{
+										text4 = "2";
+									}
+								}
 							}
 						}
-						string text3 = text2;
+						string text5 = text2;
 						text2 = string.Concat(new string[]
 						{
-							text3,
+							text5,
 							"\n|",
 							text4,
 							"|1|",
@@ -179,7 +209,8 @@ public class Info_RadaScr
 						});
 					}
 				}
-				if (num2 != 0)
+				bool flag11 = num2 != 0;
+				if (flag11)
 				{
 					num++;
 				}
@@ -188,7 +219,7 @@ public class Info_RadaScr
 		this.popUpDetailInit(this.cp, text2);
 	}
 
-	// Token: 0x060007DD RID: 2013 RVA: 0x000718CC File Offset: 0x0006FCCC
+	// Token: 0x0600040D RID: 1037 RVA: 0x00057EE8 File Offset: 0x000560E8
 	public void popUpDetailInit(ChatPopup cp, string chat)
 	{
 		cp.sayWidth = RadarScr.wText;
@@ -200,16 +231,18 @@ public class Info_RadaScr
 		cp.cy = RadarScr.yText;
 		cp.strY = 10;
 		cp.lim = cp.ch - RadarScr.hText;
-		if (cp.lim < 0)
+		bool flag = cp.lim < 0;
+		if (flag)
 		{
 			cp.lim = 0;
 		}
 	}
 
-	// Token: 0x060007DE RID: 2014 RVA: 0x00071964 File Offset: 0x0006FD64
+	// Token: 0x0600040E RID: 1038 RVA: 0x00057F84 File Offset: 0x00056184
 	public void SetEff()
 	{
-		if ((int)this.amount == (int)this.max_amount && this.eff.size() == 0)
+		bool flag = this.amount == this.max_amount && this.eff.size() == 0;
+		if (flag)
 		{
 			int num = Res.random(1, 5);
 			for (int i = 0; i < num; i++)
@@ -225,23 +258,27 @@ public class Info_RadaScr
 		}
 	}
 
-	// Token: 0x060007DF RID: 2015 RVA: 0x000719FC File Offset: 0x0006FDFC
+	// Token: 0x0600040F RID: 1039 RVA: 0x00058020 File Offset: 0x00056220
 	public void paintEff(mGraphics g, int x, int y)
 	{
 		this.SetEff();
 		for (int i = 0; i < this.eff.size(); i++)
 		{
 			Position position = (Position)this.eff.elementAt(i);
-			if (position != null)
+			bool flag = position != null;
+			if (flag)
 			{
-				if (position.w < position.v)
+				bool flag2 = position.w < position.v;
+				if (flag2)
 				{
 					position.w++;
 				}
-				if (position.w >= position.v)
+				bool flag3 = position.w >= position.v;
+				if (flag3)
 				{
 					position.anchor = GameCanvas.gameTick / 3 % (RadarScr.fraEff.nFrame + 1);
-					if (position.anchor >= RadarScr.fraEff.nFrame)
+					bool flag4 = position.anchor >= RadarScr.fraEff.nFrame;
+					if (flag4)
 					{
 						this.eff.removeElementAt(i);
 						i--;
@@ -255,55 +292,55 @@ public class Info_RadaScr
 		}
 	}
 
-	// Token: 0x04000ED8 RID: 3800
+	// Token: 0x040008F3 RID: 2291
 	public const sbyte TYPE_MONSTER = 0;
 
-	// Token: 0x04000ED9 RID: 3801
+	// Token: 0x040008F4 RID: 2292
 	public const sbyte TYPE_CHARPART = 1;
 
-	// Token: 0x04000EDA RID: 3802
+	// Token: 0x040008F5 RID: 2293
 	public sbyte rank;
 
-	// Token: 0x04000EDB RID: 3803
+	// Token: 0x040008F6 RID: 2294
 	public sbyte amount;
 
-	// Token: 0x04000EDC RID: 3804
+	// Token: 0x040008F7 RID: 2295
 	public sbyte max_amount;
 
-	// Token: 0x04000EDD RID: 3805
+	// Token: 0x040008F8 RID: 2296
 	public sbyte typeMonster;
 
-	// Token: 0x04000EDE RID: 3806
+	// Token: 0x040008F9 RID: 2297
 	public int id;
 
-	// Token: 0x04000EDF RID: 3807
+	// Token: 0x040008FA RID: 2298
 	public int no;
 
-	// Token: 0x04000EE0 RID: 3808
+	// Token: 0x040008FB RID: 2299
 	public int idIcon;
 
-	// Token: 0x04000EE1 RID: 3809
+	// Token: 0x040008FC RID: 2300
 	public string name;
 
-	// Token: 0x04000EE2 RID: 3810
+	// Token: 0x040008FD RID: 2301
 	public string info;
 
-	// Token: 0x04000EE3 RID: 3811
+	// Token: 0x040008FE RID: 2302
 	public sbyte level;
 
-	// Token: 0x04000EE4 RID: 3812
+	// Token: 0x040008FF RID: 2303
 	public sbyte isUse;
 
-	// Token: 0x04000EE5 RID: 3813
+	// Token: 0x04000900 RID: 2304
 	public global::Char charInfo;
 
-	// Token: 0x04000EE6 RID: 3814
+	// Token: 0x04000901 RID: 2305
 	public Mob mobInfo;
 
-	// Token: 0x04000EE7 RID: 3815
+	// Token: 0x04000902 RID: 2306
 	public ItemOption[] itemOption;
 
-	// Token: 0x04000EE8 RID: 3816
+	// Token: 0x04000903 RID: 2307
 	private int[] f = new int[]
 	{
 		0,
@@ -318,15 +355,15 @@ public class Info_RadaScr
 		1
 	};
 
-	// Token: 0x04000EE9 RID: 3817
+	// Token: 0x04000904 RID: 2308
 	private int count;
 
-	// Token: 0x04000EEA RID: 3818
+	// Token: 0x04000905 RID: 2309
 	private long timeRequest;
 
-	// Token: 0x04000EEB RID: 3819
+	// Token: 0x04000906 RID: 2310
 	public ChatPopup cp;
 
-	// Token: 0x04000EEC RID: 3820
+	// Token: 0x04000907 RID: 2311
 	public MyVector eff = new MyVector(string.Empty);
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 
-// Token: 0x02000047 RID: 71
+// Token: 0x02000097 RID: 151
 public class ServerEffect : Effect2
 {
-	// Token: 0x060002AF RID: 687 RVA: 0x000154B0 File Offset: 0x000138B0
+	// Token: 0x06000832 RID: 2098 RVA: 0x00091784 File Offset: 0x0008F984
 	public static void addServerEffect(int id, int cx, int cy, int loopCount)
 	{
 		ServerEffect serverEffect = new ServerEffect();
@@ -14,7 +14,7 @@ public class ServerEffect : Effect2
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
-	// Token: 0x060002B0 RID: 688 RVA: 0x000154F4 File Offset: 0x000138F4
+	// Token: 0x06000833 RID: 2099 RVA: 0x000917CC File Offset: 0x0008F9CC
 	public static void addServerEffect(int id, int cx, int cy, int loopCount, int trans)
 	{
 		ServerEffect serverEffect = new ServerEffect();
@@ -26,7 +26,7 @@ public class ServerEffect : Effect2
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
-	// Token: 0x060002B1 RID: 689 RVA: 0x00015540 File Offset: 0x00013940
+	// Token: 0x06000834 RID: 2100 RVA: 0x0009181C File Offset: 0x0008FA1C
 	public static void addServerEffect(int id, Mob m, int loopCount)
 	{
 		ServerEffect serverEffect = new ServerEffect();
@@ -36,7 +36,7 @@ public class ServerEffect : Effect2
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
-	// Token: 0x060002B2 RID: 690 RVA: 0x0001557C File Offset: 0x0001397C
+	// Token: 0x06000835 RID: 2101 RVA: 0x0009185C File Offset: 0x0008FA5C
 	public static void addServerEffect(int id, global::Char c, int loopCount)
 	{
 		ServerEffect serverEffect = new ServerEffect();
@@ -46,7 +46,7 @@ public class ServerEffect : Effect2
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
-	// Token: 0x060002B3 RID: 691 RVA: 0x000155B8 File Offset: 0x000139B8
+	// Token: 0x06000836 RID: 2102 RVA: 0x0009189C File Offset: 0x0008FA9C
 	public static void addServerEffect(int id, global::Char c, int loopCount, int trans)
 	{
 		ServerEffect serverEffect = new ServerEffect();
@@ -57,7 +57,7 @@ public class ServerEffect : Effect2
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
-	// Token: 0x060002B4 RID: 692 RVA: 0x000155FC File Offset: 0x000139FC
+	// Token: 0x06000837 RID: 2103 RVA: 0x000918E4 File Offset: 0x0008FAE4
 	public static void addServerEffectWithTime(int id, int cx, int cy, int timeLengthInSecond)
 	{
 		ServerEffect serverEffect = new ServerEffect();
@@ -68,7 +68,7 @@ public class ServerEffect : Effect2
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
-	// Token: 0x060002B5 RID: 693 RVA: 0x0001564C File Offset: 0x00013A4C
+	// Token: 0x06000838 RID: 2104 RVA: 0x00091938 File Offset: 0x0008FB38
 	public static void addServerEffectWithTime(int id, global::Char c, int timeLengthInSecond)
 	{
 		ServerEffect serverEffect = new ServerEffect();
@@ -78,45 +78,53 @@ public class ServerEffect : Effect2
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
-	// Token: 0x060002B6 RID: 694 RVA: 0x00015694 File Offset: 0x00013A94
+	// Token: 0x06000839 RID: 2105 RVA: 0x00091984 File Offset: 0x0008FB84
 	public override void paint(mGraphics g)
 	{
-		if (mGraphics.zoomLevel == 1)
+		bool flag = mGraphics.zoomLevel == 1;
+		if (flag)
 		{
 			GameScr.countEff++;
 		}
-		if (GameScr.countEff < 8)
+		bool flag2 = GameScr.countEff < 8;
+		if (flag2)
 		{
-			if (this.c != null)
+			bool flag3 = this.c != null;
+			if (flag3)
 			{
 				this.x = this.c.cx;
 				this.y = this.c.cy + GameCanvas.transY;
 			}
-			if (this.m != null)
+			bool flag4 = this.m != null;
+			if (flag4)
 			{
 				this.x = this.m.x;
 				this.y = this.m.y + GameCanvas.transY;
 			}
 			int num = this.x + this.dx0 + this.eff.arrEfInfo[this.i0].dx;
 			int num2 = this.y + this.dy0 + this.eff.arrEfInfo[this.i0].dy;
-			if (GameCanvas.isPaint(num, num2))
+			bool flag5 = GameCanvas.isPaint(num, num2);
+			if (flag5)
 			{
 				SmallImage.drawSmallImage(g, this.eff.arrEfInfo[this.i0].idImg, num, num2, this.trans, mGraphics.VCENTER | mGraphics.HCENTER);
 			}
 		}
 	}
 
-	// Token: 0x060002B7 RID: 695 RVA: 0x000157B4 File Offset: 0x00013BB4
+	// Token: 0x0600083A RID: 2106 RVA: 0x00091ABC File Offset: 0x0008FCBC
 	public override void update()
 	{
-		if (this.endTime != 0L)
+		bool flag = this.endTime != 0L;
+		if (flag)
 		{
 			this.i0++;
-			if (this.i0 >= this.eff.arrEfInfo.Length)
+			bool flag2 = this.i0 >= this.eff.arrEfInfo.Length;
+			if (flag2)
 			{
 				this.i0 = 0;
 			}
-			if (mSystem.currentTimeMillis() - this.endTime > 0L)
+			bool flag3 = mSystem.currentTimeMillis() - this.endTime > 0L;
+			if (flag3)
 			{
 				Effect2.vEffect2.removeElement(this);
 			}
@@ -124,10 +132,12 @@ public class ServerEffect : Effect2
 		else
 		{
 			this.i0++;
-			if (this.i0 >= this.eff.arrEfInfo.Length)
+			bool flag4 = this.i0 >= this.eff.arrEfInfo.Length;
+			if (flag4)
 			{
 				this.loopCount -= 1;
-				if (this.loopCount <= 0)
+				bool flag5 = this.loopCount <= 0;
+				if (flag5)
 				{
 					Effect2.vEffect2.removeElement(this);
 				}
@@ -137,42 +147,43 @@ public class ServerEffect : Effect2
 				}
 			}
 		}
-		if (GameCanvas.gameTick % 11 == 0 && this.c != null && this.c != global::Char.myCharz() && !GameScr.vCharInMap.contains(this.c))
+		bool flag6 = GameCanvas.gameTick % 11 == 0 && this.c != null && this.c != global::Char.myCharz() && !GameScr.vCharInMap.contains(this.c);
+		if (flag6)
 		{
 			Effect2.vEffect2.removeElement(this);
 		}
 	}
 
-	// Token: 0x0400034C RID: 844
+	// Token: 0x040010B0 RID: 4272
 	public EffectCharPaint eff;
 
-	// Token: 0x0400034D RID: 845
+	// Token: 0x040010B1 RID: 4273
 	private int i0;
 
-	// Token: 0x0400034E RID: 846
+	// Token: 0x040010B2 RID: 4274
 	private int dx0;
 
-	// Token: 0x0400034F RID: 847
+	// Token: 0x040010B3 RID: 4275
 	private int dy0;
 
-	// Token: 0x04000350 RID: 848
+	// Token: 0x040010B4 RID: 4276
 	private int x;
 
-	// Token: 0x04000351 RID: 849
+	// Token: 0x040010B5 RID: 4277
 	private int y;
 
-	// Token: 0x04000352 RID: 850
+	// Token: 0x040010B6 RID: 4278
 	private global::Char c;
 
-	// Token: 0x04000353 RID: 851
+	// Token: 0x040010B7 RID: 4279
 	private Mob m;
 
-	// Token: 0x04000354 RID: 852
+	// Token: 0x040010B8 RID: 4280
 	private short loopCount;
 
-	// Token: 0x04000355 RID: 853
+	// Token: 0x040010B9 RID: 4281
 	private long endTime;
 
-	// Token: 0x04000356 RID: 854
+	// Token: 0x040010BA RID: 4282
 	private int trans;
 }

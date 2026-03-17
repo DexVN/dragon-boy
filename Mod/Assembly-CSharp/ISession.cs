@@ -1,20 +1,20 @@
 ﻿using System;
 
-// Token: 0x0200004A RID: 74
+// Token: 0x02000052 RID: 82
 public interface ISession
 {
-	// Token: 0x060002BD RID: 701
+	// Token: 0x06000453 RID: 1107
 	bool isConnected();
 
-	// Token: 0x060002BE RID: 702
+	// Token: 0x06000454 RID: 1108
 	void setHandler(IMessageHandler messageHandler);
 
-	// Token: 0x060002BF RID: 703
+	// Token: 0x06000455 RID: 1109
 	void connect(string host, int port);
 
-	// Token: 0x060002C0 RID: 704
+	// Token: 0x06000456 RID: 1110
 	void sendMessage(Message message);
 
-	// Token: 0x060002C1 RID: 705
+	// Token: 0x06000457 RID: 1111
 	void close();
 }

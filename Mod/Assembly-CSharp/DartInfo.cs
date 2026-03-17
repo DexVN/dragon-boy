@@ -1,44 +1,44 @@
 ﻿using System;
 
-// Token: 0x02000053 RID: 83
+// Token: 0x0200001F RID: 31
 public class DartInfo
 {
-	// Token: 0x060002EC RID: 748 RVA: 0x000176E8 File Offset: 0x00015AE8
+	// Token: 0x060001D1 RID: 465 RVA: 0x000345F0 File Offset: 0x000327F0
 	public DartInfo clone()
 	{
 		return null;
 	}
 
-	// Token: 0x040004CD RID: 1229
+	// Token: 0x040004A0 RID: 1184
 	public short id;
 
-	// Token: 0x040004CE RID: 1230
+	// Token: 0x040004A1 RID: 1185
 	public short[][] head;
 
-	// Token: 0x040004CF RID: 1231
+	// Token: 0x040004A2 RID: 1186
 	public short[][] headBorder;
 
-	// Token: 0x040004D0 RID: 1232
+	// Token: 0x040004A3 RID: 1187
 	public short[] tail;
 
-	// Token: 0x040004D1 RID: 1233
+	// Token: 0x040004A4 RID: 1188
 	public short[] tailBorder;
 
-	// Token: 0x040004D2 RID: 1234
+	// Token: 0x040004A5 RID: 1189
 	public short[] xd1;
 
-	// Token: 0x040004D3 RID: 1235
+	// Token: 0x040004A6 RID: 1190
 	public short[] xd2;
 
-	// Token: 0x040004D4 RID: 1236
+	// Token: 0x040004A7 RID: 1191
 	public short xdPercent;
 
-	// Token: 0x040004D5 RID: 1237
+	// Token: 0x040004A8 RID: 1192
 	public short nUpdate;
 
-	// Token: 0x040004D6 RID: 1238
+	// Token: 0x040004A9 RID: 1193
 	public int va;
 
-	// Token: 0x040004D7 RID: 1239
+	// Token: 0x040004AA RID: 1194
 	public short loop;
 }

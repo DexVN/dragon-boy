@@ -1,117 +1,146 @@
 ﻿using System;
 
-// Token: 0x0200004F RID: 79
+// Token: 0x0200000D RID: 13
 public class BgItemMn
 {
-	// Token: 0x060002D9 RID: 729 RVA: 0x00016B90 File Offset: 0x00014F90
+	// Token: 0x0600006A RID: 106 RVA: 0x0000686C File Offset: 0x00004A6C
 	public static Image blendImage(Image img, int layer, int idImage)
 	{
 		int num = TileMap.tileID - 1;
 		Image image = img;
-		if (num == 0 && layer == 1)
+		bool flag = num == 0 && layer == 1;
+		if (flag)
 		{
 			image = mGraphics.blend(img, 0.3f, 807956);
 		}
-		if (num == 1 && layer == 1)
+		bool flag2 = num == 1 && layer == 1;
+		if (flag2)
 		{
 			image = mGraphics.blend(img, 0.35f, 739339);
 		}
-		if (num == 2 && layer == 1)
+		bool flag3 = num == 2 && layer == 1;
+		if (flag3)
 		{
 			image = mGraphics.blend(img, 0.1f, 3977975);
 		}
-		if (num == 3)
+		bool flag4 = num == 3;
+		if (flag4)
 		{
-			if (layer == 1)
+			bool flag5 = layer == 1;
+			if (flag5)
 			{
 				image = mGraphics.blend(img, 0.2f, 15265992);
 			}
-			if (layer == 3)
+			bool flag6 = layer == 3;
+			if (flag6)
 			{
 				image = mGraphics.blend(img, 0.1f, 15265992);
 			}
 		}
-		if (num == 4)
+		bool flag7 = num == 4;
+		if (flag7)
 		{
-			if (layer == 1)
+			bool flag8 = layer == 1;
+			if (flag8)
 			{
 				image = mGraphics.blend(img, 0.3f, 1330178);
 			}
-			if (layer == 3)
+			bool flag9 = layer == 3;
+			if (flag9)
 			{
 				image = mGraphics.blend(img, 0.1f, 1330178);
 			}
 		}
-		if (num == 6)
+		bool flag10 = num == 6;
+		if (flag10)
 		{
-			if (layer == 1)
+			bool flag11 = layer == 1;
+			if (flag11)
 			{
 				image = mGraphics.blend(img, 0.3f, 420382);
 			}
-			if (layer == 3)
+			bool flag12 = layer == 3;
+			if (flag12)
 			{
 				image = mGraphics.blend(img, 0.15f, 420382);
 			}
 		}
-		if (num == 5)
+		bool flag13 = num == 5;
+		if (flag13)
 		{
-			if (layer == 1)
+			bool flag14 = layer == 1;
+			if (flag14)
 			{
 				image = mGraphics.blend(img, 0.35f, 3270903);
 			}
-			if (layer == 3)
+			bool flag15 = layer == 3;
+			if (flag15)
 			{
 				image = mGraphics.blend(img, 0.15f, 3270903);
 			}
 		}
-		if (num == 8)
+		bool flag16 = num == 8;
+		if (flag16)
 		{
-			if (layer == 1)
+			bool flag17 = layer == 1;
+			if (flag17)
 			{
 				image = mGraphics.blend(img, 0.3f, 7094528);
 			}
-			if (layer == 3)
+			bool flag18 = layer == 3;
+			if (flag18)
 			{
 				image = mGraphics.blend(img, 0.15f, 7094528);
 			}
 		}
-		if (num == 9)
+		bool flag19 = num == 9;
+		if (flag19)
 		{
-			if (layer == 1)
+			bool flag20 = layer == 1;
+			if (flag20)
 			{
 				image = mGraphics.blend(img, 0.3f, 12113627);
 			}
-			if (layer == 3)
+			bool flag21 = layer == 3;
+			if (flag21)
 			{
 				image = mGraphics.blend(img, 0.15f, 12113627);
 			}
 		}
-		if (num == 10 && layer == 1)
+		bool flag22 = num == 10 && layer == 1;
+		if (flag22)
 		{
 			image = mGraphics.blend(img, 0.3f, 14938312);
 		}
-		if (num == 10 && layer == 1)
+		bool flag23 = num == 10 && layer == 1;
+		if (flag23)
 		{
 			image = mGraphics.blend(img, 0.2f, 14938312);
 		}
-		if (num == 11)
+		bool flag24 = num == 11;
+		if (flag24)
 		{
-			if (layer == 1)
+			bool flag25 = layer == 1;
+			if (flag25)
 			{
 				image = mGraphics.blend(img, 0.3f, 0);
 			}
-			if (layer == 3)
+			bool flag26 = layer == 3;
+			if (flag26)
 			{
 				image = mGraphics.blend(img, 0.15f, 0);
 			}
 		}
-		if (num > 11)
+		bool flag27 = num > 11;
+		if (flag27)
 		{
-			if (layer == 1 || layer == 2)
+			bool flag28 = layer == 1 || layer == 2;
+			if (flag28)
 			{
 				image = mGraphics.blend(img, 0.3f, 0);
 			}
-			if (layer == 3)
+			bool flag29 = layer == 3;
+			if (flag29)
 			{
 				image = mGraphics.blend(img, 0.15f, 0);
 			}
@@ -129,7 +158,7 @@ public class BgItemMn
 		return image;
 	}
 
-	// Token: 0x060002DA RID: 730 RVA: 0x00016E4C File Offset: 0x0001524C
+	// Token: 0x0600006B RID: 107 RVA: 0x00006BC0 File Offset: 0x00004DC0
 	public static byte[] getByteArray(Image img)
 	{
 		byte[] result;
@@ -145,13 +174,14 @@ public class BgItemMn
 		return result;
 	}
 
-	// Token: 0x060002DB RID: 731 RVA: 0x00016E88 File Offset: 0x00015288
+	// Token: 0x0600006C RID: 108 RVA: 0x00006BFC File Offset: 0x00004DFC
 	public static void blendcurrBg(short id, Image img)
 	{
 		for (int i = 0; i < TileMap.vCurrItem.size(); i++)
 		{
 			BgItem bgItem = (BgItem)TileMap.vCurrItem.elementAt(i);
-			if (bgItem.idImage == id && !bgItem.isNotBlend() && (int)bgItem.layer != 2 && (int)bgItem.layer != 4 && !BgItem.imgNew.containsKey(bgItem.idImage + "blend" + bgItem.layer))
+			bool flag = bgItem.idImage == id && !bgItem.isNotBlend() && bgItem.layer != 2 && bgItem.layer != 4 && !BgItem.imgNew.containsKey(bgItem.idImage.ToString() + "blend" + bgItem.layer.ToString());
+			if (flag)
 			{
 				sbyte[] array = Rms.loadRMS(string.Concat(new object[]
 				{
@@ -162,14 +192,15 @@ public class BgItemMn
 					"layer",
 					bgItem.layer
 				}));
-				if (array == null)
+				bool flag2 = array == null;
+				if (flag2)
 				{
-					BgItem.imgNew.put(bgItem.idImage + "blend" + bgItem.layer, BgItemMn.blendImage(img, (int)bgItem.layer, (int)bgItem.idImage));
+					BgItem.imgNew.put(bgItem.idImage.ToString() + "blend" + bgItem.layer.ToString(), BgItemMn.blendImage(img, (int)bgItem.layer, (int)bgItem.idImage));
 				}
 				else
 				{
 					Image v = Image.createImage(array, 0, array.Length);
-					BgItem.imgNew.put(bgItem.idImage + "blend" + bgItem.layer, v);
+					BgItem.imgNew.put(bgItem.idImage.ToString() + "blend" + bgItem.layer.ToString(), v);
 				}
 			}
 		}
