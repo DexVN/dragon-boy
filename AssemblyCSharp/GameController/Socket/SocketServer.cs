@@ -1,4 +1,5 @@
 ﻿using AssemblyCSharp.GameController.Command;
+using AssemblyCSharp.GameController.Features.AutoFarm;
 using AssemblyCSharp.GameController.Features.Speed;
 using System;
 using System.Net;
@@ -42,28 +43,24 @@ public class SocketServer
 
             cmd = cmd.Trim().Trim('\0');
 
-            GameControllerCommand cmdObj = JsonUtility.FromJson<GameControllerCommand>(cmd);
+            GameControllerCommand gcObj = JsonUtility.FromJson<GameControllerCommand>(cmd);
 
-            if (cmdObj == null || !cmdObj.IsValid())
+            if (gcObj == null || !gcObj.IsValid())
             {
                 Debug.Log("CMD INVALID");
                 return;
             }
 
-            switch (cmdObj.action)
+            switch (gcObj.action)
             {
                 case "game_speed":
-                    new GameSpeedCommand().Execute(cmdObj.value);
+                    new GameSpeed().Execute(gcObj);
                     break;
                 case "player_speed":
-                    new PlayerSpeedCommand().Execute((int)cmdObj.value);
+                    new PlayerSpeed().Execute(gcObj);
                     break;
-                case "attack":
-                    MainThreadDispatcher.Enqueue(() =>
-                    {
-                        // TODO: gọi hàm đánh
-                        Debug.Log("Attack triggered");
-                    });
+                case "auto_farm":
+                    new AutoFarm().Execute(gcObj);
                     break;
 
                 case "map":
@@ -84,7 +81,7 @@ public class SocketServer
                     break;
 
                 default:
-                    Debug.Log("Unknown command: " + cmdObj.action);
+                    Debug.Log("Unknown command: " + gcObj.action);
                     break;
             }
         }

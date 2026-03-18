@@ -1,6 +1,8 @@
 using System;
+using AssemblyCSharp.GameController.Features.AutoFarm;
 using Assets.src.e;
 using Assets.src.g;
+using UnityEngine;
 
 public class Char : IMapObject
 {
@@ -2623,6 +2625,8 @@ public class Char : IMapObject
 				updateFHead();
 			}
 		}
+
+        AutoFarm.Update();
 	}
 
 	private void updateEffect()
@@ -4505,7 +4509,8 @@ public class Char : IMapObject
 
 	public void setAttack()
 	{
-		if (me)
+		Debug.Log("set attack");
+        if (me)
 		{
 			SkillPaint skillPaint = skillPaintRandomPaint;
 			if (dart != null)
@@ -4518,7 +4523,8 @@ public class Char : IMapObject
 				myVector2.addElement(charFocus);
 			else if (mobFocus != null)
 			{
-				myVector.addElement(mobFocus);
+				Debug.Log("add mob focus to attack");
+                myVector.addElement(mobFocus);
 			}
 			effPaints = new EffectPaint[myVector.size() + myVector2.size()];
 			for (int i = 0; i < myVector.size(); i++)

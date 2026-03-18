@@ -7,7 +7,6 @@ namespace AssemblyCSharp.GameController.Command
 {
     internal interface ICommand
     {
-        void Execute(float value);
-        void Execute(int value);
+        void Execute(GameControllerCommand cmdObj);
     }
 }

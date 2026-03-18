@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using Assets.src.g;
+using UnityEngine;
 
 public class GameScr : mScreen, IChatable
 {
@@ -1146,8 +1148,7 @@ public class GameScr : mScreen, IChatable
 
 	public void onOSkill(sbyte[] oSkillID)
 	{
-		Cout.println("GET onScreenSkill!");
-		onScreenSkill = new Skill[10];
+        onScreenSkill = new Skill[10];
 		if (oSkillID == null)
 		{
 			loadDefaultonScreenSkill();
@@ -3006,7 +3007,7 @@ public class GameScr : mScreen, IChatable
 		return mapObject;
 	}
 
-	private Mob findClickToMOB(int px, int py)
+	public Mob findClickToMOB(int px, int py)
 	{
 		int num = 30;
 		Mob mob = null;
