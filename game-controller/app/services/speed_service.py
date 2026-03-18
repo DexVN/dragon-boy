@@ -22,3 +22,10 @@ def set_auto_farm(value: float):
         "value": value
     }
     send_command(json.dumps(data))
+
+def set_auto_login(value: float):
+    data = {
+        "action": "auto_login",
+        "value": value
+    }
+    send_command(json.dumps(data))

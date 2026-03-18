@@ -1,3 +1,4 @@
+using AssemblyCSharp.GameController.Features.AutoLogin;
 using System;
 
 public class LoginScr : mScreen, IActionListener
@@ -457,7 +458,8 @@ public class LoginScr : mScreen, IActionListener
 
 	public override void update()
 	{
-		if (Main.isWindowsPhone && isRegistering)
+        AutoLogin.Update();
+        if (Main.isWindowsPhone && isRegistering)
 		{
 			if (t < 0)
 			{
@@ -581,7 +583,7 @@ public class LoginScr : mScreen, IActionListener
 			Main.isMiniApp = true;
 		}
 		updateTfWhenOpenKb();
-	}
+    }
 
 	private void doChangeTip()
 	{

@@ -1,4 +1,5 @@
 using System;
+using AssemblyCSharp.GameController.Features.AutoLogin;
 using Assets.src.g;
 using UnityEngine;
 
@@ -500,6 +501,7 @@ public class GameCanvas : IActionListener
 
 	public void update()
 	{
+		AutoLogin.Update();
 		if (mSystem.currentTimeMillis() > timefps)
 		{
 			timefps += 1000L;

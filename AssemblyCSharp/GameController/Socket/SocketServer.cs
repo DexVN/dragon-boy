@@ -1,5 +1,6 @@
 ﻿using AssemblyCSharp.GameController.Command;
 using AssemblyCSharp.GameController.Features.AutoFarm;
+using AssemblyCSharp.GameController.Features.AutoLogin;
 using AssemblyCSharp.GameController.Features.Speed;
 using System;
 using System.Net;
@@ -39,8 +40,6 @@ public class SocketServer
     {
         try
         {
-
-
             cmd = cmd.Trim().Trim('\0');
 
             GameControllerCommand gcObj = JsonUtility.FromJson<GameControllerCommand>(cmd);
@@ -62,14 +61,8 @@ public class SocketServer
                 case "auto_farm":
                     new AutoFarm().Execute(gcObj);
                     break;
-
-                case "map":
-
-                    MainThreadDispatcher.Enqueue(() =>
-                    {
-                        // TODO: chuyển map
-                        //Debug.Log("Go to map: " + mapId);
-                    });
+                case "auto_login":
+                    new AutoLogin().Execute(gcObj);
                     break;
 
                 case "revive":

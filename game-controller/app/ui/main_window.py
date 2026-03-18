@@ -3,7 +3,8 @@ from tkinter import ttk
 from app.services.speed_service import (
     set_game_speed, 
     set_player_speed,
-    set_auto_farm
+    set_auto_farm,
+    set_auto_login
 )
 
 # ===== THEME COLORS (Dracula-inspired) =====
@@ -104,12 +105,12 @@ def run_app():
         set_auto_farm(value)
 
         if is_auto_farm:
-            btn_auto.config(text="Auto Farm: ON", bg=SUCCESS, fg="black")
+            btn_auto_farm.config(text="Auto Farm: ON", bg=SUCCESS, fg="black")
         else:
-            btn_auto.config(text="Auto Farm: OFF", bg=ERROR, fg="white")
+            btn_auto_farm.config(text="Auto Farm: OFF", bg=ERROR, fg="white")
 
 
-    btn_auto = tk.Button(
+    btn_auto_farm = tk.Button(
         container,  # 👈 sửa root → container
         text="Auto Farm: OFF",
         bg=ERROR,
@@ -117,9 +118,36 @@ def run_app():
         command=toggle_auto_farm
     )
 
-    btn_auto.pack(pady=10, fill="x")
+    btn_auto_farm.pack(pady=10, fill="x")
 
-    
+    # ===== AUTO LOGIN =====
+    is_auto_login = False
+
+    def toggle_auto_login():
+        nonlocal is_auto_login
+
+        is_auto_login = not is_auto_login
+
+        value = 0 if is_auto_login else 1
+
+        set_auto_login(value)
+
+        if is_auto_login:
+            btn_auto_login.config(text="Auto Login: ON", bg=SUCCESS, fg="black")
+        else:
+            btn_auto_login.config(text="Auto Login: OFF", bg=ERROR, fg="white")
+
+
+    btn_auto_login = tk.Button(
+        container,  # 👈 sửa root → container
+        text="Auto Login: OFF",
+        bg=ERROR,
+        fg="white",
+        command=toggle_auto_login
+    )
+
+    btn_auto_login.pack(pady=10, fill="x")
+
     root.mainloop()
 
 

@@ -27,7 +27,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GameController\Features\AutoLogin\" />
     <Folder Include="GameController\Features\Combat\" />
     <Folder Include="GameController\Features\Player\" />
   </ItemGroup>
