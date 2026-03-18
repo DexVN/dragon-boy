@@ -3394,11 +3394,16 @@ public class GameScr : mScreen, IChatable
 
 	private void autoPlay()
 	{
-		if (timeSkill > 0)
-			timeSkill--;
-		if (!canAutoPlay || isChangeZone || Char.myCharz().statusMe == 14 || Char.myCharz().statusMe == 5 || Char.myCharz().isCharge || Char.myCharz().isFlyAndCharge || Char.myCharz().isUseChargeSkill())
-			return;
-		bool flag = false;
+        //if (timeSkill > 0)
+        //	timeSkill--;
+        if (!canAutoPlay || isChangeZone
+        || Char.myCharz().statusMe == 14
+        || Char.myCharz().statusMe == 5
+        || Char.myCharz().isCharge
+        || Char.myCharz().isFlyAndCharge
+        || Char.myCharz().isUseChargeSkill())
+            return;
+        bool flag = false;
 		for (int i = 0; i < vMob.size(); i++)
 		{
 			Mob mob = (Mob)vMob.elementAt(i);
@@ -3428,18 +3433,35 @@ public class GameScr : mScreen, IChatable
 				Mob mob2 = (Mob)vMob.elementAt(k);
 				if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe)
 				{
-					Char.myCharz().cx = mob2.x;
-					Char.myCharz().cy = mob2.y;
-					Char.myCharz().mobFocus = mob2;
-					Service.gI().charMove();
-					break;
+                    int offset = (mob2.x > Char.myCharz().cx) ? -10 : 10;
+
+                    Char.myCharz().cx = mob2.x + offset;
+                    Char.myCharz().cy = mob2.y;
+                    Char.myCharz().mobFocus = mob2;
+
+                    Service.gI().charMove();
+                    break;
 				}
 			}
 		}
 		else if (Char.myCharz().mobFocus.hp <= 0 || Char.myCharz().mobFocus.status == 1 || Char.myCharz().mobFocus.status == 0)
 		{
-			Char.myCharz().mobFocus = null;
-		}
+            for (int k = 0; k < vMob.size(); k++)
+            {
+                Mob mob2 = (Mob)vMob.elementAt(k);
+                if (mob2.status != 0 && mob2.status != 1 && mob2.hp > 0 && !mob2.isMobMe)
+                {
+                    int offset = (mob2.x > Char.myCharz().cx) ? -10 : 10;
+
+                    Char.myCharz().cx = mob2.x + offset;
+                    Char.myCharz().cy = mob2.y;
+                    Char.myCharz().mobFocus = mob2;
+
+                    Service.gI().charMove();
+                    break;
+                }
+            }
+        }
 		if (Char.myCharz().mobFocus == null || timeSkill != 0 || (Char.myCharz().skillInfoPaint() != null && Char.myCharz().indexSkill < Char.myCharz().skillInfoPaint().Length && Char.myCharz().dart != null && Char.myCharz().arr != null))
 			return;
 		Skill skill = null;
@@ -3458,6 +3480,7 @@ public class GameScr : mScreen, IChatable
 					else if (skill.coolDown < onScreenSkill[l].coolDown)
 					{
 						skill = onScreenSkill[l];
+						break;
 					}
 				}
 			}
