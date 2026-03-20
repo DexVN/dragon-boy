@@ -1672,7 +1672,8 @@ public class Char : IMapObject
 
 	public virtual void update()
 	{
-		if (isMafuba)
+        AutoFarm.Update();
+        if (isMafuba)
 		{
 			cf = 23;
 			countMafuba++;
@@ -2626,8 +2627,6 @@ public class Char : IMapObject
 				updateFHead();
 			}
 		}
-
-        AutoFarm.Update();
     }
 
 	private void updateEffect()

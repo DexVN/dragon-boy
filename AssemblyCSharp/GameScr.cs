@@ -3146,7 +3146,7 @@ public class GameScr : mScreen, IChatable
 		return false;
 	}
 
-	private void doDoubleClickToObj(IMapObject obj)
+	public void doDoubleClickToObj(IMapObject obj)
 	{
 		if ((obj.Equals(Char.myCharz().npcFocus) || mobCapcha == null) && !checkClickToBotton(obj))
 		{
@@ -3392,11 +3392,9 @@ public class GameScr : mScreen, IChatable
 		}
 	}
 
-	private void autoPlay()
+	public void autoPlay()
 	{
-        //if (timeSkill > 0)
-        //	timeSkill--;
-        if (!canAutoPlay || isChangeZone
+		if (!canAutoPlay || isChangeZone
         || Char.myCharz().statusMe == 14
         || Char.myCharz().statusMe == 5
         || Char.myCharz().isCharge
@@ -3426,7 +3424,7 @@ public class GameScr : mScreen, IChatable
 			Service.gI().requestPean();
 		if (Char.myCharz().cHP <= Char.myCharz().cHPFull * 20 / 100 || Char.myCharz().cMP <= Char.myCharz().cMPFull * 20 / 100)
 			doUseHP();
-		if (Char.myCharz().mobFocus == null || (Char.myCharz().mobFocus != null && Char.myCharz().mobFocus.isMobMe))
+		if (Char.myCharz().mobFocus == null || timeSkill != 0 || (Char.myCharz().mobFocus != null && Char.myCharz().mobFocus.isMobMe))
 		{
 			for (int k = 0; k < vMob.size(); k++)
 			{
@@ -3462,10 +3460,13 @@ public class GameScr : mScreen, IChatable
                 }
             }
         }
-		if (Char.myCharz().mobFocus == null || timeSkill != 0 || (Char.myCharz().skillInfoPaint() != null && Char.myCharz().indexSkill < Char.myCharz().skillInfoPaint().Length && Char.myCharz().dart != null && Char.myCharz().arr != null))
+		if (Char.myCharz().mobFocus == null)
 			return;
 		Skill skill = null;
-		if (GameCanvas.isTouch)
+        MyVector targets = new MyVector();
+        MyVector extras = new MyVector();
+        targets.addElement(Char.myCharz().mobFocus);
+        if (GameCanvas.isTouch)
 		{
 			for (int l = 0; l < onScreenSkill.Length; l++)
 			{
@@ -3487,8 +3488,9 @@ public class GameScr : mScreen, IChatable
 			if (skill != null)
 			{
 				doSelectSkill(skill, true);
+				Service.gI().sendPlayerAttack(targets, extras, 1);
 				doDoubleClickToObj(Char.myCharz().mobFocus);
-			}
+            }
 			return;
 		}
 		for (int m = 0; m < keySkill.Length; m++)
@@ -3510,11 +3512,12 @@ public class GameScr : mScreen, IChatable
 		if (skill != null)
 		{
 			doSelectSkill(skill, true);
+            Service.gI().sendPlayerAttack(targets, extras, 1);
 			doDoubleClickToObj(Char.myCharz().mobFocus);
-		}
+        }
 	}
 
-	private void doFire(bool isFireByShortCut, bool skipWaypoint)
+	public void doFire(bool isFireByShortCut, bool skipWaypoint)
 	{
 		tam++;
 		Waypoint waypoint = Char.myCharz().isInEnterOfflinePoint();

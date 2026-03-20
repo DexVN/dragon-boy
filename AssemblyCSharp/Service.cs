@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using Assets.src.g;
+using UnityEngine;
 
 public class Service
 {
@@ -1511,7 +1513,7 @@ public class Service
 	{
 		try
 		{
-			Res.outz(">>SEND ATTACT  vMob=" + vMob.size() + "  vChar=" + vChar.size());
+			UnityEngine.Debug.Log(">>SEND ATTACT  vMob=" + vMob.size() + "  vChar=" + vChar.size());
 			Message message = null;
 			if (type == 0)
 				return;

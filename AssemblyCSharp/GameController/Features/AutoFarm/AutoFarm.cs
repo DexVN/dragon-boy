@@ -13,6 +13,7 @@ namespace AssemblyCSharp.GameController.Features.AutoFarm
         {
             GameScr.isAutoPlay = IsAutoFarming;
             GameScr.canAutoPlay = IsAutoFarming;
+            GameScr.gI().autoPlay();
         }
 
         public void Execute(GameControllerCommand cmdObj)
