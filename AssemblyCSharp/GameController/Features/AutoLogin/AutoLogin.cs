@@ -7,8 +7,8 @@ namespace AssemblyCSharp.GameController.Features.AutoLogin
     {
         public static bool IsAutoLogin { get; private set; } = false;
 
-        // Delay between auto-login attempts (ms)
         private const long AutoLoginDelayMs = 5000;
+
         private static long lastAttemptMs = 0;
 
         public AutoLogin() { }
@@ -19,7 +19,6 @@ namespace AssemblyCSharp.GameController.Features.AutoLogin
             if (!IsAutoLogin)
                 return;
 
-            // if login screen already present, nothing to do
             if (GameCanvas.loginScr != null)
                 return;
 
@@ -27,7 +26,6 @@ namespace AssemblyCSharp.GameController.Features.AutoLogin
             if (now - lastAttemptMs < AutoLoginDelayMs)
                 return;
 
-            // update timestamp immediately to avoid multiple enqueues in the same window
             lastAttemptMs = now;
 
             MainThreadDispatcher.Enqueue(() =>
@@ -49,14 +47,13 @@ namespace AssemblyCSharp.GameController.Features.AutoLogin
                 {
                     IsAutoLogin = cmdObj.value != 0f;
                     if (IsAutoLogin)
-                        lastAttemptMs = 0; // allow immediate attempt if desired when toggled on
+                        lastAttemptMs = 0;
                 }
                 catch (System.Exception ex)
                 {
                     Debug.LogError($"Failed to toggle auto login: {ex.Message}");
                 }
             });
-
         }
     }
 }

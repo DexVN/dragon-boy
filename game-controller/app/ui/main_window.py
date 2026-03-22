@@ -172,9 +172,9 @@ def run_app():
             player_status.config(text=str(e), fg=ERROR)
 
         if is_auto_pilgrimage:
-            btn_auto_pilgrimage.config(text="Auto Login: ON", bg=SUCCESS, fg="black")
+            btn_auto_pilgrimage.config(text="Auto Pilgrimage: ON", bg=SUCCESS, fg="black")
         else:
-            btn_auto_pilgrimage.config(text="Auto Login: OFF", bg=ERROR, fg="white")
+            btn_auto_pilgrimage.config(text="Auto Pilgrimage: OFF", bg=ERROR, fg="white")
 
 
     btn_auto_pilgrimage = tk.Button(

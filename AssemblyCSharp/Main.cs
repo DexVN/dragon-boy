@@ -101,6 +101,7 @@ public class Main : MonoBehaviour
 				Screen.SetResolution(1024, 600, false);
 		}
         SocketServer.Start();
+        Time.timeScale = 2f;
     }
 
 	private void SetInit()

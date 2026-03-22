@@ -1,6 +1,7 @@
 ﻿using AssemblyCSharp.GameController.Command;
 using AssemblyCSharp.GameController.Features.AutoFarm;
 using AssemblyCSharp.GameController.Features.AutoLogin;
+using AssemblyCSharp.GameController.Features.AutoPilgrimage;
 using AssemblyCSharp.GameController.Features.Speed;
 using System;
 using System.Net;
@@ -40,6 +41,7 @@ public class SocketServer
     {
         try
         {
+            Debug.Log("Received command: " + cmd);
             cmd = cmd.Trim().Trim('\0');
 
             GameControllerCommand gcObj = JsonUtility.FromJson<GameControllerCommand>(cmd);
@@ -64,15 +66,9 @@ public class SocketServer
                 case "auto_login":
                     new AutoLogin().Execute(gcObj);
                     break;
-
-                case "revive":
-                    MainThreadDispatcher.Enqueue(() =>
-                    {
-                        // TODO: hồi sinh
-                        Debug.Log("Revive");
-                    });
+                case "auto_pilgrimage":
+                    new AutoPilgrimage().Execute(gcObj);
                     break;
-
                 default:
                     Debug.Log("Unknown command: " + gcObj.action);
                     break;

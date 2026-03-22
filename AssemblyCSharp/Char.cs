@@ -1,6 +1,7 @@
 using System;
 using AssemblyCSharp.GameController.Features.AutoFarm;
 using AssemblyCSharp.GameController.Features.AutoLogin;
+using AssemblyCSharp.GameController.Features.AutoPilgrimage;
 using Assets.src.e;
 using Assets.src.g;
 using UnityEngine;
@@ -1673,6 +1674,7 @@ public class Char : IMapObject
 	public virtual void update()
 	{
         AutoFarm.Update();
+		AutoPilgrimage.Update();
         if (isMafuba)
 		{
 			cf = 23;
@@ -5475,7 +5477,8 @@ public class Char : IMapObject
 
 	public void moveTo(int toX, int toY, int type)
 	{
-		if (type == 1 || Res.abs(toX - cx) > 100 || Res.abs(toY - cy) > 300)
+		Debug.Log("Move to: " + toX + "," + toY + " type: " + type);
+        if (type == 1 || Res.abs(toX - cx) > 100 || Res.abs(toY - cy) > 300)
 		{
 			createShadow(cx, cy, 10);
 			cx = toX;
