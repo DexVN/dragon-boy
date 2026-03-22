@@ -32,7 +32,6 @@ namespace AssemblyCSharp.GameController.Features.AutoLogin
 
             MainThreadDispatcher.Enqueue(() =>
             {
-                Debug.Log("Auto Login");
                 if (GameCanvas.loginScr == null)
                 {
                     GameCanvas.loginScr = new LoginScr();

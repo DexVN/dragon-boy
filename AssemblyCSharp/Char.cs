@@ -4509,7 +4509,6 @@ public class Char : IMapObject
 
 	public void setAttack()
 	{
-		Debug.Log("set attack");
         if (me)
 		{
 			SkillPaint skillPaint = skillPaintRandomPaint;
@@ -4523,7 +4522,6 @@ public class Char : IMapObject
 				myVector2.addElement(charFocus);
 			else if (mobFocus != null)
 			{
-				Debug.Log("add mob focus to attack");
                 myVector.addElement(mobFocus);
 			}
 			effPaints = new EffectPaint[myVector.size() + myVector2.size()];

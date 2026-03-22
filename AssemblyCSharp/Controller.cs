@@ -1,3 +1,4 @@
+using AssemblyCSharp;
 using AssemblyCSharp.GameController.Features.AutoLogin;
 using Assets.src.e;
 using Assets.src.f;
@@ -108,6 +109,8 @@ public class Controller : IMessageHandler
 	{
 		GameCanvas.debugSession.removeAllElements();
 		GameCanvas.debug("SA1", 2);
+		//Debug.Log($"[Controller] Received message with command: {msg.command}");
+        LogUnity.gI().LogMessageContent(msg);
 		try
 		{
 			if (msg.command != -74)
@@ -3622,6 +3625,7 @@ public class Controller : IMessageHandler
 			{
 				GameCanvas.debug("SA80", 2);
 				int num179 = msg.reader().readInt();
+				Debug.Log(">>>>> START CMD -7: " + num179);
 				for (int num194 = 0; num194 < GameScr.vCharInMap.size(); num194++)
 				{
 					Char char15 = null;
@@ -3636,6 +3640,7 @@ public class Controller : IMessageHandler
 						break;
 					if (char15.charID == num179)
 					{
+						Debug.Log("Move TO: ");
 						GameCanvas.debug("SA8x2y" + num194, 2);
 						char15.moveTo(msg.reader().readShort(), msg.reader().readShort(), 0);
 						char15.lastUpdateTime = mSystem.currentTimeMillis();
@@ -3643,7 +3648,7 @@ public class Controller : IMessageHandler
 					}
 				}
 				GameCanvas.debug("SA80x3", 2);
-				break;
+						break;
 			}
 			case -6:
 			{
@@ -4849,7 +4854,8 @@ public class Controller : IMessageHandler
 			GameCanvas.debug("SA12", 2);
 			sbyte b = msg.reader().readByte();
 			Res.outz("---messageSubCommand : " + b);
-			switch (b)
+			Debug.Log("---messageSubCommand: " + b);
+            switch (b)
 			{
 			case 1:
 				GameCanvas.debug("SA13", 2);

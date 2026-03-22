@@ -19,7 +19,8 @@ public class Session_ME : ISession
 
 		public void AddMessage(Message message)
 		{
-			sendingMessage.Add(message);
+			Debug.Log("Add message to sending queue: " + message.command);
+            sendingMessage.Add(message);
 		}
 
 		public void run()
@@ -69,7 +70,8 @@ public class Session_ME : ISession
 						if (message.command == -27)
 							getKey(message);
 						else
-							onRecieveMsg(message);
+							Debug.Log("#### RECEIVE MSG: " + message.command);
+                        onRecieveMsg(message);
 					}
 					catch (Exception)
 					{
