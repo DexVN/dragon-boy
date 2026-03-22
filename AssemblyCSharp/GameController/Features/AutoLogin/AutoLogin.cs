@@ -7,19 +7,39 @@ namespace AssemblyCSharp.GameController.Features.AutoLogin
     {
         public static bool IsAutoLogin { get; private set; } = false;
 
+        // Delay between auto-login attempts (ms)
+        private const long AutoLoginDelayMs = 5000;
+        private static long lastAttemptMs = 0;
+
+        public AutoLogin() { }
+
         public static void Update()
         {
-            Debug.Log("AutoLogin Update: " + IsAutoLogin);
-            if (GameCanvas.loginScr == null && IsAutoLogin)
+
+            if (!IsAutoLogin)
+                return;
+
+            // if login screen already present, nothing to do
+            if (GameCanvas.loginScr != null)
+                return;
+
+            long now = mSystem.currentTimeMillis();
+            if (now - lastAttemptMs < AutoLoginDelayMs)
+                return;
+
+            // update timestamp immediately to avoid multiple enqueues in the same window
+            lastAttemptMs = now;
+
+            MainThreadDispatcher.Enqueue(() =>
             {
-                MainThreadDispatcher.Enqueue(() =>
+                Debug.Log("Auto Login");
+                if (GameCanvas.loginScr == null)
                 {
-                    Debug.Log("Auto Login");
                     GameCanvas.loginScr = new LoginScr();
                     GameCanvas.loginScr.doLogin();
-                    GameCanvas.endDlg();
-                });
-            }
+                }
+                GameCanvas.endDlg();
+            });
         }
 
         public void Execute(GameControllerCommand cmdObj)
@@ -29,6 +49,8 @@ namespace AssemblyCSharp.GameController.Features.AutoLogin
                 try
                 {
                     IsAutoLogin = cmdObj.value != 0f;
+                    if (IsAutoLogin)
+                        lastAttemptMs = 0; // allow immediate attempt if desired when toggled on
                 }
                 catch (System.Exception ex)
                 {

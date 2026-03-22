@@ -4,6 +4,8 @@ using Assets.src.f;
 using Assets.src.g;
 using UnityEngine;
 
+using AssemblyCSharp.GameController.Features.AutoLogin;
+
 public class Controller : IMessageHandler
 {
 	protected static Controller me;
@@ -107,7 +109,7 @@ public class Controller : IMessageHandler
 	{
 		GameCanvas.debugSession.removeAllElements();
 		GameCanvas.debug("SA1", 2);
-		try
+        try
 		{
 			if (msg.command != -74)
 				Res.outz("=========> [READ] cmd= " + msg.command);
@@ -2893,6 +2895,7 @@ public class Controller : IMessageHandler
 			{
 				Res.outz("BIG MESSAGE .......................................");
 				GameCanvas.endDlg();
+				if (AutoLogin.IsAutoLogin) return;
 				int avatar = msg.reader().readShort();
 				string chat4 = msg.reader().readUTF();
 				Npc npc6 = new Npc(-1, 0, 0, 0, 0, 0);
