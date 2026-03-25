@@ -29,5 +29,6 @@
   <ItemGroup>
     <Folder Include="GameController\Features\Combat\" />
     <Folder Include="GameController\Features\Player\" />
+    <Folder Include="GameController\Socket\" />
   </ItemGroup>
 </Project>

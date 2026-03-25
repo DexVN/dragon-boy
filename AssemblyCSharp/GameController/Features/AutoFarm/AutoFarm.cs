@@ -5,8 +5,9 @@ namespace AssemblyCSharp.GameController.Features.AutoFarm
 {
     internal class AutoFarm : ICommand
     {
+        private static AutoFarm _instance;
+        public static AutoFarm gI() => _instance ?? (_instance = new AutoFarm());
         public static bool IsAutoFarming { get; private set; } = false;
-
         public AutoFarm() { }
 
         public static void Update()
@@ -18,17 +19,15 @@ namespace AssemblyCSharp.GameController.Features.AutoFarm
 
         public void Execute(GameControllerCommand cmdObj)
         {
-            MainThreadDispatcher.Enqueue(() =>
+            try
             {
-                try
-                {
-                    IsAutoFarming = cmdObj.value != 0f;
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogError($"Failed to toggle auto farm: {ex.Message}");
-                }
-            });
+                IsAutoFarming = cmdObj.value != 0f;
+                Debug.Log($"[AutoFarm] Status changed to: {IsAutoFarming}");
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[AutoFarm] Failed to toggle auto farm: {ex.Message}");
+            }
         }
     }
 }

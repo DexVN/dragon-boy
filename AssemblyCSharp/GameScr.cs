@@ -6073,12 +6073,15 @@ public class GameScr : mScreen, IChatable
 					Effect2.vEffect2Outside.removeAllElements();
 					Effect2.vEffect2.removeAllElements();
 					Npc npc = (Npc)p;
-					if (npc.idItem == 0)
-						Service.gI().confirmMenu((short)npc.template.npcTemplateId, (sbyte)GameCanvas.menu.menuSelectedItem);
-					else if (GameCanvas.menu.menuSelectedItem == 0)
-					{
-						Service.gI().pickItem(npc.idItem);
-					}
+							if (npc.idItem == 0)
+							{
+                                UnityEngine.Debug.Log($"npc template id: {npc.template.npcTemplateId}, menuSelectedItem: {(sbyte)GameCanvas.menu.menuSelectedItem}");
+								Service.gI().confirmMenu((short)npc.template.npcTemplateId, (sbyte)GameCanvas.menu.menuSelectedItem);
+							}
+                            else if (GameCanvas.menu.menuSelectedItem == 0)
+							{
+								Service.gI().pickItem(npc.idItem);
+							}
 					return;
 				}
 				case 11059:

@@ -1,5 +1,7 @@
 ﻿using AssemblyCSharp.GameController.Command;
+using AssemblyCSharp.GameController.Features.Navigation;
 using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace AssemblyCSharp.GameController.Features.AutoPilgrimage
@@ -7,147 +9,123 @@ namespace AssemblyCSharp.GameController.Features.AutoPilgrimage
     internal class AutoPilgrimage : ICommand
     {
         private static AutoPilgrimage _instance;
-        public static bool IsEnabled { get; private set; }
-
-        // CONSTANTS - VIẾT HOA TOÀN BỘ
-        private const int WAIT_DURATION = 2000;      // Thời gian nghỉ (ms)
-        private const int MOVE_DURATION = 100;       // Thời gian giữ phím (ms)
-        private const int JUMP_KEY = 21;             // Phím nhảy
-        //private const int MOVE_LEFT_KEY = 22;        // Phím sang trái
-        private const int MOVE_RIGHT_KEY = 24;       // Phím sang phải
-        private const int SENSOR_OFFSET = 15;        // Khoảng cách check vật cản
-        private const int WAYPOINT_THRESHOLD = 50;   // Khoảng cách nhận diện Waypoint
-
-        // Trạng thái nội bộ
-        private static int _lastMapID = -1;
-        private static long _lastTimeWait;
-        private static long _startMoveTime;
-        private static bool _isWaiting;
-
         public static AutoPilgrimage gI() => _instance ?? (_instance = new AutoPilgrimage());
+
+        public bool IsEnabled { get; private set; }
+
+        private const int TARGET_MAP_ID = Map.VACH_NUI_DEN;
+
+        private const int NPC_DUONG_TANG_ID = 49;
+
+        private const sbyte CONFIRM_MENU_ID = 2;
+
+        private bool isMissionCompleted = false;
+
+        private bool isSubMissionCompleted = false;
+
+        private bool isUsingCapsule = false;
+
+        private bool isRequestMapSelect = false;
 
         public void Execute(GameControllerCommand cmdObj)
         {
-            IsEnabled = cmdObj.value != 0f;
-            if (IsEnabled) ResetState();
-        }
+            gI().CheckMissionTurns("dd");
+            gI().IsEnabled = cmdObj.value != 0f;
+            Service.gI().charMove();
+            if (gI().IsEnabled)
+            {
+                isMissionCompleted = false;
+                isUsingCapsule = false;
+                GameCanvas.panel.mapNames = null;
+                MapNavigation.gI().StartPath(TARGET_MAP_ID);
+                Debug.Log($"[AutoPilgrimage] Bật - Mục tiêu: {TARGET_MAP_ID}");
+            }
+            else
+            {
+                gI().isMissionCompleted = false;
+                gI().isSubMissionCompleted = false;
+                gI().isUsingCapsule = false;
+                gI().isRequestMapSelect = false;
 
-        private static void ResetState()
-        {
-            _lastMapID = -1;
-            _isWaiting = false;
+                MapNavigation.gI().StopNavigation();
+                Debug.Log("[AutoPilgrimage] Tắt");
+            }
         }
 
         public static void Update()
         {
-            if (!IsEnabled) return;
+            if (!gI().IsEnabled) return;
 
-            // Đưa vào MainThread để đảm bảo an toàn khi tương tác với Unity API
-            MainThreadDispatcher.Enqueue(ProcessAutoPilgrimage);
-        }
+            if (gI().isMissionCompleted) return;
 
-        private static void ProcessAutoPilgrimage()
-        {
-            if (Char.isLoadingMap || GameCanvas.isLoading) return;
-
-            Char me = Char.myCharz();
-            if (me == null) return;
-
-            long now = mSystem.currentTimeMillis();
-
-            // 1. Kiểm tra nếu đã sang bản đồ mới
-            if (HasChangedMap()) return;
-
-            // 2. Xử lý trạng thái đang nghỉ
-            if (IsCurrentlyWaiting(now)) return;
-
-            // 3. Kiểm tra các điểm chuyển map (Waypoint)
-            if (TryInteractWithWaypoints(me, now)) return;
-
-            // 4. Thực hiện giữ phím di chuyển
-            PerformMovement(me, now);
-        }
-
-        private static bool HasChangedMap()
-        {
-            if (TileMap.mapID == _lastMapID) return false;
-
-            _lastMapID = TileMap.mapID;
-            _isWaiting = false;
-            GameCanvas.clearKeyHold();
-            return true;
-        }
-
-        private static bool IsCurrentlyWaiting(long now)
-        {
-            if (!_isWaiting) return false;
-
-            if (now - _lastTimeWait >= WAIT_DURATION)
+            if (gI().isSubMissionCompleted)
             {
-                _isWaiting = false;
-                _startMoveTime = now;
-                return false;
-            }
-
-            GameCanvas.clearKeyHold();
-            return true;
-        }
-
-        private static bool TryInteractWithWaypoints(Char me, long now)
-        {
-            for (int i = 0; i < TileMap.vGo.size(); i++)
-            {
-                if (!(TileMap.vGo.elementAt(i) is Waypoint wp)) continue;
-
-                // Kiểm tra phạm vi Waypoint "Trạm tàu vũ trụ"
-                if (wp.name == "Trạm tàu vũ trụ" && (me.cx + WAYPOINT_THRESHOLD >= wp.minX && me.cx <= wp.maxX))
+                if (!gI().isUsingCapsule && TileMap.mapID != Map.LANG_ARU)
                 {
-                    ExecuteMapChange(me, wp);
+                    Debug.Log($"[AutoPilgrimage] Request Map select");
+                    GameCanvas.panel.mapNames = null;
+                    Service.gI().useItem(0, 1, 39, -1);
+                    gI().isUsingCapsule = true;
+                }
+                else
+                {
+                    if (gI().isRequestMapSelect || GameCanvas.panel.mapNames == null) return;
 
-                    _isWaiting = true;
-                    _lastTimeWait = now;
-                    return true;
+                    for (int i = 0; i < GameCanvas.panel.mapNames.Length; i++)
+                    {
+                        if (GameCanvas.panel.mapNames[i].Contains("Làng Aru"))
+                        {
+                            gI().isRequestMapSelect = true;
+                            Debug.Log($"[AutoPilgrimage] Request Map select ARU at index {i}");
+                            Service.gI().requestMapSelect(i);
+                            GameCanvas.panel.vPlayerMenu.removeAllElements();
+                            return;
+                        }
+                    }
                 }
             }
-            return false;
-        }
+            
+            Debug.Log("[AutoPilgrimage] Đang di chuyển...");
 
-        private static void ExecuteMapChange(Char me, Waypoint wp)
-        {
-            me.cx = (wp.minX + wp.maxX) / 2;
-            me.cy = wp.maxY;
-
-            Service.gI().charMove();
-            Service.gI().requestChangeMap();
-            GameCanvas.clearKeyHold();
-        }
-
-        private static void PerformMovement(Char me, long now)
-        {
-            float currentTimeScale = Time.timeScale;
-            if (currentTimeScale < 0.1f) currentTimeScale = 1.0f;
-
-            // Điều chỉnh thời gian giữ phím dựa trên Time.timeScale
-            float adjustedMoveDuration = MOVE_DURATION / currentTimeScale; 
-
-            // Nếu vẫn đang trong thời gian giữ phím
-            if (now - _startMoveTime < adjustedMoveDuration)
+            try
             {
-                // Mặc định đi PHẢI (Có thể đổi sang MOVE_LEFT_KEY và cdir = -1 nếu cần)
-                GameCanvas.keyHold[MOVE_RIGHT_KEY] = true;
-                me.cdir = 1;
+                MapNavigation.gI().Update();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[AutoPilgrimage] Lỗi trong Update: {ex.Message}");
+            }
+        }
 
-                // Tự động nhảy khi vướng tường bên trái của tile (T_LEFT)
-                int sensorX = me.cx + SENSOR_OFFSET;
-                bool shouldJump = (TileMap.tileTypeAtPixel(sensorX, me.cy - 12) & TileMap.T_LEFT) != 0;
-                GameCanvas.keyHold[JUMP_KEY] = shouldJump;
+        public void CheckMissionTurns(string message)
+        {
+            // Mẫu Regex: Tìm chuỗi "Số lượt còn lại : " theo sau là các chữ số, dấu "/", và các chữ số
+            string pattern = @"Số lượt còn lại\s*:\s*(\d+)/(\d+)";
+
+            Match match = Regex.Match(message, pattern);
+
+            if (match.Success)
+            {
+                // Groups[1] là số đầu tiên (11), Groups[2] là số thứ hai (15)
+                int luotConLai = int.Parse(match.Groups[1].Value);
+                int tongSoLuot = int.Parse(match.Groups[2].Value);
+
+                Debug.Log($"[AutoPilgrimage] Số lượt còn lại: {luotConLai} / {tongSoLuot}");
+
+                // Code logic của bạn ở đây. Ví dụ:
+                if (luotConLai > 0)
+                {
+                    gI().isMissionCompleted = false;
+                }
+                else
+                {
+                    // Đã hết lượt, dừng auto
+                    gI().IsEnabled = false;
+                }
             }
             else
             {
-                // Hết thời gian giữ phím -> Bắt đầu nghỉ
-                GameCanvas.clearKeyHold();
-                _isWaiting = true;
-                _lastTimeWait = now;
+                Debug.Log("[AutoPilgrimage] Không tìm thấy thông tin số lượt trong tin nhắn.");
             }
         }
     }

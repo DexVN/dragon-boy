@@ -109,7 +109,7 @@ public class Controller : IMessageHandler
 	{
 		GameCanvas.debugSession.removeAllElements();
 		GameCanvas.debug("SA1", 2);
-		//Debug.Log($"[Controller] Received message with command: {msg.command}");
+		Debug.Log($"[Controller] Received message with command: {msg.command}");
         LogUnity.gI().LogMessageContent(msg);
 		try
 		{
@@ -585,8 +585,10 @@ public class Controller : IMessageHandler
 				for (int num57 = 0; num57 < b25; num57++)
 				{
 					GameCanvas.panel.mapNames[num57] = msg.reader().readUTF();
+					Debug.Log("Received map and planet names:" + GameCanvas.panel.mapNames[num57]);
 					GameCanvas.panel.planetNames[num57] = msg.reader().readUTF();
 				}
+
 				GameCanvas.panel.setTypeMapTrans();
 				GameCanvas.panel.show();
 				break;
@@ -2971,6 +2973,7 @@ public class Controller : IMessageHandler
 							array7[num88] = msg.reader().readUTF();
 						}
 						GameScr.gI().createMenu(array7, npc2);
+						Debug.Log($"[Controller] Received chat1 with command 32: {chat}");
 						ChatPopup.addChatPopup(chat, 100000, npc2);
 						return;
 					}
@@ -2993,7 +2996,8 @@ public class Controller : IMessageHandler
 				Res.outz((Char.myCharz().npcFocus == null) ? "null" : "!null");
 				GameScr.gI().createMenu(array8, npc3);
 				ChatPopup.addChatPopup(chat2, 100000, npc3);
-				break;
+                Debug.Log($"[Controller] Received chat2 with command 32: {chat2}");
+                break;
 			}
 			case 7:
 			{

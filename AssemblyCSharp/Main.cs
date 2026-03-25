@@ -1,3 +1,4 @@
+using AssemblyCSharp.GameController;
 using AssemblyCSharp.GameController.Features.AutoLogin;
 using System.Net.NetworkInformation;
 using System.Threading;
@@ -100,8 +101,9 @@ public class Main : MonoBehaviour
 			else
 				Screen.SetResolution(1024, 600, false);
 		}
-        SocketServer.Start();
         Time.timeScale = 2f;
+        Debug.Log("[Main] Starting command receiver...");
+        CommandReceiver.StartListenting();
     }
 
 	private void SetInit()
@@ -258,7 +260,15 @@ public class Main : MonoBehaviour
 
 	private void Update()
 	{
-        MainThreadDispatcher.Execute();
+		try
+		{
+			Debug.Log("[Main] Starting command receiver...");
+			CommandReceiver.Update();
+		}
+		catch (System.Exception ex)
+		{
+            Debug.LogError("[Main] Error updating CommandReceiver: " + ex.Message);
+        }
     }
 
 	private void checkInput()
@@ -320,7 +330,7 @@ public class Main : MonoBehaviour
 
 	private void OnApplicationQuit()
 	{
-		Debug.LogWarning("APP QUIT");
+		Debug.LogWarning("[Main] Closing game...");
 		GameCanvas.bRun = false;
 		Session_ME.gI().close();
 		Session_ME2.gI().close();
