@@ -7,7 +7,24 @@ namespace AssemblyCSharp.GameController.Features.Mission
         private static MissionManager _instance;
         public static MissionManager gI() => _instance ?? (_instance = new MissionManager());
 
-        public IMission CurrentMission { get; set; }
+        private IMission _currentMission;
+
+        public IMission CurrentMission
+        {
+            get => _currentMission;
+            set
+            {
+                _currentMission = value;
+                if(_currentMission != null)
+                {
+                    Debug.Log($"[MissionManager] Started mission: {_currentMission.Name}");
+                }
+                else
+                {
+                    Debug.Log("[MissionManager] Stopped all missions.");
+                }
+            }
+        }
 
         public void OnReceiveMessage(string message)
         {
@@ -19,7 +36,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
 
         public void Update()
         {
-            if (CurrentMission != null && CurrentMission.IsCompleted)
+            if (CurrentMission != null)
             {
                 CurrentMission.Execute();
             }
@@ -29,6 +46,5 @@ namespace AssemblyCSharp.GameController.Features.Mission
                 CurrentMission = null;
             }
         }
-        
     }
 }

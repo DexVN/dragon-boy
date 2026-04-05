@@ -272,7 +272,6 @@ namespace AssemblyCSharp.GameController.Features.Navigation
                 }
             }
 
-
             float adjustedMoveDuration = MOVE_DURATION / tScale;
             if (now - _startMoveTime < adjustedMoveDuration)
             {
@@ -331,8 +330,6 @@ namespace AssemblyCSharp.GameController.Features.Navigation
                         if (now - _lastActionTime > ACTION_DELAY_MS)
                         {
                             Debug.Log($"[AutoPath] Initiating SpaceShip movement: NPC ID {step.NpcTemplateId}, Menu Item {step.MenuSelectedItem}");
-
-                            // Gửi packet
                             for (int i = 0; i < GameScr.vNpc.size(); i++)
                             {
                                 if (GameScr.vNpc.elementAt(i) is Npc npc && npc.template.npcTemplateId == step.NpcTemplateId)
@@ -346,11 +343,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
                             }
                             Service.gI().openMenu(step.NpcTemplateId);
                             Service.gI().confirmMenu(step.NpcTemplateId, step.MenuSelectedItem);
-
-                            // Cập nhật lại thời gian gửi packet
                             _lastActionTime = now;
-
-                            // Ép hệ thống chuyển sang trạng thái chờ ngay lập tức để ngắt vòng lặp Move
                             _isWaiting = true;
                             _lastTimeWait = now;
                             GameCanvas.clearKeyHold();

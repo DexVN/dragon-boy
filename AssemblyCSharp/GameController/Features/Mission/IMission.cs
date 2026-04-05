@@ -7,12 +7,14 @@ namespace AssemblyCSharp.GameController.Features.Mission
 {
     public interface IMission
     {
-        string MissionName { get; }
+        string Name { get; }
 
         bool IsCompleted { get; }
 
         void OnReceiveMessage(string message);
 
         void Execute();
+
+        void CheckEnviroment();
     }
 }

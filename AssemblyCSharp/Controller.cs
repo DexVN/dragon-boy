@@ -1,5 +1,6 @@
 using AssemblyCSharp;
 using AssemblyCSharp.GameController.Features.AutoLogin;
+using AssemblyCSharp.GameController.Features.Mission;
 using Assets.src.e;
 using Assets.src.f;
 using Assets.src.g;
@@ -2309,6 +2310,7 @@ public class Controller : IMessageHandler
 				string text5 = msg.reader().readUTF();
 				string text6 = Res.changeString(msg.reader().readUTF());
 				string empty = string.Empty;
+						Debug.Log($"Controller: text5 - {text5}; text6 - {text6}");
 				Char char11 = null;
 				sbyte b43 = 0;
 				if (!text5.Equals(string.Empty))
@@ -2974,6 +2976,14 @@ public class Controller : IMessageHandler
 						}
 						GameScr.gI().createMenu(array7, npc2);
 						Debug.Log($"[Controller] Received chat1 with command 32: {chat}");
+						try
+						{
+							MissionManager.gI().OnReceiveMessage(chat);
+						}
+						catch (Exception ex)
+						{
+                            Debug.LogError("[MissionManager] Lỗi xử lý tin nhắn: " + ex.Message);
+                        }
 						ChatPopup.addChatPopup(chat, 100000, npc2);
 						return;
 					}

@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using AssemblyCSharp.GameController.Features.Mission;
 using Assets.src.g;
 using UnityEngine;
 
@@ -4223,6 +4224,7 @@ public class GameScr : mScreen, IChatable
 				((ItemTime)textTime.elementAt(i)).update();
 			}
 			updateChatVip();
+			
 		}
 		catch (Exception)
 		{
@@ -4230,6 +4232,14 @@ public class GameScr : mScreen, IChatable
 		if (GameCanvas.gameTick % 4000 == 1000)
 			checkRemoveImage();
 		EffectManager.update();
+		try
+		{
+			MissionManager.gI().Update();
+		}
+		catch (Exception ex)
+		{
+			UnityEngine.Debug.LogError("Lỗi khi nhận tin nhắn nhiệm vụ: " + ex.Message);
+		}
 	}
 
 	public void updateKeyChatPopUp()
