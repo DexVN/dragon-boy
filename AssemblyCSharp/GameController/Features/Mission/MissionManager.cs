@@ -26,11 +26,11 @@ namespace AssemblyCSharp.GameController.Features.Mission
             }
         }
 
-        public void OnReceiveMessage(string message)
+        public void OnReceiveMessage(sbyte cmd, string message = "")
         {
-            if (CurrentMission != null && !CurrentMission.IsCompleted)
+            if (CurrentMission != null)
             {
-                CurrentMission.OnReceiveMessage(message);
+                CurrentMission.OnReceiveMessage(cmd, message);
             }
         }
 
@@ -38,6 +38,8 @@ namespace AssemblyCSharp.GameController.Features.Mission
         {
             if (CurrentMission != null)
             {
+                CurrentMission.CheckMission();
+                if (!CurrentMission.IsStart) return;
                 CurrentMission.Execute();
             }
             else

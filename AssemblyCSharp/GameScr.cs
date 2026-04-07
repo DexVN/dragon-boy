@@ -1,7 +1,9 @@
+using AssemblyCSharp.GameController.Features;
+using AssemblyCSharp.GameController.Features.Mission;
+using AssemblyCSharp.GameController.Features.Navigation;
+using Assets.src.g;
 using System;
 using System.Diagnostics;
-using AssemblyCSharp.GameController.Features.Mission;
-using Assets.src.g;
 using UnityEngine;
 
 public class GameScr : mScreen, IChatable
@@ -4235,7 +4237,10 @@ public class GameScr : mScreen, IChatable
 		try
 		{
 			MissionManager.gI().Update();
-		}
+			CapsuleController.gI().Update();
+			NpcMenuController.gI().Update();
+            MapNavigation.gI().Update();
+        }
 		catch (Exception ex)
 		{
 			UnityEngine.Debug.LogError("Lỗi khi nhận tin nhắn nhiệm vụ: " + ex.Message);
@@ -5904,6 +5909,7 @@ public class GameScr : mScreen, IChatable
 
 	public void actionPerform(int idAction, object p)
 	{
+		Logger.Info($"ID Action: {idAction}");
 		Cout.println("PERFORM WITH ID = " + idAction);
 		switch (idAction)
 		{

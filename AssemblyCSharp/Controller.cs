@@ -586,7 +586,6 @@ public class Controller : IMessageHandler
 				for (int num57 = 0; num57 < b25; num57++)
 				{
 					GameCanvas.panel.mapNames[num57] = msg.reader().readUTF();
-					Debug.Log("Received map and planet names:" + GameCanvas.panel.mapNames[num57]);
 					GameCanvas.panel.planetNames[num57] = msg.reader().readUTF();
 				}
 
@@ -2975,10 +2974,10 @@ public class Controller : IMessageHandler
 							array7[num88] = msg.reader().readUTF();
 						}
 						GameScr.gI().createMenu(array7, npc2);
-						Debug.Log($"[Controller] Received chat1 with command 32: {chat}");
+						Debug.Log($"[Controller] Received chat1 with command 32: {npc2.template.npcTemplateId}");
 						try
 						{
-							MissionManager.gI().OnReceiveMessage(chat);
+							MissionManager.gI().OnReceiveMessage(32, chat);
 						}
 						catch (Exception ex)
 						{
@@ -3654,9 +3653,10 @@ public class Controller : IMessageHandler
 						break;
 					if (char15.charID == num179)
 					{
-						Debug.Log("Move TO: ");
+						Logger.Info($"charID: {num179}, x: {char15.cx}, y: {char15.cy}");
 						GameCanvas.debug("SA8x2y" + num194, 2);
 						char15.moveTo(msg.reader().readShort(), msg.reader().readShort(), 0);
+						MissionManager.gI().OnReceiveMessage(-7, char15.chatInfo.info.s);
 						char15.lastUpdateTime = mSystem.currentTimeMillis();
 						break;
 					}
@@ -4868,7 +4868,7 @@ public class Controller : IMessageHandler
 			GameCanvas.debug("SA12", 2);
 			sbyte b = msg.reader().readByte();
 			Res.outz("---messageSubCommand : " + b);
-			Debug.Log("---messageSubCommand: " + b);
+			Debug.Log("messageSubCommand: " + b);
             switch (b)
 			{
 			case 1:

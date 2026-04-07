@@ -1,6 +1,6 @@
 ﻿namespace AssemblyCSharp.GameController.Features.Navigation
 {
-    public class Map
+    public static class Map
     {
         // --- Trái Đất ---
         public const int LANG_ARU = 0;
@@ -50,7 +50,7 @@
         public const int TRAM_TAU_VU_TRU_XAYDA = 26;
 
 
-        public string GetMapName(int mapId)
+        public static string GetMapName(int mapId)
         {
             switch (mapId)
             {
@@ -98,11 +98,24 @@
         }
 
 
-        public bool IsSpaceStation(int mapId)
+        public static bool IsSpaceStation(int mapId)
         {
             return mapId == TRAM_TAU_VU_TRU_TRAI_DAT ||
                    mapId == TRAM_TAU_VU_TRU_NAMEC ||
                    mapId == TRAM_TAU_VU_TRU_XAYDA;
+        }
+
+        public static int GetMapIdByName(string text)
+        {
+            for (int i = 0; i <= 100; i++)
+            {
+                string mapName = GetMapName(i);
+                if (text.ToLower().Contains(mapName.ToLower()) && !mapName.Contains("Bản đồ lạ"))
+                {
+                    return i; 
+                }
+            }
+            return -1;
         }
     }
 }

@@ -9,12 +9,12 @@ namespace AssemblyCSharp.GameController.Features.Mission
     {
         string Name { get; }
 
-        bool IsCompleted { get; }
+        bool IsStart { get; }
 
-        void OnReceiveMessage(string message);
+        void OnReceiveMessage(sbyte cmd, string message);
 
         void Execute();
 
-        void CheckEnviroment();
+        void CheckMission();
     }
 }

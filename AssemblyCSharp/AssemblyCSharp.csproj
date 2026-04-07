@@ -13,7 +13,6 @@
     <Exec Command="xcopy &quot;$(TargetDir)Assembly-CSharp.dll&quot; &quot;$(SolutionDir)\DragonBoy_Data\Managed\&quot; /E /Y&#xD;&#xA;start &quot;&quot; &quot;$(SolutionDir)DragonBoy.exe&quot; &amp;" />
   </Target>
   <ItemGroup>
-    <Folder Include="GameController\Features\Combat\" />
     <Folder Include="GameController\Features\Player\" />
   </ItemGroup>
   <ItemGroup>

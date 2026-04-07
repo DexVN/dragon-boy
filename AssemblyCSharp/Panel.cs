@@ -7946,6 +7946,7 @@ public class Panel : IActionListener, IChatable
 		}
 		if (idAction == 2001)
 		{
+			Logger.Info("using item");
 			Res.outz("use item");
 			Item item7 = (Item)p;
 			bool inventorySelect_isbody = GetInventorySelect_isbody(selected, newSelected, Char.myCharz().arrItemBody);

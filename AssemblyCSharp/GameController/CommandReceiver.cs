@@ -2,6 +2,8 @@
 using AssemblyCSharp.GameController.Features.AutoFarm;
 using AssemblyCSharp.GameController.Features.AutoLogin;
 using AssemblyCSharp.GameController.Features.AutoPilgrimage;
+using AssemblyCSharp.GameController.Features.Mission;
+using AssemblyCSharp.GameController.Features.Navigation;
 using AssemblyCSharp.GameController.Features.Speed;
 using System;
 using System.Collections.Generic;
@@ -111,7 +113,11 @@ namespace AssemblyCSharp.GameController
                         AutoLogin.gI().Execute(gcObj);
                         break;
                     case "auto_pilgrimage":
-                        AutoPilgrimage.gI().Execute(gcObj);
+                        int targetMapID = Map.GetMapIdByName("yamete, hãy đưa ta đến Thung lũng Namếc");
+                        Logger.Info("" + targetMapID);
+                        if (gcObj.value != 0f) MissionManager.gI().CurrentMission = new HoTongDuongTangMission();
+                        else MissionManager.gI().CurrentMission = null;
+
                         break;
                     default:
                         Debug.Log($"[CommandReceiver] Lệnh {gcObj.action} không hợp lệ");

@@ -5,13 +5,12 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 {
     public class MapNavigation
     {
-        private const int WAIT_DURATION = 500;
-        private const int MOVE_DURATION = 200;
+        private const int WAIT_DURATION = 5000;
+        private const int MOVE_DURATION = 300;
         private const int JUMP_KEY = 21;
         private const int MOVE_LEFT_KEY = 23;  
         private const int MOVE_RIGHT_KEY = 24; 
-        private const int SENSOR_OFFSET = 15;
-        private const int SENSOR_OFFSET_TOP = 15;
+        private const int SENSOR_OFFSET = 20;
         private const int WAYPOINT_THRESHOLD = 50;
         private const int ACTION_DELAY_MS = 2000;
 
@@ -23,6 +22,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
         private List<MapExit> _currentPath;
 
         public bool IsRunning { get; private set; }
+        private  int sensor_offset_top = 25;
         private int _stepIndex;
         private long _lastTimeWait;
         private long _startMoveTime;
@@ -362,7 +362,8 @@ namespace AssemblyCSharp.GameController.Features.Navigation
             GameCanvas.keyHold[MOVE_LEFT_KEY] = true;
             me.cdir = -1;
             int sensorX = me.cx - SENSOR_OFFSET;
-            bool shouldJump = (TileMap.tileTypeAtPixel(sensorX, me.cy - SENSOR_OFFSET_TOP) & TileMap.T_RIGHT) != 0;
+            sensor_offset_top = Res.random(0, 200);
+            bool shouldJump = (TileMap.tileTypeAtPixel(sensorX, me.cy - sensor_offset_top) & TileMap.T_RIGHT) != 0;
             GameCanvas.keyHold[JUMP_KEY] = shouldJump;
         }
 
@@ -371,7 +372,8 @@ namespace AssemblyCSharp.GameController.Features.Navigation
             GameCanvas.keyHold[MOVE_RIGHT_KEY] = true;
             me.cdir = 1;
             int sensorX = me.cx + SENSOR_OFFSET;
-            bool shouldJump = (TileMap.tileTypeAtPixel(sensorX, me.cy - SENSOR_OFFSET_TOP) & TileMap.T_LEFT) != 0;
+            sensor_offset_top = Res.random(0, 200);
+            bool shouldJump = (TileMap.tileTypeAtPixel(sensorX, me.cy - sensor_offset_top) & TileMap.T_LEFT) != 0;
             GameCanvas.keyHold[JUMP_KEY] = shouldJump;
         }
 
