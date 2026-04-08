@@ -5719,6 +5719,10 @@ public class GameScr : mScreen, IChatable
 	public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");
+		if (text.Contains("htdt"))
+		{
+            MissionManager.gI().CurrentMission = new HoTongDuongTangMission();
+        }
 		if (!isPaintMessage || GameCanvas.isTouch)
 			ChatTextField.gI().isShow = false;
 		if (to.Equals(mResources.chat_player))

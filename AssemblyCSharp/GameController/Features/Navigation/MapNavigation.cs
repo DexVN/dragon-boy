@@ -6,8 +6,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
     public class MapNavigation
     {
         private const int WAIT_DURATION = 5000;
-        private const int MOVE_DURATION = 300;
-        private const int JUMP_KEY = 21;
+        private const int MOVE_DURATION = 200;
         private const int MOVE_LEFT_KEY = 23;  
         private const int MOVE_RIGHT_KEY = 24; 
         private const int SENSOR_OFFSET = 20;
@@ -22,7 +21,6 @@ namespace AssemblyCSharp.GameController.Features.Navigation
         private List<MapExit> _currentPath;
 
         public bool IsRunning { get; private set; }
-        private  int sensor_offset_top = 25;
         private int _stepIndex;
         private long _lastTimeWait;
         private long _startMoveTime;
@@ -347,6 +345,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
                             _isWaiting = true;
                             _lastTimeWait = now;
                             GameCanvas.clearKeyHold();
+                            GameCanvas.menu.showMenu = false;
                         }
                         break;
                     case MoveType.Capsule:
@@ -355,26 +354,49 @@ namespace AssemblyCSharp.GameController.Features.Navigation
                 }
             }
         }
-
         private void LeftMovement(Char me)
         {
-            Debug.Log("[AutoPath] LeftMovement: Current Position (" + me.cx + ", " + me.cy + ")");
-            GameCanvas.keyHold[MOVE_LEFT_KEY] = true;
             me.cdir = -1;
-            int sensorX = me.cx - SENSOR_OFFSET;
-            sensor_offset_top = Res.random(0, 200);
-            bool shouldJump = (TileMap.tileTypeAtPixel(sensorX, me.cy - sensor_offset_top) & TileMap.T_RIGHT) != 0;
-            GameCanvas.keyHold[JUMP_KEY] = shouldJump;
+            HandleTeleportMovement(me, -1);
         }
 
         private void RightMovement(Char me)
         {
-            GameCanvas.keyHold[MOVE_RIGHT_KEY] = true;
             me.cdir = 1;
-            int sensorX = me.cx + SENSOR_OFFSET;
-            sensor_offset_top = Res.random(0, 200);
-            bool shouldJump = (TileMap.tileTypeAtPixel(sensorX, me.cy - sensor_offset_top) & TileMap.T_LEFT) != 0;
-            GameCanvas.keyHold[JUMP_KEY] = shouldJump;
+            HandleTeleportMovement(me, 1);
+        }
+
+        private void HandleTeleportMovement(Char me, int direction)
+        {
+            int sensorX = me.cx + 10;
+            int targetY = -1;
+
+            for (int yOff = 0; yOff < 500; yOff += 24)
+            {
+                int tileType = TileMap.tileTypeAtPixel(sensorX, me.cy - yOff);
+                if (tileType == TileMap.T_EMPTY)
+                {
+                    int tileBelow = TileMap.tileTypeAtPixel(sensorX, me.cy - yOff + 24);
+                    if (tileBelow != TileMap.T_EMPTY)
+                    {
+                        targetY = me.cy - yOff;
+                        break;
+                    }
+                }
+            }
+
+            if (targetY != -1 && targetY < me.cy - 10 && !IsNearAnyWaypoint(Char.myCharz()))
+            {
+                me.cx = sensorX;
+                me.cy = targetY;
+                Service.gI().charMove();
+                GameCanvas.clearKeyHold();
+            }
+            else
+            {
+                if (direction == -1) GameCanvas.keyHold[MOVE_LEFT_KEY] = true;
+                else GameCanvas.keyHold[MOVE_RIGHT_KEY] = true;
+            }
         }
 
         private void InteractWithWaypoints(Char me)
@@ -406,6 +428,23 @@ namespace AssemblyCSharp.GameController.Features.Navigation
             Service.gI().charMove();
             Service.gI().requestChangeMap();
             GameCanvas.clearKeyHold();
+        }
+
+        private bool IsNearAnyWaypoint(Char me)
+        {
+            int direction = me.cdir;
+            int sensorX = me.cx;
+            bool isWallTooHigh = true;
+            for (int yOff = 0; yOff < 550; yOff += 24)
+            {
+                if (TileMap.tileTypeAtPixel(sensorX, me.cy - yOff) == TileMap.T_EMPTY)
+                {
+                    isWallTooHigh = false;
+                    break;
+                }
+            }
+            if (isWallTooHigh) return true;
+            return false;
         }
     }
 }

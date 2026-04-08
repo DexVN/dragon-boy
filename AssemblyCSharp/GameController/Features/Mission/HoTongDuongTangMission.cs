@@ -1,17 +1,15 @@
 ﻿using AssemblyCSharp.GameController.Features.Navigation;
 using System;
 using System.Text.RegularExpressions;
-using UnityEngine;
 
 namespace AssemblyCSharp.GameController.Features.Mission
 {
     public enum HoTongDuongTangState
     {
-        GET_MISSION_TO_NPC,
+        GET_MISSION,
         WAIT_CHAR_DISPLAY,
         ENSCORT,
         ENSCORTING,
-        RETURNING,
         COMPLETED
     }
 
@@ -19,7 +17,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
     {
         GO_TO_MISSION_MAP,
         GO_TO_MISSION_NPC,
-        WAITING,
+        GET_MISSION_FROM_NPC,
         COMPLETED
     }
 
@@ -30,12 +28,12 @@ namespace AssemblyCSharp.GameController.Features.Mission
         public bool IsStart { get; private set; } = true;
         private long _lastTimeAction;
         private long _delayNextStep;
-        private int targetMapID;
+        private int targetMapID = -1;
 
         private int DUONG_TANG_ID = -100000063;
         private int NPC_DUONG_TANG_ID = 49;
 
-        public HoTongDuongTangState _currentState = HoTongDuongTangState.GET_MISSION_TO_NPC;
+        public HoTongDuongTangState _currentState = HoTongDuongTangState.GET_MISSION;
         public GetMissionState _currentGetMissionState = GetMissionState.GO_TO_MISSION_MAP;
 
         private void SetDelay(int min, int max)
@@ -49,32 +47,25 @@ namespace AssemblyCSharp.GameController.Features.Mission
             Char me = Char.myCharz();
             if (me.statusMe == 14)
             {
-                Debug.Log("[HoTongDuongTangMission] Nhân vật đã chết, dừng nhiệm vụ bò mộng!");
                 IsStart = false;
             }
-            if (TileMap.mapID != Map.LANG_ARU)
+            if (TileMap.mapID == targetMapID && _currentState == HoTongDuongTangState.COMPLETED)
             {
+                _currentState = HoTongDuongTangState.GET_MISSION;
                 _currentGetMissionState = GetMissionState.GO_TO_MISSION_MAP;
-            }
-            if (TileMap.mapID == targetMapID && _currentState == HoTongDuongTangState.ENSCORTING)
-            {
-                _currentState = HoTongDuongTangState.GET_MISSION_TO_NPC;
             }
         }
 
         public void Execute()
         {
+            if (mSystem.currentTimeMillis() - _lastTimeAction < _delayNextStep) return;
             switch (_currentState)
             {
-                case HoTongDuongTangState.GET_MISSION_TO_NPC:
+                case HoTongDuongTangState.GET_MISSION:
                     GetMission();
                     break;
-                case HoTongDuongTangState.ENSCORT:
-                    //if (CheckIfEscortStarted()) return;
+                case HoTongDuongTangState.ENSCORTING:
                     OnEscortLogic();
-                    break;
-                case HoTongDuongTangState.RETURNING:
-                    OnReturnToStart();
                     break;
                 case HoTongDuongTangState.COMPLETED:
                     Logger.Info("Not start yet!");
@@ -84,7 +75,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
 
         public void OnReceiveMessage(sbyte cmd, string message)
         {
-            Debug.Log($"[HoTongDuongTangMission] onReceiveMessage: {message}");
+            Logger.Info($"onReceiveMessage: {message}; targetMapID: {targetMapID}; _currentState: {_currentState}");
             switch (cmd)
             {
                 case 32:
@@ -98,11 +89,12 @@ namespace AssemblyCSharp.GameController.Features.Mission
                     }
                     break;
                 case -7:
-                    if (_currentState == HoTongDuongTangState.WAIT_CHAR_DISPLAY)
+                    if (targetMapID == -1 && _currentState == HoTongDuongTangState.ENSCORT)
                     {
                         targetMapID = Map.GetMapIdByName(message);
-                        Logger.Info("TARGET MAP ID" + targetMapID);
-                        _currentState = HoTongDuongTangState.ENSCORT;
+                        Logger.Info($"message: {message}");
+                        Logger.Info($"TargetMapID: {targetMapID}");
+                        _currentState = HoTongDuongTangState.ENSCORTING;
                     }
                     break;
             }     
@@ -114,11 +106,11 @@ namespace AssemblyCSharp.GameController.Features.Mission
             switch (_currentGetMissionState)
             {
                 case GetMissionState.GO_TO_MISSION_MAP:
+                    SetDelay(500, 1000);
                     if (TileMap.mapID == Map.LANG_ARU)
                     {
                         _currentGetMissionState = GetMissionState.GO_TO_MISSION_NPC;
                         CapsuleController.gI().Reset();
-                        SetDelay(500, 1000);
                         break;
                     }
                     if (CapsuleController.gI().CurrentState == CapsuleState.IDLE)
@@ -141,14 +133,19 @@ namespace AssemblyCSharp.GameController.Features.Mission
                             me.cx = npc.cx;
                             me.cy = npc.cy;
                             Service.gI().charMove();
-                            SetDelay(500, 1000);
-                            NpcMenuController.gI().Start(NPC_DUONG_TANG_ID, new int[] { 2, 0 });
-                            _currentState = HoTongDuongTangState.WAIT_CHAR_DISPLAY;
+                            _currentGetMissionState = GetMissionState.GET_MISSION_FROM_NPC;
                             break;
                         }
                     }
+                    SetDelay(500, 1000);
                     break;
-                case GetMissionState.WAITING:
+                case GetMissionState.GET_MISSION_FROM_NPC:
+                    NpcMenuController.gI().Start(NPC_DUONG_TANG_ID, new int[] { 2, 0 });
+                    _currentGetMissionState = GetMissionState.COMPLETED;
+                    _currentState = HoTongDuongTangState.ENSCORT;
+                    SetDelay(1500, 2000);
+                    break;
+                case GetMissionState.COMPLETED:
                     break;
             }
         }
@@ -156,19 +153,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
         private void OnEscortLogic()
         {
             MapNavigation.gI().StartPath(targetMapID);
-            Logger.Info("OnEscortLogic");
-            _currentState = HoTongDuongTangState.ENSCORTING;
+            _currentState = HoTongDuongTangState.COMPLETED;
         }
-
-        private void OnReturnToStart()
-        {
-            Logger.Info("Returning...");
-        }
-
-        private bool CheckIfEscortStarted()
-        {
-            return false;
-        }
-
     }
 }
