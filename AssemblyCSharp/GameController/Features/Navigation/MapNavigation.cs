@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using AssemblyCSharp.GameController.Features.Mission;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AssemblyCSharp.GameController.Features.Navigation
 {
     public class MapNavigation
     {
-        private const int WAIT_DURATION = 5000;
+        private const int WAIT_DURATION = 4000;
         private const int MOVE_DURATION = 200;
         private const int MOVE_LEFT_KEY = 23;  
         private const int MOVE_RIGHT_KEY = 24; 
-        private const int SENSOR_OFFSET = 20;
         private const int WAYPOINT_THRESHOLD = 50;
         private const int ACTION_DELAY_MS = 2000;
 
@@ -212,6 +213,23 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 
         public void Update()
         {
+            for (int num194 = 0; num194 < GameScr.vCharInMap.size(); num194++)
+            {
+                Char char15 = null;
+                try
+                {
+                    char15 = (Char)GameScr.vCharInMap.elementAt(num194);
+                }
+                catch (Exception)
+                {
+                }
+                if (char15 == null) break;
+                if (char15.charID == -100000063)
+                {
+                    Logger.Info("WOW");
+                    //if ((Char.myCharz().cx + 200) > char15.cx || (Char.myCharz().cx - 200) > char15.cx)return;
+                }
+            }
             if (!IsRunning || _currentPath == null)
             {
                 Debug.Log($"[AutoPath] Không có lộ trình | IsRunning : {IsRunning} | _currentPath : {_currentPath != null}");
@@ -368,7 +386,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 
         private void HandleTeleportMovement(Char me, int direction)
         {
-            int sensorX = me.cx + 10;
+            int sensorX = me.cx + 5;
             int targetY = -1;
 
             for (int yOff = 0; yOff < 500; yOff += 24)

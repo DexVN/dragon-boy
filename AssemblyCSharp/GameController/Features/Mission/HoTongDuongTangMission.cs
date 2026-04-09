@@ -8,8 +8,8 @@ namespace AssemblyCSharp.GameController.Features.Mission
     {
         GET_MISSION,
         WAIT_CHAR_DISPLAY,
-        ENSCORT,
-        ENSCORTING,
+        ESCORT,
+        ESCORTING,
         COMPLETED
     }
 
@@ -53,6 +53,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
             {
                 _currentState = HoTongDuongTangState.GET_MISSION;
                 _currentGetMissionState = GetMissionState.GO_TO_MISSION_MAP;
+                targetMapID = -1;
             }
         }
 
@@ -64,11 +65,10 @@ namespace AssemblyCSharp.GameController.Features.Mission
                 case HoTongDuongTangState.GET_MISSION:
                     GetMission();
                     break;
-                case HoTongDuongTangState.ENSCORTING:
+                case HoTongDuongTangState.ESCORTING:
                     OnEscortLogic();
                     break;
                 case HoTongDuongTangState.COMPLETED:
-                    Logger.Info("Not start yet!");
                     break;
             }
         }
@@ -89,12 +89,14 @@ namespace AssemblyCSharp.GameController.Features.Mission
                     }
                     break;
                 case -7:
-                    if (targetMapID == -1 && _currentState == HoTongDuongTangState.ENSCORT)
+                    if (targetMapID == -1 && _currentState == HoTongDuongTangState.ESCORT)
                     {
+                        Char me = Char.myCharz();
+                        if (!me.cName.Contains(message)) break;
                         targetMapID = Map.GetMapIdByName(message);
                         Logger.Info($"message: {message}");
                         Logger.Info($"TargetMapID: {targetMapID}");
-                        _currentState = HoTongDuongTangState.ENSCORTING;
+                        _currentState = HoTongDuongTangState.ESCORTING;
                     }
                     break;
             }     
@@ -142,7 +144,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
                 case GetMissionState.GET_MISSION_FROM_NPC:
                     NpcMenuController.gI().Start(NPC_DUONG_TANG_ID, new int[] { 2, 0 });
                     _currentGetMissionState = GetMissionState.COMPLETED;
-                    _currentState = HoTongDuongTangState.ENSCORT;
+                    _currentState = HoTongDuongTangState.ESCORT;
                     SetDelay(1500, 2000);
                     break;
                 case GetMissionState.COMPLETED:

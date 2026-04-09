@@ -1,4 +1,7 @@
+using AssemblyCSharp.GameController.Command;
 using AssemblyCSharp.GameController.Features;
+using AssemblyCSharp.GameController.Features.AutoFarm;
+using AssemblyCSharp.GameController.Features.AutoLogin;
 using AssemblyCSharp.GameController.Features.Mission;
 using AssemblyCSharp.GameController.Features.Navigation;
 using Assets.src.g;
@@ -5716,12 +5719,39 @@ public class GameScr : mScreen, IChatable
 	{
 	}
 
-	public void onChatFromMe(string text, string to)
+	private bool isAutoHtdt = false;
+	private bool isAutoFarm = false;
+    private bool isAutoLogin = false;
+    public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");
 		if (text.Contains("htdt"))
 		{
-            MissionManager.gI().CurrentMission = new HoTongDuongTangMission();
+            isAutoHtdt = !isAutoHtdt;
+			if (isAutoHtdt)
+			{
+				MissionManager.gI().CurrentMission = new HoTongDuongTangMission();
+			} else
+			{
+				MissionManager.gI().CurrentMission = null;
+            }
+        }
+		if (text.Contains("ts"))
+		{
+			isAutoFarm = !isAutoFarm;
+			GameControllerCommand gcObj = new GameControllerCommand();
+			gcObj.action = "auto_farm";
+            gcObj.value = isAutoFarm ? 1f : 0f;
+			AutoFarm.gI().Execute(gcObj);
+        }
+		if (text.Contains("lg"))
+		{
+            isAutoLogin = !isAutoLogin;
+            GameControllerCommand gcObj = new GameControllerCommand();
+            gcObj.action = "auto_login";
+            gcObj.value = isAutoLogin ? 1f : 0f;
+            AutoLogin.gI().Execute(gcObj);
+
         }
 		if (!isPaintMessage || GameCanvas.isTouch)
 			ChatTextField.gI().isShow = false;
