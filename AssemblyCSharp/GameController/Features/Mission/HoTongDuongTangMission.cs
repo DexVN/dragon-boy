@@ -92,11 +92,27 @@ namespace AssemblyCSharp.GameController.Features.Mission
                     if (targetMapID == -1 && _currentState == HoTongDuongTangState.ESCORT)
                     {
                         Char me = Char.myCharz();
-                        if (!me.cName.Contains(message)) break;
-                        targetMapID = Map.GetMapIdByName(message);
-                        Logger.Info($"message: {message}");
-                        Logger.Info($"TargetMapID: {targetMapID}");
-                        _currentState = HoTongDuongTangState.ESCORTING;
+                        if (message.Contains(me.cName))
+                        {
+                            Logger.Info($"Xác nhận nhiệm vụ cho: {me.cName}");
+                            string mapPattern = @"đến\s+(.+)";
+                            Match match2 = Regex.Match(message, mapPattern);
+                            if (match2.Success)
+                            {
+                                string mapName = match2.Groups[1].Value.Trim();
+                                mapName = mapName.Replace(":", "");
+                                targetMapID = Map.GetMapIdByName(mapName);
+                                if (targetMapID != -1)
+                                {
+                                    Logger.Info($"TargetMapID detected: {targetMapID} ({mapName})");
+                                    _currentState = HoTongDuongTangState.ESCORTING;
+                                }
+                                else
+                                {
+                                    Logger.Error($"Không tìm thấy ID cho Map: {mapName}");
+                                }
+                            }
+                        }
                     }
                     break;
             }     

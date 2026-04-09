@@ -8,9 +8,10 @@ namespace AssemblyCSharp.GameController.Features.Navigation
     public class MapNavigation
     {
         private const int WAIT_DURATION = 4000;
-        private const int MOVE_DURATION = 200;
+        private const int MOVE_DURATION = 150;
         private const int MOVE_LEFT_KEY = 23;  
         private const int MOVE_RIGHT_KEY = 24; 
+        private const int SENSOR_OFFSET = 20;
         private const int WAYPOINT_THRESHOLD = 50;
         private const int ACTION_DELAY_MS = 2000;
 
@@ -386,7 +387,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 
         private void HandleTeleportMovement(Char me, int direction)
         {
-            int sensorX = me.cx + 5;
+            int sensorX = me.cx + 10;
             int targetY = -1;
 
             for (int yOff = 0; yOff < 500; yOff += 24)
