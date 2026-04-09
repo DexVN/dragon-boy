@@ -5725,7 +5725,25 @@ public class GameScr : mScreen, IChatable
     public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");
-		if (text.Contains("htdt"))
+        if (text.StartsWith("speed")) // Dùng StartsWith sẽ chuẩn hơn Contains
+        {
+            try
+            {
+                // Tách chuỗi để lấy con số sau chữ "speed "
+                string[] parts = text.Split(' ');
+                if (parts.Length > 1)
+                {
+                    float s = float.Parse(parts[1]);
+                    Time.timeScale = s;
+                    GameScr.info1.addInfo($"Tốc độ game: x{s}", 0);
+                }
+            }
+            catch
+            {
+                Logger.Error("Lệnh speed sai cú pháp. VD: speed 2");
+            }
+        }
+        if (text.Contains("htdt"))
 		{
             isAutoHtdt = !isAutoHtdt;
 			if (isAutoHtdt)
