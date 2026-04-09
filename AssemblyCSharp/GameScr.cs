@@ -1,7 +1,6 @@
 using AssemblyCSharp.GameController.Command;
 using AssemblyCSharp.GameController.Features;
 using AssemblyCSharp.GameController.Features.AutoFarm;
-using AssemblyCSharp.GameController.Features.AutoLogin;
 using AssemblyCSharp.GameController.Features.Mission;
 using AssemblyCSharp.GameController.Features.Navigation;
 using Assets.src.g;
@@ -967,7 +966,7 @@ public class GameScr : mScreen, IChatable
 		isPaintRada = 1;
 		if (GameCanvas.isTouch)
 			isHaveSelectSkill = true;
-	}
+    }
 
 	public static void loadBg()
 	{
@@ -1059,7 +1058,7 @@ public class GameScr : mScreen, IChatable
 	{
 		readPart();
 		SmallImage.init();
-	}
+    }
 
 	public static void paintOngMauPercent(Image img0, Image img1, Image img2, float x, float y, int size, float pixelPercent, mGraphics g)
 	{
@@ -1646,7 +1645,7 @@ public class GameScr : mScreen, IChatable
 		loadSplash();
 		Res.init();
 		loadInforBar();
-	}
+    }
 
 	public void doMenuInforMe()
 	{
@@ -5720,8 +5719,6 @@ public class GameScr : mScreen, IChatable
 	}
 
 	private bool isAutoHtdt = false;
-	private bool isAutoFarm = false;
-    private bool isAutoLogin = false;
     public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");
@@ -5754,24 +5751,25 @@ public class GameScr : mScreen, IChatable
 				MissionManager.gI().CurrentMission = null;
             }
         }
-		if (text.Contains("ts"))
-		{
-			isAutoFarm = !isAutoFarm;
-			GameControllerCommand gcObj = new GameControllerCommand();
-			gcObj.action = "auto_farm";
-            gcObj.value = isAutoFarm ? 1f : 0f;
-			AutoFarm.gI().Execute(gcObj);
-        }
-		if (text.Contains("lg"))
-		{
-            isAutoLogin = !isAutoLogin;
+        if (text.Contains("ts"))
+        {
+            string stateFarm = Rms.loadRMSString("auto_farm_state");
             GameControllerCommand gcObj = new GameControllerCommand();
-            gcObj.action = "auto_login";
-            gcObj.value = isAutoLogin ? 1f : 0f;
-            AutoLogin.gI().Execute(gcObj);
-
+            gcObj.action = "auto_farm";
+			if (stateFarm != null)
+			{
+				gcObj.value = stateFarm == "1" ? 0f : 1f;
+				AutoFarm.gI().Execute(gcObj);
+			}
+            Rms.saveRMSString("auto_farm_state", (stateFarm == "0" || stateFarm == null) ? "1" : "0");
         }
-		if (!isPaintMessage || GameCanvas.isTouch)
+
+        if (text.Contains("lg"))
+        {
+			string stateLogin = Rms.loadRMSString("auto_login_state");
+            Rms.saveRMSString("auto_login_state", (stateLogin == "0" || stateLogin == null) ? "1" : "0");
+		}
+        if (!isPaintMessage || GameCanvas.isTouch)
 			ChatTextField.gI().isShow = false;
 		if (to.Equals(mResources.chat_player))
 		{
@@ -5792,8 +5790,8 @@ public class GameScr : mScreen, IChatable
 			ChatTextField.gI().center = null;
 		}
 	}
-
-	public void openWeb(string strLeft, string strRight, string url, string title, string str)
+    
+    public void openWeb(string strLeft, string strRight, string url, string title, string str)
 	{
 		isPaintAlert = true;
 		isLockKey = true;

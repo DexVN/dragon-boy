@@ -1,5 +1,4 @@
 ﻿using AssemblyCSharp.GameController.Command;
-using UnityEngine;
 
 namespace AssemblyCSharp.GameController.Features.AutoFarm
 {
@@ -17,6 +16,7 @@ namespace AssemblyCSharp.GameController.Features.AutoFarm
 
         public static void Update()
         {
+            gI().LoadSavedState();
             if (!IsAutoFarming) return;
             GameScr.isAutoPlay = true;
             GameScr.canAutoPlay = true;
@@ -29,7 +29,6 @@ namespace AssemblyCSharp.GameController.Features.AutoFarm
             try
             {
                 IsAutoFarming = cmdObj.value != 0f;
-                Logger.Info($"Status changed to: {IsAutoFarming}");
                 if (!IsAutoFarming)
                 {
                     GameScr.isAutoPlay = false;
@@ -45,15 +44,19 @@ namespace AssemblyCSharp.GameController.Features.AutoFarm
         private void HandleAutoChangeZone()
         {
             if (!IsAutoFarming) return;
-            if (mSystem.currentTimeMillis() - _lastTimeChangeZone < _delayChangeZone) return;
+            _delayChangeZone = 30000;
+            int nextZone = Res.random(0, 9);
             if (IsStrangerPresent())
             {
-                int nextZone = Res.random(0, 20);
-                if (nextZone == TileMap.zoneID) nextZone = (nextZone + 1) % 20;
-                Logger.Info($"Phát hiện người lạ! Đang chuồn sang khu: {nextZone}");
-                Service.gI().requestChangeZone(nextZone, -1);
-                _lastTimeChangeZone = mSystem.currentTimeMillis();
+                _delayChangeZone = 15000;
+                nextZone = (nextZone + 1) % 20;
+            } else
+            {
+                nextZone = TileMap.zoneID;
             }
+            if (mSystem.currentTimeMillis() - _lastTimeChangeZone < _delayChangeZone) return;
+            Service.gI().requestChangeZone(nextZone, -1);
+            _lastTimeChangeZone = mSystem.currentTimeMillis();
         }
 
         private bool IsStrangerPresent()
@@ -84,6 +87,21 @@ namespace AssemblyCSharp.GameController.Features.AutoFarm
                 }
             }
             return false;
+        }
+
+        public void LoadSavedState()
+        {
+            try
+            {
+                string farmState = Rms.loadRMSString("auto_farm_state");
+                GameControllerCommand gcObj = new GameControllerCommand();
+                gcObj.action = "auto_farm";
+                gcObj.value = farmState == "1" ? 1f : 0f;
+                Execute(gcObj);
+            }
+            catch
+            {
+            }
         }
     }
 }

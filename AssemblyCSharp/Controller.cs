@@ -1,5 +1,4 @@
 using AssemblyCSharp;
-using AssemblyCSharp.GameController.Features.AutoLogin;
 using AssemblyCSharp.GameController.Features.Mission;
 using Assets.src.e;
 using Assets.src.f;
@@ -1139,7 +1138,7 @@ public class Controller : IMessageHandler
 						LoginScr.isContinueToLogin = true;
 					GameCanvas.loginScr = new LoginScr();
 					GameCanvas.loginScr.switchToMe();
-					return;
+                    return;
 				}
 				bool flag5 = true;
 				sbyte b26 = msg.reader().readByte();
@@ -2343,9 +2342,10 @@ public class Controller : IMessageHandler
 				InfoDlg.hide();
 				LoginScr.isContinueToLogin = false;
 				Char.isLoadingMap = false;
+				LoginScr.isLoginAnotherDevice = true;
 				if (GameCanvas.currentScreen == GameCanvas.loginScr)
 					GameCanvas.serverScreen.switchToMe();
-				break;
+                break;
 			case -25:
 				GameCanvas.debug("SA3", 2);
 				GameScr.info1.addInfo(msg.reader().readUTF(), 0);
@@ -2900,7 +2900,8 @@ public class Controller : IMessageHandler
 			{
 				Res.outz("BIG MESSAGE .......................................");
 				GameCanvas.endDlg();
-                if (AutoLogin.IsAutoLogin) return;
+                string state = Rms.loadRMSString("auto_login_state");
+                if (state == "1") return;
                 int avatar = msg.reader().readShort();
 				string chat4 = msg.reader().readUTF();
 				Npc npc6 = new Npc(-1, 0, 0, 0, 0, 0);

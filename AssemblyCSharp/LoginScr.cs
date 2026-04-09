@@ -1,4 +1,5 @@
-using AssemblyCSharp.GameController.Features.AutoLogin;
+using AssemblyCSharp.GameController.Command;
+using AssemblyCSharp.GameController.Features.AutoFarm;
 using System;
 
 public class LoginScr : mScreen, IActionListener
@@ -57,7 +58,9 @@ public class LoginScr : mScreen, IActionListener
 
 	public static Image imgTitle;
 
-	public int plX;
+	public static bool isLoginAnotherDevice;
+
+    public int plX;
 
 	public int plY;
 
@@ -171,7 +174,7 @@ public class LoginScr : mScreen, IActionListener
 		}
 		tfUser.setText(Rms.loadRMSString("acc"));
 		tfPass.setText(Rms.loadRMSString("pass"));
-		if (cmdCallHotline == null)
+        if (cmdCallHotline == null)
 		{
 			cmdCallHotline = new Command("Gọi hotline", this, 13, null);
 			cmdCallHotline.x = GameCanvas.w - 75;
@@ -281,7 +284,7 @@ public class LoginScr : mScreen, IActionListener
 		string text2 = Rms.loadRMSString("pass");
 		if (text2 != null && !text2.Equals(string.Empty))
 			tfPass.setText(text2);
-	}
+    }
 
 	public void updateTfWhenOpenKb()
 	{
@@ -432,8 +435,8 @@ public class LoginScr : mScreen, IActionListener
 		Service.gI().login(text, text2, GameMidlet.VERSION, (sbyte)(isLogin2 ? 1 : 0));
 		if (Session_ME.connected)
 			GameCanvas.startWaitDlg();
-		else
-			GameCanvas.startOKDlg(mResources.maychutathoacmatsong);
+		//else
+			//GameCanvas.startOKDlg(mResources.maychutathoacmatsong);
 		focus = 0;
 		if (!isLogin2)
 			actRegisterLeft();
@@ -455,11 +458,10 @@ public class LoginScr : mScreen, IActionListener
 			Rms.saveRMSString("pass", string.Empty);
 		}
 	}
-
-	public override void update()
+  
+    public override void update()
 	{
-        AutoLogin.Update();
-        if (Main.isWindowsPhone && isRegistering)
+		if (Main.isWindowsPhone && isRegistering)
 		{
 			if (t < 0)
 			{

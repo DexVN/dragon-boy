@@ -1,5 +1,4 @@
 using AssemblyCSharp.GameController;
-using AssemblyCSharp.GameController.Features.AutoLogin;
 using System.Net.NetworkInformation;
 using System.Threading;
 using UnityEngine;

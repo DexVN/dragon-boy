@@ -1,6 +1,5 @@
 using System;
 using AssemblyCSharp.GameController.Features.AutoFarm;
-using AssemblyCSharp.GameController.Features.AutoLogin;
 using AssemblyCSharp.GameController.Features.AutoPilgrimage;
 using Assets.src.e;
 using Assets.src.g;

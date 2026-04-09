@@ -1,6 +1,5 @@
 ﻿using AssemblyCSharp.GameController.Command;
 using AssemblyCSharp.GameController.Features.AutoFarm;
-using AssemblyCSharp.GameController.Features.AutoLogin;
 using AssemblyCSharp.GameController.Features.AutoPilgrimage;
 using AssemblyCSharp.GameController.Features.Mission;
 using AssemblyCSharp.GameController.Features.Navigation;
@@ -109,8 +108,7 @@ namespace AssemblyCSharp.GameController
                     case "auto_farm":
                         AutoFarm.gI().Execute(gcObj);
                         break;
-                    case "auto_login":
-                        AutoLogin.gI().Execute(gcObj);
+                    case "auto_login":                    
                         break;
                     case "auto_pilgrimage":
                         int targetMapID = Map.GetMapIdByName("yamete, hãy đưa ta đến Thung lũng Namếc");
