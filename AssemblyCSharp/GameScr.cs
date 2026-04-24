@@ -1,6 +1,12 @@
+using AssemblyCSharp.GameController.Command;
+using AssemblyCSharp.GameController.Features;
+using AssemblyCSharp.GameController.Features.AutoFarm;
+using AssemblyCSharp.GameController.Features.Mission;
+using AssemblyCSharp.GameController.Features.Navigation;
+using Assets.src.g;
 using System;
 using System.Diagnostics;
-using Assets.src.g;
+using System.Drawing.Printing;
 using UnityEngine;
 
 public class GameScr : mScreen, IChatable
@@ -961,7 +967,8 @@ public class GameScr : mScreen, IChatable
 		isPaintRada = 1;
 		if (GameCanvas.isTouch)
 			isHaveSelectSkill = true;
-	}
+        MissionManager.gI().LoadSavedConfig();
+    }
 
 	public static void loadBg()
 	{
@@ -1053,7 +1060,7 @@ public class GameScr : mScreen, IChatable
 	{
 		readPart();
 		SmallImage.init();
-	}
+    }
 
 	public static void paintOngMauPercent(Image img0, Image img1, Image img2, float x, float y, int size, float pixelPercent, mGraphics g)
 	{
@@ -1640,7 +1647,7 @@ public class GameScr : mScreen, IChatable
 		loadSplash();
 		Res.init();
 		loadInforBar();
-	}
+    }
 
 	public void doMenuInforMe()
 	{
@@ -4223,6 +4230,7 @@ public class GameScr : mScreen, IChatable
 				((ItemTime)textTime.elementAt(i)).update();
 			}
 			updateChatVip();
+			
 		}
 		catch (Exception)
 		{
@@ -4230,6 +4238,18 @@ public class GameScr : mScreen, IChatable
 		if (GameCanvas.gameTick % 4000 == 1000)
 			checkRemoveImage();
 		EffectManager.update();
+		try
+		{
+			MissionManager.gI().Update();
+			CapsuleController.gI().Update();
+			NpcMenuController.gI().Update();
+            MapNavigation.gI().Update();
+			CapsuleKiBiController.gI().Update();
+        }
+		catch (Exception ex)
+		{
+			UnityEngine.Debug.LogError("Lỗi khi nhận tin nhắn nhiệm vụ: " + ex.Message);
+		}
 	}
 
 	public void updateKeyChatPopUp()
@@ -5701,10 +5721,93 @@ public class GameScr : mScreen, IChatable
 	{
 	}
 
-	public void onChatFromMe(string text, string to)
+    public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");
-		if (!isPaintMessage || GameCanvas.isTouch)
+		Logger.Info("text" + text);
+		if (text.Contains("map"))
+		{
+            Char me = Char.myCharz();
+            for (int i = 0; i < me.arrItemBag.Length; i++)
+            {
+				Logger.Info($"Name: {me.arrItemBag[i].template.name} - " + me.arrItemBag[i].template.id);
+            }
+        }
+		if (text.Contains("it"))
+		{
+            string exeName = System.IO.Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName);
+            string capsulekibiKey = exeName + "_capsulekibi";
+            string state = Rms.loadRMSString(capsulekibiKey) ?? "0";
+            bool isActivating = (state == "0");
+            string newState = isActivating ? "1" : "0";
+
+            if (isActivating)
+            {
+				CapsuleKiBiController.isAuto = true;
+                info1.addInfo("Bật tự dùng capsule kì bí", 0);
+            }
+            else
+            {
+                CapsuleKiBiController.isAuto = false;
+                info1.addInfo("Tắt tự dùng capsule kì bí", 0);
+            }
+			Rms.saveRMSString(capsulekibiKey, newState);
+        }
+        if (text.StartsWith("speed")) // Dùng StartsWith sẽ chuẩn hơn Contains
+        {
+            try
+            {
+                // Tách chuỗi để lấy con số sau chữ "speed "
+                string[] parts = text.Split(' ');
+                if (parts.Length > 1)
+                {
+                    float s = float.Parse(parts[1]);
+                    Time.timeScale = s;
+                    GameScr.info1.addInfo($"Tốc độ game: x{s}", 0);
+                }
+            }
+            catch
+            {
+                Logger.Error("Lệnh speed sai cú pháp. VD: speed 2");
+            }
+        }
+        if (text.Equals("htdt"))
+        {
+            string state = Rms.loadRMSString("auto_hotong") ?? "0";
+            bool isActivating = (state == "0");
+            string newState = isActivating ? "1" : "0";
+
+            if (isActivating)
+            {
+                MissionManager.gI().CurrentMission = new HoTongDuongTangMission();
+                GameScr.info1.addInfo("Bật Auto Hộ Tống", 0);
+            }
+            else
+            {
+                MissionManager.gI().CurrentMission = null;
+                GameScr.info1.addInfo("Tắt Auto Hộ Tống", 0);
+            }
+            Rms.saveRMSString("auto_hotong", newState);
+        }
+        if (text.Contains("ts"))
+        {
+            string stateFarm = Rms.loadRMSString("auto_farm_state");
+            GameControllerCommand gcObj = new GameControllerCommand();
+            gcObj.action = "auto_farm";
+			if (stateFarm != null)
+			{
+				gcObj.value = stateFarm == "1" ? 0f : 1f;
+				AutoFarm.gI().Execute(gcObj);
+			}
+            Rms.saveRMSString("auto_farm_state", (stateFarm == "0" || stateFarm == null) ? "1" : "0");
+        }
+
+        if (text.Contains("lg"))
+        {
+			string stateLogin = Rms.loadRMSString("auto_login_state");
+            Rms.saveRMSString("auto_login_state", (stateLogin == "0" || stateLogin == null) ? "1" : "0");
+		}
+        if (!isPaintMessage || GameCanvas.isTouch)
 			ChatTextField.gI().isShow = false;
 		if (to.Equals(mResources.chat_player))
 		{
@@ -5725,8 +5828,8 @@ public class GameScr : mScreen, IChatable
 			ChatTextField.gI().center = null;
 		}
 	}
-
-	public void openWeb(string strLeft, string strRight, string url, string title, string str)
+    
+    public void openWeb(string strLeft, string strRight, string url, string title, string str)
 	{
 		isPaintAlert = true;
 		isLockKey = true;
@@ -5894,6 +5997,7 @@ public class GameScr : mScreen, IChatable
 
 	public void actionPerform(int idAction, object p)
 	{
+		Logger.Info($"ID Action: {idAction}");
 		Cout.println("PERFORM WITH ID = " + idAction);
 		switch (idAction)
 		{
@@ -6073,12 +6177,15 @@ public class GameScr : mScreen, IChatable
 					Effect2.vEffect2Outside.removeAllElements();
 					Effect2.vEffect2.removeAllElements();
 					Npc npc = (Npc)p;
-					if (npc.idItem == 0)
-						Service.gI().confirmMenu((short)npc.template.npcTemplateId, (sbyte)GameCanvas.menu.menuSelectedItem);
-					else if (GameCanvas.menu.menuSelectedItem == 0)
-					{
-						Service.gI().pickItem(npc.idItem);
-					}
+							if (npc.idItem == 0)
+							{
+                                UnityEngine.Debug.Log($"npc template id: {npc.template.npcTemplateId}, menuSelectedItem: {(sbyte)GameCanvas.menu.menuSelectedItem}");
+								Service.gI().confirmMenu((short)npc.template.npcTemplateId, (sbyte)GameCanvas.menu.menuSelectedItem);
+							}
+                            else if (GameCanvas.menu.menuSelectedItem == 0)
+							{
+								Service.gI().pickItem(npc.idItem);
+							}
 					return;
 				}
 				case 11059:

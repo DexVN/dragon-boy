@@ -1,10 +1,12 @@
-using System;
+using AssemblyCSharp;
+using AssemblyCSharp.GameController.Features.Mission;
+using AssemblyCSharp.GameController.Features.Navigation;
 using Assets.src.e;
 using Assets.src.f;
 using Assets.src.g;
+using System;
+using System.Linq;
 using UnityEngine;
-
-using AssemblyCSharp.GameController.Features.AutoLogin;
 
 public class Controller : IMessageHandler
 {
@@ -109,7 +111,9 @@ public class Controller : IMessageHandler
 	{
 		GameCanvas.debugSession.removeAllElements();
 		GameCanvas.debug("SA1", 2);
-        try
+		Logger.Info($"Received message with command: {msg.command}");
+        LogUnity.gI().LogMessageContent(msg);
+		try
 		{
 			if (msg.command != -74)
 				Res.outz("=========> [READ] cmd= " + msg.command);
@@ -585,6 +589,7 @@ public class Controller : IMessageHandler
 					GameCanvas.panel.mapNames[num57] = msg.reader().readUTF();
 					GameCanvas.panel.planetNames[num57] = msg.reader().readUTF();
 				}
+
 				GameCanvas.panel.setTypeMapTrans();
 				GameCanvas.panel.show();
 				break;
@@ -1131,11 +1136,13 @@ public class Controller : IMessageHandler
 					Service.gI().getResource(3, null);
 					SmallImage.loadBigRMS();
 					SplashScr.imgLogo = null;
-					if (Rms.loadRMSString("acc") != null || Rms.loadRMSString("userAo" + ServerListScreen.ipSelect) != null)
+                    string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    string accKey = exeName + "_acc";
+                    if (Rms.loadRMSString(accKey) != null || Rms.loadRMSString("userAo" + ServerListScreen.ipSelect) != null)
 						LoginScr.isContinueToLogin = true;
 					GameCanvas.loginScr = new LoginScr();
 					GameCanvas.loginScr.switchToMe();
-					return;
+                    return;
 				}
 				bool flag5 = true;
 				sbyte b26 = msg.reader().readByte();
@@ -2305,6 +2312,7 @@ public class Controller : IMessageHandler
 				string text5 = msg.reader().readUTF();
 				string text6 = Res.changeString(msg.reader().readUTF());
 				string empty = string.Empty;
+						Debug.Log($"Controller: text5 - {text5}; text6 - {text6}");
 				Char char11 = null;
 				sbyte b43 = 0;
 				if (!text5.Equals(string.Empty))
@@ -2334,13 +2342,14 @@ public class Controller : IMessageHandler
 			case -26:
 				ServerListScreen.testConnect = 2;
 				GameCanvas.debug("SA2", 2);
-				GameCanvas.startOKDlg(msg.reader().readUTF());
+				//GameCanvas.startOKDlg(msg.reader().readUTF());
 				InfoDlg.hide();
 				LoginScr.isContinueToLogin = false;
 				Char.isLoadingMap = false;
+				LoginScr.isLoginAnotherDevice = true;
 				if (GameCanvas.currentScreen == GameCanvas.loginScr)
 					GameCanvas.serverScreen.switchToMe();
-				break;
+                break;
 			case -25:
 				GameCanvas.debug("SA3", 2);
 				GameScr.info1.addInfo(msg.reader().readUTF(), 0);
@@ -2895,8 +2904,9 @@ public class Controller : IMessageHandler
 			{
 				Res.outz("BIG MESSAGE .......................................");
 				GameCanvas.endDlg();
-				if (AutoLogin.IsAutoLogin) return;
-				int avatar = msg.reader().readShort();
+                string state = Rms.loadRMSString("auto_login_state");
+                if (state == "1") return;
+                int avatar = msg.reader().readShort();
 				string chat4 = msg.reader().readUTF();
 				Npc npc6 = new Npc(-1, 0, 0, 0, 0, 0);
 				npc6.avatar = avatar;
@@ -2969,6 +2979,15 @@ public class Controller : IMessageHandler
 							array7[num88] = msg.reader().readUTF();
 						}
 						GameScr.gI().createMenu(array7, npc2);
+						Debug.Log($"[Controller] Received chat1 with command 32: {npc2.template.npcTemplateId}");
+						try
+						{
+							MissionManager.gI().OnReceiveMessage(32, chat);
+						}
+						catch (Exception ex)
+						{
+                            Debug.LogError("[MissionManager] Lỗi xử lý tin nhắn: " + ex.Message);
+                        }
 						ChatPopup.addChatPopup(chat, 100000, npc2);
 						return;
 					}
@@ -2991,7 +3010,8 @@ public class Controller : IMessageHandler
 				Res.outz((Char.myCharz().npcFocus == null) ? "null" : "!null");
 				GameScr.gI().createMenu(array8, npc3);
 				ChatPopup.addChatPopup(chat2, 100000, npc3);
-				break;
+                Debug.Log($"[Controller] Received chat2 with command 32: {chat2}");
+                break;
 			}
 			case 7:
 			{
@@ -3623,6 +3643,7 @@ public class Controller : IMessageHandler
 			{
 				GameCanvas.debug("SA80", 2);
 				int num179 = msg.reader().readInt();
+				Debug.Log(">>>>> START CMD -7: " + num179);
 				for (int num194 = 0; num194 < GameScr.vCharInMap.size(); num194++)
 				{
 					Char char15 = null;
@@ -3637,14 +3658,23 @@ public class Controller : IMessageHandler
 						break;
 					if (char15.charID == num179)
 					{
+						Char me = Char.myCharz();
+                        bool isMentioned = char15.chatInfo.info.s.ToLower().Contains(me.cName.ToLower()) ||
+                                            (me.cName.Contains(" ") && char15.chatInfo.info.s.ToLower().Contains(me.cName.Split(' ').Last().ToLower()));
+						if (isMentioned)
+						{
+							MapNavigation.MasterCharID = num179;
+						}
+                        Logger.Info($"charID: {num179}, x: {char15.cx}, y: {char15.cy}");
 						GameCanvas.debug("SA8x2y" + num194, 2);
 						char15.moveTo(msg.reader().readShort(), msg.reader().readShort(), 0);
+						MissionManager.gI().OnReceiveMessage(-7, char15.chatInfo.info.s);
 						char15.lastUpdateTime = mSystem.currentTimeMillis();
 						break;
 					}
 				}
 				GameCanvas.debug("SA80x3", 2);
-				break;
+						break;
 			}
 			case -6:
 			{
@@ -4609,8 +4639,10 @@ public class Controller : IMessageHandler
 				sbyte b2 = msg.reader().readByte();
 				if (GameCanvas.loginScr.isLogin2)
 				{
-					Rms.saveRMSString("acc", string.Empty);
-					Rms.saveRMSString("pass", string.Empty);
+                    string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    string accKey = exeName + "_acc";
+                    Rms.saveRMSString(accKey, string.Empty);
+					Rms.saveRMSString("pass2", string.Empty);
 				}
 				else
 					Rms.saveRMSString("userAo" + ServerListScreen.ipSelect, string.Empty);
@@ -4850,7 +4882,8 @@ public class Controller : IMessageHandler
 			GameCanvas.debug("SA12", 2);
 			sbyte b = msg.reader().readByte();
 			Res.outz("---messageSubCommand : " + b);
-			switch (b)
+			Logger.Info("messageSubCommand: " + b);
+            switch (b)
 			{
 			case 1:
 				GameCanvas.debug("SA13", 2);

@@ -1,6 +1,7 @@
 using System;
 using AssemblyCSharp.GameController.Features.AutoFarm;
-using AssemblyCSharp.GameController.Features.AutoLogin;
+using AssemblyCSharp.GameController.Features.AutoPilgrimage;
+using AssemblyCSharp.GameController.Features.Navigation;
 using Assets.src.e;
 using Assets.src.g;
 using UnityEngine;
@@ -1399,6 +1400,10 @@ public class Char : IMapObject
 
 	public void addInfo(string info)
 	{
+		Logger.Info(info);
+		if (info.Contains("Hãy đứng gần Đường Tăng")) {
+			MapNavigation._back_near_by = true;
+		}
 		if (chatInfo == null)
 			chatInfo = new Info();
 		chatInfo.addInfo(info, 0, null, false);
@@ -1673,6 +1678,7 @@ public class Char : IMapObject
 	public virtual void update()
 	{
         AutoFarm.Update();
+		AutoPilgrimage.Update();
         if (isMafuba)
 		{
 			cf = 23;
@@ -4509,7 +4515,6 @@ public class Char : IMapObject
 
 	public void setAttack()
 	{
-		Debug.Log("set attack");
         if (me)
 		{
 			SkillPaint skillPaint = skillPaintRandomPaint;
@@ -4523,7 +4528,6 @@ public class Char : IMapObject
 				myVector2.addElement(charFocus);
 			else if (mobFocus != null)
 			{
-				Debug.Log("add mob focus to attack");
                 myVector.addElement(mobFocus);
 			}
 			effPaints = new EffectPaint[myVector.size() + myVector2.size()];
@@ -5477,7 +5481,8 @@ public class Char : IMapObject
 
 	public void moveTo(int toX, int toY, int type)
 	{
-		if (type == 1 || Res.abs(toX - cx) > 100 || Res.abs(toY - cy) > 300)
+		Debug.Log("Move to: " + toX + "," + toY + " type: " + type);
+        if (type == 1 || Res.abs(toX - cx) > 100 || Res.abs(toY - cy) > 300)
 		{
 			createShadow(cx, cy, 10);
 			cx = toX;

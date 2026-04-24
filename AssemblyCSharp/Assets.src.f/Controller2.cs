@@ -428,7 +428,9 @@ namespace Assets.src.f
 					if (b3 != 0 && b3 == 1)
 					{
 						GameCanvas.loginScr.isLogin2 = false;
-						Service.gI().login(Rms.loadRMSString("acc"), Rms.loadRMSString("pass"), GameMidlet.VERSION, 0);
+                        string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                        string accKey = exeName + "_acc";
+                        Service.gI().login(Rms.loadRMSString(accKey), Rms.loadRMSString("pass2"), GameMidlet.VERSION, 0);
 						LoginScr.isLoggingIn = true;
 					}
 					return;

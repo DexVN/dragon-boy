@@ -1,3 +1,5 @@
+﻿using AssemblyCSharp.GameController.Features.Navigation;
+
 public class InfoMe
 {
 	public static InfoMe me;
@@ -280,7 +282,13 @@ public class InfoMe
 	public void addInfo(string s, int Type)
 	{
 		s = Res.changeString(s);
-		if (info.infoWaitToShow.size() > 0 && s.Equals(((InfoItem)info.infoWaitToShow.lastElement()).s))
+		Logger.Info(s);
+        if (s.Contains("Khoảng cách quá xa, mau lại gần nếu không sư phụ sẽ bị lạc"))
+        {
+			Logger.Info(s);
+            MapNavigation._back_near_by = true;
+        }
+        if (info.infoWaitToShow.size() > 0 && s.Equals(((InfoItem)info.infoWaitToShow.lastElement()).s))
 			return;
 		if (info.infoWaitToShow.size() > 10)
 		{

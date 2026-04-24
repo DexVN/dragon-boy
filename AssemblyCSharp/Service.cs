@@ -1,7 +1,8 @@
+using Assets.src.g;
 using System;
 using System.Diagnostics;
-using Assets.src.g;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
 public class Service
 {
@@ -451,7 +452,8 @@ public class Service
 
 	public void useItem(sbyte type, sbyte where, sbyte index, short template)
 	{
-		Cout.println("USE ITEM! " + type);
+		Logger.Info($"useItem: type - {type}; where - {where}; index - {index}; template - {template}");
+        Cout.println("USE ITEM! " + type);
 		if (Char.myCharz().statusMe == 14)
 			return;
 		Message message = null;
@@ -1218,6 +1220,7 @@ public class Service
 
 	public void confirmMenu(short npcID, sbyte select)
 	{
+		UnityEngine.Debug.Log($"Add message confirmMenu: npcID - {npcID}; select - {select}");
 		Res.outz("confirme menu" + select);
 		Message message = null;
 		try
@@ -1242,7 +1245,10 @@ public class Service
 		Message message = null;
 		try
 		{
-			message = new Message((sbyte)33);
+			UnityEngine.Debug.Log("open menu " + npcId);
+			UnityEngine.Debug.Log($"Add message openMenu: npcID - {npcId};");
+
+            message = new Message((sbyte)33);
 			message.writer().writeShort(npcId);
 			session.sendMessage(message);
 		}
@@ -2621,6 +2627,7 @@ public class Service
 
 	public void requestMapSelect(int selected)
 	{
+		UnityEngine.Debug.Log($"requestMapSelect: {selected}");
 		Res.outz("request magic tree");
 		Message message = null;
 		try

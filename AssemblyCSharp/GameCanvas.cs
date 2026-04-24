@@ -1,5 +1,4 @@
 using System;
-using AssemblyCSharp.GameController.Features.AutoLogin;
 using Assets.src.g;
 using UnityEngine;
 
@@ -480,7 +479,7 @@ public class GameCanvas : IActionListener
 		ServerListScreen.createDeleteRMS();
 		serverScr = new ServerScr();
 		chooseCharScr = new ChooseCharScr();
-	}
+    }
 
 	public static GameCanvas gI()
 	{
@@ -501,7 +500,6 @@ public class GameCanvas : IActionListener
 
 	public void update()
 	{
-		AutoLogin.Update();
 		if (mSystem.currentTimeMillis() > timefps)
 		{
 			timefps += 1000L;

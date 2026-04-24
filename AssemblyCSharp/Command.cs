@@ -103,6 +103,7 @@ public class Command
 
 	public void performAction()
 	{
+		Logger.Info($"ID Action: {idAction}; ");
 		GameCanvas.clearAllPointerEvent();
 		if (isPlaySoundButton && ((caption != null && !caption.Equals(string.Empty) && !caption.Equals(mResources.saying)) || img != null))
 			SoundMn.gI().buttonClick();

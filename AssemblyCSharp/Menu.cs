@@ -223,12 +223,12 @@ public class Menu
 		}
 		else if (!GameScr.gI().isRongThanMenu() && !disableClose && (GameCanvas.keyPressed[13] || mScreen.getCmdPointerLast(right)))
 		{
-			if (isScrolling())
-				return;
-			if (!close)
-				close = true;
-			isClose = true;
-			SoundMn.gI().buttonClose();
+			//if (isScrolling())
+			//	return;
+			//if (!close)
+			//	close = true;
+			//isClose = true;
+			//SoundMn.gI().buttonClose();
 		}
 		if (flag)
 		{

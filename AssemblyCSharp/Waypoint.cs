@@ -1,3 +1,6 @@
+﻿using System.Diagnostics;
+using UnityEngine;
+
 public class Waypoint : IActionListener
 {
 	public short minX;
@@ -12,18 +15,24 @@ public class Waypoint : IActionListener
 
 	public bool isOffline;
 
+	public string name;
+
 	public PopUp popup;
 
 	public Waypoint(short minX, short minY, short maxX, short maxY, bool isEnter, bool isOffline, string name)
 	{
-		this.minX = minX;
+        this.minX = minX;
 		this.minY = minY;
 		this.maxX = maxX;
 		this.maxY = maxY;
 		name = Res.changeString(name);
+		this.name = name;
 		this.isEnter = isEnter;
-		this.isOffline = isOffline;
-		if (((TileMap.mapID == 21 || TileMap.mapID == 22 || TileMap.mapID == 23) && this.minX >= 0 && this.minX <= 24) || (((TileMap.mapID == 0 && Char.myCharz().cgender != 0) || (TileMap.mapID == 7 && Char.myCharz().cgender != 1) || (TileMap.mapID == 14 && Char.myCharz().cgender != 2)) && isOffline))
+		if (name == "Trạm tàu vũ trụ")
+			//this.isEnter = false;
+        this.isOffline = isOffline;
+        UnityEngine.Debug.Log($"Waypoint created: {name} at ({minX}, {minY}) - ({maxX}, {maxY}), isEnter: {isEnter}, isOffline: {isOffline}");
+        if (((TileMap.mapID == 21 || TileMap.mapID == 22 || TileMap.mapID == 23) && this.minX >= 0 && this.minX <= 24) || (((TileMap.mapID == 0 && Char.myCharz().cgender != 0) || (TileMap.mapID == 7 && Char.myCharz().cgender != 1) || (TileMap.mapID == 14 && Char.myCharz().cgender != 2)) && isOffline))
 			return;
 		if (TileMap.isInAirMap() || TileMap.mapID == 47)
 		{

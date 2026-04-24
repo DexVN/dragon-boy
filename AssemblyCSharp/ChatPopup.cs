@@ -104,6 +104,7 @@ public class ChatPopup : Effect2, IActionListener
 
 	public static void addBigMessage(string chat, int howLong, Npc c)
 	{
+		Logger.Info("addBigMessage" + chat);
 		string[] array = new string[1] { chat };
 		if (c.charID != 5 && GameScr.info1.isDone)
 			GameScr.info1.isUpdate = false;
@@ -172,7 +173,8 @@ public class ChatPopup : Effect2, IActionListener
 
 	public static ChatPopup addChatPopup(string chat, int howLong, Npc c)
 	{
-		performDelay = 10;
+        Logger.Info("addChatPopup" + chat);
+        performDelay = 10;
 		ChatPopup chatPopup = new ChatPopup();
 		chatPopup.sayWidth = GameCanvas.w - 30 - (GameCanvas.menu.showMenu ? GameCanvas.menu.menuX : 0);
 		if (chatPopup.sayWidth > 320)

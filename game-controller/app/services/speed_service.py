@@ -29,3 +29,10 @@ def set_auto_login(value: float):
         "value": value
     }
     send_command(json.dumps(data))
+
+def set_auto_pilgrimage(value: float):
+    data = {
+        "action": "auto_pilgrimage",
+        "value": value
+    }
+    send_command(json.dumps(data))

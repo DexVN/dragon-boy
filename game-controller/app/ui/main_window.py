@@ -4,7 +4,8 @@ from app.services.speed_service import (
     set_game_speed, 
     set_player_speed,
     set_auto_farm,
-    set_auto_login
+    set_auto_login,
+    set_auto_pilgrimage
 )
 
 # ===== THEME COLORS (Dracula-inspired) =====
@@ -19,7 +20,7 @@ ERROR = "#ff5555"
 def run_app():
     root = tk.Tk()
     root.title("Game Controller")
-    root.geometry("360x500")
+    root.geometry("360x600")
     root.configure(bg=BG)
     root.resizable(False, False)
 
@@ -102,7 +103,11 @@ def run_app():
 
         value = 0 if is_auto_farm else 1
 
-        set_auto_farm(value)
+        try:
+            set_auto_farm(value)
+        except Exception as e:
+            player_status.config(text=str(e), fg=ERROR)
+            
 
         if is_auto_farm:
             btn_auto_farm.config(text="Auto Farm: ON", bg=SUCCESS, fg="black")
@@ -130,7 +135,10 @@ def run_app():
 
         value = 0 if is_auto_login else 1
 
-        set_auto_login(value)
+        try:
+            set_auto_login(value)
+        except Exception as e:
+            player_status.config(text=str(e), fg=ERROR)
 
         if is_auto_login:
             btn_auto_login.config(text="Auto Login: ON", bg=SUCCESS, fg="black")
@@ -147,6 +155,37 @@ def run_app():
     )
 
     btn_auto_login.pack(pady=10, fill="x")
+
+    # ===== AUTO PILGRIMAGE =====
+    is_auto_pilgrimage = False
+
+    def toggle_auto_pilgrimage():
+        nonlocal is_auto_pilgrimage
+
+        is_auto_pilgrimage = not is_auto_pilgrimage
+
+        value = 0 if is_auto_pilgrimage else 1
+
+        try:
+            set_auto_pilgrimage(value)
+        except Exception as e:
+            player_status.config(text=str(e), fg=ERROR)
+
+        if is_auto_pilgrimage:
+            btn_auto_pilgrimage.config(text="Auto Pilgrimage: ON", bg=SUCCESS, fg="black")
+        else:
+            btn_auto_pilgrimage.config(text="Auto Pilgrimage: OFF", bg=ERROR, fg="white")
+
+
+    btn_auto_pilgrimage = tk.Button(
+        container,  # 👈 sửa root → container
+        text="Auto Pilgrimage: OFF",
+        bg=ERROR,
+        fg="white",
+        command=toggle_auto_pilgrimage
+    )
+
+    btn_auto_pilgrimage.pack(pady=10, fill="x")
 
     root.mainloop()
 
