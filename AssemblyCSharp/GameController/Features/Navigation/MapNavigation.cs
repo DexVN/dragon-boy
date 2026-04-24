@@ -1,19 +1,21 @@
 ﻿using AssemblyCSharp.GameController.Features.Mission;
+using Assets.src.g;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AssemblyCSharp.GameController.Features.Navigation
 {
     public class MapNavigation
     {
-        private const int WAIT_DURATION = 4000;
-        private const int MOVE_DURATION = 150;
+        private const int WAIT_DURATION = 800;
+        private const int MOVE_DURATION = 25;
         private const int MOVE_LEFT_KEY = 23;  
         private const int MOVE_RIGHT_KEY = 24; 
-        private const int SENSOR_OFFSET = 20;
         private const int WAYPOINT_THRESHOLD = 50;
         private const int ACTION_DELAY_MS = 2000;
+        private const int MASTER_WAIT_DISTANCE = 150;
 
 
         private static MapNavigation _instance;
@@ -21,6 +23,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
         private MapDatabase _db = new MapDatabase();
         private PathFinder _finder;
         private List<MapExit> _currentPath;
+        public static int MasterCharID = -1;
 
         public bool IsRunning { get; private set; }
         private int _stepIndex;
@@ -28,6 +31,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
         private long _startMoveTime;
         private bool _isWaiting;
         private long _lastActionTime;
+        public static bool _back_near_by = false;
 
         public MapNavigation()
         {
@@ -198,6 +202,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 
         public void StartPath(int targetMapId)
         {
+            MasterCharID = -1;
             Debug.Log($"[AutoPath] Bắt đầu tìm đường từ Map {TileMap.mapID} đến Map {targetMapId}...");
             _currentPath = _finder.GetPath(TileMap.mapID, targetMapId);
             if (_currentPath != null)
@@ -214,27 +219,55 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 
         public void Update()
         {
-            for (int num194 = 0; num194 < GameScr.vCharInMap.size(); num194++)
-            {
-                Char char15 = null;
-                try
-                {
-                    char15 = (Char)GameScr.vCharInMap.elementAt(num194);
-                }
-                catch (Exception)
-                {
-                }
-                if (char15 == null) break;
-                if (char15.charID == -100000063)
-                {
-                    Logger.Info("WOW");
-                    //if ((Char.myCharz().cx + 200) > char15.cx || (Char.myCharz().cx - 200) > char15.cx)return;
-                }
-            }
             if (!IsRunning || _currentPath == null)
             {
                 Debug.Log($"[AutoPath] Không có lộ trình | IsRunning : {IsRunning} | _currentPath : {_currentPath != null}");
                 return;
+            }
+
+            Char me = Char.myCharz();
+
+            if (me == null) return;
+            Logger.Info("MasterCharID" + MasterCharID);
+            if (MasterCharID != -1)
+            {
+                Char myMaster = null;
+                for (int i = 0; i < GameScr.vCharInMap.size(); i++)
+                {
+                    Char c = (Char)GameScr.vCharInMap.elementAt(i);
+                    if (c == null) continue;
+                    if (c.charID == MasterCharID)
+                    {
+                        Logger.Info("c.charID == MasterCharID" + (c.charID == MasterCharID));
+                        myMaster = c;
+                        MasterCharID = -1;
+                        break;
+                    }
+                }
+
+                Logger.Info($"me.cx: {me.cx}; myMaster.cx {myMaster.cx}");
+
+                if (myMaster != null)
+                {
+                    int distance = Math.abs(me.cx - myMaster.cx);
+                    int distancey = Math.abs(me.cy - myMaster.cy);
+                    if (distance > MASTER_WAIT_DISTANCE || distancey > MASTER_WAIT_DISTANCE + 150)
+                    {
+                        _back_near_by = true;
+                        myMaster = null;
+                    }
+                }
+                else
+                {
+                    Logger.Info($"clearKeyHold");
+                    GameCanvas.clearKeyHold();
+                    return;
+                }
+            }
+
+            if (_back_near_by)
+            {
+                GameCanvas.clearKeyHold();
             }
 
             if (_stepIndex >= _currentPath.Count)
@@ -309,7 +342,7 @@ namespace AssemblyCSharp.GameController.Features.Navigation
             GameCanvas.clearKeyHold();
             GameCanvas.clearKeyPressed();
         }
-
+        long _nextActionTime = 0;
         private void ExecuteMovement(MapExit step)
         {
             Char me = Char.myCharz();
@@ -317,17 +350,38 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 
             if (step.Type == MoveType.Waypoint && step.TargetX != -1)
             {
+                long currentTime = Environment.TickCount;
+
+                if (currentTime < _nextActionTime) return;
+
                 int diffX = me.cx - step.TargetX;
 
-                if (Math.abs(diffX) > WAYPOINT_THRESHOLD)
+                if (Math.abs(diffX) > WAYPOINT_THRESHOLD || _back_near_by)
                 {
-                    if (diffX > 0) LeftMovement(me);
-                    else RightMovement(me);
+                    if (diffX > 0)
+                    {
+                        if (_back_near_by)
+                        {
+                            _back_near_by = false;
+                            RightMovement(me);
+                        }
+                        else LeftMovement(me);
+                    }
+                    else
+                    {
+                        if (_back_near_by)
+                        {
+                            _back_near_by = false;
+                            LeftMovement(me);
+                        }
+                        else RightMovement(me);
+                    }
                 }
                 else
                 {
                     Debug.Log($"[AutoPath] Arrived at waypoint target X: {step.TargetX}, Current X: {me.cx}. Executing map change.");
                     GameCanvas.clearKeyHold();
+                    _nextActionTime = currentTime + new System.Random().Next(2000, 2000);
                     InteractWithWaypoints(me);
                 }
             }
@@ -336,9 +390,22 @@ namespace AssemblyCSharp.GameController.Features.Navigation
                 switch (step.Type)
                 {
                     case MoveType.Right:
+                        if (_back_near_by)
+                        {
+                            LeftMovement(me);
+                            _back_near_by = false;
+                            break;
+                        }
                         RightMovement(me);
+                        
                         break;
                     case MoveType.Left:
+                        if (_back_near_by)
+                        {
+                            RightMovement(me);
+                            _back_near_by = false;
+                            break;
+                        }
                         LeftMovement(me);
                         break;
                     case MoveType.SpaceShip:
@@ -387,10 +454,10 @@ namespace AssemblyCSharp.GameController.Features.Navigation
 
         private void HandleTeleportMovement(Char me, int direction)
         {
-            int sensorX = me.cx + 10;
+            int sensorX = me.cx + (direction == 1? 20 : -20);
             int targetY = -1;
 
-            for (int yOff = 0; yOff < 500; yOff += 24)
+            for (int yOff = 0; yOff < 450; yOff += 24)
             {
                 int tileType = TileMap.tileTypeAtPixel(sensorX, me.cy - yOff);
                 if (tileType == TileMap.T_EMPTY)

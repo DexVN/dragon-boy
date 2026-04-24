@@ -1,6 +1,7 @@
 using System;
 using AssemblyCSharp.GameController.Features.AutoFarm;
 using AssemblyCSharp.GameController.Features.AutoPilgrimage;
+using AssemblyCSharp.GameController.Features.Navigation;
 using Assets.src.e;
 using Assets.src.g;
 using UnityEngine;
@@ -1399,6 +1400,10 @@ public class Char : IMapObject
 
 	public void addInfo(string info)
 	{
+		Logger.Info(info);
+		if (info.Contains("Hãy đứng gần Đường Tăng")) {
+			MapNavigation._back_near_by = true;
+		}
 		if (chatInfo == null)
 			chatInfo = new Info();
 		chatInfo.addInfo(info, 0, null, false);

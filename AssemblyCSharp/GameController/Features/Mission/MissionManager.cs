@@ -8,6 +8,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
         public static MissionManager gI() => _instance ?? (_instance = new MissionManager());
 
         private IMission _currentMission;
+        private bool _isLoadedFromRMS = false;
 
         public IMission CurrentMission
         {
@@ -46,6 +47,18 @@ namespace AssemblyCSharp.GameController.Features.Mission
             {
                 Debug.Log("[MissionManager] Mission Completed!");
                 CurrentMission = null;
+            }
+        }
+
+        public void LoadSavedConfig()
+        {
+            if (!_isLoadedFromRMS)
+            {
+                if (Rms.loadRMSString("auto_hotong") == "1")
+                {
+                    CurrentMission = new HoTongDuongTangMission();
+                }
+                _isLoadedFromRMS = true;
             }
         }
     }

@@ -19,7 +19,7 @@ public class Session_ME : ISession
 
 		public void AddMessage(Message message)
 		{
-			Debug.Log("Add message to sending queue: " + message.command);
+			Logger.Info("Add message to sending queue: " + message.command);
             sendingMessage.Add(message);
 		}
 

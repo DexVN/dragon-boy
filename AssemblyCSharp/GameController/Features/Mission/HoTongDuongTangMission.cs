@@ -1,5 +1,6 @@
 ﻿using AssemblyCSharp.GameController.Features.Navigation;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace AssemblyCSharp.GameController.Features.Mission
@@ -23,15 +24,15 @@ namespace AssemblyCSharp.GameController.Features.Mission
 
     public class HoTongDuongTangMission : IMission
     {
-        public string Name => "Hộ tống đường tăng";
+        private int NPC_DUONG_TANG_ID = 49;
 
+        public string Name => "Hộ tống đường tăng";
         public bool IsStart { get; private set; } = true;
+
         private long _lastTimeAction;
         private long _delayNextStep;
         private int targetMapID = -1;
-
-        private int DUONG_TANG_ID = -100000063;
-        private int NPC_DUONG_TANG_ID = 49;
+        private int remainingTurns = -1;
 
         public HoTongDuongTangState _currentState = HoTongDuongTangState.GET_MISSION;
         public GetMissionState _currentGetMissionState = GetMissionState.GO_TO_MISSION_MAP;
@@ -83,33 +84,32 @@ namespace AssemblyCSharp.GameController.Features.Mission
                     Match match = Regex.Match(message, pattern);
                     if (match.Success)
                     {
-                        int remainingTurns = int.Parse(match.Groups[1].Value);
-                        int totalTurns = int.Parse(match.Groups[2].Value);
-                        if (remainingTurns == 0) IsStart = false;
+                        remainingTurns = int.Parse(match.Groups[1].Value);
+                        Logger.Info($"Remaining turn : {remainingTurns}");
                     }
                     break;
                 case -7:
                     if (targetMapID == -1 && _currentState == HoTongDuongTangState.ESCORT)
                     {
                         Char me = Char.myCharz();
-                        if (message.Contains(me.cName))
+                        bool isMentioned = message.ToLower().Contains(me.cName.ToLower()) ||
+                                           (me.cName.Contains(" ") && message.ToLower().Contains(me.cName.Split(' ').Last().ToLower()));
+                        if (isMentioned)
                         {
-                            Logger.Info($"Xác nhận nhiệm vụ cho: {me.cName}");
-                            string mapPattern = @"đến\s+(.+)";
+                            string mapPattern = @"đến\s+([^.;,!]+)";
                             Match match2 = Regex.Match(message, mapPattern);
                             if (match2.Success)
                             {
                                 string mapName = match2.Groups[1].Value.Trim();
-                                mapName = mapName.Replace(":", "");
                                 targetMapID = Map.GetMapIdByName(mapName);
                                 if (targetMapID != -1)
                                 {
-                                    Logger.Info($"TargetMapID detected: {targetMapID} ({mapName})");
+                                    Logger.Info($"[Nhiệm Vụ] Đã nhận diện Map: {mapName} (ID: {targetMapID})");
                                     _currentState = HoTongDuongTangState.ESCORTING;
                                 }
                                 else
                                 {
-                                    Logger.Error($"Không tìm thấy ID cho Map: {mapName}");
+                                    Logger.Error($"[Lỗi] Không tìm thấy ID cho Map: '{mapName}'");
                                 }
                             }
                         }
@@ -161,7 +161,7 @@ namespace AssemblyCSharp.GameController.Features.Mission
                     NpcMenuController.gI().Start(NPC_DUONG_TANG_ID, new int[] { 2, 0 });
                     _currentGetMissionState = GetMissionState.COMPLETED;
                     _currentState = HoTongDuongTangState.ESCORT;
-                    SetDelay(1500, 2000);
+                    SetDelay(1000, 1500);
                     break;
                 case GetMissionState.COMPLETED:
                     break;
@@ -175,3 +175,4 @@ namespace AssemblyCSharp.GameController.Features.Mission
         }
     }
 }
+

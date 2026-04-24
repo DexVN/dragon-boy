@@ -120,8 +120,8 @@ public class T3 : mResources
 		mResources.plsCheckAcc = "Harap periksa informasi account dengan baik untuk me-recover account. Jika lupa password\n";
 		mResources.phone = "Nomor HP";
 		mResources.email = "Email";
-		mResources.acc = "Acc";
-		mResources.pwd = "Pwd";
+		mResources.acc = "acc";
+		mResources.pwd = "Pwd2";
 		mResources.goToWebForPassword = "Untuk me-recover password harap kunjungi website http://ngocrongonline.com/matkhau";
 		mResources.dragon_ball = "Dragon Ball";
 		mResources.character = "Karakter";

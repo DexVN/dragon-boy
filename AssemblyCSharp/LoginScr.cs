@@ -172,8 +172,10 @@ public class LoginScr : mScreen, IActionListener
 		{
 			isCheck = false;
 		}
-		tfUser.setText(Rms.loadRMSString("acc"));
-		tfPass.setText(Rms.loadRMSString("pass"));
+        string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        string accKey = exeName + "_acc";
+        tfUser.setText(Rms.loadRMSString(accKey));
+		tfPass.setText(Rms.loadRMSString("pass2"));
         if (cmdCallHotline == null)
 		{
 			cmdCallHotline = new Command("Gọi hotline", this, 13, null);
@@ -278,10 +280,12 @@ public class LoginScr : mScreen, IActionListener
 
 	public void setUserPass()
 	{
-		string text = Rms.loadRMSString("acc");
+        string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        string accKey = exeName + "_acc";
+        string text = Rms.loadRMSString(accKey);
 		if (text != null && !text.Equals(string.Empty))
 			tfUser.setText(text);
-		string text2 = Rms.loadRMSString("pass");
+		string text2 = Rms.loadRMSString("pass2");
 		if (text2 != null && !text2.Equals(string.Empty))
 			tfPass.setText(text2);
     }
@@ -358,8 +362,10 @@ public class LoginScr : mScreen, IActionListener
 		GameCanvas.startWaitDlg(mResources.REGISTERING);
 		passRe = tfPass.getText();
 		Service.gI().requestRegister(user, tfPass.getText(), Rms.loadRMSString("userAo" + ServerListScreen.ipSelect), Rms.loadRMSString("passAo" + ServerListScreen.ipSelect), GameMidlet.VERSION);
-		Rms.saveRMSString("acc", user);
-		Rms.saveRMSString("pass", tfPass.getText());
+        string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        string accKey = exeName + "_acc";
+        Rms.saveRMSString(accKey, user);
+		Rms.saveRMSString("pass2", tfPass.getText());
 		t = 20;
 		isRegistering = true;
 	}
@@ -401,8 +407,10 @@ public class LoginScr : mScreen, IActionListener
 
 	public void doLogin()
 	{
-		string text = Rms.loadRMSString("acc");
-		string text2 = Rms.loadRMSString("pass");
+        string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        string accKey = exeName + "_acc";
+        string text = Rms.loadRMSString(accKey);
+		string text2 = Rms.loadRMSString("pass2");
 		if (text != null && !text.Equals(string.Empty))
 			isLogin2 = false;
 		else if (Rms.loadRMSString("userAo" + ServerListScreen.ipSelect) != null && !Rms.loadRMSString("userAo" + ServerListScreen.ipSelect).Equals(string.Empty))
@@ -448,14 +456,18 @@ public class LoginScr : mScreen, IActionListener
 		if (isCheck)
 		{
 			Rms.saveRMSInt("check", 1);
-			Rms.saveRMSString("acc", tfUser.getText().ToLower().Trim());
-			Rms.saveRMSString("pass", tfPass.getText().ToLower().Trim());
+            string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            string accKey = exeName + "_acc";
+            Rms.saveRMSString(accKey, tfUser.getText().ToLower().Trim());
+			Rms.saveRMSString("pass2", tfPass.getText().ToLower().Trim());
 		}
 		else
 		{
 			Rms.saveRMSInt("check", 2);
-			Rms.saveRMSString("acc", string.Empty);
-			Rms.saveRMSString("pass", string.Empty);
+            string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            string accKey = exeName + "_acc";
+            Rms.saveRMSString(exeName, string.Empty);
+			Rms.saveRMSString("pass2", string.Empty);
 		}
 	}
   
@@ -835,8 +847,10 @@ public class LoginScr : mScreen, IActionListener
 			actRegister();
 			return;
 		case 2008:
-			Rms.saveRMSString("acc", tfUser.getText().Trim());
-			Rms.saveRMSString("pass", tfPass.getText().Trim());
+            string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            string accKey = exeName + "_acc";
+            Rms.saveRMSString(accKey, tfUser.getText().Trim());
+			Rms.saveRMSString("pass2", tfPass.getText().Trim());
 			if (ServerListScreen.loadScreen)
 				GameCanvas.serverScreen.switchToMe();
 			else

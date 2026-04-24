@@ -1,9 +1,11 @@
 using AssemblyCSharp;
 using AssemblyCSharp.GameController.Features.Mission;
+using AssemblyCSharp.GameController.Features.Navigation;
 using Assets.src.e;
 using Assets.src.f;
 using Assets.src.g;
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class Controller : IMessageHandler
@@ -109,7 +111,7 @@ public class Controller : IMessageHandler
 	{
 		GameCanvas.debugSession.removeAllElements();
 		GameCanvas.debug("SA1", 2);
-		Debug.Log($"[Controller] Received message with command: {msg.command}");
+		Logger.Info($"Received message with command: {msg.command}");
         LogUnity.gI().LogMessageContent(msg);
 		try
 		{
@@ -1134,7 +1136,9 @@ public class Controller : IMessageHandler
 					Service.gI().getResource(3, null);
 					SmallImage.loadBigRMS();
 					SplashScr.imgLogo = null;
-					if (Rms.loadRMSString("acc") != null || Rms.loadRMSString("userAo" + ServerListScreen.ipSelect) != null)
+                    string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    string accKey = exeName + "_acc";
+                    if (Rms.loadRMSString(accKey) != null || Rms.loadRMSString("userAo" + ServerListScreen.ipSelect) != null)
 						LoginScr.isContinueToLogin = true;
 					GameCanvas.loginScr = new LoginScr();
 					GameCanvas.loginScr.switchToMe();
@@ -2338,7 +2342,7 @@ public class Controller : IMessageHandler
 			case -26:
 				ServerListScreen.testConnect = 2;
 				GameCanvas.debug("SA2", 2);
-				GameCanvas.startOKDlg(msg.reader().readUTF());
+				//GameCanvas.startOKDlg(msg.reader().readUTF());
 				InfoDlg.hide();
 				LoginScr.isContinueToLogin = false;
 				Char.isLoadingMap = false;
@@ -3654,7 +3658,14 @@ public class Controller : IMessageHandler
 						break;
 					if (char15.charID == num179)
 					{
-						Logger.Info($"charID: {num179}, x: {char15.cx}, y: {char15.cy}");
+						Char me = Char.myCharz();
+                        bool isMentioned = char15.chatInfo.info.s.ToLower().Contains(me.cName.ToLower()) ||
+                                            (me.cName.Contains(" ") && char15.chatInfo.info.s.ToLower().Contains(me.cName.Split(' ').Last().ToLower()));
+						if (isMentioned)
+						{
+							MapNavigation.MasterCharID = num179;
+						}
+                        Logger.Info($"charID: {num179}, x: {char15.cx}, y: {char15.cy}");
 						GameCanvas.debug("SA8x2y" + num194, 2);
 						char15.moveTo(msg.reader().readShort(), msg.reader().readShort(), 0);
 						MissionManager.gI().OnReceiveMessage(-7, char15.chatInfo.info.s);
@@ -4628,8 +4639,10 @@ public class Controller : IMessageHandler
 				sbyte b2 = msg.reader().readByte();
 				if (GameCanvas.loginScr.isLogin2)
 				{
-					Rms.saveRMSString("acc", string.Empty);
-					Rms.saveRMSString("pass", string.Empty);
+                    string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    string accKey = exeName + "_acc";
+                    Rms.saveRMSString(accKey, string.Empty);
+					Rms.saveRMSString("pass2", string.Empty);
 				}
 				else
 					Rms.saveRMSString("userAo" + ServerListScreen.ipSelect, string.Empty);
@@ -4869,7 +4882,7 @@ public class Controller : IMessageHandler
 			GameCanvas.debug("SA12", 2);
 			sbyte b = msg.reader().readByte();
 			Res.outz("---messageSubCommand : " + b);
-			Debug.Log("messageSubCommand: " + b);
+			Logger.Info("messageSubCommand: " + b);
             switch (b)
 			{
 			case 1:

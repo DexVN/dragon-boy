@@ -452,7 +452,7 @@ public class Service
 
 	public void useItem(sbyte type, sbyte where, sbyte index, short template)
 	{
-		UnityEngine.Debug.Log($"useItem: type - {type}; where - {where}; index - {index}; template - {template}");
+		Logger.Info($"useItem: type - {type}; where - {where}; index - {index}; template - {template}");
         Cout.println("USE ITEM! " + type);
 		if (Char.myCharz().statusMe == 14)
 			return;

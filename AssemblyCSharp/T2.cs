@@ -120,8 +120,8 @@ public class T2 : mResources
 		mResources.plsCheckAcc = "Please check your account information carefully to recover account, in case forgot password\n";
 		mResources.phone = "Phone number";
 		mResources.email = "Email";
-		mResources.acc = "Acc";
-		mResources.pwd = "Pwd";
+		mResources.acc = "acc";
+		mResources.pwd = "Pwd2";
 		mResources.goToWebForPassword = "To recover password, please visit website http://ngocrongonline.com/matkhau";
 		mResources.dragon_ball = "Dragon Ball";
 		mResources.character = "Character";

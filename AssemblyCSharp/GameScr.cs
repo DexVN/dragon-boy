@@ -6,6 +6,7 @@ using AssemblyCSharp.GameController.Features.Navigation;
 using Assets.src.g;
 using System;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using UnityEngine;
 
 public class GameScr : mScreen, IChatable
@@ -966,6 +967,7 @@ public class GameScr : mScreen, IChatable
 		isPaintRada = 1;
 		if (GameCanvas.isTouch)
 			isHaveSelectSkill = true;
+        MissionManager.gI().LoadSavedConfig();
     }
 
 	public static void loadBg()
@@ -4242,6 +4244,7 @@ public class GameScr : mScreen, IChatable
 			CapsuleController.gI().Update();
 			NpcMenuController.gI().Update();
             MapNavigation.gI().Update();
+			CapsuleKiBiController.gI().Update();
         }
 		catch (Exception ex)
 		{
@@ -5718,10 +5721,38 @@ public class GameScr : mScreen, IChatable
 	{
 	}
 
-	private bool isAutoHtdt = false;
     public void onChatFromMe(string text, string to)
 	{
 		Res.outz("CHAT");
+		Logger.Info("text" + text);
+		if (text.Contains("map"))
+		{
+            Char me = Char.myCharz();
+            for (int i = 0; i < me.arrItemBag.Length; i++)
+            {
+				Logger.Info($"Name: {me.arrItemBag[i].template.name} - " + me.arrItemBag[i].template.id);
+            }
+        }
+		if (text.Contains("it"))
+		{
+            string exeName = System.IO.Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName);
+            string capsulekibiKey = exeName + "_capsulekibi";
+            string state = Rms.loadRMSString(capsulekibiKey) ?? "0";
+            bool isActivating = (state == "0");
+            string newState = isActivating ? "1" : "0";
+
+            if (isActivating)
+            {
+				CapsuleKiBiController.isAuto = true;
+                info1.addInfo("Bật tự dùng capsule kì bí", 0);
+            }
+            else
+            {
+                CapsuleKiBiController.isAuto = false;
+                info1.addInfo("Tắt tự dùng capsule kì bí", 0);
+            }
+			Rms.saveRMSString(capsulekibiKey, newState);
+        }
         if (text.StartsWith("speed")) // Dùng StartsWith sẽ chuẩn hơn Contains
         {
             try
@@ -5740,16 +5771,23 @@ public class GameScr : mScreen, IChatable
                 Logger.Error("Lệnh speed sai cú pháp. VD: speed 2");
             }
         }
-        if (text.Contains("htdt"))
-		{
-            isAutoHtdt = !isAutoHtdt;
-			if (isAutoHtdt)
-			{
-				MissionManager.gI().CurrentMission = new HoTongDuongTangMission();
-			} else
-			{
-				MissionManager.gI().CurrentMission = null;
+        if (text.Equals("htdt"))
+        {
+            string state = Rms.loadRMSString("auto_hotong") ?? "0";
+            bool isActivating = (state == "0");
+            string newState = isActivating ? "1" : "0";
+
+            if (isActivating)
+            {
+                MissionManager.gI().CurrentMission = new HoTongDuongTangMission();
+                GameScr.info1.addInfo("Bật Auto Hộ Tống", 0);
             }
+            else
+            {
+                MissionManager.gI().CurrentMission = null;
+                GameScr.info1.addInfo("Tắt Auto Hộ Tống", 0);
+            }
+            Rms.saveRMSString("auto_hotong", newState);
         }
         if (text.Contains("ts"))
         {

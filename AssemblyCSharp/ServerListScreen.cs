@@ -174,7 +174,9 @@ public class ServerListScreen : mScreen, IActionListener
 	private void initCommand()
 	{
 		nCmdPlay = 0;
-		string text = Rms.loadRMSString("acc");
+        string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        string accKey = exeName + "_acc";
+        string text = Rms.loadRMSString(accKey);
 		if (text == null)
 		{
 			if (Rms.loadRMS("userAo" + ipSelect) != null)
@@ -763,7 +765,9 @@ public class ServerListScreen : mScreen, IActionListener
 			if (GameCanvas.loginScr == null)
 				GameCanvas.loginScr = new LoginScr();
 			GameCanvas.loginScr.switchToMe();
-			bool flag = Rms.loadRMSString("acc") != null && !Rms.loadRMSString("acc").Equals(string.Empty);
+            string exeName = System.IO.Path.GetFileNameWithoutExtension(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            string accKey = exeName + "_acc";
+            bool flag = Rms.loadRMSString(accKey) != null && !Rms.loadRMSString("acc").Equals(string.Empty);
 			bool flag2 = Rms.loadRMSString("userAo" + ipSelect) != null && !Rms.loadRMSString("userAo" + ipSelect).Equals(string.Empty);
 			if (!flag && !flag2)
 			{
