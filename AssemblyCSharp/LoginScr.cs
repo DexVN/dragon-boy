@@ -867,7 +867,7 @@ public class LoginScr : mScreen, IActionListener
 					{
 						if (idAction == 10021)
 							actRegisterLeft();
-					}
+						}
 					else
 						doRegister(tfUser.getText());
 					return;

@@ -16,8 +16,14 @@
     <Folder Include="GameController\Features\Player\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\DragonBoy_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Security">
       <HintPath>..\DragonBoy_Data\Managed\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>..\dragon-boy\DragonBoy_Data\Managed\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\DragonBoy_Data\Managed\UnityEngine.dll</HintPath>

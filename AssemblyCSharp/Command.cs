@@ -74,7 +74,7 @@ public class Command
 		this.p = p;
 	}
 
-	public Command(string caption, int action, object p)
+    public Command(string caption, int action, object p)
 	{
 		this.caption = caption;
 		idAction = action;

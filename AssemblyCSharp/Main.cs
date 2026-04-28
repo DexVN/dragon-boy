@@ -101,7 +101,6 @@ public class Main : MonoBehaviour
 				Screen.SetResolution(1024, 600, false);
 		}
         Time.timeScale = 2f;
-        Debug.Log("[Main] Starting command receiver...");
         CommandReceiver.StartListenting();
     }
 
@@ -261,7 +260,6 @@ public class Main : MonoBehaviour
 	{
 		try
 		{
-			Debug.Log("[Main] Starting command receiver...");
 			CommandReceiver.Update();
 		}
 		catch (System.Exception ex)
